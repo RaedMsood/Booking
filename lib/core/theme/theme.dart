@@ -17,7 +17,7 @@ ThemeData lightTheme = ThemeData(
       statusBarIconBrightness: Brightness.dark,
       systemNavigationBarColor: Colors.transparent,
       systemNavigationBarDividerColor: Colors.white,
-      
+
       systemNavigationBarIconBrightness: Brightness.dark,
     ),
   ),

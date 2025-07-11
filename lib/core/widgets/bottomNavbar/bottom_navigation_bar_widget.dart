@@ -2,6 +2,7 @@ import 'package:booking/core/helpers/flash_bar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../features/booking/presentation/page/booking_page.dart';
 import '../../../features/home/presentation/pages/home_page.dart';
 import '../../../generated/l10n.dart';
 import '../../constants/app_icons.dart';
@@ -23,7 +24,7 @@ class _BottomNavigationBarWidgetState
   final List<Widget> _pages = [
     const ExitFromAppWidget(child: HomePage()),
     const ExitFromAppWidget(child: HomePage()),
-    const ExitFromAppWidget(child: HomePage()),
+    ExitFromAppWidget(child: BookingPage()),
     const ExitFromAppWidget(child: HomePage()),
 
     // const ExitFromAppWidget(child: CategoryPage()),

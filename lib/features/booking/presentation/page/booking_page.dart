@@ -1,17 +1,12 @@
-// lib/ui/screens/bookings_page.dart
-
-// lib/ui/models/booking.dart
 import 'package:booking/core/helpers/navigateTo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../widget/booking_card_widget.dart';
 import 'details_info_booking_page.dart';
+import 'details_of_book_in_add_page.dart';
 
 class Booking {
   final String title;
@@ -36,9 +31,8 @@ class Booking {
 // lib/ui/screens/bookings_page.dart
 
 class BookingPage extends StatefulWidget {
-  BookingPage({required this.idSection});
+  BookingPage();
 
-  final int idSection;
 
   @override
   State<BookingPage> createState() => _BookingPageState();
@@ -115,25 +109,27 @@ class _BookingPageState extends State<BookingPage>
                         price: 50000,
                         imageUrl: 'https://your-server.com/images/hotel.jpg',
                         onTap: () {
-                         navigateTo(context,BookingDetailPage(
-                           hotelName: 'فندق أم القرى السياحي',
-                           hotelLocation: 'سعوان , هبرة',
-                           hotelImageUrl: 'https://your-server.com/images/umAlQura.jpg',
-                           bookingId: '1-2347373',
-                           bookingDate: DateTime(2025, 7, 1, 8, 17),
-                           bookingStatusLabel: 'ملغية',
-                           bookingStatusColor: Colors.red,
-                           adults: 4,
-                           children: 2,
-                           startDate: DateTime(2025, 7, 1),
-                           endDate: DateTime(2025, 7, 5),
-                           onPolicyTap: () {
-                             // افتح تفاصيل سياسة الشراء والإلغاء
-                           },
-                           onViewFacilityDetails: () {
-                             // افتح صفحة تفاصيل المنشأة
-                           },
-                         ),
+                         navigateTo(context,
+                         //   BookingDetailPage(
+                         //   hotelName: 'فندق أم القرى السياحي',
+                         //   hotelLocation: 'سعوان , هبرة',
+                         //   hotelImageUrl: 'https://your-server.com/images/umAlQura.jpg',
+                         //   bookingId: '1-2347373',
+                         //   bookingDate: DateTime(2025, 7, 1, 8, 17),
+                         //   bookingStatusLabel: 'ملغية',
+                         //   bookingStatusColor: Colors.red,
+                         //   adults: 4,
+                         //   children: 2,
+                         //   startDate: DateTime(2025, 7, 1),
+                         //   endDate: DateTime(2025, 7, 5),
+                         //   onPolicyTap: () {
+                         //     // افتح تفاصيل سياسة الشراء والإلغاء
+                         //   },
+                         //   onViewFacilityDetails: () {
+                         //     // افتح صفحة تفاصيل المنشأة
+                         //   },
+                         // ),
+                             DetailsOfBookInAddPage(),
                          );
                         },
                       ),
