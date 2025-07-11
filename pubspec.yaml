@@ -41,6 +41,7 @@ dependencies:
   flutter_secure_storage:
   encrypt:
   get_it:
+  dartz:
   dio:
   flutter_riverpod:
   auto_size_text:
@@ -49,11 +50,14 @@ dependencies:
   flutter_svg:
   flutter_rating_bar:
   skeletonizer:
-  shimmer:
-  cached_network_image:
   flutter_spinkit:
   table_calendar:
-  intl:   
+  carousel_slider:
+  smooth_page_indicator:
+  intl:
+  cached_network_image:
+  shimmer:
+  pinput:
 
 dev_dependencies:
   flutter_test:
@@ -76,8 +80,11 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/images/
     - assets/icons/
     - assets/icons/contact/
     - assets/icons/bottombar/

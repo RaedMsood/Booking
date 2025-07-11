@@ -6,6 +6,8 @@ class AppIcons {
   static const String message = '${_iconsPath}message.svg';
   static const String menu = '${_iconsPath}menu.svg';
   static const String search = '${_iconsPath}search.svg';
+  static const String notification = '${_iconsPath}notification.svg';
+
   static const String favorite = '${_iconsPath}favorite.svg';
   static const String starActive = '${_iconsPath}star_active.svg';
   static const String star = '${_iconsPath}star.svg';
@@ -18,6 +20,7 @@ class AppIcons {
 
   static const String showRow = '${_iconsPath}show_row.svg';
   static const String filter = '${_iconsPath}filter.svg';
+
   static const String highPrice = '${_iconsPath}high_price.svg';
   static const String lowPrice = '${_iconsPath}low_price.svg';
   static const String close = '${_iconsPath}close.svg';
@@ -33,6 +36,7 @@ class AppIcons {
       '${_iconsPath}your_order_has_been_confirmed_successfully.svg';
   static const String mapLocation = '${_iconsPath}map_location.svg';
   static const String trash = '${_iconsPath}trash.svg';
+  static const String location = '${_iconsPath}location.svg';
 
   static const String like = '${_iconsPath}like.svg';
   static const String disLike = '${_iconsPath}dis_like.svg';
@@ -81,11 +85,21 @@ class AppIcons {
       '${_iconsPath}user/continue_to_facebook.svg';
   static const String j = '${_iconsPath}user/j.svg';
   static const String discount = '${_iconsPath}user/discount.svg';
-  static const String location = '${_iconsPath}user/location.svg';
+  static const String date = '${_iconsPath}user/date.svg';
+  static const String google = '${_iconsPath}user/google.svg';
+  static const String gender = '${_iconsPath}user/gender.svg';
+  static const String topPattern = '${_iconsPath}user/top_pattern.svg';
+  static const String bottomPattern = '${_iconsPath}user/bottom_pattern.svg';
 
   // bottombar icons
   static const String home = '${_iconsPath}bottombar/home.svg';
   static const String homeActive = '${_iconsPath}bottombar/home_active.svg';
+  static const String myReservations =
+      '${_iconsPath}bottombar/my_reservations.svg';
+  static const String myReservationsActive =
+      '${_iconsPath}bottombar/my_reservations_active.svg';
+  static const String map = '${_iconsPath}bottombar/map.svg';
+  static const String mapActive = '${_iconsPath}bottombar/map_active.svg';
   static const String category = '${_iconsPath}bottombar/category.svg';
   static const String categoryActive =
       '${_iconsPath}bottombar/category_active.svg';

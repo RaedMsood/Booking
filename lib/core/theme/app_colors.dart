@@ -5,6 +5,7 @@ class AppColors {
   //Brand Colors
   static const Color scaffoldColor = Color(0xffF5F5F5);
   static const Color fontColor = Color(0xff80908f);
+  static const Color fontColor2 = Color(0xff9ca2ad);
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color transparent = Colors.transparent;
   static const Color primaryColor = Color(0xff0057ff);

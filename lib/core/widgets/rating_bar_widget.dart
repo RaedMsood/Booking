@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../constants/app_icons.dart';
+
 
 class RatingBarWidget extends StatelessWidget {
   final double evaluation;
@@ -27,12 +26,7 @@ class RatingBarWidget extends StatelessWidget {
       itemCount: length ?? 5,
       itemSize: itemSize ?? 14.sp,
       itemBuilder: (context, index) {
-        return Padding(
-          padding: EdgeInsets.only(bottom: 0.6.h),
-          child: SvgPicture.asset(
-            AppIcons.starActive,
-          ),
-        );
+        return Icon(Icons.star_purple500_sharp,color: Color(0xfffbcc2b),);
       },
       onRatingUpdate: (rating) {},
     );

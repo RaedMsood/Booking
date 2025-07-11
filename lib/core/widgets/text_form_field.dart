@@ -28,8 +28,9 @@ class TextFormFieldWidget extends StatelessWidget {
   final int? maxLine;
   final int? maxLength;
 
-  final Color?cursorColor;
-  final EdgeInsetsGeometry?contentPadding;
+  final Color? cursorColor;
+  final EdgeInsetsGeometry? contentPadding;
+
   const TextFormFieldWidget({
     super.key,
     required this.controller,
@@ -63,7 +64,7 @@ class TextFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       maxLines: maxLine ?? 1,
-      maxLength:maxLength ,
+      maxLength: maxLength,
       controller: controller,
       keyboardType: type ?? TextInputType.text,
       validator: fieldValidator,
@@ -72,20 +73,25 @@ class TextFormFieldWidget extends StatelessWidget {
       onFieldSubmitted: onSubmit,
       onTap: onTap,
       onChanged: onChanged,
-      cursorColor:cursorColor?? AppColors.primaryColor,
+      cursorColor: cursorColor ?? AppColors.primaryColor,
+      style: TextStyle(
+        fontSize: 12.5.sp,
+        fontFamily: "ReadexPro"
+      ),
       decoration: InputDecoration(
-        fillColor: fillColor ?? Color(0xfff4f6f9),
+        fillColor: fillColor ?? Colors.white,
         filled: true,
+
         hintText: hintText,
         labelText: label,
         hintStyle: TextStyle(
-          fontSize: hintFontSize ?? 11.sp,
-          color: hintTextColor ?? const Color(0xffa9a9a9),
+          fontSize: hintFontSize ?? 10.5.sp,
+          color: hintTextColor ?? AppColors.fontColor2,
           fontWeight: FontWeight.w400,
         ),
         labelStyle: TextStyle(
-          fontSize: labelFontSize ?? 11.sp,
-          color: labelTextColor ?? const Color(0xffa9a9a9),
+          fontSize: labelFontSize ?? 10.sp,
+          color: labelTextColor ?? AppColors.fontColor2,
           fontWeight: FontWeight.w400,
         ),
         border: InputBorder.none,
@@ -107,7 +113,7 @@ class TextFormFieldWidget extends StatelessWidget {
         ),
         prefixIcon: prefix,
         suffixIcon: suffixIcon,
-        contentPadding:contentPadding?? const EdgeInsets.all(12.0),
+        contentPadding: contentPadding ??  EdgeInsets.all(11.sp),
       ),
       expands: expanded ?? false,
       textAlign: textAlign ?? TextAlign.start,

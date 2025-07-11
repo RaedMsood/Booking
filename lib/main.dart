@@ -1,18 +1,18 @@
 import 'dart:async';
-
+import 'package:booking/features/user/presentation/pages/log_in_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/date_symbol_data_file.dart';
-import 'package:intl/intl.dart';
-
+import 'core/network/remote_request.dart';
+import 'core/state/app_restart_controller.dart';
+import 'package:booking/injection.dart' as di;
 import 'core/theme/theme.dart';
-import 'features/booking/presentation/page/booking_page.dart';
-import 'features/booking/presentation/page/details_of_book_in_add_page.dart';
+import 'core/widgets/bottomNavbar/bottom_navigation_bar_widget.dart';
+import 'features/user/presentation/pages/sign_up_page.dart';
 import 'generated/l10n.dart';
+import 'services/auth/auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +29,10 @@ void main() async {
   };
   runZonedGuarded(
     () async {
-      runApp(MyApp());
+      RemoteRequest.initDio();
+      await di.init();
+      Auth();
+      runApp(const AppRestartController(child: MyApp()));
     },
     (error, stackTrace) {
       debugPrint("Caught error in release mode: $error");
@@ -38,47 +41,30 @@ void main() async {
   );
 }
 
-class MyApp extends ConsumerStatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  ConsumerState<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends ConsumerState<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
-
-
-  @override
   Widget build(BuildContext context) {
-   // final locale = ref.watch(languageProvider);
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: false,
       splitScreenMode: false,
       child: MaterialApp(
-        navigatorKey: navigatorKey,
-        debugShowCheckedModeBanner: false,
-        locale: Locale("ar"),
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('ar'),
-          Locale('en'),
-        ],
-        theme: lightTheme,
-        home:  BookingPage(idSection: 0,),
-      ),
+          debugShowCheckedModeBanner: false,
+          locale: Locale('ar'),
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('ar'),
+            Locale('en'),
+          ],
+          theme: lightTheme,
+          home: BottomNavigationBarWidget()),
     );
   }
 }

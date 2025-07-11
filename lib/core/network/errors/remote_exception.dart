@@ -12,12 +12,12 @@ class MessageOfErorrApi {
     } else {
       switch (exception.type) {
         case DioExceptionType.connectionError:
-          return ["S.current.network", "S.current.network2", "S.current.cancel"];
+          return [S.current.network, S.current.network2, S.current.cancel];
         case DioExceptionType.connectionTimeout:
-          return ["S.current.timeout", "S.current.pleaseTryAgain"];
+          return [S.current.timeout, S.current.pleaseTryAgain];
         case DioExceptionType.badResponse:
         default:
-          return ["S.current.network", "S.current.network2"];
+          return [S.current.network, S.current.network2];
       }
     }
   }

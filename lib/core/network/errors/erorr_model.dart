@@ -1,4 +1,4 @@
-// import '../../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 
 class ErrorsModel {
   final String title;
@@ -19,7 +19,7 @@ class ErrorsModel {
     } else if (rawSubTitle is String) {
       parsedSubTitle = rawSubTitle;
     } else {
-      parsedSubTitle = "S.current.pleaseTryAgain";
+      parsedSubTitle = S.current.pleaseTryAgain;
     }
     return ErrorsModel(
       title: json['title'] ?? '',

@@ -29,13 +29,13 @@ class NoInternetConnectionWidget extends StatelessWidget {
           ),
           10.h.verticalSpace,
           AutoSizeTextWidget(
-            text: "S.of(context).timeout",
+            text: S.of(context).timeout,
             fontWeight: FontWeight.bold,
             fontSize: 15.sp,
           ),
           4.h.verticalSpace,
           AutoSizeTextWidget(
-            text: "S.of(context).network2",
+            text: S.of(context).network2,
             colorText: AppColors.fontColor,
             fontWeight: FontWeight.bold,
             fontSize: 13.5.sp,
