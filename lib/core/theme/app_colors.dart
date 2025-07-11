@@ -3,27 +3,28 @@ import 'package:flutter/material.dart';
 /// This class contains all the colors of the app.
 class AppColors {
   //Brand Colors
-  static const Color scaffoldColor = Color(0xfff5f5f5);
-  static const Color fontColor = Color(0xff757575);
+  static const Color scaffoldColor = Color(0xffF5F5F5);
+  static const Color fontColor = Color(0xff80908f);
   static const Color fontColor2 = Color(0xff9ca2ad);
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color transparent = Colors.transparent;
   static const Color primaryColor = Color(0xff0057ff);
   static Color dangerColor = const Color(0xffD64545);
+  static Color purpleColor = const Color(0xff905bfe);
 
   static const MaterialColor primarySwatch = MaterialColor(
     0xff0057ff,
     <int, Color>{
-      50: Color(0xFFE3F0FF),
-      100: Color(0xFFC2DEFF),
-      200: Color(0xFF99C5FF),
-      300: Color(0xFF66A9FF),
-      400: Color(0xFF338CFF),
-      500: Color(0xFF0057FF),
-      600: Color(0xFF004EE5),
-      700: Color(0xFF0042CC),
-      800: Color(0xFF0037B3),
-      900: Color(0xFF002080),
+      50: Color(0xFFFEF6F0),
+      100: Color(0xFFFEE8D8),
+      200: Color(0xFFFDCBB2),
+      300: Color(0xFFF9A78A),
+      400: Color(0xFFF3846C),
+      500: Color(0xFFEB4E3D),
+      600: Color(0xFFCA2F2C),
+      700: Color(0xFFA91E27),
+      800: Color(0xFF881324),
+      900: Color(0xff3d0918),
     },
   );
 
