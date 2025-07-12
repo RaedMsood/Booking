@@ -38,7 +38,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_screenutil:
-  flutter_secure_storage:
+  flutter_secure_storage: ^9.2.4
   encrypt:
   get_it:
   dartz:
@@ -58,6 +58,7 @@ dependencies:
   cached_network_image:
   shimmer:
   pinput:
+
 
 dev_dependencies:
   flutter_test:
