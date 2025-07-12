@@ -38,7 +38,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_screenutil:
-  flutter_secure_storage:
+  flutter_secure_storage: ^9.2.4
   encrypt:
   get_it:
   dartz:

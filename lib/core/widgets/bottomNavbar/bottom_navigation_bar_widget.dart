@@ -1,4 +1,3 @@
-import 'package:booking/core/helpers/flash_bar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,11 +25,6 @@ class _BottomNavigationBarWidgetState
     const ExitFromAppWidget(child: HomePage()),
     ExitFromAppWidget(child: BookingPage()),
     const ExitFromAppWidget(child: HomePage()),
-
-    // const ExitFromAppWidget(child: CategoryPage()),
-    // // const ExitFromAppWidget(child: NewPage()),
-    // const ExitFromAppWidget(child: CartPage()),
-    // const ExitFromAppWidget(child: ProfilePage()),
   ];
 
   @override
@@ -47,7 +41,7 @@ class _BottomNavigationBarWidgetState
             colors: [
               AppColors.scaffoldColor.withOpacity(.0),
               AppColors.scaffoldColor.withOpacity(.84),
-              AppColors.scaffoldColor
+              AppColors.scaffoldColor.withOpacity(.98)
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
