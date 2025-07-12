@@ -35,7 +35,7 @@ class IconButtonWidget extends StatelessWidget {
       icon: SvgPicture.asset(
         icon ?? AppIcons.arrowBack,
         height: height,
-        color: iconColor??AppColors.primaryColor,
+        color: iconColor,
       ),
     );
   }

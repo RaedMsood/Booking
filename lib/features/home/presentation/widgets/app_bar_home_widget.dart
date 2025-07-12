@@ -1,26 +1,53 @@
-import 'package:booking/core/widgets/auto_size_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../../core/constants/app_icons.dart';
+import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/buttons/icon_button_widget.dart';
+import '../../../../core/widgets/buttons/ink_well_button_widget.dart';
+import '../pages/home_page.dart';
 
 class AppBarHomeWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarHomeWidget({super.key});
 
   @override
-  Size get preferredSize => Size.fromHeight(48.h);
+  Size get preferredSize => Size.fromHeight(46.h);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      toolbarHeight: 48.h,
+      toolbarHeight: 44.h,
       centerTitle: true,
-      title: AutoSizeTextWidget(text: "اهلا رائد مسعود",fontSize: 13.sp,),
+      title: AutoSizeTextWidget(
+        text: "اهلا رائد مسعود",
+        fontSize: 13.sp,
+      ),
       actions: [
-        14.w.horizontalSpace,
-        SvgPicture.asset(AppIcons.notification),
-        14.w.horizontalSpace,
+        ValueListenableBuilder<bool>(
+          valueListenable: HomePage.showSearchIconStatic,
+          builder: (context, visible, _) {
+            return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              transitionBuilder: (child, anim) =>
+                  FadeTransition(opacity: anim, child: child),
+              child: visible
+                  ? InkWellButtonWidget(
+                      icon: AppIcons.search,
+                      iconColor: Colors.black,
+                      height: 15.5.h,
+                      onPressed: () {},
+                    )
+                  : const SizedBox.shrink(key: ValueKey("empty")),
+            );
+          },
+        ),
+        // 12.w.horizontalSpace,
+        IconButtonWidget(
+          icon: AppIcons.notification,
+          onPressed: () {
+            // notifications
+          },
+        ),
+        2.8.w.horizontalSpace,
       ],
     );
   }
