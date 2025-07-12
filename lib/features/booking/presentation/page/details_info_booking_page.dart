@@ -10,8 +10,8 @@ import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../widget/booking_data_card_widget.dart';
 import '../widget/confrim_booking_card_widget.dart';
 import '../widget/hotel_summary_card_widget.dart';
+import '../widget/policy_tile_widget.dart';
 
-/// الصفحة الرئيسية
 class BookingDetailPage extends StatelessWidget {
   final String hotelName;
   final String hotelLocation;
@@ -60,7 +60,6 @@ class BookingDetailPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // 1. ملخص الفندق
             HotelSummaryCard(
               name: hotelName,
               location: hotelLocation,
@@ -69,7 +68,6 @@ class BookingDetailPage extends StatelessWidget {
 
             SizedBox(height: 16.h),
 
-            // 2. تأكيد الحجز
             ConfirmBookingCard(
               bookingId: bookingId,
               bookingDateString:
@@ -80,7 +78,6 @@ class BookingDetailPage extends StatelessWidget {
 
             SizedBox(height: 16.h),
 
-            // 3. بيانات الحجز
             BookingDataCard(
               adults: adults,
               children: children,
@@ -90,8 +87,7 @@ class BookingDetailPage extends StatelessWidget {
 
             SizedBox(height: 16.h),
 
-            // 4. سياسة الشراء والإلغاء
-            PolicyTile(
+            PolicyTileWidget(
               title: 'سياسة الشراء والالغاء',
               onTap: onPolicyTap,
             ),
@@ -112,90 +108,4 @@ class BookingDetailPage extends StatelessWidget {
 }
 
 
-/// 4. تودجت سطر في الـ SectionCard
-/// بطاقة عامة بكل Section: عنوان + محتوى
-
-/// شارة حالة بأي لون
-class StatusBadgeInDetailsWidget extends StatelessWidget {
-  final String label;
-  final Color backgroundColor;
-  final Color textColor;
-
-  const StatusBadgeInDetailsWidget({
-    Key? key,
-    required this.label,
-    required this.backgroundColor,
-    required this.textColor,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const AutoSizeTextWidget(
-          text: 'حالة الطلب',
-          fontSize: 10,
-          colorText: Color(0xff605A65),
-        ),
-        const Spacer(),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 4.sp),
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(12.sp),
-          ),
-          child: AutoSizeTextWidget(
-            text: label,
-            fontSize: 10,
-            colorText: textColor,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-/// 5. التاج قابل للفتح (سياسة الشراء والإلغاء)
-class PolicyTile extends StatelessWidget {
-  final String title;
-  final VoidCallback? onTap;
-
-  const PolicyTile({
-    Key? key,
-    required this.title,
-    this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16.w),
-        padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.sp),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AutoSizeTextWidget(
-              text: title,
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-            ),
-            Spacer(),
-
-            const Icon(Icons.add, size: 20),
-          ],
-        ),
-      ),
-    );
-  }
-}
 

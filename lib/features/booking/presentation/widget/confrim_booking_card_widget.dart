@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../page/details_info_booking_page.dart';
 import 'booking_status_widget.dart';
 import 'info_item_in_confrim_booking_card_widget.dart';
+import 'status_badge_in_details_widget.dart';
 
 class ConfirmBookingCard extends StatelessWidget {
   final String bookingId;

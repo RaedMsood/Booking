@@ -1,4 +1,5 @@
 import 'package:booking/core/helpers/flash_bar_helper.dart';
+import 'package:booking/core/helpers/navigateTo.dart';
 import 'package:booking/core/widgets/auto_size_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,7 @@ import '../../../../core/widgets/buttons/default_button.dart';
 import '../widget/hotel_summary_card_widget.dart';
 import '../widget/range_calender_widget.dart';
 import '../widget/select_booking_details_widget.dart';
+import 'complete_add_booking_page.dart';
 
 class DetailsOfBookInAddPage extends StatelessWidget {
   const DetailsOfBookInAddPage({super.key});
@@ -53,6 +55,9 @@ class DetailsOfBookInAddPage extends StatelessWidget {
                   height: 44.h,
                   width: double.infinity,
                   borderRadius:15.r ,
+                  onPressed: (){
+                    navigateTo(context, CompleteAddBookingPage());
+                  },
                 ),
               )
             ],
