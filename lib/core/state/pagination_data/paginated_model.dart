@@ -14,15 +14,14 @@ class PaginationModel<T> {
   });
 
   //from json
-  factory PaginationModel.fromJson(Map<String, dynamic> json, T Function(dynamic json) fromJson) {
+  factory PaginationModel.fromJson(
+      Map<String, dynamic> json, T Function(dynamic json) fromJson) {
     return PaginationModel<T>(
       currentPage: json['current_page'] ?? 1,
       lastPage: json['last_page'] ?? 1,
-      perPage: json['per_page'] ?? 10,
+      perPage: json['per_page'] ?? 5,
       total: json['total'] ?? 0,
-      // data: List<T>.from(json['data'].map((x) => fromJson(x))),
       data: (json['data'] as List?)?.map((x) => fromJson(x)).toList() ?? [],
-
     );
   }
 
@@ -53,7 +52,6 @@ class PaginationModel<T> {
     );
   }
 
-
   //empty
   factory PaginationModel.empty() {
     return PaginationModel<T>(
@@ -64,5 +62,4 @@ class PaginationModel<T> {
       data: [],
     );
   }
-
 }

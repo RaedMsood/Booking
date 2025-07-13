@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/state/check_state_in_get_api_data_widget.dart';
+import '../../../../core/state/state.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../riverpod/home_riverpod.dart';
@@ -58,7 +59,10 @@ class _HomePageState extends ConsumerState<HomePage> {
     // ============ Pagination ============
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 100) {
-      ref.read(getPropertyProvider.notifier).getData(moreData: true);
+      final state = ref.read(getPropertyProvider);
+      if (state.stateData != States.loadingMore) {
+        ref.read(getPropertyProvider.notifier).getData(moreData: true);
+      }
     }
   }
 
@@ -73,7 +77,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     var state = ref.watch(getPropertyProvider);
 
     return Scaffold(
-      appBar: AppBarHomeWidget(),
+      appBar: const AppBarHomeWidget(),
       body: CheckStateInGetApiDataWidget(
         state: state,
         widgetOfData: RefreshIndicator(

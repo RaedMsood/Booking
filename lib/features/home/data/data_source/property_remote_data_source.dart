@@ -9,7 +9,7 @@ class PropertyRemoteDataSource {
 
   Future<PaginationModel<PropertyModel>> getProperty({
     required int page,
-    int perPage = 3,
+    int perPage = 5,
   }) async {
     final response = await RemoteRequest.getData(
       url: AppURL.property,
@@ -18,7 +18,7 @@ class PropertyRemoteDataSource {
         'perPage': perPage,
       },
     );
-    print(response.data);
+
     return PaginationModel<PropertyModel>.fromJson(
       response.data['data'],
       (prop) {

@@ -1,3 +1,4 @@
+import 'package:booking/core/state/pagination_data/paginated_model.dart';
 import 'package:dio/dio.dart';
 import 'state.dart';
 
@@ -28,6 +29,19 @@ class DataState<T> {
       stateData: state,
       exception: exception,
       data: data ?? this.data,
+    );
+  }
+}
+
+extension DataStateExtension<T> on DataState<PaginationModel<T>> {
+  DataState<PaginationModel<T>> success(PaginationModel<T> newData, bool moreData) {
+    return copyWith(
+      state: States.loaded,
+      data: data.copyWith(
+        data: moreData ? [...data.data, ...newData.data] : newData.data,
+        currentPage: newData.currentPage,
+        lastPage: newData.lastPage,
+      ),
     );
   }
 }

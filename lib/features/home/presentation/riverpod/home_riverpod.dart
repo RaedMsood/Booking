@@ -44,16 +44,7 @@ class GetPropertyNotifier
         state = state.copyWith(state: States.error, exception: failure);
       },
       (newData) {
-        final updatedData =
-            moreData ? [...state.data.data, ...newData.data] : newData.data;
-        state = state.copyWith(
-          state: States.loaded,
-          data: state.data.copyWith(
-            data: updatedData,
-            currentPage: newData.currentPage,
-            lastPage: newData.lastPage,
-          ),
-        );
+        state = state.success(newData, moreData);
       },
     );
   }

@@ -8,7 +8,7 @@ import '../../../../core/widgets/loading_widget.dart';
 import '../../data/model/property_model.dart';
 import 'property_card_widget.dart';
 
-class PropertySliverListWidget extends ConsumerWidget {
+class PropertySliverListWidget extends StatelessWidget {
   final List<PropertyModel> properties;
   final States state;
   final bool hasMore;
@@ -21,7 +21,7 @@ class PropertySliverListWidget extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return SliverPadding(
       padding: EdgeInsets.symmetric(horizontal: 14.w)
           .copyWith(bottom: 94.h, top: 12.h),
