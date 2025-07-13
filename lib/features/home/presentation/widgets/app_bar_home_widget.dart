@@ -36,16 +36,13 @@ class AppBarHomeWidget extends StatelessWidget implements PreferredSizeWidget {
                       height: 15.5.h,
                       onPressed: () {},
                     )
-                  : const SizedBox.shrink(key: ValueKey("empty")),
+                  : const SizedBox.shrink(),
             );
           },
         ),
-        // 12.w.horizontalSpace,
         IconButtonWidget(
           icon: AppIcons.notification,
-          onPressed: () {
-            // notifications
-          },
+          onPressed: () {},
         ),
         2.8.w.horizontalSpace,
       ],

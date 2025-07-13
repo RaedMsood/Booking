@@ -4,7 +4,7 @@ import '../../services/auth/auth.dart';
 import '../helpers/flash_bar_helper.dart';
 import '../network/errors/remote_exception.dart';
 import '../state/state.dart';
-import '../state/state_data.dart';
+import '../state/data_state.dart';
 
 class CheckStateInPostApiDataWidget extends StatelessWidget {
   final Widget? bottonWidget;

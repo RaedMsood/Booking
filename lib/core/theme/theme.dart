@@ -21,6 +21,7 @@ ThemeData lightTheme = ThemeData(
       systemNavigationBarIconBrightness: Brightness.dark,
     ),
   ),
+
   tabBarTheme: TabBarTheme(
     labelPadding: const EdgeInsets.symmetric(horizontal: 12),
     dividerColor: AppColors.fontColor,

@@ -6,7 +6,7 @@ import '../network/errors/remote_exception.dart';
 import '../state/state.dart';
 import '../theme/app_colors.dart';
 import '../widgets/no_internet_connection_widget.dart';
-import 'state_data.dart';
+import 'data_state.dart';
 
 class CheckStateInGetApiDataWidget extends StatelessWidget {
   final Widget? widgetOfData;
@@ -27,7 +27,6 @@ class CheckStateInGetApiDataWidget extends StatelessWidget {
 
     if (state.stateData == States.loaded ||
         state.stateData == States.loadingMore) {
-      // return state.data!.isEmpty?EmptyWalletWidget() :widgetOfData!;
       return widgetOfData!;
     } else if (state.stateData == States.error) {
       if (state.exception!.type == DioExceptionType.connectionError) {

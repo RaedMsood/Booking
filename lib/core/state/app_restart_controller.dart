@@ -6,9 +6,9 @@ class AppRestartController extends StatefulWidget {
   static _AppRestartControllerState? _state;
 
   const AppRestartController({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
 
   static Future<void> restartApp(BuildContext context) async {
     await _state?.restart();

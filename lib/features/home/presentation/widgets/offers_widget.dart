@@ -17,7 +17,6 @@ class _OffersWidgetState extends State<OffersWidget> {
 
   List offersImage = [
     "https://techvillageeg.com/wp-content/uploads/2023/08/%D8%A3%D9%81%D8%B6%D9%84-%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA-%D8%AD%D8%AC%D8%B2-%D8%A7%D9%84%D9%81%D9%86%D8%A7%D8%AF%D9%82.webp",
-    "https://lens.usercontent.google.com/image?vsrid=CPiJ2fWE2OzzrwEQAhgBIiRlYjVjMjU3Yy05Y2ZiLTQwYjEtYmUxNi1iNzU3YzIwNGNlODkyBiICZWgoADiWzf3E5LWOAw&gsessionid=g3pxA0dkMz759E7MEyCb50iPfuvKzDRRrAg5L-hs7E0CNv0udM1SXA",
     "https://media.zid.store/61fdcc47-4ddf-47ef-a50c-8347a582db4f/e4bfb94b-90b9-4bd7-acb4-036a223c3c3b.png",
   ];
 

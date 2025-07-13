@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 import 'state.dart';
 
 class DataState<T> {
@@ -8,7 +7,7 @@ class DataState<T> {
   final T data;
 
   DataState({
-    required  this.stateData,
+    required this.stateData,
     this.exception,
     required this.data,
   });
@@ -32,4 +31,3 @@ class DataState<T> {
     );
   }
 }
-
