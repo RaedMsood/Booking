@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../home/presentation/widgets/real_estate_card_widget.dart';
+import '../../../home/presentation/widgets/property_card_widget.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -131,9 +131,7 @@ class _MapPageState extends State<MapPage> with AutomaticKeepAliveClientMixin {
                         right: 16.w,
                         bottom: kBottomNavigationBarHeight + 30.h,
                       ),
-                      child: RealEstateCardWidget(
-                        heightImage: 90.h,
-                      ),
+                      child: Container()
                     ),
                   ),
               ],
