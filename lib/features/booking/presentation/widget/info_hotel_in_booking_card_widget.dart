@@ -1,8 +1,11 @@
+import 'package:booking/core/constants/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/rich_text_widget.dart';
 
 class InfoHotelInCardBookingWidget extends StatelessWidget {
   final String title;
@@ -10,6 +13,7 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
   final int count;
   final double price;
   final String currency;
+
   const InfoHotelInCardBookingWidget({
     Key? key,
     required this.title,
@@ -33,7 +37,13 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
           SizedBox(height: 4.h),
           Row(
             children: [
-              const Icon(Icons.location_on, size: 11, color: Colors.grey),
+               //const Icon(Icons.location_on, size: 11, color: Colors.grey),
+              SvgPicture.asset(
+                AppIcons.location,
+                height: 10.h,
+                color: Color(0xff757575),
+
+              ),
               Expanded(
                 child: AutoSizeTextWidget(
                   text: location,
@@ -54,16 +64,24 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
                 minFontSize: 7,
                 colorText: Color(0xff757575),
                 fontWeight: FontWeight.w400,
-
-
               ),
               Spacer(),
-              AutoSizeTextWidget(
-                text: '${price.toStringAsFixed(0)} $currency',
-                fontSize: 12,
-                colorText: AppColors.primaryColor,
+              // AutoSizeTextWidget(
+              //   text: '${price.toStringAsFixed(0)} $currency',
+              //   fontSize: 12,
+              //   colorText: AppColors.primaryColor,
+              //   fontWeight: FontWeight.w400,
+              //
+              // ),
+              RichTextWidget(
+                firstText: "50000 ",
+                secondText: "ريال",
+                firstColor: AppColors.primaryColor,
+                secondColor: Color(0xff757575),
+                fontSize: 11.sp,
                 fontWeight: FontWeight.w400,
-
+                fontSizeSecondText: 11.sp,
+                fontWeightSecondText: FontWeight.w300,
               ),
             ],
           ),

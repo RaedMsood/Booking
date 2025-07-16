@@ -41,13 +41,13 @@ class ConfirmBookingCard extends StatelessWidget {
               );
             },
           ),
-          6.verticalSpace,
+          10.verticalSpace,
           InfoItemInConfrimBookingCardWidget(
             title:  'تاريخ الطلب',
 
             text: bookingDateString,
           ),
-          6.verticalSpace,
+          10.verticalSpace,
           StatusBadgeInDetailsWidget(
             label: statusLabel,
             backgroundColor: statusColor.withOpacity(0.1),

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:booking/features/user/presentation/pages/log_in_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,12 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-
+  // if (Platform.isAndroid) {
+  //   final mapsImplementation = GoogleMapsFlutterPlatform.instance;
+  //   if (mapsImplementation is GoogleMapsFlutterAndroid) {
+  //     mapsImplementation.useAndroidViewSurface = true;
+  //   }
+  // }
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.dumpErrorToConsole(details);
     if (kReleaseMode) {

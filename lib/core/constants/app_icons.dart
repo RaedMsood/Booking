@@ -22,6 +22,15 @@ class AppIcons {
   static const String like = '${_iconsPath}like.svg';
   static const String disLike = '${_iconsPath}dis_like.svg';
   static const String addComment = '${_iconsPath}add_comment.svg';
+  static const String people = '${_iconsPath}people.svg';
+
+  static const String babyFace = '${_iconsPath}smiling-baby 1.svg';
+  static const String buliding = '${_iconsPath}buliding.svg';
+  static const String clock = '${_iconsPath}clock.svg';
+  static const String pay = '${_iconsPath}pay.svg';
+  static const String bank = '${_iconsPath}bank.svg';
+
+
 
   /// Contact
   static const String instagram = '${_iconsPath}contact/instagram.svg';
@@ -46,6 +55,9 @@ class AppIcons {
       '${_iconsPath}profile/receipt_discount.svg';
   static const String truckFast = '${_iconsPath}profile/truck_fast.svg';
   static const String logout = '${_iconsPath}profile/log_out.svg';
+  static const String messageQuestion =
+      '${_iconsPath}profile/message-question.svg';
+  static const String infoCircle = '${_iconsPath}profile/info-circle.svg';
 
   /// User Icons
   static const String phone = '${_iconsPath}user/phone.svg';
@@ -69,4 +81,14 @@ class AppIcons {
   static const String profile = '${_iconsPath}bottombar/profile.svg';
   static const String profileActive =
       '${_iconsPath}bottombar/profile_active.svg';
+
+
+  //settings app
+  static const String translate =
+      '${_iconsPath}translate.svg';
+  static const String currency =
+      '${_iconsPath}currency.svg';
+  static const String logOut =
+      '${_iconsPath}logout.svg';
+
 }

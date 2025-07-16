@@ -58,6 +58,7 @@ dependencies:
   cached_network_image:
   shimmer:
   pinput:
+  google_maps_flutter:
 
 
 dev_dependencies:

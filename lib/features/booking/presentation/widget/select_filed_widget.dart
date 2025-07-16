@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 
 class SelectFieldWidget extends StatelessWidget {
   final String label;
   final String value;
   final VoidCallback onTap;
+  final Color? selectFiledColor;
+  final Color? fontColorLabel;
+
+  final double? fontSizeLabel;
 
   const SelectFieldWidget({
     super.key,
     required this.label,
     required this.value,
     required this.onTap,
+         this.selectFiledColor,this.fontSizeLabel,this.fontColorLabel
   });
 
   @override
@@ -21,16 +27,16 @@ class SelectFieldWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         AutoSizeTextWidget(
-            text: label, fontSize: 10, fontWeight: FontWeight.w400),
+          colorText: fontColorLabel??Colors.black,  text: label, fontSize:fontSizeLabel?? 10, fontWeight: FontWeight.w400),
         6.verticalSpace,
         InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           child: Container(
-            height: 48,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            height: 43.h,
+            padding:  EdgeInsets.symmetric(horizontal: 14.sp),
             decoration: BoxDecoration(
-              color: const Color(0xFFF2F2F2),
+              color:selectFiledColor?? AppColors.scaffoldColor,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 
 class HotelSummaryCard extends StatelessWidget {
@@ -21,15 +23,15 @@ class HotelSummaryCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12.sp),
+        borderRadius: BorderRadius.circular(15.sp),
       ),
       child: Row(
         children: [
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(12.sp),
-                    bottomRight: Radius.circular(12.sp))),
+                    topLeft: Radius.circular(12.sp),
+                    bottomLeft: Radius.circular(12.sp))),
             child: Image.network(
               imageUrl,
               width: 60.w,
@@ -58,7 +60,13 @@ class HotelSummaryCard extends StatelessWidget {
                 4.verticalSpace,
                 Row(
                   children: [
-                    const Icon(Icons.location_on, size: 12, color: Colors.grey),
+                     SvgPicture.asset(
+                      AppIcons.location,
+                      height: 12.h,
+                      color: Color(0xff757575),
+
+                    ),
+                    2.horizontalSpace,
                     Expanded(
                       child: AutoSizeTextWidget(
                         text: location,

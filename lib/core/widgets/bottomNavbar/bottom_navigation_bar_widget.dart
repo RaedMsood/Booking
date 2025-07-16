@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../features/booking/presentation/page/booking_page.dart';
 import '../../../features/home/presentation/pages/home_page.dart';
+import '../../../features/map/presentation/page/map_page.dart';
+import '../../../features/profile/presentation/page/profile_page.dart';
 import '../../../generated/l10n.dart';
 import '../../constants/app_icons.dart';
 import '../../helpers/exit_from_the_app.dart';
@@ -23,9 +25,9 @@ class _BottomNavigationBarWidgetState
     extends ConsumerState<BottomNavigationBarWidget> {
   final List<Widget> _pages = [
     const ExitFromAppWidget(child: HomePage()),
-    const ExitFromAppWidget(child: HomePage()),
+    const ExitFromAppWidget(child: MapPage()),
     ExitFromAppWidget(child: BookingPage()),
-    const ExitFromAppWidget(child: HomePage()),
+    const ExitFromAppWidget(child: ProfilePage()),
   ];
 
   @override

@@ -4,35 +4,25 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/online_images_widget.dart';
 
-class PropertyPhotosWidget extends StatelessWidget {
-  final List<String> image;
-
-  const PropertyPhotosWidget({super.key, required this.image});
-
+class RealEstatePhotosWidget extends StatelessWidget {
+  const RealEstatePhotosWidget({super.key,this.height});
+  final double? height;
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-
-        SizedBox(
-          height: 180.h,
-          child: PageView.builder(
-            itemCount: image.length,
-            itemBuilder: (context, imageIndex) {
-              return OnlineImagesWidget(
-                imageUrl: image[imageIndex],
-                size: Size(double.infinity, 180.h),
-                borderRadius: 16.r,
-              );
-            },
-          ),
+        OnlineImagesWidget(
+          imageUrl:
+          "https://www.alaraby.co.uk/sites/default/files/media/images/6A56AE3C-62E8-4A83-98CE-D00CE8260D5D.jpg",
+          size: Size(double.infinity,height?? 180.h),
+         // size: Size(double.infinity, 100.h),
+          borderRadius: 16.r,
         ),
-
         PositionedDirectional(
           top: 10.h,
           start: 10.w,
           child: Container(
-            padding: EdgeInsets.all(6.sp),
+            padding: EdgeInsets.all(7.sp),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(28.r),
@@ -45,7 +35,6 @@ class PropertyPhotosWidget extends StatelessWidget {
             ),
           ),
         ),
-
       ],
     );
   }

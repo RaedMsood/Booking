@@ -1,18 +1,15 @@
+import 'package:booking/core/widgets/auto_size_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/rating_bar_widget.dart';
-import '../../data/model/property_model.dart';
-import 'property_photos_widget.dart';
+import 'real_estate_photos_widget.dart';
 
-class PropertyCardWidget extends StatelessWidget {
-  final PropertyModel property;
-
-  const PropertyCardWidget({super.key, required this.property});
-
+class RealEstateCardWidget extends StatelessWidget {
+  const RealEstateCardWidget({super.key,this.heightImage});
+  final double? heightImage;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,8 +24,9 @@ class PropertyCardWidget extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            PropertyPhotosWidget(image: property.mainImageUrls,),
+             RealEstatePhotosWidget(height: heightImage,),
             Padding(
               padding: EdgeInsets.all(8.sp),
               child: Column(
@@ -40,7 +38,7 @@ class PropertyCardWidget extends StatelessWidget {
                     children: [
                       Flexible(
                         child: AutoSizeTextWidget(
-                          text: property.name,
+                          text: "فندق أم القرى السياحي",
                           fontSize: 12.2.sp,
                           fontWeight: FontWeight.w500,
                           maxLines: 2,
@@ -59,7 +57,7 @@ class PropertyCardWidget extends StatelessWidget {
                         child: Row(
                           children: [
                             AutoSizeTextWidget(
-                              text: property.rating.toString(),
+                              text: "4",
                               fontSize: 10.5.sp,
                               colorText: const Color(0xfffbcc2b),
                             ),
@@ -84,7 +82,7 @@ class PropertyCardWidget extends StatelessWidget {
                       4.w.horizontalSpace,
                       Flexible(
                         child: AutoSizeTextWidget(
-                          text: "${property.city}, ${property.district}",
+                          text: "سعوان هبرة",
                           fontSize: 10.5.sp,
                           colorText: AppColors.fontColor,
                           minFontSize: 10,

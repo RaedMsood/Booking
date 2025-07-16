@@ -69,7 +69,6 @@ class BookingCard extends StatelessWidget {
               ],
             ),
             Divider(thickness: 0.5, color: Color(0xffF0F0F0)),
-            // الصف السفلي: صورة + المعلومات
             Row(
               children: [
                 HotelImage(imageUrl: imageUrl),

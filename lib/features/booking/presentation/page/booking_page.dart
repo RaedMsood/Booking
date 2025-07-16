@@ -33,7 +33,6 @@ class Booking {
 class BookingPage extends StatefulWidget {
   BookingPage();
 
-
   @override
   State<BookingPage> createState() => _BookingPageState();
 }
@@ -59,7 +58,6 @@ class _BookingPageState extends State<BookingPage>
           title: AutoSizeTextWidget(
             text: "الحجوزات",
             fontWeight: FontWeight.w500,
-
           ),
         ),
         body: Container(
@@ -74,8 +72,7 @@ class _BookingPageState extends State<BookingPage>
                   labelColor: Colors.black,
                   unselectedLabelColor: Color(0xff605A65),
                   indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                        10),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   tabs: [
                     _buildTab('الكل', 0),
@@ -109,28 +106,33 @@ class _BookingPageState extends State<BookingPage>
                         price: 50000,
                         imageUrl: 'https://your-server.com/images/hotel.jpg',
                         onTap: () {
-                         navigateTo(context,
-                         //   BookingDetailPage(
-                         //   hotelName: 'فندق أم القرى السياحي',
-                         //   hotelLocation: 'سعوان , هبرة',
-                         //   hotelImageUrl: 'https://your-server.com/images/umAlQura.jpg',
-                         //   bookingId: '1-2347373',
-                         //   bookingDate: DateTime(2025, 7, 1, 8, 17),
-                         //   bookingStatusLabel: 'ملغية',
-                         //   bookingStatusColor: Colors.red,
-                         //   adults: 4,
-                         //   children: 2,
-                         //   startDate: DateTime(2025, 7, 1),
-                         //   endDate: DateTime(2025, 7, 5),
-                         //   onPolicyTap: () {
-                         //     // افتح تفاصيل سياسة الشراء والإلغاء
-                         //   },
-                         //   onViewFacilityDetails: () {
-                         //     // افتح صفحة تفاصيل المنشأة
-                         //   },
-                         // ),
-                             DetailsOfBookInAddPage(),
-                         );
+                          navigateTo(
+                            context,
+                            BookingDetailPage(
+                              hotelName: 'فندق أم القرى السياحي',
+                              hotelLocation: 'سعوان , هبرة',
+                              hotelImageUrl:
+                                  'https://your-server.com/images/umAlQura.jpg',
+                              bookingId: '1-2347373',
+                              bookingDate: DateTime(2025, 7, 1, 8, 17),
+                              bookingStatusLabel: 'ملغية',
+                              bookingStatusColor: Colors.red,
+                              adults: 4,
+                              children: 2,
+                              startDate: DateTime(2025, 7, 1),
+                              endDate: DateTime(2025, 7, 5),
+                              onPolicyTap: () {
+                                // افتح تفاصيل سياسة الشراء والإلغاء
+                              },
+                              onViewFacilityDetails: () {
+                                navigateTo(
+                                  context,
+                                  DetailsOfBookInAddPage(),
+                                );
+                                // افتح صفحة تفاصيل المنشأة
+                              },
+                            ),
+                          );
                         },
                       ),
                       itemCount: 3,
@@ -170,7 +172,8 @@ class _BookingPageState extends State<BookingPage>
               fontWeight: FontWeight.w500,
               color: isSelected
                   ? AppColors.primaryColor
-                  : Color(0xff605A65), // النص داخل التاب المفعل أبيض وغير المفعل أسود
+                  : Color(
+                      0xff605A65), // النص داخل التاب المفعل أبيض وغير المفعل أسود
             ),
           ),
         ),

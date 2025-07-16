@@ -1,3 +1,4 @@
+import 'package:booking/core/constants/app_icons.dart';
 import 'package:booking/core/widgets/buttons/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -70,8 +71,9 @@ class BookingDetailPage extends StatelessWidget {
 
             ConfirmBookingCard(
               bookingId: bookingId,
-              bookingDateString:
-                  '${timeFmt.format(bookingDate)} - ${dateFmt.format(bookingDate)}',
+              // bookingDateString:
+              //     '${timeFmt.format(bookingDate)} - ${dateFmt.format(bookingDate)}',
+              bookingDateString: "08:17 - 2025-07-01",
               statusLabel: bookingStatusLabel,
               statusColor: bookingStatusColor,
             ),
@@ -81,8 +83,10 @@ class BookingDetailPage extends StatelessWidget {
             BookingDataCard(
               adults: adults,
               children: children,
-              startDateString: dateFmt.format(startDate),
-              endDateString: dateFmt.format(endDate),
+              // startDateString: dateFmt.format(startDate),
+              // endDateString: dateFmt.format(endDate),
+              endDateString: " 2025-07-01",
+              startDateString: " 2025-07-01",
             ),
 
             SizedBox(height: 16.h),
@@ -96,16 +100,17 @@ class BookingDetailPage extends StatelessWidget {
 
             // 5. زر عرض تفاصيل المنشأة
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 16.w),
-              child: DefaultButtonWidget(text: "استعراض تفاصيل المنشأة"),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: DefaultButtonWidget(
+                text: "استعراض تفاصيل المنشأة",
+                onPressed: onViewFacilityDetails,
+                withIcon: true,
+                icon: AppIcons.bank,
+              ),
             ),
-
           ],
         ),
       ),
     );
   }
 }
-
-
-

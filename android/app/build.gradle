@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.algonest.booking"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 35
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
