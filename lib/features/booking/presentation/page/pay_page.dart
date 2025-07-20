@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helpers/navigateTo.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/buttons/default_button.dart';
 import '../widget/bill_summary_widget.dart';
 import '../widget/deposit_in_last_details_widget.dart';
 import '../widget/desgin_button_in_add_booking_widget.dart';
@@ -58,10 +59,7 @@ class PayPage extends StatelessWidget {
             ),
           ),
           DesginButtonInAddBookingWidget(
-            text: "الدفع",
-            onPressed: (){
-              navigateTo(context, ShowLastDetailsInAddBookingPage());
-            },
+            button: DefaultButtonWidget(text: "الدفع"),
           ),
         ],
       ),

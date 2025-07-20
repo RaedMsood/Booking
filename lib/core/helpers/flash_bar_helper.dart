@@ -32,6 +32,30 @@ void showFlashBarSuccess({
   ).show(context);
 }
 
+void showFlashBarWarring({
+  required BuildContext context,
+  required String message,
+}) {
+  Flushbar(
+    duration: const Duration(seconds: 3),
+    message: message,
+    messageText: Text(
+      message,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 12.5.sp,
+        fontFamily: 'ReadexPro',
+      ),
+    ),
+    margin: EdgeInsets.symmetric(horizontal: 40.w, vertical: 18.h),
+    padding: EdgeInsets.all(12.sp),
+    backgroundColor:Color(0xffFACC15),
+    borderRadius: BorderRadius.circular(8.r),
+    flushbarPosition: FlushbarPosition.TOP,
+    flushbarStyle: FlushbarStyle.FLOATING,
+  ).show(context);
+}
 /// Error ///
 void showFlashBarError({
   required BuildContext context,
@@ -58,7 +82,7 @@ void showFlashBarError({
       style: TextStyle(
         color: Colors.white,
         fontSize: 12.2.sp,
-        fontFamily: 'NotoKufi',
+        fontFamily: 'ReadexPro',
       ),
     ),
     backgroundColor: AppColors.secondarySwatch.shade500,

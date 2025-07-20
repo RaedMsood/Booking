@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../home/presentation/widgets/property_card_widget.dart';
+import '../widgets/card_in_map_widget.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -41,6 +41,7 @@ class _MapPageState extends State<MapPage> with AutomaticKeepAliveClientMixin {
     final BitmapDescriptor icon = await _bitmapDescriptorFromAsset(
       'assets/images/loc.png',
       width: 70.w.toInt(),
+
     );
     setState(() {
       _markerIcon = icon;
@@ -55,6 +56,7 @@ class _MapPageState extends State<MapPage> with AutomaticKeepAliveClientMixin {
     ui.Codec codec = await ui.instantiateImageCodec(
       data.buffer.asUint8List(),
       targetWidth: width,
+
     );
     ui.FrameInfo fi = await codec.getNextFrame();
     Uint8List bytes = (await fi.image.toByteData(
@@ -126,13 +128,12 @@ class _MapPageState extends State<MapPage> with AutomaticKeepAliveClientMixin {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 16.w,
-                        right: 16.w,
-                        bottom: kBottomNavigationBarHeight + 30.h,
-                      ),
-                      child: Container()
-                    ),
+                        padding: EdgeInsets.only(
+                          left: 16.w,
+                          right: 16.w,
+                          bottom: kBottomNavigationBarHeight + 30.h,
+                        ),
+                        child: CardInMapWidget()),
                   ),
               ],
             ),
@@ -149,4 +150,3 @@ class _MarkerData {
 
   _MarkerData({required this.id, required this.position});
 }
-

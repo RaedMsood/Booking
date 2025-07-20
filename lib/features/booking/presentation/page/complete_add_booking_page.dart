@@ -1,3 +1,4 @@
+import 'package:booking/core/widgets/buttons/default_button.dart';
 import 'package:booking/features/booking/presentation/page/show_last_details_in_add_booking_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,7 +52,7 @@ class CompleteAddBookingPage extends StatelessWidget {
                         8.verticalSpace,
                         AutoSizeTextWidget(
                           text: 'الاسم',
-                          fontSize: 12,
+                          fontSize: 11.sp,
                           fontWeight: FontWeight.w400,
                           colorText: Color(0xff2E3333),
                         ),
@@ -62,7 +63,7 @@ class CompleteAddBookingPage extends StatelessWidget {
                         6.verticalSpace,
                         AutoSizeTextWidget(
                           text: 'البريد الالكتروني',
-                          fontSize: 12,
+                          fontSize:11.sp,
                           fontWeight: FontWeight.w400,
                           colorText: Color(0xff2E3333),
                         ),
@@ -73,7 +74,7 @@ class CompleteAddBookingPage extends StatelessWidget {
                         6.verticalSpace,
                         AutoSizeTextWidget(
                           text: 'الرقم',
-                          fontSize: 12,
+                          fontSize: 11.sp,
                           fontWeight: FontWeight.w400,
                           colorText: Color(0xff2E3333),
                         ),
@@ -83,7 +84,8 @@ class CompleteAddBookingPage extends StatelessWidget {
                         ),
                         6.verticalSpace,
                         SelectFieldWidget(
-                          fontSizeLabel: 12,
+                          fontSizeLabel: 11.sp,
+                          fontSizeValue: 11.sp,
                           label: 'المحافظة',
                           value: "صنعاء",
                           fontColorLabel: Color(0xff2E3333),
@@ -97,7 +99,7 @@ class CompleteAddBookingPage extends StatelessWidget {
                                   title: Center(
                                     child: AutoSizeTextWidget(
                                       text: opt,
-                                      fontSize: 12,
+                                      fontSize: 12.sp,
                                     ),
                                   ),
                                 );
@@ -114,9 +116,9 @@ class CompleteAddBookingPage extends StatelessWidget {
             ),
           ),
           DesginButtonInAddBookingWidget(
-            onPressed: () {
-              navigateTo(context, ShowLastDetailsInAddBookingPage());
-            },
+           button: DefaultButtonWidget(text: "التالي",onPressed: (){
+             navigateTo(context, ShowLastDetailsInAddBookingPage());
+           },),
           ),
         ],
       ),

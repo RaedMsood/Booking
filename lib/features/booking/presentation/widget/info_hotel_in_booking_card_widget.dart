@@ -15,13 +15,13 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
   final String currency;
 
   const InfoHotelInCardBookingWidget({
-    Key? key,
+    super.key,
     required this.title,
     required this.location,
     required this.count,
     required this.price,
     this.currency = 'ريال',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,20 +37,19 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
           SizedBox(height: 4.h),
           Row(
             children: [
-               //const Icon(Icons.location_on, size: 11, color: Colors.grey),
               SvgPicture.asset(
                 AppIcons.location,
                 height: 10.h,
-                color: Color(0xff757575),
-
+                color: const Color(0xff757575),
               ),
+              2.horizontalSpace,
               Expanded(
                 child: AutoSizeTextWidget(
                   text: location,
                   fontSize: 9,
                   minFontSize: 7,
                   fontWeight: FontWeight.w400,
-                  colorText: Color(0xff757575),
+                  colorText: const Color(0xff757575),
                 ),
               ),
             ],
@@ -62,22 +61,15 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
                 text: 'عدد: $count',
                 fontSize: 9,
                 minFontSize: 7,
-                colorText: Color(0xff757575),
+                colorText: const Color(0xff757575),
                 fontWeight: FontWeight.w400,
               ),
-              Spacer(),
-              // AutoSizeTextWidget(
-              //   text: '${price.toStringAsFixed(0)} $currency',
-              //   fontSize: 12,
-              //   colorText: AppColors.primaryColor,
-              //   fontWeight: FontWeight.w400,
-              //
-              // ),
+              const Spacer(),
               RichTextWidget(
-                firstText: "50000 ",
-                secondText: "ريال",
+                firstText: price.toStringAsFixed(0),
+                secondText: " ريال",
                 firstColor: AppColors.primaryColor,
-                secondColor: Color(0xff757575),
+                secondColor: const Color(0xff757575),
                 fontSize: 11.sp,
                 fontWeight: FontWeight.w400,
                 fontSizeSecondText: 11.sp,

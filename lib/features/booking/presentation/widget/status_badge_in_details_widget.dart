@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../riverpod/booking_riverpod.dart';
+import 'booking_status_widget.dart';
 
 class StatusBadgeInDetailsWidget extends StatelessWidget {
-  final String label;
-  final Color backgroundColor;
-  final Color textColor;
+  final String status;
 
   const StatusBadgeInDetailsWidget({
-    Key? key,
-    required this.label,
-    required this.backgroundColor,
-    required this.textColor,
-  }) : super(key: key);
+    super.key,
+    required this.status,
+
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,23 +22,29 @@ class StatusBadgeInDetailsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const AutoSizeTextWidget(
-          text: 'حالة الطلب',
+          text: 'حالة الحجز',
           fontSize: 10,
           colorText: Color(0xff605A65),
         ),
         const Spacer(),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 4.sp),
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(12.sp),
-          ),
-          child: AutoSizeTextWidget(
-            text: label,
-            fontSize: 10,
-            colorText: textColor,
-            fontWeight: FontWeight.w500,
-          ),
+        Consumer(
+          builder: (context, ref, child) {
+            final colors = ref.watch(statusColorsProvider(status));
+
+            return Container(
+              padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 4.sp),
+              decoration: BoxDecoration(
+                color: colors.background,
+                borderRadius: BorderRadius.circular(12.sp),
+              ),
+              child: AutoSizeTextWidget(
+                text:status=="منتهيه"? 'مكتملة':status,
+                fontSize: 10,
+                colorText: colors.text,
+                fontWeight: FontWeight.w500,
+              ),
+            );
+          },
         ),
       ],
     );

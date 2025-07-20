@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/widgets/online_images_widget.dart';
+
 class HotelImage extends StatelessWidget {
   final String imageUrl;
-  const HotelImage({Key? key, required this.imageUrl}) : super(key: key);
+  const HotelImage({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8.sp),
-      child: Image.network(
-        imageUrl,
-        width: 65.w,
-        height: 55.h,
-        fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => Container(
-          width: 65.w,
-          height: 55.h,
-          color: Colors.grey.shade200,
-          child: const Icon(Icons.image_not_supported, color: Colors.grey),
-        ),
+      child: OnlineImagesWidget(
+        imageUrl: imageUrl,
+        size: Size(65.w, 55.h),
+        fit:  BoxFit.cover,
       ),
     );
   }

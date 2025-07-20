@@ -1,35 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../riverpod/booking_riverpod.dart';
 
-class StatusBadge extends StatelessWidget {
-  final String label;
-  final Color backgroundColor;
-  final Color textColor;
+class StatusBadge extends ConsumerWidget {
+  final String status;
+
   const StatusBadge({
     Key? key,
-    required this.label,
-    required this.backgroundColor,
-    required this.textColor,
+    required this.status,
+
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,ref) {
+    final colors = ref.watch(statusColorsProvider(status));
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.sp, vertical: 4.sp),
       width: 60.w,
       height: 18.h,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: colors.background,
         borderRadius: BorderRadius.circular(12.sp),
       ),
       child: AutoSizeTextWidget(
-        text: label,
+        text:status=="منتهيه"? 'مكتملة':status,
         fontSize: 7.5,
         minFontSize: 4,
-        colorText: Color(0xfffF4D4F ),
+        colorText: colors.text,
         fontWeight: FontWeight.w500,
 
       ),

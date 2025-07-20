@@ -10,6 +10,7 @@ class SelectFieldWidget extends StatelessWidget {
   final VoidCallback onTap;
   final Color? selectFiledColor;
   final Color? fontColorLabel;
+  final double? fontSizeValue;
 
   final double? fontSizeLabel;
 
@@ -18,6 +19,7 @@ class SelectFieldWidget extends StatelessWidget {
     required this.label,
     required this.value,
     required this.onTap,
+    this.fontSizeValue,
          this.selectFiledColor,this.fontSizeLabel,this.fontColorLabel
   });
 
@@ -43,7 +45,7 @@ class SelectFieldWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: AutoSizeTextWidget(
-                      text: value, fontSize: 10, fontWeight: FontWeight.w400),
+                      text: value, fontSize:fontSizeValue?? 10, fontWeight: FontWeight.w400),
                 ),
                 const Icon(Icons.keyboard_arrow_left, color: Colors.black54),
               ],

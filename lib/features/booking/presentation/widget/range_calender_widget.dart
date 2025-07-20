@@ -7,7 +7,9 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 
 class RangeCalendarWidget extends StatefulWidget {
-  const RangeCalendarWidget({super.key});
+  const RangeCalendarWidget({super.key, required this.onRangeSelected});
+
+  final void Function(DateTime? start, DateTime? end) onRangeSelected;
 
   @override
   State<RangeCalendarWidget> createState() => _RangeCalendarScreenState();
@@ -88,7 +90,10 @@ class _RangeCalendarScreenState extends State<RangeCalendarWidget> {
                         _rangeEnd = end;
                         _focusedDay = focused;
                       });
+                      // نمرّر التاريخين للوالد
+                      widget.onRangeSelected(_rangeStart, _rangeEnd);
                     },
+
                     headerVisible: false,
                     daysOfWeekHeight: 14,
                     daysOfWeekStyle: const DaysOfWeekStyle(
@@ -103,13 +108,12 @@ class _RangeCalendarScreenState extends State<RangeCalendarWidget> {
                     ),
                     calendarStyle: CalendarStyle(
                       outsideDaysVisible: true,
-
                       rangeStartTextStyle:
-                      const TextStyle(fontSize: 10, color: Colors.white),
+                          const TextStyle(fontSize: 10, color: Colors.white),
                       rangeEndTextStyle:
-                      const TextStyle(fontSize: 10, color: Colors.white),
+                          const TextStyle(fontSize: 10, color: Colors.white),
                       defaultTextStyle: const TextStyle(
-                        fontSize: 10, // حجم نص أيام الشهر الأساسية
+                        fontSize: 10,
                       ),
                       outsideTextStyle: const TextStyle(
                         fontSize: 10, // حجم نص أيام الشهر الأساسية
@@ -145,19 +149,8 @@ class _RangeCalendarScreenState extends State<RangeCalendarWidget> {
                         shape: BoxShape.circle,
                       ),
                       rangeHighlightColor:
-                      AppColors.primaryColor.withOpacity(0.2),
-                      // withinRangeTextStyle: const TextStyle(color: Colors.white),
+                          AppColors.primaryColor.withOpacity(0.2),
                     ),
-                    // calendarBuilders: CalendarBuilders(
-                    //   dowBuilder: (context, day) {
-                    //     final text = DateFormat.E('ar').format(day);
-                    //     return Center(
-                    //       child: AutoSizeTextWidget(
-                    //         text: text,
-                    //       ),
-                    //     );
-                    //   },
-                    // ),
                   ),
                 ],
               ),

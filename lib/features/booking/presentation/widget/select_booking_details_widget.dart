@@ -6,7 +6,11 @@ import '../../../../core/widgets/auto_size_text_widget.dart';
 import 'counter_row_widget.dart';
 
 class SelectBookingDetailsWidget extends StatefulWidget {
-  const SelectBookingDetailsWidget({super.key});
+  const SelectBookingDetailsWidget({super.key,required this.onTypeSelected,required this.countRoom,required this.countAdult,required this.countChild});
+  final void Function(String? type) onTypeSelected;
+  final void Function(int? room) countRoom;
+  final void Function(int? adult) countAdult;
+  final void Function(int? child) countChild;
 
   @override
   State<SelectBookingDetailsWidget> createState() =>
@@ -15,7 +19,6 @@ class SelectBookingDetailsWidget extends StatefulWidget {
 
 class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
   String _purpose = 'ترفيه';
-  String _personType = 'شباب';
   int _rooms = 1, _adults = 1, _children = 1;
 
   void _showOptionsSheet({
@@ -64,7 +67,7 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
         children: [
           AutoSizeTextWidget(
             text: "بيانات الاشخاص في الحجز",
-            fontSize: 8,
+            fontSize: 8.sp,
             fontWeight: FontWeight.w500,
             colorText: Color(0xff001A33),
           ),
@@ -74,47 +77,69 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
             value: _purpose,
             onTap: () => _showOptionsSheet(
               title: 'الغرض من الحجز',
-              options: ['ترفيه', 'عمل', 'عائلة', 'رجال أعمال'],
+              options: ['ترفية', 'عمل'],
               current: _purpose,
-              onSelected: (v) => setState(() => _purpose = v),
+              onSelected: (v) {
+                setState(() {
+                _purpose = v;
+              });
+                widget.onTypeSelected(_purpose);
+
+              },
             ),
           ),
-          const SizedBox(height: 12),
-          SelectFieldWidget(
-            label: 'نوع الأشخاص',
-            value: _personType,
-            onTap: () => _showOptionsSheet(
-              title: 'نوع الأشخاص',
-              options: ['شباب', 'عائلات', 'أصدقاء', 'زوجين'],
-              current: _personType,
-              onSelected: (v) => setState(() => _personType = v),
-            ),
-          ),
+         // const SizedBox(height: 12),
+          // SelectFieldWidget(
+          //   label: 'نوع الأشخاص',
+          //   value: _personType,
+          //   onTap: () => _showOptionsSheet(
+          //     title: 'نوع الأشخاص',
+          //     options: ['شباب', 'عائلات', 'أصدقاء', 'زوجين'],
+          //     current: _personType,
+          //     onSelected: (v) => setState(() => _personType = v),
+          //   ),
+          // ),
           const SizedBox(height: 16),
           CounterRowWidget(
             label: 'عدد الغرف',
             count: _rooms,
-            onIncrement: () => setState(() => _rooms++),
+            onIncrement: () {
+              setState(() => _rooms++);
+              widget.countRoom(_rooms);
+            },
             onDecrement: () {
               if (_rooms > 1) setState(() => _rooms--);
+              widget.countRoom(_rooms);
             },
           ),
           const SizedBox(height: 12),
           CounterRowWidget(
             label: 'كبار',
             count: _adults,
-            onIncrement: () => setState(() => _adults++),
+            onIncrement: () {
+              setState(() => _adults++);
+              widget.countAdult(_adults);
+
+            },
             onDecrement: () {
               if (_adults > 1) setState(() => _adults--);
+              widget.countAdult(_adults);
+
             },
           ),
           const SizedBox(height: 12),
           CounterRowWidget(
-            label: 'صغار',
+            label: 'اطفال',
             count: _children,
-            onIncrement: () => setState(() => _children++),
+            onIncrement: () {
+              setState(() => _children++);
+              widget.countChild(_children);
+
+            },
             onDecrement: () {
               if (_children > 0) setState(() => _children--);
+              widget.countChild(_children);
+
             },
           ),
         ],
