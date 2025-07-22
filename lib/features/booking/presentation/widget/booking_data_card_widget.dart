@@ -2,6 +2,7 @@ import 'package:booking/features/booking/presentation/widget/section_card_in_det
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/constants/app_icons.dart';
 import '../page/details_info_booking_page.dart';
 import 'info_booking_in_details_widget.dart';
 
@@ -25,27 +26,28 @@ class BookingDataCard extends StatelessWidget {
       title: 'بيانات الحجز',
       child: Column(
         children: [
+          2.verticalSpace,
           InfoBookingInDetailsWidget(
             title: 'عدد البالغين',
-            icon: Icons.people,
+            icon:AppIcons.people,
             text: '$adults',
           ),
           SizedBox(height: 9.h),
           InfoBookingInDetailsWidget(
-            icon: Icons.child_care,
+            icon: AppIcons.babyFace,
             text: '$children',
             title: 'عدد الأطفال',
           ),
           SizedBox(height: 9.h),
           InfoBookingInDetailsWidget(
 
-            icon: Icons.calendar_today,
+            icon: AppIcons.date,
             text: startDateString,
             title: 'تاريخ بداية الحجز',
           ),
           SizedBox(height: 9.h),
           InfoBookingInDetailsWidget(
-            icon: Icons.calendar_today,
+            icon: AppIcons.date,
             text: endDateString,
             title: 'تاريخ نهاية الحجز',
           ),

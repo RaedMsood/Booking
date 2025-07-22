@@ -28,4 +28,10 @@ class AppURL {
   static String get addLike => '/review/like';
 
   static String get dislike => '/review/dislike';
+
+  static String get checkBookingHotel => '/booking';
+
+  static String get getBookingType => '/booking/all/';
+
+
 }

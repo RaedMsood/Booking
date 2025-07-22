@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/online_images_widget.dart';
 
 class HotelSummaryCard extends StatelessWidget {
   final String name;
   final String location;
-  final String imageUrl;
+  final String? imageUrl;
 
   const HotelSummaryCard({
-    Key? key,
+    super.key,
     required this.name,
     required this.location,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,29 +24,24 @@ class HotelSummaryCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12.sp),
+        borderRadius: BorderRadius.circular(15.sp),
       ),
       child: Row(
         children: [
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(12.sp),
-                    bottomRight: Radius.circular(12.sp))),
-            child: Image.network(
-              imageUrl,
-              width: 60.w,
-              height: 50.h,
-              fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(
-                width: 90.w,
-                height: 60.h,
-                color: Colors.grey.shade200,
-                child: const Icon(Icons.image_not_supported),
-              ),
+                    topLeft: Radius.circular(12.sp),
+                    bottomLeft: Radius.circular(12.sp))),
+
+            child:  OnlineImagesWidget(
+              imageUrl: imageUrl!=''?imageUrl! :'https://media.istockphoto.com/id/2110310187/photo/luxury-tropical-pool-villa-at-dusk.jpg?s=1024x1024&w=is&k=20&c=FfMY-QLqiixCQprNhrs5vmHZn1_vHqxKj3CWBRQsJ9M=',
+
+              size: Size(90.w, 60.h),
+              fit:  BoxFit.cover,
             ),
           ),
-          4.horizontalSpace,
+          6.horizontalSpace,
 
           // نص الاسم والموقع
           Expanded(
@@ -58,7 +56,13 @@ class HotelSummaryCard extends StatelessWidget {
                 4.verticalSpace,
                 Row(
                   children: [
-                    const Icon(Icons.location_on, size: 12, color: Colors.grey),
+                     SvgPicture.asset(
+                      AppIcons.location,
+                      height: 12.h,
+                      color: Color(0xff757575),
+
+                    ),
+                    2.horizontalSpace,
                     Expanded(
                       child: AutoSizeTextWidget(
                         text: location,

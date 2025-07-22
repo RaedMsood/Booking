@@ -1,12 +1,9 @@
 import 'package:booking/core/helpers/navigateTo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../widget/booking_card_widget.dart';
-import 'details_info_booking_page.dart';
-import 'details_of_book_in_add_page.dart';
+import '../widget/list_of_type_booking_widget.dart';
 
 class Booking {
   final String title;
@@ -33,7 +30,6 @@ class Booking {
 class BookingPage extends StatefulWidget {
   BookingPage();
 
-
   @override
   State<BookingPage> createState() => _BookingPageState();
 }
@@ -59,7 +55,6 @@ class _BookingPageState extends State<BookingPage>
           title: AutoSizeTextWidget(
             text: "الحجوزات",
             fontWeight: FontWeight.w500,
-
           ),
         ),
         body: Container(
@@ -74,8 +69,7 @@ class _BookingPageState extends State<BookingPage>
                   labelColor: Colors.black,
                   unselectedLabelColor: Color(0xff605A65),
                   indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                        10),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   tabs: [
                     _buildTab('الكل', 0),
@@ -90,54 +84,12 @@ class _BookingPageState extends State<BookingPage>
                 child: TabBarView(
                   controller: tabController,
                   physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    ListView.builder(
-                      itemBuilder: (context, index) => BookingCard(
-                        rating: 4,
-                        bookingId: '1-2347373',
-                        onCopyBookingId: () {
-                          Clipboard.setData(ClipboardData(text: '1-2347373'));
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('تم نسخ رقم الحجز')),
-                          );
-                        },
-                        statusLabel: 'ملغية',
-                        statusColor: Color(0xffFFF3CD),
-                        title: 'فندق أم القرى السياحي',
-                        locationText: 'سعوان , هبرة',
-                        count: 2,
-                        price: 50000,
-                        imageUrl: 'https://your-server.com/images/hotel.jpg',
-                        onTap: () {
-                         navigateTo(context,
-                         //   BookingDetailPage(
-                         //   hotelName: 'فندق أم القرى السياحي',
-                         //   hotelLocation: 'سعوان , هبرة',
-                         //   hotelImageUrl: 'https://your-server.com/images/umAlQura.jpg',
-                         //   bookingId: '1-2347373',
-                         //   bookingDate: DateTime(2025, 7, 1, 8, 17),
-                         //   bookingStatusLabel: 'ملغية',
-                         //   bookingStatusColor: Colors.red,
-                         //   adults: 4,
-                         //   children: 2,
-                         //   startDate: DateTime(2025, 7, 1),
-                         //   endDate: DateTime(2025, 7, 5),
-                         //   onPolicyTap: () {
-                         //     // افتح تفاصيل سياسة الشراء والإلغاء
-                         //   },
-                         //   onViewFacilityDetails: () {
-                         //     // افتح صفحة تفاصيل المنشأة
-                         //   },
-                         // ),
-                             DetailsOfBookInAddPage(),
-                         );
-                        },
-                      ),
-                      itemCount: 3,
-                    ), // صفحة "من اجلك"
-                    Container(color: Colors.blue), // صفحة "مدخلات جديدة"
-                    Container(color: Colors.yellow), // صفحة "خصومات"
-                    Container(color: Colors.orange), // صفحة "الاكثر مبيعا"
+                  children:const [
+                    ListOfTypeAllBookingWidget(statusId: 0,),
+                    ListOfTypeAllBookingWidget(statusId: 1,),
+                    ListOfTypeAllBookingWidget(statusId: 2,),
+                    ListOfTypeAllBookingWidget(statusId: 3,),
+
                   ],
                 ),
               ),
@@ -170,7 +122,8 @@ class _BookingPageState extends State<BookingPage>
               fontWeight: FontWeight.w500,
               color: isSelected
                   ? AppColors.primaryColor
-                  : Color(0xff605A65), // النص داخل التاب المفعل أبيض وغير المفعل أسود
+                  : Color(
+                      0xff605A65), // النص داخل التاب المفعل أبيض وغير المفعل أسود
             ),
           ),
         ),

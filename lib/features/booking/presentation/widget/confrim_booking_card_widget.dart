@@ -2,24 +2,19 @@ import 'package:booking/features/booking/presentation/widget/section_card_in_det
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../page/details_info_booking_page.dart';
-import 'booking_status_widget.dart';
 import 'info_item_in_confrim_booking_card_widget.dart';
 import 'status_badge_in_details_widget.dart';
 
 class ConfirmBookingCard extends StatelessWidget {
   final String bookingId;
   final String bookingDateString;
-  final String statusLabel;
-  final Color statusColor;
+  final String status;
 
   const ConfirmBookingCard({
     super.key,
     required this.bookingId,
     required this.bookingDateString,
-    required this.statusLabel,
-    required this.statusColor,
+    required this.status,
   });
 
   @override
@@ -31,7 +26,7 @@ class ConfirmBookingCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InfoItemInConfrimBookingCardWidget(
-            title:  'رقم الطلب',
+            title: 'رقم الحجز',
             icon: Icons.copy,
             text: bookingId,
             onTap: () {
@@ -41,17 +36,14 @@ class ConfirmBookingCard extends StatelessWidget {
               );
             },
           ),
-          6.verticalSpace,
+          10.verticalSpace,
           InfoItemInConfrimBookingCardWidget(
-            title:  'تاريخ الطلب',
-
+            title: 'تاريخ الحجز',
             text: bookingDateString,
           ),
-          6.verticalSpace,
+          10.verticalSpace,
           StatusBadgeInDetailsWidget(
-            label: statusLabel,
-            backgroundColor: statusColor.withOpacity(0.1),
-            textColor: statusColor,
+            status: status,
           ),
         ],
       ),
