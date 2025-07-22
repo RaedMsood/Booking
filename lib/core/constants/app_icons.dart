@@ -11,6 +11,11 @@ class AppIcons {
   static const String arrowLeft = '${_iconsPath}arrow_left.svg';
   static const String arrowRight = '${_iconsPath}arrow_right.svg';
 
+
+  static const String about = '${_iconsPath}about.svg';
+  static const String star = '${_iconsPath}star.svg';
+  static const String mapLocation = '${_iconsPath}map_location.svg';
+
   static const String showRow = '${_iconsPath}show_row.svg';
   static const String filter = '${_iconsPath}filter.svg';
 
@@ -18,6 +23,8 @@ class AppIcons {
 
   static const String trash = '${_iconsPath}trash.svg';
   static const String location = '${_iconsPath}location.svg';
+  static const String error = '${_iconsPath}error.svg';
+
 
   static const String like = '${_iconsPath}like.svg';
   static const String disLike = '${_iconsPath}dis_like.svg';

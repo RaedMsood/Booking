@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "aNewListHasBeenCreatedSuccessfully":
             MessageLookupByLibrary.simpleMessage(
                 "A new list has been created successfully"),
+        "about": MessageLookupByLibrary.simpleMessage("About"),
         "aboutJeeey": MessageLookupByLibrary.simpleMessage("About Jeeey"),
         "addPhotos": MessageLookupByLibrary.simpleMessage("Add photos"),
         "addRating": MessageLookupByLibrary.simpleMessage("Add Rating"),
@@ -51,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Click again to exit!"),
         "codeHasBeenSendTo":
             MessageLookupByLibrary.simpleMessage("Code has been send to"),
+        "comments": MessageLookupByLibrary.simpleMessage("Comments"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmOrder": MessageLookupByLibrary.simpleMessage("Confirm order"),
         "confirmPassword":

@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AddAComment": MessageLookupByLibrary.simpleMessage("إضافة تعليق"),
         "aNewListHasBeenCreatedSuccessfully":
             MessageLookupByLibrary.simpleMessage("تم إنشاء قائمة جديدة بنجاح"),
+        "about": MessageLookupByLibrary.simpleMessage("عن الفندق"),
         "aboutJeeey": MessageLookupByLibrary.simpleMessage("حول جي"),
         "addPhotos": MessageLookupByLibrary.simpleMessage("إضافة صور"),
         "addRating": MessageLookupByLibrary.simpleMessage("إضافة تقييم"),
@@ -51,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("انقر مرة أخرى للخروج!"),
         "codeHasBeenSendTo":
             MessageLookupByLibrary.simpleMessage("تم إرسال الرمز إلى"),
+        "comments": MessageLookupByLibrary.simpleMessage("التعليقات"),
         "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "confirmOrder": MessageLookupByLibrary.simpleMessage("تأكيد الطلب"),
         "confirmPassword":

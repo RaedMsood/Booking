@@ -13,8 +13,8 @@ class ShimmerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: baseColor ?? Colors.grey[100]!,
-      highlightColor: Colors.grey[300]!,
+      baseColor: const Color(0xffedf0f5),
+      highlightColor: Colors.grey.shade50,
       child: child,
     );
   }
@@ -29,14 +29,14 @@ class ShimmerPlaceholderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey[100]!,
-      highlightColor: Colors.grey[300]!,
+      baseColor: const Color(0xffedf0f5),
+      highlightColor: Colors.grey.shade50,
       child: Container(
           width: width ?? double.infinity,
           height: height ?? 100.h,
           decoration: BoxDecoration(
-            color: AppColors.primarySwatch.shade100,
-            borderRadius: BorderRadius.circular(4.r),
+            color: AppColors.primarySwatch.shade50.withOpacity(.8),
+            borderRadius: BorderRadius.circular(8.r),
           )),
     );
   }

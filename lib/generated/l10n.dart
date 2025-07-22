@@ -284,6 +284,28 @@ class S {
     );
   }
 
+  // skipped getter for the '--------details-----------' key
+
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comments`
+  String get comments {
+    return Intl.message(
+      'Comments',
+      name: 'comments',
+      desc: '',
+      args: [],
+    );
+  }
+
   // skipped getter for the '--------confirmOrder-----------' key
 
   /// `Confirm order`

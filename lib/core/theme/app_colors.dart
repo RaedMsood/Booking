@@ -9,6 +9,7 @@ class AppColors {
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color transparent = Colors.transparent;
   static const Color primaryColor = Color(0xff0057ff);
+  static const Color greyColor = Color(0xff868686);
   static Color dangerColor = const Color(0xffD64545);
   static Color purpleColor = const Color(0xff905bfe);
 
@@ -25,7 +26,6 @@ class AppColors {
       700: Color(0xFF0042CC),
       800: Color(0xFF0037B3),
       900: Color(0xFF002080),
-
     },
   );
 

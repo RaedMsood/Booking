@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../features/booking/presentation/page/booking_page.dart';
-import '../../../features/home/presentation/pages/home_page.dart';
+import '../../../features/properties/home/presentation/pages/home_page.dart';
 import '../../../generated/l10n.dart';
 import '../../constants/app_icons.dart';
 import '../../helpers/exit_from_the_app.dart';
@@ -36,6 +36,8 @@ class _BottomNavigationBarWidgetState
       value: const SystemUiOverlayStyle(
         systemNavigationBarColor: AppColors.scaffoldColor,
         systemNavigationBarDividerColor: AppColors.scaffoldColor,
+        systemNavigationBarIconBrightness: Brightness.dark,
+
       ),
       child: Scaffold(
         extendBody: true,

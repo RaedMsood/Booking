@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:booking/features/user/presentation/pages/log_in_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +9,6 @@ import 'core/state/app_restart_controller.dart';
 import 'package:booking/injection.dart' as di;
 import 'core/theme/theme.dart';
 import 'core/widgets/bottomNavbar/bottom_navigation_bar_widget.dart';
-import 'features/user/presentation/pages/sign_up_page.dart';
 import 'generated/l10n.dart';
 import 'services/auth/auth.dart';
 

@@ -56,8 +56,11 @@ dependencies:
   smooth_page_indicator:
   intl:
   cached_network_image:
+  cached_network_svg_image:
   shimmer:
   pinput:
+  google_maps_flutter:
+  url_launcher:
 
 
 dev_dependencies:

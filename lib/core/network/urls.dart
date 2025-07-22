@@ -11,9 +11,15 @@ class AppURL {
 
   static String get resendOtp => '/auth/update_otp';
 
+  static String get logout => '/auth/logout';
+
   static String get property => '/property';
 
-  static String get logout => '/auth/logout';
+  static String get propertyDetails => '/property';
+
+  static String get getAllUnis => '/unit/all';
+
+  static String get unitDetails => '/unit/show/';
 
   static String get getCities => '/cities';
 
