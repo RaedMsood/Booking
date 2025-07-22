@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../features/booking/presentation/page/booking_page.dart';
-import '../../../features/home/presentation/pages/home_page.dart';
 import '../../../features/map/presentation/page/map_page.dart';
 import '../../../features/profile/presentation/page/profile_page.dart';
 import '../../../features/properties/home/presentation/pages/home_page.dart';
@@ -25,7 +24,7 @@ class BottomNavigationBarWidget extends ConsumerStatefulWidget {
 class _BottomNavigationBarWidgetState
     extends ConsumerState<BottomNavigationBarWidget> {
   final List<Widget> _pages = [
-    const ExitFromAppWidget(child: HomePage()),
+    ExitFromAppWidget(child: BookingPage()),
     const ExitFromAppWidget(child: MapPage()),
     ExitFromAppWidget(child: BookingPage()),
     const ExitFromAppWidget(child: ProfilePage()),

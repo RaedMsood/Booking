@@ -7,7 +7,6 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/online_images_widget.dart';
 import '../../../../core/widgets/rating_bar_widget.dart';
-import '../../../home/presentation/widgets/property_photos_widget.dart';
 
 class CardInMapWidget extends StatelessWidget {
   const CardInMapWidget({super.key});
