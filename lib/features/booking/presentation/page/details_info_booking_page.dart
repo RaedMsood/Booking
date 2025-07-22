@@ -38,7 +38,7 @@ class BookingDetailPage extends StatelessWidget {
             HotelSummaryCard(
               name: bookData.property!,
               location:
-                  '${bookData.address!.district!} , ${bookData.address!.address!}',
+                  '${bookData.address!.city!} , ${bookData.address!.district!}',
               imageUrl: bookData.image ?? '',
             ),
             SizedBox(height: 16.h),
@@ -71,11 +71,12 @@ class BookingDetailPage extends StatelessWidget {
                 onPressed: () {
                   navigateTo(
                     context,
-                     DetailsOfBookInAddPage(
-                       location: '${bookData.address!.city!} , ${bookData.address!.district!}',
-                       image: bookData.image??'',
-                       nameProp: bookData.property!,
-                     ),
+                    DetailsOfBookInAddPage(
+                      location:
+                          '${bookData.address!.city!} , ${bookData.address!.district!}',
+                      image: bookData.image ?? '',
+                      nameProp: bookData.property!,
+                    ),
                   );
                 },
                 withIcon: true,
@@ -88,3 +89,4 @@ class BookingDetailPage extends StatelessWidget {
     );
   }
 }
+
