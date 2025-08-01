@@ -9,14 +9,14 @@ import '../../data/booking_model/status_model.dart';
 import '../../data/reposaitory/booking_reposaitory.dart';
 
 final checkBookingProvider =
-    StateNotifierProvider.autoDispose<BookingNotifier, DataState<Unit>>(
+    StateNotifierProvider.autoDispose<BookingNotifier, DataState<int>>(
   (ref) {
     return BookingNotifier();
   },
 );
 
-class BookingNotifier extends StateNotifier<DataState<Unit>> {
-  BookingNotifier() : super(DataState<Unit>.initial(unit));
+class BookingNotifier extends StateNotifier<DataState<int>> {
+  BookingNotifier() : super(DataState<int>.initial(0));
   final _controller = BookingReposaitory();
 
   checkBookingInHotel({required BookingData bookingData}) async {
@@ -25,9 +25,10 @@ class BookingNotifier extends StateNotifier<DataState<Unit>> {
         await _controller.checkBookingFromHotel(bookingData: bookingData);
     buy.fold((faliure) {
       state = state.copyWith(state: States.error, exception: faliure);
-    }, (_) {
+    }, (data) {
       state = state.copyWith(
         state: States.loaded,
+        data: data
       );
     });
   }
@@ -75,6 +76,33 @@ class GetBookingNotifier
         state = state.success(newData, moreData);
       },
     );
+  }
+}
+
+final customerBookingProvider =
+    StateNotifierProvider.autoDispose<CustomerBookingNotifier, DataState<BookingData>>(
+  (ref) {
+    return CustomerBookingNotifier();
+  },
+);
+
+class CustomerBookingNotifier extends StateNotifier<DataState<BookingData>> {
+  CustomerBookingNotifier()
+      : super(DataState<BookingData>.initial(BookingData()));
+  final _controller = BookingReposaitory();
+
+  customerBooking({required Customer customer}) async {
+    state = state.copyWith(state: States.loading);
+    final customers =
+        await _controller.custemorDataForBooking(custemor: customer);
+    customers.fold((faliure) {
+      state = state.copyWith(state: States.error, exception: faliure);
+    }, (data) {
+      state = state.copyWith(
+        state: States.loaded,
+        data: data
+      );
+    });
   }
 }
 

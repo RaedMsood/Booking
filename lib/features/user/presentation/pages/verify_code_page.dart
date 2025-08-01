@@ -7,6 +7,7 @@ import '../../../../core/state/check_state_in_post_api_data_widget.dart';
 import '../../../../core/state/state.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/bottomNavbar/bottom_navigation_bar_widget.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
@@ -68,7 +69,7 @@ class VerifyCodePage extends ConsumerWidget {
                 if (checkOTPState.data.status == true) {
                   Auth().login(checkOTPState.data);
 
-                  navigateTo(context, Hello());
+                  navigateTo(context, BottomNavigationBarWidget());
                 } else {
                   navigateTo(context, const SignUpPage());
                 }

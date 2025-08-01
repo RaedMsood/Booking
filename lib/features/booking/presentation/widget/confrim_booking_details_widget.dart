@@ -8,7 +8,19 @@ import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/rich_text_widget.dart';
 
 class ConfrimBookingDetailsWidget extends StatelessWidget {
-  const ConfrimBookingDetailsWidget({super.key});
+  const ConfrimBookingDetailsWidget(
+      {super.key,
+      required this.checkOut,
+      required this.unitCount,
+      required this.totalPrice,
+      required this.bookAt,
+      required this.checkIn});
+
+  final double totalPrice;
+  final String bookAt;
+  final String unitCount;
+  final String checkIn;
+  final String checkOut;
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +38,14 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
           ),
           6.verticalSpace,
           RichTextWidget(
-            firstText: "20000 ",
+            firstText: "$totalPrice ",
             firstColor: AppColors.primaryColor,
             secondText: "ريال",
             fontWeight: FontWeight.w400,
-            secondColor:const Color(0xff757575),
+            secondColor: const Color(0xff757575),
             fontWeightSecondText: FontWeight.w300,
             fontSizeSecondText: 14.sp,
             fontSize: 16.sp,
-
           ),
           Divider(
             thickness: 1,
@@ -50,7 +61,7 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
               ),
               10.horizontalSpace,
               AutoSizeTextWidget(
-                text: 'تاريخ الحجز 12 يوليو 2025',
+                text: 'تاريخ الحجز $bookAt',
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 colorText: Color(0xff757575),
@@ -67,7 +78,7 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
               ),
               10.horizontalSpace,
               AutoSizeTextWidget(
-                text: '3 غرف',
+                text: '$unitCount غرف',
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 colorText: Color(0xff757575),
@@ -84,7 +95,7 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
               ),
               10.horizontalSpace,
               AutoSizeTextWidget(
-                text: 'من 12 يوليو 2025 الى 14 يوليو 2025',
+                text: 'من $checkIn الى $checkOut',
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 colorText: Color(0xff757575),

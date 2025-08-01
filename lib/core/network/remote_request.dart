@@ -67,6 +67,8 @@ class RemoteRequest {
       debugPrint(response.statusCode.toString());
       return response;
     } else {
+      debugPrint(response.statusCode.toString());
+
       throw Exception();
     }
   }

@@ -6,7 +6,9 @@ import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 
 class AudienceInDetailsBookingWidget extends StatelessWidget {
-  const AudienceInDetailsBookingWidget({super.key});
+  const AudienceInDetailsBookingWidget({super.key,required this.numChild,required this.numGuests});
+  final int numGuests;
+  final int numChild;
 
   @override
   Widget build(BuildContext context) {
@@ -25,24 +27,24 @@ class AudienceInDetailsBookingWidget extends StatelessWidget {
             text: 'بيانات الحضور',
             fontSize: 12,
           ),
-          8.verticalSpace,
-          Row(
-            children: [
-              SvgPicture.asset(
-                AppIcons.profile,
-                height: 17.h,
-                color: Color(0xff605A65),
-
-              ),
-              10.horizontalSpace,
-              AutoSizeTextWidget(
-                text: 'شباب',
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                colorText: Color(0xff757575),
-              ),
-            ],
-          ),
+          // 8.verticalSpace,
+          // Row(
+          //   children: [
+          //     SvgPicture.asset(
+          //       AppIcons.profile,
+          //       height: 17.h,
+          //       color: Color(0xff605A65),
+          //
+          //     ),
+          //     10.horizontalSpace,
+          //     AutoSizeTextWidget(
+          //       text: 'شباب',
+          //       fontSize: 12,
+          //       fontWeight: FontWeight.w400,
+          //       colorText: Color(0xff757575),
+          //     ),
+          //   ],
+          // ),
           8.verticalSpace,
           Row(
             children: [
@@ -54,7 +56,7 @@ class AudienceInDetailsBookingWidget extends StatelessWidget {
               ),
               10.horizontalSpace,
               AutoSizeTextWidget(
-                text: '30 شخص (3 أطفال)',
+                text: '$numGuests شخص ($numChild أطفال)',
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 colorText: Color(0xff757575),

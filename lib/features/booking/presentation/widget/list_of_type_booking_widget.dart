@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/helpers/navigateTo.dart';
 import '../../../../core/state/check_state_in_get_api_data_widget.dart';
 import '../page/details_info_booking_page.dart';
-import '../page/details_of_book_in_add_page.dart';
 import '../riverpod/booking_riverpod.dart';
 import 'booking_card_widget.dart';
 

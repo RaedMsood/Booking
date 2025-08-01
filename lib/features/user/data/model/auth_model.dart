@@ -1,4 +1,3 @@
-import '../../../map/data/model/city_model.dart';
 import 'user_model.dart';
 
 class AuthModel {

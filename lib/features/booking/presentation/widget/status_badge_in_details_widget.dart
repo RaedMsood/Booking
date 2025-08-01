@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../riverpod/booking_riverpod.dart';
-import 'booking_status_widget.dart';
 
 class StatusBadgeInDetailsWidget extends StatelessWidget {
   final String status;
@@ -34,8 +33,9 @@ class StatusBadgeInDetailsWidget extends StatelessWidget {
             return Container(
               padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 4.sp),
               decoration: BoxDecoration(
-                color: colors.background,
+                color: colors.background.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(12.sp),
+                border: Border.all(color: colors.text.withOpacity(0.3)),
               ),
               child: AutoSizeTextWidget(
                 text:status=="منتهيه"? 'مكتملة':status,

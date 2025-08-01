@@ -33,5 +33,8 @@ class AppURL {
 
   static String get getBookingType => '/booking/all/';
 
+  static String get custemorForBooking => '/booking/customer';
+  static String get updateUser => '/profile/update';
+
 
 }

@@ -11,6 +11,7 @@ import '../widget/section_profile_widget.dart';
 import '../widget/tile_widget.dart';
 import 'about_page.dart';
 import 'contact_us_page.dart';
+import 'edit_profile_page.dart';
 import 'faq_page.dart';
 
 // الكلاسات السابقة موجودة هنا...
@@ -43,6 +44,12 @@ class ProfilePage extends StatelessWidget {
                     CircleAvatar(
                       radius: 20.r,
                       backgroundColor: AppColors.primaryColor,
+                      child:  SvgPicture.asset(
+                          AppIcons.profile,
+                        color: Colors.white,
+                        height: 18.h,
+                        width: 18.w,
+                      ),
                       //  backgroundImage: AssetImage('assets/images/profile.jpg'),
                     ),
                     SizedBox(width: 12.w),
@@ -60,7 +67,10 @@ class ProfilePage extends StatelessWidget {
                   icon: AppIcons.profile,
                   title: 'البيانات الشخصية',
                   context: context,
-                  onTap: () {},
+                  onTap: () {
+                    navigateTo(context, EditProfilePage());
+
+                  },
                 ),
                 TileWidget(
                   icon: AppIcons.favorite,

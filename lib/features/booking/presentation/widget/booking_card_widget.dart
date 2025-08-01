@@ -38,14 +38,15 @@ class BookingCard extends StatelessWidget {
                 ),
                 SizedBox(width: 8.w),
                 BookingIdBadge(
-                  bookingId: '1-2347373',
+                  bookingId: bookData.code??'',
                   onCopy: () {
-                    Clipboard.setData(const ClipboardData(text: '1-2347373'));
+                    Clipboard.setData(ClipboardData(text:bookData.code??'',));
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('تم نسخ رقم الحجز')),
                     );
                   },
                 ),
+
                 const Spacer(),
                 const RatingBadge(rating: 4),
               ],
