@@ -13,16 +13,16 @@ class SmoothPageIndicatorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return    Padding(
-      padding: EdgeInsets.only(bottom: 8.h),
+      padding: EdgeInsets.only(bottom: 4.h),
       child: SmoothPageIndicator(
         controller: PageController(initialPage: pageController),
         count: count,
         effect: ExpandingDotsEffect(
-          activeDotColor: AppColors.primaryColor,
-          dotColor: AppColors.primarySwatch.shade200,
-          dotHeight: 7,
-          dotWidth: 7,
-          expansionFactor: 3.0,
+          activeDotColor: AppColors.whiteColor,
+          dotColor: Colors.white54,
+          dotHeight: 3,
+          dotWidth: 5,
+          expansionFactor: 2.0,
           spacing: 6.0,
         ),
       ),

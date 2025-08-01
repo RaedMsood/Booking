@@ -51,7 +51,7 @@ class _DetailsPicturesWidgetState
         margin: EdgeInsets.symmetric(horizontal: 13.w).copyWith(bottom: 10.h),
         decoration: BoxDecoration(
           color: Colors.white70,
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(8.r),
         ),
         child: ListView.separated(
           controller: _scrollController,

@@ -4,12 +4,13 @@ class AppIcons {
   static const String notification = '${_iconsPath}notification.svg';
 
   static const String favorite = '${_iconsPath}favorite.svg';
-
+  static const String favoriteActive = '${_iconsPath}favorite_active.svg';
   static const String arrowBack = '${_iconsPath}arrow_back.svg';
   static const String arrowUp = '${_iconsPath}arrow_up.svg';
   static const String arrowBottom = '${_iconsPath}arrow_bottom.svg';
   static const String arrowLeft = '${_iconsPath}arrow_left.svg';
   static const String arrowRight = '${_iconsPath}arrow_right.svg';
+  static const String logo = '${_iconsPath}logos/logo.svg';
 
 
   static const String about = '${_iconsPath}about.svg';
@@ -20,6 +21,9 @@ class AppIcons {
   static const String filter = '${_iconsPath}filter.svg';
 
   static const String sharing = '${_iconsPath}sharing.svg';
+
+  static const String viewGrid = '${_iconsPath}view_grid.svg';
+  static const String viewList = '${_iconsPath}view_list.svg';
 
   static const String trash = '${_iconsPath}trash.svg';
   static const String location = '${_iconsPath}location.svg';

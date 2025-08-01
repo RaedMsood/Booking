@@ -31,7 +31,7 @@ class SliverAppBarDetailsWidget extends StatelessWidget
       elevation: 0,
       titleSpacing: 0,
       toolbarHeight: 56.h,
-      expandedHeight: 310.h,
+      expandedHeight: 300.h,
       pinned: true,
       leadingWidth: 65.2.w,
       leading: Padding(

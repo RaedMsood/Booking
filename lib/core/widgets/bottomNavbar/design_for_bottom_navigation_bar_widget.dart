@@ -39,20 +39,20 @@ class DesignForBottomNavigationBarWidget extends StatelessWidget {
                 );
               },
               child: SvgPicture.asset(
-                active ? activeIcon ?? icon : icon,
-                key: ValueKey<String>(active ? activeIcon ?? icon : icon),
-                // color: active ? AppColors.primaryColor : null,
-                // height: active ? 21.5.h : 20.h,
+                active ? (activeIcon ?? icon) : icon,
+                // إذا رغبت بأن يكون لون الأيقونة أبيض عندما تكون مفعّلة:
+                color: active ?AppColors.primaryColor: AppColors.mainColorFont,
+                height: active ? 22.h : 20.h,
               ),
             ),
-            2.h.verticalSpace,
+            2.5.h.verticalSpace,
             Text(
               label,
               style: TextStyle(
                 color: active
                     ? AppColors.primaryColor
-                    : Colors.black87,
-                fontSize:9.5.sp,
+                    :AppColors.mainColorFont,
+                fontSize:9.2.sp,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'ReadexPro',
               ),

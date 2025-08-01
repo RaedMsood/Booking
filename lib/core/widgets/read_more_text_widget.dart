@@ -101,12 +101,16 @@ class _ReadMoreTextWidgetState extends State<ReadMoreTextWidget>
         )..layout(maxWidth: constraints.maxWidth);
 
         if (!textTp.didExceedMaxLines) {
-          return AutoSizeTextWidget(
-            text: widget.text,
-            fontSize: 11.sp,
-            fontWeight: FontWeight.w400,
-            colorText: AppColors.greyColor,
-            maxLines: 4,
+          return RichText(
+            text: TextSpan(
+              style: textStyle,
+              children: [
+                TextSpan(
+                  text: widget.text,
+                  style: textStyle,
+                ),
+              ],
+            ),
           );
         }
 

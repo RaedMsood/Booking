@@ -6,12 +6,18 @@ class AppColors {
   static const Color scaffoldColor = Color(0xffF5F5F5);
   static const Color fontColor = Color(0xff80908f);
   static const Color fontColor2 = Color(0xff9ca2ad);
+  static const Color mainColorFont = Color(0xff404040);
+
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color transparent = Colors.transparent;
   static const Color primaryColor = Color(0xff0057ff);
   static const Color greyColor = Color(0xff868686);
   static Color dangerColor = const Color(0xffD64545);
   static Color purpleColor = const Color(0xff905bfe);
+  // static const Color secondaryColor = Color(0xffcab55e);
+  // static Color secondaryColor = const Color(0xffecc836);
+
+  static Color secondaryColor = const Color(0xfffea324);
 
   static const MaterialColor primarySwatch = MaterialColor(
     0xff0057ff,
@@ -37,7 +43,7 @@ class AppColors {
       100: Color(0xFFF0EFEF),
       200: Color(0xFFE9E8E8),
       300: Color(0xFFDAD8D8),
-      400: Color(0xFFC6C3C3),
+      400: Color(0xff9a9a9a),
       500: Color(0xFFA39F9F),
       600: Color(0xFF6b6b6b),
       700: Color(0xFF4D4949),

@@ -46,7 +46,7 @@ class CarouselSliderForDetailImagesWidget extends StatelessWidget {
                       imageUrl: items,
                       size: Size(
                         double.infinity,
-                        350.h,
+                        330.h,
                       ),
                       logoWidth: 0,
                       borderRadius: 0,

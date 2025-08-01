@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,10 +11,9 @@ import '../../../../../core/widgets/online_images_widget.dart';
 import '../../data/model/units_model.dart';
 import '../pages/unit_details_page.dart';
 
-
-
 class UnitCardWidget extends StatelessWidget {
   final UnitsModel units;
+
   const UnitCardWidget({super.key, required this.units});
 
   String _guestsText() {
@@ -25,11 +25,12 @@ class UnitCardWidget extends StatelessWidget {
       return '${units.maxGuests} أشخاص';
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        navigateTo(context, const UnitDetailsPage(unitId: 0,));
+        navigateTo(context, UnitDetailsPage(unitId: units.id));
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 14.h),
@@ -49,7 +50,7 @@ class UnitCardWidget extends StatelessWidget {
           children: [
             Flexible(
               child: OnlineImagesWidget(
-                imageUrl:units.image.toString(),
+                imageUrl: units.image.toString(),
                 size: Size(88.w, 76.h),
                 fit: BoxFit.cover,
                 borderRadius: 10.r,

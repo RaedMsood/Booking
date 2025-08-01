@@ -3,40 +3,39 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/constants/app_icons.dart';
+import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/text_form_field.dart';
-
+import '../riverpod/home_riverpod.dart';
 
 class SearchAndFilterDesignWidget extends StatelessWidget {
-  SearchAndFilterDesignWidget({super.key});
+  final SearchAndFilterPropertiesNotifier controller;
 
-  TextEditingController phoneNumberController = TextEditingController();
+  const SearchAndFilterDesignWidget({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 14.w),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextFormFieldWidget(
-              controller: phoneNumberController,
-              type: TextInputType.text,
-              hintText: "البحث عن الفنادق",
-            ),
+    return Row(
+      children: [
+        Expanded(
+          child: TextFormFieldWidget(
+            controller: controller.searchController,
+            type: TextInputType.text,
+            hintText: "البحث عن فندق",
+            onChanged: (value) {
+              controller.search();
+            },
           ),
-
-          8.w.horizontalSpace,
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 10.h),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: SvgPicture.asset(AppIcons.filter),
+        ),
+        10.w.horizontalSpace,
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 10.h),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8.r),
           ),
-        ],
-      ),
+          child: SvgPicture.asset(AppIcons.filter),
+        ),
+      ],
     );
   }
 }
-

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../data/model/city_model.dart';
-import '../riverpod/map_riverpod.dart';
+import '../riverpod/cities_riverpod.dart';
 import 'design_for_cities_widget.dart';
 import 'search_for_city_widget.dart';
 
@@ -22,13 +22,13 @@ class _ListToViewAllCitiesWidgetState
 
   @override
   void initState() {
-    items = ref.read(getCitiesProvider.notifier).state.data;
+    items = ref.read(getAllCitiesProvider.notifier).state.data;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var cities = ref.watch(getCitiesProvider);
+    var cities = ref.watch(getAllCitiesProvider);
 
     return CheckStateInGetApiDataWidget(
       state: cities,

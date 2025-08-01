@@ -8,6 +8,7 @@ class InkWellButtonWidget extends StatelessWidget {
   final String icon;
   final Color? iconColor;
   final double? height;
+  final double? width;
   final VoidCallback onPressed;
 
   const InkWellButtonWidget({
@@ -16,6 +17,7 @@ class InkWellButtonWidget extends StatelessWidget {
     required this.icon,
     this.iconColor,
     this.height,
+    this.width,
   });
 
   @override
@@ -27,8 +29,9 @@ class InkWellButtonWidget extends StatelessWidget {
       onTap: onPressed,
       child: SvgPicture.asset(
         icon,
-        color: iconColor??AppColors.primaryColor,
+        color: iconColor ?? AppColors.primaryColor,
         height: height,
+        width: width,
       ),
     );
   }

@@ -42,7 +42,7 @@ class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
                   },
                   child: AutoSizeTextWidget(
                     text: 'عرض المزيد',
-                    fontSize: 10.8.sp,
+                    fontSize: 10.4.sp,
                     colorText: AppColors.primaryColor,
                     fontWeight: FontWeight.w400,
                   ),
@@ -52,7 +52,7 @@ class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
           ),
           12.h.verticalSpace,
           SizedBox(
-            height: 224.h,
+            height: 214.h,
             child: ListView(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
@@ -71,3 +71,4 @@ class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
     );
   }
 }
+

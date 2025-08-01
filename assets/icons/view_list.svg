@@ -1,0 +1,5 @@
+<svg id="row-vertical" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <path id="Vector" d="M14.932,0H1.752C.5,0,0,.531,0,1.849V5.2C0,6.517.5,7.048,1.752,7.048h13.18c1.251,0,1.752-.531,1.752-1.849V1.849C16.684.531,16.183,0,14.932,0Z" transform="translate(1.658 11.294)" fill="none" stroke="#0477bd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  <path id="Vector-2" data-name="Vector" d="M14.932,0H1.752C.5,0,0,.531,0,1.849V5.2C0,6.517.5,7.048,1.752,7.048h13.18c1.251,0,1.752-.531,1.752-1.849V1.849C16.684.531,16.183,0,14.932,0Z" transform="translate(1.658 1.658)" fill="none" stroke="#0477bd" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" opacity="0.4"/>
+  <path id="Vector-3" data-name="Vector" d="M0,0H20V20H0Z" fill="none" opacity="0"/>
+</svg>

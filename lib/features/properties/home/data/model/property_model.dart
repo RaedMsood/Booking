@@ -1,31 +1,37 @@
+import '../../../cities/data/model/city_model.dart';
+import 'property_pagination_model.dart';
+
 class PropertyModel {
-  final int id;
-  final String name;
-  final dynamic rating;
-  final String type;
-  final String city;
-  final String district;
-  final List<String> mainImageUrls;
+  final List<CityModel> cities;
+  final PropertyPaginationModel property;
 
   PropertyModel({
-    required this.id,
-    required this.name,
-    required this.rating,
-    required this.type,
-    required this.city,
-    required this.district,
-    required this.mainImageUrls,
+    required this.cities,
+    required this.property,
   });
 
   factory PropertyModel.fromJson(Map<String, dynamic> json) {
     return PropertyModel(
-      id: json['id'],
-      name: json['name'] ?? '',
-      rating: json['rating'] ?? 0.0,
-      type: json['type'] ?? '',
-      city: json['city'] ?? '',
-      district: json['district'] ?? '',
-      mainImageUrls: List<String>.from(json['main_image_url'] ?? []),
+      cities: CityModel.fromJsonList(json['cities'] ?? []),
+
+      property: PropertyPaginationModel.fromJson(json['properties']),
+    );
+  }
+
+  PropertyModel copyWith({
+    List<CityModel>? cities,
+    PropertyPaginationModel? property,
+  }) {
+    return PropertyModel(
+      cities: cities ?? this.cities,
+      property: property ?? this.property,
+    );
+  }
+
+  factory PropertyModel.empty() {
+    return PropertyModel(
+      cities: [],
+      property: PropertyPaginationModel.empty(),
     );
   }
 }

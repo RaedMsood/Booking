@@ -7,12 +7,15 @@ class RatingBarWidget extends StatelessWidget {
   final double evaluation;
   final int? length;
   final double? itemSize;
-
+  final Color? unratedColor;
+  final Color? labeledColor;
   const RatingBarWidget({
     super.key,
     required this.evaluation,
     this.length,
     this.itemSize,
+    this.unratedColor,
+    this.labeledColor,
   });
 
   @override
@@ -25,9 +28,12 @@ class RatingBarWidget extends StatelessWidget {
       ignoreGestures: true,
       itemCount: length ?? 5,
       itemSize: itemSize ?? 14.sp,
-      itemBuilder: (context, index) {
-        return Icon(Icons.star_purple500_sharp,color: Color(0xfffbcc2b),);
-      },
+      itemPadding: EdgeInsets.zero,
+      unratedColor: unratedColor ?? Colors.grey[300],
+      itemBuilder: (context, _) => Icon(
+        Icons.star_rounded,
+        color: labeledColor ?? const Color(0xfffea324),
+      ),
       onRatingUpdate: (rating) {},
     );
   }

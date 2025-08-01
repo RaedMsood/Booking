@@ -17,13 +17,13 @@ class LogoShimmerWidget extends StatelessWidget {
         child: Container(
           width: width ?? 250.w,
           margin: EdgeInsets.only(bottom: 120.h),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                AppImages.logoWithText,
-              ),
-            ),
-          ),
+          // decoration: const BoxDecoration(
+          //   image: DecorationImage(
+          //     image: AssetImage(
+          //       AppImages.logoWithText,
+          //     ),
+          //   ),
+          // ),
         ),
       ),
     );

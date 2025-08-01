@@ -1,13 +1,12 @@
+import 'package:booking/features/properties/cities/presentation/riverpod/cities_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../../core/constants/app_icons.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
-import '../riverpod/map_riverpod.dart';
+import '../../../../../core/constants/app_icons.dart';
+import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
 import 'list_to_view_all_cities_widget.dart';
 
 class CityWidget extends ConsumerWidget {
@@ -15,7 +14,7 @@ class CityWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var cities = ref.watch(getCitiesProvider);
+    var cities = ref.watch(getAllCitiesProvider);
     final selectedCity = ref.watch(selectedCityProvider);
     final errorMessage = ref.watch(selectedCityErrorProvider);
 

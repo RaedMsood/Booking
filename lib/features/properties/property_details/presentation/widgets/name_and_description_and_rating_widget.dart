@@ -1,3 +1,4 @@
+import 'package:booking/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
@@ -60,7 +61,7 @@ class NameAndDescriptionAndRatingWidget extends StatelessWidget {
                           AutoSizeTextWidget(
                             text: "4",
                             fontSize: 10.5.sp,
-                            colorText: const Color(0xfffbcc2b),
+                            colorText: AppColors.secondaryColor,
                           ),
                           1.8.w.horizontalSpace,
                           RatingBarWidget(

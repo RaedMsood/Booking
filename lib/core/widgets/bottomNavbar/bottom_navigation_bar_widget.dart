@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../features/booking/presentation/page/booking_page.dart';
-import '../../../features/home/presentation/pages/home_page.dart';
 import '../../../features/map/presentation/page/map_page.dart';
 import '../../../features/profile/presentation/page/profile_page.dart';
 import '../../../features/properties/home/presentation/pages/home_page.dart';
@@ -37,66 +36,119 @@ class _BottomNavigationBarWidgetState
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-        systemNavigationBarColor: AppColors.scaffoldColor,
-        systemNavigationBarDividerColor: AppColors.scaffoldColor,
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarDividerColor: Colors.transparent,
         systemNavigationBarIconBrightness: Brightness.dark,
 
       ),
       child: Scaffold(
-        extendBody: true,
+        // extendBody: true,
         body: _pages[activeIndex],
+        // bottomNavigationBar: Container(
+        //   decoration: BoxDecoration(
+        //     gradient: LinearGradient(
+        //       colors: [
+        //         AppColors.scaffoldColor.withOpacity(.0),
+        //         AppColors.scaffoldColor.withOpacity(.84),
+        //         AppColors.scaffoldColor,
+        //       ],
+        //       begin: Alignment.topCenter,
+        //       end: Alignment.bottomCenter,
+        //     ),
+        //   ),
+        //   child: Container(
+        //     margin: EdgeInsets.only(left: 14.w, right: 14.w, bottom: 14.h),
+        //     padding: EdgeInsets.symmetric(vertical: 11.h),
+        //     decoration: BoxDecoration(
+        //       color: AppColors.whiteColor,
+        //       borderRadius: BorderRadius.circular(38.r),
+        //     ),
+        //     child: Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //       children: [
+        //         _buildNavItem(
+        //           AppIcons.home,
+        //           AppIcons.homeActive,
+        //           S.of(context).home,
+        //           0,
+        //           activeIndex,
+        //         ),
+        //         _buildNavItem(
+        //           AppIcons.map,
+        //           AppIcons.mapActive,
+        //           S.of(context).map,
+        //           1,
+        //           activeIndex,
+        //         ),
+        //         _buildNavItem(
+        //           AppIcons.myReservations,
+        //           AppIcons.myReservationsActive,
+        //           S.of(context).myReservations,
+        //           2,
+        //           activeIndex,
+        //         ),
+        //         _buildNavItem(
+        //           AppIcons.profile,
+        //           AppIcons.profileActive,
+        //           S.of(context).profile,
+        //           3,
+        //           activeIndex,
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
         bottomNavigationBar: Container(
+          // margin: EdgeInsets.only(left: 14.w, right: 14.w, bottom: 14.h),
+          padding: EdgeInsets.symmetric(vertical: 8.h),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                AppColors.scaffoldColor.withOpacity(.0),
-                AppColors.scaffoldColor.withOpacity(.84),
-                AppColors.scaffoldColor,
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+            color: AppColors.whiteColor,
+            // borderRadius: BorderRadius.only(
+            //   topLeft: Radius.circular(18.r),
+            //   topRight: Radius.circular(18.r),
+            // ),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.greySwatch.shade100,
+                blurRadius: 10,
+                offset: const Offset(0, -1),
+              ),
+            ],
           ),
-          child: Container(
-            margin: EdgeInsets.only(left: 14.w, right: 14.w, bottom: 14.h),
-            padding: EdgeInsets.symmetric(vertical: 11.h),
-            decoration: BoxDecoration(
-              color: AppColors.whiteColor,
-              borderRadius: BorderRadius.circular(38.r),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildNavItem(
-                  AppIcons.home,
-                  AppIcons.homeActive,
-                  S.of(context).home,
-                  0,
-                  activeIndex,
-                ),
-                _buildNavItem(
-                  AppIcons.map,
-                  AppIcons.mapActive,
-                  S.of(context).map,
-                  1,
-                  activeIndex,
-                ),
-                _buildNavItem(
-                  AppIcons.myReservations,
-                  AppIcons.myReservationsActive,
-                  S.of(context).myReservations,
-                  2,
-                  activeIndex,
-                ),
-                _buildNavItem(
-                  AppIcons.profile,
-                  AppIcons.profileActive,
-                  S.of(context).profile,
-                  3,
-                  activeIndex,
-                ),
-              ],
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavItem(
+                AppIcons.home,
+                AppIcons.homeActive,
+                S.of(context).home,
+                0,
+                activeIndex,
+              ),
+              _buildNavItem(
+                AppIcons.map,
+                AppIcons.mapActive,
+                S.of(context).map,
+                1,
+                activeIndex,
+              ),
+              _buildNavItem(
+                AppIcons.myReservations,
+                AppIcons.myReservationsActive,
+                S.of(context).myReservations,
+                2,
+                activeIndex,
+              ),
+              _buildNavItem(
+                AppIcons.profile,
+                AppIcons.profileActive,
+                S.of(context).profile,
+                3,
+                activeIndex,
+              ),
+            ],
           ),
         ),
       ),

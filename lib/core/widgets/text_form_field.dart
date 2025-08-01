@@ -97,19 +97,19 @@ class TextFormFieldWidget extends StatelessWidget {
         border: InputBorder.none,
         errorBorder: OutlineInputBorder(
           borderSide: borderSideError ?? BorderSide.none,
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(8.r),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: borderSideError ?? BorderSide.none,
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(8.r),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: borderSide ?? BorderSide.none,
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(8.r),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: borderSide ?? BorderSide.none,
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(8.r),
         ),
         prefixIcon: prefix,
         suffixIcon: suffixIcon,

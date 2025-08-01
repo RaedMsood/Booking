@@ -61,6 +61,7 @@ dependencies:
   pinput:
   google_maps_flutter:
   url_launcher:
+  flutter_staggered_grid_view:
 
 
 dev_dependencies:
@@ -94,6 +95,8 @@ flutter:
     - assets/icons/bottombar/
     - assets/icons/profile/
     - assets/icons/user/
+    - assets/icons/logos/
+
 
   fonts:
     - family: ReadexPro

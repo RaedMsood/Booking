@@ -2,7 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../constants/app_images.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../constants/app_icons.dart';
 import '../theme/app_colors.dart';
 
 class OnlineImagesWidget extends StatelessWidget {
@@ -79,12 +80,12 @@ class OnlineImagesWidget extends StatelessWidget {
         height: size?.height,
         width: size?.width,
         decoration: BoxDecoration(
-          color: AppColors.greySwatch.shade100,
+          color: AppColors.greySwatch.shade200,
           borderRadius: BorderRadius.circular(borderRadius ?? 4.r),
         ),
         child: Center(
-          child: Image.asset(
-            AppImages.logoWithText,
+          child: SvgPicture.asset(
+            AppIcons.logo,
             width: logoWidth ?? 50.w,
           ),
         ),

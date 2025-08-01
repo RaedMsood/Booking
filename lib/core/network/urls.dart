@@ -15,7 +15,11 @@ class AppURL {
 
   static String get property => '/property';
 
-  static String get propertyDetails => '/property';
+  static String get getSearchResultsAndFilterProperties => '/property/filter';
+
+  static String get propertiesByCity => '/property/show_city';
+
+  static String get propertyDetails => '/property/show_details';
 
   static String get getAllUnis => '/unit/all';
 

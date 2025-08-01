@@ -71,7 +71,7 @@ class _PropertyLocationWidgetState extends State<PropertyLocationWidget> {
                 child: AutoSizeTextWidget(
                   text: "العرض في الخريطة",
                   colorText: AppColors.primaryColor,
-                  fontSize: 10.8.sp,
+                  fontSize: 10.4.sp,
                   fontWeight: FontWeight.w400,
                 ),
               ),

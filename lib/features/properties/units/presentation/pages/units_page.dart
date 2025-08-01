@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/constants/app_icons.dart';
+import '../../../../../core/state/state.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/buttons/icon_button_widget.dart';
@@ -30,13 +31,12 @@ class _UnitsPageState extends ConsumerState<UnitsPage> {
     // ============ Pagination ============
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 100) {
-      // final state = ref.read(getAllUnitsProvider(1));
-      ref
-          .read(getAllUnitsProvider(widget.propertyId).notifier)
-          .getData(moreData: true);
-
-      // if (state.stateData != States.loadingMore) {
-      // }
+      final state = ref.read(getAllUnitsProvider(1));
+      if (state.stateData != States.loadingMore) {
+        ref
+            .read(getAllUnitsProvider(widget.propertyId).notifier)
+            .getData(moreData: true);
+      }
     }
   }
 

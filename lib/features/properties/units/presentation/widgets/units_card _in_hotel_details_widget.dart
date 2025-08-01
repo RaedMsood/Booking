@@ -31,16 +31,22 @@ class UnitsCardInHotelDetailsWidget extends StatelessWidget {
       width: 160.w,
       decoration: BoxDecoration(
         color: const Color(0xfff9f9f9),
-        borderRadius: BorderRadius.circular(14.r),
+        borderRadius: BorderRadius.circular(8.r),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Flexible(
-            child: OnlineImagesWidget(
-              imageUrl: unit.image.toString(),
-              size: Size(double.infinity, 100.h),
-              borderRadius: 14.r,
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8.r),
+                topRight: Radius.circular(8.r),
+              ),
+              child: OnlineImagesWidget(
+                imageUrl: unit.image.toString(),
+                size: Size(double.infinity, 90.h),
+                borderRadius: 0,
+              ),
             ),
           ),
           Padding(
@@ -98,7 +104,7 @@ class UnitsCardInHotelDetailsWidget extends StatelessWidget {
                   text: 'استعراض التفاصيل',
                   height: 32.h,
                   textSize: 9.sp,
-                  borderRadius: 14.r,
+                  borderRadius: 12.r,
                   onPressed: () {
                     navigateTo(context, UnitDetailsPage(unitId: unit.id));
                   },

@@ -9,6 +9,7 @@ class IconButtonWidget extends StatelessWidget {
   final String? icon;
   final Color? iconColor;
   final double? height;
+  final double? width;
   final VoidCallback? onPressed;
 
   const IconButtonWidget({
@@ -16,6 +17,7 @@ class IconButtonWidget extends StatelessWidget {
     this.icon,
     this.iconColor,
     this.height,
+    this.width,
     this.onPressed,
   });
 
@@ -35,6 +37,7 @@ class IconButtonWidget extends StatelessWidget {
       icon: SvgPicture.asset(
         icon ?? AppIcons.arrowBack,
         height: height,
+        width: width,
         color: iconColor,
       ),
     );
