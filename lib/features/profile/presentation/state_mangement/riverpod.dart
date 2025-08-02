@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/state/data_state.dart';
 import '../../../../core/state/state.dart';
 import '../../../../services/auth/auth.dart';
-import '../../../map/data/model/city_model.dart';
+import '../../../properties/cities/data/model/city_model.dart';
 import '../../../user/data/model/auth_model.dart';
 import '../../data/reposaitory/profile_reposaitory.dart';
 
