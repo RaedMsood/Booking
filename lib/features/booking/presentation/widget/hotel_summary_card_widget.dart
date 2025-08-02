@@ -24,19 +24,19 @@ class HotelSummaryCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(15.sp),
+        borderRadius: BorderRadius.circular(12.sp),
       ),
       child: Row(
         children: [
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(12.sp),
-                    bottomLeft: Radius.circular(12.sp))),
+                    topLeft: Radius.circular(15.sp),
+                    bottomLeft: Radius.circular(15.sp))),
 
             child:  OnlineImagesWidget(
-              imageUrl: imageUrl!=''?imageUrl! :'https://media.istockphoto.com/id/2110310187/photo/luxury-tropical-pool-villa-at-dusk.jpg?s=1024x1024&w=is&k=20&c=FfMY-QLqiixCQprNhrs5vmHZn1_vHqxKj3CWBRQsJ9M=',
-
+              imageUrl: imageUrl!=''?imageUrl! :  'https://media.istockphoto.com/id/2110310187/photo/luxury-tropical-pool-villa-at-dusk.jpg?s=1024x1024&w=is&k=20&c=FfMY-QLqiixCQprNhrs5vmHZn1_vHqxKj3CWBRQsJ9M=',
+              borderRadius: 12.r,
               size: Size(90.w, 60.h),
               fit:  BoxFit.cover,
             ),

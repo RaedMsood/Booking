@@ -13,7 +13,7 @@ class HotelImage extends StatelessWidget {
       borderRadius: BorderRadius.circular(8.sp),
       child: OnlineImagesWidget(
         imageUrl: imageUrl,
-        size: Size(65.w, 55.h),
+        size: Size(65.w, 50.h),
         fit:  BoxFit.cover,
       ),
     );

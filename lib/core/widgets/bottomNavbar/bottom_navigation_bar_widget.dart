@@ -24,7 +24,7 @@ class BottomNavigationBarWidget extends ConsumerStatefulWidget {
 class _BottomNavigationBarWidgetState
     extends ConsumerState<BottomNavigationBarWidget> {
   final List<Widget> _pages = [
-    const ExitFromAppWidget(child: HomePage()),
+    ExitFromAppWidget(child: HomePage()),
     const ExitFromAppWidget(child: MapPage()),
     ExitFromAppWidget(child: BookingPage()),
     const ExitFromAppWidget(child: ProfilePage()),

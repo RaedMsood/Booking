@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
+import '../widget/languge_dialog_widget.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -47,8 +49,10 @@ class SettingsPage extends StatelessWidget {
                   colorText: Color(0xff605A65),
                 ),
                 onTap: () {
-                  // TODO: افتح اختيار اللغة
-                },
+                  showModalBottomSheetWidget(
+                    context: context,
+                    page: const LanguageDialog(),
+                  );                },
               ),
               ListTile(
                 contentPadding: EdgeInsets.symmetric(horizontal: 16.w),

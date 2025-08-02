@@ -45,7 +45,9 @@ class PayPage extends StatelessWidget {
                       fontWeight: FontWeight.w300,colorText: Color(0xff605A65),
                     ),
                     14.verticalSpace,
-                    DepositInLastDetailsWidget(),
+                    DepositInLastDetailsWidget(
+                      deposit: 50000,
+                    ),
                     14.verticalSpace,
                     DiscountCodeWidget(),
                     14.verticalSpace,

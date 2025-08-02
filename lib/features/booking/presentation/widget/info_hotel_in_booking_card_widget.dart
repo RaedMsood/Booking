@@ -31,7 +31,7 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
         children: [
           AutoSizeTextWidget(
             text: title,
-            fontSize: 13,
+            fontSize: 12.sp,
             fontWeight: FontWeight.w500,
           ),
           SizedBox(height: 4.h),
@@ -46,7 +46,7 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
               Expanded(
                 child: AutoSizeTextWidget(
                   text: location,
-                  fontSize: 9,
+                  fontSize: 9.sp,
                   minFontSize: 7,
                   fontWeight: FontWeight.w400,
                   colorText: const Color(0xff757575),
@@ -59,7 +59,7 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
             children: [
               AutoSizeTextWidget(
                 text: 'عدد: $count',
-                fontSize: 9,
+                fontSize: 9.sp,
                 minFontSize: 7,
                 colorText: const Color(0xff757575),
                 fontWeight: FontWeight.w400,

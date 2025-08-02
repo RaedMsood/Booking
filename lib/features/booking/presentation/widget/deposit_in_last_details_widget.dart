@@ -6,8 +6,8 @@ import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/rich_text_widget.dart';
 
 class DepositInLastDetailsWidget extends StatelessWidget {
-  const DepositInLastDetailsWidget({super.key});
-
+  const DepositInLastDetailsWidget({super.key,required this.deposit});
+  final dynamic deposit;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +24,7 @@ class DepositInLastDetailsWidget extends StatelessWidget {
           ),
           8.verticalSpace,
           RichTextWidget(
-            firstText: "20000 ",
+            firstText: "$deposit ",
             firstColor: AppColors.primaryColor,
             secondText: "ريال",
             fontWeight: FontWeight.w400,

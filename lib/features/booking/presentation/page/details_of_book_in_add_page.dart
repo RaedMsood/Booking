@@ -87,7 +87,14 @@ class _DetailsOfBookInAddPageState
           CheckStateInPostApiDataWidget(
             state: checkBookingState,
             functionSuccess: () {
-              navigateTo(context, CompleteAddBookingPage());
+              navigateTo(
+                  context,
+                  CompleteAddBookingPage(
+                    nameProp: widget.nameProp,
+                    location: widget.location,
+                    imageUrl: widget.image,
+                    idBooking: checkBookingState.data,
+                  ));
             },
             bottonWidget: DesginButtonInAddBookingWidget(
               button: DefaultButtonWidget(

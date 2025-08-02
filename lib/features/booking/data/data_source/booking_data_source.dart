@@ -1,27 +1,25 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import '../../../../core/network/remote_request.dart';
 import '../../../../core/network/urls.dart';
 import '../../../../core/state/pagination_data/paginated_model.dart';
 import '../booking_model/booking_model.dart';
 
-class BookingDataSource{
-
-  Future<Unit> checkBookingFromHotel({
+class BookingDataSource {
+  Future<int> checkBookingFromHotel({
     required BookingData bookingData,
   }) async {
-
-    await RemoteRequest.postData(
-      path:  AppURL.checkBookingHotel,
+   final response =  await RemoteRequest.postData(
+      path: AppURL.checkBookingHotel,
       data: bookingData.toJson(),
     );
-    return Future.value(unit);
+    return response.data['data']['id'];
   }
 
   Future<PaginationModel<BookingData>> getBookingTypeFilter({
     required int filterType,
     required int page,
     int perPage = 5,
-
   }) async {
     final response = await RemoteRequest.getData(
       url: "${AppURL.getBookingType}$filterType",
@@ -33,9 +31,21 @@ class BookingDataSource{
 
     return PaginationModel<BookingData>.fromJson(
       response.data['data'],
-          (book) {
+      (book) {
         return BookingData.fromJson(book);
       },
     );
+  }
+
+  Future<BookingData> custemorDataForBooking({
+    required Customer custemor,
+  }) async {
+    final response = await RemoteRequest.postData(
+      path: AppURL.custemorForBooking,
+      data: custemor.toJson(),
+    );
+    debugPrint(response.statusCode.toString());
+
+    return BookingData.fromJson(response.data['data']);
   }
 }

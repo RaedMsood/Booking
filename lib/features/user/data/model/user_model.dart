@@ -3,21 +3,19 @@ import '../../../properties/cities/data/model/city_model.dart';
 class UserModel {
   final int id;
   final String name;
-
-  // final String email;
+  final String email;
   final String phoneNumber;
-
-  // final String gender;
-  // final String brithDay;
+  final String gender;
+  final String? birthDay;
   final CityModel? city;
 
   UserModel({
     required this.id,
     required this.name,
-    // required this.email,
+    required this.email,
     required this.phoneNumber,
-    // required this.gender,
-    // required this.brithDay,
+    required this.gender,
+    required this.birthDay,
     required this.city,
   });
 
@@ -25,10 +23,10 @@ class UserModel {
     return UserModel(
       id: json['id'] ?? 0,
       name: json['name'] ?? "",
-      // email: json['email'] ?? "",
+      email: json['email'] ?? "",
       phoneNumber: json['phone'] ?? "",
-      // gender: json['gender'] ?? "",
-      // brithDay: json['brith_day'] ?? "",
+      gender: json['gender'] ?? "",
+      birthDay: json['birth_day'],
       city: json['city'] != null
           ? CityModel.fromJson(json['city'] as Map<String, dynamic>)
           : null,
@@ -39,27 +37,41 @@ class UserModel {
     return {
       'id': id,
       'name': name,
+      'email': email,
       'phone': phoneNumber,
-      'city': city,
+      'gender': gender,
+      'birth_day': birthDay,
+      'city_id': city?.id,
     };
   }
 
-  UserModel copyWith() {
+  UserModel copyWith({
+    int? id,
+    String? name,
+    String? email,
+    String? phoneNumber,
+    String? gender,
+    String? birthDay,
+    CityModel? city,
+  }) {
     return UserModel(
-      id: id,
-      name: name,
-      phoneNumber: phoneNumber,
-      city: city,
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      gender: gender ?? this.gender,
+      birthDay: birthDay ?? this.birthDay,
+      city: city ?? this.city,
     );
   }
 
   factory UserModel.empty() => UserModel(
-        id: 0,
-        name: '',
-        // email: '',
-        phoneNumber: '',
-        // gender: '',
-        // brithDay: '',
-        city: CityModel.empty(),
-      );
+    id: 0,
+    name: '',
+    email: '',
+    phoneNumber: '',
+    gender: '',
+    birthDay: '',
+    city: CityModel.empty(),
+  );
 }

@@ -127,7 +127,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                   Align(
                     alignment: Alignment.center,
                     child: InkWell(
-                      onTap: (){
+                      onTap: () {
                         Navigator.of(context).pop();
                       },
                       child: AutoSizeTextWidget(

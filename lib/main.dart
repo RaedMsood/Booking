@@ -3,12 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/network/remote_request.dart';
 import 'core/state/app_restart_controller.dart';
 import 'package:booking/injection.dart' as di;
 import 'core/theme/theme.dart';
 import 'core/widgets/bottomNavbar/bottom_navigation_bar_widget.dart';
+import 'features/profile/presentation/state_mangement/riverpod.dart';
 import 'generated/l10n.dart';
 import 'services/auth/auth.dart';
 
@@ -39,18 +41,25 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
   @override
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
   Widget build(BuildContext context) {
+    final locale = ref.watch(languageProvider);
+
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: false,
       splitScreenMode: false,
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          locale: Locale('ar'),
+          locale: locale,
           localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,

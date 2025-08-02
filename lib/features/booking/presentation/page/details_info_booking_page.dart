@@ -22,8 +22,6 @@ class BookingDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateFmt = DateFormat('yyyy-MM-dd', 'en');
-    final timeFmt = DateFormat('HH:mm', 'en');
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -38,25 +36,21 @@ class BookingDetailPage extends StatelessWidget {
             HotelSummaryCard(
               name: bookData.property!,
               location:
-                  '${bookData.address!.district!} , ${bookData.address!.address!}',
+                  '${bookData.address!.city!} , ${bookData.address!.district!}',
               imageUrl: bookData.image ?? '',
             ),
             SizedBox(height: 16.h),
             ConfirmBookingCard(
-              bookingId: '1-2347373',
-              // bookingDateString:
-              //     '${timeFmt.format(bookingDate)} - ${dateFmt.format(bookingDate)}',
-              bookingDateString: "08:17 - 2025-07-01",
+              bookingId: bookData.code ?? '',
+              bookingDateString: bookData.bookingAt.toString(),
               status: bookData.status ?? '',
             ),
             SizedBox(height: 16.h),
             BookingDataCard(
               adults: bookData.adultCount ?? 1,
               children: bookData.childCount ?? 1,
-              // endDateString:dateFmt.format(bookData.checkIn as DateTime)?? " 2025-07-01",
-              // startDateString:dateFmt.format(bookData.checkOut as DateTime) ??" 2025-07-01",
-              startDateString: " 2025-07-01",
-              endDateString: " 2025-07-01",
+              startDateString: bookData.checkIn ?? '',
+              endDateString: bookData.checkOut ?? '',
             ),
             SizedBox(height: 16.h),
             PolicyTileWidget(
@@ -71,11 +65,12 @@ class BookingDetailPage extends StatelessWidget {
                 onPressed: () {
                   navigateTo(
                     context,
-                     DetailsOfBookInAddPage(
-                       location: '${bookData.address!.city!} , ${bookData.address!.district!}',
-                       image: bookData.image??'',
-                       nameProp: bookData.property!,
-                     ),
+                    DetailsOfBookInAddPage(
+                      location:
+                          '${bookData.address!.city!} , ${bookData.address!.district!}',
+                      image: bookData.image ?? '',
+                      nameProp: bookData.property!,
+                    ),
                   );
                 },
                 withIcon: true,
