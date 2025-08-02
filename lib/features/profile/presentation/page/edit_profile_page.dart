@@ -32,7 +32,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
 
-  dynamic selectedCity;
+  dynamic selectedCity="صنعاء";
   dynamic selectedGender;
 
   dynamic birthDate;
@@ -48,7 +48,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
     phoneController.text = Auth().phoneNumber;
     selectedGender = Auth().gender;
     birthDate = Auth().date;
-    selectedCity = Auth().city;
+    //selectedCity = Auth().city;
 
     // حفظ القيم الأصلية داخل الـ Notifier
     Future.microtask(() {
@@ -104,7 +104,9 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
               24.h.verticalSpace,
               CheckStateInPostApiDataWidget(
                 state: stateUpdateUser,
-                functionSuccess: (){},
+                functionSuccess: (){
+                  Auth().login(stateUpdateUser.data);
+                },
                 messageSuccess: "تم التعديل بنجاح",
                 bottonWidget: DefaultButtonWidget(
                   text: "حفظ التعديلات",
@@ -136,8 +138,9 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                     birthDate = ref.watch(birthDateProvider);
                     ref.read(updateNotifierProvider.notifier).update(
                       dateOfBirth:birthDate ,
-
-                        phoneNumber:phoneController.text, name: nameController.text,
+                        email: emailController.text,
+                        phoneNumber:phoneController.text,
+                        name: nameController.text,
                         gender: selectedGender,
                         cityId: selectedCity.id);
                     print("تعديل البيانات:");

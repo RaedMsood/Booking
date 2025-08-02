@@ -51,7 +51,7 @@ class Auth {
   String get email => user.user.email;
   String get gender => user.user.gender;
   String? get date => user.user.birthDay;
-  String? get city => user.user.city!.name;
+  //String? get city => user.user.city!.name;
 
 
   Future<void> login(AuthModel data) async {

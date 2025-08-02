@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,7 +9,7 @@ import '../../../user/data/model/auth_model.dart';
 import '../../data/reposaitory/profile_reposaitory.dart';
 
 final languageProvider =
-StateNotifierProvider<LanguageController, Locale>((ref) {
+    StateNotifierProvider<LanguageController, Locale>((ref) {
   return LanguageController();
 });
 
@@ -38,8 +37,10 @@ class LanguageController extends StateNotifier<Locale> {
     }
   }
 }
-final editProfileProvider = StateNotifierProvider.autoDispose<EditProfileNotifier, bool>(
-      (ref) => EditProfileNotifier(ref),
+
+final editProfileProvider =
+    StateNotifierProvider.autoDispose<EditProfileNotifier, bool>(
+  (ref) => EditProfileNotifier(ref),
 );
 
 class EditProfileNotifier extends StateNotifier<bool> {
@@ -83,8 +84,9 @@ class EditProfileNotifier extends StateNotifier<bool> {
     if (changed != state) state = changed;
   }
 }
+
 final updateNotifierProvider =
-StateNotifierProvider.autoDispose<UpdateNotifier, DataState<AuthModel>>(
+    StateNotifierProvider.autoDispose<UpdateNotifier, DataState<AuthModel>>(
         (ref) => UpdateNotifier());
 
 class UpdateNotifier extends StateNotifier<DataState<AuthModel>> {

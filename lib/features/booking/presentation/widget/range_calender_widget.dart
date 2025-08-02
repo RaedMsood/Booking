@@ -122,7 +122,7 @@ class _RangeCalendarScreenState extends State<RangeCalendarWidget> {
                         fontSize: 10, // حجم نص عطلة نهاية الأسبوع داخل الشهر
                       ),
                       todayTextStyle: const TextStyle(
-                        fontSize: 10, // حجم نص اليوم الحالي
+                        fontSize: 10,
                       ),
                       selectedTextStyle: const TextStyle(
                         fontSize: 10, // حجم نص اليوم المحدّد
@@ -144,12 +144,17 @@ class _RangeCalendarScreenState extends State<RangeCalendarWidget> {
                         color: AppColors.primaryColor,
                         shape: BoxShape.circle,
                       ),
-                      withinRangeDecoration: const BoxDecoration(
-                        color: AppColors.primaryColor,
+
+                      todayDecoration: BoxDecoration(
+                        color: AppColors.primaryColor.withOpacity(0.5),
+                        shape: BoxShape.circle
+                      ),
+                      withinRangeDecoration:  BoxDecoration(
+                        color: AppColors.primaryColor.withOpacity(0.5),
                         shape: BoxShape.circle,
                       ),
                       rangeHighlightColor:
-                          AppColors.primaryColor.withOpacity(0.2),
+                          AppColors.primaryColor.withOpacity(0.1),
                     ),
                   ),
                 ],
