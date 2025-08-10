@@ -88,7 +88,6 @@ class _BookingPageState extends State<BookingPage>
           color: isSelected
               ? AppColors.primaryColor.withOpacity(0.05)
               : Colors.white,
-          // نصف القطر يختلف بين المختار وغير المختار
           borderRadius: BorderRadius.circular(25.r),
           border: Border.all(
             color:

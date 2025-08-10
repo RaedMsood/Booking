@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:booking/features/properties/cities/data/model/city_model.dart';
+
 import '../../core/local/secure_storage.dart';
 import '../../features/user/data/model/auth_model.dart';
 import '../../injection.dart';
@@ -29,9 +31,7 @@ class Auth {
         AuthModel authModel = AuthModel.fromJson(map);
         user = authModel;
       }
-       print("token: ${user.token}");
-
-
+      print("token: ${user.token}");
     } catch (ex) {
       throw '$ex';
     }
@@ -48,11 +48,14 @@ class Auth {
   String get name => user.user.name;
 
   String get phoneNumber => user.user.phoneNumber;
-  String get email => user.user.email;
-  String get gender => user.user.gender;
-  String? get date => user.user.birthDay;
-  //String? get city => user.user.city!.name;
 
+  String get email => user.user.email;
+
+  String get gender => user.user.gender;
+
+  String? get date => user.user.birthDay;
+
+  CityModel get city => user.user.city!;
 
   Future<void> login(AuthModel data) async {
     user = data;
@@ -60,8 +63,9 @@ class Auth {
   }
 
   _writeToCache() {
-    log(jsonEncode(user), name: 'user');
-    secureStorage.write(key: _key, value: jsonEncode(user));
+    final cacheMap = user.toJsonForCache(); // إذا AuthModel
+    log(jsonEncode(cacheMap), name: 'user');
+    secureStorage.write(key: _key, value: jsonEncode(cacheMap));
   }
 
   Future logout() async {
@@ -89,6 +93,31 @@ class Auth {
       return jsonDecode(fingerprintValue) as bool;
     }
     return false;
+  }
+
+  Future<void> updateUserData({
+    String? name,
+    String? email,
+    String? phoneNumber,
+    String? gender,
+    String? birthDay,
+    CityModel? city,
+  }) async {
+    // ننشئ نسخة جديدة من الـ UserModel مع الحقول المحدثة
+    final updatedUser = user.user.copyWith(
+      name: name,
+      email: email,
+      phoneNumber: phoneNumber,
+      gender: gender,
+      birthDay: birthDay,
+      city: city,
+    );
+
+    // ننشئ نسخة جديدة من الـ AuthModel مع الـ user المحدث
+    user = user.copyWith(user: updatedUser);
+
+    // نعيد كتابة البيانات في الـ secure storage
+    _writeToCache();
   }
 
 }

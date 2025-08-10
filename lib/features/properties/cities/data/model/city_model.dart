@@ -20,6 +20,13 @@ class CityModel {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+    };
+  }
+
   static List<CityModel> fromJsonList(List json) {
     return json.map((e) => CityModel.fromJson(e)).toList();
   }

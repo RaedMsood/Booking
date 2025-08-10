@@ -50,6 +50,7 @@ class PropertyCardWidget extends StatelessWidget {
             PropertyPhotosWidget(
               image: property.mainImageUrls,
               height: 120.h,
+              idProperties: property.id,
             ),
             Expanded(
               child: Padding(

@@ -7,6 +7,7 @@ import '../../../../core/state/state.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
 import '../../../../services/auth/auth.dart';
 import '../../../map/presentation/riverpod/map_riverpod.dart';
+import '../../../profile/presentation/widget/update_gender_widget.dart';
 import '../../../properties/cities/presentation/riverpod/cities_riverpod.dart';
 import '../../../properties/cities/presentation/widget/city_widget.dart';
 import '../riverpod/user_riverpod.dart';

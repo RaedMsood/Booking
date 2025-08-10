@@ -1,3 +1,4 @@
+import 'package:booking/core/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,8 +9,8 @@ import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/online_images_widget.dart';
 import '../../../../core/widgets/rating_bar_widget.dart';
 
-class CardInMapWidget extends StatelessWidget {
-  const CardInMapWidget({super.key});
+class ShimmerCardInMapWidget extends StatelessWidget {
+  const ShimmerCardInMapWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,34 +30,16 @@ class CardInMapWidget extends StatelessWidget {
           children: [
             Stack(
               children: [
-
-                SizedBox(
-                  height: 95.h,
+                ShimmerWidget(
+                  child: SizedBox(
+                    height: 95.h,
                     child: OnlineImagesWidget(
-                      imageUrl: 'https://media.istockphoto.com/id/2110310187/photo/luxury-tropical-pool-villa-at-dusk.jpg?s=1024x1024&w=is&k=20&c=FfMY-QLqiixCQprNhrs5vmHZn1_vHqxKj3CWBRQsJ9M=',
+                      imageUrl: '',
                       size: Size(double.infinity, 95.h),
                       borderRadius: 16.r,
                     ),
-                ),
-
-                PositionedDirectional(
-                  top: 10.h,
-                  start: 10.w,
-                  child: Container(
-                    padding: EdgeInsets.all(6.sp),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(28.r),
-                    ),
-                    child: InkWell(
-                      onTap: () {},
-                      child: SvgPicture.asset(
-                        AppIcons.favorite,
-                      ),
-                    ),
                   ),
                 ),
-
               ],
             ),
             Padding(
@@ -69,59 +52,60 @@ class CardInMapWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Flexible(
-                        child: AutoSizeTextWidget(
-                          text: "فندق ام القرى السياحي",
-                          fontSize: 12.2.sp,
-                          fontWeight: FontWeight.w500,
-                          maxLines: 2,
-                          minFontSize: 12,
-                          textAlign: TextAlign.start,
+                        child: ShimmerWidget(
+                          child: Container(
+                            height: 18.h,
+                            width: 180.w,
+                            decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(10.r)
+                            ),                          ),
                         ),
                       ),
                       6.w.horizontalSpace,
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 8.w, vertical: 2.4.h),
-                        decoration: BoxDecoration(
-                          color: const Color(0xfffef4d4).withOpacity(.8),
-                          borderRadius: BorderRadius.circular(28.r),
-                        ),
-                        child: Row(
-                          children: [
-                            AutoSizeTextWidget(
-                              text: '4',
-                              fontSize: 10.5.sp,
-                              colorText: const Color(0xfffbcc2b),
-                            ),
-                            1.8.w.horizontalSpace,
-                            RatingBarWidget(
-                              evaluation: 4,
-                              length: 1,
-                            ),
-                          ],
+                      ShimmerWidget(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.w, vertical: 2.4.h),
+                          decoration: BoxDecoration(
+                            color: const Color(0xfffef4d4).withOpacity(.8),
+                            borderRadius: BorderRadius.circular(28.r),
+                          ),
+                          child: Row(
+                            children: [
+
+                              1.8.w.horizontalSpace,
+                              RatingBarWidget(
+                                evaluation: 4,
+                                length: 1,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
                   ),
                   4.h.verticalSpace,
-                  Row(
-                    children: [
-                      SvgPicture.asset(
-                        AppIcons.location,
-                        color: Color(0xff292D32),
-                        height: 15.h,
+                  4.w.horizontalSpace,
+                  ShimmerWidget(
+                    child: Container(
+                      width: 100.w,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(10.r)
                       ),
-                      4.w.horizontalSpace,
-                      Flexible(
-                        child: AutoSizeTextWidget(
-                          text: "سعوان , هبرة",
-                          fontSize: 10.5.sp,
-                          colorText: Color(0xff292D32),
-                          fontWeight: FontWeight.w400,
-                          minFontSize: 10,
+                      child: Flexible(
+                        child: ShimmerWidget(
+                          child: AutoSizeTextWidget(
+                            text: "          ",
+                            fontSize: 10.5.sp,
+                            colorText: Color(0xff292D32),
+                            fontWeight: FontWeight.w400,
+                            minFontSize: 10,
+                          ),
                         ),
                       ),
-                    ],
+                    ),
                   ),
                   4.h.verticalSpace,
                 ],

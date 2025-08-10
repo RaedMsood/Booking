@@ -25,7 +25,7 @@ class BookingDataSource {
       url: "${AppURL.getBookingType}$filterType",
       query: {
         'page': page,
-        'perPage': 5,
+        'perPage': 4,
       },
     );
 

@@ -25,11 +25,22 @@ class PropertyDataModel {
       type: json['type'] ?? '',
       city: json['city'] ?? '',
       district: json['district'] ?? '',
-      mainImageUrls: List<String>.from(json['main_image_url'] ?? []),
+      mainImageUrls: List<String>.from(json['main_image_url2'] ?? []),
     );
   }
 
   static List<PropertyDataModel> fromJsonList(List json) {
     return json.map((e) => PropertyDataModel.fromJson(e)).toList();
+  }
+
+  static PropertyDataModel empty() {
+    return PropertyDataModel(
+        id: 0,
+        city: '',
+        name: '',
+        district: '',
+        type: '',
+        mainImageUrls: [],
+        rating: 0);
   }
 }

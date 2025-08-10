@@ -27,7 +27,6 @@ class OnlineImagesWidget extends StatelessWidget {
     this.logoWidth,
     this.borderRadius,
   });
-
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(

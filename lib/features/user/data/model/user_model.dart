@@ -44,6 +44,19 @@ class UserModel {
       'city_id': city?.id,
     };
   }
+  /// للتحويل إلى JSON للتخزين المحلي (يشمل كائن المدينة كاملاً)
+  Map<String, dynamic> toJsonForCache() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'phone': phoneNumber,
+      'gender': gender,
+      'birth_day': birthDay,
+      // خزن كائن المدينة كاملاً
+      'city': city?.toJson(),
+    };
+  }
 
   UserModel copyWith({
     int? id,

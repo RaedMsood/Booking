@@ -1,19 +1,24 @@
 import 'dart:ui' as ui;
+import 'package:booking/core/state/state.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../profile/presentation/widget/property _fav_card.dart';
+import '../riverpod/map_riverpod.dart';
 import '../widgets/card_in_map_widget.dart';
 
-class MapPage extends StatefulWidget {
+class MapPage extends ConsumerStatefulWidget {
   const MapPage({super.key});
 
   @override
-  State<MapPage> createState() => _MapPageState();
+  ConsumerState<MapPage> createState() => _MapPageState();
 }
 
-class _MapPageState extends State<MapPage> with AutomaticKeepAliveClientMixin {
+class _MapPageState extends ConsumerState<MapPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -41,7 +46,6 @@ class _MapPageState extends State<MapPage> with AutomaticKeepAliveClientMixin {
     final BitmapDescriptor icon = await _bitmapDescriptorFromAsset(
       'assets/images/loc.png',
       width: 70.w.toInt(),
-
     );
     setState(() {
       _markerIcon = icon;
@@ -56,7 +60,6 @@ class _MapPageState extends State<MapPage> with AutomaticKeepAliveClientMixin {
     ui.Codec codec = await ui.instantiateImageCodec(
       data.buffer.asUint8List(),
       targetWidth: width,
-
     );
     ui.FrameInfo fi = await codec.getNextFrame();
     Uint8List bytes = (await fi.image.toByteData(
@@ -67,17 +70,11 @@ class _MapPageState extends State<MapPage> with AutomaticKeepAliveClientMixin {
     return BitmapDescriptor.fromBytes(bytes);
   }
 
-  Set<Marker> get _markers => _markerData.map((m) {
-        return Marker(
-          markerId: MarkerId(m.id),
-          position: m.position,
-          icon: _markerIcon,
-          onTap: () => setState(() => _showCard = true),
-        );
-      }).toSet();
-
   @override
   Widget build(BuildContext context) {
+    final positionState = ref.watch(positionProvider);
+    final propertyFromPositionState = ref.watch(propertyFromPositionProvider);
+
     super.build(context);
     return Scaffold(
       appBar: AppBar(
@@ -119,7 +116,20 @@ class _MapPageState extends State<MapPage> with AutomaticKeepAliveClientMixin {
                       zoom: 11,
                     ),
                     onMapCreated: (ctrl) => mapCtrl = ctrl,
-                    markers: _markers,
+                    markers: positionState.data.map((m) {
+                      return Marker(
+                        markerId: MarkerId(m.id.toString()),
+                        position: LatLng(double.tryParse(m.lat) ?? 0,
+                            double.tryParse(m.lng) ?? 0),
+                        icon: _markerIcon,
+                        onTap: () {
+                          ref
+                              .read(propertyFromPositionProvider.notifier)
+                              .getPropertiesFromPosition(idProperty: m.id);
+                          setState(() => _showCard = true);
+                        },
+                      );
+                    }).toSet(),
                     myLocationButtonEnabled: false,
                     zoomControlsEnabled: false,
                   ),
@@ -131,9 +141,18 @@ class _MapPageState extends State<MapPage> with AutomaticKeepAliveClientMixin {
                         padding: EdgeInsets.only(
                           left: 16.w,
                           right: 16.w,
-                          bottom: kBottomNavigationBarHeight + 30.h,
+                          bottom: kBottomNavigationBarHeight.h,
                         ),
-                        child: CardInMapWidget()),
+                        child: Visibility(
+                          visible: propertyFromPositionState.stateData !=
+                              States.loading,
+                          replacement: const ShimmerCardInMapWidget(),
+                          child: PropertyFavoriteAndMapWidget(
+                            property: propertyFromPositionState.data,
+                            imageHeight: 90,
+                            spaceHeight: 10,
+                          ),
+                        )),
                   ),
               ],
             ),

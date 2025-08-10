@@ -1,12 +1,18 @@
 import 'package:booking/features/properties/cities/presentation/riverpod/cities_riverpod.dart';
+import 'package:booking/features/properties/cities/presentation/widget/search_for_city_widget.dart';
+import 'package:booking/services/auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../core/constants/app_icons.dart';
+import '../../../../../core/state/check_state_in_get_api_data_widget.dart';
+import '../../../../../core/state/state.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
+import '../../data/model/city_model.dart';
+import 'design_for_cities_widget.dart';
 import 'list_to_view_all_cities_widget.dart';
 
 class CityWidget extends ConsumerWidget {
@@ -16,9 +22,10 @@ class CityWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var cities = ref.watch(getAllCitiesProvider);
+     var cities = ref.watch(getAllCitiesProvider);
     final selectedCity = ref.watch(selectedCityProvider);
     final errorMessage = ref.watch(selectedCityErrorProvider);
+
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,3 +93,5 @@ class CityWidget extends ConsumerWidget {
     );
   }
 }
+
+

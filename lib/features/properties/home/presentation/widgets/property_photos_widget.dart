@@ -1,24 +1,24 @@
 import 'package:booking/core/theme/app_colors.dart';
 import 'package:booking/core/widgets/smooth_page_indicator_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../../core/constants/app_icons.dart';
-import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/online_images_widget.dart';
-import '../../../../../core/widgets/rating_bar_widget.dart';
+import '../../../../profile/presentation/state_mangement/riverpod.dart';
 
 class PropertyPhotosWidget extends StatefulWidget {
   final List<String> image;
   final double height;
+  final int idProperties;
 
-  PropertyPhotosWidget({
-    super.key,
-    required this.image,
-    required this.height,
-  });
+  PropertyPhotosWidget(
+      {super.key,
+      required this.image,
+      required this.height,
+      required this.idProperties});
 
   @override
   State<PropertyPhotosWidget> createState() => _PropertyPhotosWidgetState();
@@ -56,53 +56,43 @@ class _PropertyPhotosWidgetState extends State<PropertyPhotosWidget> {
             },
           ),
         ),
-
         SmoothPageIndicatorWidget(
           pageController: pageController,
           count: widget.image.length,
         ),
+        Consumer(
+          builder: (context, ref, _) {
+            final isFav = ref.watch(
+              favoriteIdsProvider
+                  .select((ids) => ids.contains(widget.idProperties)),
+            );
+            final fav = ref.read(favoriteIdsProvider.notifier);
+            fav.isBusy(widget.idProperties);
 
-        PositionedDirectional(
-          top: 8,
-          end: 8,
-          child: Container(
-            padding: EdgeInsets.all(5.sp),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-            ),
-            child:  SvgPicture.asset(
-              AppIcons.favoriteActive,
-              color: AppColors.primarySwatch.shade400,
-              //  color:Color(0xffda6b6e),
-              height: 18.h,
-            ),
-          ),
-          // child: Container(
-          //   padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.only(
-          //         topLeft: Radius.circular(8.r),
-          //         bottomRight: Radius.circular(8.r)),
-          //     gradient: LinearGradient(
-          //       colors: [
-          //         Color(0xFFefc421),
-          //         Color(0xFFefc654),
-          //         Color(0xFFeecf5d),
-          //         Color(0xFFf8cd71),
-          //
-          //         // Color(0xFFF4C430).withOpacity(.8),
-          //       ],
-          //       begin: Alignment.centerLeft,
-          //       end: Alignment.centerRight,
-          //     ),
-          //   ),
-          //   child: RatingBarWidget(
-          //     evaluation: 5,
-          //     labeledColor: Colors.black,
-          //     itemSize: 11.5.sp,
-          //   ),
-          // ),
+            return PositionedDirectional(
+              top: 8,
+              end: 8,
+              child: SizedBox(
+                height: 30.h,
+                child: Material(
+                  color: Colors.white,
+                  shape: const CircleBorder(),
+                  child: IconButton(
+                    padding: EdgeInsets.all(0.sp),
+                    constraints: const BoxConstraints(),
+                    onPressed: () => fav.toggle(widget.idProperties),
+                    icon: SvgPicture.asset(
+                      isFav ? AppIcons.favoriteActive : AppIcons.favorite,
+                      color: isFav
+                          ? AppColors.primarySwatch.shade400
+                          : Colors.black,
+                      height: 18.h,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
         ),
       ],
     );

@@ -1,26 +1,30 @@
 import 'package:booking/core/helpers/navigateTo.dart';
 import 'package:booking/core/theme/app_colors.dart';
 import 'package:booking/features/profile/presentation/page/setting_page.dart';
+import 'package:booking/services/auth/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../properties/cities/presentation/riverpod/cities_riverpod.dart';
 import '../widget/section_profile_widget.dart';
 import '../widget/tile_widget.dart';
 import 'about_page.dart';
 import 'contact_us_page.dart';
 import 'edit_profile_page.dart';
 import 'faq_page.dart';
+import 'favorite_page.dart';
 
 // الكلاسات السابقة موجودة هنا...
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,ref) {
     return Scaffold(
       appBar: AppBar(
         title: AutoSizeTextWidget(
@@ -54,7 +58,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     SizedBox(width: 12.w),
                     AutoSizeTextWidget(
-                      text: 'حسين الاشول',
+                      text: Auth().name,
                       fontSize: 13.sp,
                       colorText: const Color(0xff001A33),
                     ),
@@ -76,7 +80,11 @@ class ProfilePage extends StatelessWidget {
                   icon: AppIcons.favorite,
                   title: 'المفضلة',
                   context: context,
-                  onTap: () {},
+                  onTap: () {
+                    navigateTo(context, FavoritePage());
+
+
+                  },
                 ),
                 TileWidget(
                   icon: AppIcons.setting,

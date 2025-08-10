@@ -42,4 +42,10 @@ class AppURL {
   static String get custemorForBooking => '/booking/customer';
 
   static String get updateUser => '/profile/update';
+  static String get getFavorite => '/profile/favorites';
+  static String get addFavorite => '/profile/add_favorites';
+  static String get propertyPosition => '/property/loc';
+  static String get propertyFromPosition => '/property/show_for_loc';
+
+
 }
