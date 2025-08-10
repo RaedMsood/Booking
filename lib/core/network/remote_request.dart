@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../services/auth/auth.dart';
-import 'errors/erorr_model.dart';
 import 'urls.dart';
 
 class RemoteRequest {
@@ -22,10 +21,8 @@ class RemoteRequest {
     dynamic query,
     String lang = 'ar',
   }) async {
-    String currency = await Auth().getCurrency();
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'Currency-Code': currency,
       'lang': lang,
       'Authorization': 'Bearer ${Auth().token}',
     };
@@ -47,17 +44,15 @@ class RemoteRequest {
     dynamic data,
     String lang = 'ar',
   }) async {
-    String currency = await Auth().getCurrency();
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'Currency-Code': currency,
       'lang': lang,
       'Authorization': 'Bearer ${Auth().token}',
     };
     final response = await dio.post(
       path,
       queryParameters: query,
-      data:  jsonEncode(data),
+      data: jsonEncode(data),
     );
 
     if (response.statusCode == 200 ||
@@ -79,11 +74,8 @@ class RemoteRequest {
     dynamic data,
     String lang = 'ar',
   }) async {
-    String currency = await Auth().getCurrency();
-
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'Currency-Code': currency,
       'lang': lang,
       'Authorization': 'Bearer ${Auth().token}',
     };
@@ -110,16 +102,13 @@ class RemoteRequest {
     dynamic data,
     String lang = 'ar',
   }) async {
-    String currency = await Auth().getCurrency();
-
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'Currency-Code': currency,
       'lang': lang,
       'Authorization': 'Bearer ${Auth().token}',
     };
     final response =
-    await dio.delete(path, queryParameters: query, data: jsonEncode(data));
+        await dio.delete(path, queryParameters: query, data: jsonEncode(data));
 
     if (response.statusCode == 200 ||
         response.statusCode == 201 ||

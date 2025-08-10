@@ -8,7 +8,8 @@ import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/buttons/icon_button_widget.dart';
 import '../../../../../core/widgets/buttons/ink_well_button_widget.dart';
 import '../../../../../core/widgets/custom_shape_widget.dart';
-import '../pages/search_and_filter_page.dart';
+import '../../../../../generated/l10n.dart';
+import '../../../search_and_filter/presentation/pages/search_and_filter_page.dart';
 
 class SliverAppBarHomeWidget extends SliverPersistentHeaderDelegate {
   SliverAppBarHomeWidget();
@@ -35,7 +36,7 @@ class SliverAppBarHomeWidget extends SliverPersistentHeaderDelegate {
                 ),
                 8.w.horizontalSpace,
                 AutoSizeTextWidget(
-                  text: "نُزل",
+                  text: S.of(context).hostel,
                   fontSize: 16.sp,
                   colorText: AppColors.whiteColor,
                   fontWeight: FontWeight.w600,
@@ -49,7 +50,7 @@ class SliverAppBarHomeWidget extends SliverPersistentHeaderDelegate {
                   iconColor: Colors.white,
                   height: 19.h,
                   onPressed: () {
-                    navigateTo(context,  SearchAndFilterPage());
+                    navigateTo(context, const SearchAndFilterPage());
                   },
                 ),
                 IconButtonWidget(

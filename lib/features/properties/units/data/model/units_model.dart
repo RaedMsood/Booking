@@ -4,7 +4,6 @@ class UnitsModel {
   final String price;
   final int maxGuests;
   final String? description;
-  // final int bedsCount;
   final String? image;
 
   UnitsModel({
@@ -13,7 +12,6 @@ class UnitsModel {
     required this.price,
     required this.maxGuests,
     this.description,
-    // required this.bedsCount,
     this.image,
   });
 
@@ -22,9 +20,8 @@ class UnitsModel {
       id: json['id'] as int,
       name: json['name'] ?? '',
       price: json['price_per_night'] ?? '',
-      maxGuests: json['max_guests'] as int,
+      maxGuests: json['max_guests'] ?? 0,
       description: json['description'] ?? '',
-      // bedsCount: json['beds_count'] as int,
       image: json['image'] ?? '',
     );
   }
@@ -39,7 +36,6 @@ class UnitsModel {
         price: '',
         maxGuests: 0,
         description: null,
-        // bedsCount: 0,
         image: null,
       );
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../data/models/policy_model.dart';
 import 'general_container_for_details_widget.dart';
 
@@ -140,7 +141,7 @@ class _TermsPolicyWidgetState extends State<TermsPolicyWidget>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AutoSizeTextWidget(
-            text: "شروط وسياسة الفندق",
+            text: S.of(context).hotelTermsAndPolicies,
             fontSize: 13.sp,
             fontWeight: FontWeight.w500,
           ),
@@ -167,7 +168,7 @@ class _TermsPolicyWidgetState extends State<TermsPolicyWidget>
                   });
                 },
                 child: AutoSizeTextWidget(
-                  text: _isExpanded ? 'عرض أقل' : 'عرض المزيد',
+                  text: _isExpanded ? S.of(context).showLess : S.of(context).viewMore,
                   fontSize: 10.4.sp,
                   colorText: AppColors.primaryColor,
                   fontWeight: FontWeight.w400,

@@ -15,7 +15,9 @@ class AppURL {
 
   static String get property => '/property';
 
-  static String get getSearchResultsAndFilterProperties => '/property/filter';
+  static String get searchAndFilterProperties => '/property/filter';
+
+  static String get getFilterData => '/filter_data';
 
   static String get propertiesByCity => '/property/show_city';
 
@@ -38,7 +40,6 @@ class AppURL {
   static String get getBookingType => '/booking/all/';
 
   static String get custemorForBooking => '/booking/customer';
+
   static String get updateUser => '/profile/update';
-
-
 }

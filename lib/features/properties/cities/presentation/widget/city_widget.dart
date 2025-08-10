@@ -10,7 +10,9 @@ import '../../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
 import 'list_to_view_all_cities_widget.dart';
 
 class CityWidget extends ConsumerWidget {
-  const CityWidget({super.key});
+  final bool locationIcon;
+
+  const CityWidget({super.key, this.locationIcon = true});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,15 +43,18 @@ class CityWidget extends ConsumerWidget {
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: BorderRadius.circular(8.r),
             ),
             child: Row(
               children: [
-                SvgPicture.asset(
-                  AppIcons.location,
-                  height: 18.h,
+                Visibility(
+                  visible: locationIcon,
+                  child: SvgPicture.asset(
+                    AppIcons.location,
+                    height: 18.h,
+                  ),
                 ),
-                8.w.horizontalSpace,
+                locationIcon ? 8.w.horizontalSpace : const SizedBox.shrink(),
                 AutoSizeTextWidget(
                   text: selectedCity?.name ?? 'اختر المحافظة',
                   fontSize: 11.sp,
@@ -68,7 +73,7 @@ class CityWidget extends ConsumerWidget {
         ),
         if (errorMessage != null)
           Padding(
-            padding: EdgeInsets.all( 8.sp),
+            padding: EdgeInsets.all(8.sp),
             child: Text(
               errorMessage,
               style: TextStyle(

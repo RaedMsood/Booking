@@ -28,14 +28,15 @@ class DesignForCitiesWidget extends StatelessWidget {
         padding: EdgeInsets.all(10.sp),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(8.r),
 
         ),
         margin: EdgeInsets.symmetric(vertical: 4.h),
         child: AutoSizeTextWidget(
           text: name.toString(),
-          fontSize: 13.sp,
+          fontSize: 12.5.sp,
           textAlign: TextAlign.start,
+          fontWeight: FontWeight.w400,
         ),
       ),
     );

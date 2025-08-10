@@ -1,24 +1,26 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import '../helpers/flash_bar_helper.dart';
 import '../network/errors/remote_exception.dart';
 import '../state/state.dart';
 import '../theme/app_colors.dart';
-import '../widgets/no_internet_connection_widget.dart';
+import '../widgets/error_widget.dart';
 import 'data_state.dart';
 
 class CheckStateInGetApiDataWidget extends StatelessWidget {
   final Widget? widgetOfData;
   final Widget? widgetOfLoading;
-
+  final VoidCallback? refresh;
   final DataState state;
+  final bool errorMessage;
 
   const CheckStateInGetApiDataWidget({
     super.key,
     required this.state,
     this.widgetOfData,
     this.widgetOfLoading,
+    this.refresh,
+    this.errorMessage = false,
   });
 
   @override
@@ -29,9 +31,7 @@ class CheckStateInGetApiDataWidget extends StatelessWidget {
         state.stateData == States.loadingMore) {
       return widgetOfData!;
     } else if (state.stateData == States.error) {
-      if (state.exception!.type == DioExceptionType.connectionError) {
-        return NoInternetConnectionWidget();
-      } else {
+      if (errorMessage) {
         SchedulerBinding.instance.addPostFrameCallback((_) {
           showFlashBarError(
             context: context,
@@ -40,6 +40,14 @@ class CheckStateInGetApiDataWidget extends StatelessWidget {
           );
           state.stateData = States.initial;
         });
+      } else {
+        return Center(
+          child: ErrorsWidget(
+            title: MessageOfErorrApi.getExeptionMessage(state.exception!).first,
+            subTitle: MessageOfErorrApi.getExeptionMessage(state.exception!).last,
+            onPressed: refresh,
+          ),
+        );
       }
     } else if (state.stateData == States.loading) {
       return widgetOfLoading ??

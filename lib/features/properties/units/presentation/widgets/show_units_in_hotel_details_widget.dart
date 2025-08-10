@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/helpers/navigateTo.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../data/model/units_model.dart';
 import '../pages/units_page.dart';
 import 'units_card _in_hotel_details_widget.dart';
@@ -32,7 +33,7 @@ class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AutoSizeTextWidget(
-                  text: "غرف الفندق",
+                  text: S.of(context).hotelRooms,
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w500,
                 ),
@@ -41,7 +42,7 @@ class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
                     navigateTo(context, UnitsPage(propertyId: propertyId));
                   },
                   child: AutoSizeTextWidget(
-                    text: 'عرض المزيد',
+                    text: S.of(context).viewMore,
                     fontSize: 10.4.sp,
                     colorText: AppColors.primaryColor,
                     fontWeight: FontWeight.w400,

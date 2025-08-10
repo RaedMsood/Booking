@@ -4,6 +4,8 @@ import '../../../../../core/state/data_state.dart';
 import '../../../../../core/state/pagination_data/paginated_model.dart';
 import '../../../../../core/state/state.dart';
 import '../../../../../injection.dart';
+import '../../../units/data/model/units_model.dart';
+import '../../../search_and_filter/data/model/filter_data_model.dart';
 import '../../data/model/property_data_model.dart';
 import '../../data/model/property_model.dart';
 import '../../data/model/property_pagination_model.dart';
@@ -76,67 +78,4 @@ class GetAllPropertyNotifier extends StateNotifier<DataState<PropertyModel>> {
   }
 }
 
-final searchAndFilterPropertiesProvider = StateNotifierProvider.autoDispose<
-    SearchAndFilterPropertiesNotifier,
-    DataState<PaginationModel<PropertyDataModel>>>(
-  (ref) {
-    return SearchAndFilterPropertiesNotifier();
-  },
-);
 
-class SearchAndFilterPropertiesNotifier
-    extends StateNotifier<DataState<PaginationModel<PropertyDataModel>>> {
-  SearchAndFilterPropertiesNotifier()
-      : super(DataState<PaginationModel<PropertyDataModel>>.initial(
-            PaginationModel.empty())) {
-    getData();
-  }
-
-  final _controller = sl<PropertyReposaitory>();
-
-  TextEditingController searchController = TextEditingController();
-
-  Future<void> getData({bool moreData = false}) async {
-    if (moreData && state.data.currentPage >= state.data.lastPage) {
-      return;
-    }
-    if (moreData) {
-      state = state.copyWith(state: States.loadingMore);
-    } else {
-      state = state.copyWith(state: States.loading);
-    }
-
-    final nextPage = moreData ? state.data.currentPage + 1 : 1;
-
-    final result = await _controller.searchAndFilterProperties(
-      page: nextPage,
-      search: searchController.text,
-    );
-
-    result.fold(
-      (failure) {
-        state = state.copyWith(state: States.error, exception: failure);
-      },
-      (newData) {
-        state = state.success(newData, moreData);
-      },
-    );
-  }
-
-  Future<void> search() async {
-    // state = state.copyWith(
-    //   data: state.data.copyWith(
-    //     products: state.data.products.copyWith(
-    //       data: [],
-    //       currentPage: 0,
-    //     ),
-    //   ),
-    // );
-    state = state.copyWith(
-      data: PaginationModel.empty(),
-      state: States.initial,
-    );
-
-    await getData();
-  }
-}

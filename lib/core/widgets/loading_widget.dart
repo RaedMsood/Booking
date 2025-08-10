@@ -8,11 +8,11 @@ class CircularProgressIndicatorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 14.w),
+      margin: EdgeInsets.symmetric(horizontal: 14.w,).copyWith(bottom: 38.h),
       child:  Center(
         child: CircularProgressIndicator(
           color: AppColors.primaryColor,
-          strokeWidth: 2.5.w,
+          strokeWidth: 2.6.w,
         ),
       ),
     );

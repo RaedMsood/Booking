@@ -2,8 +2,8 @@ class AddressModel {
   final String city;
   final String district;
   final String address;
-  final dynamic lat;
-  final dynamic lng;
+  final String lat;
+  final String lng;
 
   AddressModel({
     required this.city,
@@ -18,8 +18,8 @@ class AddressModel {
       city: json['city'] ??'',
       district: json['district'] ??'',
       address: json['address'] ??'',
-      lat: json['lat']??15.369445,
-      lng: json['lng']??44.191006,
+      lat: json['lat']??'15.369445',
+      lng: json['lng']??'44.191006',
     );
   }
 
@@ -27,7 +27,7 @@ class AddressModel {
         city: '',
         district: '',
         address: '',
-        lat: 15.369445,
-        lng: 44.191006,
+        lat: '15.369445',
+        lng: '44.191006',
       );
 }

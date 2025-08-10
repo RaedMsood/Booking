@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../data/models/address_model.dart';
 import 'general_container_for_details_widget.dart';
 
@@ -25,8 +26,8 @@ class _PropertyLocationWidgetState extends State<PropertyLocationWidget> {
   @override
   void initState() {
     super.initState();
-    // _propertyPosition = LatLng(widget.address.lat, widget.address.lng);
-    _propertyPosition = LatLng(15.369445, 44.191006);
+    _propertyPosition = LatLng(double.tryParse(widget.address.lat) ?? 15.369445,
+        double.tryParse(widget.address.lng) ?? 44.191006);
     _markers.add(
       Marker(
         markerId: const MarkerId('property'),
@@ -37,19 +38,19 @@ class _PropertyLocationWidgetState extends State<PropertyLocationWidget> {
   }
 
   Future<void> _openMapApp() async {
-    // final lat = widget.address.lat;
-    // final lng = widget.address.lng;
-    final lat = 15.369445;
-    final lng = 44.191006;
-    // رابط Google Maps عام يعمل على Android و iOS
-    final uri = Uri.parse('https://www.google.com/maps/search/?api=1&query=$lat,$lng');
+    final lat = double.tryParse(widget.address.lat) ?? 15.369445;
+    final lng = double.tryParse(widget.address.lng) ?? 44.191006;
+
+    final uri =
+        Uri.parse('https://www.google.com/maps/search/?api=1&query=$lat,$lng');
 
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('تعذّر فتح تطبيق الخرائط')),
+         SnackBar(content: Text(S.of(context).unableToOpenMapsApp)),
       );
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return GeneralContainerForDetailsWidget(
@@ -62,14 +63,14 @@ class _PropertyLocationWidgetState extends State<PropertyLocationWidget> {
             children: [
               Flexible(
                 child: AutoSizeTextWidget(
-                  text: "العنوان",
+                  text: S.of(context).address,
                   fontSize: 13.sp,
                 ),
               ),
               InkWell(
                 onTap: _openMapApp,
                 child: AutoSizeTextWidget(
-                  text: "العرض في الخريطة",
+                  text: S.of(context).showInMap,
                   colorText: AppColors.primaryColor,
                   fontSize: 10.4.sp,
                   fontWeight: FontWeight.w400,

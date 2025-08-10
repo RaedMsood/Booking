@@ -10,14 +10,14 @@ import 'hotel_features_widget.dart';
 class NameAndDescriptionAndRatingWidget extends StatelessWidget {
   final String name;
   final String description;
-  final dynamic rating;
+  final double rating;
   final List<FeaturesModel> features;
 
   const NameAndDescriptionAndRatingWidget({
     super.key,
     required this.name,
     required this.description,
-    this.rating,
+    required this.rating,
     required this.features,
   });
 
@@ -59,13 +59,13 @@ class NameAndDescriptionAndRatingWidget extends StatelessWidget {
                       child: Row(
                         children: [
                           AutoSizeTextWidget(
-                            text: "4",
+                            text: rating.toString(),
                             fontSize: 10.5.sp,
                             colorText: AppColors.secondaryColor,
                           ),
                           1.8.w.horizontalSpace,
                           RatingBarWidget(
-                            evaluation: 4,
+                            evaluation: rating,
                             length: 1,
                           ),
                         ],
@@ -74,9 +74,10 @@ class NameAndDescriptionAndRatingWidget extends StatelessWidget {
                   ],
                 ),
                 8.h.verticalSpace,
-                ReadMoreTextWidget(
-                  text: description,
-                ),
+                if (description.isNotEmpty)
+                  ReadMoreTextWidget(
+                    text: description,
+                  ),
               ],
             ),
           ),

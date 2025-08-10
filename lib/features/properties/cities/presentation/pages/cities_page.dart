@@ -1,3 +1,4 @@
+import 'package:booking/core/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,14 +30,16 @@ class DestinationsPage extends ConsumerWidget {
         title: AutoSizeTextWidget(
           text: "الوجهات",
           fontSize: 15.5.sp,
-          colorText: AppColors.mainColorFont,
         ),
-        leadingWidth: 51.w,
+        leadingWidth: 67.w,
         leading: Padding(
-          padding: EdgeInsets.only(top: 8.h),
-          child: const IconButtonWidget(
-            icon: AppIcons.arrowBack,
-            iconColor: AppColors.mainColorFont,
+          padding: EdgeInsets.symmetric(horizontal: 14.h).copyWith(top: 4.4.h),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+            child: const IconButtonWidget(),
           ),
         ),
       ),
@@ -57,6 +60,21 @@ class DestinationsPage extends ConsumerWidget {
         child: SafeArea(
           child: CheckStateInGetApiDataWidget(
             state: state,
+            widgetOfLoading: MasonryGridView.count(
+              crossAxisCount: 2,
+              mainAxisSpacing: 20.h,
+              crossAxisSpacing: 16.w,
+              padding: EdgeInsets.all(14.sp),
+              itemCount: 6,
+              itemBuilder: (context, index) {
+                final cardHeight = index == 0 ? 190.h : 220.h;
+
+                return ShimmerPlaceholderWidget(
+                  height: cardHeight,
+                  width: double.infinity,
+                );
+              },
+            ),
             widgetOfData: MasonryGridView.count(
               crossAxisCount: 2,
               mainAxisSpacing: 20.h,

@@ -30,19 +30,30 @@ class MessageLookup extends MessageLookupByLibrary {
     "aboutJeeey": MessageLookupByLibrary.simpleMessage("حول جي"),
     "addPhotos": MessageLookupByLibrary.simpleMessage("إضافة صور"),
     "addRating": MessageLookupByLibrary.simpleMessage("إضافة تقييم"),
+    "address": MessageLookupByLibrary.simpleMessage("العنوان"),
     "addressBook": MessageLookupByLibrary.simpleMessage("دفتر العناوين"),
     "addressIsRequired": MessageLookupByLibrary.simpleMessage("العنوان مطلوب"),
     "all": MessageLookupByLibrary.simpleMessage("الكل"),
     "applicationLanguage": MessageLookupByLibrary.simpleMessage("لغة التطبيق"),
     "appropriate": MessageLookupByLibrary.simpleMessage("مناسب"),
     "backToHome": MessageLookupByLibrary.simpleMessage("العودة إلى الرئيسية"),
+    "badGateway": MessageLookupByLibrary.simpleMessage("بوابة غير صالحة"),
+    "badGateway2": MessageLookupByLibrary.simpleMessage(
+      "يرجى إعادة المحاولة بعد قليل",
+    ),
     "big": MessageLookupByLibrary.simpleMessage("كبير"),
     "canYouLeaveYourReview": MessageLookupByLibrary.simpleMessage(
       "هل يمكنك ترك رأيك؟",
     ),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "cannotReachServer": MessageLookupByLibrary.simpleMessage(
+      "تعذّر الاتصال بالخادم",
+    ),
     "changeCurrency": MessageLookupByLibrary.simpleMessage("تغيير العملة"),
     "changePassword": MessageLookupByLibrary.simpleMessage("تغيير كلمة المرور"),
+    "checkInternetOrServiceUrl": MessageLookupByLibrary.simpleMessage(
+      "تحقق من اتصالك بالإنترنت أو رابط الخدمة",
+    ),
     "clear": MessageLookupByLibrary.simpleMessage("مسح"),
     "clearCache": MessageLookupByLibrary.simpleMessage(
       "مسح ذاكرة التخرين المؤقت",
@@ -74,7 +85,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "إنشاء كلمة المرور الجديدة",
     ),
     "currency": MessageLookupByLibrary.simpleMessage("عملة"),
-    "dailyNew": MessageLookupByLibrary.simpleMessage("الجديد اليومي"),
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "deleteAccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
     "deletedAddressSuccessfully": MessageLookupByLibrary.simpleMessage(
@@ -84,7 +94,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم الحذف بنجاح",
     ),
     "deliveryCost": MessageLookupByLibrary.simpleMessage("تكلفة التوصيل"),
+    "deposit": MessageLookupByLibrary.simpleMessage("العربون"),
     "discountOnBill": MessageLookupByLibrary.simpleMessage("الخصم"),
+    "discoverOurDestinations": MessageLookupByLibrary.simpleMessage(
+      "اكتشف وجهاتنا ✈️🌎",
+    ),
     "doYouReallyWantToSignOut": MessageLookupByLibrary.simpleMessage(
       "هل تريد حقا تسجيل الخروج؟",
     ),
@@ -102,6 +116,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotYourPassword": MessageLookupByLibrary.simpleMessage(
       "نسيت كلمة المرور؟",
     ),
+    "gatewayTimeout": MessageLookupByLibrary.simpleMessage(
+      "انتهى وقت الاتصال بالخادم",
+    ),
+    "gatewayTimeout2": MessageLookupByLibrary.simpleMessage(
+      "تحقق من اتصالك بالإنترنت أو حاول لاحقاً",
+    ),
     "haveACouponOrDiscountVoucher": MessageLookupByLibrary.simpleMessage(
       "لديك كوبون أو قسيمة تخفييض؟",
     ),
@@ -109,6 +129,29 @@ class MessageLookup extends MessageLookupByLibrary {
       "مرحبا صديقي الجديد!",
     ),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+    "hostel": MessageLookupByLibrary.simpleMessage("نُزل"),
+    "hotelRooms": MessageLookupByLibrary.simpleMessage("غرف الفندق"),
+    "hotelTermsAndPolicies": MessageLookupByLibrary.simpleMessage(
+      "شروط وسياسة الفندق",
+    ),
+    "httpVersionNotSupported": MessageLookupByLibrary.simpleMessage(
+      "نسخة HTTP غير مدعومة",
+    ),
+    "httpVersionNotSupported2": MessageLookupByLibrary.simpleMessage(
+      "تأكد من تحديث التطبيق إلى آخر إصدار",
+    ),
+    "internalServerError": MessageLookupByLibrary.simpleMessage(
+      "خطأ داخلي في الخادم",
+    ),
+    "internalServerError2": MessageLookupByLibrary.simpleMessage(
+      "يرجى المحاولة لاحقاً أو التواصل مع الدعم الفني",
+    ),
+    "invalidApiUrl": MessageLookupByLibrary.simpleMessage(
+      "رابط الخدمة غير صالح",
+    ),
+    "invalidApiUrl2": MessageLookupByLibrary.simpleMessage(
+      "تحقق من عنوان الخادم (Base URL) ثم أعد المحاولة",
+    ),
     "invalidPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "رقم الهاتف غير صالح",
     ),
@@ -119,6 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "manageMyAccount": MessageLookupByLibrary.simpleMessage("إدارة حسابي"),
     "map": MessageLookupByLibrary.simpleMessage("الخريطة"),
+    "more": MessageLookupByLibrary.simpleMessage("المزيد"),
     "myReservations": MessageLookupByLibrary.simpleMessage("حجوزاتي"),
     "network": MessageLookupByLibrary.simpleMessage(
       "عذراً لا يوجد اتصال بالانترنت",
@@ -128,6 +172,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "newPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
     "no": MessageLookupByLibrary.simpleMessage("لا"),
+    "notImplemented": MessageLookupByLibrary.simpleMessage(
+      "الميزة غير مدعومة على الخادم",
+    ),
+    "notImplemented2": MessageLookupByLibrary.simpleMessage(
+      "تأكد من تحديث التطبيق أو التواصل مع الدعم",
+    ),
     "oldPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور القديمة"),
     "or": MessageLookupByLibrary.simpleMessage("أو"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور:"),
@@ -170,7 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "يرجى أدخال رقم الهاتف أو البريد الالكتروني",
     ),
     "pleaseTryAgain": MessageLookupByLibrary.simpleMessage(
-      "الرجاء المحاولة مرة أخرى",
+      "يرجى المحاولة مرة أخرى",
     ),
     "privacyAndCookiePolicy": MessageLookupByLibrary.simpleMessage(
       "سياسة الخصوصية وملفات تعريف الارتباط",
@@ -182,27 +232,56 @@ class MessageLookup extends MessageLookupByLibrary {
     "ratingAndFeedback": MessageLookupByLibrary.simpleMessage(
       "التقييم والملاحظات",
     ),
+    "readMore": MessageLookupByLibrary.simpleMessage("قراءة المزيد"),
+    "receiveTimeout": MessageLookupByLibrary.simpleMessage(
+      "انتهى وقت استلام البيانات",
+    ),
+    "receiveTimeout2": MessageLookupByLibrary.simpleMessage(
+      "يرجى المحاولة لاحقاً أو تقليل حجم البيانات",
+    ),
     "recipientsPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "رقم هاتف المستلم",
     ),
+    "refresh": MessageLookupByLibrary.simpleMessage("تحديث"),
     "rename": MessageLookupByLibrary.simpleMessage("إعادة تسمية"),
+    "requestCancelled": MessageLookupByLibrary.simpleMessage("تم إلغاء الطلب"),
+    "requestCancelled2": MessageLookupByLibrary.simpleMessage(
+      "أعد المحاولة إذا كان الإلغاء غير مقصود",
+    ),
     "resend": MessageLookupByLibrary.simpleMessage("إعادة الإرسال"),
     "resendCodeIN": MessageLookupByLibrary.simpleMessage(
       "إعادة إرسال الرمز خلال",
     ),
     "save": MessageLookupByLibrary.simpleMessage("حفظ"),
+    "sendTimeout": MessageLookupByLibrary.simpleMessage(
+      "انتهى وقت إرسال البيانات",
+    ),
+    "sendTimeout2": MessageLookupByLibrary.simpleMessage(
+      "تحقق من الاتصال وأعد الإرسال",
+    ),
+    "serviceUnavailable": MessageLookupByLibrary.simpleMessage(
+      "الخدمة غير متاحة حالياً",
+    ),
+    "serviceUnavailable2": MessageLookupByLibrary.simpleMessage(
+      "يرجى المحاولة لاحقاً",
+    ),
     "settings": MessageLookupByLibrary.simpleMessage("إعدادات"),
     "sharing": MessageLookupByLibrary.simpleMessage("مشاركة"),
     "shippingMethod": MessageLookupByLibrary.simpleMessage("وسيلة الشحن"),
+    "showInMap": MessageLookupByLibrary.simpleMessage("عرض في الخريطة"),
+    "showLess": MessageLookupByLibrary.simpleMessage("عرض أقل"),
     "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "signUp": MessageLookupByLibrary.simpleMessage("تسجيل الاشتراك"),
-    "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "small": MessageLookupByLibrary.simpleMessage("صغير"),
     "somethingWentWrong": MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
     "specifyYourNameAndPasswordToCreateAJeeeyAccount":
         MessageLookupByLibrary.simpleMessage(
           "قم بتحديد الأسم و كلمة المرور الخاصة بك لإنشاء حساب في Jeeey",
         ),
+    "sslError": MessageLookupByLibrary.simpleMessage("مشكلة في شهادة الأمان"),
+    "sslError2": MessageLookupByLibrary.simpleMessage(
+      "تأكد من ضبط الشهادة أو حاول لاحقاً",
+    ),
     "successfully": MessageLookupByLibrary.simpleMessage("تمت العملية بنجاح"),
     "termsAndConditions": MessageLookupByLibrary.simpleMessage(
       "الشروط والأحكام",
@@ -223,12 +302,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "transactionSuccessful": MessageLookupByLibrary.simpleMessage(
       "تمت العملية بنجاح",
     ),
-    "update": MessageLookupByLibrary.simpleMessage("تحديث"),
+    "unableToOpenMapsApp": MessageLookupByLibrary.simpleMessage(
+      "تعذّر فتح تطبيق الخرائط",
+    ),
     "userName": MessageLookupByLibrary.simpleMessage("الأسم:"),
     "viewAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
     "viewMore": MessageLookupByLibrary.simpleMessage("عرض المزيد"),
     "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبا بعودتك!"),
     "yes": MessageLookupByLibrary.simpleMessage("نعم"),
+    "yourHotelDestination": MessageLookupByLibrary.simpleMessage(
+      "وجهتك الفندقية",
+    ),
     "yourOrderHasBeenSuccessfulPlacedThankYouForShoppingWithUs":
         MessageLookupByLibrary.simpleMessage(
           "تم تقديم طلبك بنجاح. شكرا لك على التسوق معنا.",

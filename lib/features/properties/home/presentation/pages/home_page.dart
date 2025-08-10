@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/state/check_state_in_get_api_data_widget.dart';
 import '../../../../../core/state/state.dart';
 import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/widgets/loading_widget.dart';
 import '../riverpod/home_riverpod.dart';
+import '../widgets/shimmer_home_widget.dart';
 import '../widgets/sliver_app_bar_home_widget.dart';
 import '../../../cities/presentation/widget/discover_destinations_widget.dart';
 import '../widgets/offers_widget.dart';
@@ -52,29 +54,34 @@ class _HomePageState extends ConsumerState<HomePage> {
     var state = ref.watch(getAllPropertyProvider);
 
     return Scaffold(
-      body: CheckStateInGetApiDataWidget(
-        state: state,
-        widgetOfData: RefreshIndicator(
-          color: AppColors.primaryColor,
-          backgroundColor: Colors.white,
-          displacement: 40,
-          strokeWidth: 2.5,
-          onRefresh: () async {
-            await ref.read(getAllPropertyProvider.notifier).getData();
-          },
-          child: CustomScrollView(
-            controller: _scrollController,
-            physics: const AlwaysScrollableScrollPhysics(),
-            slivers: [
-              SliverPersistentHeader(
-                pinned: true,
-                floating: false,
-                delegate: SliverAppBarHomeWidget(),
-              ),
-              SliverToBoxAdapter(
-                child: Column(
+      body: RefreshIndicator(
+        color: AppColors.primaryColor,
+        backgroundColor: Colors.white,
+        displacement: 40,
+        strokeWidth: 2.5,
+        onRefresh: () async {
+          ref.refresh(getAllPropertyProvider);
+        },
+        child: CustomScrollView(
+          controller: _scrollController,
+          physics: const AlwaysScrollableScrollPhysics(),
+          slivers: [
+            SliverPersistentHeader(
+              pinned: true,
+              floating: false,
+              delegate: SliverAppBarHomeWidget(),
+            ),
+            SliverToBoxAdapter(
+              child: CheckStateInGetApiDataWidget(
+                state: state,
+                refresh: (){
+                  ref.refresh(getAllPropertyProvider);
+                },
+                widgetOfLoading: const ShimmerHomeWidget(),
+                widgetOfData: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    4.5.h.verticalSpace,
                     const OffersWidget(),
                     4.5.h.verticalSpace,
                     DiscoverDestinationsWidget(
@@ -82,18 +89,20 @@ class _HomePageState extends ConsumerState<HomePage> {
                     ),
                     6.h.verticalSpace,
                     const PropertyViewTypeWidget(),
-                    2.h.verticalSpace,
                   ],
                 ),
               ),
+            ),
+            if (state.stateData == States.error)
+              const SliverToBoxAdapter(child: SizedBox.shrink())
+            else
               PropertySliverListWidget(
                 properties: state.data.property.data,
-                state: state.stateData,
-                hasMore: state.data.property.currentPage <
-                    state.data.property.lastPage,
+                isLoading: state.stateData == States.loading,
               ),
-            ],
-          ),
+            if (state.stateData == States.loadingMore)
+              const SliverToBoxAdapter(child: CircularProgressIndicatorWidget()),
+          ],
         ),
       ),
     );

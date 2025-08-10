@@ -17,6 +17,7 @@ ThemeData lightTheme = ThemeData(
       systemNavigationBarColor: Colors.transparent,
       systemNavigationBarDividerColor: Colors.transparent,
       systemNavigationBarIconBrightness: Brightness.dark,
+
     ),
   ),
   tabBarTheme: TabBarTheme(

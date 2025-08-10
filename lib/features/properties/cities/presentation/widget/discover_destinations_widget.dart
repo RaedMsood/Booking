@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/helpers/navigateTo.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../data/model/city_model.dart';
 import '../pages/cities_page.dart';
 import 'city_card_for_home_page_widget.dart';
@@ -23,12 +24,12 @@ class DiscoverDestinationsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AutoSizeTextWidget(
-                text: 'اكتشف وجهاتنا ✈️🌎',
+                text: S.of(context).discoverOurDestinations,
                 colorText: AppColors.mainColorFont,
                 fontSize: 13.6.sp,
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   navigateTo(context, DestinationsPage());
                 },
                 child: Container(
@@ -50,7 +51,7 @@ class DiscoverDestinationsWidget extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(bottom: 1.4.h),
                         child: AutoSizeTextWidget(
-                          text: "المزيد",
+                          text: S.of(context).more,
                           fontSize: 8.8.sp,
                           minFontSize: 6,
                           colorText: AppColors.greySwatch.shade400,
@@ -59,7 +60,9 @@ class DiscoverDestinationsWidget extends StatelessWidget {
                       ),
                       1.5.w.horizontalSpace,
                       Icon(
-                        Icons.keyboard_arrow_left_sharp,
+                        Directionality.of(context) == TextDirection.rtl
+                            ? Icons.keyboard_arrow_left_sharp
+                            : Icons.keyboard_arrow_right_sharp,
                         size: 14.4.sp,
                         color: AppColors.greySwatch.shade400,
                       ),

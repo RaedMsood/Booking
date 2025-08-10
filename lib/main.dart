@@ -9,7 +9,7 @@ import 'core/network/remote_request.dart';
 import 'core/state/app_restart_controller.dart';
 import 'package:booking/injection.dart' as di;
 import 'core/theme/theme.dart';
-import 'core/widgets/bottomNavbar/bottom_navigation_bar_widget.dart';
+import 'features/launch_page.dart';
 import 'features/profile/presentation/state_mangement/riverpod.dart';
 import 'generated/l10n.dart';
 import 'services/auth/auth.dart';
@@ -58,20 +58,21 @@ class _MyAppState extends ConsumerState<MyApp> {
       minTextAdapt: false,
       splitScreenMode: false,
       child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          locale: locale,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('ar'),
-            Locale('en'),
-          ],
-          theme: lightTheme,
-          home: BottomNavigationBarWidget()),
+        debugShowCheckedModeBanner: false,
+        locale: locale,
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('ar'),
+          Locale('en'),
+        ],
+        theme: lightTheme,
+        home: const LaunchPage(),
+      ),
     );
   }
 }

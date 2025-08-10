@@ -79,12 +79,16 @@ class Auth {
     return language ?? "ar";
   }
 
-  Future<void> setCurrency(String currencyCode) async {
-    await secureStorage.write(key: "CURRENCY", value: currencyCode);
+  Future<void> cacheOnBoarding(bool value) async {
+    await secureStorage.write(key: "SPLASH_SCREEN", value: jsonEncode(value));
   }
 
-  Future<String> getCurrency() async {
-    final language = await secureStorage.read(key: "CURRENCY");
-    return language ?? "YER";
+  Future<bool> getOnBoarding() async {
+    final fingerprintValue = await secureStorage.read(key: "SPLASH_SCREEN");
+    if (fingerprintValue != null) {
+      return jsonDecode(fingerprintValue) as bool;
+    }
+    return false;
   }
+
 }

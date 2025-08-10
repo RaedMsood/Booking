@@ -2,6 +2,7 @@ import 'package:booking/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../generated/l10n.dart';
 import 'auto_size_text_widget.dart';
 
 class ReadMoreTextWidget extends StatefulWidget {
@@ -49,7 +50,7 @@ class _ReadMoreTextWidgetState extends State<ReadMoreTextWidget>
   Widget build(BuildContext context) {
     final textStyle = widget.style ??
         TextStyle(
-          fontSize: 12.6.sp,
+          fontSize: 12.sp,
           height: 1.18.h,
           fontWeight: FontWeight.w400,
           color: AppColors.greyColor,
@@ -64,8 +65,8 @@ class _ReadMoreTextWidgetState extends State<ReadMoreTextWidget>
     );
 
     const ellipsis = '... ';
-    const moreLabel = 'قراءة المزيد';
-    const lessLabel = 'عرض أقل';
+   var  moreLabel = S.of(context).readMore;
+    var lessLabel = S.of(context).showLess;
 
     return AnimatedSize(
       duration: widget.animationDuration,

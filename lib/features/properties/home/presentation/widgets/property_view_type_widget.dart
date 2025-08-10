@@ -6,6 +6,7 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/buttons/icon_button_widget.dart';
 import '../../../../../core/widgets/buttons/ink_well_button_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../riverpod/home_riverpod.dart';
 
 class PropertyViewTypeWidget extends ConsumerWidget {
@@ -22,19 +23,21 @@ class PropertyViewTypeWidget extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Stack(
-            alignment: Alignment.centerRight,
+            alignment: Directionality.of(context) == TextDirection.rtl
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
             children: [
               Container(
                 height: 8.h,
-                width: 85.w,
+                width: 88.w,
                 margin: EdgeInsets.only(top: 10.h, right: 4.w),
                 decoration: BoxDecoration(
-                   color: AppColors.primarySwatch.shade300.withOpacity(.5),
+                  color: AppColors.primarySwatch.shade300.withOpacity(.5),
                   borderRadius: BorderRadius.circular(1.r),
                 ),
               ),
               AutoSizeTextWidget(
-                text: "وجهتك الفندقية",
+                text: S.of(context).yourHotelDestination,
                 fontSize: 13.6.sp,
                 colorText: AppColors.mainColorFont,
               ),

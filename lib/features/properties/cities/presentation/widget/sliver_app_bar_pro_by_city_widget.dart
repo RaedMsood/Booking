@@ -35,10 +35,10 @@ class SliverAppBarProByCityWidget extends StatelessWidget
       leading: Padding(
         padding: EdgeInsets.symmetric(horizontal: 11.h).copyWith(top: 4.4.h),
         child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-          ),
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
           child: const IconButtonWidget(
             icon: AppIcons.arrowBack,
             iconColor: AppColors.mainColorFont,

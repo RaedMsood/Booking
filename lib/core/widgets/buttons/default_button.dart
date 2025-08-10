@@ -19,26 +19,31 @@ class DefaultButtonWidget extends StatelessWidget {
   FontWeight? fontWeight;
   bool? isLoading;
   final Border? border;
-  bool? withIcon=false;
+  bool? withIcon = false;
   String? icon;
+  final Color? iconColor;
+  final double? iconHeight;
 
-  DefaultButtonWidget(
-      {super.key,
-      this.width,
-      this.height,
-      this.background,
-      this.onPressed,
-      required this.text,
-      this.textColor,
-      this.textSize,
-      this.fontWeight,
-      this.borderRadius,
-      this.maxFontSize,
-      this.minFontSize,
-      this.isLoading,
-      this.border,
-      this.withIcon,
-      this.icon});
+  DefaultButtonWidget({
+    super.key,
+    this.width,
+    this.height,
+    this.background,
+    this.onPressed,
+    required this.text,
+    this.textColor,
+    this.textSize,
+    this.fontWeight,
+    this.borderRadius,
+    this.maxFontSize,
+    this.minFontSize,
+    this.isLoading,
+    this.border,
+    this.withIcon,
+    this.icon,
+    this.iconColor,
+    this.iconHeight,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +54,7 @@ class DefaultButtonWidget extends StatelessWidget {
         height: height ?? 44.h,
         decoration: BoxDecoration(
           color: background ?? AppColors.primaryColor,
-          borderRadius: BorderRadius.circular(borderRadius ?? 20.r),
+          borderRadius: BorderRadius.circular(borderRadius ?? 8.r),
           border: border ??
               Border.all(
                 color: Colors.transparent,
@@ -67,7 +72,7 @@ class DefaultButtonWidget extends StatelessWidget {
                     size: 20.r,
                   )
                 : Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       AutoSizeTextWidget(
@@ -79,13 +84,14 @@ class DefaultButtonWidget extends StatelessWidget {
                         maxFontSize: maxFontSize ?? 25,
                         minFontSize: minFontSize ?? 8,
                       ),
-
                       Visibility(
-                        visible: withIcon==true,
+                        visible: withIcon == true,
                         child: Padding(
-                          padding:  EdgeInsets.only(left: 8.0.sp,right: 8.sp),
+                          padding: EdgeInsets.only(left: 8.0.sp, right: 8.sp),
                           child: SvgPicture.asset(
-                            icon??'',
+                            icon ?? '',
+                            height: iconHeight,
+                            color: iconColor,
                           ),
                         ),
                       ),

@@ -66,6 +66,7 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
                     name: state.data.name,
                     description: state.data.description,
                     features: state.data.features,
+                    rating: state.data.rating.toDouble()??0,
                   ),
                 ),
                 SliverPersistentHeader(

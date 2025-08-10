@@ -120,11 +120,12 @@ class _PropertiesByCityPagePageState
               ),
               PropertySliverListWidget(
                 properties: state.data.property.data,
-                state: state.stateData,
-                hasMore: state.data.property.currentPage <
-                    state.data.property.lastPage,
                 propertiesByCity: true,
               ),
+              if (state.stateData == States.loadingMore)
+                const SliverToBoxAdapter(
+                  child: CircularProgressIndicatorWidget(),
+                ),
             ],
           ),
         ),

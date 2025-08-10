@@ -27,6 +27,9 @@ class AppIcons {
 
   static const String trash = '${_iconsPath}trash.svg';
   static const String location = '${_iconsPath}location.svg';
+
+  static const String close = '${_iconsPath}close.svg';
+
   static const String error = '${_iconsPath}error.svg';
 
 

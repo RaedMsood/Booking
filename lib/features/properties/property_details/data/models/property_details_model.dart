@@ -37,7 +37,7 @@ class PropertyDetailsModel {
       images: List<String>.from(json['images'] ?? []),
       name: json['name'] ?? '',
       description: json['description'] ?? '',
-      rating: json['rating'] ??0.0,
+      rating: json['rating'] ??0,
       reviewsCount: json['reviews_count'] ??0,
       features: FeaturesModel.fromJsonList(json['amenities'] ?? []),
       address: AddressModel.fromJson(json['address'] as Map<String, dynamic>),

@@ -92,9 +92,9 @@ class S {
     return Intl.message('Following', name: 'following', desc: '', args: []);
   }
 
-  /// `Daily new`
-  String get dailyNew {
-    return Intl.message('Daily new', name: 'dailyNew', desc: '', args: []);
+  /// `More`
+  String get more {
+    return Intl.message('More', name: 'more', desc: '', args: []);
   }
 
   /// `Save`
@@ -112,9 +112,9 @@ class S {
     return Intl.message('No', name: 'no', desc: '', args: []);
   }
 
-  /// `Update`
-  String get update {
-    return Intl.message('Update', name: 'update', desc: '', args: []);
+  /// `Refresh`
+  String get refresh {
+    return Intl.message('Refresh', name: 'refresh', desc: '', args: []);
   }
 
   /// `Copy`
@@ -142,11 +142,6 @@ class S {
     return Intl.message('Rename', name: 'rename', desc: '', args: []);
   }
 
-  /// `Skip`
-  String get skip {
-    return Intl.message('Skip', name: 'skip', desc: '', args: []);
-  }
-
   /// `Click again to exit!`
   String get clickAgainToExit {
     return Intl.message(
@@ -155,6 +150,16 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Read more`
+  String get readMore {
+    return Intl.message('Read more', name: 'readMore', desc: '', args: []);
+  }
+
+  /// `Show less`
+  String get showLess {
+    return Intl.message('Show less', name: 'showLess', desc: '', args: []);
   }
 
   // skipped getter for the '--------bottombar-----------' key
@@ -184,6 +189,33 @@ class S {
     return Intl.message('Profile', name: 'profile', desc: '', args: []);
   }
 
+  // skipped getter for the '--------home-----------' key
+
+  /// `Discover our destinations ✈️🌎`
+  String get discoverOurDestinations {
+    return Intl.message(
+      'Discover our destinations ✈️🌎',
+      name: 'discoverOurDestinations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your hotel destination`
+  String get yourHotelDestination {
+    return Intl.message(
+      'Your hotel destination',
+      name: 'yourHotelDestination',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hostel`
+  String get hostel {
+    return Intl.message('Hostel', name: 'hostel', desc: '', args: []);
+  }
+
   // skipped getter for the '--------details-----------' key
 
   /// `About`
@@ -194,6 +226,46 @@ class S {
   /// `Comments`
   String get comments {
     return Intl.message('Comments', name: 'comments', desc: '', args: []);
+  }
+
+  /// `Unable to open Maps app`
+  String get unableToOpenMapsApp {
+    return Intl.message(
+      'Unable to open Maps app',
+      name: 'unableToOpenMapsApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address`
+  String get address {
+    return Intl.message('Address', name: 'address', desc: '', args: []);
+  }
+
+  /// `Show in map`
+  String get showInMap {
+    return Intl.message('Show in map', name: 'showInMap', desc: '', args: []);
+  }
+
+  /// `Deposit`
+  String get deposit {
+    return Intl.message('Deposit', name: 'deposit', desc: '', args: []);
+  }
+
+  /// `Hotel terms and policies`
+  String get hotelTermsAndPolicies {
+    return Intl.message(
+      'Hotel terms and policies',
+      name: 'hotelTermsAndPolicies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hotel rooms`
+  String get hotelRooms {
+    return Intl.message('Hotel rooms', name: 'hotelRooms', desc: '', args: []);
   }
 
   // skipped getter for the '--------confirmOrder-----------' key
@@ -957,11 +1029,116 @@ class S {
     );
   }
 
-  /// `Please try again`
-  String get pleaseTryAgain {
+  /// `Internal server error`
+  String get internalServerError {
     return Intl.message(
-      'Please try again',
-      name: 'pleaseTryAgain',
+      'Internal server error',
+      name: 'internalServerError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please try again later or contact support`
+  String get internalServerError2 {
+    return Intl.message(
+      'Please try again later or contact support',
+      name: 'internalServerError2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feature not supported on the server`
+  String get notImplemented {
+    return Intl.message(
+      'Feature not supported on the server',
+      name: 'notImplemented',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make sure the app is updated or contact support`
+  String get notImplemented2 {
+    return Intl.message(
+      'Make sure the app is updated or contact support',
+      name: 'notImplemented2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bad gateway`
+  String get badGateway {
+    return Intl.message('Bad gateway', name: 'badGateway', desc: '', args: []);
+  }
+
+  /// `Please try again shortly`
+  String get badGateway2 {
+    return Intl.message(
+      'Please try again shortly',
+      name: 'badGateway2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service unavailable`
+  String get serviceUnavailable {
+    return Intl.message(
+      'Service unavailable',
+      name: 'serviceUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please try again later`
+  String get serviceUnavailable2 {
+    return Intl.message(
+      'Please try again later',
+      name: 'serviceUnavailable2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gateway timeout`
+  String get gatewayTimeout {
+    return Intl.message(
+      'Gateway timeout',
+      name: 'gatewayTimeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check your internet connection or try again later`
+  String get gatewayTimeout2 {
+    return Intl.message(
+      'Check your internet connection or try again later',
+      name: 'gatewayTimeout2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HTTP version not supported`
+  String get httpVersionNotSupported {
+    return Intl.message(
+      'HTTP version not supported',
+      name: 'httpVersionNotSupported',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please update the app to the latest version`
+  String get httpVersionNotSupported2 {
+    return Intl.message(
+      'Please update the app to the latest version',
+      name: 'httpVersionNotSupported2',
       desc: '',
       args: [],
     );
@@ -972,6 +1149,136 @@ class S {
     return Intl.message(
       'Something went wrong',
       name: 'somethingWentWrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please try again`
+  String get pleaseTryAgain {
+    return Intl.message(
+      'Please try again',
+      name: 'pleaseTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to reach the server`
+  String get cannotReachServer {
+    return Intl.message(
+      'Unable to reach the server',
+      name: 'cannotReachServer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check your internet connection or service URL`
+  String get checkInternetOrServiceUrl {
+    return Intl.message(
+      'Check your internet connection or service URL',
+      name: 'checkInternetOrServiceUrl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Receiving data timed out`
+  String get receiveTimeout {
+    return Intl.message(
+      'Receiving data timed out',
+      name: 'receiveTimeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please try again later or reduce the data size`
+  String get receiveTimeout2 {
+    return Intl.message(
+      'Please try again later or reduce the data size',
+      name: 'receiveTimeout2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sending data timed out`
+  String get sendTimeout {
+    return Intl.message(
+      'Sending data timed out',
+      name: 'sendTimeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check your connection and try again`
+  String get sendTimeout2 {
+    return Intl.message(
+      'Check your connection and try again',
+      name: 'sendTimeout2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SSL certificate error`
+  String get sslError {
+    return Intl.message(
+      'SSL certificate error',
+      name: 'sslError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ensure your certificate is configured or try again later`
+  String get sslError2 {
+    return Intl.message(
+      'Ensure your certificate is configured or try again later',
+      name: 'sslError2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request was cancelled`
+  String get requestCancelled {
+    return Intl.message(
+      'Request was cancelled',
+      name: 'requestCancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry if the cancellation was unintentional`
+  String get requestCancelled2 {
+    return Intl.message(
+      'Retry if the cancellation was unintentional',
+      name: 'requestCancelled2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid service URL`
+  String get invalidApiUrl {
+    return Intl.message(
+      'Invalid service URL',
+      name: 'invalidApiUrl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check the server address (Base URL) and try again`
+  String get invalidApiUrl2 {
+    return Intl.message(
+      'Check the server address (Base URL) and try again',
+      name: 'invalidApiUrl2',
       desc: '',
       args: [],
     );

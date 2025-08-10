@@ -24,9 +24,9 @@ class BottomNavigationBarWidget extends ConsumerStatefulWidget {
 class _BottomNavigationBarWidgetState
     extends ConsumerState<BottomNavigationBarWidget> {
   final List<Widget> _pages = [
-    ExitFromAppWidget(child: HomePage()),
+    const ExitFromAppWidget(child: HomePage()),
     const ExitFromAppWidget(child: MapPage()),
-    ExitFromAppWidget(child: BookingPage()),
+    const ExitFromAppWidget(child: BookingPage()),
     const ExitFromAppWidget(child: ProfilePage()),
   ];
 
@@ -35,80 +35,23 @@ class _BottomNavigationBarWidgetState
     var activeIndex = ref.watch(activeIndexProvider);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
+      value: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Colors.transparent,
-        systemNavigationBarDividerColor: Colors.transparent,
+        statusBarIconBrightness:
+            ref.read(activeIndexProvider.notifier).state == 0
+                ? Brightness.light
+                : Brightness.dark,
+        systemNavigationBarColor: Colors.white,
+        systemNavigationBarDividerColor: Colors.white,
         systemNavigationBarIconBrightness: Brightness.dark,
-
+        systemNavigationBarContrastEnforced: true,
       ),
       child: Scaffold(
-        // extendBody: true,
         body: _pages[activeIndex],
-        // bottomNavigationBar: Container(
-        //   decoration: BoxDecoration(
-        //     gradient: LinearGradient(
-        //       colors: [
-        //         AppColors.scaffoldColor.withOpacity(.0),
-        //         AppColors.scaffoldColor.withOpacity(.84),
-        //         AppColors.scaffoldColor,
-        //       ],
-        //       begin: Alignment.topCenter,
-        //       end: Alignment.bottomCenter,
-        //     ),
-        //   ),
-        //   child: Container(
-        //     margin: EdgeInsets.only(left: 14.w, right: 14.w, bottom: 14.h),
-        //     padding: EdgeInsets.symmetric(vertical: 11.h),
-        //     decoration: BoxDecoration(
-        //       color: AppColors.whiteColor,
-        //       borderRadius: BorderRadius.circular(38.r),
-        //     ),
-        //     child: Row(
-        //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //       children: [
-        //         _buildNavItem(
-        //           AppIcons.home,
-        //           AppIcons.homeActive,
-        //           S.of(context).home,
-        //           0,
-        //           activeIndex,
-        //         ),
-        //         _buildNavItem(
-        //           AppIcons.map,
-        //           AppIcons.mapActive,
-        //           S.of(context).map,
-        //           1,
-        //           activeIndex,
-        //         ),
-        //         _buildNavItem(
-        //           AppIcons.myReservations,
-        //           AppIcons.myReservationsActive,
-        //           S.of(context).myReservations,
-        //           2,
-        //           activeIndex,
-        //         ),
-        //         _buildNavItem(
-        //           AppIcons.profile,
-        //           AppIcons.profileActive,
-        //           S.of(context).profile,
-        //           3,
-        //           activeIndex,
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
         bottomNavigationBar: Container(
-          // margin: EdgeInsets.only(left: 14.w, right: 14.w, bottom: 14.h),
           padding: EdgeInsets.symmetric(vertical: 8.h),
           decoration: BoxDecoration(
             color: AppColors.whiteColor,
-            // borderRadius: BorderRadius.only(
-            //   topLeft: Radius.circular(18.r),
-            //   topRight: Radius.circular(18.r),
-            // ),
             boxShadow: [
               BoxShadow(
                 color: AppColors.greySwatch.shade100,

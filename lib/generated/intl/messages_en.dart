@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "aboutJeeey": MessageLookupByLibrary.simpleMessage("About Jeeey"),
     "addPhotos": MessageLookupByLibrary.simpleMessage("Add photos"),
     "addRating": MessageLookupByLibrary.simpleMessage("Add Rating"),
+    "address": MessageLookupByLibrary.simpleMessage("Address"),
     "addressBook": MessageLookupByLibrary.simpleMessage("Address Book"),
     "addressIsRequired": MessageLookupByLibrary.simpleMessage(
       "Address is required",
@@ -40,13 +41,23 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "appropriate": MessageLookupByLibrary.simpleMessage("Appropriate"),
     "backToHome": MessageLookupByLibrary.simpleMessage("Back to home"),
+    "badGateway": MessageLookupByLibrary.simpleMessage("Bad gateway"),
+    "badGateway2": MessageLookupByLibrary.simpleMessage(
+      "Please try again shortly",
+    ),
     "big": MessageLookupByLibrary.simpleMessage("Big"),
     "canYouLeaveYourReview": MessageLookupByLibrary.simpleMessage(
       "Can you leave your review?",
     ),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "cannotReachServer": MessageLookupByLibrary.simpleMessage(
+      "Unable to reach the server",
+    ),
     "changeCurrency": MessageLookupByLibrary.simpleMessage("Change currency"),
     "changePassword": MessageLookupByLibrary.simpleMessage("Change password"),
+    "checkInternetOrServiceUrl": MessageLookupByLibrary.simpleMessage(
+      "Check your internet connection or service URL",
+    ),
     "clear": MessageLookupByLibrary.simpleMessage("Clear"),
     "clearCache": MessageLookupByLibrary.simpleMessage("Clear Cache"),
     "clickAgainToExit": MessageLookupByLibrary.simpleMessage(
@@ -74,7 +85,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Create a new password",
     ),
     "currency": MessageLookupByLibrary.simpleMessage("Currency"),
-    "dailyNew": MessageLookupByLibrary.simpleMessage("Daily new"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete account"),
     "deletedAddressSuccessfully": MessageLookupByLibrary.simpleMessage(
@@ -84,7 +94,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Deleted successfully",
     ),
     "deliveryCost": MessageLookupByLibrary.simpleMessage("Delivery cost"),
+    "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
     "discountOnBill": MessageLookupByLibrary.simpleMessage("Discount"),
+    "discoverOurDestinations": MessageLookupByLibrary.simpleMessage(
+      "Discover our destinations ✈️🌎",
+    ),
     "doYouReallyWantToSignOut": MessageLookupByLibrary.simpleMessage(
       "Do you really want to sign out?",
     ),
@@ -102,6 +116,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotYourPassword": MessageLookupByLibrary.simpleMessage(
       "Forgot your password?",
     ),
+    "gatewayTimeout": MessageLookupByLibrary.simpleMessage("Gateway timeout"),
+    "gatewayTimeout2": MessageLookupByLibrary.simpleMessage(
+      "Check your internet connection or try again later",
+    ),
     "haveACouponOrDiscountVoucher": MessageLookupByLibrary.simpleMessage(
       "Have a coupon or discount voucher?",
     ),
@@ -109,6 +127,29 @@ class MessageLookup extends MessageLookupByLibrary {
       "Hello my new friend!",
     ),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
+    "hostel": MessageLookupByLibrary.simpleMessage("Hostel"),
+    "hotelRooms": MessageLookupByLibrary.simpleMessage("Hotel rooms"),
+    "hotelTermsAndPolicies": MessageLookupByLibrary.simpleMessage(
+      "Hotel terms and policies",
+    ),
+    "httpVersionNotSupported": MessageLookupByLibrary.simpleMessage(
+      "HTTP version not supported",
+    ),
+    "httpVersionNotSupported2": MessageLookupByLibrary.simpleMessage(
+      "Please update the app to the latest version",
+    ),
+    "internalServerError": MessageLookupByLibrary.simpleMessage(
+      "Internal server error",
+    ),
+    "internalServerError2": MessageLookupByLibrary.simpleMessage(
+      "Please try again later or contact support",
+    ),
+    "invalidApiUrl": MessageLookupByLibrary.simpleMessage(
+      "Invalid service URL",
+    ),
+    "invalidApiUrl2": MessageLookupByLibrary.simpleMessage(
+      "Check the server address (Base URL) and try again",
+    ),
     "invalidPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Invalid phone number",
     ),
@@ -121,6 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Manage My Account",
     ),
     "map": MessageLookupByLibrary.simpleMessage("Map"),
+    "more": MessageLookupByLibrary.simpleMessage("More"),
     "myReservations": MessageLookupByLibrary.simpleMessage("My reservations"),
     "network": MessageLookupByLibrary.simpleMessage(
       "Sorry, no internet connection",
@@ -130,6 +172,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
     "no": MessageLookupByLibrary.simpleMessage("No"),
+    "notImplemented": MessageLookupByLibrary.simpleMessage(
+      "Feature not supported on the server",
+    ),
+    "notImplemented2": MessageLookupByLibrary.simpleMessage(
+      "Make sure the app is updated or contact support",
+    ),
     "oldPassword": MessageLookupByLibrary.simpleMessage("Old password"),
     "or": MessageLookupByLibrary.simpleMessage("Or"),
     "password": MessageLookupByLibrary.simpleMessage("Password:"),
@@ -182,19 +230,46 @@ class MessageLookup extends MessageLookupByLibrary {
     "ratingAndFeedback": MessageLookupByLibrary.simpleMessage(
       "Rating & Feedback",
     ),
+    "readMore": MessageLookupByLibrary.simpleMessage("Read more"),
+    "receiveTimeout": MessageLookupByLibrary.simpleMessage(
+      "Receiving data timed out",
+    ),
+    "receiveTimeout2": MessageLookupByLibrary.simpleMessage(
+      "Please try again later or reduce the data size",
+    ),
     "recipientsPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Recipient\'s phone number",
     ),
+    "refresh": MessageLookupByLibrary.simpleMessage("Refresh"),
     "rename": MessageLookupByLibrary.simpleMessage("Rename"),
+    "requestCancelled": MessageLookupByLibrary.simpleMessage(
+      "Request was cancelled",
+    ),
+    "requestCancelled2": MessageLookupByLibrary.simpleMessage(
+      "Retry if the cancellation was unintentional",
+    ),
     "resend": MessageLookupByLibrary.simpleMessage("Resend"),
     "resendCodeIN": MessageLookupByLibrary.simpleMessage("Resend code in"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
+    "sendTimeout": MessageLookupByLibrary.simpleMessage(
+      "Sending data timed out",
+    ),
+    "sendTimeout2": MessageLookupByLibrary.simpleMessage(
+      "Check your connection and try again",
+    ),
+    "serviceUnavailable": MessageLookupByLibrary.simpleMessage(
+      "Service unavailable",
+    ),
+    "serviceUnavailable2": MessageLookupByLibrary.simpleMessage(
+      "Please try again later",
+    ),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "sharing": MessageLookupByLibrary.simpleMessage("Sharing"),
     "shippingMethod": MessageLookupByLibrary.simpleMessage("Shipping method"),
+    "showInMap": MessageLookupByLibrary.simpleMessage("Show in map"),
+    "showLess": MessageLookupByLibrary.simpleMessage("Show less"),
     "signOut": MessageLookupByLibrary.simpleMessage("SIGN OUT"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
-    "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "small": MessageLookupByLibrary.simpleMessage("Small"),
     "somethingWentWrong": MessageLookupByLibrary.simpleMessage(
       "Something went wrong",
@@ -203,6 +278,10 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Specify your name and password to create a Jeeey account",
         ),
+    "sslError": MessageLookupByLibrary.simpleMessage("SSL certificate error"),
+    "sslError2": MessageLookupByLibrary.simpleMessage(
+      "Ensure your certificate is configured or try again later",
+    ),
     "successfully": MessageLookupByLibrary.simpleMessage(
       "The operation was completed successfully",
     ),
@@ -227,12 +306,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "transactionSuccessful": MessageLookupByLibrary.simpleMessage(
       "Transaction Successful",
     ),
-    "update": MessageLookupByLibrary.simpleMessage("Update"),
+    "unableToOpenMapsApp": MessageLookupByLibrary.simpleMessage(
+      "Unable to open Maps app",
+    ),
     "userName": MessageLookupByLibrary.simpleMessage("Name:"),
     "viewAll": MessageLookupByLibrary.simpleMessage("View All"),
     "viewMore": MessageLookupByLibrary.simpleMessage("View more"),
     "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
     "yes": MessageLookupByLibrary.simpleMessage("Yes"),
+    "yourHotelDestination": MessageLookupByLibrary.simpleMessage(
+      "Your hotel destination",
+    ),
     "yourOrderHasBeenSuccessfulPlacedThankYouForShoppingWithUs":
         MessageLookupByLibrary.simpleMessage(
           "Your order has been successful placed. Thank you for shopping with us.",

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../data/models/deposit_model.dart';
 import 'general_container_for_details_widget.dart';
 
@@ -17,7 +18,7 @@ class DepositWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AutoSizeTextWidget(
-            text: "العربون",
+            text: S.of(context).deposit,
             fontSize: 13.sp,
             fontWeight: FontWeight.w500,
           ),

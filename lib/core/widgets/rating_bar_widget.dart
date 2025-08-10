@@ -29,7 +29,7 @@ class RatingBarWidget extends StatelessWidget {
       itemCount: length ?? 5,
       itemSize: itemSize ?? 14.sp,
       itemPadding: EdgeInsets.zero,
-      unratedColor: unratedColor ?? Colors.grey[300],
+      unratedColor: unratedColor ??const Color(0xfffea324),
       itemBuilder: (context, _) => Icon(
         Icons.star_rounded,
         color: labeledColor ?? const Color(0xfffea324),
