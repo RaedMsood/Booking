@@ -1,8 +1,15 @@
+import 'package:booking/core/helpers/navigateTo.dart';
+import 'package:booking/features/user/presentation/pages/log_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/constants/app_images.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/buttons/default_button.dart';
+import '../../../../core/widgets/go_to_login_widget.dart';
+import '../../../../generated/l10n.dart';
+import '../../../../services/auth/auth.dart';
 import '../widget/list_of_type_booking_widget.dart';
 
 class BookingPage extends StatefulWidget {
@@ -36,43 +43,47 @@ class _BookingPageState extends State<BookingPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: AutoSizeTextWidget(
-          text: "الحجوزات",
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      body: Column(
-        children: [
-          TabBar(
-            controller: _tabController,
-            isScrollable: true,
-            tabAlignment: TabAlignment.center,
-            dividerHeight: 0,
-            labelColor: Colors.black,
-            unselectedLabelColor: Color(0xff605A65),
-            indicator: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            labelPadding: EdgeInsets.symmetric(horizontal: 8.w),
-            overlayColor: MaterialStateProperty.all(Colors.transparent),
-            tabs: List.generate(
-              _tabs.length,
-              (index) => _buildTab(_tabs[index], index),
-            ),
+    return Visibility(
+      visible: Auth().loggedIn,
+      replacement: GoToLoginWidget(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: AutoSizeTextWidget(
+            text: "الحجوزات",
+            fontWeight: FontWeight.w500,
           ),
-          Expanded(
-            child: TabBarView(
+        ),
+        body: Column(
+          children: [
+            TabBar(
               controller: _tabController,
-              physics: const BouncingScrollPhysics(),
-              children: List.generate(
+              isScrollable: true,
+              tabAlignment: TabAlignment.center,
+              dividerHeight: 0,
+              labelColor: Colors.black,
+              unselectedLabelColor: Color(0xff605A65),
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              labelPadding: EdgeInsets.symmetric(horizontal: 8.w),
+              overlayColor: MaterialStateProperty.all(Colors.transparent),
+              tabs: List.generate(
                 _tabs.length,
-                (i) => ListOfTypeAllBookingWidget(statusId: i),
+                (index) => _buildTab(_tabs[index], index),
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                physics: const BouncingScrollPhysics(),
+                children: List.generate(
+                  _tabs.length,
+                  (i) => ListOfTypeAllBookingWidget(statusId: i),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -101,10 +112,7 @@ class _BookingPageState extends State<BookingPage>
             style: TextStyle(
               fontSize: 11.sp,
               fontWeight: FontWeight.w500,
-              color: isSelected
-                  ? AppColors.primaryColor
-                  : Color(
-                      0xff605A65),
+              color: isSelected ? AppColors.primaryColor : Color(0xff605A65),
             ),
           ),
         ),

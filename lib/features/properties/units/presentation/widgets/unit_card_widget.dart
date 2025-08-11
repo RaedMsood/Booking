@@ -13,8 +13,16 @@ import '../pages/unit_details_page.dart';
 
 class UnitCardWidget extends StatelessWidget {
   final UnitsModel units;
+  final String nameProp;
+  final String location;
+  final String image;
 
-  const UnitCardWidget({super.key, required this.units});
+  const UnitCardWidget(
+      {super.key,
+      required this.units,
+      required this.location,
+      required this.nameProp,
+      required this.image});
 
   String _guestsText() {
     if (units.maxGuests == 1) {
@@ -30,7 +38,15 @@ class UnitCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        navigateTo(context, UnitDetailsPage(unitId: units.id));
+        navigateTo(
+          context,
+          UnitDetailsPage(
+            unitId: units.id,
+            image: image,
+            location: location,
+            nameProp: nameProp,
+          ),
+        );
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 14.h),

@@ -11,14 +11,18 @@ import 'unit_card_widget.dart';
 
 class ListOfUnitsWidget extends ConsumerWidget {
   final int propertyId;
-
+  final String nameProp;
+  final String location;
+  final String image;
   final ScrollController scrollController;
 
-  const ListOfUnitsWidget({
-    super.key,
-    required this.propertyId,
-    required this.scrollController,
-  });
+  const ListOfUnitsWidget(
+      {super.key,
+      required this.propertyId,
+      required this.scrollController,
+      required this.location,
+      required this.nameProp,
+      required this.image});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -36,10 +40,15 @@ class ListOfUnitsWidget extends ConsumerWidget {
                 return const CircularProgressIndicatorWidget();
               }
             }
-            return UnitCardWidget(units: state.data.data[index]);
+            return UnitCardWidget(
+              units: state.data.data[index],
+              image: image,
+              location: location,
+              nameProp: nameProp,
+            );
           },
           itemCount: state.data.data.length +
-              ((state.stateData == States.loadingMore ) ? 1 : 0),
+              ((state.stateData == States.loadingMore) ? 1 : 0),
         ),
       ),
     );

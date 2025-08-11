@@ -55,6 +55,7 @@ class NameEmailPhoneSection extends StatelessWidget {
           controller: phoneController,
           type: TextInputType.phone,
           maxLength: 9,
+          buildCounter: false,
           fieldValidator: (value) {
             if (value == null || value.toString().isEmpty) {
               return S.of(context).pleaseEnterYourPhoneNumberOrEmail;

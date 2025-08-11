@@ -1,6 +1,8 @@
 class BookingData {
   final int? id;
   final int? unitId;
+  final int? propertyId;
+
   final String? property;
   final String? status;
   final Address? address;
@@ -37,7 +39,8 @@ class BookingData {
       this.childCount,
         this.bookingAt,
         this.deposit,
-        this.code
+        this.code,
+        this.propertyId
       });
 
   factory BookingData.fromJson(Map<String, dynamic> json) {
@@ -70,7 +73,8 @@ class BookingData {
       customer: json['customer'] != null
           ? Customer.fromJson(json['customer'] as Map<String, dynamic>)
           : null,
-      code: json['code']??''
+      code: json['code']??'',
+      propertyId: json['property_id']
     );
   }
 

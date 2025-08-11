@@ -12,8 +12,16 @@ import '../pages/unit_details_page.dart';
 
 class UnitsCardInHotelDetailsWidget extends StatelessWidget {
   final UnitsModel unit;
+  final String nameProp;
+  final String location;
+  final String image;
 
-  const UnitsCardInHotelDetailsWidget({super.key, required this.unit});
+  const UnitsCardInHotelDetailsWidget(
+      {super.key,
+      required this.unit,
+      required this.location,
+      required this.nameProp,
+      required this.image});
 
   String _guestsText() {
     if (unit.maxGuests == 1) {
@@ -106,7 +114,15 @@ class UnitsCardInHotelDetailsWidget extends StatelessWidget {
                   textSize: 9.sp,
                   borderRadius: 12.r,
                   onPressed: () {
-                    navigateTo(context, UnitDetailsPage(unitId: unit.id));
+                    navigateTo(
+                      context,
+                      UnitDetailsPage(
+                        unitId: unit.id,
+                        location: location,
+                        image: image,
+                        nameProp: nameProp,
+                      ),
+                    );
                   },
                 ),
               ],

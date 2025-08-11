@@ -11,14 +11,9 @@ import '../widget/update_birth_day_widget.dart';
 import '../widget/update_gender_widget.dart';
 import '../../../../core/state/state.dart';
 import '../../../../core/state/check_state_in_post_api_data_widget.dart';
-import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
-import '../../../../core/widgets/text_form_field.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../generated/l10n.dart';
-import '../../../../core/constants/app_icons.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../../properties/cities/presentation/widget/city_widget.dart';
 import '../state_mangement/riverpod.dart';
 
@@ -45,7 +40,6 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
   void initState() {
     super.initState();
 
-    // املأ من Auth
     nameController.text = Auth().name;
     emailController.text = Auth().email;
     phoneController.text = Auth().phoneNumber;
@@ -145,7 +139,6 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                 phoneController: phoneController,
                 emailController: emailController,
               ),
-
               12.h.verticalSpace,
               UpdateBirthDatePickerWidget(onChanged: (_) => _onFormChanged()),
               12.h.verticalSpace,
@@ -221,5 +214,4 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
       ),
     );
   }
-
 }

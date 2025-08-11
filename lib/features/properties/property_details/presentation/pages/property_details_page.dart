@@ -92,6 +92,9 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
                       ShowUnitsInHotelDetailsWidget(
                         units: state.data.units,
                         propertyId: state.data.id,
+                        nameProp:  state.data.name,
+                        location:  '${state.data.address.city} ,${state.data.address.district}',
+                        image: state.data.images.isEmpty?'':state.data.images[0],
                       ),
                     ],
                   ),

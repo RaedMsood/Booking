@@ -11,12 +11,17 @@ import 'units_card _in_hotel_details_widget.dart';
 class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
   final List<UnitsModel> units;
   final int propertyId;
+  final String nameProp;
+  final String location;
+  final String image;
 
-  const ShowUnitsInHotelDetailsWidget({
-    super.key,
-    required this.units,
-    required this.propertyId,
-  });
+  const ShowUnitsInHotelDetailsWidget(
+      {super.key,
+      required this.units,
+      required this.propertyId,
+      required this.location,
+      required this.nameProp,
+      required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +44,15 @@ class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    navigateTo(context, UnitsPage(propertyId: propertyId));
+                    navigateTo(
+                      context,
+                      UnitsPage(
+                        propertyId: propertyId,
+                        image: image,
+                        location: location,
+                        nameProp: nameProp,
+                      ),
+                    );
                   },
                   child: AutoSizeTextWidget(
                     text: S.of(context).viewMore,
@@ -61,7 +74,12 @@ class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
                 children: units.map((unit) {
                   return Row(
                     children: [
-                      UnitsCardInHotelDetailsWidget(unit: unit),
+                      UnitsCardInHotelDetailsWidget(
+                        unit: unit,
+                        location: location,
+                        image: image,
+                        nameProp: nameProp,
+                      ),
                       10.w.horizontalSpace,
                     ],
                   );
@@ -72,4 +90,3 @@ class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
     );
   }
 }
-

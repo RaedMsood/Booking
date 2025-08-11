@@ -2,20 +2,22 @@ import 'package:booking/core/state/check_state_in_post_api_data_widget.dart';
 import 'package:booking/core/widgets/buttons/default_button.dart';
 import 'package:booking/features/booking/data/booking_model/booking_model.dart';
 import 'package:booking/features/booking/presentation/page/show_last_details_in_add_booking_page.dart';
+import 'package:booking/features/properties/cities/presentation/widget/city_widget.dart';
+import 'package:booking/services/auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helpers/navigateTo.dart';
 import '../../../../core/state/state.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
 import '../../../../core/widgets/text_form_field.dart';
+import '../../../properties/cities/presentation/riverpod/cities_riverpod.dart';
 import '../riverpod/booking_riverpod.dart';
 import '../widget/desgin_button_in_add_booking_widget.dart';
 import '../widget/hotel_summary_card_widget.dart';
-import '../widget/select_filed_widget.dart';
 
-class CompleteAddBookingPage extends StatefulWidget {
+class CompleteAddBookingPage extends ConsumerStatefulWidget {
   const CompleteAddBookingPage(
       {super.key,
       required this.idBooking,
@@ -29,21 +31,38 @@ class CompleteAddBookingPage extends StatefulWidget {
   final int idBooking;
 
   @override
-  State<CompleteAddBookingPage> createState() => _CompleteAddBookingPageState();
+  ConsumerState<CompleteAddBookingPage> createState() =>
+      _CompleteAddBookingPageState();
 }
 
-class _CompleteAddBookingPageState extends State<CompleteAddBookingPage> {
+class _CompleteAddBookingPageState
+    extends ConsumerState<CompleteAddBookingPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(selectedCityProvider.notifier).state = initialCity;
+    });
+  }
+
   final TextEditingController phone = TextEditingController();
 
   final TextEditingController name = TextEditingController();
 
   final TextEditingController email = TextEditingController();
 
-  String? city = "صنعاء";
+  String? city;
   final _formKey = GlobalKey<FormState>();
+  dynamic initialCity = Auth().city;
 
   @override
   Widget build(BuildContext context) {
+    name.text = Auth().name;
+    email.text = Auth().email;
+    phone.text = Auth().phoneNumber;
+
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -88,6 +107,8 @@ class _CompleteAddBookingPageState extends State<CompleteAddBookingPage> {
                           TextFormFieldWidget(
                               controller: name,
                               type: TextInputType.name,
+                              prefix: Icon(Icons.person_2_outlined,
+                                  size: 20.sp, color: AppColors.primaryColor),
                               fieldValidator: (value) {
                                 if ((value == null ||
                                     value.toString().isEmpty)) {
@@ -104,6 +125,8 @@ class _CompleteAddBookingPageState extends State<CompleteAddBookingPage> {
                           6.verticalSpace,
                           TextFormFieldWidget(
                               controller: email,
+                              prefix: Icon(Icons.email_outlined,
+                                  size: 20.sp, color: AppColors.primaryColor),
                               type: TextInputType.emailAddress,
                               fieldValidator: (value) {
                                 if ((value == null ||
@@ -127,6 +150,10 @@ class _CompleteAddBookingPageState extends State<CompleteAddBookingPage> {
                           6.verticalSpace,
                           TextFormFieldWidget(
                               controller: phone,
+                              maxLength: 9,
+                              buildCounter: false,
+                              prefix: Icon(Icons.phone_outlined,
+                                  size: 20.sp, color: AppColors.primaryColor),
                               type: TextInputType.number,
                               fieldValidator: (value) {
                                 if ((value == null ||
@@ -142,38 +169,7 @@ class _CompleteAddBookingPageState extends State<CompleteAddBookingPage> {
                                 }
                               }),
                           7.verticalSpace,
-                          SelectFieldWidget(
-                            fontSizeLabel: 11.sp,
-                            fontSizeValue: 10.sp,
-                            label: 'المحافظة',
-                            value: city!,
-                            fontColorLabel: Color(0xff2E3333),
-                            selectFiledColor: Colors.white,
-                            onTap: () => showModalBottomSheetWidget(
-                              page: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children:
-                                    ['هبرة', 'ذمار', 'اب', 'صنعاء'].map((opt) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        city = opt;
-                                      });
-                                    },
-                                    child: ListTile(
-                                      title: Center(
-                                        child: AutoSizeTextWidget(
-                                          text: opt,
-                                          fontSize: 12.sp,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
-                              context: context,
-                            ),
-                          ),
+                          CityWidget(),
                         ],
                       ),
                     ),
@@ -205,12 +201,15 @@ class _CompleteAddBookingPageState extends State<CompleteAddBookingPage> {
                       onPressed: () {
                         final isValid = _formKey.currentState!.validate();
 
+                        initialCity =
+                            ref.read(selectedCityProvider.notifier).state!;
+                        print(initialCity.name);
                         if (isValid) {
                           final custemor = Customer(
                             email: email.text,
                             name: name.text,
                             phone: phone.text,
-                            address: city,
+                            address: initialCity.name,
                             bookingId: widget.idBooking,
                           );
                           ref

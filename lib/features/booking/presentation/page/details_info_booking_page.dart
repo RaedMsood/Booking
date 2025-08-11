@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/helpers/navigateTo.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../properties/property_details/presentation/pages/property_details_page.dart';
 import '../../data/booking_model/booking_model.dart';
 import '../widget/booking_data_card_widget.dart';
 import '../widget/confrim_booking_card_widget.dart';
@@ -65,13 +66,20 @@ class BookingDetailPage extends StatelessWidget {
                 onPressed: () {
                   navigateTo(
                     context,
-                    DetailsOfBookInAddPage(
-                      location:
-                          '${bookData.address!.city!} , ${bookData.address!.district!}',
-                      image: bookData.image ?? '',
-                      nameProp: bookData.property!,
+                    PropertyDetailsPage(
+                      propertyId: bookData.propertyId!,
+                      images: [bookData.image??''],
                     ),
                   );
+                  // navigateTo(
+                  //   context,
+                  //   DetailsOfBookInAddPage(
+                  //     location:
+                  //         '${bookData.address!.city!} , ${bookData.address!.district!}',
+                  //     image: bookData.image ?? '',
+                  //     nameProp: bookData.property!,
+                  //   ),
+                  // );
                 },
                 withIcon: true,
                 icon: AppIcons.bank,
