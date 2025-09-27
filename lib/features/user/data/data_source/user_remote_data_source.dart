@@ -25,6 +25,7 @@ class UserRemoteDataSource {
     String gender,
     int cityId,
     DateTime? dateOfBirth,
+      String deviceToken
   ) async {
     final response = await RemoteRequest.postData(
       path: AppURL.signUp,
@@ -35,17 +36,20 @@ class UserRemoteDataSource {
         "gender": gender,
         "city_id": cityId,
         if (dateOfBirth != null) "date_of_birth": dateOfBirth.toIso8601String(),
+        'device_token':deviceToken
       },
     );
     return AuthModel.fromJson(response.data['data']);
   }
 
-  Future<AuthModel> checkOTP(String phoneNumber, String otp) async {
+  Future<AuthModel> checkOTP(String phoneNumber, String otp,String deviceToken) async {
     final response = await RemoteRequest.postData(
       path: AppURL.checkOtp,
       data: {
         "login": phoneNumber,
         "otp": otp,
+        'device_token':deviceToken
+
       },
     );
     return AuthModel.fromJson(response.data['data']);

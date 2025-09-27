@@ -63,7 +63,7 @@ class Auth {
   }
 
   _writeToCache() {
-    final cacheMap = user.toJsonForCache(); // إذا AuthModel
+    final cacheMap = user.toJsonForCache();
     log(jsonEncode(cacheMap), name: 'user');
     secureStorage.write(key: _key, value: jsonEncode(cacheMap));
   }
@@ -103,7 +103,6 @@ class Auth {
     String? birthDay,
     CityModel? city,
   }) async {
-    // ننشئ نسخة جديدة من الـ UserModel مع الحقول المحدثة
     final updatedUser = user.user.copyWith(
       name: name,
       email: email,
@@ -113,11 +112,17 @@ class Auth {
       city: city,
     );
 
-    // ننشئ نسخة جديدة من الـ AuthModel مع الـ user المحدث
     user = user.copyWith(user: updatedUser);
 
-    // نعيد كتابة البيانات في الـ secure storage
     _writeToCache();
   }
 
+  Future<void> setFcmToken(String fcmToken) async {
+    await secureStorage.write(key: "fcm_token", value: fcmToken);
+  }
+
+  Future<String> getFcmToken() async {
+    final fcmToken = await secureStorage.read(key: "fcm_token");
+    return fcmToken ?? "";
+  }
 }

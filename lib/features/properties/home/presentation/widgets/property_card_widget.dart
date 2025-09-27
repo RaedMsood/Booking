@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
-
 import '../../../../../core/widgets/rating_bar_widget.dart';
 import '../../../property_details/presentation/pages/property_details_page.dart';
 import '../../data/model/property_data_model.dart';
@@ -51,6 +50,7 @@ class PropertyCardWidget extends StatelessWidget {
               image: property.mainImageUrls,
               height: 120.h,
               idProperties: property.id,
+              isFavorite: property.isFavorite,
             ),
             Expanded(
               child: Padding(
@@ -84,13 +84,13 @@ class PropertyCardWidget extends StatelessWidget {
                             child: Row(
                               children: [
                                 AutoSizeTextWidget(
-                                  text: property.rating.toString(),
+                                  text: property.rating.toStringAsFixed(1),
                                   fontSize: 10.5.sp,
                                   colorText: AppColors.secondaryColor,
                                 ),
                                 1.8.w.horizontalSpace,
-                                 RatingBarWidget(
-                                  evaluation: property.rating.toDouble()??0.0,
+                                RatingBarWidget(
+                                  evaluation: property.rating.toDouble() ?? 0.0,
                                   length: 1,
                                 ),
                               ],

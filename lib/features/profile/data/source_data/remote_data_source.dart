@@ -43,4 +43,10 @@ class ProfileRemoteDataSource {
     );
     return Future.value(unit);
   }
+  Future<Unit> logout() async {
+    await RemoteRequest.postData(
+      path: AppURL.logout,
+    );
+    return Future.value(unit);
+  }
 }

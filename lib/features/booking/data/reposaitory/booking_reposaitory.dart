@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 
 import '../../../../core/state/pagination_data/paginated_model.dart';
 import '../booking_model/booking_model.dart';
+import '../booking_model/rate_model.dart';
 import '../data_source/booking_data_source.dart';
 
 class BookingReposaitory {
@@ -41,6 +42,22 @@ class BookingReposaitory {
     try {
       final remote = await bookingDataSource.custemorDataForBooking(
         custemor: custemor,
+      );
+      return Right(remote);
+    } on DioException catch (e) {
+      return Left(e);
+    }
+  }
+  Future<Either<DioException, Unit>> rateTheProperty({
+    required int idProperty,
+    required List<RateModel> rate,
+    required int idBooking
+  }) async {
+    try {
+      final remote = await bookingDataSource.rateTheProperty(
+        idBooking: idBooking,
+        rate: rate,
+        idProperty: idProperty,
       );
       return Right(remote);
     } on DioException catch (e) {

@@ -6,6 +6,7 @@ import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../data/model/filter_data_model.dart';
 import '../riverpod/search_and_filter_riverpod.dart';
 import 'list_of_units_or_cities_widget.dart';
@@ -33,7 +34,7 @@ class FilterByUnitOrCityWidget extends ConsumerWidget {
           children: [
             12.h.verticalSpace,
             AutoSizeTextWidget(
-              text: isCity ? "المحافظة" : "نوع الغرفة",
+              text: isCity ? S.of(context).governorate : S.of(context).roomType,
               fontSize: 12.sp,
               colorText: Colors.black87,
               fontWeight: FontWeight.w400,
@@ -61,7 +62,7 @@ class FilterByUnitOrCityWidget extends ConsumerWidget {
                   children: [
                     AutoSizeTextWidget(
                       text: selected?.name ??
-                          (isCity ? 'اختر المحافظة' : 'اختر نوع الغرفة'),
+                          (isCity ? S.of(context).selectGovernorate : S.of(context).selectRoomType),
                       colorText: selected == null
                           ? AppColors.fontColor
                           : AppColors.mainColorFont,

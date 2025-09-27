@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../properties/home/presentation/widgets/property_card_widget.dart';
+import '../../../properties/home/presentation/widgets/shimmer_property_card_widget.dart';
 import '../state_mangement/riverpod.dart';
 import '../widget/property _fav_card.dart';
 

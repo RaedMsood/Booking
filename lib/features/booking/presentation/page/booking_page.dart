@@ -1,12 +1,8 @@
-import 'package:booking/core/helpers/navigateTo.dart';
-import 'package:booking/features/user/presentation/pages/log_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/constants/app_images.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../core/widgets/buttons/default_button.dart';
 import '../../../../core/widgets/go_to_login_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
@@ -22,12 +18,16 @@ class BookingPage extends StatefulWidget {
 class _BookingPageState extends State<BookingPage>
     with TickerProviderStateMixin {
   late final TabController _tabController;
-  final List<String> _tabs = ['الكل', 'الحالية', 'مكتملة', 'ملغية'];
-
+   List<String> _tabs(BuildContext context) => [
+  S.of(context).all,
+  S.of(context).currentFilter,
+  S.of(context).completedFilter,
+  S.of(context).canceledFilter,
+  ];
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: _tabs.length, vsync: this)
+    _tabController = TabController(length: 4, vsync: this)
       ..addListener(() {
         if (_tabController.index != _tabController.previousIndex) {
           setState(() {});
@@ -45,11 +45,11 @@ class _BookingPageState extends State<BookingPage>
   Widget build(BuildContext context) {
     return Visibility(
       visible: Auth().loggedIn,
-      replacement: GoToLoginWidget(),
+      replacement:const GoToLoginWidget(),
       child: Scaffold(
         appBar: AppBar(
-          title: AutoSizeTextWidget(
-            text: "الحجوزات",
+          title:  AutoSizeTextWidget(
+            text: S.of(context).reservationsTitle,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -61,15 +61,15 @@ class _BookingPageState extends State<BookingPage>
               tabAlignment: TabAlignment.center,
               dividerHeight: 0,
               labelColor: Colors.black,
-              unselectedLabelColor: Color(0xff605A65),
+              unselectedLabelColor: const Color(0xff605A65),
               indicator: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
               ),
               labelPadding: EdgeInsets.symmetric(horizontal: 8.w),
               overlayColor: MaterialStateProperty.all(Colors.transparent),
               tabs: List.generate(
-                _tabs.length,
-                (index) => _buildTab(_tabs[index], index),
+                _tabs(context).length,
+                (index) => _buildTab(_tabs(context)[index], index),
               ),
             ),
             Expanded(
@@ -77,7 +77,7 @@ class _BookingPageState extends State<BookingPage>
                 controller: _tabController,
                 physics: const BouncingScrollPhysics(),
                 children: List.generate(
-                  _tabs.length,
+                  _tabs(context).length,
                   (i) => ListOfTypeAllBookingWidget(statusId: i),
                 ),
               ),
@@ -112,7 +112,7 @@ class _BookingPageState extends State<BookingPage>
             style: TextStyle(
               fontSize: 11.sp,
               fontWeight: FontWeight.w500,
-              color: isSelected ? AppColors.primaryColor : Color(0xff605A65),
+              color: isSelected ? AppColors.primaryColor : const Color(0xff605A65),
             ),
           ),
         ),

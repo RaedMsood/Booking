@@ -9,6 +9,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/go_to_login_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../widget/section_profile_widget.dart';
 import '../widget/tile_widget.dart';
 import 'about_page.dart';
@@ -29,7 +30,7 @@ class ProfilePage extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           title: AutoSizeTextWidget(
-            text: 'حسابي',
+            text:  S.of(context).profileTitle,
           ),
         ),
         body: SingleChildScrollView(
@@ -70,7 +71,7 @@ class ProfilePage extends ConsumerWidget {
                 SectionProfileWidget(children: [
                   TileWidget(
                     icon: AppIcons.profile,
-                    title: 'البيانات الشخصية',
+                    title:  S.of(context).personalInfo,
                     context: context,
                     onTap: () {
                       navigateTo(context, EditProfilePage());
@@ -79,7 +80,7 @@ class ProfilePage extends ConsumerWidget {
                   ),
                   TileWidget(
                     icon: AppIcons.favorite,
-                    title: 'المفضلة',
+                    title:  S.of(context).favorites,
                     context: context,
                     onTap: () {
                       navigateTo(context, FavoritePage());
@@ -89,7 +90,7 @@ class ProfilePage extends ConsumerWidget {
                   ),
                   TileWidget(
                     icon: AppIcons.setting,
-                    title: 'الاعدادات العامة',
+                    title:  S.of(context).generalSettings,
                     context: context,
                     onTap: () {
                       navigateTo(context, SettingsPage());
@@ -101,7 +102,7 @@ class ProfilePage extends ConsumerWidget {
                   children: [
                     TileWidget(
                       icon: AppIcons.infoCircle,
-                      title: 'عن التطبيق',
+                      title:  S.of(context).aboutApp,
                       context: context,
                       onTap: () {
                         navigateTo(context, AboutPage());
@@ -109,7 +110,7 @@ class ProfilePage extends ConsumerWidget {
                     ),
                     TileWidget(
                       icon: AppIcons.phone,
-                      title: 'تواصل معنا',
+                      title:  S.of(context).contactUs,
                       context: context,
                       onTap: () {
                         navigateTo(context, ContactUsPage());
@@ -117,7 +118,8 @@ class ProfilePage extends ConsumerWidget {
                     ),
                     TileWidget(
                       icon: AppIcons.messageQuestion,
-                      title: 'الأسئلة الشائعة',
+
+                      title:  S.of(context).faq,
                       context: context,
                       onTap: () {
                         navigateTo(context, FAQPage());
@@ -125,7 +127,7 @@ class ProfilePage extends ConsumerWidget {
                     ),
                     TileWidget(
                       icon: AppIcons.sharing,
-                      title: 'مشاركة التطبيق',
+                      title:  S.of(context).shareApp,
                       context: context,
                       onTap: () {},
                     ),

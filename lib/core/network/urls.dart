@@ -47,5 +47,9 @@ class AppURL {
   static String get propertyPosition => '/property/loc';
   static String get propertyFromPosition => '/property/show_for_loc';
 
+  static String get rateProperty => '/booking/rate';
+
+  static String get notification => '/notifications';
+
 
 }

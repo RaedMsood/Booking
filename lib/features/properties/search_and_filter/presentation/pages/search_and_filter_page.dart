@@ -9,6 +9,7 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/buttons/icon_button_widget.dart';
 import '../../../../../core/widgets/loading_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../home/presentation/widgets/property_list_widget.dart';
 import '../riverpod/search_and_filter_riverpod.dart';
 import '../widgets/search_and_filter_widget.dart';
@@ -124,13 +125,13 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AutoSizeTextWidget(
-                  text: "أبحث عن المكان المناسب لك",
+                  text: S.of(context).findTheRightPlaceForYou,
                   textAlign: TextAlign.start,
                   fontSize: 14.6.sp,
                 ),
                 8.h.verticalSpace,
                 AutoSizeTextWidget(
-                  text: "بامكانك البحث بأسم منشأة وفلترة النتائج الخاصة بك",
+                  text: S.of(context).searchSubtitle,
                   colorText: AppColors.fontColor2,
                   fontSize: 10.4.sp,
                   textAlign: TextAlign.start,

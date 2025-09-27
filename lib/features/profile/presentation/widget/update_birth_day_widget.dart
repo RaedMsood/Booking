@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../generated/l10n.dart';
 
 final updateBirthDateProvider = StateProvider<DateTime?>((ref) => null);
 
@@ -20,7 +21,7 @@ class UpdateBirthDatePickerWidget extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AutoSizeTextWidget(
-          text: "تاريخ الميلاد (اختياري)",
+          text: S.of(context).birthdateOptional,
           fontSize: 11.sp,
           colorText: Colors.black87,
         ),
@@ -73,7 +74,7 @@ class UpdateBirthDatePickerWidget extends ConsumerWidget {
                 10.w.horizontalSpace,
                 AutoSizeTextWidget(
                   text: birthDate == null
-                      ? "إدخل تاريخ الميلاد"
+                      ? S.of(context).enterBirthdate
                       : "${birthDate.year}-${birthDate.month.toString().padLeft(2, '0')}-${birthDate.day.toString().padLeft(2, '0')}",
                   fontSize: 10.8.sp,
                   colorText:

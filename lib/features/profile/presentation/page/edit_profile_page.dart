@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
 import '../../../properties/cities/data/model/city_model.dart';
 import '../../../properties/cities/presentation/riverpod/cities_riverpod.dart';
@@ -129,9 +130,9 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               24.h.verticalSpace,
-              const UserPageTitlesWidget(
-                title: "تعديل البيانات الشخصية",
-                subTitle: "قم بتحديث معلوماتك الشخصية",
+               UserPageTitlesWidget(
+                title:  S.of(context).editPersonalInfoTitle ,
+                subTitle: S.of(context).editPersonalInfoSubtitle,
               ),
               12.verticalSpace,
               NameEmailPhoneSection(
@@ -173,7 +174,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                       .initialize(latest);
                 },
                 bottonWidget: DefaultButtonWidget(
-                  text: "حفظ التعديلات",
+                  text: S.of(context).saveChanges,
                   isLoading: stateUpdateUser.stateData == States.loading,
                   onPressed: !canSave
                       ? null

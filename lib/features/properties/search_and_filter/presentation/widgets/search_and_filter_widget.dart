@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/widgets/text_form_field.dart';
+import '../../../../../generated/l10n.dart';
 import '../pages/filter_page.dart';
 import '../riverpod/search_and_filter_riverpod.dart';
 
@@ -20,7 +21,7 @@ class SearchAndFilterWidget extends StatelessWidget {
           child: TextFormFieldWidget(
             controller: controller.searchController,
             type: TextInputType.text,
-            hintText: "البحث عن فندق",
+            hintText: S.of(context).searchHotelPlaceholder,
             onChanged: (value) {
               controller.search();
             },

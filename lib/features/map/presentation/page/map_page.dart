@@ -1,11 +1,15 @@
+import 'dart:typed_data';
 import 'dart:ui' as ui;
+
 import 'package:booking/core/state/state.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../../../profile/presentation/widget/property _fav_card.dart';
 import '../riverpod/map_riverpod.dart';
 import '../widgets/card_in_map_widget.dart';
@@ -26,7 +30,7 @@ class _MapPageState extends ConsumerState<MapPage>
 
   BitmapDescriptor _markerIcon = BitmapDescriptor.defaultMarker;
 
-  final List<_MarkerData> _markerData = [
+  final List<_MarkerData> _markerData = const [
     _MarkerData(id: 'sanaacenter', position: LatLng(15.3694, 44.1910)),
     _MarkerData(id: 'oldcity', position: LatLng(15.3608, 44.1910)),
     _MarkerData(id: 'main_district', position: LatLng(15.3389, 44.2100)),
@@ -35,6 +39,9 @@ class _MapPageState extends ConsumerState<MapPage>
   ];
 
   bool _showCard = false;
+
+  /// يحدد إن كانت الحركة بدأت من المستخدم (سحب/لمس) وليس برمجياً
+  bool _userGestureInProgress = false;
 
   @override
   void initState() {
@@ -47,22 +54,24 @@ class _MapPageState extends ConsumerState<MapPage>
       'assets/images/loc.png',
       width: 70.w.toInt(),
     );
-    setState(() {
-      _markerIcon = icon;
-    });
+    if (mounted) {
+      setState(() {
+        _markerIcon = icon;
+      });
+    }
   }
 
   Future<BitmapDescriptor> _bitmapDescriptorFromAsset(
-    String assetPath, {
-    required int width,
-  }) async {
-    ByteData data = await rootBundle.load(assetPath);
-    ui.Codec codec = await ui.instantiateImageCodec(
+      String assetPath, {
+        required int width,
+      }) async {
+    final ByteData data = await rootBundle.load(assetPath);
+    final ui.Codec codec = await ui.instantiateImageCodec(
       data.buffer.asUint8List(),
       targetWidth: width,
     );
-    ui.FrameInfo fi = await codec.getNextFrame();
-    Uint8List bytes = (await fi.image.toByteData(
+    final ui.FrameInfo fi = await codec.getNextFrame();
+    final Uint8List bytes = (await fi.image.toByteData(
       format: ui.ImageByteFormat.png,
     ))!
         .buffer
@@ -72,13 +81,14 @@ class _MapPageState extends ConsumerState<MapPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     final positionState = ref.watch(positionProvider);
     final propertyFromPositionState = ref.watch(propertyFromPositionProvider);
 
-    super.build(context);
     return Scaffold(
       appBar: AppBar(
-        title: const AutoSizeTextWidget(text: 'الخريطة'),
+        title: AutoSizeTextWidget(text: S.of(context).mapTitle),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,14 +99,13 @@ class _MapPageState extends ConsumerState<MapPage>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AutoSizeTextWidget(
-                  text: 'أطلع على المنشآت في الخريطة',
+                  text: S.of(context).mapHeadline,
                   fontWeight: FontWeight.w600,
                   fontSize: 12.sp,
                 ),
                 6.verticalSpace,
                 AutoSizeTextWidget(
-                  text:
-                      'استخدم أداة البحث عن خريطة لتحديد المواقع بسهولة وسرعة.',
+                  text: S.of(context).mapSubhead,
                   fontWeight: FontWeight.w500,
                   fontSize: 11.sp,
                   colorText: const Color(0xff757575),
@@ -116,13 +125,32 @@ class _MapPageState extends ConsumerState<MapPage>
                       zoom: 11,
                     ),
                     onMapCreated: (ctrl) => mapCtrl = ctrl,
+
+                    // إخفاء الكارد فقط إذا بدأ التحريك نتيجة إيماءة مستخدم
+                    onCameraMoveStarted: () {
+                      if (_userGestureInProgress && _showCard) {
+                        setState(() => _showCard = false);
+                      }
+                    },
+
+                    // إخفاء الكارد عند الضغط في الخريطة (مكان فارغ)
+                    onTap: (_) {
+                      if (_showCard) {
+                        setState(() => _showCard = false);
+                      }
+                    },
+
                     markers: positionState.data.map((m) {
                       return Marker(
                         markerId: MarkerId(m.id.toString()),
-                        position: LatLng(double.tryParse(m.lat) ?? 0,
-                            double.tryParse(m.lng) ?? 0),
+                        position: LatLng(
+                          double.tryParse(m.lat) ?? 0,
+                          double.tryParse(m.lng) ?? 0,
+                        ),
                         icon: _markerIcon,
                         onTap: () {
+                          // تأكد أن الإيماءة لا تُخفي الكارد مباشرة بعد تحريك برمجي
+                          _userGestureInProgress = false;
                           ref
                               .read(propertyFromPositionProvider.notifier)
                               .getPropertiesFromPosition(idProperty: m.id);
@@ -130,30 +158,51 @@ class _MapPageState extends ConsumerState<MapPage>
                         },
                       );
                     }).toSet(),
+
                     myLocationButtonEnabled: false,
                     zoomControlsEnabled: false,
                   ),
                 ),
-                if (_showCard)
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                        padding: EdgeInsets.only(
-                          left: 16.w,
-                          right: 16.w,
-                          bottom: kBottomNavigationBarHeight.h,
+
+                /// طبقة شفافة تلتقط اللمس بدون تعطيل الخريطة:
+                /// نضبط الفلاغ عند بداية/نهاية اللمس
+                Listener(
+                  behavior: HitTestBehavior.translucent,
+                  onPointerDown: (_) => _userGestureInProgress = true,
+                  onPointerUp: (_) => _userGestureInProgress = false,
+                  onPointerCancel: (_) => _userGestureInProgress = false,
+                  child: const SizedBox.expand(),
+                ),
+
+                /// الكارد في الأسفل: يظهر عند اختيار ماركر ويختفي بالحركة أو بالنقر على الخريطة
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: 16.w,
+                      right: 16.w,
+                      bottom: kBottomNavigationBarHeight.h,
+                    ),
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 180),
+                      switchInCurve: Curves.easeOut,
+                      switchOutCurve: Curves.easeIn,
+                      child: _showCard
+                          ? Visibility(
+                        key: const ValueKey('card'),
+                        visible: propertyFromPositionState.stateData !=
+                            States.loading,
+                        replacement: const ShimmerCardInMapWidget(),
+                        child: PropertyFavoriteAndMapWidget(
+                          property: propertyFromPositionState.data,
+                          imageHeight: 90,
+                          spaceHeight: 10,
                         ),
-                        child: Visibility(
-                          visible: propertyFromPositionState.stateData !=
-                              States.loading,
-                          replacement: const ShimmerCardInMapWidget(),
-                          child: PropertyFavoriteAndMapWidget(
-                            property: propertyFromPositionState.data,
-                            imageHeight: 90,
-                            spaceHeight: 10,
-                          ),
-                        )),
+                      )
+                          : const SizedBox.shrink(key: ValueKey('empty')),
+                    ),
                   ),
+                ),
               ],
             ),
           ),
@@ -166,6 +215,5 @@ class _MapPageState extends ConsumerState<MapPage>
 class _MarkerData {
   final String id;
   final LatLng position;
-
-  _MarkerData({required this.id, required this.position});
+  const _MarkerData({required this.id, required this.position});
 }

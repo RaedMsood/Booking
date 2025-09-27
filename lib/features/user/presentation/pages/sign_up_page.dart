@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helpers/navigateTo.dart';
 import '../../../../core/state/check_state_in_post_api_data_widget.dart';
 import '../../../../core/state/state.dart';
+import '../../../../core/widgets/bottomNavbar/bottom_navigation_bar_widget.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
 import '../../../../services/auth/auth.dart';
 import '../../../map/presentation/riverpod/map_riverpod.dart';
@@ -66,12 +67,12 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                   functionSuccess: () {
                     Auth().login(signUpState.data);
 
-                    navigateTo(context, Hello());
+                    navigateTo(context, BottomNavigationBarWidget());
                   },
                   bottonWidget: DefaultButtonWidget(
                     text: "إنشاء حساب",
                     isLoading: signUpState.stateData == States.loading,
-                    onPressed: () {
+                    onPressed: () async {
                       final isValid = formKey.currentState!.validate();
                       final selectedCity = ref.read(selectedCityProvider);
 
@@ -98,6 +99,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             gender: selectedGender.toString(),
                             cityId: selectedCity!.id,
                             dateOfBirth: birthDate,
+                            deviceToken: await Auth().getFcmToken(),
                           );
                     },
                   ),

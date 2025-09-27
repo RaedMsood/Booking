@@ -29,6 +29,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final int? maxLine;
   final int? maxLength;
   final bool? buildCounter;
+  final bool? enable;
 
   final Color? cursorColor;
   final EdgeInsetsGeometry? contentPadding;
@@ -60,7 +61,7 @@ class TextFormFieldWidget extends StatelessWidget {
       this.onSubmit,
       this.cursorColor,
       this.contentPadding,
-      this.buildCounter = true});
+      this.buildCounter = true,this.enable});
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +89,7 @@ class TextFormFieldWidget extends StatelessWidget {
       cursorColor: cursorColor ?? AppColors.primaryColor,
       style: TextStyle(fontSize: 12.5.sp, fontFamily: "ReadexPro"),
       decoration: InputDecoration(
+
         fillColor: fillColor ?? Colors.white,
         filled: true,
         hintText: hintText,
@@ -97,6 +99,7 @@ class TextFormFieldWidget extends StatelessWidget {
           color: hintTextColor ?? AppColors.fontColor2,
           fontWeight: FontWeight.w400,
         ),
+
         labelStyle: TextStyle(
           fontSize: labelFontSize ?? 10.sp,
           color: labelTextColor ?? AppColors.fontColor2,
@@ -119,11 +122,13 @@ class TextFormFieldWidget extends StatelessWidget {
           borderSide: borderSide ?? BorderSide.none,
           borderRadius: BorderRadius.circular(8.r),
         ),
+
         prefixIcon: prefix,
         suffixIcon: suffixIcon,
         contentPadding: contentPadding ?? EdgeInsets.all(11.sp),
       ),
       expands: expanded ?? false,
+      enabled: enable??true,
       textAlign: textAlign ?? TextAlign.start,
     );
   }

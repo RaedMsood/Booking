@@ -25,7 +25,7 @@ class NameEmailPhoneSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AutoSizeTextWidget(
-          text: "الاسم",
+          text: S.of(context).name,
           fontSize: 11.sp,
           colorText: Colors.black87,
         ),
@@ -55,6 +55,7 @@ class NameEmailPhoneSection extends StatelessWidget {
           controller: phoneController,
           type: TextInputType.phone,
           maxLength: 9,
+          enable: false,
           buildCounter: false,
           fieldValidator: (value) {
             if (value == null || value.toString().isEmpty) {
@@ -85,7 +86,7 @@ class NameEmailPhoneSection extends StatelessWidget {
         ),
         12.h.verticalSpace,
         AutoSizeTextWidget(
-          text: "البريد الإلكتروني (اختياري)",
+          text: S.of(context).emailOptional,
           fontSize: 11.sp,
           colorText: Colors.black87,
         ),

@@ -28,7 +28,6 @@ class PropertySliverListWidget extends ConsumerWidget {
       sliver: SliverGrid(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-
             return isLoading
                 ? const ShimmerPropertyCardWidget()
                 : PropertyCardWidget(
@@ -36,9 +35,7 @@ class PropertySliverListWidget extends ConsumerWidget {
                     propertiesByCity: propertiesByCity,
                   );
           },
-          childCount: isLoading
-              ? 4
-              : properties.length ,
+          childCount: isLoading ? 4 : properties.length,
         ),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: provider.viewType,

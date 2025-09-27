@@ -20,10 +20,12 @@ class SignUpNotifier extends StateNotifier<DataState<AuthModel>> {
     required String gender,
     required int cityId,
     DateTime? dateOfBirth,
+    String? deviceToken
+
   }) async {
     state = state.copyWith(state: States.loading);
     final user = await _controller.signUp(
-        phoneNumber, name, email.toString(), gender, cityId, dateOfBirth);
+        phoneNumber, name, email.toString(), gender, cityId, dateOfBirth,deviceToken!);
     user.fold((f) {
       state = state.copyWith(state: States.error, exception: f);
     }, (data) {
@@ -43,9 +45,10 @@ class CheckOTPNotifier extends StateNotifier<DataState<AuthModel>> {
   Future<void> checkOTP({
     required String phoneNumber,
     required String otp,
+    String? deviceToken
   }) async {
     state = state.copyWith(state: States.loading);
-    final user = await _controller.checkOTP(phoneNumber, otp);
+    final user = await _controller.checkOTP(phoneNumber, otp,deviceToken!);
     user.fold((f) {
       state = state.copyWith(state: States.error, exception: f);
     }, (data) {

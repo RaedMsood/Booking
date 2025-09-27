@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../riverpod/search_and_filter_riverpod.dart';
 import 'calendar_range_picker_sheet_widget.dart';
 
@@ -21,7 +22,7 @@ class _FilterByDateWidgetState extends ConsumerState<FilterByDateWidget> {
     var selectedRange = ref.read(selectedDateRangeProvider);
 
     if (selectedRange == null) {
-      return 'من  -  إلى';
+      return '${ S.of(context).from} - ${ S.of(context).to}';
     }
     final locale = Localizations.localeOf(context).toString();
     final fmt = DateFormat('EEEE dd MMMM', locale);
@@ -37,7 +38,7 @@ class _FilterByDateWidgetState extends ConsumerState<FilterByDateWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AutoSizeTextWidget(
-          text: "التاريخ",
+          text: S.of(context).date,
           fontSize: 12.sp,
           colorText: Colors.black87,
           fontWeight: FontWeight.w400,

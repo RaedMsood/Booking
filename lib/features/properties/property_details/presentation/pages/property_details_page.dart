@@ -1,8 +1,18 @@
+import 'package:booking/core/widgets/auto_size_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/state/check_state_in_get_api_data_widget.dart';
+import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/widgets/rating_bar_widget.dart';
+import '../../../../booking/presentation/riverpod/booking_riverpod.dart';
+import '../../../../booking/presentation/widget/rating_row_widget.dart';
 import '../riverpod/property_details_riverpod.dart';
+import '../widgets/customer_of_score_widget.dart';
+import '../widgets/list_of_all_scores_custemor_widget.dart';
+import '../widgets/list_of_score_in_rate_widget.dart';
 import '../widgets/property_location_widget.dart';
+import '../widgets/rate_of_score_widget.dart';
 import '../widgets/shimmer_property_details_widget.dart';
 import '../widgets/sliver_app_bar_details_widget.dart';
 import '../widgets/deposit_widget.dart';
@@ -60,13 +70,14 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
               return [
                 SliverAppBarDetailsWidget(
                   images: state.data.images,
+                  idProperties:state.data.id ,
                 ),
                 SliverToBoxAdapter(
                   child: NameAndDescriptionAndRatingWidget(
                     name: state.data.name,
                     description: state.data.description,
                     features: state.data.features,
-                    rating: state.data.rating.toDouble()??0,
+                    rating: double.parse(state.data.rating.toStringAsFixed(1)) ,
                   ),
                 ),
                 SliverPersistentHeader(
@@ -92,24 +103,18 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
                       ShowUnitsInHotelDetailsWidget(
                         units: state.data.units,
                         propertyId: state.data.id,
-                        nameProp:  state.data.name,
-                        location:  '${state.data.address.city} ,${state.data.address.district}',
-                        image: state.data.images.isEmpty?'':state.data.images[0],
+                        nameProp: state.data.name,
+                        location:
+                            '${state.data.address.city} ,${state.data.address.district}',
+                        image: state.data.images.isEmpty
+                            ? ''
+                            : state.data.images[0],
                       ),
                     ],
                   ),
                 ),
-                SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 80,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
+                ListOfAllScoresCustemorWidget(
+                  rateOfScore: state.data.allScoreRateWithUser,
                 ),
               ],
             ),

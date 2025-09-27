@@ -198,3 +198,25 @@ final favoriteIdsProvider =
 StateNotifierProvider<FavoriteIdsNotifier, Set<int>>(
       (ref) => FavoriteIdsNotifier()..load(),
 );
+final logoutProvider =
+StateNotifierProvider.autoDispose<LogoutController, DataState<Unit>>(
+      (ref) {
+    return LogoutController();
+  },
+);
+
+class LogoutController extends StateNotifier<DataState<Unit>> {
+  LogoutController() : super(DataState<Unit>.initial(unit));
+  final _controller = ProfileReposaitory();
+
+  Future<void> logout() async {
+    state = state.copyWith(state: States.loading);
+
+    final data = await _controller.logout();
+    data.fold((f) {
+      state = state.copyWith(state: States.error, exception: f);
+    }, (data) {
+      state = state.copyWith(state: States.loaded);
+    });
+  }
+}

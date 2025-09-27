@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,14 +18,13 @@ class PropertyFavoriteAndMapWidget extends StatelessWidget {
   final double? imageHeight;
   final double? spaceHeight;
 
-  const PropertyFavoriteAndMapWidget({
-    super.key,
-    required this.property,
-    this.viewType = 2,
-    this.propertiesByCity = false,
-    this.imageHeight,
-    this.spaceHeight
-  });
+  const PropertyFavoriteAndMapWidget(
+      {super.key,
+      required this.property,
+      this.viewType = 2,
+      this.propertiesByCity = false,
+      this.imageHeight,
+      this.spaceHeight});
 
   @override
   Widget build(BuildContext context) {
@@ -50,21 +48,20 @@ class PropertyFavoriteAndMapWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.r),
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min, // ✅ يمنع التمدد غير المحدود
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // صورة العقار
             PropertyPhotosWidget(
               image: property.mainImageUrls,
-              height: imageHeight?.h??120.h,
+              height: imageHeight?.h ?? 120.h,
               idProperties: property.id,
+              isFavorite:property.isFavorite ,
             ),
 
-            // محتوى النصوص والتقييم
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
               child: Column(
-                mainAxisSize: MainAxisSize.min, // ✅ يكتفي بارتفاع المحتوى
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // الاسم والتقييم
@@ -95,7 +92,7 @@ class PropertyFavoriteAndMapWidget extends StatelessWidget {
                         child: Row(
                           children: [
                             AutoSizeTextWidget(
-                              text: property.rating.toString(),
+                              text: property.rating.toStringAsFixed(1),
                               fontSize: 10.5.sp,
                               colorText: AppColors.secondaryColor,
                             ),
@@ -110,7 +107,7 @@ class PropertyFavoriteAndMapWidget extends StatelessWidget {
                     ],
                   ),
 
-                spaceHeight?.h.verticalSpace??  20.h.verticalSpace,
+                  spaceHeight?.h.verticalSpace ?? 20.h.verticalSpace,
 
                   // الموقع
                   Row(

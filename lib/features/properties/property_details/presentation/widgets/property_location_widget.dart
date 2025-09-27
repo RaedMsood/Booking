@@ -46,7 +46,7 @@ class _PropertyLocationWidgetState extends State<PropertyLocationWidget> {
 
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(content: Text(S.of(context).unableToOpenMapsApp)),
+        SnackBar(content: Text(S.of(context).unableToOpenMapsApp)),
       );
     }
   }

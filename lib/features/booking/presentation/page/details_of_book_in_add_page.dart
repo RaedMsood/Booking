@@ -9,6 +9,7 @@ import '../../../../core/helpers/flash_bar_helper.dart';
 import '../../../../core/state/check_state_in_post_api_data_widget.dart';
 import '../../../../core/state/state.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
+import '../../../../generated/l10n.dart';
 import '../riverpod/booking_riverpod.dart';
 import '../widget/desgin_button_in_add_booking_widget.dart';
 import '../widget/hotel_summary_card_widget.dart';
@@ -20,11 +21,16 @@ class DetailsOfBookInAddPage extends ConsumerStatefulWidget {
   final String nameProp;
   final String location;
   final String image;
+  final int unitId;
+  final String totalPrice;
 
   const DetailsOfBookInAddPage({
     required this.image,
     required this.nameProp,
     required this.location,
+    required this.unitId,
+    required this.totalPrice,
+
     super.key,
   });
 
@@ -48,8 +54,8 @@ class _DetailsOfBookInAddPageState
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: const AutoSizeTextWidget(
-          text: 'حجز الفندق',
+        title:  AutoSizeTextWidget(
+          text: S.of(context).hotelBookingTitle,
         ),
       ),
       body: Column(
@@ -98,7 +104,7 @@ class _DetailsOfBookInAddPageState
             },
             bottonWidget: DesginButtonInAddBookingWidget(
               button: DefaultButtonWidget(
-                  text: "التالي",
+                  text: S.of(context).next,
                   height: 44.h,
                   width: double.infinity,
                   borderRadius: 15.r,
@@ -107,7 +113,7 @@ class _DetailsOfBookInAddPageState
                     if (startDate == null || endDate == null) {
                       showFlashBarWarring(
                           context: context,
-                          message: "قم بتحديد تاريخ الحجز الخاص بك");
+                          message: S.of(context).validationSelectDate);
                     } else {
                       final bookingData = BookingData(
                           checkIn: DateFormat('yyyy-MM-dd', 'en_US')
@@ -121,8 +127,8 @@ class _DetailsOfBookInAddPageState
                           childCount: children,
                           adultCount: adults,
                           guests: 4,
-                          totalPrice: 100,
-                          unitId: 1);
+                          totalPrice: widget.totalPrice,
+                          unitId: widget.unitId);
                       ref
                           .read(checkBookingProvider.notifier)
                           .checkBookingInHotel(bookingData: bookingData);

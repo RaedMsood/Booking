@@ -11,6 +11,7 @@ import '../../../../../core/state/state.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../data/model/city_model.dart';
 import 'design_for_cities_widget.dart';
 import 'list_to_view_all_cities_widget.dart';
@@ -32,7 +33,7 @@ class CityWidget extends ConsumerWidget {
       children: [
         12.h.verticalSpace,
         AutoSizeTextWidget(
-          text: "المحافظة",
+          text: S.of(context).governorate,
           fontSize: 11.5.sp,
           colorText: Colors.black87,
         ),

@@ -13,12 +13,14 @@ class PropertyPhotosWidget extends StatefulWidget {
   final List<String> image;
   final double height;
   final int idProperties;
+  bool isFavorite;
 
   PropertyPhotosWidget(
       {super.key,
       required this.image,
       required this.height,
-      required this.idProperties});
+      required this.idProperties,
+      required this.isFavorite});
 
   @override
   State<PropertyPhotosWidget> createState() => _PropertyPhotosWidgetState();
@@ -26,7 +28,7 @@ class PropertyPhotosWidget extends StatefulWidget {
 
 class _PropertyPhotosWidgetState extends State<PropertyPhotosWidget> {
   int pageController = 0;
-
+  late bool favorite = widget.isFavorite;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -66,6 +68,7 @@ class _PropertyPhotosWidgetState extends State<PropertyPhotosWidget> {
               favoriteIdsProvider
                   .select((ids) => ids.contains(widget.idProperties)),
             );
+
             final fav = ref.read(favoriteIdsProvider.notifier);
             fav.isBusy(widget.idProperties);
 
@@ -80,12 +83,20 @@ class _PropertyPhotosWidgetState extends State<PropertyPhotosWidget> {
                   child: IconButton(
                     padding: EdgeInsets.all(0.sp),
                     constraints: const BoxConstraints(),
-                    onPressed: () => fav.toggle(widget.idProperties),
+                    onPressed: () {
+                      fav.toggle(widget.idProperties);
+                      setState(() {
+                        favorite=!favorite;
+
+                      });
+                    },
                     icon: SvgPicture.asset(
-                      isFav ? AppIcons.favoriteActive : AppIcons.favorite,
+                      isFav
+                          ? AppIcons.favoriteActive
+                          : AppIcons.favorite,
                       color: isFav
                           ? AppColors.primarySwatch.shade400
-                          : Colors.black,
+                          : AppColors.primaryColor,
                       height: 18.h,
                     ),
                   ),

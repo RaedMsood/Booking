@@ -64,13 +64,11 @@ class UnitCardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Flexible(
-              child: OnlineImagesWidget(
-                imageUrl: units.image.toString(),
-                size: Size(88.w, 76.h),
-                fit: BoxFit.cover,
-                borderRadius: 10.r,
-              ),
+            OnlineImagesWidget(
+              imageUrl: units.image.toString(),
+              size: Size(88.w, 76.h),
+              fit: BoxFit.cover,
+              borderRadius: 10.r,
             ),
             Flexible(
               child: Padding(

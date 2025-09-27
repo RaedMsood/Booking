@@ -6,6 +6,7 @@ import '../../../../core/constants/app_icons.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
+import '../../../../generated/l10n.dart';
 
 final updateGenderProvider = StateProvider<String?>(
       (ref) => null,
@@ -31,7 +32,7 @@ class UpdateGenderWidget extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AutoSizeTextWidget(
-          text: "الجنس",
+          text:  S.of(context).gender,
           fontSize: 11.5.sp,
           colorText: Colors.black87,
         ),
@@ -63,7 +64,7 @@ class UpdateGenderWidget extends ConsumerWidget {
                 ),
                 SizedBox(width: 8.w),
                 AutoSizeTextWidget(
-                  text: selectedGender == 'male' ? 'ذكر' : 'أنثى',
+                  text: selectedGender == 'male' ?  S.of(context).male :  S.of(context).female,
                   fontSize: 11.sp,
                   colorText: Colors.black87,
                 ),

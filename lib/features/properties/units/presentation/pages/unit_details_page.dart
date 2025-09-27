@@ -41,6 +41,8 @@ class UnitDetailsPage extends ConsumerWidget {
             SliverAppBarDetailsWidget(
               isFavorite: false,
               images: state.data.images,
+              idProperties: state.data.id,
+              isUnit: true,
             ),
             SliverToBoxAdapter(
               child: UnitDetailsDataWidget(
@@ -99,8 +101,7 @@ class UnitDetailsPage extends ConsumerWidget {
                           ),
                         ],
                       ),
-
-              DefaultButtonWidget(
+                      DefaultButtonWidget(
                         text: 'حجز الان',
                         height: 48.h,
                         width: 128.w,
@@ -109,18 +110,19 @@ class UnitDetailsPage extends ConsumerWidget {
                         onPressed: () {
                           if (!Auth().loggedIn) {
                             navigateTo(context, const LogInPage());
-                          }else{
+                          } else {
                             navigateTo(
                               context,
                               DetailsOfBookInAddPage(
-                                location:
-                                location,
-                                image:image ?? '',
+                                location: location,
+                                image: image ?? '',
                                 nameProp: nameProp,
+                                unitId: state.data.id,
+                                totalPrice: state.data.price.toString(),
+
                               ),
                             );
                           }
-
                         },
                       ),
                     ],

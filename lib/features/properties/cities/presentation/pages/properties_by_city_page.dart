@@ -120,6 +120,7 @@ class _PropertiesByCityPagePageState
               ),
               PropertySliverListWidget(
                 properties: state.data.property.data,
+
                 propertiesByCity: true,
               ),
               if (state.stateData == States.loadingMore)

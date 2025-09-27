@@ -69,7 +69,7 @@ class VerifyCodePage extends ConsumerWidget {
                 if (checkOTPState.data.status == true) {
                   Auth().login(checkOTPState.data);
 
-                  navigateTo(context, BottomNavigationBarWidget());
+                  navigateTo(context,const BottomNavigationBarWidget());
                 } else {
                   navigateTo(context, const SignUpPage());
                 }
@@ -85,6 +85,7 @@ class VerifyCodePage extends ConsumerWidget {
                     ref.read(checkOTPProvider.notifier).checkOTP(
                           phoneNumber: phoneNumberOrEmail,
                           otp: verifyController.text,
+                      deviceToken:await Auth().getFcmToken(),
                         );
                   }
                 },

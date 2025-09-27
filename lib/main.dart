@@ -7,6 +7,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/network/remote_request.dart';
+import 'core/notifications/firebase_messaging_service.dart';
+import 'core/notifications/notification_bootstrap.dart';
 import 'core/state/app_restart_controller.dart';
 import 'package:booking/injection.dart' as di;
 import 'core/theme/theme.dart';
@@ -21,6 +23,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  await NotificationBootstrap.I.init(debug: kDebugMode);
 
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.dumpErrorToConsole(details);
@@ -47,9 +50,21 @@ class MyApp extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<MyApp> createState() => _MyAppState();
+
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  void initState() {
+    FirebaseMessagingService.I.getDeviceToken().then((t) {
+      if (t != null) {
+        print('Device Token: $t');
+        Auth().setFcmToken(t);
+      }
+    });
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final locale = ref.watch(languageProvider);

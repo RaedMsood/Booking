@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../riverpod/booking_riverpod.dart';
 
 class StatusBadgeInDetailsWidget extends StatelessWidget {
@@ -20,10 +21,10 @@ class StatusBadgeInDetailsWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const AutoSizeTextWidget(
-          text: 'حالة الحجز',
+        AutoSizeTextWidget(
+          text: S.of(context).bookingStatusLabel,
           fontSize: 10,
-          colorText: Color(0xff605A65),
+          colorText: const Color(0xff605A65),
         ),
         const Spacer(),
         Consumer(

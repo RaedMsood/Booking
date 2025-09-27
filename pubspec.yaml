@@ -62,7 +62,10 @@ dependencies:
   google_maps_flutter:
   url_launcher:
   flutter_staggered_grid_view:
-
+  firebase_core:
+  flutter_local_notifications:
+  awesome_notifications:
+  firebase_messaging:
 
 dev_dependencies:
   flutter_test:

@@ -12,6 +12,7 @@ import '../../../../core/state/state.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/text_form_field.dart';
+import '../../../../generated/l10n.dart';
 import '../../../properties/cities/presentation/riverpod/cities_riverpod.dart';
 import '../riverpod/booking_riverpod.dart';
 import '../widget/desgin_button_in_add_booking_widget.dart';
@@ -62,13 +63,12 @@ class _CompleteAddBookingPageState
     email.text = Auth().email;
     phone.text = Auth().phoneNumber;
 
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
-        title: const AutoSizeTextWidget(
-          text: 'حجز الفندق',
+        title:  AutoSizeTextWidget(
+          text: S.of(context).hotelBookingTitle,
         ),
       ),
       body: Column(
@@ -91,14 +91,14 @@ class _CompleteAddBookingPageState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           12.verticalSpace,
-                          const AutoSizeTextWidget(
-                            text: 'بيانات الشخص',
+                           AutoSizeTextWidget(
+                            text: S.of(context).personalInfoTitle,
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                           ),
                           8.verticalSpace,
                           AutoSizeTextWidget(
-                            text: 'الاسم',
+                            text: S.of(context).fullName,
                             fontSize: 11.sp,
                             fontWeight: FontWeight.w400,
                             colorText: Color(0xff2E3333),
@@ -112,12 +112,12 @@ class _CompleteAddBookingPageState
                               fieldValidator: (value) {
                                 if ((value == null ||
                                     value.toString().isEmpty)) {
-                                  return 'قم بتسجيل الاسم ';
+                                  return S.of(context).nameRequired;
                                 }
                               }),
                           6.verticalSpace,
                           AutoSizeTextWidget(
-                            text: 'البريد الالكتروني',
+                            text: S.of(context).emailAddress,
                             fontSize: 11.sp,
                             fontWeight: FontWeight.w400,
                             colorText: Color(0xff2E3333),
@@ -137,12 +137,12 @@ class _CompleteAddBookingPageState
                                 final emailRegex =
                                     RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                                 if (!emailRegex.hasMatch(emails)) {
-                                  return 'الرجاء إدخال بريد إلكتروني صالح';
+                                  return S.of(context).invalidEmail;
                                 }
                               }),
                           6.verticalSpace,
                           AutoSizeTextWidget(
-                            text: 'الرقم',
+                            text: S.of(context).phoneLabel,
                             fontSize: 11.sp,
                             fontWeight: FontWeight.w400,
                             colorText: Color(0xff2E3333),
@@ -158,7 +158,7 @@ class _CompleteAddBookingPageState
                               fieldValidator: (value) {
                                 if ((value == null ||
                                     value.toString().isEmpty)) {
-                                  return 'قم بتسجيل الرقم  ';
+                                  return S.of(context).phoneRequired;
                                 }
                                 final phone = value.trim();
                                 if (!phone.startsWith('7')) {
@@ -197,7 +197,7 @@ class _CompleteAddBookingPageState
                   },
                   bottonWidget: DefaultButtonWidget(
                       isLoading: state.stateData == States.loading,
-                      text: "التالي",
+                      text: S.of(context).next,
                       onPressed: () {
                         final isValid = _formKey.currentState!.validate();
 

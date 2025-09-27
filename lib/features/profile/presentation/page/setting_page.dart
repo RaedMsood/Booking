@@ -1,3 +1,4 @@
+import 'package:booking/core/helpers/navigateTo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -5,7 +6,9 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../widget/languge_dialog_widget.dart';
+import '../widget/sign_out_dialog_widget.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -16,7 +19,7 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: AutoSizeTextWidget(
-          text: 'إعدادات التطبيق',
+          text: S.of(context).generalSettings,
           fontSize: 14.sp,
           fontWeight: FontWeight.w500,
         ),
@@ -38,7 +41,7 @@ class SettingsPage extends StatelessWidget {
                   AppIcons.translate,
                 ),
                 title: AutoSizeTextWidget(
-                  text: 'اللغة',
+                  text: S.of(context).language,
                   colorText: Color(0xff001A33),
                   fontSize: 11.sp,
                 ),
@@ -52,7 +55,8 @@ class SettingsPage extends StatelessWidget {
                   showModalBottomSheetWidget(
                     context: context,
                     page: const LanguageDialog(),
-                  );                },
+                  );
+                },
               ),
               ListTile(
                 contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -60,7 +64,7 @@ class SettingsPage extends StatelessWidget {
                   AppIcons.currency,
                 ),
                 title: AutoSizeTextWidget(
-                  text: 'العملة',
+                  text: S.of(context).currency,
                   colorText: Color(0xff001A33),
                   fontSize: 11.sp,
                 ),
@@ -80,7 +84,7 @@ class SettingsPage extends StatelessWidget {
                   AppIcons.logOut,
                 ),
                 title: AutoSizeTextWidget(
-                  text: 'تسجيل الخروج',
+                  text: S.of(context).signOut,
                   fontSize: 11.sp,
                   colorText: Color(0xffFF4D4F),
                 ),
@@ -90,30 +94,35 @@ class SettingsPage extends StatelessWidget {
                   height: 16.h,
                 ),
                 onTap: () {
+                  showModalBottomSheetWidget(
+                    context: context,
+                    page: const SignOutDialog(),
+                  );
+
                   // TODO: نفّذ تسجيل الخروج
                 },
               ),
-              ListTile(
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                ),
-                leading: SvgPicture.asset(
-                  AppIcons.trash,
-                  height: 18.h,
-                ),
-                title: AutoSizeTextWidget(
-                  text: 'حذف الحساب بشكل نهائي',
-                  fontSize: 11.sp,
-                  colorText: Color(0xff001A33),
-                ),
-                trailing: SvgPicture.asset(
-                  AppIcons.arrowLeft,
-                  height: 16.h,
-                ),
-                onTap: () {
-                  // TODO: نفّذ حذف الحساب
-                },
-              ),
+              // ListTile(
+              //   contentPadding: EdgeInsets.symmetric(
+              //     horizontal: 16.w,
+              //   ),
+              //   leading: SvgPicture.asset(
+              //     AppIcons.trash,
+              //     height: 18.h,
+              //   ),
+              //   title: AutoSizeTextWidget(
+              //     text: S.of(context).deleteAccount,
+              //     fontSize: 11.sp,
+              //     colorText: Color(0xff001A33),
+              //   ),
+              //   trailing: SvgPicture.asset(
+              //     AppIcons.arrowLeft,
+              //     height: 16.h,
+              //   ),
+              //   onTap: () {
+              //     // TODO: نفّذ حذف الحساب
+              //   },
+              // ),
             ],
           ),
         ),

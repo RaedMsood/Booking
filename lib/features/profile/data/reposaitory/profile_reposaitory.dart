@@ -45,4 +45,14 @@ class ProfileReposaitory {
       return Left(e);
     }
   }
+
+  Future<Either<DioException, Unit>> logout() async {
+    try {
+      final remote = await profileRemoteDataSource.logout();
+      return Right(remote);
+    } on DioException catch (e) {
+      return Left(e);
+    }
+  }
+
 }

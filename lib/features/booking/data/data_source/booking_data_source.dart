@@ -1,3 +1,4 @@
+import 'package:booking/features/booking/data/booking_model/rate_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../../core/network/remote_request.dart';
@@ -9,7 +10,7 @@ class BookingDataSource {
   Future<int> checkBookingFromHotel({
     required BookingData bookingData,
   }) async {
-   final response =  await RemoteRequest.postData(
+    final response = await RemoteRequest.postData(
       path: AppURL.checkBookingHotel,
       data: bookingData.toJson(),
     );
@@ -30,9 +31,9 @@ class BookingDataSource {
     );
 
     return PaginationModel<BookingData>.fromJson(
-      response.data['data'],
+      response.data['data']??response.data,
       (book) {
-        return BookingData.fromJson(book);
+        return BookingData.fromJson(book );
       },
     );
   }
@@ -47,5 +48,22 @@ class BookingDataSource {
     debugPrint(response.statusCode.toString());
 
     return BookingData.fromJson(response.data['data']);
+  }
+
+  Future<Unit> rateTheProperty(
+      {required List<RateModel> rate,
+      required int idProperty,
+      required int idBooking}) async {
+    final response = await RemoteRequest.postData(
+      path: AppURL.rateProperty,
+      data: {
+        "property_id": idProperty,
+        "criteria": RateModel.toJsonList(rate),
+        'booking_id': idBooking
+      },
+    );
+    debugPrint(response.statusCode.toString());
+
+    return Future.value(unit);
   }
 }
