@@ -20,7 +20,7 @@ ThemeData lightTheme = ThemeData(
 
     ),
   ),
-  tabBarTheme: TabBarTheme(
+  tabBarTheme: TabBarThemeData(
     dividerColor: AppColors.transparent,
     labelColor: AppColors.greyColor,
     unselectedLabelColor: AppColors.greyColor,
