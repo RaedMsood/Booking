@@ -5,7 +5,7 @@ import '../../../../core/widgets/online_images_widget.dart';
 
 class HotelImage extends StatelessWidget {
   final String imageUrl;
-  const HotelImage({super.key, required this.imageUrl});
+  const   HotelImage({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {

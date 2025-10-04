@@ -28,7 +28,6 @@ class PropertySliverListWidget extends ConsumerWidget {
       sliver: SliverGrid(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-
             return isLoading
                 ? const ShimmerPropertyCardWidget()
                 : PropertyCardWidget(
@@ -36,9 +35,7 @@ class PropertySliverListWidget extends ConsumerWidget {
                     propertiesByCity: propertiesByCity,
                   );
           },
-          childCount: isLoading
-              ? 4
-              : properties.length ,
+          childCount: isLoading ? 4 : properties.length,
         ),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: provider.viewType,
@@ -50,3 +47,38 @@ class PropertySliverListWidget extends ConsumerWidget {
     );
   }
 }
+
+// return SliverPadding(
+//   padding: EdgeInsets.symmetric(horizontal: 14.w)
+//       .copyWith(bottom: 94.h,top: 2.h
+//   ),
+//   sliver: SliverList(
+//     delegate: SliverChildBuilderDelegate(
+//       (context, index) {
+//         if (index == properties.length) {
+//           if (state == States.loadingMore) {
+//             return const CircularProgressIndicatorWidget();
+//           } else if (!hasMore) {
+//             return Padding(
+//               padding: EdgeInsets.only(top: 4.h),
+//               child: Center(
+//                 child: AutoSizeTextWidget(
+//                   text:
+//                       "انتهت قائمة الفنادق المتوفرة، نتمنى لك إقامة سعيدة.",
+//                   fontSize: 10.8.sp,
+//                   fontWeight: FontWeight.w500,
+//                   colorText: AppColors.fontColor2,
+//                 ),
+//               ),
+//             );
+//           }
+//         }
+//         return PropertyCardWidget(
+//           property: properties[index],
+//         );
+//       },
+//       childCount: properties.length +
+//           ((state == States.loadingMore || !hasMore) ? 1 : 0),
+//     ),
+//   ),
+// );

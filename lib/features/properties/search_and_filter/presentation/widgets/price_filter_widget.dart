@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../riverpod/search_and_filter_riverpod.dart';
 
 class PriceFilterWidget extends ConsumerStatefulWidget {
@@ -46,7 +47,7 @@ class _PriceFilterWidgetState extends ConsumerState<PriceFilterWidget> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         AutoSizeTextWidget(
-          text: "السعر",
+          text: S.of(context).price,
           fontSize: 12.sp,
           colorText: Colors.black87,
           fontWeight: FontWeight.w400,
@@ -88,7 +89,7 @@ class _PriceFilterWidgetState extends ConsumerState<PriceFilterWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildValueBox('من', currentRange.start),
+                  _buildValueBox(S.of(context).from, currentRange.start),
                   14.w.horizontalSpace,
                   Container(
                     width: 10.w,
@@ -96,7 +97,7 @@ class _PriceFilterWidgetState extends ConsumerState<PriceFilterWidget> {
                     color: const Color(0xff605a65),
                   ),
                   14.w.horizontalSpace,
-                  _buildValueBox('إلى', currentRange.end),
+                  _buildValueBox(S.of(context).to, currentRange.end),
                 ],
               ),
               10.h.verticalSpace,

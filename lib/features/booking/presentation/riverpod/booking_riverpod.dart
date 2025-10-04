@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:booking/features/booking/data/booking_model/rate_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/state/data_state.dart';
@@ -103,6 +104,62 @@ class CustomerBookingNotifier extends StateNotifier<DataState<BookingData>> {
         data: data
       );
     });
+  }
+}
+
+
+final ratePropertyProvider =
+StateNotifierProvider.autoDispose<RatePropertyNotifier, DataState<Unit>>(
+      (ref) {
+    return RatePropertyNotifier();
+  },
+);
+
+class RatePropertyNotifier extends StateNotifier<DataState<Unit>> {
+  RatePropertyNotifier()
+      : super(DataState<Unit>.initial(unit));
+  final _controller = BookingReposaitory();
+
+  rateProperty({required List<RateModel> rate,required int idProperty,required int idBooking}) async {
+    state = state.copyWith(state: States.loading);
+    final rates =
+    await _controller.rateTheProperty(rate: rate,idProperty: idProperty,idBooking: idBooking);
+    rates.fold((faliure) {
+      state = state.copyWith(state: States.error, exception: faliure);
+    }, (data) {
+      state = state.copyWith(
+          state: States.loaded,
+
+      );
+    });
+  }
+}
+
+final getIfPropertyRatedProvider =
+StateNotifierProvider.family<GetIfPropertyRatedNotifier, bool?,Tuple2<int?,int?> >(
+        (ref, idSection) {
+      return GetIfPropertyRatedNotifier();
+    });
+
+class GetIfPropertyRatedNotifier extends StateNotifier<bool?> {
+  GetIfPropertyRatedNotifier() : super(null);
+
+  void setIfPropertyRatedNumber(bool isRated) {
+    state = isRated;
+  }
+}
+
+final showAllScoreInRateProvider =
+StateNotifierProvider.family<ShowAllScoreInRateNotifier, bool?,int? >(
+        (ref, index) {
+      return ShowAllScoreInRateNotifier();
+    });
+
+class ShowAllScoreInRateNotifier extends StateNotifier<bool?> {
+  ShowAllScoreInRateNotifier() : super(false);
+
+  void setShowAllScoreInRate() {
+    state = !state!;
   }
 }
 

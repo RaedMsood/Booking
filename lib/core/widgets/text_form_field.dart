@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/app_colors.dart';
@@ -27,44 +28,56 @@ class TextFormFieldWidget extends StatelessWidget {
   final bool? autofocus;
   final int? maxLine;
   final int? maxLength;
+  final bool? buildCounter;
+  final bool? enable;
 
   final Color? cursorColor;
   final EdgeInsetsGeometry? contentPadding;
 
-  const TextFormFieldWidget({
-    super.key,
-    required this.controller,
-    this.type,
-    this.fillColor,
-    this.hintText,
-    this.hintTextColor,
-    this.hintFontSize,
-    this.label,
-    this.labelTextColor,
-    this.labelFontSize,
-    this.textAlign,
-    this.borderSide,
-    this.borderSideError,
-    this.fieldValidator,
-    this.isPassword,
-    this.prefix,
-    this.suffixIcon,
-    this.expanded,
-    this.autofocus,
-    this.maxLine,
-    this.maxLength,
-    this.onTap,
-    this.onChanged,
-    this.onSubmit,
-    this.cursorColor,
-    this.contentPadding,
-  });
+  const TextFormFieldWidget(
+      {super.key,
+      required this.controller,
+      this.type,
+      this.fillColor,
+      this.hintText,
+      this.hintTextColor,
+      this.hintFontSize,
+      this.label,
+      this.labelTextColor,
+      this.labelFontSize,
+      this.textAlign,
+      this.borderSide,
+      this.borderSideError,
+      this.fieldValidator,
+      this.isPassword,
+      this.prefix,
+      this.suffixIcon,
+      this.expanded,
+      this.autofocus,
+      this.maxLine,
+      this.maxLength,
+      this.onTap,
+      this.onChanged,
+      this.onSubmit,
+      this.cursorColor,
+      this.contentPadding,
+      this.buildCounter = true,this.enable});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       maxLines: maxLine ?? 1,
       maxLength: maxLength,
+      buildCounter: buildCounter == true
+          ? null
+          : (
+              BuildContext context, {
+              required int currentLength,
+              required int? maxLength,
+              required bool isFocused,
+            }) {
+              return null; // يخفي العداد
+            },
       controller: controller,
       keyboardType: type ?? TextInputType.text,
       validator: fieldValidator,
@@ -74,14 +87,11 @@ class TextFormFieldWidget extends StatelessWidget {
       onTap: onTap,
       onChanged: onChanged,
       cursorColor: cursorColor ?? AppColors.primaryColor,
-      style: TextStyle(
-        fontSize: 12.5.sp,
-        fontFamily: "ReadexPro"
-      ),
+      style: TextStyle(fontSize: 12.5.sp, fontFamily: "ReadexPro"),
       decoration: InputDecoration(
+
         fillColor: fillColor ?? Colors.white,
         filled: true,
-
         hintText: hintText,
         labelText: label,
         hintStyle: TextStyle(
@@ -89,6 +99,7 @@ class TextFormFieldWidget extends StatelessWidget {
           color: hintTextColor ?? AppColors.fontColor2,
           fontWeight: FontWeight.w400,
         ),
+
         labelStyle: TextStyle(
           fontSize: labelFontSize ?? 10.sp,
           color: labelTextColor ?? AppColors.fontColor2,
@@ -111,11 +122,13 @@ class TextFormFieldWidget extends StatelessWidget {
           borderSide: borderSide ?? BorderSide.none,
           borderRadius: BorderRadius.circular(8.r),
         ),
+
         prefixIcon: prefix,
         suffixIcon: suffixIcon,
-        contentPadding: contentPadding ??  EdgeInsets.all(11.sp),
+        contentPadding: contentPadding ?? EdgeInsets.all(11.sp),
       ),
       expands: expanded ?? false,
+      enabled: enable??true,
       textAlign: textAlign ?? TextAlign.start,
     );
   }

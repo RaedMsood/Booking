@@ -44,4 +44,12 @@ class AuthModel {
         status: false,
         user: UserModel.empty(),
       );
+  /// تحويل كامل للتخزين في secure storage
+  Map<String, dynamic> toJsonForCache() {
+    return {
+      'token': token,
+      'user': user.toJsonForCache(),
+    };
+  }
+
 }

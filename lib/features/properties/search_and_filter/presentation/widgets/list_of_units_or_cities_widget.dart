@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/buttons/icon_button_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../cities/presentation/widget/design_for_cities_widget.dart';
 import '../../data/model/filter_data_model.dart';
 import '../riverpod/search_and_filter_riverpod.dart';
@@ -29,7 +30,7 @@ class ListOfUnitsOrCitiesWidget extends StatelessWidget {
             children: [
               14.w.horizontalSpace,
               AutoSizeTextWidget(
-                text: isCity ? "المحافظة" : "نوع الغرفة",
+                text: isCity ? S.of(context).governorate : S.of(context).roomType,
                 fontWeight: FontWeight.w400,
               ),
               const Spacer(),

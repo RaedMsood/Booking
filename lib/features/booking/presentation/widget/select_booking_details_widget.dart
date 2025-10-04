@@ -3,10 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../generated/l10n.dart';
 import 'counter_row_widget.dart';
 
 class SelectBookingDetailsWidget extends StatefulWidget {
-  const SelectBookingDetailsWidget({super.key,required this.onTypeSelected,required this.countRoom,required this.countAdult,required this.countChild});
+  const SelectBookingDetailsWidget(
+      {super.key,
+      required this.onTypeSelected,
+      required this.countRoom,
+      required this.countAdult,
+      required this.countChild});
+
   final void Function(String? type) onTypeSelected;
   final void Function(int? room) countRoom;
   final void Function(int? adult) countAdult;
@@ -66,29 +73,28 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AutoSizeTextWidget(
-            text: "بيانات الاشخاص في الحجز",
+            text: S.of(context).guestsSectionTitle,
             fontSize: 8.sp,
             fontWeight: FontWeight.w500,
             colorText: Color(0xff001A33),
           ),
           16.verticalSpace,
           SelectFieldWidget(
-            label: 'الغرض من الحجز',
+            label:S.of(context).bookingPurpose,
             value: _purpose,
             onTap: () => _showOptionsSheet(
-              title: 'الغرض من الحجز',
-              options: ['ترفية', 'عمل'],
+              title: S.of(context).bookingPurpose,
+              options: [S.of(context).purposeLeisure, S.of(context).purposeBusiness],
               current: _purpose,
               onSelected: (v) {
                 setState(() {
-                _purpose = v;
-              });
+                  _purpose = v;
+                });
                 widget.onTypeSelected(_purpose);
-
               },
             ),
           ),
-         // const SizedBox(height: 12),
+          // const SizedBox(height: 12),
           // SelectFieldWidget(
           //   label: 'نوع الأشخاص',
           //   value: _personType,
@@ -101,7 +107,7 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
           // ),
           const SizedBox(height: 16),
           CounterRowWidget(
-            label: 'عدد الغرف',
+            label: S.of(context).roomsCount,
             count: _rooms,
             onIncrement: () {
               setState(() => _rooms++);
@@ -114,32 +120,28 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
           ),
           const SizedBox(height: 12),
           CounterRowWidget(
-            label: 'كبار',
+            label: S.of(context).adults,
             count: _adults,
             onIncrement: () {
               setState(() => _adults++);
               widget.countAdult(_adults);
-
             },
             onDecrement: () {
               if (_adults > 1) setState(() => _adults--);
               widget.countAdult(_adults);
-
             },
           ),
           const SizedBox(height: 12),
           CounterRowWidget(
-            label: 'اطفال',
+            label: S.of(context).children,
             count: _children,
             onIncrement: () {
               setState(() => _children++);
               widget.countChild(_children);
-
             },
             onDecrement: () {
               if (_children > 0) setState(() => _children--);
               widget.countChild(_children);
-
             },
           ),
         ],

@@ -59,7 +59,7 @@ class BookingCard extends StatelessWidget {
                 InfoHotelInCardBookingWidget(
                   title: bookData.property ?? '',
                   location:
-                      '${bookData.address!.city!} , ${bookData.address!.district!}',
+                      '${bookData.address?.city??''} , ${bookData.address?.district??''}',
                   count: bookData.guests ?? 1,
                   price: bookData.totalPrice,
                 ),

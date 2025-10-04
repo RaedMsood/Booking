@@ -19,11 +19,11 @@ class RemoteRequest {
   static Future<Response> getData({
     required String url,
     dynamic query,
-    String lang = 'ar',
   }) async {
+
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'lang': lang,
+      'Accept-Language':await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
     };
     final response = await dio.get(url, queryParameters: query);
@@ -42,11 +42,10 @@ class RemoteRequest {
     required String path,
     Map<String, dynamic>? query,
     dynamic data,
-    String lang = 'ar',
   }) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'lang': lang,
+      'Accept-Language':await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
     };
     final response = await dio.post(
@@ -72,11 +71,10 @@ class RemoteRequest {
     required String path,
     Map<String, dynamic>? query,
     dynamic data,
-    String lang = 'ar',
   }) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'lang': lang,
+      'Accept-Language':await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
     };
     final response = await dio.put(
@@ -100,11 +98,10 @@ class RemoteRequest {
     required String path,
     Map<String, dynamic>? query,
     dynamic data,
-    String lang = 'ar',
   }) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'lang': lang,
+      'Accept-Language':await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
     };
     final response =

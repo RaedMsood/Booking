@@ -11,8 +11,16 @@ import '../widgets/list_of_units_widget.dart';
 
 class UnitsPage extends ConsumerStatefulWidget {
   final int propertyId;
+  final String nameProp;
+  final String location;
+  final String image;
 
-  const UnitsPage({super.key, required this.propertyId});
+  const UnitsPage(
+      {super.key,
+      required this.propertyId,
+      required this.location,
+      required this.nameProp,
+      required this.image});
 
   @override
   ConsumerState<UnitsPage> createState() => _UnitsPageState();
@@ -83,6 +91,9 @@ class _UnitsPageState extends ConsumerState<UnitsPage> {
           ListOfUnitsWidget(
             scrollController: _scrollController,
             propertyId: widget.propertyId,
+            image:widget.image,
+            location: widget.location,
+            nameProp: widget.nameProp,
           ),
         ],
       ),

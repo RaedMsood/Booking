@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/go_to_login_widget.dart';
+import '../../../../generated/l10n.dart';
+import '../../../../services/auth/auth.dart';
 import '../widget/list_of_type_booking_widget.dart';
 
 class BookingPage extends StatefulWidget {
@@ -15,12 +18,16 @@ class BookingPage extends StatefulWidget {
 class _BookingPageState extends State<BookingPage>
     with TickerProviderStateMixin {
   late final TabController _tabController;
-  final List<String> _tabs = ['الكل', 'الحالية', 'مكتملة', 'ملغية'];
-
+   List<String> _tabs(BuildContext context) => [
+  S.of(context).all,
+  S.of(context).currentFilter,
+  S.of(context).completedFilter,
+  S.of(context).canceledFilter,
+  ];
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: _tabs.length, vsync: this)
+    _tabController = TabController(length: 4, vsync: this)
       ..addListener(() {
         if (_tabController.index != _tabController.previousIndex) {
           setState(() {});
@@ -36,43 +43,47 @@ class _BookingPageState extends State<BookingPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: AutoSizeTextWidget(
-          text: "الحجوزات",
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      body: Column(
-        children: [
-          TabBar(
-            controller: _tabController,
-            isScrollable: true,
-            tabAlignment: TabAlignment.center,
-            dividerHeight: 0,
-            labelColor: Colors.black,
-            unselectedLabelColor: Color(0xff605A65),
-            indicator: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            labelPadding: EdgeInsets.symmetric(horizontal: 8.w),
-            overlayColor: MaterialStateProperty.all(Colors.transparent),
-            tabs: List.generate(
-              _tabs.length,
-              (index) => _buildTab(_tabs[index], index),
-            ),
+    return Visibility(
+      visible: Auth().loggedIn,
+      replacement:const GoToLoginWidget(),
+      child: Scaffold(
+        appBar: AppBar(
+          title:  AutoSizeTextWidget(
+            text: S.of(context).reservationsTitle,
+            fontWeight: FontWeight.w500,
           ),
-          Expanded(
-            child: TabBarView(
+        ),
+        body: Column(
+          children: [
+            TabBar(
               controller: _tabController,
-              physics: const BouncingScrollPhysics(),
-              children: List.generate(
-                _tabs.length,
-                (i) => ListOfTypeAllBookingWidget(statusId: i),
+              isScrollable: true,
+              tabAlignment: TabAlignment.center,
+              dividerHeight: 0,
+              labelColor: Colors.black,
+              unselectedLabelColor: const Color(0xff605A65),
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              labelPadding: EdgeInsets.symmetric(horizontal: 8.w),
+              overlayColor: MaterialStateProperty.all(Colors.transparent),
+              tabs: List.generate(
+                _tabs(context).length,
+                (index) => _buildTab(_tabs(context)[index], index),
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                physics: const BouncingScrollPhysics(),
+                children: List.generate(
+                  _tabs(context).length,
+                  (i) => ListOfTypeAllBookingWidget(statusId: i),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -88,7 +99,6 @@ class _BookingPageState extends State<BookingPage>
           color: isSelected
               ? AppColors.primaryColor.withOpacity(0.05)
               : Colors.white,
-          // نصف القطر يختلف بين المختار وغير المختار
           borderRadius: BorderRadius.circular(25.r),
           border: Border.all(
             color:
@@ -102,10 +112,7 @@ class _BookingPageState extends State<BookingPage>
             style: TextStyle(
               fontSize: 11.sp,
               fontWeight: FontWeight.w500,
-              color: isSelected
-                  ? AppColors.primaryColor
-                  : Color(
-                      0xff605A65),
+              color: isSelected ? AppColors.primaryColor : const Color(0xff605A65),
             ),
           ),
         ),

@@ -4,8 +4,8 @@ import '../data_source/user_remote_data_source.dart';
 import '../model/auth_model.dart';
 
 class UserReposaitory {
-  final UserRemoteDataSource _userRemoteDataSource =
-  UserRemoteDataSource();
+  final UserRemoteDataSource _userRemoteDataSource = UserRemoteDataSource();
+
   Future<Either<DioException, Unit>> logIn(
     String phoneNumber,
   ) async {
@@ -18,16 +18,16 @@ class UserReposaitory {
   }
 
   Future<Either<DioException, AuthModel>> signUp(
-    String phoneNumber,
-    String name,
-    String email,
-    String gender,
-    int cityId,
-    DateTime? dateOfBirth,
-  ) async {
+      String phoneNumber,
+      String name,
+      String email,
+      String gender,
+      int cityId,
+      DateTime? dateOfBirth,
+      String deviceToken) async {
     try {
-      final remote = await _userRemoteDataSource
-          .signUp(phoneNumber, name, email, gender, cityId, dateOfBirth);
+      final remote = await _userRemoteDataSource.signUp(
+          phoneNumber, name, email, gender, cityId, dateOfBirth, deviceToken);
       return Right(remote);
     } on DioException catch (e) {
       return Left(e);
@@ -35,9 +35,9 @@ class UserReposaitory {
   }
 
   Future<Either<DioException, AuthModel>> checkOTP(
-      String phoneNumber, String otp) async {
+      String phoneNumber, String otp,String deviceToken) async {
     try {
-      final remote = await _userRemoteDataSource.checkOTP(phoneNumber, otp);
+      final remote = await _userRemoteDataSource.checkOTP(phoneNumber, otp,deviceToken);
       return Right(remote);
     } on DioException catch (e) {
       return Left(e);

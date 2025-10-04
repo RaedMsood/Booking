@@ -9,6 +9,7 @@ import '../../../../../core/widgets/buttons/icon_button_widget.dart';
 import '../../../../../core/widgets/buttons/ink_well_button_widget.dart';
 import '../../../../../core/widgets/custom_shape_widget.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../notifications/presentation/pages/consumer_notifications_page.dart';
 import '../../../search_and_filter/presentation/pages/search_and_filter_page.dart';
 
 class SliverAppBarHomeWidget extends SliverPersistentHeaderDelegate {
@@ -55,7 +56,9 @@ class SliverAppBarHomeWidget extends SliverPersistentHeaderDelegate {
                 ),
                 IconButtonWidget(
                   icon: AppIcons.notification,
-                  onPressed: () {},
+                  onPressed: () {
+                    navigateTo(context, NotificationsPage());
+                  },
                 ),
               ],
             )

@@ -1,6 +1,10 @@
+import 'rate_model.dart';
+
 class BookingData {
   final int? id;
   final int? unitId;
+  final int? propertyId;
+
   final String? property;
   final String? status;
   final Address? address;
@@ -18,6 +22,8 @@ class BookingData {
   final int? guests;
   final dynamic totalPrice;
   final Customer? customer;
+  final List<RateModel>? rateData;
+  final bool? isRated;
 
   BookingData(
       {this.id,
@@ -35,43 +41,46 @@ class BookingData {
       this.adultCount,
       this.customer,
       this.childCount,
-        this.bookingAt,
-        this.deposit,
-        this.code
-      });
+      this.bookingAt,
+      this.deposit,
+      this.code,
+      this.propertyId,
+      this.rateData,
+      this.isRated});
 
   factory BookingData.fromJson(Map<String, dynamic> json) {
     return BookingData(
-      id: json['id'] != null ? int.tryParse(json['id'].toString()) : null,
-      unitId: json['unit_id'] != null
-          ? int.tryParse(json['unit_id'].toString())
-          : null,
-      property: json['property']?.toString()??'',
-      status: json['status']?.toString()??'',
-      address: json['address'] != null
-          ? Address.fromJson(json['address'] as Map<String, dynamic>)
-          : null,
-      checkIn: json['check_in']?.toString()??'',
-      checkOut: json['check_out']?.toString()??'',
-      image: json['image']?.toString() ?? '',
-      guests: json['guests'] != null
-          ? int.tryParse(json['guests'].toString())
-          : null,
-      totalPrice: json['total_price'] != null
-          ? double.tryParse(json['total_price'].toString())
-          : null,
-      childCount: json['children'] ?? 0,
-      adultCount: json['adults'] ?? 0,
-      unitCount: json['count'] ?? 1,
-      type: json['type']?.toString()??'',
-      bookingAt: json['booking_at']?.toString()??'',
-      deposit: json['deposit']?.toString()??'',
-
-      customer: json['customer'] != null
-          ? Customer.fromJson(json['customer'] as Map<String, dynamic>)
-          : null,
-      code: json['code']??''
-    );
+        id: json['id'] != null ? int.tryParse(json['id'].toString()) : null,
+        unitId: json['unit_id'] != null
+            ? int.tryParse(json['unit_id'].toString())
+            : null,
+        property: json['property']?.toString() ?? '',
+        status: json['status']?.toString() ?? '',
+        address: json['address'] != null
+            ? Address.fromJson(json['address'] as Map<String, dynamic>)
+            : null,
+        checkIn: json['check_in']?.toString() ?? '',
+        checkOut: json['check_out']?.toString() ?? '',
+        image: json['image']?.toString() ?? '',
+        guests: json['guests'] != null
+            ? int.tryParse(json['guests'].toString())
+            : null,
+        totalPrice: json['total_price'] != null
+            ? double.tryParse(json['total_price'].toString())
+            : null,
+        childCount: json['children'] ?? 0,
+        adultCount: json['adults'] ?? 0,
+        unitCount: json['count'] ?? 1,
+        type: json['type']?.toString() ?? '',
+        bookingAt: json['booking_at']?.toString() ?? '',
+        deposit: json['deposit']?.toString() ?? '',
+        customer: json['customer'] != null
+            ? Customer.fromJson(json['customer'] as Map<String, dynamic>)
+            : null,
+        code: json['code'] ?? '',
+        propertyId: json['property_id'],
+        rateData: RateModel.fromJsonList(json['criterias']??[]),
+        isRated: json['rate']);
   }
 
   Map<String, dynamic> toJson() {

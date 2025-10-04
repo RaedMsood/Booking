@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:booking/features/properties/cities/data/model/city_model.dart';
+
 import '../../core/local/secure_storage.dart';
 import '../../features/user/data/model/auth_model.dart';
 import '../../injection.dart';
@@ -29,9 +31,7 @@ class Auth {
         AuthModel authModel = AuthModel.fromJson(map);
         user = authModel;
       }
-       print("token: ${user.token}");
-
-
+      print("token: ${user.token}");
     } catch (ex) {
       throw '$ex';
     }
@@ -48,11 +48,14 @@ class Auth {
   String get name => user.user.name;
 
   String get phoneNumber => user.user.phoneNumber;
-  String get email => user.user.email;
-  String get gender => user.user.gender;
-  String? get date => user.user.birthDay;
-  String? get city => user.user.city!.name;
 
+  String get email => user.user.email;
+
+  String get gender => user.user.gender;
+
+  String? get date => user.user.birthDay;
+
+  CityModel get city => user.user.city!;
 
   Future<void> login(AuthModel data) async {
     user = data;
@@ -60,8 +63,9 @@ class Auth {
   }
 
   _writeToCache() {
-    log(jsonEncode(user), name: 'user');
-    secureStorage.write(key: _key, value: jsonEncode(user));
+    final cacheMap = user.toJsonForCache();
+    log(jsonEncode(cacheMap), name: 'user');
+    secureStorage.write(key: _key, value: jsonEncode(cacheMap));
   }
 
   Future logout() async {
@@ -91,4 +95,34 @@ class Auth {
     return false;
   }
 
+  Future<void> updateUserData({
+    String? name,
+    String? email,
+    String? phoneNumber,
+    String? gender,
+    String? birthDay,
+    CityModel? city,
+  }) async {
+    final updatedUser = user.user.copyWith(
+      name: name,
+      email: email,
+      phoneNumber: phoneNumber,
+      gender: gender,
+      birthDay: birthDay,
+      city: city,
+    );
+
+    user = user.copyWith(user: updatedUser);
+
+    _writeToCache();
+  }
+
+  Future<void> setFcmToken(String fcmToken) async {
+    await secureStorage.write(key: "fcm_token", value: fcmToken);
+  }
+
+  Future<String> getFcmToken() async {
+    final fcmToken = await secureStorage.read(key: "fcm_token");
+    return fcmToken ?? "";
+  }
 }

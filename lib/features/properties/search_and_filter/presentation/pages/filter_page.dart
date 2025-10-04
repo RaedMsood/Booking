@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/state/check_state_in_get_api_data_widget.dart';
 import '../../../../../core/state/state.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../riverpod/search_and_filter_riverpod.dart';
 import '../widgets/app_bar_filter_widget.dart';
 import '../widgets/features_filter_widget.dart';
@@ -42,7 +43,7 @@ class FilterPage extends ConsumerWidget {
                 minPrice: double.tryParse(state.data.minPrice) ?? 0.0,
               ),
               AutoSizeTextWidget(
-                text: "المميزات",
+                text: S.of(context).features,
                 fontSize: 12.sp,
                 colorText: Colors.black87,
                 fontWeight: FontWeight.w400,
@@ -51,7 +52,7 @@ class FilterPage extends ConsumerWidget {
                 features: state.data.features,
               ),
               AutoSizeTextWidget(
-                text: "التقييم",
+                text: S.of(context).rating,
                 fontSize: 12.sp,
                 colorText: Colors.black87,
                 fontWeight: FontWeight.w400,

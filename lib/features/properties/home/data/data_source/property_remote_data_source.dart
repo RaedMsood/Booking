@@ -13,7 +13,7 @@ class PropertyRemoteDataSource {
       url: AppURL.property,
       query: {
         'page': page,
-        'perPage': perPage,
+        'perPage': 4,
       },
     );
 

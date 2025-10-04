@@ -2,6 +2,7 @@ import 'package:booking/features/booking/presentation/widget/section_card_in_det
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../generated/l10n.dart';
 import 'info_item_in_confrim_booking_card_widget.dart';
 import 'status_badge_in_details_widget.dart';
 
@@ -20,13 +21,13 @@ class ConfirmBookingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SectionCardInDetailsWidget(
-      title: 'تأكيد الحجز',
+      title: S.of(context).bookingConfirmation,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InfoItemInConfrimBookingCardWidget(
-            title: 'رقم الحجز',
+            title: S.of(context).bookingCodeLabel,
             icon: Icons.copy,
             text: bookingId,
             onTap: () {
@@ -38,7 +39,7 @@ class ConfirmBookingCard extends StatelessWidget {
           ),
           10.verticalSpace,
           InfoItemInConfrimBookingCardWidget(
-            title: 'تاريخ الحجز',
+            title: S.of(context).bookingDateLabel,
             text: bookingDateString,
           ),
           10.verticalSpace,

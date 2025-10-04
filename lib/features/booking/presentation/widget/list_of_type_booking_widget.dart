@@ -1,3 +1,4 @@
+import 'package:booking/features/booking/presentation/widget/shimmer_booking_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/helpers/navigateTo.dart';
@@ -40,6 +41,10 @@ class _ListOfTypeBookingWidgetState
     final bookingTypeState = ref.watch(getBookingProvider(widget.statusId));
     return CheckStateInGetApiDataWidget(
       state: bookingTypeState,
+      widgetOfLoading: const ShimmerBookingCardWidget(),
+      refresh: (){
+        ref.read(getBookingProvider(widget.statusId).notifier).getDataBookingType();
+      },
       widgetOfData: ListView.builder(
         controller: _scrollController,
         itemBuilder: (context, index) => BookingCard(
@@ -49,6 +54,8 @@ class _ListOfTypeBookingWidgetState
               context,
               BookingDetailPage(
                 bookData: bookingTypeState.data.data[index],
+                isCompletedBook: widget.statusId == 2 ||
+                    bookingTypeState.data.data[index].status == "منتهيه",
               ),
             );
           },

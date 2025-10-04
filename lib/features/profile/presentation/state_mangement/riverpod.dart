@@ -1,4 +1,4 @@
-
+import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,11 +6,13 @@ import '../../../../core/state/data_state.dart';
 import '../../../../core/state/state.dart';
 import '../../../../services/auth/auth.dart';
 import '../../../properties/cities/data/model/city_model.dart';
+import '../../../properties/home/data/model/property_data_model.dart';
 import '../../../user/data/model/auth_model.dart';
+import '../../data/model/profile_model.dart';
 import '../../data/reposaitory/profile_reposaitory.dart';
 
 final languageProvider =
-StateNotifierProvider<LanguageController, Locale>((ref) {
+    StateNotifierProvider<LanguageController, Locale>((ref) {
   return LanguageController();
 });
 
@@ -38,53 +40,9 @@ class LanguageController extends StateNotifier<Locale> {
     }
   }
 }
-final editProfileProvider = StateNotifierProvider.autoDispose<EditProfileNotifier, bool>(
-      (ref) => EditProfileNotifier(ref),
-);
 
-class EditProfileNotifier extends StateNotifier<bool> {
-  EditProfileNotifier(this.ref) : super(false);
-
-  final Ref ref;
-
-  late final String _originalName;
-  late final String _originalEmail;
-  String? _originalGender;
-  DateTime? _originalBirthDate;
-  CityModel? _originalCity;
-
-  void initialize({
-    required String name,
-    required String email,
-    required String? gender,
-    required DateTime? birthDate,
-    required CityModel? city,
-  }) {
-    _originalName = name;
-    _originalEmail = email;
-    _originalGender = gender;
-    _originalBirthDate = birthDate;
-    _originalCity = city;
-  }
-
-  void checkIfChanged({
-    required String name,
-    required String email,
-    required String? gender,
-    required DateTime? birthDate,
-    required CityModel? city,
-  }) {
-    final changed = name.trim() != _originalName.trim() ||
-        email.trim() != _originalEmail.trim() ||
-        gender != _originalGender ||
-        birthDate != _originalBirthDate ||
-        city?.id != _originalCity?.id;
-
-    if (changed != state) state = changed;
-  }
-}
 final updateNotifierProvider =
-StateNotifierProvider.autoDispose<UpdateNotifier, DataState<AuthModel>>(
+    StateNotifierProvider.autoDispose<UpdateNotifier, DataState<AuthModel>>(
         (ref) => UpdateNotifier());
 
 class UpdateNotifier extends StateNotifier<DataState<AuthModel>> {
@@ -92,20 +50,173 @@ class UpdateNotifier extends StateNotifier<DataState<AuthModel>> {
   final _controller = ProfileReposaitory();
 
   Future<void> update({
-    required String phoneNumber,
-    required String name,
+    String? phoneNumber,
+    String? name,
     String? email,
-    required String gender,
-    required int cityId,
+    String? gender,
+    int? cityId,
     DateTime? dateOfBirth,
   }) async {
     state = state.copyWith(state: States.loading);
     final user = await _controller.update(
-        phoneNumber, name, email.toString(), gender, cityId, dateOfBirth);
+        phoneNumber!, name!, email.toString(), gender!, cityId!, dateOfBirth);
     user.fold((f) {
       state = state.copyWith(state: States.error, exception: f);
     }, (data) {
       state = state.copyWith(state: States.loaded, data: data);
+    });
+  }
+}
+
+final favoriteProvider = StateNotifierProvider.autoDispose<FavoriteNotifier,
+    DataState<List<PropertyDataModel>>>((ref) => FavoriteNotifier());
+
+class FavoriteNotifier
+    extends StateNotifier<DataState<List<PropertyDataModel>>> {
+  FavoriteNotifier() : super(DataState<List<PropertyDataModel>>.initial([])) {
+    getFavoriteProperties();
+  }
+
+  final _controller = ProfileReposaitory();
+
+  Future<void> getFavoriteProperties() async {
+    state = state.copyWith(state: States.loading);
+    final user = await _controller.getFavoriteProperties();
+    user.fold((f) {
+      state = state.copyWith(state: States.error, exception: f);
+    }, (data) {
+      state = state.copyWith(state: States.loaded, data: data);
+    });
+  }
+}
+
+final addFavoriteProvider =
+    StateNotifierProvider.autoDispose<AddFavoriteNotifier, DataState<Unit>>(
+        (ref) => AddFavoriteNotifier());
+
+class AddFavoriteNotifier extends StateNotifier<DataState<Unit>> {
+  AddFavoriteNotifier() : super(DataState<Unit>.initial(unit));
+  final _controller = ProfileReposaitory();
+
+  Future<void> addFavorite({required int idProperties}) async {
+    state = state.copyWith(state: States.loading);
+    final fav =
+        await _controller.addFavoriteProperties(idProperties: idProperties);
+    fav.fold((f) {
+      state = state.copyWith(state: States.error, exception: f);
+    }, (data) {
+      state = state.copyWith(state: States.loaded);
+    });
+  }
+}
+
+class EditProfileController extends StateNotifier<ChangeResult> {
+  EditProfileController() : super(const ChangeResult());
+
+  ProfileModel? _initial;
+
+  void initialize(ProfileModel snapshot) {
+    _initial = snapshot;
+    state = const ChangeResult();
+  }
+
+  void compute(ProfileModel current) {
+    final init = _initial;
+    if (init == null) return;
+
+    bool eqStr(String a, String b) => a.trim() == b.trim();
+    bool eqDate(DateTime? a, DateTime? b) {
+      if (a == null && b == null) return true;
+      if (a == null || b == null) return false;
+      return a.year == b.year && a.month == b.month && a.day == b.day;
+    }
+
+    state = ChangeResult(
+      nameChanged: !eqStr(current.name, init.name),
+      emailChanged: !eqStr(current.email, init.email),
+      phoneChanged: !eqStr(current.phoneNumber, init.phoneNumber),
+      genderChanged: current.gender != init.gender,
+      birthDateChanged: !eqDate(current.birthDate, init.birthDate),
+      cityChanged: (current.city?.id) != (init.city?.id),
+    );
+  }
+
+  ProfileModel effectiveForPut(ProfileModel current) {
+    final init = _initial!;
+    return ProfileModel(
+      name: state.nameChanged ? current.name : init.name,
+      email: state.emailChanged ? current.email : init.email,
+      phoneNumber: state.phoneChanged ? current.phoneNumber : init.phoneNumber,
+      gender: state.genderChanged ? current.gender : init.gender,
+      birthDate: state.birthDateChanged ? current.birthDate : init.birthDate,
+      city: state.cityChanged ? current.city : init.city,
+    );
+  }
+}
+
+final editProfileControllerProvider =
+    StateNotifierProvider<EditProfileController, ChangeResult>(
+  (ref) => EditProfileController(),
+);
+
+class FavoriteIdsNotifier extends StateNotifier<Set<int>> {
+  FavoriteIdsNotifier() : super(<int>{});
+
+  final _repo = ProfileReposaitory();
+  final Map<int, bool> _inFlight = {};
+
+  bool isBusy(int id) => _inFlight[id] == true;
+
+  Future<void> load() async {
+    final res = await _repo.getFavoriteProperties();
+    res.fold((_) {}, (list) {
+      state = list.map((p) => p.id).toSet();
+    });
+  }
+
+  Future<void> toggle(int id) async {
+    if (_inFlight[id] == true) return;
+    _inFlight[id] = true;
+
+    final wasFav = state.contains(id);
+    state = wasFav ? ({...state}..remove(id)) : ({...state, id});
+
+    try {
+      final res = await _repo.addFavoriteProperties(idProperties: id); // toggle
+      res.fold(
+        (_) {
+          state = wasFav ? ({...state, id}) : ({...state}..remove(id));
+        },
+        (_) {},
+      );
+    } finally {
+      _inFlight[id] = false;
+    }
+  }
+}
+final favoriteIdsProvider =
+StateNotifierProvider<FavoriteIdsNotifier, Set<int>>(
+      (ref) => FavoriteIdsNotifier()..load(),
+);
+final logoutProvider =
+StateNotifierProvider.autoDispose<LogoutController, DataState<Unit>>(
+      (ref) {
+    return LogoutController();
+  },
+);
+
+class LogoutController extends StateNotifier<DataState<Unit>> {
+  LogoutController() : super(DataState<Unit>.initial(unit));
+  final _controller = ProfileReposaitory();
+
+  Future<void> logout() async {
+    state = state.copyWith(state: States.loading);
+
+    final data = await _controller.logout();
+    data.fold((f) {
+      state = state.copyWith(state: States.error, exception: f);
+    }, (data) {
+      state = state.copyWith(state: States.loaded);
     });
   }
 }

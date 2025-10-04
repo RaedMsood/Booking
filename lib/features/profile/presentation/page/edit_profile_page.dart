@@ -1,22 +1,21 @@
-import 'package:booking/core/state/state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-
-import '../../../../core/constants/app_icons.dart';
-import '../../../../core/state/check_state_in_post_api_data_widget.dart';
-import '../../../../core/widgets/buttons/default_button.dart';
-import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../core/widgets/text_form_field.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
+import '../../../properties/cities/data/model/city_model.dart';
 import '../../../properties/cities/presentation/riverpod/cities_riverpod.dart';
-import '../../../properties/cities/presentation/widget/city_widget.dart';
 import '../../../user/presentation/widgets/birth_date_picker_widget.dart';
-import '../../../user/presentation/widgets/gender_selection_widget.dart';
 import '../../../user/presentation/widgets/user_page_titles_widget.dart';
+import '../../data/model/profile_model.dart';
+import '../widget/name_email_phone_widget.dart';
+import '../widget/update_birth_day_widget.dart';
+import '../widget/update_gender_widget.dart';
+import '../../../../core/state/state.dart';
+import '../../../../core/state/check_state_in_post_api_data_widget.dart';
+import '../../../../core/widgets/buttons/default_button.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../properties/cities/presentation/widget/city_widget.dart';
 import '../state_mangement/riverpod.dart';
 
 class EditProfilePage extends ConsumerStatefulWidget {
@@ -32,54 +31,94 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
 
-  dynamic selectedCity;
-  dynamic selectedGender;
+  bool _bootstrapping = true;
 
-  dynamic birthDate;
+  ProviderSubscription<DateTime?>? _birthSub;
+  ProviderSubscription<dynamic>? _genderSub;
+  ProviderSubscription<CityModel?>? _citySub;
 
   @override
   void initState() {
     super.initState();
-    selectedCity = ref.read(selectedCityProvider);
-    selectedGender = ref.read(genderProvider);
-    birthDate = ref.read(birthDateProvider);
+
     nameController.text = Auth().name;
     emailController.text = Auth().email;
     phoneController.text = Auth().phoneNumber;
-    selectedGender = Auth().gender;
-    birthDate = Auth().date;
-    selectedCity = Auth().city;
 
-    // حفظ القيم الأصلية داخل الـ Notifier
-    Future.microtask(() {
-      ref.read(editProfileProvider.notifier).initialize(
-        name: nameController.text,
-        email: emailController.text,
-        gender: ref.read(genderProvider),
-        birthDate: ref.read(birthDateProvider),
-        city: ref.read(selectedCityProvider),
+    final initialGender = Auth().gender;
+    final initialCity = Auth().city;
+    final initialBirth = DateTime.tryParse(Auth().date ?? '');
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(updateGenderProvider.notifier).state = initialGender;
+      ref.read(updateBirthDateProvider.notifier).state = initialBirth;
+      ref.read(selectedCityProvider.notifier).state = initialCity;
+
+      ref.read(editProfileControllerProvider.notifier).initialize(
+            ProfileModel(
+              name: nameController.text,
+              email: emailController.text,
+              phoneNumber: phoneController.text,
+              gender: initialGender,
+              birthDate: initialBirth,
+              city: initialCity,
+            ),
+          );
+
+      _birthSub = ref.listenManual<DateTime?>(
+        birthDateProvider,
+        (prev, next) => _onFormChanged(),
       );
+      _genderSub = ref.listenManual<dynamic>(
+        updateGenderProvider,
+        (prev, next) => _onFormChanged(),
+      );
+      _citySub = ref.listenManual<CityModel?>(
+        selectedCityProvider,
+        (prev, next) => _onFormChanged(),
+      );
+
+      _bootstrapping = false;
+      _onFormChanged();
     });
 
     nameController.addListener(_onFormChanged);
     emailController.addListener(_onFormChanged);
+    phoneController.addListener(_onFormChanged);
+  }
+
+  @override
+  void dispose() {
+    _birthSub?.close();
+    _genderSub?.close();
+    _citySub?.close();
+    nameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    super.dispose();
   }
 
   void _onFormChanged() {
-    ref.read(editProfileProvider.notifier).checkIfChanged(
+    if (_bootstrapping) return;
+
+    final current = ProfileModel(
       name: nameController.text,
       email: emailController.text,
-      gender: ref.read(genderProvider),
+      phoneNumber: phoneController.text,
+      gender: ref.read(updateGenderProvider),
       birthDate: ref.read(birthDateProvider),
       city: ref.read(selectedCityProvider),
     );
-  }
 
+    ref.read(editProfileControllerProvider.notifier).compute(current);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final isChanged = ref.watch(editProfileProvider);
+    final changes = ref.watch(editProfileControllerProvider);
     final stateUpdateUser = ref.watch(updateNotifierProvider);
+    final canSave = changes.hasAny;
+
     return Scaffold(
       extendBody: true,
       resizeToAvoidBottomInset: true,
@@ -91,173 +130,89 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               24.h.verticalSpace,
-              const UserPageTitlesWidget(
-                title: "تعديل البيانات الشخصية",
-                subTitle: "قم بتحديث معلوماتك الشخصية",
+               UserPageTitlesWidget(
+                title:  S.of(context).editPersonalInfoTitle ,
+                subTitle: S.of(context).editPersonalInfoSubtitle,
               ),
               12.verticalSpace,
-              _buildNameAndEmail(),
-              const BirthDatePickerWidget(),
+              NameEmailPhoneSection(
+                nameController: nameController,
+                phoneController: phoneController,
+                emailController: emailController,
+              ),
               12.h.verticalSpace,
-              const GenderPickerWidget(),
+              UpdateBirthDatePickerWidget(onChanged: (_) => _onFormChanged()),
+              12.h.verticalSpace,
+              UpdateGenderWidget(
+                selectedGenderFromProfile: ref.watch(updateGenderProvider),
+                onChanged: (_) => _onFormChanged(),
+              ),
               const CityWidget(),
               24.h.verticalSpace,
               CheckStateInPostApiDataWidget(
                 state: stateUpdateUser,
-                functionSuccess: (){},
                 messageSuccess: "تم التعديل بنجاح",
+                functionSuccess: () {
+                  final latest = ProfileModel(
+                    name: nameController.text,
+                    email: emailController.text,
+                    phoneNumber: phoneController.text,
+                    gender: ref.read(updateGenderProvider),
+                    birthDate: ref.read(birthDateProvider),
+                    city: ref.read(selectedCityProvider),
+                  );
+                  Auth().updateUserData(
+                    // birthDate: ref.read(birthDateProvider),
+                    email: emailController.text,
+                    phoneNumber: phoneController.text,
+                    name: nameController.text,
+                    gender: ref.read(updateGenderProvider),
+                    city: ref.read(selectedCityProvider),
+                  );
+                  ref
+                      .read(editProfileControllerProvider.notifier)
+                      .initialize(latest);
+                },
                 bottonWidget: DefaultButtonWidget(
-                  text: "حفظ التعديلات",
-                  isLoading: stateUpdateUser.stateData==States.loading,
-                  onPressed: !isChanged ? () {
-                    print("no");
-                  } : () {
-                    final isValid = _formKey.currentState!.validate();
-                    selectedCity = ref.read(selectedCityProvider);
+                  text: S.of(context).saveChanges,
+                  isLoading: stateUpdateUser.stateData == States.loading,
+                  onPressed: !canSave
+                      ? null
+                      : () async {
+                          if (!_formKey.currentState!.validate()) return;
+                          FocusManager.instance.primaryFocus?.unfocus();
 
-                    bool hasError = false;
-                    if (selectedCity == null) {
-                      ref
-                          .read(selectedCityErrorProvider.notifier)
-                          .state =
-                      "يرجى اختيار المحافظة";
-                      hasError = true;
-                    } else {
-                      ref
-                          .read(selectedCityErrorProvider.notifier)
-                          .state = null;
-                    }
+                          final controller =
+                              ref.read(editProfileControllerProvider.notifier);
 
-                    if (!isValid || hasError) return;
+                          final current = ProfileModel(
+                            name: nameController.text,
+                            email: emailController.text,
+                            phoneNumber: phoneController.text,
+                            gender: ref.read(updateGenderProvider),
+                            birthDate: ref.read(birthDateProvider),
+                            city: ref.read(selectedCityProvider),
+                          );
 
-                    FocusManager.instance.primaryFocus?.unfocus();
-
-                    selectedGender = ref.read(genderProvider);
-                    birthDate = ref.watch(birthDateProvider);
-                    ref.read(updateNotifierProvider.notifier).update(
-                      dateOfBirth:birthDate ,
-
-                        phoneNumber:phoneController.text, name: nameController.text,
-                        gender: selectedGender,
-                        cityId: selectedCity.id);
-                    print("تعديل البيانات:");
-                    print(nameController.text);
-                    print(emailController.text);
-                    print(selectedGender);
-                    print(selectedCity!.id);
-                    print(birthDate);
-                  },
+                          controller.compute(current);
+                          final effective = controller.effectiveForPut(current);
+                          await ref
+                              .read(updateNotifierProvider.notifier)
+                              .update(
+                                //dateOfBirth: effective.birthDate?.toIso8601String() ?? '',
+                                email: effective.email,
+                                phoneNumber: effective.phoneNumber,
+                                name: effective.name,
+                                gender: (effective.gender ?? '').toString(),
+                                cityId: effective.city?.id ?? 0,
+                              );
+                        },
                 ),
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildNameAndEmail() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AutoSizeTextWidget(
-          text: "الاسم",
-          fontSize: 11.sp,
-          colorText: Colors.black87,
-        ),
-        6.h.verticalSpace,
-        TextFormFieldWidget(
-          controller: nameController,
-          hintText: "أدخل اسمك الرباعي",
-          fieldValidator: (value) {
-            if (value == null || value
-                .trim()
-                .isEmpty) {
-              return "الرجاء إدخال الاسم";
-            }
-            return null;
-          },
-          prefix: Padding(
-            padding: EdgeInsets.all(11.sp),
-            child:
-            Icon(Icons.person, size: 20.sp, color: AppColors.primaryColor),
-          ),
-        ),
-        12.verticalSpace,
-        AutoSizeTextWidget(
-          text: S
-              .of(context)
-              .phoneNumber,
-          fontSize: 11.sp,
-          colorText: Colors.black87,
-        ),
-        6.h.verticalSpace,
-        TextFormFieldWidget(
-          controller: phoneController,
-          type: TextInputType.phone,
-          maxLength: 9,
-          fieldValidator: (value) {
-            if (value == null || value
-                .toString()
-                .isEmpty) {
-              return S
-                  .of(context)
-                  .pleaseEnterYourPhoneNumberOrEmail;
-            }
-            final phone = value.trim();
-            if (!phone.startsWith('7')) {
-              return "رقم الهاتف يجب أن يبدأ بـ 7 (اليمن)";
-            }
-            if (phone.length < 9) {
-              return "رقم الهاتف يجب ألا يقل عن 9 أرقام";
-            }
-            return null;
-          },
-          prefix: Padding(
-            padding: EdgeInsets.all(11.sp),
-            child: SvgPicture.asset(
-              AppIcons.phone,
-              height: 14.h,
-            ),
-          ),
-          suffixIcon: Padding(
-            padding: EdgeInsets.only(
-                left: 12.w, right: 12.w, top: 12.h, bottom: 8.h),
-            child: AutoSizeTextWidget(
-              text: "967+",
-              colorText: AppColors.primaryColor,
-              fontSize: 12.sp,
-            ),
-          ),
-        ),
-        12.h.verticalSpace,
-        AutoSizeTextWidget(
-          text: "البريد الإلكتروني (اختياري)",
-          fontSize: 11.sp,
-          colorText: Colors.black87,
-        ),
-        6.h.verticalSpace,
-        TextFormFieldWidget(
-          controller: emailController,
-          hintText: "أدخل بريدك الإلكتروني",
-          type: TextInputType.emailAddress,
-          fieldValidator: (value) {
-            final email = value?.trim() ?? '';
-            if (email.isEmpty) return null;
-            final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-            if (!emailRegex.hasMatch(email)) {
-              return 'الرجاء إدخال بريد إلكتروني صالح';
-            }
-            return null;
-          },
-          prefix: Padding(
-            padding: EdgeInsets.all(11.sp),
-            child:
-            Icon(Icons.email, size: 20.sp, color: AppColors.primaryColor),
-          ),
-        ),
-        12.h.verticalSpace,
-      ],
     );
   }
 }

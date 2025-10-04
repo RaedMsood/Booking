@@ -3,19 +3,31 @@ import 'package:booking/features/properties/units/presentation/riverpod/unit_riv
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/helpers/navigateTo.dart';
 import '../../../../../core/state/state.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/bottomNavbar/button_bottom_navigation_bar_design_widget.dart';
 import '../../../../../core/widgets/buttons/default_button.dart';
+import '../../../../../services/auth/auth.dart';
+import '../../../../booking/presentation/page/details_of_book_in_add_page.dart';
+import '../../../../user/presentation/pages/log_in_page.dart';
 import '../../../property_details/presentation/widgets/sliver_app_bar_details_widget.dart';
 import '../widgets/unit_details_data_widget.dart';
 import '../widgets/unit_features_widget.dart';
 
 class UnitDetailsPage extends ConsumerWidget {
   final int unitId;
+  final String nameProp;
+  final String location;
+  final String image;
 
-  const UnitDetailsPage({super.key, required this.unitId});
+  const UnitDetailsPage(
+      {super.key,
+      required this.unitId,
+      required this.image,
+      required this.nameProp,
+      required this.location});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -29,6 +41,8 @@ class UnitDetailsPage extends ConsumerWidget {
             SliverAppBarDetailsWidget(
               isFavorite: false,
               images: state.data.images,
+              idProperties: state.data.id,
+              isUnit: true,
             ),
             SliverToBoxAdapter(
               child: UnitDetailsDataWidget(
@@ -93,7 +107,23 @@ class UnitDetailsPage extends ConsumerWidget {
                         width: 128.w,
                         textSize: 12.sp,
                         borderRadius: 34.r,
-                        onPressed: () {},
+                        onPressed: () {
+                          if (!Auth().loggedIn) {
+                            navigateTo(context, const LogInPage());
+                          } else {
+                            navigateTo(
+                              context,
+                              DetailsOfBookInAddPage(
+                                location: location,
+                                image: image ?? '',
+                                nameProp: nameProp,
+                                unitId: state.data.id,
+                                totalPrice: state.data.price.toString(),
+
+                              ),
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),

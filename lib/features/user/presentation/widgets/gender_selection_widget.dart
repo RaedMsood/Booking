@@ -11,7 +11,6 @@ final genderProvider = StateProvider<String>((ref) => 'male');
 
 class GenderPickerWidget extends ConsumerWidget {
   const GenderPickerWidget({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedGender = ref.watch(genderProvider);

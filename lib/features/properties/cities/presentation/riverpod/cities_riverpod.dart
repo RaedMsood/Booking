@@ -6,11 +6,14 @@ import '../../../home/data/model/property_model.dart';
 import '../../../home/data/model/property_pagination_model.dart';
 import '../../data/model/city_model.dart';
 import '../../data/repos/cities_repo.dart';
+final sselectedCityProvider = StateProvider.family<CityModel?,CityModel>((ref,init) {
+  return init;
+});
 
 final selectedCityProvider = StateProvider<CityModel?>((ref) => null);
 final selectedCityErrorProvider = StateProvider<String?>((ref) => null);
 
-final getAllCitiesProvider = StateNotifierProvider.autoDispose<GetAllCitiesNotifier,
+final getAllCitiesProvider = StateNotifierProvider<GetAllCitiesNotifier,
     DataState<List<CityModel>>>(
       (ref) {
     return GetAllCitiesNotifier();

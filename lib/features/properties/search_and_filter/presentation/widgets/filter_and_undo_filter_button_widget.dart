@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/buttons/default_button.dart';
+import '../../../../../generated/l10n.dart';
 
 class FilterAndUndoFilterButtonWidget extends StatelessWidget {
 
@@ -22,7 +23,7 @@ class FilterAndUndoFilterButtonWidget extends StatelessWidget {
           children: [
             Expanded(
               child: DefaultButtonWidget(
-                text: "فلترة",
+                text: S.of(context).applyFilter,
                 height: 40.h,
                 textSize: 12.5.sp,
                 fontWeight: FontWeight.w400,
@@ -37,7 +38,7 @@ class FilterAndUndoFilterButtonWidget extends StatelessWidget {
             14.w.horizontalSpace,
             Expanded(
               child: DefaultButtonWidget(
-                text: "تصفية الفلاتر",
+                text: S.of(context).clearFilters,
                 background: Colors.white,
                 textColor: AppColors.primaryColor,
                 height: 40.h,
