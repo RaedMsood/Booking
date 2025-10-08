@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../generated/l10n.dart';
 
 class AudienceInDetailsBookingWidget extends StatelessWidget {
   const AudienceInDetailsBookingWidget({super.key,required this.numChild,required this.numGuests});
@@ -24,27 +24,9 @@ class AudienceInDetailsBookingWidget extends StatelessWidget {
 
         children: [
           AutoSizeTextWidget(
-            text: 'بيانات الحضور',
+            text: S.of(context).guestsInfoTitle,
             fontSize: 12,
           ),
-          // 8.verticalSpace,
-          // Row(
-          //   children: [
-          //     SvgPicture.asset(
-          //       AppIcons.profile,
-          //       height: 17.h,
-          //       color: Color(0xff605A65),
-          //
-          //     ),
-          //     10.horizontalSpace,
-          //     AutoSizeTextWidget(
-          //       text: 'شباب',
-          //       fontSize: 12,
-          //       fontWeight: FontWeight.w400,
-          //       colorText: Color(0xff757575),
-          //     ),
-          //   ],
-          // ),
           8.verticalSpace,
           Row(
             children: [

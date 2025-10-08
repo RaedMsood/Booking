@@ -9,8 +9,7 @@ import 'city_name_and_flag_widget.dart';
 class CityCardForHomePageWidget extends StatelessWidget {
   final CityModel city;
 
-  const CityCardForHomePageWidget(
-      {super.key, required this.city});
+  const CityCardForHomePageWidget({super.key, required this.city});
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +39,24 @@ class CityCardForHomePageWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.r),
               gradient: LinearGradient(
                 colors: [
+                  // AppColors.primaryColor.withValues(alpha: 0.18),
+                  // AppColors.primaryColor.withValues(alpha: 0.28),
+                  // AppColors.primaryColor.withValues(alpha: 0.3),
                   Colors.black12,
                   Colors.black12,
                   Colors.black12,
                   Colors.black26,
                   Colors.black38,
                   Colors.black45,
-                  Colors.black87.withOpacity(.68),
-                  Colors.black.withOpacity(.85),
+                  Colors.black87.withValues(alpha: 0.72),
+                  Colors.black.withValues(alpha: 0.96),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
             ),
             child: CityNameAndFlagWidget(
-              cityName:city.name.toString() ,
+              cityName: city.name.toString(),
               colorText: Colors.white,
               fontWeight: FontWeight.w300,
               fontSize: 12.6.sp,

@@ -1,22 +1,22 @@
-import 'package:booking/core/state/check_state_in_post_api_data_widget.dart';
-import 'package:booking/core/widgets/buttons/default_button.dart';
-import 'package:booking/features/booking/data/booking_model/booking_model.dart';
-import 'package:booking/features/booking/presentation/page/show_last_details_in_add_booking_page.dart';
-import 'package:booking/features/properties/cities/presentation/widget/city_widget.dart';
-import 'package:booking/services/auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helpers/navigateTo.dart';
+import '../../../../core/state/check_state_in_post_api_data_widget.dart';
 import '../../../../core/state/state.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/buttons/default_button.dart';
 import '../../../../core/widgets/text_form_field.dart';
 import '../../../../generated/l10n.dart';
+import '../../../../services/auth/auth.dart';
 import '../../../properties/cities/presentation/riverpod/cities_riverpod.dart';
+import '../../../properties/cities/presentation/widget/city_widget.dart';
+import '../../data/booking_model/booking_model.dart';
 import '../riverpod/booking_riverpod.dart';
 import '../widget/desgin_button_in_add_booking_widget.dart';
 import '../widget/hotel_summary_card_widget.dart';
+import 'show_last_details_in_add_booking_page.dart';
 
 class CompleteAddBookingPage extends ConsumerStatefulWidget {
   const CompleteAddBookingPage(
@@ -40,7 +40,6 @@ class _CompleteAddBookingPageState
     extends ConsumerState<CompleteAddBookingPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(selectedCityProvider.notifier).state = initialCity;
@@ -67,7 +66,7 @@ class _CompleteAddBookingPageState
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
-        title:  AutoSizeTextWidget(
+        title: AutoSizeTextWidget(
           text: S.of(context).hotelBookingTitle,
         ),
       ),
@@ -91,7 +90,7 @@ class _CompleteAddBookingPageState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           12.verticalSpace,
-                           AutoSizeTextWidget(
+                          AutoSizeTextWidget(
                             text: S.of(context).personalInfoTitle,
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -101,14 +100,17 @@ class _CompleteAddBookingPageState
                             text: S.of(context).fullName,
                             fontSize: 11.sp,
                             fontWeight: FontWeight.w400,
-                            colorText: Color(0xff2E3333),
+                            colorText: const Color(0xff2E3333),
                           ),
                           6.verticalSpace,
                           TextFormFieldWidget(
                               controller: name,
                               type: TextInputType.name,
-                              prefix: Icon(Icons.person_2_outlined,
-                                  size: 20.sp, color: AppColors.primaryColor),
+                              prefix: Icon(
+                                Icons.person_2_outlined,
+                                size: 20.sp,
+                                color: AppColors.primaryColor,
+                              ),
                               fieldValidator: (value) {
                                 if ((value == null ||
                                     value.toString().isEmpty)) {
@@ -117,7 +119,7 @@ class _CompleteAddBookingPageState
                               }),
                           6.verticalSpace,
                           AutoSizeTextWidget(
-                            text: S.of(context).emailAddress,
+                            text: S.of(context).emailOptional,
                             fontSize: 11.sp,
                             fontWeight: FontWeight.w400,
                             colorText: Color(0xff2E3333),
@@ -131,7 +133,7 @@ class _CompleteAddBookingPageState
                               fieldValidator: (value) {
                                 if ((value == null ||
                                     value.toString().isEmpty)) {
-                                  return 'قم بتسجيل الايميل ';
+                                  return S.of(context).emailRequired;
                                 }
                                 final emails = email.text.trim() ?? '';
                                 final emailRegex =
@@ -142,34 +144,35 @@ class _CompleteAddBookingPageState
                               }),
                           6.verticalSpace,
                           AutoSizeTextWidget(
-                            text: S.of(context).phoneLabel,
+                            text: S.of(context).phoneNumber,
                             fontSize: 11.sp,
                             fontWeight: FontWeight.w400,
-                            colorText: Color(0xff2E3333),
+                            colorText: const Color(0xff2E3333),
                           ),
                           6.verticalSpace,
                           TextFormFieldWidget(
-                              controller: phone,
-                              maxLength: 9,
-                              buildCounter: false,
-                              prefix: Icon(Icons.phone_outlined,
-                                  size: 20.sp, color: AppColors.primaryColor),
-                              type: TextInputType.number,
-                              fieldValidator: (value) {
-                                if ((value == null ||
-                                    value.toString().isEmpty)) {
-                                  return S.of(context).phoneRequired;
-                                }
-                                final phone = value.trim();
-                                if (!phone.startsWith('7')) {
-                                  return "رقم الهاتف يجب أن يبدأ بـ 7 (اليمن)";
-                                }
-                                if (phone.length < 9) {
-                                  return "رقم الهاتف يجب ألا يقل عن 9 أرقام";
-                                }
-                              }),
+                            controller: phone,
+                            maxLength: 9,
+                            buildCounter: false,
+                            prefix: Icon(Icons.phone_outlined,
+                                size: 20.sp, color: AppColors.primaryColor),
+                            type: TextInputType.number,
+                            fieldValidator: (value) {
+                              if (value == null || value.toString().isEmpty) {
+                                return S.of(context).phoneRequired;
+                              }
+                              final phone = value.trim();
+                              if (!phone.startsWith('7')) {
+                                return S.of(context).phoneMustStartWith7;
+                              }
+                              if (phone.length < 9) {
+                                return S.of(context).phoneMustBe9Digits;
+                              }
+                              return null;
+                            },
+                          ),
                           7.verticalSpace,
-                          CityWidget(),
+                          const CityWidget(),
                         ],
                       ),
                     ),
@@ -203,7 +206,6 @@ class _CompleteAddBookingPageState
 
                         initialCity =
                             ref.read(selectedCityProvider.notifier).state!;
-                        print(initialCity.name);
                         if (isValid) {
                           final custemor = Customer(
                             email: email.text,

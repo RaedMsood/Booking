@@ -96,8 +96,10 @@ class GenderBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final genders = {'male': 'ذكر', 'female': 'أنثى'};
-    // نقرأ الحالة الحالية من نفس الـProvider مع initial
+    final genders = {
+      'male': S.of(context).male,
+      'female': S.of(context).female
+    };
     final current = ref.watch(updateGenderProvider);
     final notifier = ref.read(updateGenderProvider.notifier);
 

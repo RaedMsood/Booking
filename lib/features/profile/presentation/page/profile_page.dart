@@ -74,7 +74,7 @@ class ProfilePage extends ConsumerWidget {
                     title:  S.of(context).personalInfo,
                     context: context,
                     onTap: () {
-                      navigateTo(context, EditProfilePage());
+                      navigateTo(context, const EditProfilePage());
 
                     },
                   ),
@@ -83,7 +83,7 @@ class ProfilePage extends ConsumerWidget {
                     title:  S.of(context).favorites,
                     context: context,
                     onTap: () {
-                      navigateTo(context, FavoritePage());
+                      navigateTo(context, const FavoritePage());
 
 
                     },
@@ -93,7 +93,7 @@ class ProfilePage extends ConsumerWidget {
                     title:  S.of(context).generalSettings,
                     context: context,
                     onTap: () {
-                      navigateTo(context, SettingsPage());
+                      navigateTo(context, const SettingsPage());
                     },
                   ),
                 ]),
@@ -105,7 +105,7 @@ class ProfilePage extends ConsumerWidget {
                       title:  S.of(context).aboutApp,
                       context: context,
                       onTap: () {
-                        navigateTo(context, AboutPage());
+                        navigateTo(context, const AboutPage());
                       },
                     ),
                     TileWidget(
@@ -113,7 +113,7 @@ class ProfilePage extends ConsumerWidget {
                       title:  S.of(context).contactUs,
                       context: context,
                       onTap: () {
-                        navigateTo(context, ContactUsPage());
+                        navigateTo(context, const ContactUsPage());
                       },
                     ),
                     TileWidget(
@@ -122,7 +122,7 @@ class ProfilePage extends ConsumerWidget {
                       title:  S.of(context).faq,
                       context: context,
                       onTap: () {
-                        navigateTo(context, FAQPage());
+                        navigateTo(context, const FAQPage());
                       },
                     ),
                     TileWidget(

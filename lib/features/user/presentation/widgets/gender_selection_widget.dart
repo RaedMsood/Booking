@@ -6,6 +6,7 @@ import '../../../../core/constants/app_icons.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
+import '../../../../generated/l10n.dart';
 
 final genderProvider = StateProvider<String>((ref) => 'male');
 
@@ -19,7 +20,7 @@ class GenderPickerWidget extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AutoSizeTextWidget(
-          text: "الجنس",
+          text: S.of(context).gender,
           fontSize: 11.5.sp,
           colorText: Colors.black87,
         ),
@@ -47,7 +48,7 @@ class GenderPickerWidget extends ConsumerWidget {
                 ),
                 8.w.horizontalSpace,
                 AutoSizeTextWidget(
-                  text: selectedGender == 'male' ? 'ذكر' : 'أنثى',
+                  text: selectedGender == 'male' ? S.of(context).male : S.of(context).female,
                   fontSize: 11.sp,
                   colorText: Colors.black87,
                 ),
@@ -72,7 +73,10 @@ class GenderBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final genders = {'male': 'ذكر', 'female': 'أنثى'};
+    final genders = {
+      'male': S.of(context).male,
+      'female': S.of(context).female
+    };
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w),

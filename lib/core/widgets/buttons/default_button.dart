@@ -51,7 +51,7 @@ class DefaultButtonWidget extends StatelessWidget {
       opacity: isLoading == true ? 0.5 : 1,
       child: Container(
         width: width,
-        height: height ?? 44.h,
+        height: height ?? 42.h,
         decoration: BoxDecoration(
           color: background ?? AppColors.primaryColor,
           borderRadius: BorderRadius.circular(borderRadius ?? 8.r),
@@ -77,7 +77,7 @@ class DefaultButtonWidget extends StatelessWidget {
                     children: [
                       AutoSizeTextWidget(
                         text: text,
-                        fontSize: textSize ?? 13.sp,
+                        fontSize: textSize ?? 12.6.sp,
                         colorText: textColor ?? Colors.white,
                         textAlign: TextAlign.center,
                         fontWeight: fontWeight ?? FontWeight.w600,

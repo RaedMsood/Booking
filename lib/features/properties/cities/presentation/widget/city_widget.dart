@@ -64,7 +64,7 @@ class CityWidget extends ConsumerWidget {
                 ),
                 locationIcon ? 8.w.horizontalSpace : const SizedBox.shrink(),
                 AutoSizeTextWidget(
-                  text: selectedCity?.name ?? 'اختر المحافظة',
+                  text: selectedCity?.name ?? S.of(context).selectGovernorate,
                   fontSize: 11.sp,
                   colorText: selectedCity == null
                       ? AppColors.fontColor2

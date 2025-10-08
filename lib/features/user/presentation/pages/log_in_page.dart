@@ -51,8 +51,8 @@ class _LogInPageState extends ConsumerState<LogInPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const UserPageTitlesWidget(
-                    title: "تسجيل الدخول",
+                   UserPageTitlesWidget(
+                    title: S.of(context).logIn,
                     subTitle: "مرحبًا! مرحبًا بك من جديد، لقد افتقدناك",
                   ),
                   12.h.verticalSpace,
@@ -68,14 +68,14 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                     maxLength: 9,
                     fieldValidator: (value) {
                       if (value == null || value.toString().isEmpty) {
-                        return S.of(context).pleaseEnterYourPhoneNumberOrEmail;
+                        return S.of(context).phoneRequired;
                       }
                       final phone = value.trim();
                       if (!phone.startsWith('7')) {
-                        return "رقم الهاتف يجب أن يبدأ بـ 7 (اليمن)";
+                        return S.of(context).phoneMustStartWith7;
                       }
                       if (phone.length < 9) {
-                        return "رقم الهاتف يجب ألا يقل عن 9 أرقام";
+                        return S.of(context).phoneMustBe9Digits;
                       }
                       return null;
                     },
@@ -108,7 +108,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                           ));
                     },
                     bottonWidget: DefaultButtonWidget(
-                      text: "تسجيل الدخول",
+                      text: S.of(context).logIn,
                       isLoading: state.stateData == States.loading,
                       onPressed: () {
                         final isValid = formKey.currentState!.validate();
@@ -131,7 +131,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                         Navigator.of(context).pop();
                       },
                       child: AutoSizeTextWidget(
-                        text: "المتابعة كزائر",
+                        text: S.of(context).continueAsGuest,
                         fontSize: 11.sp,
                         fontWeight: FontWeight.w400,
                         colorText: AppColors.primaryColor,

@@ -40,15 +40,13 @@ class VerifyCodePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AutoSizeTextWidget(
-              text: "رمز التحقق",
+              text: S.of(context).verificationCode,
               fontSize: 14.5.sp,
               fontWeight: FontWeight.w600,
             ),
             6.h.verticalSpace,
-
             AutoSizeTextWidget(
-              text:
-                  "${S.of(context).codeHasBeenSendTo} $phoneNumberOrEmail",
+              text: "${S.of(context).codeHasBeenSendTo} $phoneNumberOrEmail",
               fontSize: 11.sp,
               fontWeight: FontWeight.w600,
               colorText: AppColors.fontColor,
@@ -65,18 +63,17 @@ class VerifyCodePage extends ConsumerWidget {
             CheckStateInPostApiDataWidget(
               state: checkOTPState,
               hasMessageSuccess: false,
-              functionSuccess: () async{
+              functionSuccess: () async {
                 if (checkOTPState.data.status == true) {
                   Auth().login(checkOTPState.data);
 
-                  navigateTo(context,const BottomNavigationBarWidget());
+                  navigateTo(context, const BottomNavigationBarWidget());
                 } else {
                   navigateTo(context, const SignUpPage());
                 }
               },
               bottonWidget: DefaultButtonWidget(
                 text: S.of(context).confirm,
-
                 isLoading: checkOTPState.stateData == States.loading,
                 onPressed: () async {
                   final isValid = formKey.currentState!.validate();
@@ -85,7 +82,7 @@ class VerifyCodePage extends ConsumerWidget {
                     ref.read(checkOTPProvider.notifier).checkOTP(
                           phoneNumber: phoneNumberOrEmail,
                           otp: verifyController.text,
-                      deviceToken:await Auth().getFcmToken(),
+                          deviceToken: await Auth().getFcmToken(),
                         );
                   }
                 },
@@ -98,23 +95,4 @@ class VerifyCodePage extends ConsumerWidget {
   }
 }
 
-class Hello extends StatelessWidget {
-  const Hello({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          AutoSizeTextWidget(
-            text: "مرحبا بك ",
-            fontSize: 16.sp,
-            maxLines: 2,
-            textAlign: TextAlign.center,
-            fontWeight: FontWeight.w600,
-          ),
-        ],
-      ),
-    );
-  }
-}

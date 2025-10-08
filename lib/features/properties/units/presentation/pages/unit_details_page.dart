@@ -9,6 +9,7 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/bottomNavbar/button_bottom_navigation_bar_design_widget.dart';
 import '../../../../../core/widgets/buttons/default_button.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../../services/auth/auth.dart';
 import '../../../../booking/presentation/page/details_of_book_in_add_page.dart';
 import '../../../../user/presentation/pages/log_in_page.dart';
@@ -76,7 +77,7 @@ class UnitDetailsPage extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AutoSizeTextWidget(
-                            text: "السعر الإجمالي",
+                            text: S.of(context).grandTotal,
                             fontSize: 11.4.sp,
                             colorText: AppColors.greyColor,
                             fontWeight: FontWeight.w400,

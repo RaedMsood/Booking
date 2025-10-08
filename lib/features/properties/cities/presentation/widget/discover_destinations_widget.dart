@@ -30,7 +30,7 @@ class DiscoverDestinationsWidget extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  navigateTo(context, DestinationsPage());
+                  navigateTo(context, const DestinationsPage());
                 },
                 child: Container(
                   padding:

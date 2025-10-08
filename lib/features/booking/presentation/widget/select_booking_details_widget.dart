@@ -25,7 +25,7 @@ class SelectBookingDetailsWidget extends StatefulWidget {
 }
 
 class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
-  String _purpose = 'ترفيه';
+  String _purpose = S.current.purposeLeisure;
   int _rooms = 1, _adults = 1, _children = 1;
 
   void _showOptionsSheet({
@@ -76,7 +76,7 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
             text: S.of(context).guestsSectionTitle,
             fontSize: 8.sp,
             fontWeight: FontWeight.w500,
-            colorText: Color(0xff001A33),
+            colorText: const Color(0xff001A33),
           ),
           16.verticalSpace,
           SelectFieldWidget(
@@ -94,17 +94,6 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
               },
             ),
           ),
-          // const SizedBox(height: 12),
-          // SelectFieldWidget(
-          //   label: 'نوع الأشخاص',
-          //   value: _personType,
-          //   onTap: () => _showOptionsSheet(
-          //     title: 'نوع الأشخاص',
-          //     options: ['شباب', 'عائلات', 'أصدقاء', 'زوجين'],
-          //     current: _personType,
-          //     onSelected: (v) => setState(() => _personType = v),
-          //   ),
-          // ),
           const SizedBox(height: 16),
           CounterRowWidget(
             label: S.of(context).roomsCount,

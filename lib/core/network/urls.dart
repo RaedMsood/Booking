@@ -41,15 +41,21 @@ class AppURL {
 
   static String get custemorForBooking => '/booking/customer';
 
+  static String get getAllPaymentMethods => '/booking/get_booking_data';
+
+  static String get confirmPayment => '/booking/payment';
+
   static String get updateUser => '/profile/update';
+
   static String get getFavorite => '/profile/favorites';
+
   static String get addFavorite => '/profile/add_favorites';
+
   static String get propertyPosition => '/property/loc';
+
   static String get propertyFromPosition => '/property/show_for_loc';
 
   static String get rateProperty => '/booking/rate';
 
   static String get notification => '/notifications';
-
-
 }

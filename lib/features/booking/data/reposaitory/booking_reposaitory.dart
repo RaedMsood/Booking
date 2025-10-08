@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 
 import '../../../../core/state/pagination_data/paginated_model.dart';
 import '../booking_model/booking_model.dart';
+import '../booking_model/payment_methods_model.dart';
 import '../booking_model/rate_model.dart';
 import '../data_source/booking_data_source.dart';
 
@@ -48,16 +49,45 @@ class BookingReposaitory {
       return Left(e);
     }
   }
-  Future<Either<DioException, Unit>> rateTheProperty({
-    required int idProperty,
-    required List<RateModel> rate,
-    required int idBooking
-  }) async {
+
+  Future<Either<DioException, Unit>> rateTheProperty(
+      {required int idProperty,
+      required List<RateModel> rate,
+      required int idBooking}) async {
     try {
       final remote = await bookingDataSource.rateTheProperty(
         idBooking: idBooking,
         rate: rate,
         idProperty: idProperty,
+      );
+      return Right(remote);
+    } on DioException catch (e) {
+      return Left(e);
+    }
+  }
+
+  Future<Either<DioException, List<PaymentMethodsModel>>>
+      getAllPaymentMethods() async {
+    try {
+      final remote = await bookingDataSource.getAllPaymentMethods();
+      return Right(remote);
+    } on DioException catch (e) {
+      return Left(e);
+    }
+  }
+
+  Future<Either<DioException, Unit>> confirmPayment({
+    required int bookingId,
+    required String payMethodName,
+    required String voucher,
+    required int amount,
+  }) async {
+    try {
+      final remote = await bookingDataSource.confirmPayment(
+        bookingId: bookingId,
+        payMethodName: payMethodName,
+        voucher: voucher,
+        amount: amount,
       );
       return Right(remote);
     } on DioException catch (e) {

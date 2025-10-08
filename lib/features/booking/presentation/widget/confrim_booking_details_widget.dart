@@ -61,7 +61,7 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
               ),
               10.horizontalSpace,
               AutoSizeTextWidget(
-                text: 'تاريخ الحجز $bookAt',
+                text: 'تاريخ الحجز $checkIn',
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 colorText: Color(0xff757575),

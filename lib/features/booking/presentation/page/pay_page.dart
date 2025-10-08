@@ -1,73 +1,126 @@
-  import 'package:booking/features/booking/presentation/page/show_last_details_in_add_booking_page.dart';
+import 'package:booking/core/state/check_state_in_get_api_data_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/helpers/navigateTo.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
+import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
+import '../../../../generated/l10n.dart';
+import '../../data/booking_model/pay_spec.dart';
+import '../riverpod/booking_riverpod.dart';
 import '../widget/bill_summary_widget.dart';
 import '../widget/deposit_in_last_details_widget.dart';
 import '../widget/desgin_button_in_add_booking_widget.dart';
 import '../widget/discount_code_widget.dart';
-import '../widget/payment_method_widget.dart';
+import '../widget/general_design_for_booking_widget.dart';
+import '../widget/pay_method_widget.dart';
+import '../widget/list_of_pay_method_widget.dart';
 
-class PayPage extends StatelessWidget {
-  const PayPage({super.key});
+class PayPage extends ConsumerWidget {
+  final int bookingId;
+
+  const PayPage({super.key, required this.bookingId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var payState = ref.watch(getAllPaymentMethodsProvider);
+    final errorMessage = ref.watch(selectedPayMethodErrorProvider);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const AutoSizeTextWidget(
-          text: 'دفع العربون',
+        title:  AutoSizeTextWidget(
+          text: S.of(context).payDeposit,
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 10.h ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AutoSizeTextWidget(
-                      text: 'قم بدفع العبون لتاكيد الحجز',
-                      fontSize: 13,
-                    ),
-                    4.verticalSpace,
-                    AutoSizeTextWidget(
-                      text: 'سيتوجب عليك دفع باقي المبلغ لصاحب الفندق عند الوصول',
-                      fontSize: 12,
-                      fontWeight: FontWeight.w300,colorText: Color(0xff605A65),
-                    ),
-                    14.verticalSpace,
-                    DepositInLastDetailsWidget(
-                      deposit: 50000,
-                    ),
-                    14.verticalSpace,
-                    DiscountCodeWidget(),
-                    14.verticalSpace,
-
-                    PaymentMethodsWidget(),
-                    14.verticalSpace,
-                    BillSummaryWidget(),
-                  ],
+      body: CheckStateInGetApiDataWidget(
+        state: payState,
+        refresh: () {
+          ref.refresh(getAllPaymentMethodsProvider);
+        },
+        widgetOfData: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Container(
+                  width: double.infinity,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AutoSizeTextWidget(
+                        text: S.of(context).confirmDepositTitle,
+                        fontSize: 12.6.sp,
+                      ),
+                      6.verticalSpace,
+                      AutoSizeTextWidget(
+                        text:
+                            'سيتوجب عليك دفع باقي المبلغ لصاحب الفندق عند الوصول',
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w400,
+                        colorText: Color(0xff605A65),
+                      ),
+                      14.verticalSpace,
+                      const DepositInLastDetailsWidget(
+                        deposit: 50000,
+                      ),
+                      14.verticalSpace,
+                      const DiscountCodeWidget(),
+                      14.verticalSpace,
+                      if (errorMessage != null)
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 6.h),
+                          child: AutoSizeTextWidget(
+                            text: errorMessage,
+                            fontSize: 10.sp,
+                            colorText: AppColors.dangerColor,
+                          ),
+                        ),
+                      GeneralDesignForBookingWidget(
+                        title: S.of(context).paymentMethods,
+                        child: ListOfPaymentMethodWidget(
+                          paymentData: payState.data,
+                        ),
+                      ),
+                      14.verticalSpace,
+                      const BillSummaryWidget(),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          DesginButtonInAddBookingWidget(
-            button: DefaultButtonWidget(text: "الدفع"),
-          ),
-        ],
+            DesginButtonInAddBookingWidget(
+              button: DefaultButtonWidget(
+                text: S.of(context).payAction,
+                onPressed: () {
+                  final selectedPayMethod = ref.read(selectedPayMethodProvider);
+
+                  bool hasError = false;
+                  if (selectedPayMethod == null) {
+                    ref.read(selectedPayMethodErrorProvider.notifier).state =
+                      S.of(context).pleaseSelectPaymentMethod;
+                    hasError = true;
+                  } else {
+                    ref.read(selectedPayMethodErrorProvider.notifier).state =
+                        null;
+                  }
+
+                  if (hasError) return;
+
+                  showTitledBottomSheet(
+                    context: context,
+                    title: paySpecs[selectedPayMethod!.name]!.codeLabel,
+                    page: PayMethodWidget(bookingId: bookingId),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-
-
-

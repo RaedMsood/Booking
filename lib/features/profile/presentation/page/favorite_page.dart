@@ -4,8 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../properties/home/presentation/widgets/property_card_widget.dart';
-import '../../../properties/home/presentation/widgets/shimmer_property_card_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../state_mangement/riverpod.dart';
 import '../widget/property _fav_card.dart';
 
@@ -19,8 +18,8 @@ class FavoritePage extends ConsumerWidget {
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,
-          title: const AutoSizeTextWidget(
-            text: 'المفضلة',
+          title:  AutoSizeTextWidget(
+            text: S.of(context).favorites,
           ),
         ),
         body: CheckStateInGetApiDataWidget(

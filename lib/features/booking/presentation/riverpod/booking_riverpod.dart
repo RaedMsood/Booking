@@ -1,11 +1,12 @@
 import 'dart:ui';
-import 'package:booking/features/booking/data/booking_model/rate_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/state/data_state.dart';
 import '../../../../core/state/pagination_data/paginated_model.dart';
 import '../../../../core/state/state.dart';
 import '../../data/booking_model/booking_model.dart';
+import '../../data/booking_model/payment_methods_model.dart';
+import '../../data/booking_model/rate_model.dart';
 import '../../data/booking_model/status_model.dart';
 import '../../data/reposaitory/booking_reposaitory.dart';
 
@@ -24,13 +25,10 @@ class BookingNotifier extends StateNotifier<DataState<int>> {
     state = state.copyWith(state: States.loading);
     final buy =
         await _controller.checkBookingFromHotel(bookingData: bookingData);
-    buy.fold((faliure) {
-      state = state.copyWith(state: States.error, exception: faliure);
+    buy.fold((failure) {
+      state = state.copyWith(state: States.error, exception: failure);
     }, (data) {
-      state = state.copyWith(
-        state: States.loaded,
-        data: data
-      );
+      state = state.copyWith(state: States.loaded, data: data);
     });
   }
 }
@@ -80,8 +78,8 @@ class GetBookingNotifier
   }
 }
 
-final customerBookingProvider =
-    StateNotifierProvider.autoDispose<CustomerBookingNotifier, DataState<BookingData>>(
+final customerBookingProvider = StateNotifierProvider.autoDispose<
+    CustomerBookingNotifier, DataState<BookingData>>(
   (ref) {
     return CustomerBookingNotifier();
   },
@@ -96,50 +94,109 @@ class CustomerBookingNotifier extends StateNotifier<DataState<BookingData>> {
     state = state.copyWith(state: States.loading);
     final customers =
         await _controller.custemorDataForBooking(custemor: customer);
-    customers.fold((faliure) {
-      state = state.copyWith(state: States.error, exception: faliure);
+    customers.fold((f) {
+      state = state.copyWith(state: States.error, exception: f);
     }, (data) {
+      state = state.copyWith(state: States.loaded, data: data);
+    });
+  }
+}
+
+final getAllPaymentMethodsProvider = StateNotifierProvider.autoDispose<
+    GetAllPaymentMethodsController, DataState<List<PaymentMethodsModel>>>(
+  (ref) => GetAllPaymentMethodsController(),
+);
+
+class GetAllPaymentMethodsController
+    extends StateNotifier<DataState<List<PaymentMethodsModel>>> {
+  GetAllPaymentMethodsController()
+      : super(DataState<List<PaymentMethodsModel>>.initial([])) {
+    getData();
+  }
+
+  final _controller = BookingReposaitory();
+
+  Future<void> getData() async {
+    state = state.copyWith(state: States.loading);
+
+    final data = await _controller.getAllPaymentMethods();
+
+    data.fold((f) {
+      state = state.copyWith(state: States.error, exception: f);
+    }, (data) {
+      state = state.copyWith(state: States.loaded, data: data);
+    });
+  }
+}
+
+final selectedPayMethodProvider =
+    StateProvider<PaymentMethodsModel?>((ref) => null);
+
+final selectedPayMethodErrorProvider = StateProvider<String?>((ref) => null);
+
+final confirmPaymentProvider =
+    StateNotifierProvider.autoDispose<ConfirmPaymentNotifier, DataState<bool>>(
+        (ref) => ConfirmPaymentNotifier());
+
+class ConfirmPaymentNotifier extends StateNotifier<DataState<bool>> {
+  ConfirmPaymentNotifier() : super(DataState<bool>.initial(false));
+  final _controller = BookingReposaitory();
+
+  Future<void> confirmPayment({
+    required int bookingId,
+    required String payMethodName,
+    required String voucher,
+    required int amount,
+  }) async {
+    state = state.copyWith(state: States.loading);
+    final user = await _controller.confirmPayment(
+      bookingId: bookingId,
+      payMethodName: payMethodName,
+      voucher: voucher,
+      amount: amount,
+    );
+    user.fold((f) {
+      state = state.copyWith(state: States.error, exception: f);
+    }, (_) {
       state = state.copyWith(
         state: States.loaded,
-        data: data
       );
     });
   }
 }
 
-
 final ratePropertyProvider =
-StateNotifierProvider.autoDispose<RatePropertyNotifier, DataState<Unit>>(
-      (ref) {
+    StateNotifierProvider.autoDispose<RatePropertyNotifier, DataState<Unit>>(
+  (ref) {
     return RatePropertyNotifier();
   },
 );
 
 class RatePropertyNotifier extends StateNotifier<DataState<Unit>> {
-  RatePropertyNotifier()
-      : super(DataState<Unit>.initial(unit));
+  RatePropertyNotifier() : super(DataState<Unit>.initial(unit));
   final _controller = BookingReposaitory();
 
-  rateProperty({required List<RateModel> rate,required int idProperty,required int idBooking}) async {
+  rateProperty(
+      {required List<RateModel> rate,
+      required int idProperty,
+      required int idBooking}) async {
     state = state.copyWith(state: States.loading);
-    final rates =
-    await _controller.rateTheProperty(rate: rate,idProperty: idProperty,idBooking: idBooking);
-    rates.fold((faliure) {
-      state = state.copyWith(state: States.error, exception: faliure);
+    final rates = await _controller.rateTheProperty(
+        rate: rate, idProperty: idProperty, idBooking: idBooking);
+    rates.fold((failure) {
+      state = state.copyWith(state: States.error, exception: failure);
     }, (data) {
       state = state.copyWith(
-          state: States.loaded,
-
+        state: States.loaded,
       );
     });
   }
 }
 
-final getIfPropertyRatedProvider =
-StateNotifierProvider.family<GetIfPropertyRatedNotifier, bool?,Tuple2<int?,int?> >(
-        (ref, idSection) {
-      return GetIfPropertyRatedNotifier();
-    });
+final getIfPropertyRatedProvider = StateNotifierProvider.family<
+    GetIfPropertyRatedNotifier, bool?, Tuple2<int?, int?>>((ref, idSection) {
+  return GetIfPropertyRatedNotifier();
+});
 
 class GetIfPropertyRatedNotifier extends StateNotifier<bool?> {
   GetIfPropertyRatedNotifier() : super(null);
@@ -150,10 +207,10 @@ class GetIfPropertyRatedNotifier extends StateNotifier<bool?> {
 }
 
 final showAllScoreInRateProvider =
-StateNotifierProvider.family<ShowAllScoreInRateNotifier, bool?,int? >(
+    StateNotifierProvider.family<ShowAllScoreInRateNotifier, bool?, int?>(
         (ref, index) {
-      return ShowAllScoreInRateNotifier();
-    });
+  return ShowAllScoreInRateNotifier();
+});
 
 class ShowAllScoreInRateNotifier extends StateNotifier<bool?> {
   ShowAllScoreInRateNotifier() : super(false);

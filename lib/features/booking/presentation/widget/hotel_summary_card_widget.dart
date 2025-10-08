@@ -30,20 +30,21 @@ class HotelSummaryCard extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15.sp),
-                    bottomLeft: Radius.circular(15.sp))),
-
-            child:  OnlineImagesWidget(
-              imageUrl: imageUrl!=''?imageUrl! :  'https://media.istockphoto.com/id/2110310187/photo/luxury-tropical-pool-villa-at-dusk.jpg?s=1024x1024&w=is&k=20&c=FfMY-QLqiixCQprNhrs5vmHZn1_vHqxKj3CWBRQsJ9M=',
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15.sp),
+                bottomLeft: Radius.circular(15.sp),
+              ),
+            ),
+            child: OnlineImagesWidget(
+              imageUrl: imageUrl != ''
+                  ? imageUrl!
+                  : 'https://media.istockphoto.com/id/2110310187/photo/luxury-tropical-pool-villa-at-dusk.jpg?s=1024x1024&w=is&k=20&c=FfMY-QLqiixCQprNhrs5vmHZn1_vHqxKj3CWBRQsJ9M=',
               borderRadius: 12.r,
               size: Size(90.w, 60.h),
-              fit:  BoxFit.cover,
+              fit: BoxFit.cover,
             ),
           ),
           6.horizontalSpace,
-
-          // نص الاسم والموقع
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,11 +57,10 @@ class HotelSummaryCard extends StatelessWidget {
                 4.verticalSpace,
                 Row(
                   children: [
-                     SvgPicture.asset(
+                    SvgPicture.asset(
                       AppIcons.location,
                       height: 12.h,
-                      color: Color(0xff757575),
-
+                      color: const Color(0xff757575),
                     ),
                     2.horizontalSpace,
                     Expanded(
@@ -77,8 +77,6 @@ class HotelSummaryCard extends StatelessWidget {
               ],
             ),
           ),
-
-          // صورة الفندق
         ],
       ),
     );

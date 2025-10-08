@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/state/state.dart';
 import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
 import '../../../properties/cities/data/model/city_model.dart';
 import '../../../properties/cities/presentation/riverpod/cities_riverpod.dart';
@@ -30,7 +31,7 @@ class UpdateCityWidget extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 12.h),
-        Text('المحافظة', style: TextStyle(fontSize: 11.5.sp)),
+        Text(S.of(context).governorate, style: TextStyle(fontSize: 11.5.sp)),
         SizedBox(height: 6.h),
         InkWell(
           onTap: cityState.stateData == States.loaded
@@ -60,13 +61,13 @@ class UpdateCityWidget extends ConsumerWidget {
                 SvgPicture.asset(AppIcons.location, height: 18.h),
                 SizedBox(width: 8.w),
                 Text(
-                  selectedCity?.name ?? 'اختر المحافظة',
+                  selectedCity?.name ?? S.of(context).selectGovernorate,
                   style: TextStyle(
                     fontSize: 11.sp,
                     color: selectedCity == null ? Colors.grey : Colors.black87,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 SvgPicture.asset(AppIcons.arrowBottom, height: 18.h),
               ],
             ),

@@ -6,9 +6,8 @@ import '../../../../core/state/check_state_in_post_api_data_widget.dart';
 import '../../../../core/state/state.dart';
 import '../../../../core/widgets/bottomNavbar/bottom_navigation_bar_widget.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
+import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
-import '../../../map/presentation/riverpod/map_riverpod.dart';
-import '../../../profile/presentation/widget/update_gender_widget.dart';
 import '../../../properties/cities/presentation/riverpod/cities_riverpod.dart';
 import '../../../properties/cities/presentation/widget/city_widget.dart';
 import '../riverpod/user_riverpod.dart';
@@ -17,7 +16,6 @@ import '../widgets/design_to_log_in_and_sign_up_widget.dart';
 import '../widgets/gender_selection_widget.dart';
 import '../widgets/name_and_email_widget.dart';
 import '../widgets/user_page_titles_widget.dart';
-import 'verify_code_page.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
   const SignUpPage({super.key});
@@ -48,8 +46,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 24.h.verticalSpace,
-                const UserPageTitlesWidget(
-                  title: "إنشاء حساب",
+                 UserPageTitlesWidget(
+                  title: S.of(context).signUp,
                   subTitle: "إنشاء حسابك الآن لتبدأ رحلتك",
                 ),
                 NameAndEmailWidget(
@@ -67,10 +65,10 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                   functionSuccess: () {
                     Auth().login(signUpState.data);
 
-                    navigateTo(context, BottomNavigationBarWidget());
+                    navigateTo(context, const BottomNavigationBarWidget());
                   },
                   bottonWidget: DefaultButtonWidget(
-                    text: "إنشاء حساب",
+                    text: S.of(context).signUp,
                     isLoading: signUpState.stateData == States.loading,
                     onPressed: () async {
                       final isValid = formKey.currentState!.validate();
@@ -79,7 +77,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                       bool hasError = false;
                       if (selectedCity == null) {
                         ref.read(selectedCityErrorProvider.notifier).state =
-                            "يرجى اختيار المحافظة";
+                           S.of(context).governorateRequired;
                         hasError = true;
                       } else {
                         ref.read(selectedCityErrorProvider.notifier).state =

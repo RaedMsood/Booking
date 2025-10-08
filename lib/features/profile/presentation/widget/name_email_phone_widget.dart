@@ -25,23 +25,24 @@ class NameEmailPhoneSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AutoSizeTextWidget(
-          text: S.of(context).name,
+          text: S.of(context).fullName,
           fontSize: 11.sp,
           colorText: Colors.black87,
         ),
         6.h.verticalSpace,
         TextFormFieldWidget(
           controller: nameController,
-          hintText: "أدخل اسمك الرباعي",
+          hintText: S.of(context).fullNamePlaceholder,
           fieldValidator: (value) {
             if (value == null || value.trim().isEmpty) {
-              return "الرجاء إدخال الاسم";
+              return S.of(context).nameRequired;
             }
             return null;
           },
           prefix: Padding(
             padding: EdgeInsets.all(11.sp),
-            child: Icon(Icons.person, size: 20.sp, color: AppColors.primaryColor),
+            child:
+                Icon(Icons.person, size: 20.sp, color: AppColors.primaryColor),
           ),
         ),
         12.verticalSpace,
@@ -59,14 +60,14 @@ class NameEmailPhoneSection extends StatelessWidget {
           buildCounter: false,
           fieldValidator: (value) {
             if (value == null || value.toString().isEmpty) {
-              return S.of(context).pleaseEnterYourPhoneNumberOrEmail;
+              return S.of(context).phoneRequired;
             }
             final phone = value.trim();
             if (!phone.startsWith('7')) {
-              return "رقم الهاتف يجب أن يبدأ بـ 7 (اليمن)";
+              return S.of(context).phoneMustStartWith7;
             }
             if (phone.length < 9) {
-              return "رقم الهاتف يجب ألا يقل عن 9 أرقام";
+              return S.of(context).phoneMustBe9Digits;
             }
             return null;
           },
@@ -93,20 +94,21 @@ class NameEmailPhoneSection extends StatelessWidget {
         6.h.verticalSpace,
         TextFormFieldWidget(
           controller: emailController,
-          hintText: "أدخل بريدك الإلكتروني",
+          hintText: S.of(context).emailPlaceholder,
           type: TextInputType.emailAddress,
           fieldValidator: (value) {
             final email = value?.trim() ?? '';
             if (email.isEmpty) return null;
             final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
             if (!emailRegex.hasMatch(email)) {
-              return 'الرجاء إدخال بريد إلكتروني صالح';
+              return S.of(context).invalidEmail;
             }
             return null;
           },
           prefix: Padding(
             padding: EdgeInsets.all(11.sp),
-            child: Icon(Icons.email, size: 20.sp, color: AppColors.primaryColor),
+            child:
+                Icon(Icons.email, size: 20.sp, color: AppColors.primaryColor),
           ),
         ),
       ],

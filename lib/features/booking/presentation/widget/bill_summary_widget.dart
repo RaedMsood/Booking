@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/rich_text_widget.dart';
-import '../page/pay_page.dart';
+import '../../../../generated/l10n.dart';
 
 class BillSummaryWidget extends StatelessWidget {
   const BillSummaryWidget({super.key});
@@ -27,7 +27,7 @@ class BillSummaryWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   AutoSizeTextWidget(
-                    text: "التكلفة",
+                    text: S.of(context).cost,
                     fontSize: 12.sp,
                     colorText: Color(0xff292D32),
                   ),
@@ -49,7 +49,7 @@ class BillSummaryWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   AutoSizeTextWidget(
-                    text: "الاجمالي",
+                    text: S.of(context).grandTotal,
                     fontSize: 12.sp,
                     colorText: Color(0xff292D32),
                   ),
@@ -72,7 +72,7 @@ class BillSummaryWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   AutoSizeTextWidget(
-                    text: "العربون",
+                    text: S.of(context).depositAmount,
                     fontSize: 12.sp,
                     colorText: Color(0xff292D32),
                   ),
@@ -94,9 +94,9 @@ class BillSummaryWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   AutoSizeTextWidget(
-                    text: "المتبقي بعد العربون",
+                    text: S.of(context).remainingAfterDeposit,
                     fontSize: 12.sp,
-                    colorText: Color(0xff292D32),
+                    colorText: const Color(0xff292D32),
                   ),
                   RichTextWidget(
                     firstText: "50000 ",

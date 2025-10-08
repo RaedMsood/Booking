@@ -2,7 +2,6 @@ import 'package:booking/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/text_form_field.dart';
@@ -25,18 +24,19 @@ class NameAndEmailWidget extends StatelessWidget {
       children: [
         12.h.verticalSpace,
         AutoSizeTextWidget(
-          text: S.of(context).userName,
+          text: S.of(context).fullName,
           fontSize: 11.sp,
           colorText: Colors.black87,
         ),
         6.h.verticalSpace,
         TextFormFieldWidget(
           controller: name,
-          hintText: "إدخل أسمك الرباعي",
+          hintText: S.of(context).fullNamePlaceholder,
           fieldValidator: (value) {
-            if (value == null || value.toString().isEmpty) {
-              return S.of(context).pleaseEnterYourName;
+            if (value == null || value.trim().isEmpty) {
+              return S.of(context).nameRequired;
             }
+            return null;
           },
           prefix: Padding(
             padding: EdgeInsets.all(11.sp),
@@ -49,7 +49,7 @@ class NameAndEmailWidget extends StatelessWidget {
         ),
         12.h.verticalSpace,
         AutoSizeTextWidget(
-          text: "${S.of(context).email} (اختياري)",
+          text: S.of(context).emailOptional,
           fontSize: 11.sp,
           colorText: Colors.black87,
         ),
@@ -57,13 +57,13 @@ class NameAndEmailWidget extends StatelessWidget {
         TextFormFieldWidget(
           controller: email,
           type: TextInputType.emailAddress,
-          hintText: "إدخل بريدك إلاكتروني",
+          hintText: S.of(context).emailPlaceholder,
           fieldValidator: (value) {
             final email = value?.trim() ?? '';
             if (email.isEmpty) return null;
             final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
             if (!emailRegex.hasMatch(email)) {
-              return 'الرجاء إدخال بريد إلكتروني صالح';
+              return S.of(context).invalidEmail;
             }
             return null;
           },

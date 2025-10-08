@@ -5,6 +5,7 @@ import '../../../../core/network/remote_request.dart';
 import '../../../../core/network/urls.dart';
 import '../../../../core/state/pagination_data/paginated_model.dart';
 import '../booking_model/booking_model.dart';
+import '../booking_model/payment_methods_model.dart';
 
 class BookingDataSource {
   Future<int> checkBookingFromHotel({
@@ -31,9 +32,9 @@ class BookingDataSource {
     );
 
     return PaginationModel<BookingData>.fromJson(
-      response.data['data']??response.data,
+      response.data['data'] ?? response.data,
       (book) {
-        return BookingData.fromJson(book );
+        return BookingData.fromJson(book);
       },
     );
   }
@@ -64,6 +65,33 @@ class BookingDataSource {
     );
     debugPrint(response.statusCode.toString());
 
+    return Future.value(unit);
+  }
+
+  Future<List<PaymentMethodsModel>> getAllPaymentMethods() async {
+    final response = await RemoteRequest.getData(
+      url: AppURL.getAllPaymentMethods,
+    );
+    return PaymentMethodsModel.fromJsonList(
+        response.data['data']['payment_methods']);
+  }
+
+  Future<Unit> confirmPayment({
+    required int bookingId,
+    required String payMethodName,
+    required String voucher,
+    required int amount,
+  }) async {
+    await RemoteRequest.postData(
+      path: AppURL.confirmPayment,
+      data: {
+        "booking_id": bookingId,
+        "payment_method_name": payMethodName,
+        if (payMethodName == "jawali") "voucher": voucher,
+        if (payMethodName == "kuraimi") "pin_pass": voucher,
+        if (payMethodName == "kuraimi") "amount": amount,
+      },
+    );
     return Future.value(unit);
   }
 }

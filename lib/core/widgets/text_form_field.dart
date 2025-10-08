@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/app_colors.dart';
 
-class TextFormFieldWidget extends StatelessWidget {
+class TextFormFieldWidget extends StatefulWidget {
   final TextEditingController controller;
   final TextInputType? type;
   final Color? fillColor;
@@ -30,45 +30,97 @@ class TextFormFieldWidget extends StatelessWidget {
   final int? maxLength;
   final bool? buildCounter;
   final bool? enable;
-
   final Color? cursorColor;
   final EdgeInsetsGeometry? contentPadding;
+  final FocusNode? focusNode;
+  final bool preserveFocusOnResume;
 
-  const TextFormFieldWidget(
-      {super.key,
-      required this.controller,
-      this.type,
-      this.fillColor,
-      this.hintText,
-      this.hintTextColor,
-      this.hintFontSize,
-      this.label,
-      this.labelTextColor,
-      this.labelFontSize,
-      this.textAlign,
-      this.borderSide,
-      this.borderSideError,
-      this.fieldValidator,
-      this.isPassword,
-      this.prefix,
-      this.suffixIcon,
-      this.expanded,
-      this.autofocus,
-      this.maxLine,
-      this.maxLength,
-      this.onTap,
-      this.onChanged,
-      this.onSubmit,
-      this.cursorColor,
-      this.contentPadding,
-      this.buildCounter = true,this.enable});
+  const TextFormFieldWidget({
+    super.key,
+    required this.controller,
+    this.type,
+    this.fillColor,
+    this.hintText,
+    this.hintTextColor,
+    this.hintFontSize,
+    this.label,
+    this.labelTextColor,
+    this.labelFontSize,
+    this.textAlign,
+    this.borderSide,
+    this.borderSideError,
+    this.fieldValidator,
+    this.isPassword,
+    this.prefix,
+    this.suffixIcon,
+    this.expanded,
+    this.autofocus,
+    this.maxLine,
+    this.maxLength,
+    this.onTap,
+    this.onChanged,
+    this.onSubmit,
+    this.cursorColor,
+    this.contentPadding,
+    this.buildCounter = true,
+    this.enable,
+    this.focusNode,
+    this.preserveFocusOnResume = true,
+  });
+
+  @override
+  State<TextFormFieldWidget> createState() => _TextFormFieldWidgetState();
+}
+
+class _TextFormFieldWidgetState extends State<TextFormFieldWidget>
+    with WidgetsBindingObserver {
+  FocusNode? _internalFocus;
+
+  FocusNode get _focus => widget.focusNode ?? _internalFocus!;
+
+  bool _wasFocused = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.preserveFocusOnResume) {
+      WidgetsBinding.instance.addObserver(this);
+    }
+    _internalFocus ??= widget.focusNode ?? FocusNode();
+    _focus.addListener(() {
+      _wasFocused = _focus.hasFocus;
+    });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!widget.preserveFocusOnResume) return;
+    if (state == AppLifecycleState.resumed && _wasFocused && mounted) {
+      Future.microtask(() {
+        if (!mounted) return;
+        FocusScope.of(context).requestFocus(_focus);
+        SystemChannels.textInput.invokeMethod('TextInput.show');
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    if (widget.preserveFocusOnResume) {
+      WidgetsBinding.instance.removeObserver(this);
+    }
+    if (widget.focusNode == null) {
+      _internalFocus?.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      maxLines: maxLine ?? 1,
-      maxLength: maxLength,
-      buildCounter: buildCounter == true
+      maxLines: widget.maxLine ?? 1,
+      maxLength: widget.maxLength,
+      buildCounter: widget.buildCounter == true
           ? null
           : (
               BuildContext context, {
@@ -78,58 +130,56 @@ class TextFormFieldWidget extends StatelessWidget {
             }) {
               return null; // يخفي العداد
             },
-      controller: controller,
-      keyboardType: type ?? TextInputType.text,
-      validator: fieldValidator,
-      obscureText: isPassword ?? false,
-      autofocus: autofocus ?? false,
-      onFieldSubmitted: onSubmit,
-      onTap: onTap,
-      onChanged: onChanged,
-      cursorColor: cursorColor ?? AppColors.primaryColor,
+      controller: widget.controller,
+      focusNode: _focus,
+      keyboardType: widget.type ?? TextInputType.text,
+      validator: widget.fieldValidator,
+      obscureText: widget.isPassword ?? false,
+      autofocus: widget.autofocus ?? false,
+      onFieldSubmitted: widget.onSubmit,
+      onTap: widget.onTap,
+      onChanged: widget.onChanged,
+      cursorColor: widget.cursorColor ?? AppColors.primaryColor,
       style: TextStyle(fontSize: 12.5.sp, fontFamily: "ReadexPro"),
       decoration: InputDecoration(
-
-        fillColor: fillColor ?? Colors.white,
+        fillColor: widget.fillColor ?? Colors.white,
         filled: true,
-        hintText: hintText,
-        labelText: label,
+        hintText: widget.hintText,
+        labelText: widget.label,
         hintStyle: TextStyle(
-          fontSize: hintFontSize ?? 10.5.sp,
-          color: hintTextColor ?? AppColors.fontColor2,
+          fontSize: widget.hintFontSize ?? 10.5.sp,
+          color: widget.hintTextColor ?? AppColors.fontColor2,
           fontWeight: FontWeight.w400,
         ),
-
         labelStyle: TextStyle(
-          fontSize: labelFontSize ?? 10.sp,
-          color: labelTextColor ?? AppColors.fontColor2,
+          fontSize: widget.labelFontSize ?? 10.sp,
+          color: widget.labelTextColor ?? AppColors.fontColor2,
           fontWeight: FontWeight.w400,
         ),
         border: InputBorder.none,
         errorBorder: OutlineInputBorder(
-          borderSide: borderSideError ?? BorderSide.none,
+          borderSide: widget.borderSideError ?? BorderSide.none,
           borderRadius: BorderRadius.circular(8.r),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderSide: borderSideError ?? BorderSide.none,
+          borderSide: widget.borderSideError ?? BorderSide.none,
           borderRadius: BorderRadius.circular(8.r),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: borderSide ?? BorderSide.none,
+          borderSide: widget.borderSide ?? BorderSide.none,
           borderRadius: BorderRadius.circular(8.r),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: borderSide ?? BorderSide.none,
+          borderSide: widget.borderSide ?? BorderSide.none,
           borderRadius: BorderRadius.circular(8.r),
         ),
-
-        prefixIcon: prefix,
-        suffixIcon: suffixIcon,
-        contentPadding: contentPadding ?? EdgeInsets.all(11.sp),
+        prefixIcon: widget.prefix,
+        suffixIcon: widget.suffixIcon,
+        contentPadding: widget.contentPadding ?? EdgeInsets.all(11.sp),
       ),
-      expands: expanded ?? false,
-      enabled: enable??true,
-      textAlign: textAlign ?? TextAlign.start,
+      expands: widget.expanded ?? false,
+      enabled: widget.enable ?? true,
+      textAlign: widget.textAlign ?? TextAlign.start,
     );
   }
 }

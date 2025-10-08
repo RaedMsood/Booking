@@ -43,7 +43,7 @@ class _DetailsOfBookInAddPageState
     extends ConsumerState<DetailsOfBookInAddPage> {
   DateTime? startDate;
   DateTime? endDate;
-  String typeBook = "ترفية";
+  String typeBook = S.current.purposeLeisure;
   int rooms = 1, adults = 1, children = 1;
 
   @override
