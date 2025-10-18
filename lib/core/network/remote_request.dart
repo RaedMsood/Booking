@@ -20,10 +20,9 @@ class RemoteRequest {
     required String url,
     dynamic query,
   }) async {
-
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'Accept-Language':await Auth().getLanguage(),
+      'Accept-Language': await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
     };
     final response = await dio.get(url, queryParameters: query);
@@ -45,7 +44,7 @@ class RemoteRequest {
   }) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'Accept-Language':await Auth().getLanguage(),
+      'Accept-Language': await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
     };
     final response = await dio.post(
@@ -74,7 +73,7 @@ class RemoteRequest {
   }) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'Accept-Language':await Auth().getLanguage(),
+      'Accept-Language': await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
     };
     final response = await dio.put(
@@ -101,7 +100,7 @@ class RemoteRequest {
   }) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'Accept-Language':await Auth().getLanguage(),
+      'Accept-Language': await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
     };
     final response =

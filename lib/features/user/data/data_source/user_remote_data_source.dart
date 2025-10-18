@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/network/remote_request.dart';
 import '../../../../core/network/urls.dart';
 import '../model/auth_model.dart';
-import '../../../properties/cities/data/model/city_model.dart';
 
 class UserRemoteDataSource {
   UserRemoteDataSource();

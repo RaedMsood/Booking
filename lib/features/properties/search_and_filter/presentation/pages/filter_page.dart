@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/state/check_state_in_get_api_data_widget.dart';
 import '../../../../../core/state/state.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../../generated/l10n.dart';
 import '../riverpod/search_and_filter_riverpod.dart';
-import '../widgets/app_bar_filter_widget.dart';
 import '../widgets/features_filter_widget.dart';
 import '../widgets/filter_and_undo_filter_button_widget.dart';
 import '../widgets/filter_by_date_widget.dart';
@@ -23,7 +23,7 @@ class FilterPage extends ConsumerWidget {
 
     return Scaffold(
       extendBody: true,
-      appBar: const AppBarFilterWidget(),
+      appBar: SecondaryAppBarWidget(title: S.of(context).filterTitle),
       body: CheckStateInGetApiDataWidget(
         state: state,
         widgetOfData: SingleChildScrollView(

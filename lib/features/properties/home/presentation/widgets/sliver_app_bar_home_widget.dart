@@ -57,7 +57,7 @@ class SliverAppBarHomeWidget extends SliverPersistentHeaderDelegate {
                 IconButtonWidget(
                   icon: AppIcons.notification,
                   onPressed: () {
-                    navigateTo(context, NotificationsPage());
+                    navigateTo(context, const NotificationsPage());
                   },
                 ),
               ],

@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/secondary_app_bar_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../widget/social_button_widget.dart';
 
 class AboutPage extends StatelessWidget {
@@ -11,14 +13,7 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        title: AutoSizeTextWidget(
-          text: 'عن التطبيق',
-          fontSize: 14.sp,
-        ),
-      ),
+      appBar: SecondaryAppBarWidget(title: S.of(context).aboutApp),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
@@ -42,10 +37,10 @@ class AboutPage extends StatelessWidget {
                       padding: EdgeInsets.all(16.w),
                       child: AutoSizeTextWidget(
                         text:
-                        'تطبيق نُزِل هو تطبيق يمني مخصص لحجز الفنادق والشقق المفروشة، ويُعد من أبرز التطبيقات المحلية في هذا المجال، حيث يجمع بين سهولة الاستخدام وتنوع الخيارات مع تركيز خاص على السوق اليمني والخليجي.',
+                            'تطبيق نُزِل هو تطبيق يمني مخصص لحجز الفنادق والشقق المفروشة، ويُعد من أبرز التطبيقات المحلية في هذا المجال، حيث يجمع بين سهولة الاستخدام وتنوع الخيارات مع تركيز خاص على السوق اليمني والخليجي.',
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w300,
-                        colorText: Color(0xff292D32),
+                        colorText: const Color(0xff292D32),
                         maxLines: 10,
                       ),
                     ),
@@ -61,33 +56,25 @@ class AboutPage extends StatelessWidget {
                     icon: SvgPicture.asset(
                       AppIcons.whatsapp,
                     ),
-                    onTap: () {
-                      // TODO: افتح رابط واتساب
-                    },
+                    onTap: () {},
                   ),
                   SocialButtonWidget(
                     icon: SvgPicture.asset(
                       AppIcons.instagram,
                     ),
-                    onTap: () {
-                      // TODO: افتح رابط تيليجرام
-                    },
+                    onTap: () {},
                   ),
                   SocialButtonWidget(
                     icon: SvgPicture.asset(
                       AppIcons.twitter,
                     ),
-                    onTap: () {
-                      // TODO: افتح رابط إنستغرام
-                    },
+                    onTap: () {},
                   ),
                   SocialButtonWidget(
                     icon: SvgPicture.asset(
                       AppIcons.facebook,
                     ),
-                    onTap: () {
-                      // TODO: افتح رابط فيسبوك
-                    },
+                    onTap: () {},
                   ),
                 ],
               ),

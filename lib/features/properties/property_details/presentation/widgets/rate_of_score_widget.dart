@@ -27,7 +27,7 @@ class RateOfScoreWidget extends StatelessWidget {
             colorText: AppColors.secondaryColor,
           ),
           1.8.w.horizontalSpace,
-          RatingBarWidget(
+          const RatingBarWidget(
             evaluation: 4,
             length: 1,
           ),

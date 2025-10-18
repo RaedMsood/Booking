@@ -8,10 +8,10 @@ class PolicyTileWidget extends StatelessWidget {
   final VoidCallback? onTap;
 
   const PolicyTileWidget({
-    Key? key,
+    super.key,
     required this.title,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class PolicyTileWidget extends StatelessWidget {
               fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
-            Spacer(),
+            const Spacer(),
 
             const Icon(Icons.add, size: 20),
           ],

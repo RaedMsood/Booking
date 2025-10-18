@@ -50,7 +50,7 @@ void showFlashBarWarring({
     ),
     margin: EdgeInsets.symmetric(horizontal: 40.w, vertical: 18.h),
     padding: EdgeInsets.all(12.sp),
-    backgroundColor:Color(0xffFACC15),
+    backgroundColor:const Color(0xffFACC15),
     borderRadius: BorderRadius.circular(8.r),
     flushbarPosition: FlushbarPosition.TOP,
     flushbarStyle: FlushbarStyle.FLOATING,

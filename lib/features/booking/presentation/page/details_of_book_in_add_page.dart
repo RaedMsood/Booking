@@ -1,15 +1,15 @@
-import 'package:booking/core/helpers/navigateTo.dart';
-import 'package:booking/core/widgets/auto_size_text_widget.dart';
-import 'package:booking/features/booking/data/booking_model/booking_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/helpers/flash_bar_helper.dart';
+import '../../../../core/helpers/navigateTo.dart';
 import '../../../../core/state/check_state_in_post_api_data_widget.dart';
 import '../../../../core/state/state.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
+import '../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../generated/l10n.dart';
+import '../../data/booking_model/booking_model.dart';
 import '../riverpod/booking_riverpod.dart';
 import '../widget/desgin_button_in_add_booking_widget.dart';
 import '../widget/hotel_summary_card_widget.dart';
@@ -30,7 +30,6 @@ class DetailsOfBookInAddPage extends ConsumerStatefulWidget {
     required this.location,
     required this.unitId,
     required this.totalPrice,
-
     super.key,
   });
 
@@ -51,19 +50,14 @@ class _DetailsOfBookInAddPageState
     var checkBookingState = ref.watch(checkBookingProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        title:  AutoSizeTextWidget(
-          text: S.of(context).hotelBookingTitle,
-        ),
-      ),
+      appBar: SecondaryAppBarWidget(title: S.of(context).hotelBookingTitle),
       body: Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  6.h.verticalSpace,
                   HotelSummaryCard(
                     name: widget.nameProp,
                     location: widget.location,
@@ -99,7 +93,7 @@ class _DetailsOfBookInAddPageState
                     nameProp: widget.nameProp,
                     location: widget.location,
                     imageUrl: widget.image,
-                    idBooking: checkBookingState.data,
+                    booking: checkBookingState.data,
                   ));
             },
             bottonWidget: DesginButtonInAddBookingWidget(
@@ -116,19 +110,20 @@ class _DetailsOfBookInAddPageState
                           message: S.of(context).validationSelectDate);
                     } else {
                       final bookingData = BookingData(
-                          checkIn: DateFormat('yyyy-MM-dd', 'en_US')
-                              .format(startDate!)
-                              .toString(),
-                          checkOut: DateFormat('yyyy-MM-dd', 'en_US')
-                              .format(endDate!)
-                              .toString(),
-                          type: typeBook,
-                          unitCount: rooms,
-                          childCount: children,
-                          adultCount: adults,
-                          guests: 4,
-                          totalPrice: widget.totalPrice,
-                          unitId: widget.unitId);
+                        checkIn: DateFormat('yyyy-MM-dd', 'en_US')
+                            .format(startDate!)
+                            .toString(),
+                        checkOut: DateFormat('yyyy-MM-dd', 'en_US')
+                            .format(endDate!)
+                            .toString(),
+                        type: typeBook,
+                        unitCount: rooms,
+                        childCount: children,
+                        adultCount: adults,
+                        guests: 4,
+                        totalPrice: widget.totalPrice,
+                        unitId: widget.unitId,
+                      );
                       ref
                           .read(checkBookingProvider.notifier)
                           .checkBookingInHotel(bookingData: bookingData);

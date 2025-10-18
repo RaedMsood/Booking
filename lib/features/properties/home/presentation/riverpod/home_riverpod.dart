@@ -1,12 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../core/state/data_state.dart';
-import '../../../../../core/state/pagination_data/paginated_model.dart';
 import '../../../../../core/state/state.dart';
 import '../../../../../injection.dart';
-import '../../../units/data/model/units_model.dart';
-import '../../../search_and_filter/data/model/filter_data_model.dart';
-import '../../data/model/property_data_model.dart';
 import '../../data/model/property_model.dart';
 import '../../data/model/property_pagination_model.dart';
 import '../../data/repos/property_repo.dart';

@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/buttons/icon_button_widget.dart';
-import '../../../../../core/widgets/buttons/ink_well_button_widget.dart';
 import '../../../../profile/presentation/state_mangement/riverpod.dart';
 import 'details_pictures_widget.dart';
 

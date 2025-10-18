@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../constants/app_images.dart';
 import '../theme/app_colors.dart';
 
 class OnlineSvgWidget extends StatelessWidget {

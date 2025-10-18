@@ -13,9 +13,9 @@ class PropertyPhotosWidget extends StatefulWidget {
   final List<String> image;
   final double height;
   final int idProperties;
-  bool isFavorite;
+  final bool isFavorite;
 
-  PropertyPhotosWidget(
+  const PropertyPhotosWidget(
       {super.key,
       required this.image,
       required this.height,
@@ -29,6 +29,7 @@ class PropertyPhotosWidget extends StatefulWidget {
 class _PropertyPhotosWidgetState extends State<PropertyPhotosWidget> {
   int pageController = 0;
   late bool favorite = widget.isFavorite;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -74,30 +75,27 @@ class _PropertyPhotosWidgetState extends State<PropertyPhotosWidget> {
 
             return PositionedDirectional(
               top: 8,
-              end: 8,
+              end: 4,
               child: SizedBox(
                 height: 30.h,
                 child: Material(
                   color: Colors.white,
                   shape: const CircleBorder(),
                   child: IconButton(
-                    padding: EdgeInsets.all(0.sp),
+                    padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                     onPressed: () {
                       fav.toggle(widget.idProperties);
                       setState(() {
-                        favorite=!favorite;
-
+                        favorite = !favorite;
                       });
                     },
                     icon: SvgPicture.asset(
-                      isFav
-                          ? AppIcons.favoriteActive
-                          : AppIcons.favorite,
+                      isFav ? AppIcons.favoriteActive : AppIcons.favorite,
                       color: isFav
                           ? AppColors.primarySwatch.shade400
                           : AppColors.primaryColor,
-                      height: 18.h,
+                      height: isFav ? 18.h : 15.h,
                     ),
                   ),
                 ),

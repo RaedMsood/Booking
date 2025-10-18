@@ -14,14 +14,15 @@ class SelectFieldWidget extends StatelessWidget {
 
   final double? fontSizeLabel;
 
-  const SelectFieldWidget({
-    super.key,
-    required this.label,
-    required this.value,
-    required this.onTap,
-    this.fontSizeValue,
-         this.selectFiledColor,this.fontSizeLabel,this.fontColorLabel
-  });
+  const SelectFieldWidget(
+      {super.key,
+      required this.label,
+      required this.value,
+      required this.onTap,
+      this.fontSizeValue,
+      this.selectFiledColor,
+      this.fontSizeLabel,
+      this.fontColorLabel});
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +30,29 @@ class SelectFieldWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         AutoSizeTextWidget(
-          colorText: fontColorLabel??Colors.black,  text: label, fontSize:fontSizeLabel?? 10, fontWeight: FontWeight.w400),
+          colorText: fontColorLabel ?? Colors.black,
+          text: label,
+          fontSize: fontSizeLabel ?? 10,
+          fontWeight: FontWeight.w400,
+        ),
         6.verticalSpace,
         InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(12.r),
           child: Container(
             height: 43.h,
-            padding:  EdgeInsets.symmetric(horizontal: 14.sp),
+            padding: EdgeInsets.symmetric(horizontal: 14.sp),
             decoration: BoxDecoration(
-              color:selectFiledColor?? AppColors.scaffoldColor,
+              color: selectFiledColor ?? AppColors.scaffoldColor,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
               children: [
                 Expanded(
                   child: AutoSizeTextWidget(
-                      text: value, fontSize:fontSizeValue?? 10, fontWeight: FontWeight.w400),
+                      text: value,
+                      fontSize: fontSizeValue ?? 10,
+                      fontWeight: FontWeight.w400),
                 ),
                 const Icon(Icons.keyboard_arrow_left, color: Colors.black54),
               ],

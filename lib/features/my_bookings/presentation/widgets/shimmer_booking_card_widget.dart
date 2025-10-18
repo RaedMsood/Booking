@@ -1,7 +1,8 @@
-import 'package:booking/core/widgets/shimmer_widget.dart';
-import 'package:booking/features/booking/presentation/widget/rating_booking_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/widgets/shimmer_widget.dart';
+import 'rating_booking_widget.dart';
 
 class ShimmerBookingCardWidget extends StatelessWidget {
   const ShimmerBookingCardWidget({super.key});
@@ -46,7 +47,7 @@ class ShimmerBookingCardWidget extends StatelessWidget {
                     width: 60.w,
                   )),
                   const Spacer(),
-                  ShimmerWidget(child: const RatingBadge(rating: 0)),
+                  const ShimmerWidget(child:  RatingBookingWidget(rating: 0)),
                 ],
               ),
               const Divider(thickness: 0.5, color: Color(0xffF0F0F0)),

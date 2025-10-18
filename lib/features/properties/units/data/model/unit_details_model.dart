@@ -1,4 +1,3 @@
-import '../../../property_details/data/models/deposit_model.dart';
 import '../../../property_details/data/models/features_model.dart';
 import 'attachments_model.dart';
 

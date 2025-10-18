@@ -1,17 +1,17 @@
-import 'package:booking/features/booking/presentation/widget/section_card_in_details_widget.dart';
+import 'package:booking/features/my_bookings/presentation/widgets/section_card_in_details_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../generated/l10n.dart';
-import 'info_item_in_confrim_booking_card_widget.dart';
+import '../../../booking/presentation/widget/info_item_in_confrim_booking_card_widget.dart';
 import 'status_badge_in_details_widget.dart';
 
-class ConfirmBookingCard extends StatelessWidget {
+class ConfrimBookingCardWidget extends StatelessWidget {
   final String bookingId;
   final String bookingDateString;
   final String status;
 
-  const ConfirmBookingCard({
+  const ConfrimBookingCardWidget({
     super.key,
     required this.bookingId,
     required this.bookingDateString,
@@ -33,7 +33,7 @@ class ConfirmBookingCard extends StatelessWidget {
             onTap: () {
               Clipboard.setData(ClipboardData(text: bookingId));
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('تم نسخ رقم الطلب')),
+                 SnackBar(content: Text(S.of(context).bookingCodeCopied)),
               );
             },
           ),

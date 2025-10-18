@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/state/state.dart';
 import '../../../../core/state/data_state.dart';
 import '../../data/model/auth_model.dart';
-import '../../../properties/cities/data/model/city_model.dart';
 import '../../data/repos/user_repo.dart';
 
 final signUpProvider =

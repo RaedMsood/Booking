@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../generated/l10n.dart';
-import 'auto_size_text_widget.dart';
 
 class ReadMoreTextWidget extends StatefulWidget {
   final String text;

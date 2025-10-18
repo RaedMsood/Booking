@@ -1,15 +1,14 @@
+import 'package:booking/core/widgets/secondary_app_bar_widget.dart';
 import 'package:booking/core/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/helpers/navigateTo.dart';
 import '../../../../../core/state/check_state_in_get_api_data_widget.dart';
 import '../../../../../core/theme/app_colors.dart';
-import '../../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../../core/widgets/buttons/icon_button_widget.dart';
 import '../../../../../core/widgets/online_images_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../riverpod/cities_riverpod.dart';
 import '../widget/city_name_and_flag_widget.dart';
 import 'properties_by_city_page.dart';
@@ -23,25 +22,9 @@ class DestinationsPage extends ConsumerWidget {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        title: AutoSizeTextWidget(
-          text: "الوجهات",
-          fontSize: 15.5.sp,
-        ),
-        leadingWidth: 67.w,
-        leading: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 14.h).copyWith(top: 4.4.h),
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-            ),
-            child: const IconButtonWidget(),
-          ),
-        ),
+      appBar: SecondaryAppBarWidget(
+        title: S.of(context).destinations,
+        fontSize: 13.8.sp,
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -64,7 +47,7 @@ class DestinationsPage extends ConsumerWidget {
               crossAxisCount: 2,
               mainAxisSpacing: 20.h,
               crossAxisSpacing: 16.w,
-              padding: EdgeInsets.all(14.sp),
+              padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
               itemCount: 6,
               itemBuilder: (context, index) {
                 final cardHeight = index == 0 ? 190.h : 220.h;
@@ -79,7 +62,7 @@ class DestinationsPage extends ConsumerWidget {
               crossAxisCount: 2,
               mainAxisSpacing: 20.h,
               crossAxisSpacing: 16.w,
-              padding: EdgeInsets.all(14.sp),
+              padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
               itemCount: state.data.length,
               itemBuilder: (context, index) {
                 final cardHeight = index == 0 ? 190.h : 220.h;

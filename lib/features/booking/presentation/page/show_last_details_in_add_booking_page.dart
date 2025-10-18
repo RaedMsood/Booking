@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../riverpod/booking_riverpod.dart';
 import '../widget/audience_in_details_booking_widget.dart';
@@ -31,14 +32,10 @@ class ShowLastDetailsInAddBookingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title:  AutoSizeTextWidget(
-          text: S.of(context).hotelBookingTitle,
-        ),
-      ),
+      appBar: SecondaryAppBarWidget(title: S.of(context).hotelBookingTitle),
       body: Column(
         children: [
+          4.h.verticalSpace,
           HotelSummaryCard(
             name: nameProp,
             location: location,

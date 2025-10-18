@@ -216,6 +216,135 @@ class S {
     return Intl.message('Hostel', name: 'hostel', desc: '', args: []);
   }
 
+  /// `Destinations`
+  String get destinations {
+    return Intl.message(
+      'Destinations',
+      name: 'destinations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the '--------search-----------' key
+
+  /// `Find the right place for you`
+  String get findTheRightPlaceForYou {
+    return Intl.message(
+      'Find the right place for you',
+      name: 'findTheRightPlaceForYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can search by property name and customize your results`
+  String get searchSubtitle {
+    return Intl.message(
+      'You can search by property name and customize your results',
+      name: 'searchSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for a hotel`
+  String get searchHotelPlaceholder {
+    return Intl.message(
+      'Search for a hotel',
+      name: 'searchHotelPlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No search results`
+  String get noSearchResults {
+    return Intl.message(
+      'No search results',
+      name: 'noSearchResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the '--------filter-----------' key
+
+  /// `Filter`
+  String get filterTitle {
+    return Intl.message('Filter', name: 'filterTitle', desc: '', args: []);
+  }
+
+  /// `Date`
+  String get date {
+    return Intl.message('Date', name: 'date', desc: '', args: []);
+  }
+
+  /// `Room type`
+  String get roomType {
+    return Intl.message('Room type', name: 'roomType', desc: '', args: []);
+  }
+
+  /// `Select room type`
+  String get selectRoomType {
+    return Intl.message(
+      'Select room type',
+      name: 'selectRoomType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price`
+  String get price {
+    return Intl.message('Price', name: 'price', desc: '', args: []);
+  }
+
+  /// `Features`
+  String get features {
+    return Intl.message('Features', name: 'features', desc: '', args: []);
+  }
+
+  /// `Rating`
+  String get rating {
+    return Intl.message('Rating', name: 'rating', desc: '', args: []);
+  }
+
+  /// `Apply filter`
+  String get applyFilter {
+    return Intl.message(
+      'Apply filter',
+      name: 'applyFilter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear filters`
+  String get clearFilters {
+    return Intl.message(
+      'Clear filters',
+      name: 'clearFilters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nights`
+  String get nights {
+    return Intl.message('Nights', name: 'nights', desc: '', args: []);
+  }
+
+  /// `Select dates`
+  String get selectDates {
+    return Intl.message(
+      'Select dates',
+      name: 'selectDates',
+      desc: '',
+      args: [],
+    );
+  }
+
   // skipped getter for the '--------details-----------' key
 
   /// `About`
@@ -268,31 +397,812 @@ class S {
     return Intl.message('Hotel rooms', name: 'hotelRooms', desc: '', args: []);
   }
 
+  // skipped getter for the '--------myBookings-----------' key
+
+  /// `Reservations`
+  String get reservationsTitle {
+    return Intl.message(
+      'Reservations',
+      name: 'reservationsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get allFilter {
+    return Intl.message('All', name: 'allFilter', desc: '', args: []);
+  }
+
+  /// `Current`
+  String get currentFilter {
+    return Intl.message('Current', name: 'currentFilter', desc: '', args: []);
+  }
+
+  /// `Completed`
+  String get completedFilter {
+    return Intl.message(
+      'Completed',
+      name: 'completedFilter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Canceled`
+  String get canceledFilter {
+    return Intl.message('Canceled', name: 'canceledFilter', desc: '', args: []);
+  }
+
+  /// `Booking number copied`
+  String get bookingCodeCopied {
+    return Intl.message(
+      'Booking number copied',
+      name: 'bookingCodeCopied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Count`
+  String get countLabel {
+    return Intl.message('Count', name: 'countLabel', desc: '', args: []);
+  }
+
+  /// `Add your rating`
+  String get addYourRating {
+    return Intl.message(
+      'Add your rating',
+      name: 'addYourRating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get send {
+    return Intl.message('Send', name: 'send', desc: '', args: []);
+  }
+
+  // skipped getter for the '--------map-----------' key
+
+  /// `Map`
+  String get mapTitle {
+    return Intl.message('Map', name: 'mapTitle', desc: '', args: []);
+  }
+
+  /// `Explore places on the map`
+  String get mapHeadline {
+    return Intl.message(
+      'Explore places on the map',
+      name: 'mapHeadline',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use the search tool to locate places easily and quickly.`
+  String get mapSubhead {
+    return Intl.message(
+      'Use the search tool to locate places easily and quickly.',
+      name: 'mapSubhead',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the '--------myBookingsDetails-----------' key
+
+  /// `Booking details`
+  String get bookingDetailsTitle {
+    return Intl.message(
+      'Booking details',
+      name: 'bookingDetailsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking confirmation`
+  String get bookingConfirmation {
+    return Intl.message(
+      'Booking confirmation',
+      name: 'bookingConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking number`
+  String get bookingCodeLabel {
+    return Intl.message(
+      'Booking number',
+      name: 'bookingCodeLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking date`
+  String get bookingDateLabel {
+    return Intl.message(
+      'Booking date',
+      name: 'bookingDateLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking status`
+  String get bookingStatusLabel {
+    return Intl.message(
+      'Booking status',
+      name: 'bookingStatusLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking info`
+  String get bookingInfo {
+    return Intl.message(
+      'Booking info',
+      name: 'bookingInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adults`
+  String get adultsCount {
+    return Intl.message('Adults', name: 'adultsCount', desc: '', args: []);
+  }
+
+  /// `Children`
+  String get childrenCount {
+    return Intl.message('Children', name: 'childrenCount', desc: '', args: []);
+  }
+
+  /// `Check-in date`
+  String get checkInDate {
+    return Intl.message(
+      'Check-in date',
+      name: 'checkInDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check-out date`
+  String get checkOutDate {
+    return Intl.message(
+      'Check-out date',
+      name: 'checkOutDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Purchase & cancellation policy`
+  String get purchaseAndCancellationPolicy {
+    return Intl.message(
+      'Purchase & cancellation policy',
+      name: 'purchaseAndCancellationPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View venue details`
+  String get viewVenueDetails {
+    return Intl.message(
+      'View venue details',
+      name: 'viewVenueDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the '--------hotelBooking-----------' key
+
+  /// `Hotel booking`
+  String get hotelBookingTitle {
+    return Intl.message(
+      'Hotel booking',
+      name: 'hotelBookingTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your booking date`
+  String get yourBookingDate {
+    return Intl.message(
+      'Your booking date',
+      name: 'yourBookingDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select booking date`
+  String get selectBookingDate {
+    return Intl.message(
+      'Select booking date',
+      name: 'selectBookingDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check-in`
+  String get checkIn {
+    return Intl.message('Check-in', name: 'checkIn', desc: '', args: []);
+  }
+
+  /// `Check-out`
+  String get checkOut {
+    return Intl.message('Check-out', name: 'checkOut', desc: '', args: []);
+  }
+
+  /// `Guests information`
+  String get guestsSectionTitle {
+    return Intl.message(
+      'Guests information',
+      name: 'guestsSectionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Purpose of stay`
+  String get bookingPurpose {
+    return Intl.message(
+      'Purpose of stay',
+      name: 'bookingPurpose',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Leisure`
+  String get purposeLeisure {
+    return Intl.message('Leisure', name: 'purposeLeisure', desc: '', args: []);
+  }
+
+  /// `Business`
+  String get purposeBusiness {
+    return Intl.message(
+      'Business',
+      name: 'purposeBusiness',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Family`
+  String get purposeFamily {
+    return Intl.message('Family', name: 'purposeFamily', desc: '', args: []);
+  }
+
+  /// `Other`
+  String get purposeOther {
+    return Intl.message('Other', name: 'purposeOther', desc: '', args: []);
+  }
+
+  /// `Rooms`
+  String get roomsCount {
+    return Intl.message('Rooms', name: 'roomsCount', desc: '', args: []);
+  }
+
+  /// `Adults`
+  String get adults {
+    return Intl.message('Adults', name: 'adults', desc: '', args: []);
+  }
+
+  /// `Children`
+  String get children {
+    return Intl.message('Children', name: 'children', desc: '', args: []);
+  }
+
+  /// `Increase`
+  String get increase {
+    return Intl.message('Increase', name: 'increase', desc: '', args: []);
+  }
+
+  /// `Decrease`
+  String get decrease {
+    return Intl.message('Decrease', name: 'decrease', desc: '', args: []);
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message('Next', name: 'next', desc: '', args: []);
+  }
+
+  /// `Previous`
+  String get previous {
+    return Intl.message('Previous', name: 'previous', desc: '', args: []);
+  }
+
+  /// `Please select a booking date`
+  String get validationSelectDate {
+    return Intl.message(
+      'Please select a booking date',
+      name: 'validationSelectDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please set the number of guests`
+  String get validationGuestsRequired {
+    return Intl.message(
+      'Please set the number of guests',
+      name: 'validationGuestsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please set the number of rooms`
+  String get validationRoomsRequired {
+    return Intl.message(
+      'Please set the number of rooms',
+      name: 'validationRoomsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `At least one adult is required`
+  String get validationMinOneAdult {
+    return Intl.message(
+      'At least one adult is required',
+      name: 'validationMinOneAdult',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get calendarToday {
+    return Intl.message('Today', name: 'calendarToday', desc: '', args: []);
+  }
+
+  /// `Clear dates`
+  String get calendarClear {
+    return Intl.message(
+      'Clear dates',
+      name: 'calendarClear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply`
+  String get calendarApply {
+    return Intl.message('Apply', name: 'calendarApply', desc: '', args: []);
+  }
+
+  /// `Personal information`
+  String get personalInfoTitle {
+    return Intl.message(
+      'Personal information',
+      name: 'personalInfoTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the '--------booking-----------' key
+
+  /// `Booking confirmation`
+  String get confirmationSectionTitle {
+    return Intl.message(
+      'Booking confirmation',
+      name: 'confirmationSectionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `rooms`
+  String get roomsShort {
+    return Intl.message('rooms', name: 'roomsShort', desc: '', args: []);
+  }
+
+  /// `From`
+  String get from {
+    return Intl.message('From', name: 'from', desc: '', args: []);
+  }
+
+  /// `To`
+  String get to {
+    return Intl.message('To', name: 'to', desc: '', args: []);
+  }
+
+  /// `Deposit`
+  String get depositSectionTitle {
+    return Intl.message(
+      'Deposit',
+      name: 'depositSectionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay deposit`
+  String get payDeposit {
+    return Intl.message('Pay deposit', name: 'payDeposit', desc: '', args: []);
+  }
+
+  /// `Please pay the deposit to confirm the booking`
+  String get payDepositNote {
+    return Intl.message(
+      'Please pay the deposit to confirm the booking',
+      name: 'payDepositNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Guests details`
+  String get guestsInfoTitle {
+    return Intl.message(
+      'Guests details',
+      name: 'guestsInfoTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{adults} person ({children} children)`
+  String guestsSummaryFormat(Object adults, Object children) {
+    return Intl.message(
+      '$adults person ($children children)',
+      name: 'guestsSummaryFormat',
+      desc: '',
+      args: [adults, children],
+    );
+  }
+
+  /// `Hotel policy:`
+  String get hotelPolicyPrefix {
+    return Intl.message(
+      'Hotel policy:',
+      name: 'hotelPolicyPrefix',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit amount is strictly non-refundable`
+  String get nonRefundablePolicy {
+    return Intl.message(
+      'Deposit amount is strictly non-refundable',
+      name: 'nonRefundablePolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay deposit`
+  String get depositPaymentTitle {
+    return Intl.message(
+      'Pay deposit',
+      name: 'depositPaymentTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Have a discount coupon?`
+  String get haveCouponQuestion {
+    return Intl.message(
+      'Have a discount coupon?',
+      name: 'haveCouponQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coupon`
+  String get coupon {
+    return Intl.message('Coupon', name: 'coupon', desc: '', args: []);
+  }
+
+  /// `Enter coupon`
+  String get enterCoupon {
+    return Intl.message(
+      'Enter coupon',
+      name: 'enterCoupon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify`
+  String get verifyCoupon {
+    return Intl.message('Verify', name: 'verifyCoupon', desc: '', args: []);
+  }
+
+  /// `Discount`
+  String get couponDiscount {
+    return Intl.message('Discount', name: 'couponDiscount', desc: '', args: []);
+  }
+
+  /// `Payment methods`
+  String get paymentMethods {
+    return Intl.message(
+      'Payment methods',
+      name: 'paymentMethods',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cost`
+  String get cost {
+    return Intl.message('Cost', name: 'cost', desc: '', args: []);
+  }
+
+  /// `Total`
+  String get grandTotal {
+    return Intl.message('Total', name: 'grandTotal', desc: '', args: []);
+  }
+
+  /// `Deposit`
+  String get depositAmount {
+    return Intl.message('Deposit', name: 'depositAmount', desc: '', args: []);
+  }
+
+  /// `Remaining after deposit`
+  String get remainingAfterDeposit {
+    return Intl.message(
+      'Remaining after deposit',
+      name: 'remainingAfterDeposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay`
+  String get payAction {
+    return Intl.message('Pay', name: 'payAction', desc: '', args: []);
+  }
+
+  /// `Please select a payment method`
+  String get pleaseSelectPaymentMethod {
+    return Intl.message(
+      'Please select a payment method',
+      name: 'pleaseSelectPaymentMethod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay the deposit to confirm the booking`
+  String get confirmDepositTitle {
+    return Intl.message(
+      'Pay the deposit to confirm the booking',
+      name: 'confirmDepositTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hotel policy: the deposit is strictly non-refundable`
+  String get hotelPolicyNote {
+    return Intl.message(
+      'Hotel policy: the deposit is strictly non-refundable',
+      name: 'hotelPolicyNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You will need to pay the remaining amount to the hotel owner upon arrival`
+  String get hotelPaymentNote {
+    return Intl.message(
+      'You will need to pay the remaining amount to the hotel owner upon arrival',
+      name: 'hotelPaymentNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the '--------payment-----------' key
+
+  /// `Amount`
+  String get amountLabel {
+    return Intl.message('Amount', name: 'amountLabel', desc: '', args: []);
+  }
+
+  /// `Please enter the amount`
+  String get amountValidation {
+    return Intl.message(
+      'Please enter the amount',
+      name: 'amountValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The identification number is generated from Al Kuraimi app settings on first setup`
+  String get payKuraimiInstruction {
+    return Intl.message(
+      'The identification number is generated from Al Kuraimi app settings on first setup',
+      name: 'payKuraimiInstruction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Identification code`
+  String get payKuraimiCodeLabel {
+    return Intl.message(
+      'Identification code',
+      name: 'payKuraimiCodeLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Identification code`
+  String get payKuraimiCodeHint {
+    return Intl.message(
+      'Identification code',
+      name: 'payKuraimiCodeHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the identification code`
+  String get payKuraimiCodeEmptyError {
+    return Intl.message(
+      'Please enter the identification code',
+      name: 'payKuraimiCodeEmptyError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the purchase code generated in the Jawali app`
+  String get payJawaliInstruction {
+    return Intl.message(
+      'Enter the purchase code generated in the Jawali app',
+      name: 'payJawaliInstruction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Purchase code`
+  String get payJawaliCodeLabel {
+    return Intl.message(
+      'Purchase code',
+      name: 'payJawaliCodeLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Purchase code`
+  String get payJawaliCodeHint {
+    return Intl.message(
+      'Purchase code',
+      name: 'payJawaliCodeHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the purchase code`
+  String get payJawaliCodeEmptyError {
+    return Intl.message(
+      'Please enter the purchase code',
+      name: 'payJawaliCodeEmptyError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Payment`
+  String get confirmPayment {
+    return Intl.message(
+      'Confirm Payment',
+      name: 'confirmPayment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the '--------profile-----------' key
+
+  /// `Personal information`
+  String get personalInfo {
+    return Intl.message(
+      'Personal information',
+      name: 'personalInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorites`
+  String get favorites {
+    return Intl.message('Favorites', name: 'favorites', desc: '', args: []);
+  }
+
+  /// `General settings`
+  String get generalSettings {
+    return Intl.message(
+      'General settings',
+      name: 'generalSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About the app`
+  String get aboutApp {
+    return Intl.message('About the app', name: 'aboutApp', desc: '', args: []);
+  }
+
+  /// `Contact us`
+  String get contactUs {
+    return Intl.message('Contact us', name: 'contactUs', desc: '', args: []);
+  }
+
+  /// `FAQ`
+  String get faq {
+    return Intl.message('FAQ', name: 'faq', desc: '', args: []);
+  }
+
+  /// `Share the app`
+  String get shareApp {
+    return Intl.message('Share the app', name: 'shareApp', desc: '', args: []);
+  }
+
+  // skipped getter for the '--------editProfile-----------' key
+
+  /// `Edit personal information`
+  String get editPersonalInfoTitle {
+    return Intl.message(
+      'Edit personal information',
+      name: 'editPersonalInfoTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update your personal information`
+  String get editPersonalInfoSubtitle {
+    return Intl.message(
+      'Update your personal information',
+      name: 'editPersonalInfoSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save changes`
+  String get saveChanges {
+    return Intl.message(
+      'Save changes',
+      name: 'saveChanges',
+      desc: '',
+      args: [],
+    );
+  }
+
   // skipped getter for the '--------settings-----------' key
 
   /// `Settings`
   String get settings {
     return Intl.message('Settings', name: 'settings', desc: '', args: []);
-  }
-
-  /// `Address Book`
-  String get addressBook {
-    return Intl.message(
-      'Address Book',
-      name: 'addressBook',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Manage My Account`
-  String get manageMyAccount {
-    return Intl.message(
-      'Manage My Account',
-      name: 'manageMyAccount',
-      desc: '',
-      args: [],
-    );
   }
 
   /// `Language`
@@ -303,66 +1213,6 @@ class S {
   /// `Currency`
   String get currency {
     return Intl.message('Currency', name: 'currency', desc: '', args: []);
-  }
-
-  /// `Contact Preferences`
-  String get contactPreferences {
-    return Intl.message(
-      'Contact Preferences',
-      name: 'contactPreferences',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Clear Cache`
-  String get clearCache {
-    return Intl.message('Clear Cache', name: 'clearCache', desc: '', args: []);
-  }
-
-  /// `Privacy & Cookie Policy`
-  String get privacyAndCookiePolicy {
-    return Intl.message(
-      'Privacy & Cookie Policy',
-      name: 'privacyAndCookiePolicy',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Terms & Conditions`
-  String get termsAndConditions {
-    return Intl.message(
-      'Terms & Conditions',
-      name: 'termsAndConditions',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Rating & Feedback`
-  String get ratingAndFeedback {
-    return Intl.message(
-      'Rating & Feedback',
-      name: 'ratingAndFeedback',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Connect to Us`
-  String get connectToUs {
-    return Intl.message(
-      'Connect to Us',
-      name: 'connectToUs',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `About Jeeey`
-  String get aboutJeeey {
-    return Intl.message('About Jeeey', name: 'aboutJeeey', desc: '', args: []);
   }
 
   /// `SIGN OUT`
@@ -385,26 +1235,6 @@ class S {
     return Intl.message(
       'Application language',
       name: 'applicationLanguage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Change password`
-  String get changePassword {
-    return Intl.message(
-      'Change password',
-      name: 'changePassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Delete account`
-  String get deleteAccount {
-    return Intl.message(
-      'Delete account',
-      name: 'deleteAccount',
       desc: '',
       args: [],
     );
@@ -719,41 +1549,11 @@ class S {
     );
   }
 
-  /// `The password has been changed`
-  String get thePasswordHasBeenChanged {
-    return Intl.message(
-      'The password has been changed',
-      name: 'thePasswordHasBeenChanged',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Deleted address successfully`
-  String get deletedAddressSuccessfully {
-    return Intl.message(
-      'Deleted address successfully',
-      name: 'deletedAddressSuccessfully',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Logout successfully`
   String get logoutSuccessfully {
     return Intl.message(
       'Logout successfully',
       name: 'logoutSuccessfully',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Products have been added to the list`
-  String get productsHaveBeenAddedToTheList {
-    return Intl.message(
-      'Products have been added to the list',
-      name: 'productsHaveBeenAddedToTheList',
       desc: '',
       args: [],
     );
@@ -769,31 +1569,11 @@ class S {
     );
   }
 
-  /// `The list has been deleted successfully`
-  String get theListHasBeenDeletedSuccessfully {
-    return Intl.message(
-      'The list has been deleted successfully',
-      name: 'theListHasBeenDeletedSuccessfully',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Deleted successfully`
   String get deletedSuccessfully {
     return Intl.message(
       'Deleted successfully',
       name: 'deletedSuccessfully',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `A new list has been created successfully`
-  String get aNewListHasBeenCreatedSuccessfully {
-    return Intl.message(
-      'A new list has been created successfully',
-      name: 'aNewListHasBeenCreatedSuccessfully',
       desc: '',
       args: [],
     );
@@ -1081,914 +1861,6 @@ class S {
     return Intl.message(
       'Check the server address (Base URL) and try again',
       name: 'invalidApiUrl2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  // skipped getter for the '--------profile-----------' key
-
-  /// `My account`
-  String get profileTitle {
-    return Intl.message('My account', name: 'profileTitle', desc: '', args: []);
-  }
-
-  /// `Personal information`
-  String get personalInfo {
-    return Intl.message(
-      'Personal information',
-      name: 'personalInfo',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Favorites`
-  String get favorites {
-    return Intl.message('Favorites', name: 'favorites', desc: '', args: []);
-  }
-
-  /// `General settings`
-  String get generalSettings {
-    return Intl.message(
-      'General settings',
-      name: 'generalSettings',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `About the app`
-  String get aboutApp {
-    return Intl.message('About the app', name: 'aboutApp', desc: '', args: []);
-  }
-
-  /// `Contact us`
-  String get contactUs {
-    return Intl.message('Contact us', name: 'contactUs', desc: '', args: []);
-  }
-
-  /// `FAQ`
-  String get faq {
-    return Intl.message('FAQ', name: 'faq', desc: '', args: []);
-  }
-
-  /// `Share the app`
-  String get shareApp {
-    return Intl.message('Share the app', name: 'shareApp', desc: '', args: []);
-  }
-
-  // skipped getter for the '--------reservations-----------' key
-
-  /// `Reservations`
-  String get reservationsTitle {
-    return Intl.message(
-      'Reservations',
-      name: 'reservationsTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `All`
-  String get allFilter {
-    return Intl.message('All', name: 'allFilter', desc: '', args: []);
-  }
-
-  /// `Current`
-  String get currentFilter {
-    return Intl.message('Current', name: 'currentFilter', desc: '', args: []);
-  }
-
-  /// `Completed`
-  String get completedFilter {
-    return Intl.message(
-      'Completed',
-      name: 'completedFilter',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Canceled`
-  String get canceledFilter {
-    return Intl.message('Canceled', name: 'canceledFilter', desc: '', args: []);
-  }
-
-  /// `Booking code`
-  String get bookingCode {
-    return Intl.message(
-      'Booking code',
-      name: 'bookingCode',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Copy code`
-  String get copyCode {
-    return Intl.message('Copy code', name: 'copyCode', desc: '', args: []);
-  }
-
-  /// `Code copied`
-  String get codeCopied {
-    return Intl.message('Code copied', name: 'codeCopied', desc: '', args: []);
-  }
-
-  // skipped getter for the '--------map-----------' key
-
-  /// `Map`
-  String get mapTitle {
-    return Intl.message('Map', name: 'mapTitle', desc: '', args: []);
-  }
-
-  /// `Explore places on the map`
-  String get mapHeadline {
-    return Intl.message(
-      'Explore places on the map',
-      name: 'mapHeadline',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Use the search tool to locate places easily and quickly.`
-  String get mapSubhead {
-    return Intl.message(
-      'Use the search tool to locate places easily and quickly.',
-      name: 'mapSubhead',
-      desc: '',
-      args: [],
-    );
-  }
-
-  // skipped getter for the '--------bookingDetails-----------' key
-
-  /// `Booking details`
-  String get bookingDetailsTitle {
-    return Intl.message(
-      'Booking details',
-      name: 'bookingDetailsTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Booking confirmation`
-  String get bookingConfirmation {
-    return Intl.message(
-      'Booking confirmation',
-      name: 'bookingConfirmation',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Booking number`
-  String get bookingCodeLabel {
-    return Intl.message(
-      'Booking number',
-      name: 'bookingCodeLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Booking date`
-  String get bookingDateLabel {
-    return Intl.message(
-      'Booking date',
-      name: 'bookingDateLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Booking status`
-  String get bookingStatusLabel {
-    return Intl.message(
-      'Booking status',
-      name: 'bookingStatusLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Booking info`
-  String get bookingInfo {
-    return Intl.message(
-      'Booking info',
-      name: 'bookingInfo',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Adults`
-  String get adultsCount {
-    return Intl.message('Adults', name: 'adultsCount', desc: '', args: []);
-  }
-
-  /// `Children`
-  String get childrenCount {
-    return Intl.message('Children', name: 'childrenCount', desc: '', args: []);
-  }
-
-  /// `Check-in date`
-  String get checkInDate {
-    return Intl.message(
-      'Check-in date',
-      name: 'checkInDate',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Check-out date`
-  String get checkOutDate {
-    return Intl.message(
-      'Check-out date',
-      name: 'checkOutDate',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Purchase & cancellation policy`
-  String get purchaseAndCancellationPolicy {
-    return Intl.message(
-      'Purchase & cancellation policy',
-      name: 'purchaseAndCancellationPolicy',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `View venue details`
-  String get viewVenueDetails {
-    return Intl.message(
-      'View venue details',
-      name: 'viewVenueDetails',
-      desc: '',
-      args: [],
-    );
-  }
-
-  // skipped getter for the '--------hotelBooking-----------' key
-
-  /// `Hotel booking`
-  String get hotelBookingTitle {
-    return Intl.message(
-      'Hotel booking',
-      name: 'hotelBookingTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Your booking date`
-  String get yourBookingDate {
-    return Intl.message(
-      'Your booking date',
-      name: 'yourBookingDate',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Select booking date`
-  String get selectBookingDate {
-    return Intl.message(
-      'Select booking date',
-      name: 'selectBookingDate',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Check-in`
-  String get checkIn {
-    return Intl.message('Check-in', name: 'checkIn', desc: '', args: []);
-  }
-
-  /// `Check-out`
-  String get checkOut {
-    return Intl.message('Check-out', name: 'checkOut', desc: '', args: []);
-  }
-
-  /// `Guests information`
-  String get guestsSectionTitle {
-    return Intl.message(
-      'Guests information',
-      name: 'guestsSectionTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Purpose of stay`
-  String get bookingPurpose {
-    return Intl.message(
-      'Purpose of stay',
-      name: 'bookingPurpose',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Leisure`
-  String get purposeLeisure {
-    return Intl.message('Leisure', name: 'purposeLeisure', desc: '', args: []);
-  }
-
-  /// `Business`
-  String get purposeBusiness {
-    return Intl.message(
-      'Business',
-      name: 'purposeBusiness',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Family`
-  String get purposeFamily {
-    return Intl.message('Family', name: 'purposeFamily', desc: '', args: []);
-  }
-
-  /// `Other`
-  String get purposeOther {
-    return Intl.message('Other', name: 'purposeOther', desc: '', args: []);
-  }
-
-  /// `Rooms`
-  String get roomsCount {
-    return Intl.message('Rooms', name: 'roomsCount', desc: '', args: []);
-  }
-
-  /// `Adults`
-  String get adults {
-    return Intl.message('Adults', name: 'adults', desc: '', args: []);
-  }
-
-  /// `Children`
-  String get children {
-    return Intl.message('Children', name: 'children', desc: '', args: []);
-  }
-
-  /// `Increase`
-  String get increase {
-    return Intl.message('Increase', name: 'increase', desc: '', args: []);
-  }
-
-  /// `Decrease`
-  String get decrease {
-    return Intl.message('Decrease', name: 'decrease', desc: '', args: []);
-  }
-
-  /// `Next`
-  String get next {
-    return Intl.message('Next', name: 'next', desc: '', args: []);
-  }
-
-  /// `Previous`
-  String get previous {
-    return Intl.message('Previous', name: 'previous', desc: '', args: []);
-  }
-
-  /// `Please select a booking date`
-  String get validationSelectDate {
-    return Intl.message(
-      'Please select a booking date',
-      name: 'validationSelectDate',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Please set the number of guests`
-  String get validationGuestsRequired {
-    return Intl.message(
-      'Please set the number of guests',
-      name: 'validationGuestsRequired',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Please set the number of rooms`
-  String get validationRoomsRequired {
-    return Intl.message(
-      'Please set the number of rooms',
-      name: 'validationRoomsRequired',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `At least one adult is required`
-  String get validationMinOneAdult {
-    return Intl.message(
-      'At least one adult is required',
-      name: 'validationMinOneAdult',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Today`
-  String get calendarToday {
-    return Intl.message('Today', name: 'calendarToday', desc: '', args: []);
-  }
-
-  /// `Clear dates`
-  String get calendarClear {
-    return Intl.message(
-      'Clear dates',
-      name: 'calendarClear',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Apply`
-  String get calendarApply {
-    return Intl.message('Apply', name: 'calendarApply', desc: '', args: []);
-  }
-
-  /// `Personal information`
-  String get personalInfoTitle {
-    return Intl.message(
-      'Personal information',
-      name: 'personalInfoTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  // skipped getter for the '--------bookingPayment-----------' key
-
-  /// `Booking confirmation`
-  String get confirmationSectionTitle {
-    return Intl.message(
-      'Booking confirmation',
-      name: 'confirmationSectionTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Booking confirmation`
-  String get confirmationAmountLabel {
-    return Intl.message(
-      'Booking confirmation',
-      name: 'confirmationAmountLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `rooms`
-  String get roomsShort {
-    return Intl.message('rooms', name: 'roomsShort', desc: '', args: []);
-  }
-
-  /// `From`
-  String get from {
-    return Intl.message('From', name: 'from', desc: '', args: []);
-  }
-
-  /// `To`
-  String get to {
-    return Intl.message('To', name: 'to', desc: '', args: []);
-  }
-
-  /// `Deposit`
-  String get depositSectionTitle {
-    return Intl.message(
-      'Deposit',
-      name: 'depositSectionTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Pay deposit`
-  String get payDeposit {
-    return Intl.message('Pay deposit', name: 'payDeposit', desc: '', args: []);
-  }
-
-  /// `Please pay the deposit to confirm the booking`
-  String get payDepositNote {
-    return Intl.message(
-      'Please pay the deposit to confirm the booking',
-      name: 'payDepositNote',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Guests details`
-  String get guestsInfoTitle {
-    return Intl.message(
-      'Guests details',
-      name: 'guestsInfoTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `{adults} person ({children} children)`
-  String guestsSummaryFormat(Object adults, Object children) {
-    return Intl.message(
-      '$adults person ($children children)',
-      name: 'guestsSummaryFormat',
-      desc: '',
-      args: [adults, children],
-    );
-  }
-
-  /// `Hotel policy:`
-  String get hotelPolicyPrefix {
-    return Intl.message(
-      'Hotel policy:',
-      name: 'hotelPolicyPrefix',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Deposit amount is strictly non-refundable`
-  String get nonRefundablePolicy {
-    return Intl.message(
-      'Deposit amount is strictly non-refundable',
-      name: 'nonRefundablePolicy',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Processing payment...`
-  String get paymentInProgress {
-    return Intl.message(
-      'Processing payment...',
-      name: 'paymentInProgress',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Payment successful`
-  String get paymentSuccess {
-    return Intl.message(
-      'Payment successful',
-      name: 'paymentSuccess',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Payment failed`
-  String get paymentFailed {
-    return Intl.message(
-      'Payment failed',
-      name: 'paymentFailed',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Payment cancelled`
-  String get paymentCancelled {
-    return Intl.message(
-      'Payment cancelled',
-      name: 'paymentCancelled',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `View invoice`
-  String get viewInvoice {
-    return Intl.message(
-      'View invoice',
-      name: 'viewInvoice',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Try again`
-  String get tryAgain {
-    return Intl.message('Try again', name: 'tryAgain', desc: '', args: []);
-  }
-
-  /// `Pay deposit`
-  String get depositPaymentTitle {
-    return Intl.message(
-      'Pay deposit',
-      name: 'depositPaymentTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Have a discount coupon?`
-  String get haveCouponQuestion {
-    return Intl.message(
-      'Have a discount coupon?',
-      name: 'haveCouponQuestion',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Coupon`
-  String get coupon {
-    return Intl.message('Coupon', name: 'coupon', desc: '', args: []);
-  }
-
-  /// `Enter coupon`
-  String get enterCoupon {
-    return Intl.message(
-      'Enter coupon',
-      name: 'enterCoupon',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Verify`
-  String get verifyCoupon {
-    return Intl.message('Verify', name: 'verifyCoupon', desc: '', args: []);
-  }
-
-  /// `Remove coupon`
-  String get removeCoupon {
-    return Intl.message(
-      'Remove coupon',
-      name: 'removeCoupon',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Coupon applied`
-  String get couponApplied {
-    return Intl.message(
-      'Coupon applied',
-      name: 'couponApplied',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Invalid coupon`
-  String get invalidCoupon {
-    return Intl.message(
-      'Invalid coupon',
-      name: 'invalidCoupon',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Coupon expired`
-  String get expiredCoupon {
-    return Intl.message(
-      'Coupon expired',
-      name: 'expiredCoupon',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Discount`
-  String get couponDiscount {
-    return Intl.message('Discount', name: 'couponDiscount', desc: '', args: []);
-  }
-
-  /// `Payment methods`
-  String get paymentMethods {
-    return Intl.message(
-      'Payment methods',
-      name: 'paymentMethods',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Al Kuraimi`
-  String get payWithAlKuraimi {
-    return Intl.message(
-      'Al Kuraimi',
-      name: 'payWithAlKuraimi',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `OneCash`
-  String get payWithOneCash {
-    return Intl.message('OneCash', name: 'payWithOneCash', desc: '', args: []);
-  }
-
-  /// `Jawali Wallet`
-  String get payWithJawali {
-    return Intl.message(
-      'Jawali Wallet',
-      name: 'payWithJawali',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Flousak`
-  String get payWithFlousak {
-    return Intl.message('Flousak', name: 'payWithFlousak', desc: '', args: []);
-  }
-
-  /// `Cost`
-  String get cost {
-    return Intl.message('Cost', name: 'cost', desc: '', args: []);
-  }
-
-  /// `Total`
-  String get grandTotal {
-    return Intl.message('Total', name: 'grandTotal', desc: '', args: []);
-  }
-
-  /// `Deposit`
-  String get depositAmount {
-    return Intl.message('Deposit', name: 'depositAmount', desc: '', args: []);
-  }
-
-  /// `Remaining after deposit`
-  String get remainingAfterDeposit {
-    return Intl.message(
-      'Remaining after deposit',
-      name: 'remainingAfterDeposit',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Pay`
-  String get payAction {
-    return Intl.message('Pay', name: 'payAction', desc: '', args: []);
-  }
-
-  /// `Please select a payment method`
-  String get pleaseSelectPaymentMethod {
-    return Intl.message(
-      'Please select a payment method',
-      name: 'pleaseSelectPaymentMethod',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Pay the deposit to confirm the booking`
-  String get confirmDepositTitle {
-    return Intl.message(
-      'Pay the deposit to confirm the booking',
-      name: 'confirmDepositTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Hotel policy: the deposit is strictly non-refundable`
-  String get hotelPolicyNote {
-    return Intl.message(
-      'Hotel policy: the deposit is strictly non-refundable',
-      name: 'hotelPolicyNote',
-      desc: '',
-      args: [],
-    );
-  }
-
-  // skipped getter for the '--------search-----------' key
-
-  /// `Find the right place for you`
-  String get findTheRightPlaceForYou {
-    return Intl.message(
-      'Find the right place for you',
-      name: 'findTheRightPlaceForYou',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `You can search by property name and customize your results`
-  String get searchSubtitle {
-    return Intl.message(
-      'You can search by property name and customize your results',
-      name: 'searchSubtitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Search for a hotel`
-  String get searchHotelPlaceholder {
-    return Intl.message(
-      'Search for a hotel',
-      name: 'searchHotelPlaceholder',
-      desc: '',
-      args: [],
-    );
-  }
-
-  // skipped getter for the '--------filter-----------' key
-
-  /// `Filter`
-  String get filterTitle {
-    return Intl.message('Filter', name: 'filterTitle', desc: '', args: []);
-  }
-
-  /// `Date`
-  String get date {
-    return Intl.message('Date', name: 'date', desc: '', args: []);
-  }
-
-  /// `Room type`
-  String get roomType {
-    return Intl.message('Room type', name: 'roomType', desc: '', args: []);
-  }
-
-  /// `Select room type`
-  String get selectRoomType {
-    return Intl.message(
-      'Select room type',
-      name: 'selectRoomType',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Price`
-  String get price {
-    return Intl.message('Price', name: 'price', desc: '', args: []);
-  }
-
-  /// `Features`
-  String get features {
-    return Intl.message('Features', name: 'features', desc: '', args: []);
-  }
-
-  /// `Rating`
-  String get rating {
-    return Intl.message('Rating', name: 'rating', desc: '', args: []);
-  }
-
-  /// `Apply filter`
-  String get applyFilter {
-    return Intl.message(
-      'Apply filter',
-      name: 'applyFilter',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Clear filters`
-  String get clearFilters {
-    return Intl.message(
-      'Clear filters',
-      name: 'clearFilters',
-      desc: '',
-      args: [],
-    );
-  }
-
-  // skipped getter for the '--------editProfile-----------' key
-
-  /// `Edit personal information`
-  String get editPersonalInfoTitle {
-    return Intl.message(
-      'Edit personal information',
-      name: 'editPersonalInfoTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Update your personal information`
-  String get editPersonalInfoSubtitle {
-    return Intl.message(
-      'Update your personal information',
-      name: 'editPersonalInfoSubtitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Save changes`
-  String get saveChanges {
-    return Intl.message(
-      'Save changes',
-      name: 'saveChanges',
       desc: '',
       args: [],
     );

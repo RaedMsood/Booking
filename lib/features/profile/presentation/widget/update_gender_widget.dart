@@ -26,7 +26,7 @@ class UpdateGenderWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final initial = selectedGenderFromProfile ?? 'male';
     final selectedGender = ref.watch(updateGenderProvider);
-    final genderNotifier = ref.read(updateGenderProvider.notifier);
+    ref.read(updateGenderProvider.notifier);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

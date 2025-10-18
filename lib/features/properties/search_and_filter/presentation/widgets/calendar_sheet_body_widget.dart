@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../../generated/l10n.dart';
 import 'calendar_month_widget.dart';
 
 class CalendarSheetBodyWidget extends StatelessWidget {
@@ -52,7 +53,7 @@ class CalendarSheetBodyWidget extends StatelessWidget {
             child: Row(
               children: [
                 12.w.horizontalSpace,
-                const AutoSizeTextWidget(text: "اختر التواريخ"),
+                 AutoSizeTextWidget(text: S.of(context).selectDates),
                 const Spacer(),
                 IconButtonWidget(
                   icon: AppIcons.close,

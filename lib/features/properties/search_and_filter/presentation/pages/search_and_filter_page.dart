@@ -7,8 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/state/state.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../../core/widgets/buttons/icon_button_widget.dart';
 import '../../../../../core/widgets/loading_widget.dart';
+import '../../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../home/presentation/widgets/property_list_widget.dart';
 import '../riverpod/search_and_filter_riverpod.dart';
@@ -57,70 +57,13 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
     var provider = ref.read(searchAndFilterPropertiesProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 72.w,
-        toolbarHeight: 58.h,
-        leading: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 14.h).copyWith(top: 4.4.h),
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-            ),
-            child: const IconButtonWidget(),
-          ),
-        ),
-      ),
-      // body: CustomScrollView(
-      //   controller: _scrollController,
-      //   slivers: [
-      //     SliverPersistentHeader(
-      //       pinned: true,
-      //       delegate: _SearchHeaderDelegate(
-      //         child: Padding(
-      //           padding: EdgeInsets.all(14.sp),
-      //           child: Column(
-      //             crossAxisAlignment: CrossAxisAlignment.start,
-      //             children: [
-      //               AutoSizeTextWidget(
-      //                 text: "أبحث عن المكان المناسب لك",
-      //                 textAlign: TextAlign.start,
-      //                 fontSize: 14.6.sp,
-      //               ),
-      //               8.h.verticalSpace,
-      //               AutoSizeTextWidget(
-      //                 text: "بامكانك البحث بأسم منشأة وفلترة النتائج الخاصة بك",
-      //                 colorText: AppColors.fontColor2,
-      //                 fontSize: 10.4.sp,
-      //                 textAlign: TextAlign.start,
-      //               ),
-      //               16.h.verticalSpace,
-      //               SearchAndFilterDesignWidget(),
-      //               12.h.verticalSpace,
-      //             ],
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-      //
-      //     SliverToBoxAdapter(
-      //       child: CheckStateInGetApiDataWidget(
-      //         state: state,
-      //         widgetOfData: PropertySliverListWidget(
-      //           properties: state.data.data,
-      //           state: state.stateData,
-      //           hasMore: state.data.currentPage <
-      //               state.data.lastPage,
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
+      appBar: const SecondaryAppBarWidget(title: ''),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.all(14.sp),
+            padding:
+                EdgeInsets.symmetric(horizontal: 14.w).copyWith(bottom: 8.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -136,7 +79,7 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
                   fontSize: 10.4.sp,
                   textAlign: TextAlign.start,
                 ),
-                16.h.verticalSpace,
+                14.h.verticalSpace,
                 SearchAndFilterWidget(controller: provider),
               ],
             ),
@@ -160,8 +103,8 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
                 controller: _scrollController,
                 slivers: [
                   if (state.data.data.isEmpty)
-                    const SliverToBoxAdapter(
-                      child: EmptyWidget(title: "لايوجد نتائج للبحث"),
+                     SliverToBoxAdapter(
+                      child: EmptyWidget(title: S.of(context).noSearchResults),
                     ),
                   PropertySliverListWidget(
                     properties: state.data.data,
@@ -178,28 +121,4 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
       ),
     );
   }
-}
-
-class _SearchHeaderDelegate extends SliverPersistentHeaderDelegate {
-  final Widget child;
-
-  _SearchHeaderDelegate({required this.child});
-
-  @override
-  double get minExtent => 180.h;
-
-  @override
-  double get maxExtent => 180.h;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: Colors.white, // تأكد من وجود خلفية لتثبيتها فوق المحتوى
-      child: child,
-    );
-  }
-
-  @override
-  bool shouldRebuild(covariant _SearchHeaderDelegate oldDelegate) => false;
 }

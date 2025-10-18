@@ -1,9 +1,6 @@
 import 'package:booking/core/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-
-import '../../../../core/constants/app_icons.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/online_images_widget.dart';
@@ -75,7 +72,7 @@ class ShimmerCardInMapWidget extends StatelessWidget {
                             children: [
 
                               1.8.w.horizontalSpace,
-                              RatingBarWidget(
+                              const RatingBarWidget(
                                 evaluation: 4,
                                 length: 1,
                               ),
@@ -99,7 +96,7 @@ class ShimmerCardInMapWidget extends StatelessWidget {
                           child: AutoSizeTextWidget(
                             text: "          ",
                             fontSize: 10.5.sp,
-                            colorText: Color(0xff292D32),
+                            colorText: const Color(0xff292D32),
                             fontWeight: FontWeight.w400,
                             minFontSize: 10,
                           ),

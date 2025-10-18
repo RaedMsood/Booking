@@ -4,6 +4,7 @@ import 'package:booking/core/widgets/buttons/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import '../../../../../generated/l10n.dart';
 import 'calendar_sheet_body_widget.dart';
 
 Future<DateTimeRange?> showCalendarRangePickerBottomSheet(
@@ -84,8 +85,8 @@ class _CalendarRangePickerSheetWidgetState extends State<CalendarRangePickerShee
     final endText = '${dFmt.format(end)} ${mFmt.format(end)}';
 
     return _rangeEnd == null
-        ? 'من $startText'
-        : '$startText - $endText (${nights.toString()} ليال)';
+        ? '${S.of(context).from} $startText'
+        : '$startText - $endText (${nights.toString()} ${S.of(context).nights})';
   }
 
   @override
@@ -132,7 +133,7 @@ class _CalendarRangePickerSheetWidgetState extends State<CalendarRangePickerShee
                     ),
                   const SizedBox(height: 12),
                   DefaultButtonWidget(
-                    text: "تاكيد",
+                    text: S.of(context).confirm,
                     borderRadius: 8.r,
                     height: 40.h,
                     background: _canConfirm

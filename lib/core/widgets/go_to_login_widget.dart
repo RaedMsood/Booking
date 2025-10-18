@@ -20,7 +20,7 @@ class GoToLoginWidget extends StatelessWidget {
           children: [
             Image.asset(AppImages.errorNetwork),
             14.h.verticalSpace,
-            AutoSizeTextWidget(
+            const AutoSizeTextWidget(
               text: "افتح الباب لعالم العروض والحجوزات الخاصة بك",
             ),
             4.h.verticalSpace,
@@ -34,7 +34,7 @@ class GoToLoginWidget extends StatelessWidget {
               width: 160.w,
               height: 36.h,
               onPressed: () {
-                navigateTo(context, LogInPage());
+                navigateTo(context, const LogInPage());
               },
             )
           ],

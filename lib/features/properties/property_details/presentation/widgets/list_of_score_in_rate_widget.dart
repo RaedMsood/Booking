@@ -1,8 +1,8 @@
-import 'package:booking/features/booking/data/booking_model/rate_model.dart';
+import 'package:booking/features/my_bookings/data/model/rate_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../booking/presentation/widget/rating_row_widget.dart';
+import '../../../../my_bookings/presentation/widgets/rating_row_widget.dart';
 
 class ListOfScoreInRateWidget extends StatelessWidget {
  const ListOfScoreInRateWidget(

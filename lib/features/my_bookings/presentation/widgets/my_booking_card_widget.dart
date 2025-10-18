@@ -1,18 +1,19 @@
-import 'package:booking/features/booking/data/booking_model/booking_model.dart';
-import 'package:booking/features/booking/presentation/widget/rating_booking_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../generated/l10n.dart';
+import '../../../booking/data/booking_model/booking_model.dart';
 import 'booking_status_widget.dart';
 import 'id_booking_with_copy_widget.dart';
-import 'image_hotel_widget.dart';
+import 'hotel_image_widget.dart';
 import 'info_hotel_in_booking_card_widget.dart';
+import 'rating_booking_widget.dart';
 
-class BookingCard extends StatelessWidget {
+class MyBookingCardWidget extends StatelessWidget {
   final BookingData bookData;
   final VoidCallback? onTap;
 
-  const BookingCard({
+  const MyBookingCardWidget({
     super.key,
     required this.bookData,
     this.onTap,
@@ -23,7 +24,7 @@ class BookingCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+        margin: EdgeInsets.symmetric( horizontal: 16.w).copyWith(top: 12.h),
         padding: EdgeInsets.all(12.sp),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -33,33 +34,34 @@ class BookingCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                StatusBadge(
+                BookingStatusWidget(
                   status: bookData.status ?? '',
                 ),
                 SizedBox(width: 8.w),
-                BookingIdBadge(
-                  bookingId: bookData.code??'',
+                IdBookingWithCopyWidget(
+                  bookingId: bookData.code ?? '',
                   onCopy: () {
-                    Clipboard.setData(ClipboardData(text:bookData.code??'',));
+                    Clipboard.setData(ClipboardData(
+                      text: bookData.code ?? '',
+                    ));
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('تم نسخ رقم الحجز')),
+                      SnackBar(content: Text(S.of(context).bookingCodeCopied)),
                     );
                   },
                 ),
-
                 const Spacer(),
-                const RatingBadge(rating: 4),
+                const RatingBookingWidget(rating: 4),
               ],
             ),
             const Divider(thickness: 0.5, color: Color(0xffF0F0F0)),
             Row(
               children: [
-                HotelImage(imageUrl: bookData.image ?? ''),
+                HotelImageWidget(imageUrl: bookData.image ?? ''),
                 SizedBox(width: 12.w),
                 InfoHotelInCardBookingWidget(
                   title: bookData.property ?? '',
                   location:
-                      '${bookData.address?.city??''} , ${bookData.address?.district??''}',
+                      '${bookData.address?.city ?? ''} , ${bookData.address?.district ?? ''}',
                   count: bookData.guests ?? 1,
                   price: bookData.totalPrice,
                 ),

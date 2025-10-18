@@ -1,4 +1,6 @@
 
+import '../../../../generated/l10n.dart';
+
 class PaySpec {
   final String instruction;
   final String codeLabel;
@@ -15,21 +17,21 @@ class PaySpec {
 }
 
 
-const Map<String, PaySpec> paySpecs = {
-  'kuraimi': PaySpec(
-    instruction: 'رقم التعريف يُولَّد من إعدادات تطبيق الكريمي لأول مرة',
-    codeLabel: 'رمز التعريف',
-    codeHint: 'رمز التعريف',
-    codeEmptyError: 'يرجى إدخال رمز التعريف',
-    requiresAmount: true,
-  ),
-  'jawali': PaySpec(
-    instruction: 'أدخل كود الشراء المنشأ في تطبيق جوالي',
-    codeLabel: 'كود الشراء',
-    codeHint: 'كود الشراء',
-    codeEmptyError: 'يرجى إدخال كود الشراء',
-    requiresAmount: false,
-  ),
+ Map<String, PaySpec> paySpecs = {
+   'kuraimi': PaySpec(
+     instruction: S.current.payKuraimiInstruction,
+     codeLabel: S.current.payKuraimiCodeLabel,
+     codeHint: S.current.payKuraimiCodeHint,
+     codeEmptyError: S.current.payKuraimiCodeEmptyError,
+     requiresAmount: true,
+   ),
+   'jawali': PaySpec(
+     instruction: S.current.payJawaliInstruction,
+     codeLabel: S.current.payJawaliCodeLabel,
+     codeHint: S.current.payJawaliCodeHint,
+     codeEmptyError: S.current.payJawaliCodeEmptyError,
+     requiresAmount: false,
+   ),
 };
 
 

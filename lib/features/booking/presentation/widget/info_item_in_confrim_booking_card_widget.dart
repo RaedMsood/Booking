@@ -12,13 +12,13 @@ class InfoItemInConfrimBookingCardWidget extends StatelessWidget {
   final VoidCallback? onTap;
 
   const InfoItemInConfrimBookingCardWidget({
-    Key? key,
+    super.key,
     this.icon,
     required this.text,
     this.label,
     this.onTap,
     required this.title
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class InfoItemInConfrimBookingCardWidget extends StatelessWidget {
 
         ),
         const Spacer(),
-        Icon(icon, size: 10, color: const Color(0xff605A65)),
+        Icon(icon, size: 12, color: const Color(0xff605A65)),
         2.horizontalSpace,
         AutoSizeTextWidget(
           text: text,

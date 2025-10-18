@@ -1,24 +1,25 @@
-import 'package:booking/features/booking/presentation/widget/shimmer_booking_card_widget.dart';
+import 'package:booking/features/my_bookings/presentation/widgets/shimmer_booking_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helpers/navigateTo.dart';
 import '../../../../core/state/check_state_in_get_api_data_widget.dart';
-import '../page/details_info_booking_page.dart';
-import '../riverpod/booking_riverpod.dart';
-import 'booking_card_widget.dart';
+import '../pages/my_booking_details_page.dart';
+import 'my_booking_card_widget.dart';
+import '../riverpod/my_bookings_riverpod.dart';
 
-class ListOfTypeAllBookingWidget extends ConsumerStatefulWidget {
-  const ListOfTypeAllBookingWidget({super.key, required this.statusId});
+class ListOfTypeAllMyBookingsWidget extends ConsumerStatefulWidget {
+  const ListOfTypeAllMyBookingsWidget({super.key, required this.statusId});
 
   final int statusId;
 
   @override
-  ConsumerState<ListOfTypeAllBookingWidget> createState() =>
-      _ListOfTypeBookingWidgetState();
+  ConsumerState<ListOfTypeAllMyBookingsWidget> createState() =>
+      _ListOfTypeAllMyBookingsWidgetState();
 }
 
-class _ListOfTypeBookingWidgetState
-    extends ConsumerState<ListOfTypeAllBookingWidget> {
+class _ListOfTypeAllMyBookingsWidgetState
+    extends ConsumerState<ListOfTypeAllMyBookingsWidget> {
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -42,17 +43,20 @@ class _ListOfTypeBookingWidgetState
     return CheckStateInGetApiDataWidget(
       state: bookingTypeState,
       widgetOfLoading: const ShimmerBookingCardWidget(),
-      refresh: (){
-        ref.read(getBookingProvider(widget.statusId).notifier).getDataBookingType();
+      refresh: () {
+        ref
+            .read(getBookingProvider(widget.statusId).notifier)
+            .getDataBookingType();
       },
       widgetOfData: ListView.builder(
         controller: _scrollController,
-        itemBuilder: (context, index) => BookingCard(
+        padding: EdgeInsets.only(bottom: 14.h),
+        itemBuilder: (context, index) => MyBookingCardWidget(
           bookData: bookingTypeState.data.data[index],
           onTap: () {
             navigateTo(
               context,
-              BookingDetailPage(
+              MyBookingDetailsPage(
                 bookData: bookingTypeState.data.data[index],
                 isCompletedBook: widget.statusId == 2 ||
                     bookingTypeState.data.data[index].status == "منتهيه",

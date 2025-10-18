@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../generated/l10n.dart';
-import '../riverpod/booking_riverpod.dart';
+import '../riverpod/my_bookings_riverpod.dart';
 
 class StatusBadgeInDetailsWidget extends StatelessWidget {
   final String status;

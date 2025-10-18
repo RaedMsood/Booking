@@ -144,7 +144,7 @@ class _ListToViewAllCitiesWidgetState
           if (_filtered.isEmpty)
             Padding(
               padding: EdgeInsets.all(16.sp),
-              child: Text('لا توجد نتائج',
+              child: const Text('لا توجد نتائج',
                   style: TextStyle(color: Colors.grey)),
             )
           else

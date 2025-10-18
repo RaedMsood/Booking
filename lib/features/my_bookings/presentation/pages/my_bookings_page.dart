@@ -6,16 +6,16 @@ import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/go_to_login_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
-import '../widget/list_of_type_booking_widget.dart';
+import '../widgets/list_of_type_all_my_bookings_widget.dart';
 
-class BookingPage extends StatefulWidget {
-  const BookingPage({super.key});
+class MyBookingsPage extends StatefulWidget {
+  const MyBookingsPage({super.key});
 
   @override
-  State<BookingPage> createState() => _BookingPageState();
+  State<MyBookingsPage> createState() => _MyBookingsPageState();
 }
 
-class _BookingPageState extends State<BookingPage>
+class _MyBookingsPageState extends State<MyBookingsPage>
     with TickerProviderStateMixin {
   late final TabController _tabController;
    List<String> _tabs(BuildContext context) => [
@@ -78,7 +78,7 @@ class _BookingPageState extends State<BookingPage>
                 physics: const BouncingScrollPhysics(),
                 children: List.generate(
                   _tabs(context).length,
-                  (i) => ListOfTypeAllBookingWidget(statusId: i),
+                  (i) => ListOfTypeAllMyBookingsWidget(statusId: i),
                 ),
               ),
             ),

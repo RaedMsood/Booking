@@ -2,8 +2,7 @@ import 'package:booking/core/state/check_state_in_get_api_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../state_mangement/riverpod.dart';
 import '../widget/property _fav_card.dart';
@@ -15,13 +14,7 @@ class FavoritePage extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final favoriteState = ref.watch(favoriteProvider);
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          centerTitle: true,
-          title:  AutoSizeTextWidget(
-            text: S.of(context).favorites,
-          ),
-        ),
+        appBar: SecondaryAppBarWidget(title: S.of(context).favorites),
         body: CheckStateInGetApiDataWidget(
           state: favoriteState,
           widgetOfData: ListView.builder(

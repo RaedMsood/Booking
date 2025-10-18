@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/widgets/online_images_widget.dart';
 
-class HotelImage extends StatelessWidget {
+class HotelImageWidget extends StatelessWidget {
   final String imageUrl;
-  const   HotelImage({super.key, required this.imageUrl});
+  const   HotelImageWidget({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {

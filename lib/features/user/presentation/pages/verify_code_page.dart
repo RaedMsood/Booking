@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/constants/app_images.dart';
 import '../../../../core/helpers/navigateTo.dart';
 import '../../../../core/state/check_state_in_post_api_data_widget.dart';
 import '../../../../core/state/state.dart';
@@ -16,20 +15,21 @@ import '../widgets/resend_code_widget.dart';
 import '../widgets/verify_pinput_widget.dart';
 import 'sign_up_page.dart';
 
-class VerifyCodePage extends ConsumerWidget {
-  final String phoneNumberOrEmail;
+class VerifyCodePage extends ConsumerStatefulWidget {
+  final String phoneNumber;
 
-  VerifyCodePage({
-    super.key,
-    required this.phoneNumberOrEmail,
-  });
+  const VerifyCodePage( {super.key,required this.phoneNumber});
 
+  @override
+  ConsumerState<VerifyCodePage> createState() => _VerifyCodePageState();
+}
+
+class _VerifyCodePageState extends ConsumerState<VerifyCodePage> {
   final formKey = GlobalKey<FormState>();
 
   TextEditingController verifyController = TextEditingController();
-
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context) {
     var checkOTPState = ref.watch(checkOTPProvider);
 
     return Form(
@@ -46,7 +46,7 @@ class VerifyCodePage extends ConsumerWidget {
             ),
             6.h.verticalSpace,
             AutoSizeTextWidget(
-              text: "${S.of(context).codeHasBeenSendTo} $phoneNumberOrEmail",
+              text: "${S.of(context).codeHasBeenSendTo} ${widget.phoneNumber}",
               fontSize: 11.sp,
               fontWeight: FontWeight.w600,
               colorText: AppColors.fontColor,
@@ -57,7 +57,7 @@ class VerifyCodePage extends ConsumerWidget {
             ),
             24.h.verticalSpace,
             ResendCodeWidget(
-              phoneNumberOrEmail: phoneNumberOrEmail,
+              phoneNumberOrEmail: widget.phoneNumber,
             ),
             24.h.verticalSpace,
             CheckStateInPostApiDataWidget(
@@ -80,10 +80,10 @@ class VerifyCodePage extends ConsumerWidget {
                   if (isValid) {
                     FocusManager.instance.primaryFocus?.unfocus();
                     ref.read(checkOTPProvider.notifier).checkOTP(
-                          phoneNumber: phoneNumberOrEmail,
-                          otp: verifyController.text,
-                          deviceToken: await Auth().getFcmToken(),
-                        );
+                      phoneNumber: widget.phoneNumber,
+                      otp: verifyController.text,
+                      deviceToken: await Auth().getFcmToken(),
+                    );
                   }
                 },
               ),
@@ -94,5 +94,7 @@ class VerifyCodePage extends ConsumerWidget {
     );
   }
 }
+
+
 
 

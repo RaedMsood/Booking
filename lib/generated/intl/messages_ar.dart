@@ -24,18 +24,18 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "aNewListHasBeenCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "تم إنشاء قائمة جديدة بنجاح",
-    ),
     "about": MessageLookupByLibrary.simpleMessage("عن الفندق"),
     "aboutApp": MessageLookupByLibrary.simpleMessage("عن التطبيق"),
-    "aboutJeeey": MessageLookupByLibrary.simpleMessage("حول جي"),
+    "addYourRating": MessageLookupByLibrary.simpleMessage("أضف تقييمك"),
     "address": MessageLookupByLibrary.simpleMessage("العنوان"),
-    "addressBook": MessageLookupByLibrary.simpleMessage("دفتر العناوين"),
     "adults": MessageLookupByLibrary.simpleMessage("كبار"),
     "adultsCount": MessageLookupByLibrary.simpleMessage("عدد البالغين"),
     "all": MessageLookupByLibrary.simpleMessage("الكل"),
     "allFilter": MessageLookupByLibrary.simpleMessage("الكل"),
+    "amountLabel": MessageLookupByLibrary.simpleMessage("المبلغ"),
+    "amountValidation": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال المبلغ",
+    ),
     "applicationLanguage": MessageLookupByLibrary.simpleMessage("لغة التطبيق"),
     "applyFilter": MessageLookupByLibrary.simpleMessage("فلترة"),
     "badGateway": MessageLookupByLibrary.simpleMessage("بوابة غير صالحة"),
@@ -45,7 +45,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "birthdateOptional": MessageLookupByLibrary.simpleMessage(
       "تاريخ الميلاد (اختياري)",
     ),
-    "bookingCode": MessageLookupByLibrary.simpleMessage("رمز الحجز"),
+    "bookingCodeCopied": MessageLookupByLibrary.simpleMessage(
+      "تم نسخ رقم الحجز",
+    ),
     "bookingCodeLabel": MessageLookupByLibrary.simpleMessage("رقم الحجز"),
     "bookingConfirmation": MessageLookupByLibrary.simpleMessage("تأكيد الحجز"),
     "bookingDateLabel": MessageLookupByLibrary.simpleMessage("تاريخ الحجز"),
@@ -62,7 +64,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "تعذّر الاتصال بالخادم",
     ),
     "changeCurrency": MessageLookupByLibrary.simpleMessage("تغيير العملة"),
-    "changePassword": MessageLookupByLibrary.simpleMessage("تغيير كلمة المرور"),
     "checkIn": MessageLookupByLibrary.simpleMessage("تاريخ الوصول"),
     "checkInDate": MessageLookupByLibrary.simpleMessage("تاريخ بداية الحجز"),
     "checkInternetOrServiceUrl": MessageLookupByLibrary.simpleMessage(
@@ -73,14 +74,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "children": MessageLookupByLibrary.simpleMessage("أطفال"),
     "childrenCount": MessageLookupByLibrary.simpleMessage("عدد الأطفال"),
     "clear": MessageLookupByLibrary.simpleMessage("مسح"),
-    "clearCache": MessageLookupByLibrary.simpleMessage(
-      "مسح ذاكرة التخرين المؤقت",
-    ),
     "clearFilters": MessageLookupByLibrary.simpleMessage("تصفية الفلاتر"),
     "clickAgainToExit": MessageLookupByLibrary.simpleMessage(
       "انقر مرة أخرى للخروج!",
     ),
-    "codeCopied": MessageLookupByLibrary.simpleMessage("تم نسخ الرمز"),
     "codeHasBeenSendTo": MessageLookupByLibrary.simpleMessage(
       "تم إرسال الرمز إلى",
     ),
@@ -90,15 +87,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmDepositTitle": MessageLookupByLibrary.simpleMessage(
       "قم بدفع العربون لتأكيد الحجز",
     ),
-    "confirmationAmountLabel": MessageLookupByLibrary.simpleMessage(
-      "تأكيد الحجز",
-    ),
+    "confirmPayment": MessageLookupByLibrary.simpleMessage("تأكيد الدفع"),
     "confirmationSectionTitle": MessageLookupByLibrary.simpleMessage(
       "تأكيد الحجز",
-    ),
-    "connectToUs": MessageLookupByLibrary.simpleMessage("التواصل معنا"),
-    "contactPreferences": MessageLookupByLibrary.simpleMessage(
-      "جهات الاتصال المفضلة",
     ),
     "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
     "continueAsGuest": MessageLookupByLibrary.simpleMessage("المتابعة كزائر"),
@@ -109,20 +100,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "الاستمرار بجوجل Google",
     ),
     "copy": MessageLookupByLibrary.simpleMessage("نسخ"),
-    "copyCode": MessageLookupByLibrary.simpleMessage("نسخ الرمز"),
     "cost": MessageLookupByLibrary.simpleMessage("التكلفة"),
+    "countLabel": MessageLookupByLibrary.simpleMessage("عدد"),
     "coupon": MessageLookupByLibrary.simpleMessage("القسيمة"),
-    "couponApplied": MessageLookupByLibrary.simpleMessage("تم تطبيق القسيمة"),
     "couponDiscount": MessageLookupByLibrary.simpleMessage("قيمة الخصم"),
     "currency": MessageLookupByLibrary.simpleMessage("عملة"),
     "currentFilter": MessageLookupByLibrary.simpleMessage("الحالية"),
     "date": MessageLookupByLibrary.simpleMessage("التاريخ"),
     "decrease": MessageLookupByLibrary.simpleMessage("نقصان"),
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
-    "deleteAccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
-    "deletedAddressSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "تم حذف العنوان بنجاح",
-    ),
     "deletedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم الحذف بنجاح",
     ),
@@ -130,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "depositAmount": MessageLookupByLibrary.simpleMessage("العربون"),
     "depositPaymentTitle": MessageLookupByLibrary.simpleMessage("دفع العربون"),
     "depositSectionTitle": MessageLookupByLibrary.simpleMessage("العربون"),
+    "destinations": MessageLookupByLibrary.simpleMessage("الوجهات"),
     "discoverOurDestinations": MessageLookupByLibrary.simpleMessage(
       "اكتشف وجهاتنا ✈️🌎",
     ),
@@ -157,7 +144,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "إدخل تاريخ الميلاد",
     ),
     "enterCoupon": MessageLookupByLibrary.simpleMessage("أدخل القسيمة"),
-    "expiredCoupon": MessageLookupByLibrary.simpleMessage("القسيمة منتهية"),
     "faq": MessageLookupByLibrary.simpleMessage("الأسئلة الشائعة"),
     "favorites": MessageLookupByLibrary.simpleMessage("المفضلة"),
     "features": MessageLookupByLibrary.simpleMessage("المميزات"),
@@ -199,6 +185,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "hostel": MessageLookupByLibrary.simpleMessage("نُزل"),
     "hotelBookingTitle": MessageLookupByLibrary.simpleMessage("حجز الفندق"),
+    "hotelPaymentNote": MessageLookupByLibrary.simpleMessage(
+      "سيتوجب عليك دفع باقي المبلغ لصاحب الفندق عند الوصول",
+    ),
     "hotelPolicyNote": MessageLookupByLibrary.simpleMessage(
       "سياسة الفندق: مبلغ العربون لا يُرجع مطلقًا",
     ),
@@ -226,7 +215,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidApiUrl2": MessageLookupByLibrary.simpleMessage(
       "تحقق من عنوان الخادم (Base URL) ثم أعد المحاولة",
     ),
-    "invalidCoupon": MessageLookupByLibrary.simpleMessage("القسيمة غير صالحة"),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني غير صالح",
     ),
@@ -236,7 +224,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم تسجيل الخروج بنجاح",
     ),
     "male": MessageLookupByLibrary.simpleMessage("ذكر"),
-    "manageMyAccount": MessageLookupByLibrary.simpleMessage("إدارة حسابي"),
     "map": MessageLookupByLibrary.simpleMessage("الخريطة"),
     "mapHeadline": MessageLookupByLibrary.simpleMessage(
       "اطّلع على المنشآت في الخريطة",
@@ -255,7 +242,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "تحقق من إتصالك بشبكة الانترنت",
     ),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
+    "nights": MessageLookupByLibrary.simpleMessage("ليال"),
     "no": MessageLookupByLibrary.simpleMessage("لا"),
+    "noSearchResults": MessageLookupByLibrary.simpleMessage(
+      "لايوجد نتائج للبحث",
+    ),
     "nonRefundablePolicy": MessageLookupByLibrary.simpleMessage(
       "مبلغ العربون لا يُرجع مطلقًا",
     ),
@@ -271,17 +262,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "payDepositNote": MessageLookupByLibrary.simpleMessage(
       "يرجى دفع العربون لتأكيد الحجز",
     ),
-    "payWithAlKuraimi": MessageLookupByLibrary.simpleMessage("عبر الكريمي"),
-    "payWithFlousak": MessageLookupByLibrary.simpleMessage("فلوسك"),
-    "payWithJawali": MessageLookupByLibrary.simpleMessage("محفظة جوالي"),
-    "payWithOneCash": MessageLookupByLibrary.simpleMessage("ون كاش"),
-    "paymentCancelled": MessageLookupByLibrary.simpleMessage("تم إلغاء الدفع"),
-    "paymentFailed": MessageLookupByLibrary.simpleMessage("فشل الدفع"),
-    "paymentInProgress": MessageLookupByLibrary.simpleMessage(
-      "جاري معالجة الدفع...",
+    "payJawaliCodeEmptyError": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال كود الشراء",
+    ),
+    "payJawaliCodeHint": MessageLookupByLibrary.simpleMessage("كود الشراء"),
+    "payJawaliCodeLabel": MessageLookupByLibrary.simpleMessage("كود الشراء"),
+    "payJawaliInstruction": MessageLookupByLibrary.simpleMessage(
+      "أدخل كود الشراء المنشأ في تطبيق جوالي",
+    ),
+    "payKuraimiCodeEmptyError": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال رمز التعريف",
+    ),
+    "payKuraimiCodeHint": MessageLookupByLibrary.simpleMessage("رمز التعريف"),
+    "payKuraimiCodeLabel": MessageLookupByLibrary.simpleMessage("رمز التعريف"),
+    "payKuraimiInstruction": MessageLookupByLibrary.simpleMessage(
+      "رقم التعريف يُولَّد من إعدادات تطبيق الكريمي لأول مرة",
     ),
     "paymentMethods": MessageLookupByLibrary.simpleMessage("وسائل الدفع"),
-    "paymentSuccess": MessageLookupByLibrary.simpleMessage("تم الدفع بنجاح"),
     "personalInfo": MessageLookupByLibrary.simpleMessage("البيانات الشخصية"),
     "personalInfoTitle": MessageLookupByLibrary.simpleMessage("بيانات الشخص"),
     "phone": MessageLookupByLibrary.simpleMessage("الرقم"),
@@ -305,14 +302,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "previous": MessageLookupByLibrary.simpleMessage("السابق"),
     "price": MessageLookupByLibrary.simpleMessage("السعر"),
-    "privacyAndCookiePolicy": MessageLookupByLibrary.simpleMessage(
-      "سياسة الخصوصية وملفات تعريف الارتباط",
-    ),
-    "productsHaveBeenAddedToTheList": MessageLookupByLibrary.simpleMessage(
-      "تمت إضافة المنتجات إلى القائمة",
-    ),
     "profile": MessageLookupByLibrary.simpleMessage("حسابي"),
-    "profileTitle": MessageLookupByLibrary.simpleMessage("حسابي"),
     "purchaseAndCancellationPolicy": MessageLookupByLibrary.simpleMessage(
       "سياسة الشراء والإلغاء",
     ),
@@ -321,9 +311,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "purposeLeisure": MessageLookupByLibrary.simpleMessage("ترفيه"),
     "purposeOther": MessageLookupByLibrary.simpleMessage("أخرى"),
     "rating": MessageLookupByLibrary.simpleMessage("التقييم"),
-    "ratingAndFeedback": MessageLookupByLibrary.simpleMessage(
-      "التقييم والملاحظات",
-    ),
     "readMore": MessageLookupByLibrary.simpleMessage("قراءة المزيد"),
     "receiveTimeout": MessageLookupByLibrary.simpleMessage(
       "انتهى وقت استلام البيانات",
@@ -335,7 +322,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "remainingAfterDeposit": MessageLookupByLibrary.simpleMessage(
       "المتبقي بعد العربون",
     ),
-    "removeCoupon": MessageLookupByLibrary.simpleMessage("إزالة القسيمة"),
     "rename": MessageLookupByLibrary.simpleMessage("إعادة تسمية"),
     "requestCancelled": MessageLookupByLibrary.simpleMessage("تم إلغاء الطلب"),
     "requestCancelled2": MessageLookupByLibrary.simpleMessage(
@@ -360,8 +346,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectBookingDate": MessageLookupByLibrary.simpleMessage(
       "اختر تاريخ الحجز",
     ),
+    "selectDates": MessageLookupByLibrary.simpleMessage("اختر التواريخ"),
     "selectGovernorate": MessageLookupByLibrary.simpleMessage("اختر المحافظة"),
     "selectRoomType": MessageLookupByLibrary.simpleMessage("اختر نوع الغرفة"),
+    "send": MessageLookupByLibrary.simpleMessage("ارسال"),
     "sendTimeout": MessageLookupByLibrary.simpleMessage(
       "انتهى وقت إرسال البيانات",
     ),
@@ -387,22 +375,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "تأكد من ضبط الشهادة أو حاول لاحقاً",
     ),
     "successfully": MessageLookupByLibrary.simpleMessage("تمت العملية بنجاح"),
-    "termsAndConditions": MessageLookupByLibrary.simpleMessage(
-      "الشروط والأحكام",
-    ),
-    "theListHasBeenDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "تم حذف القائمة بنجاح",
-    ),
     "theModificationHasBeenCompletedSuccessfully":
         MessageLookupByLibrary.simpleMessage("لقد تم التعديل بنجاح"),
-    "thePasswordHasBeenChanged": MessageLookupByLibrary.simpleMessage(
-      "تم تغيير كلمة السر بنجاح",
-    ),
     "timeout": MessageLookupByLibrary.simpleMessage(
       "عذراً هناك مشكلة بالانترنت",
     ),
     "to": MessageLookupByLibrary.simpleMessage("إلى"),
-    "tryAgain": MessageLookupByLibrary.simpleMessage("أعد المحاولة"),
     "unableToOpenMapsApp": MessageLookupByLibrary.simpleMessage(
       "تعذّر فتح تطبيق الخرائط",
     ),
@@ -421,7 +399,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
     "verifyCoupon": MessageLookupByLibrary.simpleMessage("تحقق"),
     "viewAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
-    "viewInvoice": MessageLookupByLibrary.simpleMessage("عرض الفاتورة"),
     "viewMore": MessageLookupByLibrary.simpleMessage("عرض المزيد"),
     "viewVenueDetails": MessageLookupByLibrary.simpleMessage(
       "استعراض تفاصيل المنشأة",

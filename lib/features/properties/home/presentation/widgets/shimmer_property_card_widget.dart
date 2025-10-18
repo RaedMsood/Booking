@@ -5,8 +5,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/theme/app_colors.dart';
-import '../../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../../core/widgets/rating_bar_widget.dart';
+
 
 class ShimmerPropertyCardWidget extends StatelessWidget {
   final bool propertiesByCity;

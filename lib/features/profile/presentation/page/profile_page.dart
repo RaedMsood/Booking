@@ -18,19 +18,18 @@ import 'edit_profile_page.dart';
 import 'faq_page.dart';
 import 'favorite_page.dart';
 
-
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context,ref) {
+  Widget build(BuildContext context, ref) {
     return Visibility(
       visible: Auth().loggedIn,
-      replacement: GoToLoginWidget(),
+      replacement: const GoToLoginWidget(),
       child: Scaffold(
         appBar: AppBar(
           title: AutoSizeTextWidget(
-            text:  S.of(context).profileTitle,
+            text: S.of(context).profile,
           ),
         ),
         body: SingleChildScrollView(
@@ -40,7 +39,8 @@ class ProfilePage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12.r),
@@ -50,13 +50,12 @@ class ProfilePage extends ConsumerWidget {
                       CircleAvatar(
                         radius: 20.r,
                         backgroundColor: AppColors.primaryColor,
-                        child:  SvgPicture.asset(
-                            AppIcons.profile,
+                        child: SvgPicture.asset(
+                          AppIcons.profile,
                           color: Colors.white,
                           height: 18.h,
                           width: 18.w,
                         ),
-                        //  backgroundImage: AssetImage('assets/images/profile.jpg'),
                       ),
                       SizedBox(width: 12.w),
                       AutoSizeTextWidget(
@@ -71,26 +70,23 @@ class ProfilePage extends ConsumerWidget {
                 SectionProfileWidget(children: [
                   TileWidget(
                     icon: AppIcons.profile,
-                    title:  S.of(context).personalInfo,
+                    title: S.of(context).personalInfo,
                     context: context,
                     onTap: () {
                       navigateTo(context, const EditProfilePage());
-
                     },
                   ),
                   TileWidget(
                     icon: AppIcons.favorite,
-                    title:  S.of(context).favorites,
+                    title: S.of(context).favorites,
                     context: context,
                     onTap: () {
                       navigateTo(context, const FavoritePage());
-
-
                     },
                   ),
                   TileWidget(
                     icon: AppIcons.setting,
-                    title:  S.of(context).generalSettings,
+                    title: S.of(context).generalSettings,
                     context: context,
                     onTap: () {
                       navigateTo(context, const SettingsPage());
@@ -102,7 +98,7 @@ class ProfilePage extends ConsumerWidget {
                   children: [
                     TileWidget(
                       icon: AppIcons.infoCircle,
-                      title:  S.of(context).aboutApp,
+                      title: S.of(context).aboutApp,
                       context: context,
                       onTap: () {
                         navigateTo(context, const AboutPage());
@@ -110,7 +106,7 @@ class ProfilePage extends ConsumerWidget {
                     ),
                     TileWidget(
                       icon: AppIcons.phone,
-                      title:  S.of(context).contactUs,
+                      title: S.of(context).contactUs,
                       context: context,
                       onTap: () {
                         navigateTo(context, const ContactUsPage());
@@ -118,8 +114,7 @@ class ProfilePage extends ConsumerWidget {
                     ),
                     TileWidget(
                       icon: AppIcons.messageQuestion,
-
-                      title:  S.of(context).faq,
+                      title: S.of(context).faq,
                       context: context,
                       onTap: () {
                         navigateTo(context, const FAQPage());
@@ -127,7 +122,7 @@ class ProfilePage extends ConsumerWidget {
                     ),
                     TileWidget(
                       icon: AppIcons.sharing,
-                      title:  S.of(context).shareApp,
+                      title: S.of(context).shareApp,
                       context: context,
                       onTap: () {},
                     ),

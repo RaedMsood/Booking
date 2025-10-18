@@ -33,7 +33,7 @@ class AudienceInDetailsBookingWidget extends StatelessWidget {
               SvgPicture.asset(
                 AppIcons.people,
                 height: 17.h,
-                color: Color(0xff605A65),
+                color: const Color(0xff605A65),
 
               ),
               10.horizontalSpace,
@@ -41,7 +41,7 @@ class AudienceInDetailsBookingWidget extends StatelessWidget {
                 text: '$numGuests شخص ($numChild أطفال)',
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
-                colorText: Color(0xff757575),
+                colorText: const Color(0xff757575),
               ),
             ],
           ),

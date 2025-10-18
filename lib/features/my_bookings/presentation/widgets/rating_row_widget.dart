@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import 'draggable_score_bar_widget.dart';
+import '../../../booking/presentation/widget/draggable_score_bar_widget.dart';
 
 class RatingRowWidget extends StatelessWidget {
   final String title;

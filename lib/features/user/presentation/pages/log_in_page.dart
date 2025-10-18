@@ -104,7 +104,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                       showModalBottomSheetWidget(
                           context: context,
                           page: VerifyCodePage(
-                            phoneNumberOrEmail: phoneNumberController.text,
+                          phoneNumber: phoneNumberController.text,
                           ));
                     },
                     bottonWidget: DefaultButtonWidget(
@@ -141,7 +141,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                   16.h.verticalSpace,
 
                   /// Class Continue To Google Or Facebook Widget
-                  ContinueWithGoogleOrFacebookWidget(),
+                  const ContinueWithGoogleOrFacebookWidget(),
                 ],
               ),
             ),

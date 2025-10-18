@@ -1,26 +1,28 @@
-import 'package:booking/core/state/check_state_in_post_api_data_widget.dart';
-import 'package:booking/core/state/state.dart';
-import 'package:booking/core/widgets/buttons/default_button.dart';
-import 'package:booking/features/booking/data/booking_model/rate_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/state/check_state_in_post_api_data_widget.dart';
+import '../../../../core/state/state.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../riverpod/booking_riverpod.dart';
-import '../widget/rating_row_widget.dart';
+import '../../../../core/widgets/buttons/default_button.dart';
+import '../../../../generated/l10n.dart';
+import '../../../booking/presentation/riverpod/booking_riverpod.dart';
+import '../../data/model/rate_model.dart';
+import '../widgets/rating_row_widget.dart';
+import '../riverpod/my_bookings_riverpod.dart';
 
 class AddYourRatingSection extends ConsumerStatefulWidget {
-  const AddYourRatingSection(
-      {super.key,
-      required this.rateData,
-      required this.propertyId,
-      required this.bookingId});
+  const AddYourRatingSection({
+    super.key,
+    required this.rateData,
+    required this.propertyId,
+    required this.bookingId,
+  });
 
   final int propertyId;
   final int bookingId;
-
   final List<RateModel> rateData;
 
   @override
@@ -46,7 +48,7 @@ class _AddYourRatingSectionState extends ConsumerState<AddYourRatingSection> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AutoSizeTextWidget(
-                text: 'أضف تقييمك',
+                text: S.of(context).addYourRating,
                 fontSize: 12.sp,
               ),
               SizedBox(height: 18.h),
@@ -76,17 +78,15 @@ class _AddYourRatingSectionState extends ConsumerState<AddYourRatingSection> {
                   ref.read(getBookingProvider(2).notifier).getDataBookingType();
                 },
                 bottonWidget: DefaultButtonWidget(
-                  text: "ارسال",
+                  text: S.of(context).send,
                   isLoading: rateState.stateData == States.loading,
                   textColor: AppColors.primaryColor,
                   background: const Color(0xffDCE6FF),
                   onPressed: () {
-                    print(widget.rateData[0].toString());
                     ref.read(ratePropertyProvider.notifier).rateProperty(
                         idBooking: widget.bookingId,
                         rate: widget.rateData,
                         idProperty: widget.propertyId);
-                    print(widget.rateData[2].numberOfRate);
                   },
                 ),
               ),

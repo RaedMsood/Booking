@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
 import '../../../properties/cities/data/model/city_model.dart';
@@ -122,16 +123,19 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
     return Scaffold(
       extendBody: true,
       resizeToAvoidBottomInset: true,
+      appBar: const SecondaryAppBarWidget(title: ''),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 64.h),
+          padding: EdgeInsets.symmetric(
+            horizontal: 14.w,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              24.h.verticalSpace,
-               UserPageTitlesWidget(
-                title:  S.of(context).editPersonalInfoTitle ,
+              6.h.verticalSpace,
+              UserPageTitlesWidget(
+                title: S.of(context).editPersonalInfoTitle,
                 subTitle: S.of(context).editPersonalInfoSubtitle,
               ),
               12.verticalSpace,

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../generated/l10n.dart';
@@ -38,7 +37,6 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
 
   // حد علوي مرن (عدّله لو تحب)
   final DateTime _lastDay = DateTime.utc(2030, 12, 31);
-
 
   @override
   Widget build(BuildContext context) {

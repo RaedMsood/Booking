@@ -12,12 +12,12 @@ class CounterRowWidget extends StatelessWidget {
   final VoidCallback onDecrement;
 
   const CounterRowWidget({
-    Key? key,
+    super.key,
     required this.label,
     required this.count,
     required this.onIncrement,
     required this.onDecrement,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,10 @@ class CounterRowWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AutoSizeTextWidget(
-            text: label, fontSize: 10, fontWeight: FontWeight.w400),
+          text: label,
+          fontSize: 10,
+          fontWeight: FontWeight.w400,
+        ),
         6.verticalSpace,
         Row(
           children: [

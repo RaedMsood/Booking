@@ -6,6 +6,7 @@ import '../../../../core/constants/app_icons.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/rich_text_widget.dart';
+import '../../../../generated/l10n.dart';
 
 class ConfrimBookingDetailsWidget extends StatelessWidget {
   const ConfrimBookingDetailsWidget(
@@ -33,7 +34,7 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AutoSizeTextWidget(
-            text: 'تاكيد الحجز',
+            text: S.of(context).confirmationSectionTitle,
             fontSize: 12,
           ),
           6.verticalSpace,
@@ -47,7 +48,7 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
             fontSizeSecondText: 14.sp,
             fontSize: 16.sp,
           ),
-          Divider(
+          const Divider(
             thickness: 1,
             color: Color(0xffF0F0F0),
           ),
@@ -57,14 +58,14 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
               SvgPicture.asset(
                 AppIcons.date,
                 height: 17.h,
-                color: Color(0xff605A65),
+                color: const Color(0xff605A65),
               ),
               10.horizontalSpace,
               AutoSizeTextWidget(
-                text: 'تاريخ الحجز $checkIn',
+                text: '${ S.of(context).bookingDateLabel} $checkIn',
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
-                colorText: Color(0xff757575),
+                colorText: const Color(0xff757575),
               ),
             ],
           ),
@@ -74,14 +75,14 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
               SvgPicture.asset(
                 AppIcons.buliding,
                 height: 17.h,
-                color: Color(0xff605A65),
+                color: const Color(0xff605A65),
               ),
               10.horizontalSpace,
               AutoSizeTextWidget(
                 text: '$unitCount غرف',
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
-                colorText: Color(0xff757575),
+                colorText: const Color(0xff757575),
               ),
             ],
           ),
@@ -91,14 +92,14 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
               SvgPicture.asset(
                 AppIcons.clock,
                 height: 17.h,
-                color: Color(0xff605A65),
+                color: const Color(0xff605A65),
               ),
               10.horizontalSpace,
               AutoSizeTextWidget(
-                text: 'من $checkIn الى $checkOut',
+                text: '${S.of(context).from} $checkIn ${S.of(context).to} $checkOut',
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
-                colorText: Color(0xff757575),
+                colorText: const Color(0xff757575),
               ),
             ],
           ),

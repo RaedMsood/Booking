@@ -21,7 +21,7 @@ class ShimmerHomeWidget extends StatelessWidget {
             itemBuilder: (context, index, realIdx) {
               return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4.w),
-                  child: ShimmerPlaceholderWidget());
+                  child: const ShimmerPlaceholderWidget());
             },
             options: CarouselOptions(
               autoPlay: false,

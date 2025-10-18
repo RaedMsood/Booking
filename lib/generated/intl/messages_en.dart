@@ -25,18 +25,18 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "aNewListHasBeenCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "A new list has been created successfully",
-    ),
     "about": MessageLookupByLibrary.simpleMessage("About"),
     "aboutApp": MessageLookupByLibrary.simpleMessage("About the app"),
-    "aboutJeeey": MessageLookupByLibrary.simpleMessage("About Jeeey"),
+    "addYourRating": MessageLookupByLibrary.simpleMessage("Add your rating"),
     "address": MessageLookupByLibrary.simpleMessage("Address"),
-    "addressBook": MessageLookupByLibrary.simpleMessage("Address Book"),
     "adults": MessageLookupByLibrary.simpleMessage("Adults"),
     "adultsCount": MessageLookupByLibrary.simpleMessage("Adults"),
     "all": MessageLookupByLibrary.simpleMessage("All"),
     "allFilter": MessageLookupByLibrary.simpleMessage("All"),
+    "amountLabel": MessageLookupByLibrary.simpleMessage("Amount"),
+    "amountValidation": MessageLookupByLibrary.simpleMessage(
+      "Please enter the amount",
+    ),
     "applicationLanguage": MessageLookupByLibrary.simpleMessage(
       "Application language",
     ),
@@ -48,7 +48,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "birthdateOptional": MessageLookupByLibrary.simpleMessage(
       "Birthdate (optional)",
     ),
-    "bookingCode": MessageLookupByLibrary.simpleMessage("Booking code"),
+    "bookingCodeCopied": MessageLookupByLibrary.simpleMessage(
+      "Booking number copied",
+    ),
     "bookingCodeLabel": MessageLookupByLibrary.simpleMessage("Booking number"),
     "bookingConfirmation": MessageLookupByLibrary.simpleMessage(
       "Booking confirmation",
@@ -71,7 +73,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Unable to reach the server",
     ),
     "changeCurrency": MessageLookupByLibrary.simpleMessage("Change currency"),
-    "changePassword": MessageLookupByLibrary.simpleMessage("Change password"),
     "checkIn": MessageLookupByLibrary.simpleMessage("Check-in"),
     "checkInDate": MessageLookupByLibrary.simpleMessage("Check-in date"),
     "checkInternetOrServiceUrl": MessageLookupByLibrary.simpleMessage(
@@ -82,12 +83,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "children": MessageLookupByLibrary.simpleMessage("Children"),
     "childrenCount": MessageLookupByLibrary.simpleMessage("Children"),
     "clear": MessageLookupByLibrary.simpleMessage("Clear"),
-    "clearCache": MessageLookupByLibrary.simpleMessage("Clear Cache"),
     "clearFilters": MessageLookupByLibrary.simpleMessage("Clear filters"),
     "clickAgainToExit": MessageLookupByLibrary.simpleMessage(
       "Click again to exit!",
     ),
-    "codeCopied": MessageLookupByLibrary.simpleMessage("Code copied"),
     "codeHasBeenSendTo": MessageLookupByLibrary.simpleMessage(
       "Code has been send to",
     ),
@@ -97,15 +96,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmDepositTitle": MessageLookupByLibrary.simpleMessage(
       "Pay the deposit to confirm the booking",
     ),
-    "confirmationAmountLabel": MessageLookupByLibrary.simpleMessage(
-      "Booking confirmation",
-    ),
+    "confirmPayment": MessageLookupByLibrary.simpleMessage("Confirm Payment"),
     "confirmationSectionTitle": MessageLookupByLibrary.simpleMessage(
       "Booking confirmation",
-    ),
-    "connectToUs": MessageLookupByLibrary.simpleMessage("Connect to Us"),
-    "contactPreferences": MessageLookupByLibrary.simpleMessage(
-      "Contact Preferences",
     ),
     "contactUs": MessageLookupByLibrary.simpleMessage("Contact us"),
     "continueAsGuest": MessageLookupByLibrary.simpleMessage(
@@ -118,20 +111,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Continue with google",
     ),
     "copy": MessageLookupByLibrary.simpleMessage("Copy"),
-    "copyCode": MessageLookupByLibrary.simpleMessage("Copy code"),
     "cost": MessageLookupByLibrary.simpleMessage("Cost"),
+    "countLabel": MessageLookupByLibrary.simpleMessage("Count"),
     "coupon": MessageLookupByLibrary.simpleMessage("Coupon"),
-    "couponApplied": MessageLookupByLibrary.simpleMessage("Coupon applied"),
     "couponDiscount": MessageLookupByLibrary.simpleMessage("Discount"),
     "currency": MessageLookupByLibrary.simpleMessage("Currency"),
     "currentFilter": MessageLookupByLibrary.simpleMessage("Current"),
     "date": MessageLookupByLibrary.simpleMessage("Date"),
     "decrease": MessageLookupByLibrary.simpleMessage("Decrease"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
-    "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete account"),
-    "deletedAddressSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "Deleted address successfully",
-    ),
     "deletedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Deleted successfully",
     ),
@@ -139,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "depositAmount": MessageLookupByLibrary.simpleMessage("Deposit"),
     "depositPaymentTitle": MessageLookupByLibrary.simpleMessage("Pay deposit"),
     "depositSectionTitle": MessageLookupByLibrary.simpleMessage("Deposit"),
+    "destinations": MessageLookupByLibrary.simpleMessage("Destinations"),
     "discoverOurDestinations": MessageLookupByLibrary.simpleMessage(
       "Discover our destinations ✈️🌎",
     ),
@@ -160,7 +149,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailRequired": MessageLookupByLibrary.simpleMessage("Email is required"),
     "enterBirthdate": MessageLookupByLibrary.simpleMessage("Enter birthdate"),
     "enterCoupon": MessageLookupByLibrary.simpleMessage("Enter coupon"),
-    "expiredCoupon": MessageLookupByLibrary.simpleMessage("Coupon expired"),
     "faq": MessageLookupByLibrary.simpleMessage("FAQ"),
     "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
     "features": MessageLookupByLibrary.simpleMessage("Features"),
@@ -200,6 +188,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "hostel": MessageLookupByLibrary.simpleMessage("Hostel"),
     "hotelBookingTitle": MessageLookupByLibrary.simpleMessage("Hotel booking"),
+    "hotelPaymentNote": MessageLookupByLibrary.simpleMessage(
+      "You will need to pay the remaining amount to the hotel owner upon arrival",
+    ),
     "hotelPolicyNote": MessageLookupByLibrary.simpleMessage(
       "Hotel policy: the deposit is strictly non-refundable",
     ),
@@ -227,7 +218,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidApiUrl2": MessageLookupByLibrary.simpleMessage(
       "Check the server address (Base URL) and try again",
     ),
-    "invalidCoupon": MessageLookupByLibrary.simpleMessage("Invalid coupon"),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "Invalid email address",
     ),
@@ -237,9 +227,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Logout successfully",
     ),
     "male": MessageLookupByLibrary.simpleMessage("Male"),
-    "manageMyAccount": MessageLookupByLibrary.simpleMessage(
-      "Manage My Account",
-    ),
     "map": MessageLookupByLibrary.simpleMessage("Map"),
     "mapHeadline": MessageLookupByLibrary.simpleMessage(
       "Explore places on the map",
@@ -258,7 +245,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Check your internet connection",
     ),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "nights": MessageLookupByLibrary.simpleMessage("Nights"),
     "no": MessageLookupByLibrary.simpleMessage("No"),
+    "noSearchResults": MessageLookupByLibrary.simpleMessage(
+      "No search results",
+    ),
     "nonRefundablePolicy": MessageLookupByLibrary.simpleMessage(
       "Deposit amount is strictly non-refundable",
     ),
@@ -274,21 +265,27 @@ class MessageLookup extends MessageLookupByLibrary {
     "payDepositNote": MessageLookupByLibrary.simpleMessage(
       "Please pay the deposit to confirm the booking",
     ),
-    "payWithAlKuraimi": MessageLookupByLibrary.simpleMessage("Al Kuraimi"),
-    "payWithFlousak": MessageLookupByLibrary.simpleMessage("Flousak"),
-    "payWithJawali": MessageLookupByLibrary.simpleMessage("Jawali Wallet"),
-    "payWithOneCash": MessageLookupByLibrary.simpleMessage("OneCash"),
-    "paymentCancelled": MessageLookupByLibrary.simpleMessage(
-      "Payment cancelled",
+    "payJawaliCodeEmptyError": MessageLookupByLibrary.simpleMessage(
+      "Please enter the purchase code",
     ),
-    "paymentFailed": MessageLookupByLibrary.simpleMessage("Payment failed"),
-    "paymentInProgress": MessageLookupByLibrary.simpleMessage(
-      "Processing payment...",
+    "payJawaliCodeHint": MessageLookupByLibrary.simpleMessage("Purchase code"),
+    "payJawaliCodeLabel": MessageLookupByLibrary.simpleMessage("Purchase code"),
+    "payJawaliInstruction": MessageLookupByLibrary.simpleMessage(
+      "Enter the purchase code generated in the Jawali app",
+    ),
+    "payKuraimiCodeEmptyError": MessageLookupByLibrary.simpleMessage(
+      "Please enter the identification code",
+    ),
+    "payKuraimiCodeHint": MessageLookupByLibrary.simpleMessage(
+      "Identification code",
+    ),
+    "payKuraimiCodeLabel": MessageLookupByLibrary.simpleMessage(
+      "Identification code",
+    ),
+    "payKuraimiInstruction": MessageLookupByLibrary.simpleMessage(
+      "The identification number is generated from Al Kuraimi app settings on first setup",
     ),
     "paymentMethods": MessageLookupByLibrary.simpleMessage("Payment methods"),
-    "paymentSuccess": MessageLookupByLibrary.simpleMessage(
-      "Payment successful",
-    ),
     "personalInfo": MessageLookupByLibrary.simpleMessage(
       "Personal information",
     ),
@@ -316,14 +313,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseTryAgain": MessageLookupByLibrary.simpleMessage("Please try again"),
     "previous": MessageLookupByLibrary.simpleMessage("Previous"),
     "price": MessageLookupByLibrary.simpleMessage("Price"),
-    "privacyAndCookiePolicy": MessageLookupByLibrary.simpleMessage(
-      "Privacy & Cookie Policy",
-    ),
-    "productsHaveBeenAddedToTheList": MessageLookupByLibrary.simpleMessage(
-      "Products have been added to the list",
-    ),
     "profile": MessageLookupByLibrary.simpleMessage("Profile"),
-    "profileTitle": MessageLookupByLibrary.simpleMessage("My account"),
     "purchaseAndCancellationPolicy": MessageLookupByLibrary.simpleMessage(
       "Purchase & cancellation policy",
     ),
@@ -332,9 +322,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "purposeLeisure": MessageLookupByLibrary.simpleMessage("Leisure"),
     "purposeOther": MessageLookupByLibrary.simpleMessage("Other"),
     "rating": MessageLookupByLibrary.simpleMessage("Rating"),
-    "ratingAndFeedback": MessageLookupByLibrary.simpleMessage(
-      "Rating & Feedback",
-    ),
     "readMore": MessageLookupByLibrary.simpleMessage("Read more"),
     "receiveTimeout": MessageLookupByLibrary.simpleMessage(
       "Receiving data timed out",
@@ -346,7 +333,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "remainingAfterDeposit": MessageLookupByLibrary.simpleMessage(
       "Remaining after deposit",
     ),
-    "removeCoupon": MessageLookupByLibrary.simpleMessage("Remove coupon"),
     "rename": MessageLookupByLibrary.simpleMessage("Rename"),
     "requestCancelled": MessageLookupByLibrary.simpleMessage(
       "Request was cancelled",
@@ -371,10 +357,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectBookingDate": MessageLookupByLibrary.simpleMessage(
       "Select booking date",
     ),
+    "selectDates": MessageLookupByLibrary.simpleMessage("Select dates"),
     "selectGovernorate": MessageLookupByLibrary.simpleMessage(
       "Select governorate",
     ),
     "selectRoomType": MessageLookupByLibrary.simpleMessage("Select room type"),
+    "send": MessageLookupByLibrary.simpleMessage("Send"),
     "sendTimeout": MessageLookupByLibrary.simpleMessage(
       "Sending data timed out",
     ),
@@ -404,24 +392,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "successfully": MessageLookupByLibrary.simpleMessage(
       "The operation was completed successfully",
     ),
-    "termsAndConditions": MessageLookupByLibrary.simpleMessage(
-      "Terms & Conditions",
-    ),
-    "theListHasBeenDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "The list has been deleted successfully",
-    ),
     "theModificationHasBeenCompletedSuccessfully":
         MessageLookupByLibrary.simpleMessage(
           "The modification has been completed successfully",
         ),
-    "thePasswordHasBeenChanged": MessageLookupByLibrary.simpleMessage(
-      "The password has been changed",
-    ),
     "timeout": MessageLookupByLibrary.simpleMessage(
       "Sorry, there is an internet issue",
     ),
     "to": MessageLookupByLibrary.simpleMessage("To"),
-    "tryAgain": MessageLookupByLibrary.simpleMessage("Try again"),
     "unableToOpenMapsApp": MessageLookupByLibrary.simpleMessage(
       "Unable to open Maps app",
     ),
@@ -442,7 +420,6 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "verifyCoupon": MessageLookupByLibrary.simpleMessage("Verify"),
     "viewAll": MessageLookupByLibrary.simpleMessage("View All"),
-    "viewInvoice": MessageLookupByLibrary.simpleMessage("View invoice"),
     "viewMore": MessageLookupByLibrary.simpleMessage("View more"),
     "viewVenueDetails": MessageLookupByLibrary.simpleMessage(
       "View venue details",

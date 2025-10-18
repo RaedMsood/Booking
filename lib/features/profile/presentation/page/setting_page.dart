@@ -1,10 +1,10 @@
-import 'package:booking/core/helpers/navigateTo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../widget/languge_dialog_widget.dart';
@@ -16,14 +16,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: AutoSizeTextWidget(
-          text: S.of(context).generalSettings,
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
+      appBar: SecondaryAppBarWidget(title: S.of(context).generalSettings),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
         child: Card(
@@ -42,14 +35,14 @@ class SettingsPage extends StatelessWidget {
                 ),
                 title: AutoSizeTextWidget(
                   text: S.of(context).language,
-                  colorText: Color(0xff001A33),
+                  colorText: const Color(0xff001A33),
                   fontSize: 11.sp,
                 ),
                 trailing: AutoSizeTextWidget(
                   text: 'العربية',
                   fontSize: 11.sp,
                   fontWeight: FontWeight.w300,
-                  colorText: Color(0xff605A65),
+                  colorText: const Color(0xff605A65),
                 ),
                 onTap: () {
                   showModalBottomSheetWidget(
@@ -58,26 +51,6 @@ class SettingsPage extends StatelessWidget {
                   );
                 },
               ),
-              // ListTile(
-              //   contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-              //   leading: SvgPicture.asset(
-              //     AppIcons.currency,
-              //   ),
-              //   title: AutoSizeTextWidget(
-              //     text: S.of(context).currency,
-              //     colorText: Color(0xff001A33),
-              //     fontSize: 11.sp,
-              //   ),
-              //   trailing: AutoSizeTextWidget(
-              //     text: 'ريال يمني قديم',
-              //     fontSize: 11.sp,
-              //     fontWeight: FontWeight.w300,
-              //     colorText: Color(0xff605A65),
-              //   ),
-              //   onTap: () {
-              //     // TODO: افتح اختيار العملة
-              //   },
-              // ),
               ListTile(
                 contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
                 leading: SvgPicture.asset(
@@ -86,11 +59,11 @@ class SettingsPage extends StatelessWidget {
                 title: AutoSizeTextWidget(
                   text: S.of(context).signOut,
                   fontSize: 11.sp,
-                  colorText: Color(0xffFF4D4F),
+                  colorText: const Color(0xffFF4D4F),
                 ),
                 trailing: SvgPicture.asset(
                   AppIcons.arrowLeft,
-                  color: Color(0xffFF4D4F),
+                  color: const Color(0xffFF4D4F),
                   height: 16.h,
                 ),
                 onTap: () {
@@ -98,7 +71,6 @@ class SettingsPage extends StatelessWidget {
                     context: context,
                     page: const SignOutDialog(),
                   );
-
                 },
               ),
               // ListTile(

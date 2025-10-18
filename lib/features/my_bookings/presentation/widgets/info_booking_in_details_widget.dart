@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 
 class InfoBookingInDetailsWidget extends StatelessWidget {
@@ -10,9 +9,12 @@ class InfoBookingInDetailsWidget extends StatelessWidget {
   final String text;
   final String title;
 
-  const InfoBookingInDetailsWidget(
-      {Key? key, this.icon, required this.text, required this.title})
-      : super(key: key);
+  const InfoBookingInDetailsWidget({
+    super.key,
+    this.icon,
+    required this.text,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,12 @@ class InfoBookingInDetailsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
       children: [
-        SvgPicture.asset(icon!, color: const Color(0xff605A65),width: 18.w,height: 18.h,),
+        SvgPicture.asset(
+          icon!,
+          color: const Color(0xff605A65),
+          width: 18.w,
+          height: 18.h,
+        ),
         8.horizontalSpace,
         AutoSizeTextWidget(
           text: title,

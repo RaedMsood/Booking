@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/rich_text_widget.dart';
+import '../../../../generated/l10n.dart';
 
 class InfoHotelInCardBookingWidget extends StatelessWidget {
   final String title;
@@ -31,7 +32,7 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
         children: [
           AutoSizeTextWidget(
             text: title,
-            fontSize: 11.5.sp,
+            fontSize: 11.2.sp,
             fontWeight: FontWeight.w500,
           ),
           SizedBox(height: 4.h),
@@ -58,7 +59,7 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
           Row(
             children: [
               AutoSizeTextWidget(
-                text: 'عدد: $count',
+                text: '${S.of(context).countLabel}: $count',
                 fontSize: 8.5.sp,
                 minFontSize: 7,
                 colorText: const Color(0xff757575),

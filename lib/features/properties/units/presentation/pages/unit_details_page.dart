@@ -116,7 +116,7 @@ class UnitDetailsPage extends ConsumerWidget {
                               context,
                               DetailsOfBookInAddPage(
                                 location: location,
-                                image: image ?? '',
+                                image: image ,
                                 nameProp: nameProp,
                                 unitId: state.data.id,
                                 totalPrice: state.data.price.toString(),

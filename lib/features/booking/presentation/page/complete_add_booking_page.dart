@@ -7,6 +7,7 @@ import '../../../../core/state/state.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
+import '../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../core/widgets/text_form_field.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
@@ -19,17 +20,18 @@ import '../widget/hotel_summary_card_widget.dart';
 import 'show_last_details_in_add_booking_page.dart';
 
 class CompleteAddBookingPage extends ConsumerStatefulWidget {
-  const CompleteAddBookingPage(
-      {super.key,
-      required this.idBooking,
-      required this.location,
-      required this.nameProp,
-      required this.imageUrl});
+  const CompleteAddBookingPage({
+    super.key,
+    required this.booking,
+    required this.location,
+    required this.nameProp,
+    required this.imageUrl,
+  });
 
   final String nameProp;
   final String location;
   final String? imageUrl;
-  final int idBooking;
+  final BookingData booking;
 
   @override
   ConsumerState<CompleteAddBookingPage> createState() =>
@@ -64,12 +66,7 @@ class _CompleteAddBookingPageState
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        centerTitle: true,
-        title: AutoSizeTextWidget(
-          text: S.of(context).hotelBookingTitle,
-        ),
-      ),
+      appBar: SecondaryAppBarWidget(title: S.of(context).hotelBookingTitle),
       body: Column(
         children: [
           Expanded(
@@ -77,6 +74,7 @@ class _CompleteAddBookingPageState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  6.h.verticalSpace,
                   HotelSummaryCard(
                     name: widget.nameProp,
                     location: widget.location,
@@ -89,13 +87,13 @@ class _CompleteAddBookingPageState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          12.verticalSpace,
+                          14.h.verticalSpace,
                           AutoSizeTextWidget(
                             text: S.of(context).personalInfoTitle,
-                            fontSize: 12,
+                            fontSize: 11.6.sp,
                             fontWeight: FontWeight.w500,
                           ),
-                          8.verticalSpace,
+                          12.verticalSpace,
                           AutoSizeTextWidget(
                             text: S.of(context).fullName,
                             fontSize: 11.sp,
@@ -106,43 +104,50 @@ class _CompleteAddBookingPageState
                           TextFormFieldWidget(
                               controller: name,
                               type: TextInputType.name,
+                              hintText: S.of(context).fullNamePlaceholder,
                               prefix: Icon(
                                 Icons.person_2_outlined,
                                 size: 20.sp,
                                 color: AppColors.primaryColor,
                               ),
                               fieldValidator: (value) {
-                                if ((value == null ||
-                                    value.toString().isEmpty)) {
+                                if (value == null || value.toString().isEmpty) {
                                   return S.of(context).nameRequired;
                                 }
+
+                                return null;
                               }),
-                          6.verticalSpace,
+                          12.verticalSpace,
                           AutoSizeTextWidget(
-                            text: S.of(context).emailOptional,
+                            text: S.of(context).email,
                             fontSize: 11.sp,
                             fontWeight: FontWeight.w400,
-                            colorText: Color(0xff2E3333),
+                            colorText: const Color(0xff2E3333),
                           ),
                           6.verticalSpace,
                           TextFormFieldWidget(
                               controller: email,
-                              prefix: Icon(Icons.email_outlined,
-                                  size: 20.sp, color: AppColors.primaryColor),
                               type: TextInputType.emailAddress,
+                              hintText: S.of(context).emailPlaceholder,
+                              prefix: Icon(
+                                Icons.email_outlined,
+                                size: 20.sp,
+                                color: AppColors.primaryColor,
+                              ),
                               fieldValidator: (value) {
                                 if ((value == null ||
                                     value.toString().isEmpty)) {
                                   return S.of(context).emailRequired;
                                 }
-                                final emails = email.text.trim() ?? '';
+                                final emails = email.text.trim();
                                 final emailRegex =
                                     RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                                 if (!emailRegex.hasMatch(emails)) {
                                   return S.of(context).invalidEmail;
                                 }
+                                return null;
                               }),
-                          6.verticalSpace,
+                          12.verticalSpace,
                           AutoSizeTextWidget(
                             text: S.of(context).phoneNumber,
                             fontSize: 11.sp,
@@ -154,9 +159,12 @@ class _CompleteAddBookingPageState
                             controller: phone,
                             maxLength: 9,
                             buildCounter: false,
-                            prefix: Icon(Icons.phone_outlined,
-                                size: 20.sp, color: AppColors.primaryColor),
-                            type: TextInputType.number,
+                            type: TextInputType.phone,
+                            prefix: Icon(
+                              Icons.phone_outlined,
+                              size: 20.sp,
+                              color: AppColors.primaryColor,
+                            ),
                             fieldValidator: (value) {
                               if (value == null || value.toString().isEmpty) {
                                 return S.of(context).phoneRequired;
@@ -171,8 +179,10 @@ class _CompleteAddBookingPageState
                               return null;
                             },
                           ),
-                          7.verticalSpace,
-                          const CityWidget(),
+                          CityWidget(
+                            fontSize: 11.sp,
+                            colorText: const Color(0xff2E3333),
+                          ),
                         ],
                       ),
                     ),
@@ -212,7 +222,7 @@ class _CompleteAddBookingPageState
                             name: name.text,
                             phone: phone.text,
                             address: initialCity.name,
-                            bookingId: widget.idBooking,
+                            booking: widget.booking,
                           );
                           ref
                               .read(customerBookingProvider.notifier)

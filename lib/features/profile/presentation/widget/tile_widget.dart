@@ -30,9 +30,9 @@ class TileWidget extends StatelessWidget {
         text: title,
         fontSize: 11.sp,
         fontWeight: FontWeight.w500,
-        colorText: Color(0xff001A33),
+        colorText: const Color(0xff001A33),
       ),
-      trailing: Icon(Icons.chevron_right, color: Colors.black),
+      trailing: const Icon(Icons.chevron_right, color: Colors.black),
       onTap: onTap,
     );
   }

@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
+import '../../../../core/widgets/secondary_app_bar_widget.dart';
+import '../../../../generated/l10n.dart';
 
 class ContactUsPage extends StatelessWidget {
   const ContactUsPage({super.key});
@@ -11,14 +13,7 @@ class ContactUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: AutoSizeTextWidget(
-          text: "تواصل معنا",
-          fontSize: 14.sp,
-        ),
-        centerTitle: true,
-        elevation: 0,
-      ),
+      appBar: SecondaryAppBarWidget(title: S.of(context).contactUs),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
         child: Container(
@@ -34,14 +29,13 @@ class ContactUsPage extends StatelessWidget {
                 ),
                 title: AutoSizeTextWidget(
                   text: 'support@NOZAL.com',
-                  colorText: Color(0xff001A33),
+                  colorText: const Color(0xff001A33),
                   fontSize: 11.sp,
                 ),
                 trailing: SvgPicture.asset(
                   AppIcons.arrowLeft,
                 ),
                 onTap: () {
-                  // TODO: افتح اختيار العملة
                 },
               ),
               ListTile(
@@ -51,15 +45,13 @@ class ContactUsPage extends StatelessWidget {
                 ),
                 title: AutoSizeTextWidget(
                   text: '775076388',
-                  colorText: Color(0xff001A33),
+                  colorText: const Color(0xff001A33),
                   fontSize: 11.sp,
                 ),
                 trailing: SvgPicture.asset(
                   AppIcons.arrowLeft,
                 ),
-                onTap: () {
-                  // TODO: افتح اختيار العملة
-                },
+                onTap: () {},
               ),
               ListTile(
                 contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -68,15 +60,13 @@ class ContactUsPage extends StatelessWidget {
                 ),
                 title: AutoSizeTextWidget(
                   text: '775076388',
-                  colorText: Color(0xff001A33),
+                  colorText: const Color(0xff001A33),
                   fontSize: 11.sp,
                 ),
                 trailing: SvgPicture.asset(
                   AppIcons.arrowLeft,
                 ),
-                onTap: () {
-                  // TODO: افتح اختيار العملة
-                },
+                onTap: () {},
               ),
             ],
           ),

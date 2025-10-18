@@ -41,7 +41,7 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: options.map((opt) {
-            final selected = opt == current;
+            // final selected = opt == current;
             return ListTile(
               title: Center(
                 child: AutoSizeTextWidget(

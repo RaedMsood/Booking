@@ -1,4 +1,4 @@
-import '../../../../booking/data/booking_model/rate_model.dart';
+import '../../../../my_bookings/data/model/rate_model.dart';
 
 class RateWithCustomerModel {
   final int? id;

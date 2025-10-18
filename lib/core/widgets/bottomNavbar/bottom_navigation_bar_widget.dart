@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../features/booking/presentation/page/booking_page.dart';
+import '../../../features/my_bookings/presentation/pages/my_bookings_page.dart';
 import '../../../features/map/presentation/page/map_page.dart';
 import '../../../features/profile/presentation/page/profile_page.dart';
 import '../../../features/properties/home/presentation/pages/home_page.dart';
@@ -26,7 +26,7 @@ class _BottomNavigationBarWidgetState
   final List<Widget> _pages = [
     const ExitFromAppWidget(child: HomePage()),
     const ExitFromAppWidget(child: MapPage()),
-    const ExitFromAppWidget(child: BookingPage()),
+    const ExitFromAppWidget(child: MyBookingsPage()),
     const ExitFromAppWidget(child: ProfilePage()),
   ];
 

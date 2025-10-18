@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/state/data_state.dart';
 import '../../../../core/state/state.dart';
-import '../../../properties/home/data/model/property_data_model.dart';
 import '../../data/model/notifications_model.dart';
 import '../../data/repository/notifications_repository.dart';
 

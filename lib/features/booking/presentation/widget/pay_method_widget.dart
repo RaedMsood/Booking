@@ -1,14 +1,14 @@
-import 'package:booking/core/extension/string.dart';
-import 'package:booking/core/state/check_state_in_post_api_data_widget.dart';
-import 'package:booking/core/theme/app_colors.dart';
-import 'package:booking/core/widgets/auto_size_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/state/check_state_in_post_api_data_widget.dart';
 import '../../../../core/state/state.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
 import '../../../../core/widgets/text_form_field.dart';
+import '../../../../generated/l10n.dart';
 import '../../data/booking_model/pay_spec.dart';
 import '../riverpod/booking_riverpod.dart';
 
@@ -30,16 +30,14 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
   @override
   Widget build(BuildContext context) {
     final selectedPayMethod =
-        ref
-            .watch(selectedPayMethodProvider.notifier)
-            .state;
+        ref.watch(selectedPayMethodProvider.notifier).state;
     if (selectedPayMethod!.name.isEmpty) return const SizedBox.shrink();
     final spec = paySpecs[selectedPayMethod.name];
     var state = ref.watch(confirmPaymentProvider);
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12.w).copyWith(
-          bottom: 12.h, top: 2.h),
+      padding: EdgeInsets.symmetric(horizontal: 12.w)
+          .copyWith(bottom: 12.h, top: 2.h),
       child: Form(
         key: formKey,
         child: Column(
@@ -64,14 +62,10 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
             TextFormFieldWidget(
               controller: voucherController,
               type: TextInputType.text,
-
-
               fillColor: AppColors.scaffoldColor,
               hintText: spec.codeHint,
               fieldValidator: (value) {
-                if (value == null || value
-                    .toString()
-                    .isEmpty) {
+                if (value == null || value.toString().isEmpty) {
                   return spec.codeEmptyError;
                 }
 
@@ -85,7 +79,7 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AutoSizeTextWidget(
-                    text: "المبلغ",
+                    text: S.of(context).amountLabel,
                     fontSize: 10.4.sp,
                     colorText: AppColors.mainColorFont,
                     fontWeight: FontWeight.w400,
@@ -97,10 +91,8 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                     fillColor: AppColors.scaffoldColor,
                     hintText: "0.0",
                     fieldValidator: (value) {
-                      if (value == null || value
-                          .toString()
-                          .isEmpty) {
-                        return "يرجى إدخال المبلغ";
+                      if (value == null || value.toString().isEmpty) {
+                        return S.of(context).amountValidation;
                       }
 
                       return null;
@@ -113,7 +105,7 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
             CheckStateInPostApiDataWidget(
               state: state,
               bottonWidget: DefaultButtonWidget(
-                text: "تأكيد الدفع",
+                text: S.of(context).confirmPayment,
                 height: 40.h,
                 textSize: 12.sp,
                 isLoading: state.stateData == States.loading,
@@ -124,11 +116,11 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
 
                   FocusManager.instance.primaryFocus?.unfocus();
                   ref.read(confirmPaymentProvider.notifier).confirmPayment(
-                    bookingId: widget.bookingId,
-                    payMethodName: selectedPayMethod.name,
-                    voucher: voucherController.text,
-                    amount: int.tryParse(amountController.text) ?? 0,
-                  );
+                        bookingId: widget.bookingId,
+                        payMethodName: selectedPayMethod.name,
+                        voucher: voucherController.text,
+                        amount: int.tryParse(amountController.text) ?? 0,
+                      );
                 },
               ),
             ),

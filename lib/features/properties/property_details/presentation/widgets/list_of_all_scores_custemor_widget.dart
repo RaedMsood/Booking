@@ -55,7 +55,7 @@ class ListOfAllScoresCustemorWidget extends ConsumerWidget {
                           ? Icons.keyboard_arrow_down
                           : Icons.keyboard_arrow_up,
                       size: 30.w,
-                      color: Color(0xff757575),
+                      color: const Color(0xff757575),
                     ),
                   ),
                 ],
