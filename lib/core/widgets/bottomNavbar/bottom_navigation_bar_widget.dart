@@ -46,52 +46,54 @@ class _BottomNavigationBarWidgetState
         systemNavigationBarIconBrightness: Brightness.dark,
         systemNavigationBarContrastEnforced: true,
       ),
-      child: Scaffold(
+        child: Scaffold(
         body: _pages[activeIndex],
-        bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(vertical: 8.h),
-          decoration: BoxDecoration(
-            color: AppColors.whiteColor,
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.greySwatch.shade100,
-                blurRadius: 10,
-                offset: const Offset(0, -1),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem(
-                AppIcons.home,
-                AppIcons.homeActive,
-                S.of(context).home,
-                0,
-                activeIndex,
-              ),
-              _buildNavItem(
-                AppIcons.map,
-                AppIcons.mapActive,
-                S.of(context).map,
-                1,
-                activeIndex,
-              ),
-              _buildNavItem(
-                AppIcons.myReservations,
-                AppIcons.myReservationsActive,
-                S.of(context).myReservations,
-                2,
-                activeIndex,
-              ),
-              _buildNavItem(
-                AppIcons.profile,
-                AppIcons.profileActive,
-                S.of(context).profile,
-                3,
-                activeIndex,
-              ),
-            ],
+        bottomNavigationBar: SafeArea(
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 8.h),
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.greySwatch.shade100,
+                  blurRadius: 10,
+                  offset: const Offset(0, -1),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildNavItem(
+                  AppIcons.home,
+                  AppIcons.homeActive,
+                  S.of(context).home,
+                  0,
+                  activeIndex,
+                ),
+                _buildNavItem(
+                  AppIcons.map,
+                  AppIcons.mapActive,
+                  S.of(context).map,
+                  1,
+                  activeIndex,
+                ),
+                _buildNavItem(
+                  AppIcons.myReservations,
+                  AppIcons.myReservationsActive,
+                  S.of(context).myReservations,
+                  2,
+                  activeIndex,
+                ),
+                _buildNavItem(
+                  AppIcons.profile,
+                  AppIcons.profileActive,
+                  S.of(context).profile,
+                  3,
+                  activeIndex,
+                ),
+              ],
+            ),
           ),
         ),
       ),

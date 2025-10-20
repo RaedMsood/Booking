@@ -67,173 +67,176 @@ class _CompleteAddBookingPageState
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: SecondaryAppBarWidget(title: S.of(context).hotelBookingTitle),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  6.h.verticalSpace,
-                  HotelSummaryCard(
-                    name: widget.nameProp,
-                    location: widget.location,
-                    imageUrl: widget.imageUrl ?? '',
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          14.h.verticalSpace,
-                          AutoSizeTextWidget(
-                            text: S.of(context).personalInfoTitle,
-                            fontSize: 11.6.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          12.verticalSpace,
-                          AutoSizeTextWidget(
-                            text: S.of(context).fullName,
-                            fontSize: 11.sp,
-                            fontWeight: FontWeight.w400,
-                            colorText: const Color(0xff2E3333),
-                          ),
-                          6.verticalSpace,
-                          TextFormFieldWidget(
-                              controller: name,
-                              type: TextInputType.name,
-                              hintText: S.of(context).fullNamePlaceholder,
+      body: SafeArea(
+        top: false,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    6.h.verticalSpace,
+                    HotelSummaryCard(
+                      name: widget.nameProp,
+                      location: widget.location,
+                      imageUrl: widget.imageUrl ?? '',
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            14.h.verticalSpace,
+                            AutoSizeTextWidget(
+                              text: S.of(context).personalInfoTitle,
+                              fontSize: 11.6.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            12.verticalSpace,
+                            AutoSizeTextWidget(
+                              text: S.of(context).fullName,
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.w400,
+                              colorText: const Color(0xff2E3333),
+                            ),
+                            6.verticalSpace,
+                            TextFormFieldWidget(
+                                controller: name,
+                                type: TextInputType.name,
+                                hintText: S.of(context).fullNamePlaceholder,
+                                prefix: Icon(
+                                  Icons.person_2_outlined,
+                                  size: 20.sp,
+                                  color: AppColors.primaryColor,
+                                ),
+                                fieldValidator: (value) {
+                                  if (value == null || value.toString().isEmpty) {
+                                    return S.of(context).nameRequired;
+                                  }
+        
+                                  return null;
+                                }),
+                            12.verticalSpace,
+                            AutoSizeTextWidget(
+                              text: S.of(context).email,
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.w400,
+                              colorText: const Color(0xff2E3333),
+                            ),
+                            6.verticalSpace,
+                            TextFormFieldWidget(
+                                controller: email,
+                                type: TextInputType.emailAddress,
+                                hintText: S.of(context).emailPlaceholder,
+                                prefix: Icon(
+                                  Icons.email_outlined,
+                                  size: 20.sp,
+                                  color: AppColors.primaryColor,
+                                ),
+                                fieldValidator: (value) {
+                                  if ((value == null ||
+                                      value.toString().isEmpty)) {
+                                    return S.of(context).emailRequired;
+                                  }
+                                  final emails = email.text.trim();
+                                  final emailRegex =
+                                      RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                                  if (!emailRegex.hasMatch(emails)) {
+                                    return S.of(context).invalidEmail;
+                                  }
+                                  return null;
+                                }),
+                            12.verticalSpace,
+                            AutoSizeTextWidget(
+                              text: S.of(context).phoneNumber,
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.w400,
+                              colorText: const Color(0xff2E3333),
+                            ),
+                            6.verticalSpace,
+                            TextFormFieldWidget(
+                              controller: phone,
+                              maxLength: 9,
+                              buildCounter: false,
+                              type: TextInputType.phone,
                               prefix: Icon(
-                                Icons.person_2_outlined,
+                                Icons.phone_outlined,
                                 size: 20.sp,
                                 color: AppColors.primaryColor,
                               ),
                               fieldValidator: (value) {
                                 if (value == null || value.toString().isEmpty) {
-                                  return S.of(context).nameRequired;
+                                  return S.of(context).phoneRequired;
                                 }
-
-                                return null;
-                              }),
-                          12.verticalSpace,
-                          AutoSizeTextWidget(
-                            text: S.of(context).email,
-                            fontSize: 11.sp,
-                            fontWeight: FontWeight.w400,
-                            colorText: const Color(0xff2E3333),
-                          ),
-                          6.verticalSpace,
-                          TextFormFieldWidget(
-                              controller: email,
-                              type: TextInputType.emailAddress,
-                              hintText: S.of(context).emailPlaceholder,
-                              prefix: Icon(
-                                Icons.email_outlined,
-                                size: 20.sp,
-                                color: AppColors.primaryColor,
-                              ),
-                              fieldValidator: (value) {
-                                if ((value == null ||
-                                    value.toString().isEmpty)) {
-                                  return S.of(context).emailRequired;
+                                final phone = value.trim();
+                                if (!phone.startsWith('7')) {
+                                  return S.of(context).phoneMustStartWith7;
                                 }
-                                final emails = email.text.trim();
-                                final emailRegex =
-                                    RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-                                if (!emailRegex.hasMatch(emails)) {
-                                  return S.of(context).invalidEmail;
+                                if (phone.length < 9) {
+                                  return S.of(context).phoneMustBe9Digits;
                                 }
                                 return null;
-                              }),
-                          12.verticalSpace,
-                          AutoSizeTextWidget(
-                            text: S.of(context).phoneNumber,
-                            fontSize: 11.sp,
-                            fontWeight: FontWeight.w400,
-                            colorText: const Color(0xff2E3333),
-                          ),
-                          6.verticalSpace,
-                          TextFormFieldWidget(
-                            controller: phone,
-                            maxLength: 9,
-                            buildCounter: false,
-                            type: TextInputType.phone,
-                            prefix: Icon(
-                              Icons.phone_outlined,
-                              size: 20.sp,
-                              color: AppColors.primaryColor,
+                              },
                             ),
-                            fieldValidator: (value) {
-                              if (value == null || value.toString().isEmpty) {
-                                return S.of(context).phoneRequired;
-                              }
-                              final phone = value.trim();
-                              if (!phone.startsWith('7')) {
-                                return S.of(context).phoneMustStartWith7;
-                              }
-                              if (phone.length < 9) {
-                                return S.of(context).phoneMustBe9Digits;
-                              }
-                              return null;
-                            },
-                          ),
-                          CityWidget(
-                            fontSize: 11.sp,
-                            colorText: const Color(0xff2E3333),
-                          ),
-                        ],
+                            CityWidget(
+                              fontSize: 11.sp,
+                              colorText: const Color(0xff2E3333),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          Consumer(
-            builder: (context, ref, child) {
-              final state = ref.watch(customerBookingProvider);
-              return DesginButtonInAddBookingWidget(
-                button: CheckStateInPostApiDataWidget(
-                  state: state,
-                  hasMessageSuccess: false,
-                  functionSuccess: () {
-                    navigateTo(
-                        context,
-                        ShowLastDetailsInAddBookingPage(
-                          bookingData: state.data,
-                          nameProp: widget.nameProp,
-                          location: widget.location,
-                          image: widget.imageUrl ?? '',
-                        ));
-                  },
-                  bottonWidget: DefaultButtonWidget(
-                      isLoading: state.stateData == States.loading,
-                      text: S.of(context).next,
-                      onPressed: () {
-                        final isValid = _formKey.currentState!.validate();
-
-                        initialCity =
-                            ref.read(selectedCityProvider.notifier).state!;
-                        if (isValid) {
-                          final custemor = Customer(
-                            email: email.text,
-                            name: name.text,
-                            phone: phone.text,
-                            address: initialCity.name,
-                            booking: widget.booking,
-                          );
-                          ref
-                              .read(customerBookingProvider.notifier)
-                              .customerBooking(customer: custemor);
-                        }
-                      }),
-                ),
-              );
-            },
-          ),
-        ],
+            Consumer(
+              builder: (context, ref, child) {
+                final state = ref.watch(customerBookingProvider);
+                return DesginButtonInAddBookingWidget(
+                  button: CheckStateInPostApiDataWidget(
+                    state: state,
+                    hasMessageSuccess: false,
+                    functionSuccess: () {
+                      navigateTo(
+                          context,
+                          ShowLastDetailsInAddBookingPage(
+                            bookingData: state.data,
+                            nameProp: widget.nameProp,
+                            location: widget.location,
+                            image: widget.imageUrl ?? '',
+                          ));
+                    },
+                    bottonWidget: DefaultButtonWidget(
+                        isLoading: state.stateData == States.loading,
+                        text: S.of(context).next,
+                        onPressed: () {
+                          final isValid = _formKey.currentState!.validate();
+        
+                          initialCity =
+                              ref.read(selectedCityProvider.notifier).state!;
+                          if (isValid) {
+                            final custemor = Customer(
+                              email: email.text,
+                              name: name.text,
+                              phone: phone.text,
+                              address: initialCity.name,
+                              booking: widget.booking,
+                            );
+                            ref
+                                .read(customerBookingProvider.notifier)
+                                .customerBooking(customer: custemor);
+                          }
+                        }),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

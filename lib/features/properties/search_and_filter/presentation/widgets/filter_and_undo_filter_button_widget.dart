@@ -15,43 +15,45 @@ class FilterAndUndoFilterButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 14.w).copyWith(bottom: 8.h),
-        child: Row(
-          children: [
-            Expanded(
-              child: DefaultButtonWidget(
-                text: S.of(context).applyFilter,
-                height: 40.h,
-                textSize: 12.5.sp,
-                fontWeight: FontWeight.w400,
-                borderRadius: 8.r,
-                onPressed:clickOnFilter,
-                withIcon: true,
-                icon: AppIcons.filter,
-                iconColor: Colors.white,
-                iconHeight: 18.h,
+    return SafeArea(
+      child: Container(
+        color: Colors.transparent,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 14.w).copyWith(bottom: 8.h),
+          child: Row(
+            children: [
+              Expanded(
+                child: DefaultButtonWidget(
+                  text: S.of(context).applyFilter,
+                  height: 40.h,
+                  textSize: 12.5.sp,
+                  fontWeight: FontWeight.w400,
+                  borderRadius: 8.r,
+                  onPressed:clickOnFilter,
+                  withIcon: true,
+                  icon: AppIcons.filter,
+                  iconColor: Colors.white,
+                  iconHeight: 18.h,
+                ),
               ),
-            ),
-            14.w.horizontalSpace,
-            Expanded(
-              child: DefaultButtonWidget(
-                text: S.of(context).clearFilters,
-                background: Colors.white,
-                textColor: AppColors.primaryColor,
-                height: 40.h,
-                textSize: 12.5.sp,
-                borderRadius: 8.r,
-                fontWeight: FontWeight.w400,
-                border: Border.all(
-                    color: AppColors.primaryColor.withOpacity(.4),
-                    width: 0.4.w),
-                onPressed: clickOnUndoFilter,
+              14.w.horizontalSpace,
+              Expanded(
+                child: DefaultButtonWidget(
+                  text: S.of(context).clearFilters,
+                  background: Colors.white,
+                  textColor: AppColors.primaryColor,
+                  height: 40.h,
+                  textSize: 12.5.sp,
+                  borderRadius: 8.r,
+                  fontWeight: FontWeight.w400,
+                  border: Border.all(
+                      color: AppColors.primaryColor.withOpacity(.4),
+                      width: 0.4.w),
+                  onPressed: clickOnUndoFilter,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -39,8 +39,8 @@ class PropertySliverListWidget extends ConsumerWidget {
         ),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: provider.viewType,
-          mainAxisSpacing: 18.h,
-          crossAxisSpacing: 18.w,
+          mainAxisSpacing: 10.h,
+          crossAxisSpacing: 10.w,
           childAspectRatio: provider.viewType == 2 ? 0.57.h : 1.28.h,
         ),
       ),

@@ -74,28 +74,32 @@ class _UnitsPageState extends ConsumerState<UnitsPage> {
           ),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14.w).copyWith(top: 6.h),
-            child: AutoSizeTextWidget(
-              text: "الغرف الخاصة بفندق أم القرى السياحي",
-              fontSize: 13.6.sp,
-              fontWeight: FontWeight.w500,
-              maxLines: 2,
-              minFontSize: 12,
+      body: SafeArea(
+        top: false,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: 14.w).copyWith(top: 6.h),
+              child: AutoSizeTextWidget(
+                text: "الغرف الخاصة بفندق أم القرى السياحي",
+                fontSize: 13.6.sp,
+                fontWeight: FontWeight.w500,
+                maxLines: 2,
+                minFontSize: 12,
+              ),
             ),
-          ),
-          12.h.verticalSpace,
-          ListOfUnitsWidget(
-            scrollController: _scrollController,
-            propertyId: widget.propertyId,
-            image:widget.image,
-            location: widget.location,
-            nameProp: widget.nameProp,
-          ),
-        ],
+            12.h.verticalSpace,
+            ListOfUnitsWidget(
+              scrollController: _scrollController,
+              propertyId: widget.propertyId,
+              image: widget.image,
+              location: widget.location,
+              nameProp: widget.nameProp,
+            ),
+          ],
+        ),
       ),
     );
   }

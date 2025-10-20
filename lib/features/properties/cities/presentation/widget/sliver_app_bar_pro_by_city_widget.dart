@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/theme/app_colors.dart';
@@ -23,26 +24,29 @@ class SliverAppBarProByCityWidget extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    final double tbh = 46.h;
+    final double topInset = MediaQuery.viewPaddingOf(context).top;
+
     return SliverAppBar(
       backgroundColor: AppColors.whiteColor,
       surfaceTintColor: AppColors.whiteColor,
       elevation: 0,
-      titleSpacing: 0,
-      toolbarHeight: 46.h,
-      expandedHeight: 220.h,
       pinned: true,
+      toolbarHeight: tbh,
+      expandedHeight: 220.h,
       leadingWidth: 62.w,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.transparent,
+      ),
       leading: Padding(
         padding: EdgeInsets.symmetric(horizontal: 11.h).copyWith(top: 4.4.h),
         child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-            ),
+          decoration:
+              const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
           child: const IconButtonWidget(
-            icon: AppIcons.arrowBack,
-            iconColor: AppColors.mainColorFont,
-          ),
+              icon: AppIcons.arrowBack, iconColor: AppColors.mainColorFont),
         ),
       ),
       flexibleSpace: ClipPath(
@@ -50,15 +54,14 @@ class SliverAppBarProByCityWidget extends StatelessWidget
         clipBehavior: Clip.hardEdge,
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final collapsedHeight =
-                kToolbarHeight + MediaQuery.of(context).padding.top;
-            final isCollapsed = constraints.maxHeight <= collapsedHeight;
+            final bool isCollapsed =
+                constraints.maxHeight <= (tbh + topInset + 1);
 
             return FlexibleSpaceBar(
               centerTitle: true,
               title: AnimatedOpacity(
                 opacity: isCollapsed ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 200),
                 child: isCollapsed
                     ? CityNameAndFlagWidget(
                         cityName: cityName,

@@ -39,6 +39,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
         systemNavigationBarColor: Colors.transparent,
         systemNavigationBarIconBrightness: Brightness.dark,
         systemNavigationBarDividerColor: Colors.transparent,
+        systemNavigationBarContrastEnforced: false,
       ),
       child: Scaffold(
         extendBody: true,
@@ -51,7 +52,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   UserPageTitlesWidget(
+                  UserPageTitlesWidget(
                     title: S.of(context).logIn,
                     subTitle: "مرحبًا! مرحبًا بك من جديد، لقد افتقدناك",
                   ),
@@ -104,7 +105,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                       showModalBottomSheetWidget(
                           context: context,
                           page: VerifyCodePage(
-                          phoneNumber: phoneNumberController.text,
+                            phoneNumber: phoneNumberController.text,
                           ));
                     },
                     bottonWidget: DefaultButtonWidget(

@@ -193,21 +193,29 @@ class _LaunchPageState extends State<LaunchPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final view = MediaQuery.of(context);
+    final bottomInset = view.viewPadding.bottom;
+    final topInset = view.viewPadding.top;
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle(
+        value: const SystemUiOverlayStyle(
+          // statusBarColor: Colors.transparent,
+          // statusBarIconBrightness: Brightness.light,
+          // systemNavigationBarColor: AppColors.primarySwatch.shade300,
+          // systemNavigationBarDividerColor: AppColors.primarySwatch.shade300,
+          // systemNavigationBarIconBrightness: Brightness.light,
           statusBarColor: Colors.transparent,
+          systemNavigationBarColor: Colors.transparent,
+          systemNavigationBarDividerColor: Colors.transparent,
           statusBarIconBrightness: Brightness.light,
-          systemNavigationBarColor: AppColors.primarySwatch.shade300,
-          systemNavigationBarDividerColor: AppColors.primarySwatch.shade300,
           systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarContrastEnforced: false,
         ),
         child: Container(
           width: double.infinity,
           height: MediaQuery.of(context).size.height,
-          padding: EdgeInsets.all(14.sp),
-          decoration: BoxDecoration(
+          padding: EdgeInsets.fromLTRB(14.sp, topInset + 14.sp, 14.sp, bottomInset + 14.sp),            decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 AppColors.primaryColor,

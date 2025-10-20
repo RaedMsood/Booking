@@ -15,9 +15,11 @@ void showModalBottomSheetWidget({
     context: context,
     isScrollControlled: true,
     backgroundColor:backgroundColor?? Colors.white,
-    builder: (context) =>  Padding(
-      padding:  EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: page,
+    builder: (context) =>  SafeArea(
+      child: Padding(
+        padding:  EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: page,
+      ),
     ),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(

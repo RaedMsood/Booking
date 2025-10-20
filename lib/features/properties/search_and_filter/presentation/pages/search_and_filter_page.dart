@@ -58,66 +58,70 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
 
     return Scaffold(
       appBar: const SecondaryAppBarWidget(title: ''),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: 14.w).copyWith(bottom: 8.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AutoSizeTextWidget(
-                  text: S.of(context).findTheRightPlaceForYou,
-                  textAlign: TextAlign.start,
-                  fontSize: 14.6.sp,
-                ),
-                8.h.verticalSpace,
-                AutoSizeTextWidget(
-                  text: S.of(context).searchSubtitle,
-                  colorText: AppColors.fontColor2,
-                  fontSize: 10.4.sp,
-                  textAlign: TextAlign.start,
-                ),
-                14.h.verticalSpace,
-                SearchAndFilterWidget(controller: provider),
-              ],
-            ),
-          ),
-          Expanded(
-            child: CheckStateInGetApiDataWidget(
-              state: state,
-              refresh: () {
-                ref.refresh(searchAndFilterPropertiesProvider);
-              },
-              widgetOfLoading: CustomScrollView(
-                controller: _scrollController,
-                slivers: const [
-                  PropertySliverListWidget(
-                    properties: [],
-                    isLoading: true,
+      body: SafeArea(
+        top: false,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: 14.w).copyWith(bottom: 8.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AutoSizeTextWidget(
+                    text: S.of(context).findTheRightPlaceForYou,
+                    textAlign: TextAlign.start,
+                    fontSize: 14.6.sp,
                   ),
-                ],
-              ),
-              widgetOfData: CustomScrollView(
-                controller: _scrollController,
-                slivers: [
-                  if (state.data.data.isEmpty)
-                     SliverToBoxAdapter(
-                      child: EmptyWidget(title: S.of(context).noSearchResults),
-                    ),
-                  PropertySliverListWidget(
-                    properties: state.data.data,
+                  8.h.verticalSpace,
+                  AutoSizeTextWidget(
+                    text: S.of(context).searchSubtitle,
+                    colorText: AppColors.fontColor2,
+                    fontSize: 10.4.sp,
+                    textAlign: TextAlign.start,
                   ),
-                  if (state.stateData == States.loadingMore)
-                    const SliverToBoxAdapter(
-                      child: CircularProgressIndicatorWidget(),
-                    ),
+                  14.h.verticalSpace,
+                  SearchAndFilterWidget(controller: provider),
                 ],
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: CheckStateInGetApiDataWidget(
+                state: state,
+                refresh: () {
+                  ref.refresh(searchAndFilterPropertiesProvider);
+                },
+                widgetOfLoading: CustomScrollView(
+                  controller: _scrollController,
+                  slivers: const [
+                    PropertySliverListWidget(
+                      properties: [],
+                      isLoading: true,
+                    ),
+                  ],
+                ),
+                widgetOfData: CustomScrollView(
+                  controller: _scrollController,
+                  slivers: [
+                    if (state.data.data.isEmpty)
+                      SliverToBoxAdapter(
+                        child:
+                            EmptyWidget(title: S.of(context).noSearchResults),
+                      ),
+                    PropertySliverListWidget(
+                      properties: state.data.data,
+                    ),
+                    if (state.stateData == States.loadingMore)
+                      const SliverToBoxAdapter(
+                        child: CircularProgressIndicatorWidget(),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

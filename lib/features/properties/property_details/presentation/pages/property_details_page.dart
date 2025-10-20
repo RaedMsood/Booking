@@ -53,61 +53,64 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        body: CheckStateInGetApiDataWidget(
-          state: state,
-          widgetOfLoading: ShimmerPropertyDetailsWidget(images: widget.images),
-          widgetOfData: NestedScrollView(
-            headerSliverBuilder: (context, innerBoxIsScrolled) {
-              return [
-                SliverAppBarDetailsWidget(
-                  images: state.data.images,
-                  idProperties:state.data.id ,
-                ),
-                SliverToBoxAdapter(
-                  child: NameAndDescriptionAndRatingWidget(
-                    name: state.data.name,
-                    description: state.data.description,
-                    features: state.data.features,
-                    rating: double.parse(state.data.rating.toStringAsFixed(1)) ,
+        body: SafeArea(
+          top: false,
+          child: CheckStateInGetApiDataWidget(
+            state: state,
+            widgetOfLoading: ShimmerPropertyDetailsWidget(images: widget.images),
+            widgetOfData: NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) {
+                return [
+                  SliverAppBarDetailsWidget(
+                    images: state.data.images,
+                    idProperties:state.data.id ,
                   ),
-                ),
-                SliverPersistentHeader(
-                  pinned: true,
-                  delegate: PropertyDetailsTabBarWidget(
-                    _tabController,
-                    context,
+                  SliverToBoxAdapter(
+                    child: NameAndDescriptionAndRatingWidget(
+                      name: state.data.name,
+                      description: state.data.description,
+                      features: state.data.features,
+                      rating: double.parse(state.data.rating.toStringAsFixed(1)) ,
+                    ),
                   ),
-                ),
-              ];
-            },
-            body: TabBarView(
-              controller: _tabController,
-              children: [
-                SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      PropertyLocationWidget(address: state.data.address),
-                      DepositWidget(deposit: state.data.deposit),
-                      TermsPolicyWidget(policy: state.data.policies),
-                      ShowUnitsInHotelDetailsWidget(
-                        units: state.data.units,
-                        propertyId: state.data.id,
-                        nameProp: state.data.name,
-                        location:
-                            '${state.data.address.city} ,${state.data.address.district}',
-                        image: state.data.images.isEmpty
-                            ? ''
-                            : state.data.images[0],
-                      ),
-                    ],
+                  SliverPersistentHeader(
+                    pinned: true,
+                    delegate: PropertyDetailsTabBarWidget(
+                      _tabController,
+                      context,
+                    ),
                   ),
-                ),
-                ListOfAllScoresCustemorWidget(
-                  rateOfScore: state.data.allScoreRateWithUser,
-                ),
-              ],
+                ];
+              },
+              body: TabBarView(
+                controller: _tabController,
+                children: [
+                  SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PropertyLocationWidget(address: state.data.address),
+                        DepositWidget(deposit: state.data.deposit),
+                        TermsPolicyWidget(policy: state.data.policies),
+                        ShowUnitsInHotelDetailsWidget(
+                          units: state.data.units,
+                          propertyId: state.data.id,
+                          nameProp: state.data.name,
+                          location:
+                              '${state.data.address.city} ,${state.data.address.district}',
+                          image: state.data.images.isEmpty
+                              ? ''
+                              : state.data.images[0],
+                        ),
+                      ],
+                    ),
+                  ),
+                  ListOfAllScoresCustemorWidget(
+                    rateOfScore: state.data.allScoreRateWithUser,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

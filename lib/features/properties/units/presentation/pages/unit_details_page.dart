@@ -104,9 +104,9 @@ class UnitDetailsPage extends ConsumerWidget {
                       ),
                       DefaultButtonWidget(
                         text: 'حجز الان',
-                        height: 48.h,
-                        width: 128.w,
-                        textSize: 12.sp,
+                        height: 42.h,
+                        width: 126.w,
+                        textSize: 12.4.sp,
                         borderRadius: 34.r,
                         onPressed: () {
                           if (!Auth().loggedIn) {

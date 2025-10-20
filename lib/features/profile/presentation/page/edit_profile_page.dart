@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/widgets/bottomNavbar/button_bottom_navigation_bar_design_widget.dart';
 import '../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
@@ -124,98 +125,103 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
       extendBody: true,
       resizeToAvoidBottomInset: true,
       appBar: const SecondaryAppBarWidget(title: ''),
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(
-            horizontal: 14.w,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              6.h.verticalSpace,
-              UserPageTitlesWidget(
-                title: S.of(context).editPersonalInfoTitle,
-                subTitle: S.of(context).editPersonalInfoSubtitle,
-              ),
-              12.verticalSpace,
-              NameEmailPhoneSection(
-                nameController: nameController,
-                phoneController: phoneController,
-                emailController: emailController,
-              ),
-              12.h.verticalSpace,
-              UpdateBirthDatePickerWidget(onChanged: (_) => _onFormChanged()),
-              12.h.verticalSpace,
-              UpdateGenderWidget(
-                selectedGenderFromProfile: ref.watch(updateGenderProvider),
-                onChanged: (_) => _onFormChanged(),
-              ),
-              const CityWidget(),
-              24.h.verticalSpace,
-              CheckStateInPostApiDataWidget(
-                state: stateUpdateUser,
-                messageSuccess: "تم التعديل بنجاح",
-                functionSuccess: () {
-                  final latest = ProfileModel(
-                    name: nameController.text,
-                    email: emailController.text,
-                    phoneNumber: phoneController.text,
-                    gender: ref.read(updateGenderProvider),
-                    birthDate: ref.read(birthDateProvider),
-                    city: ref.read(selectedCityProvider),
-                  );
-                  Auth().updateUserData(
-                    // birthDate: ref.read(birthDateProvider),
-                    email: emailController.text,
-                    phoneNumber: phoneController.text,
-                    name: nameController.text,
-                    gender: ref.read(updateGenderProvider),
-                    city: ref.read(selectedCityProvider),
-                  );
-                  ref
-                      .read(editProfileControllerProvider.notifier)
-                      .initialize(latest);
-                },
-                bottonWidget: DefaultButtonWidget(
-                  text: S.of(context).saveChanges,
-                  isLoading: stateUpdateUser.stateData == States.loading,
-                  onPressed: !canSave
-                      ? null
-                      : () async {
-                          if (!_formKey.currentState!.validate()) return;
-                          FocusManager.instance.primaryFocus?.unfocus();
-
-                          final controller =
-                              ref.read(editProfileControllerProvider.notifier);
-
-                          final current = ProfileModel(
-                            name: nameController.text,
-                            email: emailController.text,
-                            phoneNumber: phoneController.text,
-                            gender: ref.read(updateGenderProvider),
-                            birthDate: ref.read(birthDateProvider),
-                            city: ref.read(selectedCityProvider),
-                          );
-
-                          controller.compute(current);
-                          final effective = controller.effectiveForPut(current);
-                          await ref
-                              .read(updateNotifierProvider.notifier)
-                              .update(
-                                //dateOfBirth: effective.birthDate?.toIso8601String() ?? '',
-                                email: effective.email,
-                                phoneNumber: effective.phoneNumber,
-                                name: effective.name,
-                                gender: (effective.gender ?? '').toString(),
-                                cityId: effective.city?.id ?? 0,
-                              );
-                        },
+      body: SafeArea(
+        child: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(
+              horizontal: 14.w,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                6.h.verticalSpace,
+                UserPageTitlesWidget(
+                  title: S.of(context).editPersonalInfoTitle,
+                  subTitle: S.of(context).editPersonalInfoSubtitle,
                 ),
-              ),
-            ],
+                12.verticalSpace,
+                NameEmailPhoneSection(
+                  nameController: nameController,
+                  phoneController: phoneController,
+                  emailController: emailController,
+                ),
+                12.h.verticalSpace,
+                UpdateBirthDatePickerWidget(onChanged: (_) => _onFormChanged()),
+                12.h.verticalSpace,
+                UpdateGenderWidget(
+                  selectedGenderFromProfile: ref.watch(updateGenderProvider),
+                  onChanged: (_) => _onFormChanged(),
+                ),
+                const CityWidget(),
+                18.h.verticalSpace,
+        
+              ],
+            ),
           ),
         ),
+      ),
+      bottomNavigationBar: ButtonBottomNavigationBarDesignWidget(
+        child:  CheckStateInPostApiDataWidget(
+          state: stateUpdateUser,
+          messageSuccess: "تم التعديل بنجاح",
+          functionSuccess: () {
+            final latest = ProfileModel(
+              name: nameController.text,
+              email: emailController.text,
+              phoneNumber: phoneController.text,
+              gender: ref.read(updateGenderProvider),
+              birthDate: ref.read(birthDateProvider),
+              city: ref.read(selectedCityProvider),
+            );
+            Auth().updateUserData(
+              // birthDate: ref.read(birthDateProvider),
+              email: emailController.text,
+              phoneNumber: phoneController.text,
+              name: nameController.text,
+              gender: ref.read(updateGenderProvider),
+              city: ref.read(selectedCityProvider),
+            );
+            ref
+                .read(editProfileControllerProvider.notifier)
+                .initialize(latest);
+          },
+          bottonWidget: DefaultButtonWidget(
+            text: S.of(context).saveChanges,
+            isLoading: stateUpdateUser.stateData == States.loading,
+            onPressed: !canSave
+                ? null
+                : () async {
+              if (!_formKey.currentState!.validate()) return;
+              FocusManager.instance.primaryFocus?.unfocus();
+
+              final controller =
+              ref.read(editProfileControllerProvider.notifier);
+
+              final current = ProfileModel(
+                name: nameController.text,
+                email: emailController.text,
+                phoneNumber: phoneController.text,
+                gender: ref.read(updateGenderProvider),
+                birthDate: ref.read(birthDateProvider),
+                city: ref.read(selectedCityProvider),
+              );
+
+              controller.compute(current);
+              final effective = controller.effectiveForPut(current);
+              await ref
+                  .read(updateNotifierProvider.notifier)
+                  .update(
+                //dateOfBirth: effective.birthDate?.toIso8601String() ?? '',
+                email: effective.email,
+                phoneNumber: effective.phoneNumber,
+                name: effective.name,
+                gender: (effective.gender ?? '').toString(),
+                cityId: effective.city?.id ?? 0,
+              );
+            },
+          ),
+        ) ,
       ),
     );
   }

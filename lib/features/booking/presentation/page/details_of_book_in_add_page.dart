@@ -51,87 +51,91 @@ class _DetailsOfBookInAddPageState
 
     return Scaffold(
       appBar: SecondaryAppBarWidget(title: S.of(context).hotelBookingTitle),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  6.h.verticalSpace,
-                  HotelSummaryCard(
-                    name: widget.nameProp,
-                    location: widget.location,
-                    imageUrl: widget.image,
-                  ),
-                  RangeCalendarWidget(
-                    onRangeSelected: (start, end) {
-                      setState(() {
-                        startDate = start;
-                        endDate = end;
-                      });
-                    },
-                  ),
-                  SelectBookingDetailsWidget(countAdult: (adult) {
-                    adults = adult!;
-                  }, countChild: (child) {
-                    children = child!;
-                  }, countRoom: (room) {
-                    rooms = room!;
-                  }, onTypeSelected: (type) {
-                    typeBook = type!;
-                  }),
-                ],
+      body: SafeArea(
+        top: false,
+
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    6.h.verticalSpace,
+                    HotelSummaryCard(
+                      name: widget.nameProp,
+                      location: widget.location,
+                      imageUrl: widget.image,
+                    ),
+                    RangeCalendarWidget(
+                      onRangeSelected: (start, end) {
+                        setState(() {
+                          startDate = start;
+                          endDate = end;
+                        });
+                      },
+                    ),
+                    SelectBookingDetailsWidget(countAdult: (adult) {
+                      adults = adult!;
+                    }, countChild: (child) {
+                      children = child!;
+                    }, countRoom: (room) {
+                      rooms = room!;
+                    }, onTypeSelected: (type) {
+                      typeBook = type!;
+                    }),
+                  ],
+                ),
               ),
             ),
-          ),
-          CheckStateInPostApiDataWidget(
-            state: checkBookingState,
-            functionSuccess: () {
-              navigateTo(
-                  context,
-                  CompleteAddBookingPage(
-                    nameProp: widget.nameProp,
-                    location: widget.location,
-                    imageUrl: widget.image,
-                    booking: checkBookingState.data,
-                  ));
-            },
-            bottonWidget: DesginButtonInAddBookingWidget(
-              button: DefaultButtonWidget(
-                  text: S.of(context).next,
-                  height: 44.h,
-                  width: double.infinity,
-                  borderRadius: 15.r,
-                  isLoading: checkBookingState.stateData == States.loading,
-                  onPressed: () {
-                    if (startDate == null || endDate == null) {
-                      showFlashBarWarring(
-                          context: context,
-                          message: S.of(context).validationSelectDate);
-                    } else {
-                      final bookingData = BookingData(
-                        checkIn: DateFormat('yyyy-MM-dd', 'en_US')
-                            .format(startDate!)
-                            .toString(),
-                        checkOut: DateFormat('yyyy-MM-dd', 'en_US')
-                            .format(endDate!)
-                            .toString(),
-                        type: typeBook,
-                        unitCount: rooms,
-                        childCount: children,
-                        adultCount: adults,
-                        guests: 4,
-                        totalPrice: widget.totalPrice,
-                        unitId: widget.unitId,
-                      );
-                      ref
-                          .read(checkBookingProvider.notifier)
-                          .checkBookingInHotel(bookingData: bookingData);
-                    }
-                  }),
+            CheckStateInPostApiDataWidget(
+              state: checkBookingState,
+              functionSuccess: () {
+                navigateTo(
+                    context,
+                    CompleteAddBookingPage(
+                      nameProp: widget.nameProp,
+                      location: widget.location,
+                      imageUrl: widget.image,
+                      booking: checkBookingState.data,
+                    ));
+              },
+              bottonWidget: DesginButtonInAddBookingWidget(
+                button: DefaultButtonWidget(
+                    text: S.of(context).next,
+                    height: 42.h,
+                    width: double.infinity,
+                    borderRadius: 15.r,
+                    isLoading: checkBookingState.stateData == States.loading,
+                    onPressed: () {
+                      if (startDate == null || endDate == null) {
+                        showFlashBarWarring(
+                            context: context,
+                            message: S.of(context).validationSelectDate);
+                      } else {
+                        final bookingData = BookingData(
+                          checkIn: DateFormat('yyyy-MM-dd', 'en_US')
+                              .format(startDate!)
+                              .toString(),
+                          checkOut: DateFormat('yyyy-MM-dd', 'en_US')
+                              .format(endDate!)
+                              .toString(),
+                          type: typeBook,
+                          unitCount: rooms,
+                          childCount: children,
+                          adultCount: adults,
+                          guests: 4,
+                          totalPrice: widget.totalPrice,
+                          unitId: widget.unitId,
+                        );
+                        ref
+                            .read(checkBookingProvider.notifier)
+                            .checkBookingInHotel(bookingData: bookingData);
+                      }
+                    }),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

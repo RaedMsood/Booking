@@ -60,74 +60,77 @@ class _PropertiesByCityPagePageState
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: CheckStateInGetApiDataWidget(
-        state: state,
-        widgetOfLoading: const CircularProgressIndicatorWidget(),
-        widgetOfData: RefreshIndicator(
-          color: AppColors.primaryColor,
-          backgroundColor: Colors.white,
-          displacement: 40,
-          strokeWidth: 2.5,
-          onRefresh: () async {
-            await ref
-                .read(getPropertiesByCityProvider(widget.cityId).notifier)
-                .getData();
-          },
-          child: CustomScrollView(
-            controller: _scrollController,
-            slivers: [
-              if (hasDestination)
-                SliverAppBarProByCityWidget(
-                  images: state.data.cities[0].image,
-                  cityName: state.data.cities[0].name,
-                ),
-              if (hasDestination)
-                SliverToBoxAdapter(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 14.w),
-                    color: Colors.white,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CityNameAndFlagWidget(
-                          cityName: state.data.cities[0].name,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                        ),
-                        12.h.verticalSpace,
-                        ReadMoreTextWidget(
-                          text: state.data.cities[0].description,
-                          style: TextStyle(
-                            fontSize: 12.6.sp,
-                            height: 1.18.h,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.mainColorFont,
-                            fontFamily: 'ReadexPro',
+      body: SafeArea(
+        top: false,
+        child: CheckStateInGetApiDataWidget(
+          state: state,
+          widgetOfLoading: const CircularProgressIndicatorWidget(),
+          widgetOfData: RefreshIndicator(
+            color: AppColors.primaryColor,
+            backgroundColor: Colors.white,
+            displacement: 40,
+            strokeWidth: 2.5,
+            onRefresh: () async {
+              await ref
+                  .read(getPropertiesByCityProvider(widget.cityId).notifier)
+                  .getData();
+            },
+            child: CustomScrollView(
+              controller: _scrollController,
+              slivers: [
+                if (hasDestination)
+                  SliverAppBarProByCityWidget(
+                    images: state.data.cities[0].image,
+                    cityName: state.data.cities[0].name,
+                  ),
+                if (hasDestination)
+                  SliverToBoxAdapter(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 14.w),
+                      color: Colors.white,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CityNameAndFlagWidget(
+                            cityName: state.data.cities[0].name,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                           ),
-                        ),
-                        10.h.verticalSpace,
-                        Container(
-                          height: 1.h,
-                          width: double.infinity,
-                          color: AppColors.fontColor2.withOpacity(.2),
-                          margin: EdgeInsets.symmetric(vertical: 12.h),
-                        ),
-                      ],
+                          12.h.verticalSpace,
+                          ReadMoreTextWidget(
+                            text: state.data.cities[0].description,
+                            style: TextStyle(
+                              fontSize: 12.6.sp,
+                              height: 1.18.h,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.mainColorFont,
+                              fontFamily: 'ReadexPro',
+                            ),
+                          ),
+                          10.h.verticalSpace,
+                          Container(
+                            height: 1.h,
+                            width: double.infinity,
+                            color: AppColors.fontColor2.withOpacity(.2),
+                            margin: EdgeInsets.symmetric(vertical: 12.h),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              const SliverToBoxAdapter(
-                child: PropertyViewTypeWidget(),
-              ),
-              PropertySliverListWidget(
-                properties: state.data.property.data,
-
-                propertiesByCity: true,
-              ),
-              if (state.stateData == States.loadingMore)
                 const SliverToBoxAdapter(
-                  child: CircularProgressIndicatorWidget(),
+                  child: PropertyViewTypeWidget(),
                 ),
-            ],
+                PropertySliverListWidget(
+                  properties: state.data.property.data,
+
+                  propertiesByCity: true,
+                ),
+                if (state.stateData == States.loadingMore)
+                  const SliverToBoxAdapter(
+                    child: CircularProgressIndicatorWidget(),
+                  ),
+              ],
+            ),
           ),
         ),
       ),

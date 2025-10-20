@@ -58,7 +58,7 @@ class FilterPage extends ConsumerWidget {
                 fontWeight: FontWeight.w400,
               ),
               const RatingFilterWidget(),
-              50.h.verticalSpace,
+              70.h.verticalSpace,
             ],
           ),
         ),

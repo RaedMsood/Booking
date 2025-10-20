@@ -53,7 +53,7 @@ class DefaultButtonWidget extends StatelessWidget {
       opacity: isLoading == true ? 0.5 : 1,
       child: Container(
         width: width,
-        height: height ?? 42.h,
+        height: height ?? 40.h,
         decoration: BoxDecoration(
           color: background ?? AppColors.primaryColor,
           borderRadius: BorderRadius.circular(borderRadius ?? 8.r),

@@ -13,7 +13,8 @@ class VerifyPinputWidget extends StatefulWidget {
   State<VerifyPinputWidget> createState() => _VerifyPinputWidgetState();
 }
 
-class _VerifyPinputWidgetState extends State<VerifyPinputWidget> with WidgetsBindingObserver {
+class _VerifyPinputWidgetState extends State<VerifyPinputWidget>
+    with WidgetsBindingObserver {
   late final FocusNode _focus;
   bool _wasFocused = false;
 
@@ -42,6 +43,7 @@ class _VerifyPinputWidgetState extends State<VerifyPinputWidget> with WidgetsBin
     _focus.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Pinput(
@@ -77,8 +79,12 @@ class _VerifyPinputWidgetState extends State<VerifyPinputWidget> with WidgetsBin
         ),
       ),
       validator: (value) {
-        if (value == null || value.toString().isEmpty) {
-          return S.of(context).pleaseEnterTheVerificationCode;
+        if (value == null || value
+            .toString()
+            .isEmpty) {
+          return S
+              .of(context)
+              .pleaseEnterTheVerificationCode;
         }
       },
     );
