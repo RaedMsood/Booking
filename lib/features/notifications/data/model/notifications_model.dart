@@ -16,13 +16,16 @@ class NotificationsModel {
 
   factory NotificationsModel.fromJson(Map<String, dynamic> json) {
     return NotificationsModel(
-      id: json['id'],
-      userId: json['user_id'],
-      title: json['title'],
-      message: json['message'],
-      date: json['created_at'],
+      id: json['id'] != null ? int.tryParse(json['id'].toString()) : null,
+      userId: json['user_id'] != null
+          ? int.tryParse(json['user_id'].toString())
+          : null,
+      title: json['title'] ?? '',
+      message: json['message'] ?? '',
+      date: json['created_at'] ?? '',
     );
   }
+
   static List<NotificationsModel> fromJsonList(List json) {
     return json.map((e) => NotificationsModel.fromJson(e)).toList();
   }

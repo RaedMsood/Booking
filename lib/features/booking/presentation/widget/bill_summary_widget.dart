@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../core/widgets/rich_text_widget.dart';
+import '../../../../core/widgets/price_and_currency_widget.dart';
 import '../../../../generated/l10n.dart';
 
 class BillSummaryWidget extends StatelessWidget {
@@ -21,7 +19,9 @@ class BillSummaryWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r), color: Colors.white),
+        borderRadius: BorderRadius.circular(12.r),
+        color: Colors.white,
+      ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -33,14 +33,11 @@ class BillSummaryWidget extends StatelessWidget {
                 fontSize: 12.sp,
                 colorText: const Color(0xff292D32),
               ),
-              RichTextWidget(
-                firstText: totalPrice.toString(),
+              PriceAndCurrencyWidget(
+                price: totalPrice.toString(),
                 firstColor: const Color(0xff605A65),
-                secondText: "ريال",
-                secondColor: const Color(0xff757575),
-                fontWeightSecondText: FontWeight.w300,
-                fontSizeSecondText: 12.sp,
-                fontSize: 14.sp,
+                fontSize: 13.sp,
+                fontWeightSecondText: FontWeight.w400,
               ),
             ],
           ),
@@ -53,14 +50,11 @@ class BillSummaryWidget extends StatelessWidget {
                 fontSize: 12.sp,
                 colorText: const Color(0xff292D32),
               ),
-              RichTextWidget(
-                firstText: totalPrice.toString(),
-                firstColor: AppColors.primaryColor,
-                secondText: " ريال",
-                secondColor: const Color(0xff757575),
-                fontWeightSecondText: FontWeight.w300,
-                fontSizeSecondText: 12.sp,
-                fontSize: 14.sp,
+              PriceAndCurrencyWidget(
+                price: totalPrice.toString(),
+                fontSize: 13.sp,
+                fontWeightSecondText: FontWeight.w400,
+                fontSizeSecondText: 10.5.sp,
               ),
             ],
           ),
@@ -77,14 +71,11 @@ class BillSummaryWidget extends StatelessWidget {
                 fontSize: 12.sp,
                 colorText: const Color(0xff292D32),
               ),
-              RichTextWidget(
-                firstText: deposit.toString(),
-                firstColor: AppColors.primaryColor,
-                secondText: " ريال",
-                secondColor: const Color(0xff757575),
-                fontWeightSecondText: FontWeight.w300,
-                fontSizeSecondText: 12.sp,
-                fontSize: 14.sp,
+              PriceAndCurrencyWidget(
+                price: deposit.toString(),
+                fontSize: 13.sp,
+                fontWeightSecondText: FontWeight.w400,
+                fontSizeSecondText: 10.5.sp,
               ),
             ],
           ),
@@ -97,14 +88,12 @@ class BillSummaryWidget extends StatelessWidget {
                 fontSize: 12.sp,
                 colorText: const Color(0xff292D32),
               ),
-              RichTextWidget(
-                firstText: (totalPrice - deposit).toString(),
+              PriceAndCurrencyWidget(
+                price: (totalPrice - deposit).toString(),
                 firstColor: const Color(0xff605A65),
-                secondText: " ريال",
-                secondColor: const Color(0xff757575),
-                fontWeightSecondText: FontWeight.w300,
-                fontSizeSecondText: 12.sp,
-                fontSize: 14.sp,
+                fontSize: 13.sp,
+                fontSizeSecondText: 10.5.sp,
+                fontWeightSecondText: FontWeight.w400,
               ),
             ],
           ),

@@ -1,49 +1,54 @@
+import 'package:booking/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
-class RichTextWidget extends StatelessWidget {
-  final String firstText;
-  final String secondText;
-  final Color firstColor;
-  final Color secondColor;
+import '../../generated/l10n.dart';
+
+class PriceAndCurrencyWidget extends StatelessWidget {
+  final String price;
+  final Color? firstColor;
+  final Color? secondColor;
   final double? fontSize;
   final FontWeight? fontWeight;
   final TextAlign? textAlign;
   final double? fontSizeSecondText;
   final FontWeight? fontWeightSecondText;
-  const RichTextWidget({
+
+  const PriceAndCurrencyWidget({
     super.key,
-    required this.firstText,
-    required this.secondText,
-    required this.firstColor,
-    required this.secondColor,
+    required this.price,
+    this.firstColor,
+    this.secondColor,
     this.fontSize,
     this.fontWeight,
     this.textAlign,
     this.fontSizeSecondText,
-    this.fontWeightSecondText
+    this.fontWeightSecondText,
   });
 
   @override
   Widget build(BuildContext context) {
+    final NumberFormat formatter = NumberFormat('#,##0', 'en_US');
+
     return Text.rich(
       TextSpan(
         children: [
           TextSpan(
-            text: firstText,
+            text: formatter.format(double.tryParse(price.toString())),
             style: TextStyle(
-              color: firstColor,
+              color: firstColor ?? AppColors.primaryColor,
               fontSize: fontSize ?? 12.sp,
               fontWeight: fontWeight ?? FontWeight.w500,
               fontFamily: 'ReadexPro',
             ),
           ),
           TextSpan(
-            text: secondText,
+            text: " ${S.of(context).YER}",
             style: TextStyle(
-              color: secondColor,
-              fontSize: fontSizeSecondText ?? 12.sp,
-              fontWeight: fontWeightSecondText ?? FontWeight.w500,
+              color: secondColor ?? const Color(0xff757575),
+              fontSize: fontSizeSecondText ?? 11.sp,
+              fontWeight: fontWeightSecondText ?? FontWeight.w300,
               fontFamily: 'ReadexPro',
             ),
           ),

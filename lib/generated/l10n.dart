@@ -162,6 +162,11 @@ class S {
     return Intl.message('Show less', name: 'showLess', desc: '', args: []);
   }
 
+  /// `YER`
+  String get YER {
+    return Intl.message('YER', name: 'YER', desc: '', args: []);
+  }
+
   // skipped getter for the '--------bottombar-----------' key
 
   /// `Home`
@@ -221,6 +226,16 @@ class S {
     return Intl.message(
       'Destinations',
       name: 'destinations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notificationsTitle {
+    return Intl.message(
+      'Notifications',
+      name: 'notificationsTitle',
       desc: '',
       args: [],
     );

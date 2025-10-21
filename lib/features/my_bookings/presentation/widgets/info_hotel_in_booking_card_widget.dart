@@ -2,10 +2,8 @@ import 'package:booking/core/constants/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../core/widgets/rich_text_widget.dart';
+import '../../../../core/widgets/price_and_currency_widget.dart';
 import '../../../../generated/l10n.dart';
 
 class InfoHotelInCardBookingWidget extends StatelessWidget {
@@ -13,7 +11,6 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
   final String location;
   final int count;
   final double price;
-  final String currency;
 
   const InfoHotelInCardBookingWidget({
     super.key,
@@ -21,7 +18,6 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
     required this.location,
     required this.count,
     required this.price,
-    this.currency = 'ريال',
   });
 
   @override
@@ -66,15 +62,11 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
               const Spacer(),
-              RichTextWidget(
-                firstText: price.toStringAsFixed(0),
-                secondText: " ريال",
-                firstColor: AppColors.primaryColor,
-                secondColor: const Color(0xff757575),
+              PriceAndCurrencyWidget(
+                price: price.toStringAsFixed(0),
                 fontSize: 11.sp,
                 fontWeight: FontWeight.w400,
-                fontSizeSecondText: 11.sp,
-                fontWeightSecondText: FontWeight.w300,
+                fontSizeSecondText: 10.sp,
               ),
             ],
           ),

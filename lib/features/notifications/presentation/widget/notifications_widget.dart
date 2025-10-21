@@ -18,11 +18,11 @@ class NotificationsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 8.sp),
+      margin: EdgeInsets.only(bottom: 10.h),
       padding: EdgeInsets.all(10.sp),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(25.sp),
+        borderRadius: BorderRadius.circular(20.r),
       ),
       child: Column(
         children: [
@@ -43,7 +43,7 @@ class NotificationsWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: 8.w,
+                width: 10.w,
               ),
               Expanded(
                 child: Column(
@@ -54,14 +54,14 @@ class NotificationsWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          width: 190.w,
+                        Flexible(
                           child: AutoSizeTextWidget(
                             text: title,
-                            fontSize: 12.5.sp,
+                            fontSize: 11.sp,
                             maxLines: 4,
                           ),
                         ),
+                        6.w.horizontalSpace,
                         Padding(
                           padding: EdgeInsets.only(top: 3.h),
                           child: AutoSizeTextWidget(
@@ -78,7 +78,8 @@ class NotificationsWidget extends StatelessWidget {
                     AutoSizeTextWidget(
                       text: message,
                       colorText: AppColors.fontColor,
-                      fontSize: 12.sp,
+                      fontSize: 10.6.sp,
+                      maxLines: 8,
                     ),
                   ],
                 ),

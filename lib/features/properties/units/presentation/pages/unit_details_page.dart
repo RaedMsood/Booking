@@ -13,6 +13,7 @@ import '../../../../../generated/l10n.dart';
 import '../../../../../services/auth/auth.dart';
 import '../../../../booking/presentation/page/details_of_book_in_add_page.dart';
 import '../../../../user/presentation/pages/log_in_page.dart';
+import '../../../property_details/presentation/widgets/deposit_widget.dart';
 import '../../../property_details/presentation/widgets/sliver_app_bar_details_widget.dart';
 import '../widgets/unit_details_data_widget.dart';
 import '../widgets/unit_features_widget.dart';
@@ -54,7 +55,7 @@ class UnitDetailsPage extends ConsumerWidget {
               ),
             ),
             // SliverToBoxAdapter(
-            //   child: DepositWidget(),
+            //   child: DepositWidget(deposit: state.data.,),
             // ),
 
             SliverToBoxAdapter(

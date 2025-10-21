@@ -5,7 +5,7 @@ import '../../../../core/constants/app_icons.dart';
 import '../../../../core/extension/string.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../core/widgets/rich_text_widget.dart';
+import '../../../../core/widgets/price_and_currency_widget.dart';
 import '../../../../generated/l10n.dart';
 import 'general_design_for_booking_widget.dart';
 
@@ -35,15 +35,10 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          RichTextWidget(
-            firstText: "$totalPrice ",
-            firstColor: AppColors.primaryColor,
-            secondText: "ريال",
+          PriceAndCurrencyWidget(
+            price: totalPrice.toString() ,
             fontWeight: FontWeight.w400,
-            secondColor: const Color(0xff757575),
-            fontWeightSecondText: FontWeight.w300,
-            fontSizeSecondText: 14.sp,
-            fontSize: 16.sp,
+            fontSize: 14.6.sp,
           ),
           const Divider(
             thickness: 1,
