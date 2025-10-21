@@ -7,6 +7,7 @@ import '../../../../../core/helpers/navigateTo.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/online_images_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../data/model/units_model.dart';
 import '../pages/unit_details_page.dart';
 
@@ -25,11 +26,11 @@ class UnitCardWidget extends StatelessWidget {
 
   String _guestsText() {
     if (units.maxGuests == 1) {
-      return 'شخص';
+      return S.current.personOne;
     } else if (units.maxGuests == 2) {
-      return 'شخصين';
+      return S.current.personTwo;
     } else {
-      return '${units.maxGuests} أشخاص';
+      return '${units.maxGuests} ${S.current.personOther}';
     }
   }
 

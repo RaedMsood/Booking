@@ -4,22 +4,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/state/data_state.dart';
 import '../../../../core/state/pagination_data/paginated_model.dart';
 import '../../../../core/state/state.dart';
-import '../../../booking/data/booking_model/booking_model.dart';
+import '../../data/model/my_bookings_data.dart';
 import '../../data/model/rate_model.dart';
 import '../../data/model/status_model.dart';
 import '../../data/repos/my_bookings_reposaitory.dart';
 
 final getBookingProvider = StateNotifierProvider.family<GetBookingNotifier,
-    DataState<PaginationModel<BookingData>>, int>(
+    DataState<PaginationModel<MyBookingsData>>, int>(
   (ref, bookingType) {
     return GetBookingNotifier(bookingType);
   },
 );
 
 class GetBookingNotifier
-    extends StateNotifier<DataState<PaginationModel<BookingData>>> {
+    extends StateNotifier<DataState<PaginationModel<MyBookingsData>>> {
   GetBookingNotifier(this.bookingType)
-      : super(DataState<PaginationModel<BookingData>>.initial(
+      : super(DataState<PaginationModel<MyBookingsData>>.initial(
             PaginationModel.empty())) {
     getDataBookingType();
   }

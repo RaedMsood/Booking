@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import '../../../../core/state/pagination_data/paginated_model.dart';
-import '../../../booking/data/booking_model/booking_model.dart';
 import '../../../my_bookings/data/model/rate_model.dart';
 import '../data_source/my_bookings_data_source.dart';
+import '../model/my_bookings_data.dart';
 
 class MyBookingsReposaitory {
   final MyBookingsDataSource myBookingsDataSource = MyBookingsDataSource();
 
-  Future<Either<DioException, PaginationModel<BookingData>>>
+  Future<Either<DioException, PaginationModel<MyBookingsData>>>
       getBookingTypeFilter({
     required int page,
     required int filterType,

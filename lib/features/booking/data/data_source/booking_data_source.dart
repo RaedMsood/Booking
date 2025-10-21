@@ -2,20 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../../core/network/remote_request.dart';
 import '../../../../core/network/urls.dart';
-import '../booking_model/booking_model.dart';
+import '../booking_model/booking_data.dart';
+import '../booking_model/booking_data_model.dart';
 import '../booking_model/payment_methods_model.dart';
 
 class BookingDataSource {
-  // Future<int> checkBookingFromHotel({
-  //   required BookingData bookingData,
-  // }) async {
-  //   final response = await RemoteRequest.postData(
-  //     path: AppURL.checkBookingHotel,
-  //     data: bookingData.toJson(),
-  //   );
-  //   return response.data['data']['id'];
-  // }
-
   Future<BookingData> checkBookingFromHotel({
     required BookingData bookingData,
   }) async {
@@ -26,7 +17,7 @@ class BookingDataSource {
     return BookingData.fromJson(response.data['data']['id']);
   }
 
-  Future<BookingData> custemorDataForBooking({
+  Future<BookingDataModel> custemorDataForBooking({
     required Customer custemor,
   }) async {
     final response = await RemoteRequest.postData(
@@ -35,7 +26,7 @@ class BookingDataSource {
     );
     debugPrint(response.statusCode.toString());
 
-    return BookingData.fromJson(response.data['data']);
+    return BookingDataModel.fromJson(response.data['data']);
   }
 
   Future<List<PaymentMethodsModel>> getAllPaymentMethods() async {

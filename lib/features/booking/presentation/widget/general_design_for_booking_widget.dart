@@ -28,7 +28,7 @@ class GeneralDesignForBookingWidget extends StatelessWidget {
         children: [
           AutoSizeTextWidget(
             text: title,
-            fontSize: fontSize ?? 11.5.sp,
+            fontSize: fontSize ?? 11.sp,
           ),
           8.h.verticalSpace,
           child,

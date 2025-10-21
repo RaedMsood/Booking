@@ -7,6 +7,7 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/buttons/default_button.dart';
 import '../../../../../core/widgets/online_images_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../data/model/units_model.dart';
 import '../pages/unit_details_page.dart';
 
@@ -25,11 +26,11 @@ class UnitsCardInHotelDetailsWidget extends StatelessWidget {
 
   String _guestsText() {
     if (unit.maxGuests == 1) {
-      return 'شخص';
+      return S.current.personOne;
     } else if (unit.maxGuests == 2) {
-      return 'شخصين';
+      return S.current.personTwo;
     } else {
-      return '${unit.maxGuests} أشخاص';
+      return '${unit.maxGuests} ${S.current.personOther}';
     }
   }
 

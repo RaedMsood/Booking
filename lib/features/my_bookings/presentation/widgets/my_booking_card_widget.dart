@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../generated/l10n.dart';
-import '../../../booking/data/booking_model/booking_model.dart';
+import '../../data/model/my_bookings_data.dart';
 import 'booking_status_widget.dart';
 import 'id_booking_with_copy_widget.dart';
 import 'hotel_image_widget.dart';
@@ -10,7 +10,7 @@ import 'info_hotel_in_booking_card_widget.dart';
 import 'rating_booking_widget.dart';
 
 class MyBookingCardWidget extends StatelessWidget {
-  final BookingData bookData;
+  final MyBookingsData bookData;
   final VoidCallback? onTap;
 
   const MyBookingCardWidget({

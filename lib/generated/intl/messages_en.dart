@@ -286,6 +286,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "The identification number is generated from Al Kuraimi app settings on first setup",
     ),
     "paymentMethods": MessageLookupByLibrary.simpleMessage("Payment methods"),
+    "personOne": MessageLookupByLibrary.simpleMessage("Person"),
+    "personOther": MessageLookupByLibrary.simpleMessage("People"),
+    "personTwo": MessageLookupByLibrary.simpleMessage("People"),
     "personalInfo": MessageLookupByLibrary.simpleMessage(
       "Personal information",
     ),
@@ -345,7 +348,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "reservationsTitle": MessageLookupByLibrary.simpleMessage("Reservations"),
     "roomType": MessageLookupByLibrary.simpleMessage("Room type"),
     "roomsCount": MessageLookupByLibrary.simpleMessage("Rooms"),
-    "roomsShort": MessageLookupByLibrary.simpleMessage("rooms"),
+    "roomsShort": MessageLookupByLibrary.simpleMessage("Rooms"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
     "searchHotelPlaceholder": MessageLookupByLibrary.simpleMessage(

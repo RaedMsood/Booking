@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import '../../../../core/network/remote_request.dart';
 import '../../../../core/network/urls.dart';
 import '../../../../core/state/pagination_data/paginated_model.dart';
-import '../../../booking/data/booking_model/booking_model.dart';
+import '../model/my_bookings_data.dart';
 import '../model/rate_model.dart';
 
 class MyBookingsDataSource {
-  Future<PaginationModel<BookingData>> getBookingTypeFilter({
+  Future<PaginationModel<MyBookingsData>> getBookingTypeFilter({
     required int filterType,
     required int page,
     int perPage = 5,
@@ -20,10 +20,10 @@ class MyBookingsDataSource {
       },
     );
 
-    return PaginationModel<BookingData>.fromJson(
+    return PaginationModel<MyBookingsData>.fromJson(
       response.data['data'] ?? response.data,
       (book) {
-        return BookingData.fromJson(book);
+        return MyBookingsData.fromJson(book);
       },
     );
   }

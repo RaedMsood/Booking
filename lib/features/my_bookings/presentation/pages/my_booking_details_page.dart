@@ -8,8 +8,8 @@ import '../../../../core/widgets/buttons/default_button.dart';
 import '../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../../../properties/property_details/presentation/pages/property_details_page.dart';
-import '../../../booking/data/booking_model/booking_model.dart';
 import '../../../booking/presentation/riverpod/booking_riverpod.dart';
+import '../../data/model/my_bookings_data.dart';
 import '../widgets/booking_data_card_widget.dart';
 import '../widgets/confrim_booking_card_widget.dart';
 import '../../../booking/presentation/widget/hotel_summary_card_widget.dart';
@@ -17,7 +17,7 @@ import '../widgets/policy_tile_widget.dart';
 import 'rate_page.dart';
 
 class MyBookingDetailsPage extends ConsumerWidget {
-  final BookingData bookData;
+  final MyBookingsData bookData;
   final bool isCompletedBook;
 
   const MyBookingDetailsPage(

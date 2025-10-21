@@ -1,43 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../../core/constants/app_icons.dart';
+import '../../../../core/extension/string.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/rich_text_widget.dart';
 import '../../../../generated/l10n.dart';
+import 'general_design_for_booking_widget.dart';
 
 class ConfrimBookingDetailsWidget extends StatelessWidget {
-  const ConfrimBookingDetailsWidget(
-      {super.key,
-      required this.checkOut,
-      required this.unitCount,
-      required this.totalPrice,
-      required this.bookAt,
-      required this.checkIn});
+  const ConfrimBookingDetailsWidget({
+    super.key,
+    required this.checkOut,
+    required this.unitCount,
+    required this.unitName,
+    required this.totalPrice,
+    required this.bookAt,
+    required this.checkIn,
+  });
 
-  final double totalPrice;
+  final double? totalPrice;
   final String bookAt;
   final String unitCount;
+  final String unitName;
+
   final String checkIn;
   final String checkOut;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.sp, vertical: 12.sp),
-      width: double.infinity,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r), color: Colors.white),
+    return GeneralDesignForBookingWidget(
+      title: S.of(context).confirmationSectionTitle,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AutoSizeTextWidget(
-            text: S.of(context).confirmationSectionTitle,
-            fontSize: 12,
-          ),
-          6.verticalSpace,
           RichTextWidget(
             firstText: "$totalPrice ",
             firstColor: AppColors.primaryColor,
@@ -61,11 +58,13 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
                 color: const Color(0xff605A65),
               ),
               10.horizontalSpace,
-              AutoSizeTextWidget(
-                text: '${ S.of(context).bookingDateLabel} $checkIn',
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                colorText: const Color(0xff757575),
+              Flexible(
+                child: AutoSizeTextWidget(
+                  text: '${S.of(context).bookingDateLabel} ${formatDate(bookAt)} ',
+                  fontSize: 10.5.sp,
+                  fontWeight: FontWeight.w400,
+                  colorText: const Color(0xff757575),
+                ),
               ),
             ],
           ),
@@ -78,11 +77,13 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
                 color: const Color(0xff605A65),
               ),
               10.horizontalSpace,
-              AutoSizeTextWidget(
-                text: '$unitCount غرف',
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                colorText: const Color(0xff757575),
+              Flexible(
+                child: AutoSizeTextWidget(
+                  text: '$unitCount $unitName',
+                  fontSize: 10.5.sp,
+                  fontWeight: FontWeight.w400,
+                  colorText: const Color(0xff757575),
+                ),
               ),
             ],
           ),
@@ -95,11 +96,14 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
                 color: const Color(0xff605A65),
               ),
               10.horizontalSpace,
-              AutoSizeTextWidget(
-                text: '${S.of(context).from} $checkIn ${S.of(context).to} $checkOut',
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                colorText: const Color(0xff757575),
+              Flexible(
+                child: AutoSizeTextWidget(
+                  text:
+                      '${S.of(context).from} $checkIn ${S.of(context).to} $checkOut',
+                  fontSize: 10.5.sp,
+                  fontWeight: FontWeight.w400,
+                  colorText: const Color(0xff757575),
+                ),
               ),
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../booking_model/booking_model.dart';
+import '../booking_model/booking_data.dart';
+import '../booking_model/booking_data_model.dart';
 import '../booking_model/payment_methods_model.dart';
 import '../data_source/booking_data_source.dart';
 
@@ -20,7 +21,7 @@ class BookingReposaitory {
     }
   }
 
-  Future<Either<DioException, BookingData>> custemorDataForBooking({
+  Future<Either<DioException, BookingDataModel>> custemorDataForBooking({
     required Customer custemor,
   }) async {
     try {

@@ -13,7 +13,8 @@ import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
 import '../../../properties/cities/presentation/riverpod/cities_riverpod.dart';
 import '../../../properties/cities/presentation/widget/city_widget.dart';
-import '../../data/booking_model/booking_model.dart';
+import '../../data/booking_model/booking_data.dart';
+import '../../data/booking_model/booking_data_model.dart';
 import '../riverpod/booking_riverpod.dart';
 import '../widget/desgin_button_in_add_booking_widget.dart';
 import '../widget/hotel_summary_card_widget.dart';
@@ -204,7 +205,7 @@ class _CompleteAddBookingPageState
                       navigateTo(
                           context,
                           ShowLastDetailsInAddBookingPage(
-                            bookingData: state.data,
+                            bookingData: state.data.bookingData,
                             nameProp: widget.nameProp,
                             location: widget.location,
                             image: widget.imageUrl ?? '',

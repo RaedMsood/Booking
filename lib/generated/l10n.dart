@@ -795,6 +795,21 @@ class S {
     );
   }
 
+  /// `Person`
+  String get personOne {
+    return Intl.message('Person', name: 'personOne', desc: '', args: []);
+  }
+
+  /// `People`
+  String get personTwo {
+    return Intl.message('People', name: 'personTwo', desc: '', args: []);
+  }
+
+  /// `People`
+  String get personOther {
+    return Intl.message('People', name: 'personOther', desc: '', args: []);
+  }
+
   // skipped getter for the '--------booking-----------' key
 
   /// `Booking confirmation`
@@ -807,9 +822,9 @@ class S {
     );
   }
 
-  /// `rooms`
+  /// `Rooms`
   String get roomsShort {
-    return Intl.message('rooms', name: 'roomsShort', desc: '', args: []);
+    return Intl.message('Rooms', name: 'roomsShort', desc: '', args: []);
   }
 
   /// `From`

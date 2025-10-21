@@ -37,7 +37,7 @@ class DepositInLastDetailsWidget extends StatelessWidget {
             colorText: const Color(0xff757575),
             fontWeight: FontWeight.w400,
           ),
-          6.verticalSpace,
+          4.verticalSpace,
         ],
       ),
     );

@@ -2,7 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/state/data_state.dart';
 import '../../../../core/state/state.dart';
-import '../../data/booking_model/booking_model.dart';
+import '../../data/booking_model/booking_data.dart';
+import '../../data/booking_model/booking_data_model.dart';
 import '../../data/booking_model/payment_methods_model.dart';
 import '../../data/reposaitory/booking_reposaitory.dart';
 
@@ -54,15 +55,15 @@ class BookingNotifier extends StateNotifier<DataState<BookingData>> {
 
 
 final customerBookingProvider = StateNotifierProvider.autoDispose<
-    CustomerBookingNotifier, DataState<BookingData>>(
+    CustomerBookingNotifier, DataState<BookingDataModel>>(
   (ref) {
     return CustomerBookingNotifier();
   },
 );
 
-class CustomerBookingNotifier extends StateNotifier<DataState<BookingData>> {
+class CustomerBookingNotifier extends StateNotifier<DataState<BookingDataModel>> {
   CustomerBookingNotifier()
-      : super(DataState<BookingData>.initial(BookingData()));
+      : super(DataState<BookingDataModel>.initial(BookingDataModel.empty()));
   final _controller = BookingReposaitory();
 
   customerBooking({required Customer customer}) async {

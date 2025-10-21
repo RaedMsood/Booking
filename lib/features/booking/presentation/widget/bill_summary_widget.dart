@@ -7,7 +7,14 @@ import '../../../../core/widgets/rich_text_widget.dart';
 import '../../../../generated/l10n.dart';
 
 class BillSummaryWidget extends StatelessWidget {
-  const BillSummaryWidget({super.key});
+  final dynamic deposit;
+  final dynamic totalPrice;
+
+  const BillSummaryWidget({
+    super.key,
+    required this.deposit,
+    required this.totalPrice,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,7 @@ class BillSummaryWidget extends StatelessWidget {
                 colorText: const Color(0xff292D32),
               ),
               RichTextWidget(
-                firstText: "50000 ",
+                firstText: totalPrice.toString(),
                 firstColor: const Color(0xff605A65),
                 secondText: "ريال",
                 secondColor: const Color(0xff757575),
@@ -47,9 +54,9 @@ class BillSummaryWidget extends StatelessWidget {
                 colorText: const Color(0xff292D32),
               ),
               RichTextWidget(
-                firstText: "50000 ",
+                firstText: totalPrice.toString(),
                 firstColor: AppColors.primaryColor,
-                secondText: "ريال",
+                secondText: " ريال",
                 secondColor: const Color(0xff757575),
                 fontWeightSecondText: FontWeight.w300,
                 fontSizeSecondText: 12.sp,
@@ -71,9 +78,9 @@ class BillSummaryWidget extends StatelessWidget {
                 colorText: const Color(0xff292D32),
               ),
               RichTextWidget(
-                firstText: "20000 ",
+                firstText: deposit.toString(),
                 firstColor: AppColors.primaryColor,
-                secondText: "ريال",
+                secondText: " ريال",
                 secondColor: const Color(0xff757575),
                 fontWeightSecondText: FontWeight.w300,
                 fontSizeSecondText: 12.sp,
@@ -91,9 +98,9 @@ class BillSummaryWidget extends StatelessWidget {
                 colorText: const Color(0xff292D32),
               ),
               RichTextWidget(
-                firstText: "50000 ",
+                firstText: (totalPrice - deposit).toString(),
                 firstColor: const Color(0xff605A65),
-                secondText: "ريال",
+                secondText: " ريال",
                 secondColor: const Color(0xff757575),
                 fontWeightSecondText: FontWeight.w300,
                 fontSizeSecondText: 12.sp,
