@@ -128,7 +128,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget>
               required int? maxLength,
               required bool isFocused,
             }) {
-              return null; // يخفي العداد
+              return null;
             },
       controller: widget.controller,
       focusNode: _focus,

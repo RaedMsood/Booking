@@ -49,6 +49,7 @@ class BookingReposaitory {
     required String payMethodName,
     required String voucher,
     required int amount,
+    required String phoneNumber,
   }) async {
     try {
       final remote = await bookingDataSource.confirmPayment(
@@ -56,6 +57,7 @@ class BookingReposaitory {
         payMethodName: payMethodName,
         voucher: voucher,
         amount: amount,
+        phoneNumber: phoneNumber,
       );
       return Right(remote);
     } on DioException catch (e) {

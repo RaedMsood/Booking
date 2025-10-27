@@ -42,13 +42,15 @@ class BookingDataSource {
     required String payMethodName,
     required String voucher,
     required int amount,
+    required String phoneNumber,
   }) async {
     await RemoteRequest.postData(
       path: AppURL.confirmPayment,
       data: {
-        "booking_id": bookingId,
+        "booking_id": 49,
         "payment_method_name": payMethodName,
         if (payMethodName == "jawali") "voucher": voucher,
+        if (payMethodName == "jawali") "receiver_mobile": phoneNumber,
         if (payMethodName == "kuraimi") "pin_pass": voucher,
         if (payMethodName == "kuraimi") "amount": amount,
       },

@@ -1,3 +1,4 @@
+import 'package:booking/services/auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,8 +10,10 @@ import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
 import '../../../../core/widgets/text_form_field.dart';
 import '../../../../generated/l10n.dart';
+import '../../../my_bookings/presentation/riverpod/my_bookings_riverpod.dart';
 import '../../data/booking_model/pay_spec.dart';
 import '../riverpod/booking_riverpod.dart';
+import 'booking_success_dialog_widget.dart';
 
 class PayMethodWidget extends ConsumerStatefulWidget {
   final int bookingId;
@@ -24,6 +27,7 @@ class PayMethodWidget extends ConsumerStatefulWidget {
 class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
   TextEditingController voucherController = TextEditingController();
   TextEditingController amountController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
 
@@ -34,7 +38,9 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
     if (selectedPayMethod!.name.isEmpty) return const SizedBox.shrink();
     final spec = paySpecs[selectedPayMethod.name];
     var state = ref.watch(confirmPaymentProvider);
-
+    if (spec!.requiresPhoneNumber) {
+      phoneNumberController.text = Auth().phoneNumber;
+    }
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w)
           .copyWith(bottom: 12.h, top: 2.h),
@@ -52,6 +58,43 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
               fontWeight: FontWeight.w400,
             ),
             12.h.verticalSpace,
+            Visibility(
+              visible: spec.requiresPhoneNumber,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AutoSizeTextWidget(
+                    text: S.of(context).phoneNumber,
+                    fontSize: 10.4.sp,
+                    colorText: AppColors.mainColorFont,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  6.h.verticalSpace,
+                  TextFormFieldWidget(
+                    controller: phoneNumberController,
+                    type: TextInputType.phone,
+                    maxLength: 9,
+                    buildCounter: false,
+                    fillColor: AppColors.scaffoldColor,
+                    hintText: S.of(context).phonePlaceholder,
+                    fieldValidator: (value) {
+                      if (value == null || value.toString().isEmpty) {
+                        return S.of(context).phoneRequired;
+                      }
+                      final phone = value.trim();
+                      if (!phone.startsWith('7')) {
+                        return S.of(context).phoneMustStartWith7;
+                      }
+                      if (phone.length < 9) {
+                        return S.of(context).phoneMustBe9Digits;
+                      }
+                      return null;
+                    },
+                  ),
+                ],
+              ),
+            ),
+            8.h.verticalSpace,
             AutoSizeTextWidget(
               text: spec.codeLabel,
               fontSize: 10.4.sp,
@@ -68,16 +111,15 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                 if (value == null || value.toString().isEmpty) {
                   return spec.codeEmptyError;
                 }
-
                 return null;
               },
             ),
-            8.h.verticalSpace,
             Visibility(
               visible: spec.requiresAmount,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  8.h.verticalSpace,
                   AutoSizeTextWidget(
                     text: S.of(context).amountLabel,
                     fontSize: 10.4.sp,
@@ -94,7 +136,6 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                       if (value == null || value.toString().isEmpty) {
                         return S.of(context).amountValidation;
                       }
-
                       return null;
                     },
                   ),
@@ -104,6 +145,11 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
             16.h.verticalSpace,
             CheckStateInPostApiDataWidget(
               state: state,
+              hasMessageSuccess: false,
+              functionSuccess: () {
+                CompleteBooking.successDialog(context, ref);
+                ref.refresh(getBookingProvider(0));
+              },
               bottonWidget: DefaultButtonWidget(
                 text: S.of(context).confirmPayment,
                 height: 40.h,
@@ -120,6 +166,7 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                         payMethodName: selectedPayMethod.name,
                         voucher: voucherController.text,
                         amount: int.tryParse(amountController.text) ?? 0,
+                        phoneNumber: phoneNumberController.text,
                       );
                 },
               ),

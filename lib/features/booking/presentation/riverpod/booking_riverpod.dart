@@ -31,20 +31,21 @@ import '../../data/reposaitory/booking_reposaitory.dart';
 // }
 
 final checkBookingProvider =
-StateNotifierProvider.autoDispose<BookingNotifier, DataState<BookingData>>(
-      (ref) {
+    StateNotifierProvider.autoDispose<BookingNotifier, DataState<BookingData>>(
+  (ref) {
     return BookingNotifier();
   },
 );
 
 class BookingNotifier extends StateNotifier<DataState<BookingData>> {
-  BookingNotifier() : super(DataState<BookingData>.initial(BookingData.empty()));
+  BookingNotifier()
+      : super(DataState<BookingData>.initial(BookingData.empty()));
   final _controller = BookingReposaitory();
 
   checkBookingInHotel({required BookingData bookingData}) async {
     state = state.copyWith(state: States.loading);
     final buy =
-    await _controller.checkBookingFromHotel(bookingData: bookingData);
+        await _controller.checkBookingFromHotel(bookingData: bookingData);
     buy.fold((failure) {
       state = state.copyWith(state: States.error, exception: failure);
     }, (data) {
@@ -53,7 +54,6 @@ class BookingNotifier extends StateNotifier<DataState<BookingData>> {
   }
 }
 
-
 final customerBookingProvider = StateNotifierProvider.autoDispose<
     CustomerBookingNotifier, DataState<BookingDataModel>>(
   (ref) {
@@ -61,7 +61,8 @@ final customerBookingProvider = StateNotifierProvider.autoDispose<
   },
 );
 
-class CustomerBookingNotifier extends StateNotifier<DataState<BookingDataModel>> {
+class CustomerBookingNotifier
+    extends StateNotifier<DataState<BookingDataModel>> {
   CustomerBookingNotifier()
       : super(DataState<BookingDataModel>.initial(BookingDataModel.empty()));
   final _controller = BookingReposaitory();
@@ -123,6 +124,7 @@ class ConfirmPaymentNotifier extends StateNotifier<DataState<bool>> {
     required String payMethodName,
     required String voucher,
     required int amount,
+    required String phoneNumber,
   }) async {
     state = state.copyWith(state: States.loading);
     final user = await _controller.confirmPayment(
@@ -130,6 +132,7 @@ class ConfirmPaymentNotifier extends StateNotifier<DataState<bool>> {
       payMethodName: payMethodName,
       voucher: voucher,
       amount: amount,
+      phoneNumber: phoneNumber,
     );
     user.fold((f) {
       state = state.copyWith(state: States.error, exception: f);
@@ -140,7 +143,6 @@ class ConfirmPaymentNotifier extends StateNotifier<DataState<bool>> {
     });
   }
 }
-
 
 final getIfPropertyRatedProvider = StateNotifierProvider.family<
     GetIfPropertyRatedNotifier, bool?, Tuple2<int?, int?>>((ref, idSection) {
@@ -168,5 +170,3 @@ class ShowAllScoreInRateNotifier extends StateNotifier<bool?> {
     state = !state!;
   }
 }
-
-

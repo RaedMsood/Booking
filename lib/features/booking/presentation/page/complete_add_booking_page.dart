@@ -66,7 +66,6 @@ class _CompleteAddBookingPageState
     phone.text = Auth().phoneNumber;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: SecondaryAppBarWidget(title: S.of(context).hotelBookingTitle),
       body: SafeArea(
         top: false,
@@ -92,7 +91,7 @@ class _CompleteAddBookingPageState
                           children: [
                             14.h.verticalSpace,
                             AutoSizeTextWidget(
-                              text: S.of(context).personalInfoTitle,
+                              text: "${S.of(context).personalInfoTitle} ${widget.booking.deposit}",
                               fontSize: 11.6.sp,
                               fontWeight: FontWeight.w500,
                             ),
@@ -216,7 +215,7 @@ class _CompleteAddBookingPageState
                         text: S.of(context).next,
                         onPressed: () {
                           final isValid = _formKey.currentState!.validate();
-        
+
                           initialCity =
                               ref.read(selectedCityProvider.notifier).state!;
                           if (isValid) {

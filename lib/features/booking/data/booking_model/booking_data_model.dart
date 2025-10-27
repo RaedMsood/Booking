@@ -65,10 +65,10 @@ class Customer {
   }
 
   factory Customer.empty() {
-    return Customer(
+    return const Customer(
       name: '',
       address: '',
-      booking: BookingData.empty(),
+      // booking: BookingData.empty(),
       email: '',
       phone: '',
     );
