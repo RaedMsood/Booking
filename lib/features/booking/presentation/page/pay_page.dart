@@ -21,7 +21,7 @@ import '../widget/list_of_pay_method_widget.dart';
 
 class PayPage extends ConsumerWidget {
   final BookingData bookingData;
-  
+
   const PayPage({super.key, required this.bookingData});
 
   @override
@@ -62,7 +62,7 @@ class PayPage extends ConsumerWidget {
                           colorText: const Color(0xff605A65),
                         ),
                         14.verticalSpace,
-                         DepositInLastDetailsWidget(
+                        DepositInLastDetailsWidget(
                           deposit: bookingData.deposit,
                         ),
                         14.verticalSpace,
@@ -84,10 +84,10 @@ class PayPage extends ConsumerWidget {
                           ),
                         ),
                         14.verticalSpace,
-                         BillSummaryWidget(
-                           totalPrice: bookingData.totalPrice,
-                           deposit: bookingData.deposit,
-                         ),
+                        BillSummaryWidget(
+                          totalPrice: bookingData.totalPrice,
+                          deposit: bookingData.deposit,
+                        ),
                       ],
                     ),
                   ),
@@ -97,8 +97,9 @@ class PayPage extends ConsumerWidget {
                 button: DefaultButtonWidget(
                   text: S.of(context).payAction,
                   onPressed: () {
-                    final selectedPayMethod = ref.read(selectedPayMethodProvider);
-          
+                    final selectedPayMethod =
+                        ref.read(selectedPayMethodProvider);
+
                     bool hasError = false;
                     if (selectedPayMethod == null) {
                       ref.read(selectedPayMethodErrorProvider.notifier).state =
@@ -108,13 +109,13 @@ class PayPage extends ConsumerWidget {
                       ref.read(selectedPayMethodErrorProvider.notifier).state =
                           null;
                     }
-          
+
                     if (hasError) return;
-          
+
                     showTitledBottomSheet(
                       context: context,
                       title: paySpecs[selectedPayMethod!.name]!.codeLabel,
-                      page: PayMethodWidget(bookingId: bookingData.propertyId!),
+                      page: const PayMethodWidget(),
                     );
                   },
                 ),

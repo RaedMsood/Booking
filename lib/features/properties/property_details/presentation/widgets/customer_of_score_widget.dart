@@ -13,19 +13,15 @@ final dynamic rateOfScore;
   Widget build(BuildContext context) {
     return  Row(
       children: [
-        CircleAvatar(
-          radius: 25.r,
-        ),
-        4.h.horizontalSpace,
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AutoSizeTextWidget(
               text: name,
-              fontSize: 11.5.sp,
+              fontSize: 11.8.sp,
             ),
-            2.verticalSpace,
+            2.6.h.verticalSpace,
             AutoSizeTextWidget(
               text:timeScore,
               fontSize: 8.sp,

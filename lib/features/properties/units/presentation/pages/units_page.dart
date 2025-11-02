@@ -1,11 +1,10 @@
+import 'package:booking/core/widgets/secondary_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/state/state.dart';
-import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../../core/widgets/buttons/icon_button_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../riverpod/unit_riverpod.dart';
 import '../widgets/list_of_units_widget.dart';
 
@@ -57,23 +56,7 @@ class _UnitsPageState extends ConsumerState<UnitsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        titleSpacing: 0,
-        toolbarHeight: 56.h,
-        leadingWidth: 65.2.w,
-        leading: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.5.h),
-          child: CircleAvatar(
-            backgroundColor: Colors.white,
-            radius: 20.r,
-            child: const IconButtonWidget(
-              icon: AppIcons.arrowBack,
-              iconColor: AppColors.fontColor,
-            ),
-          ),
-        ),
-      ),
+      appBar: const SecondaryAppBarWidget(title: ""),
       body: SafeArea(
         top: false,
         child: Column(
@@ -83,14 +66,14 @@ class _UnitsPageState extends ConsumerState<UnitsPage> {
               padding:
                   EdgeInsets.symmetric(horizontal: 14.w).copyWith(top: 6.h),
               child: AutoSizeTextWidget(
-                text: "الغرف الخاصة بفندق أم القرى السياحي",
+                text: "${S.of(context).roomsFor} ${widget.nameProp}",
                 fontSize: 13.6.sp,
                 fontWeight: FontWeight.w500,
                 maxLines: 2,
                 minFontSize: 12,
               ),
             ),
-            12.h.verticalSpace,
+            8.h.verticalSpace,
             ListOfUnitsWidget(
               scrollController: _scrollController,
               propertyId: widget.propertyId,

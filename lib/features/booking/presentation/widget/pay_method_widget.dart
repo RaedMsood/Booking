@@ -2,7 +2,6 @@ import 'package:booking/services/auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/state/check_state_in_post_api_data_widget.dart';
 import '../../../../core/state/state.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -16,9 +15,7 @@ import '../riverpod/booking_riverpod.dart';
 import 'booking_success_dialog_widget.dart';
 
 class PayMethodWidget extends ConsumerStatefulWidget {
-  final int bookingId;
-
-  const PayMethodWidget({super.key, required this.bookingId});
+  const PayMethodWidget({super.key});
 
   @override
   ConsumerState<PayMethodWidget> createState() => _PayMethodWidgetState();
@@ -51,7 +48,7 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
           mainAxisSize: MainAxisSize.min,
           children: [
             AutoSizeTextWidget(
-              text: spec!.instruction,
+              text: spec.instruction,
               fontSize: 11.sp,
               colorText: AppColors.mainColorFont,
               maxLines: 2,
@@ -159,10 +156,11 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                   final isValid = formKey.currentState!.validate();
 
                   if (!isValid) return;
+                  final bookingData = ref.read(customerBookingProvider);
 
                   FocusManager.instance.primaryFocus?.unfocus();
                   ref.read(confirmPaymentProvider.notifier).confirmPayment(
-                        bookingId: widget.bookingId,
+                        bookingData: bookingData.data,
                         payMethodName: selectedPayMethod.name,
                         voucher: voucherController.text,
                         amount: int.tryParse(amountController.text) ?? 0,

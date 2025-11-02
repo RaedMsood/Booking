@@ -6,7 +6,6 @@ import '../theme/app_colors.dart';
 import '../widgets/auto_size_text_widget.dart';
 
 // /// Success ///
-
 void showFlashBarSuccess({
   required BuildContext context,
   required String message,
@@ -19,43 +18,20 @@ void showFlashBarSuccess({
       textAlign: TextAlign.center,
       style: TextStyle(
         color: Colors.white,
-        fontSize: 12.5.sp,
-        fontFamily: 'NotoKufi',
+        fontSize: 11.sp,
+        fontWeight: FontWeight.w600,
+        fontFamily: 'ReadexPro',
       ),
     ),
     margin: EdgeInsets.symmetric(horizontal: 40.w, vertical: 18.h),
     padding: EdgeInsets.all(12.sp),
-    backgroundColor: AppColors.successSwatch.shade800.withOpacity(.9),
+    backgroundColor: AppColors.successSwatch.shade800.withValues(alpha: .9),
     borderRadius: BorderRadius.circular(8.r),
     flushbarPosition: FlushbarPosition.TOP,
     flushbarStyle: FlushbarStyle.FLOATING,
   ).show(context);
 }
 
-void showFlashBarWarring({
-  required BuildContext context,
-  required String message,
-}) {
-  Flushbar(
-    duration: const Duration(seconds: 3),
-    message: message,
-    messageText: Text(
-      message,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 12.5.sp,
-        fontFamily: 'ReadexPro',
-      ),
-    ),
-    margin: EdgeInsets.symmetric(horizontal: 40.w, vertical: 18.h),
-    padding: EdgeInsets.all(12.sp),
-    backgroundColor:const Color(0xffFACC15),
-    borderRadius: BorderRadius.circular(8.r),
-    flushbarPosition: FlushbarPosition.TOP,
-    flushbarStyle: FlushbarStyle.FLOATING,
-  ).show(context);
-}
 /// Error ///
 void showFlashBarError({
   required BuildContext context,
@@ -71,9 +47,9 @@ void showFlashBarError({
       textAlign: TextAlign.center,
       style: TextStyle(
         color: Colors.white,
-        fontSize: 12.4.sp,
+        fontSize: 11.sp,
         fontWeight: FontWeight.w600,
-        fontFamily: 'NotoKufi',
+        fontFamily: 'ReadexPro',
       ),
     ),
     messageText: Text(
@@ -81,13 +57,39 @@ void showFlashBarError({
       textAlign: TextAlign.center,
       style: TextStyle(
         color: Colors.white,
-        fontSize: 12.2.sp,
+        fontSize: 10.4.sp,
+        fontWeight: FontWeight.w500,
         fontFamily: 'ReadexPro',
       ),
     ),
-    backgroundColor: AppColors.secondarySwatch.shade500,
+    backgroundColor: const Color(0xFFBC2A23),
     margin: EdgeInsets.symmetric(horizontal: 40.w, vertical: 18.h),
     padding: EdgeInsets.all(12.sp),
+    borderRadius: BorderRadius.circular(8.r),
+    flushbarPosition: FlushbarPosition.TOP,
+    flushbarStyle: FlushbarStyle.FLOATING,
+  ).show(context);
+}
+// Warring
+void showFlashBarWarring({
+  required BuildContext context,
+  required String message,
+}) {
+  Flushbar(
+    duration: const Duration(seconds: 3),
+    message: message,
+    messageText: Text(
+      message,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 11.4.sp,
+        fontFamily: 'ReadexPro',
+      ),
+    ),
+    margin: EdgeInsets.symmetric(horizontal: 40.w, vertical: 18.h),
+    padding: EdgeInsets.all(12.sp),
+    backgroundColor: AppColors.dangerColor,
     borderRadius: BorderRadius.circular(8.r),
     flushbarPosition: FlushbarPosition.TOP,
     flushbarStyle: FlushbarStyle.FLOATING,
@@ -109,10 +111,11 @@ void pressAgainToExit({
         child: AutoSizeTextWidget(
           text: text ?? S.of(context).clickAgainToExit,
           colorText: Colors.white,
-          fontSize: 14.sp,
+          fontSize: 13.6.sp,
           minFontSize: 4,
           maxFontSize: 20,
           textAlign: TextAlign.center,
+
         ),
       ),
       behavior: SnackBarBehavior.floating,

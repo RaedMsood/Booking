@@ -5,10 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../booking/presentation/riverpod/booking_riverpod.dart';
 import '../../data/models/rate_with_customer_model.dart';
 import 'customer_of_score_widget.dart';
+import 'general_container_for_details_widget.dart';
 import 'list_of_score_in_rate_widget.dart';
 
 class ListOfAllScoresCustemorWidget extends ConsumerWidget {
-  const ListOfAllScoresCustemorWidget({super.key, required this.rateOfScore,});
+  const ListOfAllScoresCustemorWidget({
+    super.key,
+    required this.rateOfScore,
+  });
 
   final List<RateWithCustomerModel> rateOfScore;
 
@@ -22,24 +26,19 @@ class ListOfAllScoresCustemorWidget extends ConsumerWidget {
         return Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: 16.w,
-              ),
-              padding: EdgeInsets.all(16.r),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16.r),
-              ),
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 14.w),
+              color: Colors.white,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   CustomerOfScoreAndRateWidget(
                     name: rateOfScore[index].customerName ?? '',
-                    timeScore: rateOfScore[index].timeScore??'' ,
-                    rateOfScore:rateOfScore[index].avg ,
+                    timeScore: rateOfScore[index].timeScore ?? '',
+                    rateOfScore: rateOfScore[index].avg,
                   ),
-                  6.w.verticalSpace,
+                  8.h.verticalSpace,
                   ListOfScoreInRateWidget(
                     isShowAllScore: isShow ?? false,
                     score: rateOfScore[index].allScore ?? [],
@@ -54,7 +53,7 @@ class ListOfAllScoresCustemorWidget extends ConsumerWidget {
                       isShow == false
                           ? Icons.keyboard_arrow_down
                           : Icons.keyboard_arrow_up,
-                      size: 30.w,
+                      size: 25.w,
                       color: const Color(0xff757575),
                     ),
                   ),

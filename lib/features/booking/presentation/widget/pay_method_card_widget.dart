@@ -8,6 +8,7 @@ class PayMethodCardWidget extends StatelessWidget {
   final String name;
   final String value;
   final String paymentMethodGroupValue;
+  final String image;
   final VoidCallback onPressed;
 
   const PayMethodCardWidget({
@@ -16,6 +17,7 @@ class PayMethodCardWidget extends StatelessWidget {
     required this.value,
     required this.paymentMethodGroupValue,
     required this.onPressed,
+    required this.image,
   });
 
   @override
@@ -25,10 +27,10 @@ class PayMethodCardWidget extends StatelessWidget {
       child: Row(
         children: [
           OnlineImagesWidget(
-            size: Size(48.w, 36.h),
-            imageUrl: "",
+            size: Size(48.w, 32.h),
+            imageUrl: image,
             fit: BoxFit.contain,
-            logoWidth: 22.w,
+            logoWidth: 20.w,
           ),
           12.w.horizontalSpace,
           Flexible(

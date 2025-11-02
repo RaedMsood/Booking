@@ -42,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Application language",
     ),
     "applyFilter": MessageLookupByLibrary.simpleMessage("Apply filter"),
+    "backToMyBookings": MessageLookupByLibrary.simpleMessage(
+      "Back to my bookings",
+    ),
     "badGateway": MessageLookupByLibrary.simpleMessage("Bad gateway"),
     "badGateway2": MessageLookupByLibrary.simpleMessage(
       "Please try again shortly",
@@ -55,6 +58,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "bookingCodeLabel": MessageLookupByLibrary.simpleMessage("Booking number"),
     "bookingConfirmation": MessageLookupByLibrary.simpleMessage(
       "Booking confirmation",
+    ),
+    "bookingConfirmed": MessageLookupByLibrary.simpleMessage(
+      "Your booking has been confirmed successfully, thank you.",
     ),
     "bookingDateLabel": MessageLookupByLibrary.simpleMessage("Booking date"),
     "bookingDetailsTitle": MessageLookupByLibrary.simpleMessage(
@@ -350,6 +356,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "reservationsTitle": MessageLookupByLibrary.simpleMessage("Reservations"),
     "roomType": MessageLookupByLibrary.simpleMessage("Room type"),
     "roomsCount": MessageLookupByLibrary.simpleMessage("Rooms"),
+    "roomsFor": MessageLookupByLibrary.simpleMessage("Rooms at"),
     "roomsShort": MessageLookupByLibrary.simpleMessage("Rooms"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
@@ -425,6 +432,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "verifyCoupon": MessageLookupByLibrary.simpleMessage("Verify"),
     "viewAll": MessageLookupByLibrary.simpleMessage("View All"),
+    "viewDetails": MessageLookupByLibrary.simpleMessage("View details"),
     "viewMore": MessageLookupByLibrary.simpleMessage("View more"),
     "viewVenueDetails": MessageLookupByLibrary.simpleMessage(
       "View venue details",

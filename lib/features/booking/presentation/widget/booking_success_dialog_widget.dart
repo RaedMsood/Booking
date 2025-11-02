@@ -14,10 +14,10 @@ class BookingSuccessDialogWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     return Container(
-      padding: EdgeInsets.all(14.sp),
+      padding: EdgeInsets.all(20.sp),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24.sp),
+        borderRadius: BorderRadius.circular(18.r),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -46,13 +46,12 @@ class BookingSuccessDialogWidget extends ConsumerWidget {
           14.h.verticalSpace,
           AutoSizeTextWidget(
             text: S.of(context).successfully,
-            fontSize: 15.sp,
             fontWeight: FontWeight.w700,
             textAlign: TextAlign.center,
           ),
           8.h.verticalSpace,
           AutoSizeTextWidget(
-            text: "تم تأكيد حجزك بنجاح, شكرا لك",
+            text: S.of(context).bookingConfirmed,
             fontSize: 12.sp,
             colorText: AppColors.fontColor,
             maxLines: 3,
@@ -60,12 +59,12 @@ class BookingSuccessDialogWidget extends ConsumerWidget {
           ),
           16.h.verticalSpace,
           DefaultButtonWidget(
-            text: "العودة الى حجوزاتي",
+            text: S.of(context).backToMyBookings,
             width: 160.w,
             height: 38.h,
             textSize: 11.sp,
             onPressed: () {
-              ref.read(activeIndexProvider.notifier).state = 0;
+              ref.read(activeIndexProvider.notifier).state = 2;
               navigateAndFinish(context, const BottomNavigationBarWidget());
             },
           ),

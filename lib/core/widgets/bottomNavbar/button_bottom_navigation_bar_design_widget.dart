@@ -19,7 +19,7 @@ class ButtonBottomNavigationBarDesignWidget extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(.04),
+              color: Colors.black.withValues(alpha: .04),
               blurRadius: 2.r,
             ),
           ],

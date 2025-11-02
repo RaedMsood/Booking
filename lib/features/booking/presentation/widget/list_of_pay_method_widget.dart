@@ -31,6 +31,7 @@ class _ListOfPaymentMethodWidgetState
           value: widget.paymentData[index].id.toString(),
           paymentMethodGroupValue:
               ref.read(selectedPayMethodProvider)?.id.toString() ?? '',
+          image: widget.paymentData[index].image ?? "",
           onPressed: () {
             ref.read(selectedPayMethodProvider.notifier).state =
                 widget.paymentData[index];
@@ -38,7 +39,7 @@ class _ListOfPaymentMethodWidgetState
           },
         );
       },
-      separatorBuilder: (context, index) => 8.h.verticalSpace,
+      separatorBuilder: (context, index) => 10.h.verticalSpace,
     );
   }
 }

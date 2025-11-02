@@ -11,7 +11,6 @@ class PaymentMethodsModel {
     required this.title,
     required this.type,
     required this.image,
-    // this.image,
   });
 
   factory PaymentMethodsModel.fromJson(Map<String, dynamic> json) {

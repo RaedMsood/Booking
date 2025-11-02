@@ -1,3 +1,4 @@
+import 'package:booking/core/widgets/price_and_currency_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -55,7 +56,7 @@ class UnitCardWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(.02),
+              color: Colors.black.withValues(alpha: .02),
               blurRadius: 1.r,
             ),
           ],
@@ -69,6 +70,7 @@ class UnitCardWidget extends StatelessWidget {
               size: Size(88.w, 76.h),
               fit: BoxFit.cover,
               borderRadius: 10.r,
+              logoWidth: 34.w,
             ),
             Flexible(
               child: Padding(
@@ -103,24 +105,10 @@ class UnitCardWidget extends StatelessWidget {
                       ],
                     ),
                     6.h.verticalSpace,
-                    Row(
-                      children: [
-                        Flexible(
-                          child: AutoSizeTextWidget(
-                            text: units.price,
-                            fontSize: 11.6.sp,
-                            colorText: AppColors.primaryColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        3.w.horizontalSpace,
-                        AutoSizeTextWidget(
-                          text: "ريال",
-                          fontSize: 10.5.sp,
-                          colorText: AppColors.greySwatch.shade600,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ],
+                    PriceAndCurrencyWidget(
+                      price: units.price,
+                      fontSize: 11.6.sp,
+                      fontSizeSecondText: 10.5.sp,
                     ),
                     6.h.verticalSpace,
                   ],

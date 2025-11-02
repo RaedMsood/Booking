@@ -7,6 +7,7 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/buttons/default_button.dart';
 import '../../../../../core/widgets/online_images_widget.dart';
+import '../../../../../core/widgets/price_and_currency_widget.dart';
 import '../../../../../generated/l10n.dart';
 import '../../data/model/units_model.dart';
 import '../pages/unit_details_page.dart';
@@ -63,24 +64,10 @@ class UnitsCardInHotelDetailsWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Flexible(
-                      child: AutoSizeTextWidget(
-                        text: unit.price,
-                        fontSize: 12.sp,
-                        colorText: AppColors.primaryColor,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    3.w.horizontalSpace,
-                    AutoSizeTextWidget(
-                      text: "ريال",
-                      fontSize: 11.4.sp,
-                      colorText: AppColors.greySwatch.shade600,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ],
+                PriceAndCurrencyWidget(
+                  price: unit.price,
+                  fontSize: 12.sp,
+                  fontSizeSecondText: 11.4.sp,
                 ),
                 6.h.verticalSpace,
                 AutoSizeTextWidget(
@@ -110,7 +97,7 @@ class UnitsCardInHotelDetailsWidget extends StatelessWidget {
                 ),
                 10.h.verticalSpace,
                 DefaultButtonWidget(
-                  text: 'استعراض التفاصيل',
+                  text: S.of(context).viewDetails,
                   height: 32.h,
                   textSize: 9.sp,
                   borderRadius: 12.r,
@@ -135,40 +122,3 @@ class UnitsCardInHotelDetailsWidget extends StatelessWidget {
   }
 }
 
-class Room {
-  final String imageUrl;
-  final String price;
-  final String title;
-  final int persons;
-
-  const Room({
-    required this.imageUrl,
-    required this.price,
-    required this.title,
-    required this.persons,
-  });
-}
-
-const List<Room> rooms = [
-  Room(
-    imageUrl:
-        "https://glamorous-design.org/wp-content/uploads/2021/06/Hotel-Bedroom-View-01-1024x670.jpg",
-    price: '50,000 ريال يمني قديم',
-    title: 'غرفة نوم فندقية فاخرة',
-    persons: 2,
-  ),
-  Room(
-    imageUrl:
-        "https://cnn-arabic-images.cnn.io/cloudinary/image/upload/w_1920,c_scale,q_auto/cnnarabic/2024/07/04/images/271856.jpg",
-    price: '50,000 ريال يمني قديم',
-    title: 'غرفة نوم فندقية فاخرة',
-    persons: 2,
-  ),
-  Room(
-    imageUrl:
-        "https://cnn-arabic-images.cnn.io/cloudinary/image/upload/w_1920,c_scale,q_auto/cnnarabic/2024/07/04/images/271856.jpg",
-    price: '50,000 ريال يمني قديم',
-    title: 'غرفة نوم فندقية فاخرة',
-    persons: 2,
-  ),
-];

@@ -219,7 +219,7 @@ class _CompleteAddBookingPageState
                           initialCity =
                               ref.read(selectedCityProvider.notifier).state!;
                           if (isValid) {
-                            final custemor = Customer(
+                            final custemor = CustomerModel(
                               email: email.text,
                               name: name.text,
                               phone: phone.text,

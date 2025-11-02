@@ -7,7 +7,7 @@ class UnitDetailsModel {
   final String description;
   final int maxGuests;
   final int price;
-  // final int deposit;
+  final num deposit;
   final List<String> images;
   final List<FeaturesModel> features;
   final List<AttachmentsModel> attachments;
@@ -20,7 +20,7 @@ class UnitDetailsModel {
     required this.description,
     required this.maxGuests,
     required this.price,
-    // required this.deposit,
+    required this.deposit,
     required this.images,
     required this.features,
     required this.attachments,
@@ -31,31 +31,31 @@ class UnitDetailsModel {
   factory UnitDetailsModel.fromJson(Map<String, dynamic> json) {
     return UnitDetailsModel(
       id: json['id'] as int,
-      name: json['name'] ??'',
+      name: json['name'] ?? '',
       description: json['description'] ?? '',
       maxGuests: json['max_guests'] as int,
       price: json['price_per_night'] as int,
-      // deposit: json['deposit'] as int,
-      images: List<String>.from(json['images'] ??[]),
+      deposit: json['deposit'] ?? 0,
+      images: List<String>.from(json['images'] ?? []),
       features: FeaturesModel.fromJsonList(json['amenities'] ?? []),
       attachments: AttachmentsModel.fromJsonList(json['details'] ?? []),
-      checkInTime: json['check_in_time'] ??'',
-      checkOutTime: json['check_out_time'] ??'',
+      checkInTime: json['check_in_time'] ?? '',
+      checkOutTime: json['check_out_time'] ?? '',
     );
   }
+
   factory UnitDetailsModel.empty() => UnitDetailsModel(
-    id: 0,
-    name: '',
-    description: '',
-    maxGuests: 0,
-    price: 0,
-    // deposit: DepositModel.empty(),
-    images: <String>[],
-
-    features: <FeaturesModel>[],
-    attachments: <AttachmentsModel>[],
-    checkInTime: '',
-    checkOutTime: '',
-  );
-
+        id: 0,
+        name: '',
+        description: '',
+        maxGuests: 0,
+        price: 0,
+        // deposit: DepositModel.empty(),
+        images: <String>[],
+        deposit: 0,
+        features: <FeaturesModel>[],
+        attachments: <AttachmentsModel>[],
+        checkInTime: '',
+        checkOutTime: '',
+      );
 }

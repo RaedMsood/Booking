@@ -7,29 +7,6 @@ import '../../data/booking_model/booking_data_model.dart';
 import '../../data/booking_model/payment_methods_model.dart';
 import '../../data/reposaitory/booking_reposaitory.dart';
 
-// final checkBookingProvider =
-//     StateNotifierProvider.autoDispose<BookingNotifier, DataState<int>>(
-//   (ref) {
-//     return BookingNotifier();
-//   },
-// );
-//
-// class BookingNotifier extends StateNotifier<DataState<int>> {
-//   BookingNotifier() : super(DataState<int>.initial(0));
-//   final _controller = BookingReposaitory();
-//
-//   checkBookingInHotel({required BookingData bookingData}) async {
-//     state = state.copyWith(state: States.loading);
-//     final buy =
-//         await _controller.checkBookingFromHotel(bookingData: bookingData);
-//     buy.fold((failure) {
-//       state = state.copyWith(state: States.error, exception: failure);
-//     }, (data) {
-//       state = state.copyWith(state: States.loaded, data: data);
-//     });
-//   }
-// }
-
 final checkBookingProvider =
     StateNotifierProvider.autoDispose<BookingNotifier, DataState<BookingData>>(
   (ref) {
@@ -67,7 +44,7 @@ class CustomerBookingNotifier
       : super(DataState<BookingDataModel>.initial(BookingDataModel.empty()));
   final _controller = BookingReposaitory();
 
-  customerBooking({required Customer customer}) async {
+  customerBooking({required CustomerModel customer}) async {
     state = state.copyWith(state: States.loading);
     final customers =
         await _controller.custemorDataForBooking(custemor: customer);
@@ -120,7 +97,7 @@ class ConfirmPaymentNotifier extends StateNotifier<DataState<bool>> {
   final _controller = BookingReposaitory();
 
   Future<void> confirmPayment({
-    required int bookingId,
+    required BookingDataModel bookingData,
     required String payMethodName,
     required String voucher,
     required int amount,
@@ -128,7 +105,7 @@ class ConfirmPaymentNotifier extends StateNotifier<DataState<bool>> {
   }) async {
     state = state.copyWith(state: States.loading);
     final user = await _controller.confirmPayment(
-      bookingId: bookingId,
+      bookingData: bookingData,
       payMethodName: payMethodName,
       voucher: voucher,
       amount: amount,

@@ -29,69 +29,74 @@ class MyBookingDetailsPage extends ConsumerWidget {
         getIfPropertyRatedProvider(Tuple2(bookData.propertyId, bookData.id)));
     return Scaffold(
       appBar: SecondaryAppBarWidget(title: S.of(context).bookingDetailsTitle),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            6.h.verticalSpace,
-            HotelSummaryCard(
-              name: bookData.property!,
-              location:
-                  '${bookData.address!.city!} , ${bookData.address!.district!}',
-              imageUrl: bookData.image ?? '',
-            ),
-            14.h.verticalSpace,
+      body: SafeArea(
+        top: false,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              6.h.verticalSpace,
+              HotelSummaryCard(
+                name: bookData.property!,
+                location:
+                    '${bookData.address!.city!} , ${bookData.address!.district!}',
+                imageUrl: bookData.image ?? '',
+              ),
+              14.h.verticalSpace,
 
-            ConfrimBookingCardWidget(
-              bookingId: bookData.code ?? '',
-              bookingDateString: bookData.bookingAt.toString(),
-              status: bookData.status ?? '',
-            ),
-            14.h.verticalSpace,
-            BookingDataCardWidget(
-              adults: bookData.adultCount ?? 1,
-              children: bookData.childCount ?? 1,
-              startDateString: bookData.checkIn ?? '',
-              endDateString: bookData.checkOut ?? '',
-            ),
-            14.h.verticalSpace,
-            // PolicyTileWidget(
-            //   title: 'سياسة الشراء والالغاء',
-            //   onTap: () {},
-            // ),
-            Visibility(
-              visible: isCompletedBook,
-              replacement: PolicyTileWidget(
-                title: S.of(context).purchaseAndCancellationPolicy,
-                onTap: () {},
+              ConfrimBookingCardWidget(
+                bookingId: bookData.code ?? '',
+                bookingDateString: bookData.bookingAt.toString(),
+                status: bookData.status ?? '',
               ),
-              child: bookData.isRated == true || state == true
-                  ? const SizedBox()
-                  : AddYourRatingSection(
-                      bookingId: bookData.id ?? 0,
-                      propertyId: bookData.propertyId!,
-                      rateData: bookData.rateData ?? [],
-                    ),
-            ),
-            SizedBox(height: 24.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: DefaultButtonWidget(
-                text: S.of(context).viewVenueDetails,
-                textSize: 11.6.sp,
-                onPressed: () {
-                  navigateTo(
-                    context,
-                    PropertyDetailsPage(
-                      propertyId: bookData.propertyId!,
-                      images: [bookData.image ?? ''],
-                    ),
-                  );
-                },
-                withIcon: true,
-                icon: AppIcons.bank,
+              14.h.verticalSpace,
+              BookingDataCardWidget(
+                adults: bookData.adultCount ?? 1,
+                children: bookData.childCount ?? 1,
+                startDateString: bookData.checkIn ?? '',
+                endDateString: bookData.checkOut ?? '',
               ),
-            ),
-          ],
+              14.h.verticalSpace,
+              // PolicyTileWidget(
+              //   title: 'سياسة الشراء والالغاء',
+              //   onTap: () {},
+              // ),
+              Visibility(
+                visible: isCompletedBook,
+                replacement: PolicyTileWidget(
+                  title: S.of(context).purchaseAndCancellationPolicy,
+                  onTap: () {},
+                ),
+                child: bookData.isRated == true || state == true
+                    ? const SizedBox.shrink()
+                    : AddYourRatingSection(
+                        bookingId: bookData.id ?? 0,
+                        propertyId: bookData.propertyId!,
+                        rateData: bookData.rateData ?? [],
+                      ),
+              ),
+              SizedBox(height: 24.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: DefaultButtonWidget(
+                  text: S.of(context).viewVenueDetails,
+                  textSize: 11.6.sp,
+                  onPressed: () {
+                    navigateTo(
+                      context,
+                      PropertyDetailsPage(
+                        propertyId: bookData.propertyId!,
+                        images: [bookData.image ?? ''],
+                      ),
+                    );
+                  },
+                  withIcon: true,
+                  icon: AppIcons.bank,
+                ),
+              ),
+              14.h.verticalSpace,
+
+            ],
+          ),
         ),
       ),
     );

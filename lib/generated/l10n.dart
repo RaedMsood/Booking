@@ -412,6 +412,21 @@ class S {
     return Intl.message('Hotel rooms', name: 'hotelRooms', desc: '', args: []);
   }
 
+  /// `Rooms at`
+  String get roomsFor {
+    return Intl.message('Rooms at', name: 'roomsFor', desc: '', args: []);
+  }
+
+  /// `View details`
+  String get viewDetails {
+    return Intl.message(
+      'View details',
+      name: 'viewDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
   // skipped getter for the '--------myBookings-----------' key
 
   /// `Reservations`
@@ -1144,6 +1159,26 @@ class S {
     return Intl.message(
       'Confirm Payment',
       name: 'confirmPayment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your booking has been confirmed successfully, thank you.`
+  String get bookingConfirmed {
+    return Intl.message(
+      'Your booking has been confirmed successfully, thank you.',
+      name: 'bookingConfirmed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to my bookings`
+  String get backToMyBookings {
+    return Intl.message(
+      'Back to my bookings',
+      name: 'backToMyBookings',
       desc: '',
       args: [],
     );

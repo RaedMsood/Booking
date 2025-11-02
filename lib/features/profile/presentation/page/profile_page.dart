@@ -1,8 +1,11 @@
 import 'package:booking/core/helpers/navigateTo.dart';
 import 'package:booking/core/theme/app_colors.dart';
+import 'package:booking/core/widgets/buttons/icon_button_widget.dart';
+import 'package:booking/core/widgets/buttons/ink_well_button_widget.dart';
 import 'package:booking/features/profile/presentation/page/setting_page.dart';
 import 'package:booking/services/auth/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,6 +13,8 @@ import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/go_to_login_widget.dart';
 import '../../../../generated/l10n.dart';
+import '../../../user/presentation/widgets/design_to_log_in_and_sign_up_widget.dart';
+import '../widget/profile_header_card_widget.dart';
 import '../widget/section_profile_widget.dart';
 import '../widget/tile_widget.dart';
 import 'about_page.dart';
@@ -18,120 +23,135 @@ import 'edit_profile_page.dart';
 import 'faq_page.dart';
 import 'favorite_page.dart';
 
-class ProfilePage extends ConsumerWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context, ref) {
-    return Visibility(
-      visible: Auth().loggedIn,
-      replacement: const GoToLoginWidget(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: AutoSizeTextWidget(
-            text: S.of(context).profile,
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  void _refresh() {
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  AppColors.primarySwatch.shade100.withValues(alpha: .7),
+                  AppColors.primarySwatch.shade50.withValues(alpha: .4),
+                  AppColors.scaffoldColor,
+                  AppColors.scaffoldColor,
+                ],
+                begin: Alignment.topRight,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+            child: SvgPicture.asset(
+              AppIcons.topPattern,
+              height: 200.h,
+              color: Colors.black54,
+            ),
           ),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(14.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  child: Row(
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 12.h,
+                children: [
+                  14.h.verticalSpace,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CircleAvatar(
-                        radius: 20.r,
-                        backgroundColor: AppColors.primaryColor,
-                        child: SvgPicture.asset(
-                          AppIcons.profile,
-                          color: Colors.white,
-                          height: 18.h,
-                          width: 18.w,
-                        ),
-                      ),
-                      SizedBox(width: 12.w),
                       AutoSizeTextWidget(
-                        text: Auth().name,
-                        fontSize: 13.sp,
-                        colorText: const Color(0xff001A33),
+                        text: S.of(context).profile,
+                        fontSize: 15.sp,
                       ),
+                      InkWellButtonWidget(
+                        icon: AppIcons.notification,
+                        iconColor: Colors.black,
+                        height: 18.h,
+                        onPressed: () {},
+                      )
                     ],
                   ),
-                ),
-                SizedBox(height: 20.h),
-                SectionProfileWidget(children: [
-                  TileWidget(
-                    icon: AppIcons.profile,
-                    title: S.of(context).personalInfo,
-                    context: context,
-                    onTap: () {
-                      navigateTo(context, const EditProfilePage());
-                    },
-                  ),
-                  TileWidget(
-                    icon: AppIcons.favorite,
-                    title: S.of(context).favorites,
-                    context: context,
-                    onTap: () {
-                      navigateTo(context, const FavoritePage());
-                    },
+                  ProfileHeaderCardWidget(onLogoutSuccess: _refresh),
+                  Visibility(
+                    visible: Auth().loggedIn,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: 12.h,
+                      children: [
+                        TileWidget(
+                          icon: AppIcons.profile,
+                          title: S.of(context).personalInfo,
+                          context: context,
+                          onTap: () {
+                            navigateTo(context, const EditProfilePage());
+                          },
+                        ),
+                        TileWidget(
+                          icon: AppIcons.favorite,
+                          title: S.of(context).favorites,
+                          context: context,
+                          onTap: () {
+                            navigateTo(context, const FavoritePage());
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                   TileWidget(
                     icon: AppIcons.setting,
                     title: S.of(context).generalSettings,
                     context: context,
                     onTap: () {
-                      navigateTo(context, const SettingsPage());
+                      navigateTo(
+                          context, SettingsPage(onLogoutSuccess: _refresh));
                     },
                   ),
-                ]),
-                SizedBox(height: 12.h),
-                SectionProfileWidget(
-                  children: [
-                    TileWidget(
-                      icon: AppIcons.infoCircle,
-                      title: S.of(context).aboutApp,
-                      context: context,
-                      onTap: () {
-                        navigateTo(context, const AboutPage());
-                      },
-                    ),
-                    TileWidget(
-                      icon: AppIcons.phone,
-                      title: S.of(context).contactUs,
-                      context: context,
-                      onTap: () {
-                        navigateTo(context, const ContactUsPage());
-                      },
-                    ),
-                    TileWidget(
-                      icon: AppIcons.messageQuestion,
-                      title: S.of(context).faq,
-                      context: context,
-                      onTap: () {
-                        navigateTo(context, const FAQPage());
-                      },
-                    ),
-                    TileWidget(
-                      icon: AppIcons.sharing,
-                      title: S.of(context).shareApp,
-                      context: context,
-                      onTap: () {},
-                    ),
-                  ],
-                ),
-              ],
+                  TileWidget(
+                    icon: AppIcons.infoCircle,
+                    title: S.of(context).aboutApp,
+                    context: context,
+                    onTap: () {
+                      navigateTo(context, const AboutPage());
+                    },
+                  ),
+                  TileWidget(
+                    icon: AppIcons.phone,
+                    title: S.of(context).contactUs,
+                    context: context,
+                    onTap: () {
+                      navigateTo(context, const ContactUsPage());
+                    },
+                  ),
+                  TileWidget(
+                    icon: AppIcons.messageQuestion,
+                    title: S.of(context).faq,
+                    context: context,
+                    onTap: () {
+                      navigateTo(context, const FAQPage());
+                    },
+                  ),
+                  TileWidget(
+                    icon: AppIcons.sharing,
+                    title: S.of(context).shareApp,
+                    context: context,
+                    onTap: () {},
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'booking_data.dart';
 
 class BookingDataModel {
   final BookingData bookingData;
-  final Customer? customer;
+  final CustomerModel? customer;
 
   BookingDataModel({
     required this.bookingData,
@@ -15,29 +15,27 @@ class BookingDataModel {
           ? BookingData.fromJson(json['booking'] as Map<String, dynamic>)
           : BookingData.empty(),
       customer: json['customer'] != null
-          ? Customer.fromJson(json['customer'] as Map<String, dynamic>)
-          : Customer.empty(),
+          ? CustomerModel.fromJson(json['customer'] as Map<String, dynamic>)
+          : CustomerModel.empty(),
     );
   }
 
   factory BookingDataModel.empty() {
     return BookingDataModel(
       bookingData: BookingData.empty(),
-      customer: Customer.empty(),
+      customer: CustomerModel.empty(),
     );
   }
 }
 
-
-
-class Customer {
+class CustomerModel {
   final String? name;
   final String? email;
   final String? phone;
   final String? address;
   final BookingData? booking;
 
-  const Customer({
+  const CustomerModel({
     this.name,
     this.email,
     this.phone,
@@ -45,8 +43,8 @@ class Customer {
     this.booking,
   });
 
-  factory Customer.fromJson(Map<String, dynamic> json) {
-    return Customer(
+  factory CustomerModel.fromJson(Map<String, dynamic> json) {
+    return CustomerModel(
       name: json['name']?.toString(),
       email: json['email']?.toString(),
       phone: json['phone']?.toString(),
@@ -60,15 +58,14 @@ class Customer {
       'email': email,
       'phone': phone,
       'address': address,
-      'booking_id': booking?.toJson(),
+      if (booking != null) 'booking_id': booking?.toJson(),
     };
   }
 
-  factory Customer.empty() {
-    return const Customer(
+  factory CustomerModel.empty() {
+    return const CustomerModel(
       name: '',
       address: '',
-      // booking: BookingData.empty(),
       email: '',
       phone: '',
     );

@@ -39,6 +39,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "applicationLanguage": MessageLookupByLibrary.simpleMessage("لغة التطبيق"),
     "applyFilter": MessageLookupByLibrary.simpleMessage("فلترة"),
+    "backToMyBookings": MessageLookupByLibrary.simpleMessage(
+      "العودة إلى حجوزاتي",
+    ),
     "badGateway": MessageLookupByLibrary.simpleMessage("بوابة غير صالحة"),
     "badGateway2": MessageLookupByLibrary.simpleMessage(
       "يرجى إعادة المحاولة بعد قليل",
@@ -51,6 +54,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "bookingCodeLabel": MessageLookupByLibrary.simpleMessage("رقم الحجز"),
     "bookingConfirmation": MessageLookupByLibrary.simpleMessage("تأكيد الحجز"),
+    "bookingConfirmed": MessageLookupByLibrary.simpleMessage(
+      "تم تأكيد حجزك بنجاح، شكرًا لك.",
+    ),
     "bookingDateLabel": MessageLookupByLibrary.simpleMessage("تاريخ الحجز"),
     "bookingDetailsTitle": MessageLookupByLibrary.simpleMessage("تفاصيل الحجز"),
     "bookingInfo": MessageLookupByLibrary.simpleMessage("بيانات الحجز"),
@@ -339,6 +345,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "reservationsTitle": MessageLookupByLibrary.simpleMessage("الحجوزات"),
     "roomType": MessageLookupByLibrary.simpleMessage("نوع الغرفة"),
     "roomsCount": MessageLookupByLibrary.simpleMessage("عدد الغرف"),
+    "roomsFor": MessageLookupByLibrary.simpleMessage("الغرف الخاصة بـ"),
     "roomsShort": MessageLookupByLibrary.simpleMessage("غرف"),
     "save": MessageLookupByLibrary.simpleMessage("حفظ"),
     "saveChanges": MessageLookupByLibrary.simpleMessage("حفظ التعديلات"),
@@ -404,6 +411,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
     "verifyCoupon": MessageLookupByLibrary.simpleMessage("تحقق"),
     "viewAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
+    "viewDetails": MessageLookupByLibrary.simpleMessage("استعراض التفاصيل"),
     "viewMore": MessageLookupByLibrary.simpleMessage("عرض المزيد"),
     "viewVenueDetails": MessageLookupByLibrary.simpleMessage(
       "استعراض تفاصيل المنشأة",

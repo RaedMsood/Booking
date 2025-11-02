@@ -24,17 +24,12 @@ class DepositWidget extends StatelessWidget {
           ),
           8.h.verticalSpace,
           AutoSizeTextWidget(
-            text: deposit.depositRatio,
+            text: "%${deposit.depositRatio}",
             fontSize: 12.sp,
             colorText: AppColors.primaryColor,
             fontWeight: FontWeight.w500,
           ),
-          // PriceAndCurrencyWidget(
-          //   price: deposit.depositRatio.toString(),
-          //   fontSize: 13.sp,
-          //   fontWeightSecondText: FontWeight.w400,
-          //   fontSizeSecondText: 10.5.sp,
-          // ),
+
           8.h.verticalSpace,
           AutoSizeTextWidget(
             text: deposit.policy,

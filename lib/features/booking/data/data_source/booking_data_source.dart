@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
 import '../../../../core/network/remote_request.dart';
 import '../../../../core/network/urls.dart';
 import '../booking_model/booking_data.dart';
@@ -18,14 +17,12 @@ class BookingDataSource {
   }
 
   Future<BookingDataModel> custemorDataForBooking({
-    required Customer custemor,
+    required CustomerModel custemor,
   }) async {
     final response = await RemoteRequest.postData(
       path: AppURL.custemorForBooking,
       data: custemor.toJson(),
     );
-    debugPrint(response.statusCode.toString());
-
     return BookingDataModel.fromJson(response.data['data']);
   }
 
@@ -38,7 +35,7 @@ class BookingDataSource {
   }
 
   Future<Unit> confirmPayment({
-    required int bookingId,
+    required BookingDataModel bookingData,
     required String payMethodName,
     required String voucher,
     required int amount,
@@ -47,7 +44,8 @@ class BookingDataSource {
     await RemoteRequest.postData(
       path: AppURL.confirmPayment,
       data: {
-        "booking_id": 49,
+        "booking": bookingData.bookingData.toJson(),
+        "customer": bookingData.customer?.toJson(),
         "payment_method_name": payMethodName,
         if (payMethodName == "jawali") "voucher": voucher,
         if (payMethodName == "jawali") "receiver_mobile": phoneNumber,

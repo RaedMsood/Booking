@@ -1,4 +1,5 @@
 import 'package:booking/core/state/check_state_in_get_api_data_widget.dart';
+import 'package:booking/core/widgets/price_and_currency_widget.dart';
 import 'package:booking/features/properties/units/presentation/riverpod/unit_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -54,9 +55,26 @@ class UnitDetailsPage extends ConsumerWidget {
                 maxGuests: state.data.maxGuests,
               ),
             ),
-            // SliverToBoxAdapter(
-            //   child: DepositWidget(deposit: state.data.,),
-            // ),
+
+            SliverToBoxAdapter(
+              child: Container(
+                margin: EdgeInsets.only(top: 12.h),
+                padding: EdgeInsets.symmetric(horizontal: 14.sp,vertical: 8.h),
+                color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AutoSizeTextWidget(
+                      text: S.of(context).deposit,
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    8.h.verticalSpace,
+                    PriceAndCurrencyWidget(price: state.data.deposit.toString())
+                  ],
+                ),
+              ),
+            ),
 
             SliverToBoxAdapter(
               child: UnitFeaturesWidget(

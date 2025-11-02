@@ -22,7 +22,7 @@ class BookingReposaitory {
   }
 
   Future<Either<DioException, BookingDataModel>> custemorDataForBooking({
-    required Customer custemor,
+    required CustomerModel custemor,
   }) async {
     try {
       final remote = await bookingDataSource.custemorDataForBooking(
@@ -45,7 +45,7 @@ class BookingReposaitory {
   }
 
   Future<Either<DioException, Unit>> confirmPayment({
-    required int bookingId,
+    required BookingDataModel bookingData,
     required String payMethodName,
     required String voucher,
     required int amount,
@@ -53,7 +53,7 @@ class BookingReposaitory {
   }) async {
     try {
       final remote = await bookingDataSource.confirmPayment(
-        bookingId: bookingId,
+        bookingData: bookingData,
         payMethodName: payMethodName,
         voucher: voucher,
         amount: amount,

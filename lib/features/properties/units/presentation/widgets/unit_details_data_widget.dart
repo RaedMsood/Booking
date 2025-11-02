@@ -61,18 +61,20 @@ class UnitDetailsDataWidget extends StatelessWidget {
                   maxLines: 2,
                   minFontSize: 12,
                 ),
-                8.h.verticalSpace,
-                ReadMoreTextWidget(
-                  text: description,
-                ),
+                if (description.isNotEmpty) ...[
+                  8.h.verticalSpace,
+                  ReadMoreTextWidget(
+                    text: description,
+                  ),
+                ],
               ],
             ),
           ),
           6.h.verticalSpace,
-          if(attachments.isNotEmpty)
-          AttachmentsWidget(
-            attachments: attachments,
-          ),
+          if (attachments.isNotEmpty)
+            AttachmentsWidget(
+              attachments: attachments,
+            ),
         ],
       ),
     );
