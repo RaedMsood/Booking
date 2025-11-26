@@ -1,4 +1,3 @@
-// lib/notifications/awesome_notification_service.dart
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/foundation.dart';
 import 'notification_keys.dart';
@@ -97,23 +96,4 @@ class AwesomeNotificationService {
       bigPicture: message.notification!.android!.imageUrl,
     );
   }
-  // Future<void> showFromRemote(
-  //     RemoteMessage message, {
-  //       String channelKey = NotifKeys.highChannel,
-  //     }) async {
-  //   final title = message.data['title'] ?? 'إشعار';
-  //   final body = message.data['message'] ?? '';
-  //   final bigPicture = message.data['image'] ?? '';
-  //
-  //
-  //   await show(
-  //     title: title,
-  //     body: body,
-  //     channelKey: channelKey,
-  //     payload: (message.data.isNotEmpty)
-  //         ? message.data.map((k, v) => MapEntry(k, '$v'))
-  //         : null,
-  //     bigPicture: bigPicture,
-  //   );
-  // }
 }

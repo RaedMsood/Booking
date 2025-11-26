@@ -102,7 +102,9 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                     state: state,
                     hasMessageSuccess: false,
                     functionSuccess: () {
-                      showModalBottomSheetWidget(
+                      showTitledBottomSheet(
+                          title: S.of(context).verificationCode,
+                          fontSize: 14.sp,
                           context: context,
                           page: VerifyCodePage(
                             phoneNumber: phoneNumberController.text,

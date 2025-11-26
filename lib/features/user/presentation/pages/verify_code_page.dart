@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 import '../../../../core/helpers/navigateTo.dart';
 import '../../../../core/state/check_state_in_post_api_data_widget.dart';
 import '../../../../core/state/state.dart';
@@ -18,83 +19,115 @@ import 'sign_up_page.dart';
 class VerifyCodePage extends ConsumerStatefulWidget {
   final String phoneNumber;
 
-  const VerifyCodePage( {super.key,required this.phoneNumber});
+  const VerifyCodePage({super.key, required this.phoneNumber});
 
   @override
   ConsumerState<VerifyCodePage> createState() => _VerifyCodePageState();
 }
 
-class _VerifyCodePageState extends ConsumerState<VerifyCodePage> {
-  final formKey = GlobalKey<FormState>();
+class _VerifyCodePageState extends ConsumerState<VerifyCodePage>
+    with CodeAutoFill {
+  static const _otpLen = 6;
 
-  TextEditingController verifyController = TextEditingController();
+  final TextEditingController _verifyController = TextEditingController();
+
+  bool _canAutoSubmit = true;
+
+  @override
+  void initState() {
+    super.initState();
+    listenForCode();
+
+    _verifyController.addListener(_maybeAutoSubmit);
+  }
+
+  @override
+  void codeUpdated() {
+    final c = code ?? '';
+    if (c.isNotEmpty) {
+      _verifyController.text = c;
+    }
+  }
+
+  void _maybeAutoSubmit() async {
+    final text = _verifyController.text.trim();
+    if (text.length < _otpLen) {
+      _canAutoSubmit = true;
+      return;
+    }
+    if (_canAutoSubmit && text.length == _otpLen) {
+      _canAutoSubmit = false;
+      FocusManager.instance.primaryFocus?.unfocus();
+      ref.read(checkOTPProvider.notifier).checkOTP(
+            phoneNumber: widget.phoneNumber,
+            otp: text,
+            deviceToken: await Auth().getFcmToken(),
+          );
+    }
+  }
+
+  @override
+  void dispose() {
+    cancel();
+    _verifyController.removeListener(_maybeAutoSubmit);
+    _verifyController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var checkOTPState = ref.watch(checkOTPProvider);
 
-    return Form(
-      key: formKey,
-      child: SingleChildScrollView(
-        padding: EdgeInsets.all(14.sp),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AutoSizeTextWidget(
-              text: S.of(context).verificationCode,
-              fontSize: 14.5.sp,
-              fontWeight: FontWeight.w600,
-            ),
-            6.h.verticalSpace,
-            AutoSizeTextWidget(
-              text: "${S.of(context).codeHasBeenSendTo} ${widget.phoneNumber}",
-              fontSize: 11.sp,
-              fontWeight: FontWeight.w600,
-              colorText: AppColors.fontColor,
-            ),
-            24.h.verticalSpace,
-            VerifyPinputWidget(
-              verifyController: verifyController,
-            ),
-            24.h.verticalSpace,
-            ResendCodeWidget(
-              phoneNumberOrEmail: widget.phoneNumber,
-            ),
-            24.h.verticalSpace,
-            CheckStateInPostApiDataWidget(
-              state: checkOTPState,
-              hasMessageSuccess: false,
-              functionSuccess: () async {
-                if (checkOTPState.data.status == true) {
-                  Auth().login(checkOTPState.data);
-
-                  navigateTo(context, const BottomNavigationBarWidget());
-                } else {
-                  navigateTo(context, const SignUpPage());
-                }
-              },
-              bottonWidget: DefaultButtonWidget(
-                text: S.of(context).confirm,
-                isLoading: checkOTPState.stateData == States.loading,
-                onPressed: () async {
-                  final isValid = formKey.currentState!.validate();
-                  if (isValid) {
-                    FocusManager.instance.primaryFocus?.unfocus();
-                    ref.read(checkOTPProvider.notifier).checkOTP(
+    return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(horizontal: 14.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AutoSizeTextWidget(
+            text: "${S.of(context).codeHasBeenSendTo} ${widget.phoneNumber}",
+            fontSize: 10.6.sp,
+            fontWeight: FontWeight.w600,
+            colorText: AppColors.fontColor,
+          ),
+          22.h.verticalSpace,
+          VerifyPinputWidget(
+            verifyController: _verifyController,
+          ),
+          22.h.verticalSpace,
+          ResendCodeWidget(
+            phoneNumberOrEmail: widget.phoneNumber,
+          ),
+          22.h.verticalSpace,
+          CheckStateInPostApiDataWidget(
+            state: checkOTPState,
+            hasMessageSuccess: false,
+            functionSuccess: () async {
+              if (checkOTPState.data.status == true) {
+                Auth().login(checkOTPState.data);
+                navigateAndFinish(context, const BottomNavigationBarWidget());
+              } else {
+                Navigator.of(context).pop();
+                navigateTo(context, const SignUpPage());
+              }
+            },
+            bottonWidget: DefaultButtonWidget(
+              text: S.of(context).confirm,
+              isLoading: checkOTPState.stateData == States.loading,
+              onPressed: () async {
+                final code = _verifyController.text.trim();
+                if (code.length != _otpLen) return;
+                FocusManager.instance.primaryFocus?.unfocus();
+                ref.read(checkOTPProvider.notifier).checkOTP(
                       phoneNumber: widget.phoneNumber,
-                      otp: verifyController.text,
+                      otp: code,
                       deviceToken: await Auth().getFcmToken(),
                     );
-                  }
-                },
-              ),
+              },
             ),
-          ],
-        ),
+          ),
+          22.h.verticalSpace,
+        ],
       ),
     );
   }
 }
-
-
-
-

@@ -73,7 +73,7 @@ class _ResendCodeWidgetState extends ConsumerState<ResendCodeWidget> {
       children: [
         AutoSizeTextWidget(
           text: S.of(context).resendCodeIN,
-          fontSize: 12.sp,
+          fontSize: 10.4.sp,
           colorText: Colors.black,
           textAlign: TextAlign.center,
         ),
@@ -82,7 +82,7 @@ class _ResendCodeWidgetState extends ConsumerState<ResendCodeWidget> {
             ? state.stateData == States.loading
                 ? SpinKitThreeBounce(
                     color: AppColors.primaryColor,
-                    size: 17.sp,
+                    size: 14.sp,
                   )
                 : CheckStateInPostApiDataWidget(
                     state: state,
@@ -92,14 +92,14 @@ class _ResendCodeWidgetState extends ConsumerState<ResendCodeWidget> {
                     },
                     bottonWidget: InkWell(
                       onTap: () {
-                        // ref.read(userProvider.notifier).resendOTP(
-                        //       phoneNumberOrEmail: widget.phoneNumberOrEmail,
-                        //     );
+                        ref.read(userProvider.notifier).resendOTP(
+                              phoneNumberOrEmail: widget.phoneNumberOrEmail,
+                            );
                       },
                       child: Text(
                         S.of(context).resend,
                         style: TextStyle(
-                          fontSize: 12.sp,
+                          fontSize: 11.sp,
                           color: AppColors.primaryColor,
                           fontWeight: FontWeight.bold,
                         ),
@@ -110,7 +110,7 @@ class _ResendCodeWidgetState extends ConsumerState<ResendCodeWidget> {
                 text:
                     "00:${countDown < 10 ? "0${countDown.toString()}" : countDown.toString()}",
                 colorText: AppColors.primaryColor,
-                fontSize: 11.5.sp,
+                fontSize: 11.sp,
                 fontWeight: FontWeight.w700,
               ),
       ],

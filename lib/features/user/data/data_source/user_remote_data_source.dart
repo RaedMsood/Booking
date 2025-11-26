@@ -18,14 +18,13 @@ class UserRemoteDataSource {
   }
 
   Future<AuthModel> signUp(
-    String phoneNumber,
-    String name,
-    String email,
-    String gender,
-    int cityId,
-    DateTime? dateOfBirth,
-      String deviceToken
-  ) async {
+      String phoneNumber,
+      String name,
+      String email,
+      String gender,
+      int cityId,
+      DateTime? dateOfBirth,
+      String deviceToken) async {
     final response = await RemoteRequest.postData(
       path: AppURL.signUp,
       data: {
@@ -35,20 +34,20 @@ class UserRemoteDataSource {
         "gender": gender,
         "city_id": cityId,
         if (dateOfBirth != null) "date_of_birth": dateOfBirth.toIso8601String(),
-        'device_token':deviceToken
+        'device_token': deviceToken
       },
     );
     return AuthModel.fromJson(response.data['data']);
   }
 
-  Future<AuthModel> checkOTP(String phoneNumber, String otp,String deviceToken) async {
+  Future<AuthModel> checkOTP(
+      String phoneNumber, String otp, String deviceToken) async {
     final response = await RemoteRequest.postData(
       path: AppURL.checkOtp,
       data: {
         "login": phoneNumber,
         "otp": otp,
-        'device_token':deviceToken
-
+        'device_token': deviceToken,
       },
     );
     return AuthModel.fromJson(response.data['data']);

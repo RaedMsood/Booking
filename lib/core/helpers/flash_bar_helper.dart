@@ -109,7 +109,9 @@ void pressAgainToExit({
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(30.sp)),
         alignment: Alignment.center,
         child: AutoSizeTextWidget(
-          text: text ?? S.of(context).clickAgainToExit,
+          text: text ?? S
+              .of(context)
+              .clickAgainToExit,
           colorText: Colors.white,
           fontSize: 13.6.sp,
           minFontSize: 4,
@@ -119,7 +121,7 @@ void pressAgainToExit({
         ),
       ),
       behavior: SnackBarBehavior.floating,
-      backgroundColor: Colors.black54.withOpacity(.8),
+      backgroundColor: Colors.black54.withValues(alpha: .8),
     ),
   );
 }

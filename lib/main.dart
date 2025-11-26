@@ -31,13 +31,13 @@ void main() async {
     }
   };
   runZonedGuarded(
-    () async {
+        () async {
       RemoteRequest.initDio();
       await di.init();
       Auth();
       runApp(const AppRestartController(child: MyApp()));
     },
-    (error, stackTrace) {
+        (error, stackTrace) {
       debugPrint("Caught error in release mode: $error");
       debugPrint("Stack trace: $stackTrace");
     },
@@ -49,7 +49,6 @@ class MyApp extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<MyApp> createState() => _MyAppState();
-
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
@@ -64,6 +63,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final locale = ref.watch(languageProvider);

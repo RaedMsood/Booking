@@ -1,4 +1,3 @@
-// lib/notifications/notification_bootstrap.dart
 import 'package:firebase_core/firebase_core.dart';
 import 'awesome_notification_service.dart';
 import 'firebase_messaging_service.dart';
