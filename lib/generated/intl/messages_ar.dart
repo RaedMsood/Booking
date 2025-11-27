@@ -27,6 +27,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "YER": MessageLookupByLibrary.simpleMessage("ريال"),
     "about": MessageLookupByLibrary.simpleMessage("عن الفندق"),
     "aboutApp": MessageLookupByLibrary.simpleMessage("عن التطبيق"),
+    "accountDeletedSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم حذف الحساب بنجاح",
+    ),
     "addYourRating": MessageLookupByLibrary.simpleMessage("أضف تقييمك"),
     "address": MessageLookupByLibrary.simpleMessage("العنوان"),
     "adults": MessageLookupByLibrary.simpleMessage("كبار"),
@@ -71,6 +74,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "تعذّر الاتصال بالخادم",
     ),
     "changeCurrency": MessageLookupByLibrary.simpleMessage("تغيير العملة"),
+    "changePhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "تغيير رقم الهاتف",
+    ),
     "checkIn": MessageLookupByLibrary.simpleMessage("تاريخ الوصول"),
     "checkInDate": MessageLookupByLibrary.simpleMessage("تاريخ بداية الحجز"),
     "checkInternetOrServiceUrl": MessageLookupByLibrary.simpleMessage(
@@ -116,6 +122,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "date": MessageLookupByLibrary.simpleMessage("التاريخ"),
     "decrease": MessageLookupByLibrary.simpleMessage("نقصان"),
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
+    "deleteAccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
+    "deleteAccountConfirmation": MessageLookupByLibrary.simpleMessage(
+      "هل تريد حقا حذف حسابك؟ ستفقد جميع البيانات المتعلقة بك",
+    ),
     "deletedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم الحذف بنجاح",
     ),
@@ -227,6 +237,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "logIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+    "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
+      "هل تريد حقا تسجيل الخروج؟ سيتوجب عليك تسجيل الدخول مرة أخرى للوصول إلى بياناتك",
+    ),
     "logoutSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم تسجيل الخروج بنجاح",
     ),
@@ -300,8 +313,18 @@ class MessageLookup extends MessageLookupByLibrary {
       "رقم الهاتف يجب أن يبدأ بـ 7 (اليمن)",
     ),
     "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+    "phoneNumberCurrent": MessageLookupByLibrary.simpleMessage(
+      "رقم الهاتف الحالي",
+    ),
+    "phoneNumberNew": MessageLookupByLibrary.simpleMessage("رقم الهاتف الجديد"),
+    "phoneNumberUpdatedSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم تغيير رقم الهاتف بنجاح",
+    ),
     "phonePlaceholder": MessageLookupByLibrary.simpleMessage("أدخل رقم الهاتف"),
     "phoneRequired": MessageLookupByLibrary.simpleMessage("الرقم مطلوب"),
+    "pleaseEnterPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "يرجى ادخال رقم هاتف",
+    ),
     "pleaseEnterTheVerificationCode": MessageLookupByLibrary.simpleMessage(
       "يرجى أدخال رمز التحقق",
     ),
@@ -314,6 +337,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "previous": MessageLookupByLibrary.simpleMessage("السابق"),
     "price": MessageLookupByLibrary.simpleMessage("السعر"),
     "profile": MessageLookupByLibrary.simpleMessage("حسابي"),
+    "profileUpdatedSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم تعديل البيانات الشخصية بنجاح",
+    ),
     "purchaseAndCancellationPolicy": MessageLookupByLibrary.simpleMessage(
       "سياسة الشراء والإلغاء",
     ),

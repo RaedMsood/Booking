@@ -67,6 +67,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                     controller: phoneNumberController,
                     type: TextInputType.phone,
                     maxLength: 9,
+                    hintText: S.of(context).phonePlaceholder,
                     fieldValidator: (value) {
                       if (value == null || value.toString().isEmpty) {
                         return S.of(context).phoneRequired;

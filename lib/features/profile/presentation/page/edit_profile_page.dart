@@ -31,7 +31,6 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
-  final phoneController = TextEditingController();
 
   bool _bootstrapping = true;
 
@@ -45,7 +44,6 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
 
     nameController.text = Auth().name;
     emailController.text = Auth().email;
-    phoneController.text = Auth().phoneNumber;
 
     final initialGender = Auth().gender;
     final initialCity = Auth().city;
@@ -60,7 +58,6 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
             ProfileModel(
               name: nameController.text,
               email: emailController.text,
-              phoneNumber: phoneController.text,
               gender: initialGender,
               birthDate: initialBirth,
               city: initialCity,
@@ -86,7 +83,6 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
 
     nameController.addListener(_onFormChanged);
     emailController.addListener(_onFormChanged);
-    phoneController.addListener(_onFormChanged);
   }
 
   @override
@@ -96,7 +92,6 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
     _citySub?.close();
     nameController.dispose();
     emailController.dispose();
-    phoneController.dispose();
     super.dispose();
   }
 
@@ -106,7 +101,6 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
     final current = ProfileModel(
       name: nameController.text,
       email: emailController.text,
-      phoneNumber: phoneController.text,
       gender: ref.read(updateGenderProvider),
       birthDate: ref.read(birthDateProvider),
       city: ref.read(selectedCityProvider),
@@ -143,7 +137,6 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                 12.verticalSpace,
                 NameEmailPhoneSection(
                   nameController: nameController,
-                  phoneController: phoneController,
                   emailController: emailController,
                 ),
                 12.h.verticalSpace,
@@ -164,20 +157,18 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
       bottomNavigationBar: ButtonBottomNavigationBarDesignWidget(
         child:  CheckStateInPostApiDataWidget(
           state: stateUpdateUser,
-          messageSuccess: "تم التعديل بنجاح",
+          messageSuccess: S.of(context).profileUpdatedSuccess,
           functionSuccess: () {
             final latest = ProfileModel(
               name: nameController.text,
               email: emailController.text,
-              phoneNumber: phoneController.text,
               gender: ref.read(updateGenderProvider),
               birthDate: ref.read(birthDateProvider),
               city: ref.read(selectedCityProvider),
             );
             Auth().updateUserData(
-              // birthDate: ref.read(birthDateProvider),
+              birthDay: ref.read(birthDateProvider).toString(),
               email: emailController.text,
-              phoneNumber: phoneController.text,
               name: nameController.text,
               gender: ref.read(updateGenderProvider),
               city: ref.read(selectedCityProvider),
@@ -186,40 +177,44 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                 .read(editProfileControllerProvider.notifier)
                 .initialize(latest);
           },
-          bottonWidget: DefaultButtonWidget(
-            text: S.of(context).saveChanges,
-            isLoading: stateUpdateUser.stateData == States.loading,
-            onPressed: !canSave
-                ? null
-                : () async {
-              if (!_formKey.currentState!.validate()) return;
-              FocusManager.instance.primaryFocus?.unfocus();
+          bottonWidget: Opacity(
+            opacity: canSave? 1 : 0.4,
 
-              final controller =
-              ref.read(editProfileControllerProvider.notifier);
-
-              final current = ProfileModel(
-                name: nameController.text,
-                email: emailController.text,
-                phoneNumber: phoneController.text,
-                gender: ref.read(updateGenderProvider),
-                birthDate: ref.read(birthDateProvider),
-                city: ref.read(selectedCityProvider),
-              );
-
-              controller.compute(current);
-              final effective = controller.effectiveForPut(current);
-              await ref
-                  .read(updateNotifierProvider.notifier)
-                  .update(
-                //dateOfBirth: effective.birthDate?.toIso8601String() ?? '',
-                email: effective.email,
-                phoneNumber: effective.phoneNumber,
-                name: effective.name,
-                gender: (effective.gender ?? '').toString(),
-                cityId: effective.city?.id ?? 0,
-              );
-            },
+            child: DefaultButtonWidget(
+              text: S.of(context).saveChanges,
+              isLoading: stateUpdateUser.stateData == States.loading,
+              onPressed: !canSave
+                  ? null
+                  : () async {
+                if (!_formKey.currentState!.validate()) return;
+                FocusManager.instance.primaryFocus?.unfocus();
+            
+                final controller =
+                ref.read(editProfileControllerProvider.notifier);
+            
+                final current = ProfileModel(
+                  name: nameController.text,
+                  email: emailController.text,
+                  gender: ref.read(updateGenderProvider),
+                  birthDate: ref.read(birthDateProvider),
+                  city: ref.read(selectedCityProvider),
+                );
+            
+                controller.compute(current);
+                final effective = controller.effectiveForPut(current);
+                print(effective.birthDate);
+                await ref
+                    .read(updateNotifierProvider.notifier)
+                    .update(
+                  dateOfBirth: effective.birthDate,
+                  email: effective.email,
+                  name: effective.name,
+                  gender: (effective.gender ?? '').toString(),
+                  cityId: effective.city?.id ?? 0,
+            
+                );
+              },
+            ),
           ),
         ) ,
       ),

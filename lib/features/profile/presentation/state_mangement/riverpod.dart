@@ -49,7 +49,6 @@ class UpdateNotifier extends StateNotifier<DataState<AuthModel>> {
   final _controller = ProfileReposaitory();
 
   Future<void> update({
-    String? phoneNumber,
     String? name,
     String? email,
     String? gender,
@@ -58,7 +57,7 @@ class UpdateNotifier extends StateNotifier<DataState<AuthModel>> {
   }) async {
     state = state.copyWith(state: States.loading);
     final user = await _controller.update(
-        phoneNumber!, name!, email.toString(), gender!, cityId!, dateOfBirth);
+       name!, email.toString(), gender!, cityId!, dateOfBirth);
     user.fold((f) {
       state = state.copyWith(state: States.error, exception: f);
     }, (data) {
@@ -133,7 +132,6 @@ class EditProfileController extends StateNotifier<ChangeResult> {
     state = ChangeResult(
       nameChanged: !eqStr(current.name, init.name),
       emailChanged: !eqStr(current.email, init.email),
-      phoneChanged: !eqStr(current.phoneNumber, init.phoneNumber),
       genderChanged: current.gender != init.gender,
       birthDateChanged: !eqDate(current.birthDate, init.birthDate),
       cityChanged: (current.city?.id) != (init.city?.id),
@@ -145,10 +143,10 @@ class EditProfileController extends StateNotifier<ChangeResult> {
     return ProfileModel(
       name: state.nameChanged ? current.name : init.name,
       email: state.emailChanged ? current.email : init.email,
-      phoneNumber: state.phoneChanged ? current.phoneNumber : init.phoneNumber,
       gender: state.genderChanged ? current.gender : init.gender,
       birthDate: state.birthDateChanged ? current.birthDate : init.birthDate,
       city: state.cityChanged ? current.city : init.city,
+
     );
   }
 }
@@ -216,6 +214,45 @@ class LogoutController extends StateNotifier<DataState<Unit>> {
       state = state.copyWith(state: States.error, exception: f);
     }, (data) {
       state = state.copyWith(state: States.loaded);
+    });
+  }
+  Future<void> deleteAccount() async {
+    state = state.copyWith(state: States.loading);
+
+    final data = await _controller.deleteAccount();
+    data.fold((f) {
+      state = state.copyWith(state: States.error, exception: f);
+    }, (data) {
+      state = state.copyWith(state: States.loaded);
+    });
+  }
+}
+
+final changePhoneNumberProvider = StateNotifierProvider.autoDispose<
+    ChangePhoneNumberController, DataState<AuthModel>>(
+      (ref) {
+    return ChangePhoneNumberController();
+  },
+);
+
+class ChangePhoneNumberController extends StateNotifier<DataState<AuthModel>> {
+  ChangePhoneNumberController() : super(DataState<AuthModel>.initial(AuthModel.empty()));
+  final _controller = ProfileReposaitory();
+
+  Future<void> changePhoneNumber({
+    required String phoneNumber,
+    required String otp,
+  }) async {
+    state = state.copyWith(state: States.loading);
+
+    final data = await _controller.changePhoneNumber(
+      phoneNumber: phoneNumber,
+      otp: otp,
+    );
+    data.fold((f) {
+      state = state.copyWith(state: States.error, exception: f);
+    }, (data) {
+      state = state.copyWith(state: States.loaded,data: data);
     });
   }
 }

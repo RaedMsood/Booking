@@ -11,7 +11,11 @@ class AppURL {
 
   static String get resendOtp => '/auth/update_otp';
 
+  static String get changePhoneNumber => '/profile/update_phone_number';
+
   static String get logout => '/auth/logout';
+
+  static String get deleteAccount => '/profile/delete_account';
 
   static String get property => '/property';
 

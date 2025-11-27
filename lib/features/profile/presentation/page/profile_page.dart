@@ -114,7 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     context: context,
                     onTap: () {
                       navigateTo(
-                          context, SettingsPage(onLogoutSuccess: _refresh));
+                          context, SettingsPage(onSuccess: _refresh));
                     },
                   ),
                   TileWidget(

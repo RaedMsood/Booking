@@ -11,14 +11,15 @@ import '../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
+import '../widget/change_phone_number_widget.dart';
 import '../widget/languge_dialog_widget.dart';
-import '../widget/sign_out_dialog_widget.dart';
+import '../widget/logout_or_delete_account_bottom_sheet_widget.dart';
 import '../widget/tile_widget.dart';
 
 class SettingsPage extends StatefulWidget {
-  final VoidCallback? onLogoutSuccess;
+  final VoidCallback? onSuccess;
 
-  const SettingsPage({super.key, this.onLogoutSuccess});
+  const SettingsPage({super.key, this.onSuccess});
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
@@ -74,10 +75,30 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
+            if(Auth().loggedIn)
+            TileWidget(
+              icon: AppIcons.phone,
+              title: S.of(context).changePhoneNumber,
+              context: context,
+              fontSize: 10.6.sp,
+              heightIcon: 17.h,
+              onTap: () {
+                showTitledBottomSheet(
+                  title: S.of(context).changePhoneNumber,
+                  fontSize: 13.sp,
+                  context: context,
+                  page: ChangePhoneNumberWidget(
+                    phoneNumberOnSuccess: () {
+                      widget.onSuccess?.call();
+                    },
+                  ),
+                );
+              },
+            ),
             Visibility(
               visible: Auth().loggedIn,
               replacement: InkWell(
-                onTap: (){
+                onTap: () {
                   navigateTo(context, const LogInPage());
                 },
                 child: Container(
@@ -104,10 +125,32 @@ class _SettingsPageState extends State<SettingsPage> {
                   showModalBottomSheetWidget(
                     context: context,
                     backgroundColor: Colors.transparent,
-                    page: SignOutDialog(onLogoutSuccess: () {
+                    page: LogoutOrDeleteAccountBottomSheetWidget(onSuccess: () {
                       _refresh();
-                      widget.onLogoutSuccess?.call();
+                      widget.onSuccess?.call();
                     }),
+                  );
+                },
+              ),
+            ),
+            Visibility(
+              visible: Auth().loggedIn,
+              child: TileWidget(
+                icon: AppIcons.trash,
+                title: S.of(context).deleteAccount,
+                context: context,
+                fontSize: 10.6.sp,
+                heightIcon: 17.h,
+                onTap: () {
+                  showModalBottomSheetWidget(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    page: LogoutOrDeleteAccountBottomSheetWidget(
+                        deleteAccount: true,
+                        onSuccess: () {
+                          _refresh();
+                          widget.onSuccess?.call();
+                        }),
                   );
                 },
               ),

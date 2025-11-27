@@ -28,6 +28,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "YER": MessageLookupByLibrary.simpleMessage("YER"),
     "about": MessageLookupByLibrary.simpleMessage("About"),
     "aboutApp": MessageLookupByLibrary.simpleMessage("About the app"),
+    "accountDeletedSuccess": MessageLookupByLibrary.simpleMessage(
+      "Account deleted successfully.",
+    ),
     "addYourRating": MessageLookupByLibrary.simpleMessage("Add your rating"),
     "address": MessageLookupByLibrary.simpleMessage("Address"),
     "adults": MessageLookupByLibrary.simpleMessage("Adults"),
@@ -80,6 +83,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Unable to reach the server",
     ),
     "changeCurrency": MessageLookupByLibrary.simpleMessage("Change currency"),
+    "changePhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "Change Phone Number",
+    ),
     "checkIn": MessageLookupByLibrary.simpleMessage("Check-in"),
     "checkInDate": MessageLookupByLibrary.simpleMessage("Check-in date"),
     "checkInternetOrServiceUrl": MessageLookupByLibrary.simpleMessage(
@@ -127,6 +133,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "date": MessageLookupByLibrary.simpleMessage("Date"),
     "decrease": MessageLookupByLibrary.simpleMessage("Decrease"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete account"),
+    "deleteAccountConfirmation": MessageLookupByLibrary.simpleMessage(
+      "Do you really want to delete your account? You will lose all related data.",
+    ),
     "deletedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Deleted successfully",
     ),
@@ -230,6 +240,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
+    "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
+      "Do you really want to log out? You will need to log in again to access your data.",
+    ),
     "logoutSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Logout successfully",
     ),
@@ -311,10 +324,20 @@ class MessageLookup extends MessageLookupByLibrary {
       "Phone number must start with 7 (Yemen)",
     ),
     "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
+    "phoneNumberCurrent": MessageLookupByLibrary.simpleMessage(
+      "Current phone number",
+    ),
+    "phoneNumberNew": MessageLookupByLibrary.simpleMessage("New phone number"),
+    "phoneNumberUpdatedSuccess": MessageLookupByLibrary.simpleMessage(
+      "Phone number changed successfully.",
+    ),
     "phonePlaceholder": MessageLookupByLibrary.simpleMessage(
       "Enter your phone number",
     ),
     "phoneRequired": MessageLookupByLibrary.simpleMessage("Phone is required"),
+    "pleaseEnterPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "Please enter phone number",
+    ),
     "pleaseEnterTheVerificationCode": MessageLookupByLibrary.simpleMessage(
       "Please enter the verification code",
     ),
@@ -325,6 +348,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "previous": MessageLookupByLibrary.simpleMessage("Previous"),
     "price": MessageLookupByLibrary.simpleMessage("Price"),
     "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+    "profileUpdatedSuccess": MessageLookupByLibrary.simpleMessage(
+      "Profile updated successfully",
+    ),
     "purchaseAndCancellationPolicy": MessageLookupByLibrary.simpleMessage(
       "Purchase & cancellation policy",
     ),

@@ -10,7 +10,6 @@ class ProfileReposaitory {
       ProfileRemoteDataSource();
 
   Future<Either<DioException, AuthModel>> update(
-    String phoneNumber,
     String name,
     String email,
     String gender,
@@ -19,7 +18,7 @@ class ProfileReposaitory {
   ) async {
     try {
       final remote = await profileRemoteDataSource.upDateUser(
-          phoneNumber, name, email, gender, cityId, dateOfBirth);
+          name, email, gender, cityId, dateOfBirth);
       return Right(remote);
     } on DioException catch (e) {
       return Left(e);
@@ -36,10 +35,26 @@ class ProfileReposaitory {
     }
   }
 
-  Future<Either<DioException, Unit>>
-  addFavoriteProperties({required int idProperties}) async {
+  Future<Either<DioException, Unit>> addFavoriteProperties(
+      {required int idProperties}) async {
     try {
-      final remote = await profileRemoteDataSource.addFavoriteProperties(idProperties);
+      final remote =
+          await profileRemoteDataSource.addFavoriteProperties(idProperties);
+      return Right(remote);
+    } on DioException catch (e) {
+      return Left(e);
+    }
+  }
+
+  Future<Either<DioException, AuthModel>> changePhoneNumber({
+    required String phoneNumber,
+    required String otp,
+  }) async {
+    try {
+      final remote = await profileRemoteDataSource.changePhoneNumber(
+        phoneNumber: phoneNumber,
+        otp: otp,
+      );
       return Right(remote);
     } on DioException catch (e) {
       return Left(e);
@@ -55,4 +70,12 @@ class ProfileReposaitory {
     }
   }
 
+  Future<Either<DioException, Unit>> deleteAccount() async {
+    try {
+      final remote = await profileRemoteDataSource.deleteAccount();
+      return Right(remote);
+    } on DioException catch (e) {
+      return Left(e);
+    }
+  }
 }

@@ -1315,6 +1315,66 @@ class S {
     );
   }
 
+  /// `Change Phone Number`
+  String get changePhoneNumber {
+    return Intl.message(
+      'Change Phone Number',
+      name: 'changePhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current phone number`
+  String get phoneNumberCurrent {
+    return Intl.message(
+      'Current phone number',
+      name: 'phoneNumberCurrent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New phone number`
+  String get phoneNumberNew {
+    return Intl.message(
+      'New phone number',
+      name: 'phoneNumberNew',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you really want to delete your account? You will lose all related data.`
+  String get deleteAccountConfirmation {
+    return Intl.message(
+      'Do you really want to delete your account? You will lose all related data.',
+      name: 'deleteAccountConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you really want to log out? You will need to log in again to access your data.`
+  String get logoutConfirmation {
+    return Intl.message(
+      'Do you really want to log out? You will need to log in again to access your data.',
+      name: 'logoutConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
   // skipped getter for the '--------user-----------' key
 
   /// `Resend code in`
@@ -1472,6 +1532,16 @@ class S {
     return Intl.message(
       'Phone is required',
       name: 'phoneRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter phone number`
+  String get pleaseEnterPhoneNumber {
+    return Intl.message(
+      'Please enter phone number',
+      name: 'pleaseEnterPhoneNumber',
       desc: '',
       args: [],
     );
@@ -1639,6 +1709,36 @@ class S {
     return Intl.message(
       'Deleted successfully',
       name: 'deletedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile updated successfully`
+  String get profileUpdatedSuccess {
+    return Intl.message(
+      'Profile updated successfully',
+      name: 'profileUpdatedSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number changed successfully.`
+  String get phoneNumberUpdatedSuccess {
+    return Intl.message(
+      'Phone number changed successfully.',
+      name: 'phoneNumberUpdatedSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account deleted successfully.`
+  String get accountDeletedSuccess {
+    return Intl.message(
+      'Account deleted successfully.',
+      name: 'accountDeletedSuccess',
       desc: '',
       args: [],
     );

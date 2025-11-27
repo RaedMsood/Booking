@@ -53,7 +53,6 @@ class UserModel {
       'phone': phoneNumber,
       'gender': gender,
       'birth_day': birthDay,
-      // خزن كائن المدينة كاملاً
       'city': city?.toJson(),
     };
   }

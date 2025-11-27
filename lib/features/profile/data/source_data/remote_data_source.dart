@@ -7,7 +7,6 @@ import '../../../user/data/model/auth_model.dart';
 
 class ProfileRemoteDataSource {
   Future<AuthModel> upDateUser(
-    String phoneNumber,
     String name,
     String email,
     String gender,
@@ -17,7 +16,6 @@ class ProfileRemoteDataSource {
     final response = await RemoteRequest.postData(
       path: AppURL.updateUser,
       data: {
-        "phone": phoneNumber,
         "name": name,
         if (email.isNotEmpty) 'email': email,
         "gender": gender,
@@ -34,18 +32,37 @@ class ProfileRemoteDataSource {
     );
     return PropertyDataModel.fromJsonList(response.data['data']);
   }
+
   Future<Unit> addFavoriteProperties(int idProperties) async {
-     await RemoteRequest.postData(
-      path: AppURL.addFavorite,
-      data: {
-        'property_id':idProperties
-      }
-    );
+    await RemoteRequest.postData(
+        path: AppURL.addFavorite, data: {'property_id': idProperties});
     return Future.value(unit);
   }
+
+  Future<AuthModel> changePhoneNumber({
+    required String phoneNumber,
+    required String otp,
+  }) async {
+    final response = await RemoteRequest.postData(
+      path: AppURL.changePhoneNumber,
+      data: {
+        "phone_number": phoneNumber,
+        if (otp.isNotEmpty) "otp": otp,
+      },
+    );
+    return AuthModel.fromJson(response.data['data']);
+  }
+
   Future<Unit> logout() async {
     await RemoteRequest.postData(
       path: AppURL.logout,
+    );
+    return Future.value(unit);
+  }
+
+  Future<Unit> deleteAccount() async {
+    await RemoteRequest.deleteData(
+      path: AppURL.deleteAccount,
     );
     return Future.value(unit);
   }

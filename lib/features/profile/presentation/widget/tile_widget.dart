@@ -13,6 +13,7 @@ class TileWidget extends StatelessWidget {
     required this.title,
     this.fontSize,
     this.color,
+    this.heightIcon,
   });
 
   final String icon;
@@ -21,6 +22,7 @@ class TileWidget extends StatelessWidget {
   final GestureTapCallback onTap;
   final double? fontSize;
   final Color? color;
+  final double? heightIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class TileWidget extends StatelessWidget {
           leading: SvgPicture.asset(
             icon,
             color: color ?? Colors.black,
+            height: heightIcon,
           ),
           trailing: Padding(
             padding: EdgeInsets.symmetric(horizontal: 3.w),
