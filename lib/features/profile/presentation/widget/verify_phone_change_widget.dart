@@ -62,7 +62,7 @@ class _VerifyPhoneChangeWidgetState
     if (_canAutoSubmit && text.length == _otpLen) {
       _canAutoSubmit = false;
       FocusManager.instance.primaryFocus?.unfocus();
-      ref.read(changePhoneNumberProvider.notifier).changePhoneNumber(
+      ref.read(changePhoneNumberProvider.notifier).confirmChangePhoneNumber(
             phoneNumber: widget.phoneNumber,
             otp: text,
           );
@@ -105,7 +105,7 @@ class _VerifyPhoneChangeWidgetState
             state: state,
             messageSuccess: S.of(context).phoneNumberUpdatedSuccess,
             functionSuccess: () async {
-              Auth().login(state.data);
+              Auth().updateUserData(phoneNumber: state.data.user.phoneNumber);
               if (mounted) {
                 Navigator.of(context).pop();
                 widget.phoneNumberOnSuccess?.call();
@@ -118,7 +118,9 @@ class _VerifyPhoneChangeWidgetState
                 final code = verifyController.text.trim();
                 if (code.length != _otpLen) return;
                 FocusManager.instance.primaryFocus?.unfocus();
-                ref.read(changePhoneNumberProvider.notifier).changePhoneNumber(
+                ref
+                    .read(changePhoneNumberProvider.notifier)
+                    .confirmChangePhoneNumber(
                       phoneNumber: widget.phoneNumber,
                       otp: verifyController.text.trim(),
                     );

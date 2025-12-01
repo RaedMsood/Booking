@@ -31,12 +31,13 @@ class FilterPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              FilterByUnitOrCityWidget(unitTypes: state.data.unitTypes),
+              12.h.verticalSpace,
               const FilterByDateWidget(),
               FilterByUnitOrCityWidget(
                 unitTypes: state.data.cities,
                 isCity: true,
               ),
-              FilterByUnitOrCityWidget(unitTypes: state.data.unitTypes),
               12.h.verticalSpace,
               PriceFilterWidget(
                 maxPrice: double.tryParse(state.data.maxPrice) ?? 0.0,
@@ -44,7 +45,7 @@ class FilterPage extends ConsumerWidget {
               ),
               AutoSizeTextWidget(
                 text: S.of(context).features,
-                fontSize: 12.sp,
+                fontSize: 11.sp,
                 colorText: Colors.black87,
                 fontWeight: FontWeight.w400,
               ),
@@ -53,7 +54,7 @@ class FilterPage extends ConsumerWidget {
               ),
               AutoSizeTextWidget(
                 text: S.of(context).rating,
-                fontSize: 12.sp,
+                fontSize: 11.sp,
                 colorText: Colors.black87,
                 fontWeight: FontWeight.w400,
               ),

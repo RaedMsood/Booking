@@ -18,7 +18,7 @@ import 'verify_phone_change_widget.dart';
 class ChangePhoneNumberWidget extends ConsumerStatefulWidget {
   final VoidCallback? phoneNumberOnSuccess;
 
-  const ChangePhoneNumberWidget( {super.key,this.phoneNumberOnSuccess});
+  const ChangePhoneNumberWidget({super.key, this.phoneNumberOnSuccess});
 
   @override
   ConsumerState<ChangePhoneNumberWidget> createState() =>
@@ -27,7 +27,6 @@ class ChangePhoneNumberWidget extends ConsumerStatefulWidget {
 
 class _ChangePhoneNumberWidgetState
     extends ConsumerState<ChangePhoneNumberWidget> {
-
   TextEditingController phoneNumberController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
@@ -124,7 +123,7 @@ class _ChangePhoneNumberWidgetState
             CheckStateInPostApiDataWidget(
               state: state,
               messageSuccess:
-              "${S.of(context).codeHasBeenSendTo} ${phoneNumberController.text}",
+                  "${S.of(context).codeHasBeenSendTo} ${phoneNumberController.text}",
               functionSuccess: () {
                 Navigator.of(context).pop();
                 showTitledBottomSheet(
@@ -142,18 +141,18 @@ class _ChangePhoneNumberWidgetState
                 isLoading: state.stateData == States.loading,
                 onPressed: () {
                   final isValid = formKey.currentState!.validate();
-
                   if (isValid) {
+                    FocusManager.instance.primaryFocus?.unfocus();
                     ref
                         .read(changePhoneNumberProvider.notifier)
                         .changePhoneNumber(
                           phoneNumber: phoneNumberController.text,
-                          otp: '',
                         );
                   }
                 },
               ),
             ),
+            8.h.verticalSpace,
           ],
         ),
       ),

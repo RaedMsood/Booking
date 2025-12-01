@@ -15,8 +15,11 @@ Future<DateTimeRange?> showCalendarRangePickerBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.white,
-      builder: (_) => CalendarRangePickerSheetWidget(
-        initialRange: initialRange,
+      builder: (_) => SafeArea(
+        top: false,
+        child: CalendarRangePickerSheetWidget(
+          initialRange: initialRange,
+        ),
       ),
     );
 

@@ -46,6 +46,7 @@ class UnitDetailsPage extends ConsumerWidget {
               images: state.data.images,
               idProperties: state.data.id,
               isUnit: true,
+              title: state.data.name,
             ),
             SliverToBoxAdapter(
               child: UnitDetailsDataWidget(
@@ -55,11 +56,10 @@ class UnitDetailsPage extends ConsumerWidget {
                 maxGuests: state.data.maxGuests,
               ),
             ),
-
             SliverToBoxAdapter(
               child: Container(
                 margin: EdgeInsets.only(top: 12.h),
-                padding: EdgeInsets.symmetric(horizontal: 14.sp,vertical: 8.h),
+                padding: EdgeInsets.symmetric(horizontal: 14.sp, vertical: 8.h),
                 color: Colors.white,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +75,6 @@ class UnitDetailsPage extends ConsumerWidget {
                 ),
               ),
             ),
-
             SliverToBoxAdapter(
               child: UnitFeaturesWidget(
                 features: state.data.features,
@@ -135,11 +134,10 @@ class UnitDetailsPage extends ConsumerWidget {
                               context,
                               DetailsOfBookInAddPage(
                                 location: location,
-                                image: image ,
+                                image: image,
                                 nameProp: nameProp,
                                 unitId: state.data.id,
                                 totalPrice: state.data.price.toString(),
-
                               ),
                             );
                           }

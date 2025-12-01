@@ -46,12 +46,25 @@ class ProfileReposaitory {
     }
   }
 
-  Future<Either<DioException, AuthModel>> changePhoneNumber({
+  Future<Either<DioException, Unit>> changePhoneNumber({
+    required String phoneNumber,
+  }) async {
+    try {
+      final remote = await profileRemoteDataSource.changePhoneNumber(
+        phoneNumber: phoneNumber,
+      );
+      return Right(remote);
+    } on DioException catch (e) {
+      return Left(e);
+    }
+  }
+
+  Future<Either<DioException, AuthModel>> confirmChangePhoneNumber({
     required String phoneNumber,
     required String otp,
   }) async {
     try {
-      final remote = await profileRemoteDataSource.changePhoneNumber(
+      final remote = await profileRemoteDataSource.confirmChangePhoneNumber(
         phoneNumber: phoneNumber,
         otp: otp,
       );

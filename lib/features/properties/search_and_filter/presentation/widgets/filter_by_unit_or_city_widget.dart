@@ -35,7 +35,7 @@ class FilterByUnitOrCityWidget extends ConsumerWidget {
             12.h.verticalSpace,
             AutoSizeTextWidget(
               text: isCity ? S.of(context).governorate : S.of(context).roomType,
-              fontSize: 12.sp,
+              fontSize: 11.sp,
               colorText: Colors.black87,
               fontWeight: FontWeight.w400,
             ),

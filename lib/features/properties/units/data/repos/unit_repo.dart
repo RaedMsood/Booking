@@ -20,14 +20,16 @@ class UnitReposaitory {
     }
   }
 
-  Future<Either<DioException, PaginationModel<UnitsModel>>> getAllUnits({
+  Future<Either<DioException, SectionsModel>> getAllUnits({
     required int propertyId,
     required int page,
+    required int sectionId,
   }) async {
     try {
       final remote = await _unitDetailsDataSource.getAllUnits(
         page: page,
         propertyId: propertyId,
+        sectionId: sectionId,
       );
       return Right(remote);
     } on DioException catch (e) {

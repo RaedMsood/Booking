@@ -16,7 +16,8 @@ class PropertyDetailsModel {
   final AddressModel address;
   final DepositModel deposit;
   final List<PolicyModel> policies;
-  final List<UnitsModel> units;
+  final List<SectionsOfPropertyModel> sections;
+
   final List<RateWithCustomerModel> allScoreRateWithUser;
 
   PropertyDetailsModel(
@@ -30,7 +31,7 @@ class PropertyDetailsModel {
       required this.address,
       required this.deposit,
       required this.policies,
-      required this.units,
+      required this.sections,
       required this.allScoreRateWithUser});
 
   factory PropertyDetailsModel.fromJson(Map<String, dynamic> json) {
@@ -45,22 +46,23 @@ class PropertyDetailsModel {
         address: AddressModel.fromJson(json['address'] as Map<String, dynamic>),
         deposit: DepositModel.fromJson(json['deposit'] as Map<String, dynamic>),
         policies: PolicyModel.fromJsonList(json['policies'] ?? []),
-        units: UnitsModel.fromJsonList(json['units'] ?? []),
+        sections: SectionsOfPropertyModel.fromJsonList(json['sections'] ?? []),
         allScoreRateWithUser:
             RateWithCustomerModel.fromJsonList(json['rate'] ?? []));
   }
 
   factory PropertyDetailsModel.empty() => PropertyDetailsModel(
-      id: 0,
-      name: '',
-      description: '',
-      rating: 0,
-      reviewsCount: 0,
-      deposit: DepositModel.empty(),
-      address: AddressModel.empty(),
-      features: <FeaturesModel>[],
-      policies: <PolicyModel>[],
-      units: <UnitsModel>[],
-      images: <String>[],
-      allScoreRateWithUser: []);
+        id: 0,
+        name: '',
+        description: '',
+        rating: 0,
+        reviewsCount: 0,
+        deposit: DepositModel.empty(),
+        address: AddressModel.empty(),
+        features: <FeaturesModel>[],
+        policies: <PolicyModel>[],
+        sections: <SectionsOfPropertyModel>[],
+        images: <String>[],
+        allScoreRateWithUser: [],
+      );
 }

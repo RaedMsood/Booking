@@ -16,8 +16,8 @@ class ShimmerPropertyDetailsWidget extends StatelessWidget {
         SliverAppBarDetailsWidget(
           images: images,
           isLoading: true,
-          idProperties:1 ,
-
+          idProperties: 1,
+          title: "",
         ),
         SliverToBoxAdapter(
           child: Container(

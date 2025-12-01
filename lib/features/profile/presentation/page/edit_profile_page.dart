@@ -202,7 +202,6 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
             
                 controller.compute(current);
                 final effective = controller.effectiveForPut(current);
-                print(effective.birthDate);
                 await ref
                     .read(updateNotifierProvider.notifier)
                     .update(

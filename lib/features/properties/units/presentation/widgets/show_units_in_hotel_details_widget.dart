@@ -8,8 +8,8 @@ import '../../data/model/units_model.dart';
 import '../pages/units_page.dart';
 import 'units_card _in_hotel_details_widget.dart';
 
-class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
-  final List<UnitsModel> units;
+class ShowUnitsInHotelDetailsWidget extends StatefulWidget {
+  final List<SectionsOfPropertyModel> sections;
   final int propertyId;
   final String nameProp;
   final String location;
@@ -17,14 +17,29 @@ class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
 
   const ShowUnitsInHotelDetailsWidget(
       {super.key,
-      required this.units,
+      required this.sections,
       required this.propertyId,
       required this.location,
       required this.nameProp,
       required this.image});
 
   @override
+  State<ShowUnitsInHotelDetailsWidget> createState() =>
+      _ShowUnitsInHotelDetailsWidgetState();
+}
+
+class _ShowUnitsInHotelDetailsWidgetState
+    extends State<ShowUnitsInHotelDetailsWidget> {
+  int _selectedSectionIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
+    final sections = widget.sections;
+    if (sections.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    final currentUnits = sections[_selectedSectionIndex].units ?? [];
     return Container(
       margin: EdgeInsets.symmetric(vertical: 12.h),
       padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -47,10 +62,10 @@ class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
                     navigateTo(
                       context,
                       UnitsPage(
-                        propertyId: propertyId,
-                        image: image,
-                        location: location,
-                        nameProp: nameProp,
+                        propertyId: widget.propertyId,
+                        image: widget.image,
+                        location: widget.location,
+                        nameProp: widget.nameProp,
                       ),
                     );
                   },
@@ -64,6 +79,53 @@ class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
               ],
             ),
           ),
+          10.h.verticalSpace,
+          SizedBox(
+            height: 28.h,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.symmetric(horizontal: 14.w),
+              itemCount: sections.length,
+              separatorBuilder: (_, __) => 8.w.horizontalSpace,
+              itemBuilder: (context, index) {
+                final section = sections[index];
+                final bool isSelected = index == _selectedSectionIndex;
+
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      _selectedSectionIndex = index;
+                    });
+                  },
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 38.w, vertical: 4.h),
+                    decoration: BoxDecoration(
+                        color: isSelected
+                            ? AppColors.primarySwatch.shade50
+                                .withValues(alpha: .15)
+                            : AppColors.scaffoldColor,
+                        borderRadius: BorderRadius.circular(20.r),
+                        border: isSelected
+                            ? Border.all(
+                                color: AppColors.primaryColor, width: 0.6)
+                            : Border.all(
+                                color: AppColors.greySwatch.shade200,
+                                width: 0.6)),
+                    alignment: Alignment.center,
+                    child: AutoSizeTextWidget(
+                      text: section.name,
+                      fontSize: 10.sp,
+                      colorText: isSelected
+                          ? AppColors.primaryColor
+                          : AppColors.mainColorFont,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
           12.h.verticalSpace,
           SizedBox(
             height: 214.h,
@@ -71,14 +133,14 @@ class ShowUnitsInHotelDetailsWidget extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 padding: EdgeInsets.symmetric(horizontal: 14.w),
-                children: units.map((unit) {
+                children: currentUnits.map((unit) {
                   return Row(
                     children: [
                       UnitsCardInHotelDetailsWidget(
                         unit: unit,
-                        location: location,
-                        image: image,
-                        nameProp: nameProp,
+                        location: widget.location,
+                        image: widget.image,
+                        nameProp: widget.nameProp,
                       ),
                       10.w.horizontalSpace,
                     ],

@@ -64,6 +64,7 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
                   SliverAppBarDetailsWidget(
                     images: state.data.images,
                     idProperties:state.data.id ,
+                    title: state.data.name,
                   ),
                   SliverToBoxAdapter(
                     child: NameAndDescriptionAndRatingWidget(
@@ -94,7 +95,7 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
                         DepositWidget(deposit: state.data.deposit),
                         TermsPolicyWidget(policy: state.data.policies),
                         ShowUnitsInHotelDetailsWidget(
-                          units: state.data.units,
+                          sections: state.data.sections,
                           propertyId: state.data.id,
                           nameProp: state.data.name,
                           location:

@@ -16,16 +16,14 @@ class AuthModel {
       token: json['token'] ?? "",
       status: json['status'] ?? false,
       user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
-
     );
   }
-
 
   Map<String, dynamic> toJson() {
     return {
       'token': token,
       'user': user,
-      'status':status,
+      'status': status,
     };
   }
 
@@ -44,6 +42,7 @@ class AuthModel {
         status: false,
         user: UserModel.empty(),
       );
+
   /// تحويل كامل للتخزين في secure storage
   Map<String, dynamic> toJsonForCache() {
     return {
@@ -51,5 +50,4 @@ class AuthModel {
       'user': user.toJsonForCache(),
     };
   }
-
 }

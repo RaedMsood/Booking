@@ -17,24 +17,27 @@ class UnitDataSource {
     return UnitDetailsModel.fromJson(response.data['data']);
   }
 
-  Future<PaginationModel<UnitsModel>> getAllUnits({
+  Future<SectionsModel> getAllUnits({
     required int propertyId,
     required int page,
-    int perPage = 5,
+    required int sectionId,
+    int perPage = 4,
   }) async {
     final response = await RemoteRequest.getData(
       url: "${AppURL.getAllUnis}/$propertyId",
       query: {
         'page': page,
         'perPage': perPage,
+        'sectionId': sectionId,
       },
     );
 
-    return PaginationModel<UnitsModel>.fromJson(
-      response.data['data'],
-      (prop) {
-        return UnitsModel.fromJson(prop);
-      },
-    );
+    return SectionsModel.fromJson(  response.data['data']);
+    // return PaginationModel<UnitsModel>.fromJson(
+    //   response.data['data'],
+    //   (prop) {
+    //     return UnitsModel.fromJson(prop);
+    //   },
+    // );
   }
 }

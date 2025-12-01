@@ -48,7 +48,7 @@ class _PriceFilterWidgetState extends ConsumerState<PriceFilterWidget> {
       children: [
         AutoSizeTextWidget(
           text: S.of(context).price,
-          fontSize: 12.sp,
+          fontSize: 11.sp,
           colorText: Colors.black87,
           fontWeight: FontWeight.w400,
         ),

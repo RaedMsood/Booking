@@ -47,9 +47,9 @@ class LogoutOrDeleteAccountBottomSheetWidget extends ConsumerWidget {
         children: [
           8.h.verticalSpace,
           SvgPicture.asset(
-            deleteAccount?AppIcons.trash: AppIcons.logOut,
+            deleteAccount ? AppIcons.trash : AppIcons.logOut,
             width: 40.w,
-            color:Colors.redAccent.withValues(alpha: .9),
+            color: Colors.redAccent.withValues(alpha: .9),
           ),
           10.h.verticalSpace,
           AutoSizeTextWidget(
@@ -62,7 +62,9 @@ class LogoutOrDeleteAccountBottomSheetWidget extends ConsumerWidget {
           ),
           8.h.verticalSpace,
           AutoSizeTextWidget(
-            text:deleteAccount?S.of(context).deleteAccountConfirmation: S.of(context).logoutConfirmation,
+            text: deleteAccount
+                ? S.of(context).deleteAccountConfirmation
+                : S.of(context).logoutConfirmation,
             colorText: AppColors.fontColor,
             fontSize: 11.4.sp,
             textAlign: TextAlign.center,
@@ -82,7 +84,9 @@ class LogoutOrDeleteAccountBottomSheetWidget extends ConsumerWidget {
           10.h.verticalSpace,
           CheckStateInPostApiDataWidget(
             state: state,
-            messageSuccess: S.of(context).logoutSuccessfully,
+            messageSuccess: deleteAccount
+                ? S.of(context).accountDeletedSuccess
+                : S.of(context).logoutSuccessfully,
             functionSuccess: () {
               Auth().logout();
               Navigator.of(context).pop();
@@ -104,7 +108,8 @@ class LogoutOrDeleteAccountBottomSheetWidget extends ConsumerWidget {
                   ref.read(logoutProvider.notifier).deleteAccount();
                 } else {
                   ref.read(logoutProvider.notifier).logout();
-                }              },
+                }
+              },
             ),
           ),
         ],

@@ -57,7 +57,7 @@ class UpdateNotifier extends StateNotifier<DataState<AuthModel>> {
   }) async {
     state = state.copyWith(state: States.loading);
     final user = await _controller.update(
-       name!, email.toString(), gender!, cityId!, dateOfBirth);
+        name!, email.toString(), gender!, cityId!, dateOfBirth);
     user.fold((f) {
       state = state.copyWith(state: States.error, exception: f);
     }, (data) {
@@ -146,7 +146,6 @@ class EditProfileController extends StateNotifier<ChangeResult> {
       gender: state.genderChanged ? current.gender : init.gender,
       birthDate: state.birthDateChanged ? current.birthDate : init.birthDate,
       city: state.cityChanged ? current.city : init.city,
-
     );
   }
 }
@@ -191,13 +190,14 @@ class FavoriteIdsNotifier extends StateNotifier<Set<int>> {
     }
   }
 }
+
 final favoriteIdsProvider =
-StateNotifierProvider<FavoriteIdsNotifier, Set<int>>(
-      (ref) => FavoriteIdsNotifier()..load(),
+    StateNotifierProvider<FavoriteIdsNotifier, Set<int>>(
+  (ref) => FavoriteIdsNotifier()..load(),
 );
 final logoutProvider =
-StateNotifierProvider.autoDispose<LogoutController, DataState<Unit>>(
-      (ref) {
+    StateNotifierProvider.autoDispose<LogoutController, DataState<Unit>>(
+  (ref) {
     return LogoutController();
   },
 );
@@ -216,6 +216,7 @@ class LogoutController extends StateNotifier<DataState<Unit>> {
       state = state.copyWith(state: States.loaded);
     });
   }
+
   Future<void> deleteAccount() async {
     state = state.copyWith(state: States.loading);
 
@@ -230,29 +231,41 @@ class LogoutController extends StateNotifier<DataState<Unit>> {
 
 final changePhoneNumberProvider = StateNotifierProvider.autoDispose<
     ChangePhoneNumberController, DataState<AuthModel>>(
-      (ref) {
+  (ref) {
     return ChangePhoneNumberController();
   },
 );
 
 class ChangePhoneNumberController extends StateNotifier<DataState<AuthModel>> {
-  ChangePhoneNumberController() : super(DataState<AuthModel>.initial(AuthModel.empty()));
+  ChangePhoneNumberController()
+      : super(DataState<AuthModel>.initial(AuthModel.empty()));
   final _controller = ProfileReposaitory();
 
-  Future<void> changePhoneNumber({
+  Future<void> confirmChangePhoneNumber({
     required String phoneNumber,
     required String otp,
   }) async {
     state = state.copyWith(state: States.loading);
 
-    final data = await _controller.changePhoneNumber(
+    final data = await _controller.confirmChangePhoneNumber(
       phoneNumber: phoneNumber,
       otp: otp,
     );
     data.fold((f) {
       state = state.copyWith(state: States.error, exception: f);
     }, (data) {
-      state = state.copyWith(state: States.loaded,data: data);
+      state = state.copyWith(state: States.loaded, data: data);
+    });
+  }
+
+  Future<void> changePhoneNumber({required String phoneNumber}) async {
+    state = state.copyWith(state: States.loading);
+
+    final data = await _controller.changePhoneNumber(phoneNumber: phoneNumber);
+    data.fold((f) {
+      state = state.copyWith(state: States.error, exception: f);
+    }, (data) {
+      state = state.copyWith(state: States.loaded);
     });
   }
 }

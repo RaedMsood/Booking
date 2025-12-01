@@ -26,7 +26,7 @@ class UserModel {
       email: json['email'] ?? "",
       phoneNumber: json['phone'] ?? "",
       gender: json['gender'] ?? "",
-      birthDay: json['birth_day'],
+      birthDay: json['date_of_birth'],
       city: json['city'] != null
           ? CityModel.fromJson(json['city'] as Map<String, dynamic>)
           : null,
@@ -40,11 +40,11 @@ class UserModel {
       'email': email,
       'phone': phoneNumber,
       'gender': gender,
-      'birth_day': birthDay,
+      'date_of_birth': birthDay,
       'city_id': city?.id,
     };
   }
-  /// للتحويل إلى JSON للتخزين المحلي (يشمل كائن المدينة كاملاً)
+
   Map<String, dynamic> toJsonForCache() {
     return {
       'id': id,
@@ -52,7 +52,7 @@ class UserModel {
       'email': email,
       'phone': phoneNumber,
       'gender': gender,
-      'birth_day': birthDay,
+      'date_of_birth': birthDay,
       'city': city?.toJson(),
     };
   }
@@ -78,12 +78,12 @@ class UserModel {
   }
 
   factory UserModel.empty() => UserModel(
-    id: 0,
-    name: '',
-    email: '',
-    phoneNumber: '',
-    gender: '',
-    birthDay: '',
-    city: CityModel.empty(),
-  );
+        id: 0,
+        name: '',
+        email: '',
+        phoneNumber: '',
+        gender: '',
+        birthDay: '',
+        city: CityModel.empty(),
+      );
 }

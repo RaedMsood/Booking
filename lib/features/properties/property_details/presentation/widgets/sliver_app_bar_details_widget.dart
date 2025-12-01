@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/buttons/icon_button_widget.dart';
 import '../../../../profile/presentation/state_mangement/riverpod.dart';
 import 'details_pictures_widget.dart';
@@ -15,27 +16,31 @@ class SliverAppBarDetailsWidget extends StatelessWidget
   final int idProperties;
   final List<String> images;
   final bool isUnit;
+  final String title;
 
-  const SliverAppBarDetailsWidget(
-      {super.key,
-      this.isFavorite = true,
-      this.isLoading = false,      this.isUnit = false,
-
-
-        required this.images,
-      required this.idProperties});
+  const SliverAppBarDetailsWidget({
+    super.key,
+    this.isFavorite = true,
+    this.isLoading = false,
+    this.isUnit = false,
+    required this.images,
+    required this.idProperties,
+    required this.title,
+  });
 
   @override
   Size get preferredSize => Size.fromHeight(60.h);
 
   @override
   Widget build(BuildContext context) {
+    final double tbh = 56.h;
+    final double topInset = MediaQuery.viewPaddingOf(context).top;
     return SliverAppBar(
       backgroundColor: AppColors.scaffoldColor,
       surfaceTintColor: AppColors.scaffoldColor,
       elevation: 0,
       titleSpacing: 0,
-      toolbarHeight: 56.h,
+      toolbarHeight: tbh,
       expandedHeight: 300.h,
       pinned: true,
       leadingWidth: 65.2.w,
@@ -50,7 +55,7 @@ class SliverAppBarDetailsWidget extends StatelessWidget
           ),
         ),
       ),
-      actions: isLoading ||isUnit
+      actions: isLoading || isUnit
           ? []
           : [
               // if (isFavorite)
@@ -87,7 +92,7 @@ class SliverAppBarDetailsWidget extends StatelessWidget
                           color: isFav
                               ? AppColors.primarySwatch.shade400
                               : AppColors.fontColor,
-                          height: 18.h,
+                          height: isFav ? 20.h : 16.h,
                         ),
                       ),
                     ),
@@ -96,8 +101,33 @@ class SliverAppBarDetailsWidget extends StatelessWidget
               ),
               14.w.horizontalSpace,
             ],
-      flexibleSpace: FlexibleSpaceBar(
-        background: DetailsPicturesWidget(images: images),
+      flexibleSpace: LayoutBuilder(
+        builder: (context, constraints) {
+          final bool isCollapsed =
+              constraints.maxHeight <= (tbh + topInset + 1);
+          return FlexibleSpaceBar(
+            centerTitle: true,
+            title: AnimatedOpacity(
+              opacity: isCollapsed ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 300),
+              child: isCollapsed
+                  ? Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 66.w)
+                          .copyWith(bottom: 4.h),
+                      child: AutoSizeTextWidget(
+                        text: title,
+                        colorText: Colors.black,
+                        fontSize: 13.2.sp,
+                        maxLines: 2,
+                        minFontSize: 13,
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ),
+            background: DetailsPicturesWidget(images: images),
+          );
+        },
       ),
     );
   }

@@ -39,7 +39,7 @@ class _FilterByDateWidgetState extends ConsumerState<FilterByDateWidget> {
       children: [
         AutoSizeTextWidget(
           text: S.of(context).date,
-          fontSize: 12.sp,
+          fontSize: 11.sp,
           colorText: Colors.black87,
           fontWeight: FontWeight.w400,
         ),
