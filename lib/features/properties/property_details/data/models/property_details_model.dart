@@ -16,7 +16,7 @@ class PropertyDetailsModel {
   final AddressModel address;
   final DepositModel deposit;
   final List<PolicyModel> policies;
-  final List<SectionsOfPropertyModel> sections;
+  // final List<SectionsOfPropertyModel> sections;
 
   final List<RateWithCustomerModel> allScoreRateWithUser;
 
@@ -31,8 +31,8 @@ class PropertyDetailsModel {
       required this.address,
       required this.deposit,
       required this.policies,
-      required this.sections,
-      required this.allScoreRateWithUser});
+      // required this.sections,
+      required this.allScoreRateWithUser,});
 
   factory PropertyDetailsModel.fromJson(Map<String, dynamic> json) {
     return PropertyDetailsModel(
@@ -46,7 +46,7 @@ class PropertyDetailsModel {
         address: AddressModel.fromJson(json['address'] as Map<String, dynamic>),
         deposit: DepositModel.fromJson(json['deposit'] as Map<String, dynamic>),
         policies: PolicyModel.fromJsonList(json['policies'] ?? []),
-        sections: SectionsOfPropertyModel.fromJsonList(json['sections'] ?? []),
+        // sections: SectionsOfPropertyModel.fromJsonList(json['sections'] ?? []),
         allScoreRateWithUser:
             RateWithCustomerModel.fromJsonList(json['rate'] ?? []));
   }
@@ -61,7 +61,7 @@ class PropertyDetailsModel {
         address: AddressModel.empty(),
         features: <FeaturesModel>[],
         policies: <PolicyModel>[],
-        sections: <SectionsOfPropertyModel>[],
+        // sections: <SectionsOfPropertyModel>[],
         images: <String>[],
         allScoreRateWithUser: [],
       );

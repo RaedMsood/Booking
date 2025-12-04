@@ -37,8 +37,8 @@ class PropertyCardWidget extends StatelessWidget {
       child: Card(
         elevation: propertiesByCity ? 1 : 0.6,
         shadowColor: propertiesByCity
-            ? AppColors.greySwatch.shade50.withOpacity(.6)
-            : AppColors.greySwatch.shade50.withOpacity(.04),
+            ? AppColors.greySwatch.shade50.withValues(alpha: .6)
+            : AppColors.greySwatch.shade50.withValues(alpha: .04),
         color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.r),

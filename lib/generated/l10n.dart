@@ -427,6 +427,11 @@ class S {
     );
   }
 
+  /// `Sections`
+  String get sections {
+    return Intl.message('Sections', name: 'sections', desc: '', args: []);
+  }
+
   // skipped getter for the '--------myBookings-----------' key
 
   /// `Reservations`

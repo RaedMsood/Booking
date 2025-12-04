@@ -1,8 +1,6 @@
-import 'package:booking/features/properties/units/data/model/units_model.dart';
-
 import '../../../../../core/network/remote_request.dart';
 import '../../../../../core/network/urls.dart';
-import '../../../../../core/state/pagination_data/paginated_model.dart';
+import '../model/sections_model.dart';
 import '../model/unit_details_model.dart';
 
 class UnitDataSource {
@@ -17,11 +15,11 @@ class UnitDataSource {
     return UnitDetailsModel.fromJson(response.data['data']);
   }
 
-  Future<SectionsModel> getAllUnits({
+  Future<UnitsInPropertySectionsModel> getAllUnits({
     required int propertyId,
     required int page,
     required int sectionId,
-    int perPage = 4,
+    int perPage = 10,
   }) async {
     final response = await RemoteRequest.getData(
       url: "${AppURL.getAllUnis}/$propertyId",
@@ -32,12 +30,6 @@ class UnitDataSource {
       },
     );
 
-    return SectionsModel.fromJson(  response.data['data']);
-    // return PaginationModel<UnitsModel>.fromJson(
-    //   response.data['data'],
-    //   (prop) {
-    //     return UnitsModel.fromJson(prop);
-    //   },
-    // );
+    return UnitsInPropertySectionsModel.fromJson(response.data['data']);
   }
 }

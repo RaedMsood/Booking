@@ -381,6 +381,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchSubtitle": MessageLookupByLibrary.simpleMessage(
       "بإمكانك البحث باسم منشأة وقدرتة النتائج الخاصة بك",
     ),
+    "sections": MessageLookupByLibrary.simpleMessage("الأقسام"),
     "selectBookingDate": MessageLookupByLibrary.simpleMessage(
       "اختر تاريخ الحجز",
     ),

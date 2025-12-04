@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/widgets/online_images_widget.dart';
+import '../../../../../core/widgets/photo_view_dialog_widget.dart';
 import 'carousel_slider_for_detail_images_widget.dart';
 import 'hexagon_image _widget.dart';
 
@@ -61,10 +62,15 @@ class _DetailsPicturesWidgetState
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                setState(() {
-                  _currentIndex = index;
-                });
-                _carouselController.jumpToPage(index);
+                // setState(() {
+                //   _currentIndex = index;
+                // });
+                // _carouselController.jumpToPage(index);
+                PhotoViewDialogWidget.show(
+                  context,
+                  images: widget.images,
+                  initialIndex: index,
+                );
               },
               child: _currentIndex == index
                   ? HexagonImageWidget(imageUrl: widget.images[index])

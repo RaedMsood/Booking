@@ -16,6 +16,8 @@ class AppIcons {
   static const String about = '${_iconsPath}about.svg';
   static const String star = '${_iconsPath}star.svg';
   static const String mapLocation = '${_iconsPath}map_location.svg';
+  static const String bed = '${_iconsPath}bed.svg';
+
 
   static const String showRow = '${_iconsPath}show_row.svg';
   static const String filter = '${_iconsPath}filter.svg';

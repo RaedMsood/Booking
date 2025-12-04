@@ -38,7 +38,7 @@ class UnitsCardInHotelDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 180.w,
+      // width: 180.w,
       padding: EdgeInsets.all(10.sp),
       decoration: BoxDecoration(
           // color: const Color(0xfff9f9f9),

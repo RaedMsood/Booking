@@ -392,6 +392,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchSubtitle": MessageLookupByLibrary.simpleMessage(
       "You can search by property name and customize your results",
     ),
+    "sections": MessageLookupByLibrary.simpleMessage("Sections"),
     "selectBookingDate": MessageLookupByLibrary.simpleMessage(
       "Select booking date",
     ),

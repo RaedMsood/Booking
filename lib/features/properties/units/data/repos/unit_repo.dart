@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import '../../../../../core/state/pagination_data/paginated_model.dart';
 import '../data_source/unit_data_source.dart';
+import '../model/sections_model.dart';
 import '../model/unit_details_model.dart';
 import '../model/units_model.dart';
 
@@ -20,7 +21,7 @@ class UnitReposaitory {
     }
   }
 
-  Future<Either<DioException, SectionsModel>> getAllUnits({
+  Future<Either<DioException, UnitsInPropertySectionsModel>> getAllUnits({
     required int propertyId,
     required int page,
     required int sectionId,

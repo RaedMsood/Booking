@@ -57,6 +57,7 @@ dependencies:
   intl:
   cached_network_image:
   cached_network_svg_image:
+  photo_view:
   shimmer:
   pinput:
   google_maps_flutter:

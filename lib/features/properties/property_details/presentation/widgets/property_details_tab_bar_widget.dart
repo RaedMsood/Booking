@@ -14,7 +14,7 @@ class PropertyDetailsTabBarWidget extends SliverPersistentHeaderDelegate {
   late final TabBar _tabBar = TabBar(
     controller: tabController,
     isScrollable: true,
-    labelPadding: EdgeInsets.symmetric(horizontal: 54.w),
+    labelPadding: EdgeInsets.symmetric(horizontal: 30.w),
     physics: const ClampingScrollPhysics(),
     labelStyle: TextStyle(
       fontSize: 11.5.sp,
@@ -33,6 +33,17 @@ class PropertyDetailsTabBarWidget extends SliverPersistentHeaderDelegate {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(S.of(context).about),
+            4.w.horizontalSpace,
+            SvgPicture.asset(AppIcons.about),
+          ],
+        ),
+      ),
+      Tab(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(S.of(context).sections),
             4.w.horizontalSpace,
             SvgPicture.asset(AppIcons.about),
           ],
