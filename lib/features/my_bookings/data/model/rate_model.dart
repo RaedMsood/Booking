@@ -8,7 +8,7 @@ class RateModel {
   factory RateModel.fromJson(Map<String, dynamic> json) {
     return RateModel(
       id: json['id'],
-      nameOfRate: json['name'],
+      nameOfRate: json['name_ar'],
       numberOfRate: json['score'],
     );
   }

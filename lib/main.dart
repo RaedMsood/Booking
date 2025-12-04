@@ -12,6 +12,7 @@ import 'core/state/app_restart_controller.dart';
 import 'package:booking/injection.dart' as di;
 import 'core/theme/theme.dart';
 import 'features/launch_page.dart';
+import 'features/notifications/presentation/state_mangment/notifications_riverpod.dart';
 import 'features/profile/presentation/state_mangement/riverpod.dart';
 import 'generated/l10n.dart';
 import 'services/auth/auth.dart';
@@ -31,13 +32,13 @@ void main() async {
     }
   };
   runZonedGuarded(
-        () async {
+    () async {
       RemoteRequest.initDio();
       await di.init();
-      Auth();
+      await Auth().onInit();
       runApp(const AppRestartController(child: MyApp()));
     },
-        (error, stackTrace) {
+    (error, stackTrace) {
       debugPrint("Caught error in release mode: $error");
       debugPrint("Stack trace: $stackTrace");
     },
@@ -60,7 +61,18 @@ class _MyAppState extends ConsumerState<MyApp> {
         Auth().setFcmToken(t);
       }
     });
-    // TODO: implement initState
+    if (Auth().loggedIn) {
+      FirebaseMessagingService.I.onRefreshUnread = () {
+        ref.read(unreadCountProvider.notifier).refresh();
+      };
+      FirebaseMessagingService.I.onSetUnread = (c) {
+        ref.read(unreadCountProvider.notifier).set(c);
+      };
+      Future.microtask(() => ref.read(unreadCountProvider.notifier).refresh());
+    } else {
+      FirebaseMessagingService.I.onRefreshUnread = null;
+      FirebaseMessagingService.I.onSetUnread = null;
+    }
     super.initState();
   }
 

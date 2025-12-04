@@ -39,6 +39,9 @@ class UnitDetailsPage extends ConsumerWidget {
     return Scaffold(
       body: CheckStateInGetApiDataWidget(
         state: state,
+        refresh: () {
+          ref.invalidate(getUnitDetailsProvider(unitId));
+        },
         widgetOfData: CustomScrollView(
           slivers: [
             SliverAppBarDetailsWidget(

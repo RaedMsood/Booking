@@ -1,21 +1,15 @@
 import 'package:booking/core/helpers/navigateTo.dart';
 import 'package:booking/core/theme/app_colors.dart';
-import 'package:booking/core/widgets/buttons/icon_button_widget.dart';
-import 'package:booking/core/widgets/buttons/ink_well_button_widget.dart';
 import 'package:booking/features/profile/presentation/page/setting_page.dart';
 import 'package:booking/services/auth/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../core/widgets/go_to_login_widget.dart';
 import '../../../../generated/l10n.dart';
-import '../../../user/presentation/widgets/design_to_log_in_and_sign_up_widget.dart';
+import '../../../notifications/presentation/widget/notifications_button_widget.dart';
 import '../widget/profile_header_card_widget.dart';
-import '../widget/section_profile_widget.dart';
 import '../widget/tile_widget.dart';
 import 'about_page.dart';
 import 'contact_us_page.dart';
@@ -60,95 +54,100 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: 12.h,
-                children: [
-                  14.h.verticalSpace,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      AutoSizeTextWidget(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 12.h,
+              children: [
+                14.h.verticalSpace,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 14.w),
+                      child: AutoSizeTextWidget(
                         text: S.of(context).profile,
                         fontSize: 15.sp,
                       ),
-                      InkWellButtonWidget(
-                        icon: AppIcons.notification,
-                        iconColor: Colors.black,
-                        height: 18.h,
-                        onPressed: () {},
-                      )
+                    ),
+                    const NotificationsButtonWidget(),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 14.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 12.h,
+                    children: [
+                      ProfileHeaderCardWidget(onLogoutSuccess: _refresh),
+                      Visibility(
+                        visible: Auth().loggedIn,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: 12.h,
+                          children: [
+                            TileWidget(
+                              icon: AppIcons.profile,
+                              title: S.of(context).personalInfo,
+                              context: context,
+                              onTap: () {
+                                navigateTo(context, const EditProfilePage());
+                              },
+                            ),
+                            TileWidget(
+                              icon: AppIcons.favorite,
+                              title: S.of(context).favorites,
+                              context: context,
+                              onTap: () {
+                                navigateTo(context, const FavoritePage());
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      TileWidget(
+                        icon: AppIcons.setting,
+                        title: S.of(context).generalSettings,
+                        context: context,
+                        onTap: () {
+                          navigateTo(
+                              context, SettingsPage(onSuccess: _refresh));
+                        },
+                      ),
+                      TileWidget(
+                        icon: AppIcons.infoCircle,
+                        title: S.of(context).aboutApp,
+                        context: context,
+                        onTap: () {
+                          navigateTo(context, const AboutPage());
+                        },
+                      ),
+                      TileWidget(
+                        icon: AppIcons.phone,
+                        title: S.of(context).contactUs,
+                        context: context,
+                        onTap: () {
+                          navigateTo(context, const ContactUsPage());
+                        },
+                      ),
+                      TileWidget(
+                        icon: AppIcons.messageQuestion,
+                        title: S.of(context).faq,
+                        context: context,
+                        onTap: () {
+                          navigateTo(context, const FAQPage());
+                        },
+                      ),
+                      TileWidget(
+                        icon: AppIcons.sharing,
+                        title: S.of(context).shareApp,
+                        context: context,
+                        onTap: () {},
+                      ),
                     ],
                   ),
-                  ProfileHeaderCardWidget(onLogoutSuccess: _refresh),
-                  Visibility(
-                    visible: Auth().loggedIn,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: 12.h,
-                      children: [
-                        TileWidget(
-                          icon: AppIcons.profile,
-                          title: S.of(context).personalInfo,
-                          context: context,
-                          onTap: () {
-                            navigateTo(context, const EditProfilePage());
-                          },
-                        ),
-                        TileWidget(
-                          icon: AppIcons.favorite,
-                          title: S.of(context).favorites,
-                          context: context,
-                          onTap: () {
-                            navigateTo(context, const FavoritePage());
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  TileWidget(
-                    icon: AppIcons.setting,
-                    title: S.of(context).generalSettings,
-                    context: context,
-                    onTap: () {
-                      navigateTo(
-                          context, SettingsPage(onSuccess: _refresh));
-                    },
-                  ),
-                  TileWidget(
-                    icon: AppIcons.infoCircle,
-                    title: S.of(context).aboutApp,
-                    context: context,
-                    onTap: () {
-                      navigateTo(context, const AboutPage());
-                    },
-                  ),
-                  TileWidget(
-                    icon: AppIcons.phone,
-                    title: S.of(context).contactUs,
-                    context: context,
-                    onTap: () {
-                      navigateTo(context, const ContactUsPage());
-                    },
-                  ),
-                  TileWidget(
-                    icon: AppIcons.messageQuestion,
-                    title: S.of(context).faq,
-                    context: context,
-                    onTap: () {
-                      navigateTo(context, const FAQPage());
-                    },
-                  ),
-                  TileWidget(
-                    icon: AppIcons.sharing,
-                    title: S.of(context).shareApp,
-                    context: context,
-                    onTap: () {},
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],

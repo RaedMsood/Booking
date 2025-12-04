@@ -21,6 +21,7 @@ class MyBookingsData {
   final dynamic totalPrice;
   final List<RateModel>? rateData;
   final bool? isRated;
+  final num? totalRate;
 
   MyBookingsData({
     this.id,
@@ -43,6 +44,7 @@ class MyBookingsData {
     this.propertyId,
     this.rateData,
     this.isRated,
+    this.totalRate,
   });
 
   factory MyBookingsData.fromJson(Map<String, dynamic> json) {
@@ -75,6 +77,8 @@ class MyBookingsData {
       propertyId: json['property_id'],
       rateData: RateModel.fromJsonList(json['criterias'] ?? []),
       isRated: json['rate'] ?? false,
+      totalRate: json['totalRate'] ,
+
     );
   }
 }

@@ -24,7 +24,7 @@ class MyBookingCardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.symmetric( horizontal: 16.w).copyWith(top: 12.h),
+        margin: EdgeInsets.symmetric(horizontal: 12.w).copyWith(top: 12.h),
         padding: EdgeInsets.all(12.sp),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -50,7 +50,7 @@ class MyBookingCardWidget extends StatelessWidget {
                   },
                 ),
                 const Spacer(),
-                const RatingBookingWidget(rating: 4),
+                RatingBookingWidget(rating: bookData.totalRate ?? 0.0),
               ],
             ),
             const Divider(thickness: 0.5, color: Color(0xffF0F0F0)),

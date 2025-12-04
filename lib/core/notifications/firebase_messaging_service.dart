@@ -3,18 +3,19 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'awesome_notification_service.dart';
 
-/// لازم يكون Top-Level و عليه @pragma حتى يشتغل بالخلفية.
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  if(message.notification == null){
+  if (message.notification == null) {
     await AwesomeNotificationService.I.showFromRemote(message);
-
   }
-  // لا تنشئ قنوات هنا. فقط اعرض باستخدام القنوات المسجّلة مسبقًا.
 }
 
 class FirebaseMessagingService {
+  VoidCallback? onRefreshUnread;
+  void Function(int count)? onSetUnread;
+
   FirebaseMessagingService._();
+
   static final FirebaseMessagingService I = FirebaseMessagingService._();
 
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
@@ -44,7 +45,8 @@ class FirebaseMessagingService {
     );
 
     if (Platform.isIOS) {
-      await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      await FirebaseMessaging.instance
+          .setForegroundNotificationPresentationOptions(
         alert: true,
         badge: true,
         sound: true,
@@ -54,22 +56,30 @@ class FirebaseMessagingService {
     // Background handler
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
-    // Foreground messages
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      if (kDebugMode) {
-        print('[FCM] onMessage: ${message.notification?.title} | ${message.notification?.body}');
-      }
-      await AwesomeNotificationService.I.showFromRemote(message);
-    });
-
-    // App opened from notification (اختياري توجيه/روتنج)
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       if (kDebugMode) {
         print('[FCM] onMessageOpenedApp: ${message.data}');
       }
-      // TODO: نفّذ توجيه معين إذا احتجت (Router)
     });
 
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      await AwesomeNotificationService.I.showFromRemote(message);
+      _touchUnread(message);
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      _touchUnread(message);
+    });
     _configured = true;
+  }
+
+  void _touchUnread(RemoteMessage m) {
+    final type = m.data['type'];
+    if (type == 'unread_count' && m.data['unread'] != null) {
+      final c = int.tryParse('${m.data['unread']}') ?? 0;
+      onSetUnread?.call(c);
+    } else {
+      onRefreshUnread?.call();
+    }
   }
 }

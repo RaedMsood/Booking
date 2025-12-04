@@ -20,7 +20,7 @@ class Auth {
     onInit();
   }
 
-  void onInit() async {
+  Future<void> onInit() async {
     try {
       var read = await secureStorage.read(
         key: _key,

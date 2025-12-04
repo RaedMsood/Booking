@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 
 class RatingBookingWidget extends StatelessWidget {
-  final int rating;
+  final num rating;
 
   const RatingBookingWidget({super.key, required this.rating});
 
@@ -14,9 +14,9 @@ class RatingBookingWidget extends StatelessWidget {
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(horizontal: 8.sp, vertical: 4.sp),
       decoration: BoxDecoration(
-          color: const Color(0xffFFF3CD).withOpacity(0.5),
+          color: const Color(0xffFFF3CD).withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(16.sp),
-          border: Border.all(color: const Color(0xffFFA500).withOpacity(0.3))),
+          border: Border.all(color: const Color(0xffFFA500).withValues(alpha: 0.3))),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,

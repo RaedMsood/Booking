@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../generated/l10n.dart';
+import '../../../notifications/presentation/widget/notifications_button_widget.dart';
 import '../../../profile/presentation/widget/property _fav_card.dart';
 import '../riverpod/map_riverpod.dart';
 import '../widgets/card_in_map_widget.dart';
@@ -60,9 +61,9 @@ class _MapPageState extends ConsumerState<MapPage>
   }
 
   Future<BitmapDescriptor> _bitmapDescriptorFromAsset(
-      String assetPath, {
-        required int width,
-      }) async {
+    String assetPath, {
+    required int width,
+  }) async {
     final ByteData data = await rootBundle.load(assetPath);
     final ui.Codec codec = await ui.instantiateImageCodec(
       data.buffer.asUint8List(),
@@ -87,6 +88,7 @@ class _MapPageState extends ConsumerState<MapPage>
     return Scaffold(
       appBar: AppBar(
         title: AutoSizeTextWidget(text: S.of(context).mapTitle),
+        actions: const [NotificationsButtonWidget()],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,16 +189,16 @@ class _MapPageState extends ConsumerState<MapPage>
                       switchOutCurve: Curves.easeIn,
                       child: _showCard
                           ? Visibility(
-                        key: const ValueKey('card'),
-                        visible: propertyFromPositionState.stateData !=
-                            States.loading,
-                        replacement: const ShimmerCardInMapWidget(),
-                        child: PropertyFavoriteAndMapWidget(
-                          property: propertyFromPositionState.data,
-                          imageHeight: 90,
-                          spaceHeight: 10,
-                        ),
-                      )
+                              key: const ValueKey('card'),
+                              visible: propertyFromPositionState.stateData !=
+                                  States.loading,
+                              replacement: const ShimmerCardInMapWidget(),
+                              child: PropertyFavoriteAndMapWidget(
+                                property: propertyFromPositionState.data,
+                                imageHeight: 90,
+                                spaceHeight: 10,
+                              ),
+                            )
                           : const SizedBox.shrink(key: ValueKey('empty')),
                     ),
                   ),
@@ -213,5 +215,6 @@ class _MapPageState extends ConsumerState<MapPage>
 class _MarkerData {
   final String id;
   final LatLng position;
+
   const _MarkerData({required this.id, required this.position});
 }

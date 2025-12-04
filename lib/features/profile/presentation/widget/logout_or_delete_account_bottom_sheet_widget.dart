@@ -10,6 +10,7 @@ import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/buttons/default_button.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../../services/auth/auth.dart';
+import '../../../notifications/presentation/state_mangment/notifications_riverpod.dart';
 import '../state_mangement/riverpod.dart';
 
 class LogoutOrDeleteAccountBottomSheetWidget extends ConsumerWidget {
@@ -90,6 +91,7 @@ class LogoutOrDeleteAccountBottomSheetWidget extends ConsumerWidget {
             functionSuccess: () {
               Auth().logout();
               Navigator.of(context).pop();
+              ref.read(unreadCountProvider.notifier).clear();
               onSuccess?.call();
             },
             bottonWidget: DefaultButtonWidget(

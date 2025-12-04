@@ -68,6 +68,9 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
           top: false,
           child: CheckStateInGetApiDataWidget(
             state: state,
+            refresh: () {
+              ref.invalidate(getPropertyDetailsProvider(widget.propertyId));
+            },
             widgetOfLoading:
                 ShimmerPropertyDetailsWidget(images: widget.images),
             widgetOfData: NestedScrollView(

@@ -6,6 +6,7 @@ import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/go_to_login_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
+import '../../../notifications/presentation/widget/notifications_button_widget.dart';
 import '../widgets/list_of_type_all_my_bookings_widget.dart';
 
 class MyBookingsPage extends StatefulWidget {
@@ -18,12 +19,14 @@ class MyBookingsPage extends StatefulWidget {
 class _MyBookingsPageState extends State<MyBookingsPage>
     with TickerProviderStateMixin {
   late final TabController _tabController;
-   List<String> _tabs(BuildContext context) => [
-  S.of(context).all,
-  S.of(context).currentFilter,
-  S.of(context).completedFilter,
-  S.of(context).canceledFilter,
-  ];
+
+  List<String> _tabs(BuildContext context) => [
+        S.of(context).all,
+        S.of(context).currentFilter,
+        S.of(context).completedFilter,
+        S.of(context).canceledFilter,
+      ];
+
   @override
   void initState() {
     super.initState();
@@ -45,13 +48,14 @@ class _MyBookingsPageState extends State<MyBookingsPage>
   Widget build(BuildContext context) {
     return Visibility(
       visible: Auth().loggedIn,
-      replacement:const GoToLoginWidget(),
+      replacement: const GoToLoginWidget(),
       child: Scaffold(
         appBar: AppBar(
-          title:  AutoSizeTextWidget(
+          title: AutoSizeTextWidget(
             text: S.of(context).reservationsTitle,
             fontWeight: FontWeight.w500,
           ),
+          actions: const [NotificationsButtonWidget()],
         ),
         body: Column(
           children: [
@@ -65,7 +69,7 @@ class _MyBookingsPageState extends State<MyBookingsPage>
               indicator: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
               ),
-              labelPadding: EdgeInsets.symmetric(horizontal: 8.w),
+              labelPadding: EdgeInsets.symmetric(horizontal: 9.6.w),
               overlayColor: MaterialStateProperty.all(Colors.transparent),
               tabs: List.generate(
                 _tabs(context).length,
@@ -112,7 +116,8 @@ class _MyBookingsPageState extends State<MyBookingsPage>
             style: TextStyle(
               fontSize: 11.sp,
               fontWeight: FontWeight.w500,
-              color: isSelected ? AppColors.primaryColor : const Color(0xff605A65),
+              color:
+                  isSelected ? AppColors.primaryColor : const Color(0xff605A65),
             ),
           ),
         ),
