@@ -55,7 +55,7 @@ class GetBookingNotifier
 }
 
 final statusColorsProvider =
-Provider.family<StatusColors, String>((ref, status) {
+    Provider.family<StatusColors, String>((ref, status) {
   switch (status) {
     case 'حالية':
       return const StatusColors(
@@ -79,6 +79,41 @@ Provider.family<StatusColors, String>((ref, status) {
       );
   }
 });
+
+final myBookingDetailsProvider = StateNotifierProvider.autoDispose
+    .family<MyBookingDetailsController, DataState<MyBookingsData>, int>(
+  (ref, int id) {
+    return MyBookingDetailsController(id);
+  },
+);
+
+class MyBookingDetailsController
+    extends StateNotifier<DataState<MyBookingsData>> {
+  final int id;
+
+  MyBookingDetailsController(this.id)
+      : super(DataState<MyBookingsData>.initial(MyBookingsData.empty())) {
+    getData();
+  }
+
+  final _controller = MyBookingsReposaitory();
+
+  Future<void> getData() async {
+    state = state.copyWith(state: States.loading);
+    final data = await _controller.myBookingDetails(id: id);
+    data.fold(
+      (failure) {
+        state = state.copyWith(state: States.error, exception: failure);
+      },
+      (orderDetailsData) {
+        state = state.copyWith(
+          state: States.loaded,
+          data: orderDetailsData,
+        );
+      },
+    );
+  }
+}
 
 final ratePropertyProvider =
     StateNotifierProvider.autoDispose<RatePropertyNotifier, DataState<Unit>>(
@@ -107,5 +142,3 @@ class RatePropertyNotifier extends StateNotifier<DataState<Unit>> {
     });
   }
 }
-
-

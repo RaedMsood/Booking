@@ -54,10 +54,11 @@ class _ListOfTypeAllMyBookingsWidgetState
         itemBuilder: (context, index) => MyBookingCardWidget(
           bookData: bookingTypeState.data.data[index],
           onTap: () {
+            print(bookingTypeState.data.data[index].id);
             navigateTo(
               context,
               MyBookingDetailsPage(
-                bookData: bookingTypeState.data.data[index],
+                bookingId: bookingTypeState.data.data[index].id!,
                 isCompletedBook: widget.statusId == 2 ||
                     bookingTypeState.data.data[index].status == "منتهيه",
               ),

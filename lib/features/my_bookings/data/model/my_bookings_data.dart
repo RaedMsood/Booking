@@ -74,11 +74,26 @@ class MyBookingsData {
       bookingAt: json['booking_at']?.toString() ?? '',
       deposit: json['deposit']?.toString() ?? '',
       code: json['code'] ?? '',
-      propertyId: json['property_id'],
+      propertyId: json['property_id']??0,
       rateData: RateModel.fromJsonList(json['criterias'] ?? []),
       isRated: json['rate'] ?? false,
-      totalRate: json['totalRate'] ,
+      totalRate: json['totalRate']??0 ,
 
+    );
+  }
+
+  factory MyBookingsData.empty() {
+    return MyBookingsData(
+      propertyId: null,
+      unitId: null,
+      checkIn: '',
+      checkOut: '',
+      guests: null,
+      childCount: 0,
+      adultCount: 0,
+      bookingAt: '',
+      type: '',
+      unitCount: null,
     );
   }
 }

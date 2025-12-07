@@ -37,4 +37,16 @@ class MyBookingsReposaitory {
       return Left(e);
     }
   }
+
+  Future<Either<DioException, MyBookingsData>> myBookingDetails({
+    required int id,
+  }) async {
+    try {
+      final remote = await myBookingsDataSource.myBookingDetails(id: id);
+      return Right(remote);
+    } on DioException catch (e) {
+      print(e);
+      return Left(e);
+    }
+  }
 }

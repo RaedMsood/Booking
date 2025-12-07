@@ -118,7 +118,7 @@ class UnitCardWidget extends StatelessWidget {
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        spacing: 4.h,
+                        spacing: 5.h,
                         children: [
                           Flexible(
                             child: Row(
@@ -127,7 +127,7 @@ class UnitCardWidget extends StatelessWidget {
                                 Flexible(
                                   child: AutoSizeTextWidget(
                                     text: units.name,
-                                    fontSize: 12.sp,
+                                    fontSize: 11.sp,
                                     colorText: Colors.white,
                                     minFontSize: 10,
                                   ),
@@ -163,8 +163,9 @@ class UnitCardWidget extends StatelessWidget {
                               4.w.horizontalSpace,
                               Flexible(
                                 child: AutoSizeTextWidget(
-                                  text: 'اسرة مزدوجة 4، اسرة مفردة 4',
-                                  fontSize: 8.8.sp,
+                                  text: 'اسرة مزدوجة 4 - اسرة مفردة 4',
+                                  fontSize: 8.2.sp,
+                                  minFontSize: 7,
                                   colorText: Colors.white.withValues(alpha: 0.9),
                                   textAlign: TextAlign.start,
                                 ),

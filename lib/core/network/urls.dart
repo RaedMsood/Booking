@@ -45,6 +45,8 @@ class AppURL {
 
   static String get getBookingType => '/booking/all/';
 
+  static String get myBookingDetails => '/booking/showDetail';
+
   static String get custemorForBooking => '/booking/customer';
 
   static String get getAllPaymentMethods => '/booking/get_booking_data';

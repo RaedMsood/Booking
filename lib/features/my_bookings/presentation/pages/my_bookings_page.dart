@@ -20,12 +20,12 @@ class _MyBookingsPageState extends State<MyBookingsPage>
     with TickerProviderStateMixin {
   late final TabController _tabController;
 
-  List<String> _tabs(BuildContext context) => [
-        S.of(context).all,
-        S.of(context).currentFilter,
-        S.of(context).completedFilter,
-        S.of(context).canceledFilter,
-      ];
+  final List<String> _tabs = [
+    S.current.all,
+    S.current.currentFilter,
+    S.current.completedFilter,
+    S.current.canceledFilter,
+  ];
 
   @override
   void initState() {
@@ -71,55 +71,64 @@ class _MyBookingsPageState extends State<MyBookingsPage>
               ),
               labelPadding: EdgeInsets.symmetric(horizontal: 9.6.w),
               overlayColor: MaterialStateProperty.all(Colors.transparent),
-              tabs: List.generate(
-                _tabs(context).length,
-                (index) => _buildTab(_tabs(context)[index], index),
-              ),
+              tabs: [
+                for (int i = 0; i < _tabs.length; i++)
+                  AnimatedBuilder(
+                    animation: _tabController.animation!,
+                    builder: (context, _) {
+                      final value = _tabController.animation?.value ??
+                          _tabController.index.toDouble();
+                      final selectness =
+                          (1.0 - (value - i).abs()).clamp(0.0, 1.0);
+                      final bgColor = Color.lerp(
+                          Colors.white,
+                          AppColors.primaryColor.withValues(alpha: 0.05),
+                          selectness)!;
+                      final borderColor = Color.lerp(const Color(0xFFE0E0E0),
+                          AppColors.primaryColor, selectness)!;
+                      final textColor = Color.lerp(const Color(0xff605A65),
+                          AppColors.primaryColor, selectness)!;
+
+                      return Container(
+                        height: 30.h,
+                        width: 70.w,
+                        decoration: BoxDecoration(
+                          color: bgColor,
+                          borderRadius: BorderRadius.circular(25.r),
+                          border: Border.all(
+                            color: borderColor,
+                            width: 0.5,
+                          ),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          _tabs[i],
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontFamily: 'ReadexPro',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 10.sp,
+                            color: textColor,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+              ],
             ),
             Expanded(
               child: TabBarView(
                 controller: _tabController,
                 physics: const BouncingScrollPhysics(),
                 children: List.generate(
-                  _tabs(context).length,
+                  _tabs.length,
                   (i) => ListOfTypeAllMyBookingsWidget(statusId: i),
                 ),
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTab(String label, int index) {
-    bool isSelected = _tabController.index == index;
-
-    return Tab(
-      child: Container(
-        height: 30.h,
-        width: 70.w,
-        decoration: BoxDecoration(
-          color: isSelected
-              ? AppColors.primaryColor.withOpacity(0.05)
-              : Colors.white,
-          borderRadius: BorderRadius.circular(25.r),
-          border: Border.all(
-            color:
-                isSelected ? AppColors.primaryColor : const Color(0xFFE0E0E0),
-            width: 0.5,
-          ),
-        ),
-        child: Center(
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 11.sp,
-              fontWeight: FontWeight.w500,
-              color:
-                  isSelected ? AppColors.primaryColor : const Color(0xff605A65),
-            ),
-          ),
         ),
       ),
     );

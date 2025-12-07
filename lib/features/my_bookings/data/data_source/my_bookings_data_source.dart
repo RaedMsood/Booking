@@ -16,7 +16,7 @@ class MyBookingsDataSource {
       url: "${AppURL.getBookingType}$filterType",
       query: {
         'page': page,
-        'perPage': 4,
+        'perPage': perPage,
       },
     );
 
@@ -43,5 +43,14 @@ class MyBookingsDataSource {
     debugPrint(response.statusCode.toString());
 
     return Future.value(unit);
+  }
+
+  Future<MyBookingsData> myBookingDetails({
+    required int id,
+  }) async {
+    final response = await RemoteRequest.getData(
+      url: "${AppURL.myBookingDetails}/$id",
+    );
+    return MyBookingsData.fromJson(response.data['data']);
   }
 }

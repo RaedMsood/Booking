@@ -17,6 +17,7 @@ class HotelFeaturesWidget extends StatelessWidget {
       children: [
         SizedBox(
           height: 75.h,
+          width: double.infinity,
           child: ListView.separated(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
