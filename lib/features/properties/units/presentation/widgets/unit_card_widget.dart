@@ -16,16 +16,10 @@ import '../pages/unit_details_page.dart';
 
 class UnitCardWidget extends StatelessWidget {
   final UnitsModel units;
-  final String nameProp;
-  final String location;
-  final String image;
 
   const UnitCardWidget({
     super.key,
     required this.units,
-    required this.location,
-    required this.nameProp,
-    required this.image,
   });
 
   String _guestsText() {
@@ -38,28 +32,44 @@ class UnitCardWidget extends StatelessWidget {
     }
   }
 
+  String? _bedsText(BuildContext context) {
+    final num single = units.singleBed ;
+    final num dbl = units.doubleBed ;
+
+    final parts = <String>[];
+
+    if (dbl > 0) {
+      parts.add('${S.of(context).doubleBed} ${dbl.toInt()}');
+    }
+
+    if (single > 0) {
+      parts.add('${S.of(context).singleBed} ${single.toInt()}');
+    }
+
+    if (parts.isEmpty) {
+      return null;
+    }
+
+    return parts.join(' - ');
+  }
   @override
   Widget build(BuildContext context) {
     final isRtl = Directionality.of(context) == TextDirection.rtl;
-
+    final bedsText = _bedsText(context);
     return GestureDetector(
       onTap: () {
         navigateTo(
           context,
-          UnitDetailsPage(
-            unitId: units.id,
-            image: image,
-            location: location,
-            nameProp: nameProp,
-          ),
+          UnitDetailsPage(unitId: units.id),
         );
       },
       child: Padding(
-        padding:  EdgeInsets.only(bottom: 8.h),
+        padding: EdgeInsets.only(bottom: 10.h),
         child: Card(
           elevation: 0.8,
           shadowColor: AppColors.greySwatch.shade50.withValues(alpha: .04),
           color: AppColors.whiteColor,
+          margin: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14.r),
           ),
@@ -138,7 +148,8 @@ class UnitCardWidget extends StatelessWidget {
                                     SvgPicture.asset(
                                       AppIcons.gender,
                                       height: 10.h,
-                                      color: Colors.white.withValues(alpha: 0.9),
+                                      color:
+                                          Colors.white.withValues(alpha: 0.9),
                                     ),
                                     2.w.horizontalSpace,
                                     AutoSizeTextWidget(
@@ -153,6 +164,7 @@ class UnitCardWidget extends StatelessWidget {
                               ],
                             ),
                           ),
+                          if (bedsText != null)
                           Row(
                             children: [
                               SvgPicture.asset(
@@ -163,10 +175,11 @@ class UnitCardWidget extends StatelessWidget {
                               4.w.horizontalSpace,
                               Flexible(
                                 child: AutoSizeTextWidget(
-                                  text: 'اسرة مزدوجة 4 - اسرة مفردة 4',
+                                  text: bedsText,
                                   fontSize: 8.2.sp,
                                   minFontSize: 7,
-                                  colorText: Colors.white.withValues(alpha: 0.9),
+                                  colorText:
+                                      Colors.white.withValues(alpha: 0.9),
                                   textAlign: TextAlign.start,
                                 ),
                               ),

@@ -18,8 +18,8 @@ class DesignToLogInAndSignUpWidget extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                AppColors.primarySwatch.shade100.withOpacity(.7),
-                AppColors.primarySwatch.shade50.withOpacity(.4),
+                AppColors.primarySwatch.shade100.withValues(alpha:.7),
+                AppColors.primarySwatch.shade50.withValues(alpha:.4),
                 AppColors.scaffoldColor,
                 AppColors.scaffoldColor,
               ],
@@ -39,8 +39,8 @@ class DesignToLogInAndSignUpWidget extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  AppColors.primarySwatch.shade100.withOpacity(.7),
-                  AppColors.primarySwatch.shade50.withOpacity(.4),
+                  AppColors.primarySwatch.shade100.withValues(alpha:.7),
+                  AppColors.primarySwatch.shade50.withValues(alpha:.4),
                   AppColors.scaffoldColor,
                   AppColors.scaffoldColor,
                   AppColors.scaffoldColor,

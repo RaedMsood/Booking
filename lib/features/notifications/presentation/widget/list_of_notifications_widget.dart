@@ -17,11 +17,9 @@ class ListOfNotificationsWidget extends StatelessWidget {
       primary: true,
       padding: EdgeInsets.all(15.sp),
       itemBuilder: (context, index) {
-        index = getNotifications.length - 1 - index;
         return NotificationsWidget(
-          title: getNotifications[index].title,
-          date: getNotifications[index].date,
-          message: getNotifications[index].message,
+          data: getNotifications[index],
+          index: index,
         );
       },
       itemCount: getNotifications.length,

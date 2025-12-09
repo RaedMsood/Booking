@@ -23,7 +23,7 @@ class AttachmentsWidget extends StatelessWidget {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
             decoration: BoxDecoration(
-              color: AppColors.scaffoldColor.withOpacity(.8),
+              color: AppColors.scaffoldColor.withValues(alpha:.8),
               borderRadius: BorderRadius.circular(8.r),
             ),
             child: Column(

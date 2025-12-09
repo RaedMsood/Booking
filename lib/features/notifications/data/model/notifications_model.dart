@@ -1,9 +1,11 @@
 class NotificationsModel {
   final String? id;
-  int? userId;
+  final int? userId;
   final String title;
   final String message;
   final String date;
+  final String? type;
+  final int? typeId;
   final String? readAt;
 
   NotificationsModel({
@@ -12,6 +14,8 @@ class NotificationsModel {
     required this.title,
     required this.message,
     required this.date,
+    this.type,
+    this.typeId,
     this.readAt,
   });
 
@@ -24,7 +28,11 @@ class NotificationsModel {
       title: json['title'] ?? '',
       message: json['message'] ?? '',
       date: json['created_at'] ?? '',
-      readAt: json['read_at'] ?? '',
+      type: json['type']?.toString(),
+      typeId: json['type_id'] != null
+          ? int.tryParse(json['type_id'].toString())
+          : null,
+      readAt: json['read_at']?.toString(),
     );
   }
 

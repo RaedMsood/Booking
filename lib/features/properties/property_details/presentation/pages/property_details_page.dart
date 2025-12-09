@@ -116,20 +116,14 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         DepositWidget(deposit: state.data.deposit),
+                        if(state.data.policies.isNotEmpty)
                         TermsPolicyWidget(policy: state.data.policies),
                         PropertyLocationWidget(address: state.data.address),
                         12.h.verticalSpace,
                       ],
                     ),
                   ),
-                  UnitsInPropertyDetailsTab(
-                    propertyId: state.data.id,
-                    nameProp: state.data.name,
-                    location:
-                        '${state.data.address.city} ,${state.data.address.district}',
-                    image:
-                        state.data.images.isEmpty ? '' : state.data.images[0],
-                  ),
+                  UnitsInPropertyDetailsTab(propertyId: state.data.id),
                   ListOfAllScoresCustemorWidget(
                     rateOfScore: state.data.allScoreRateWithUser,
                   ),

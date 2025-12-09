@@ -15,7 +15,7 @@ class ShimmerCardInMapWidget extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 8.h),
       child: Card(
         elevation: 0.8,
-        shadowColor: AppColors.greySwatch.shade50.withOpacity(.2),
+        shadowColor: AppColors.greySwatch.shade50.withValues(alpha:.2),
         color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.r),
@@ -65,7 +65,7 @@ class ShimmerCardInMapWidget extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: 8.w, vertical: 2.4.h),
                           decoration: BoxDecoration(
-                            color: const Color(0xfffef4d4).withOpacity(.8),
+                            color: const Color(0xfffef4d4).withValues(alpha:.8),
                             borderRadius: BorderRadius.circular(28.r),
                           ),
                           child: Row(

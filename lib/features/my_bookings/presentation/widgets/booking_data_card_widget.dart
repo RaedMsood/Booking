@@ -28,7 +28,7 @@ class BookingDataCardWidget extends StatelessWidget {
           2.verticalSpace,
           InfoBookingInDetailsWidget(
             title: S.of(context).adultsCount,
-            icon:AppIcons.people,
+            icon: AppIcons.people,
             text: '$adults',
           ),
           SizedBox(height: 9.h),
@@ -39,7 +39,6 @@ class BookingDataCardWidget extends StatelessWidget {
           ),
           SizedBox(height: 9.h),
           InfoBookingInDetailsWidget(
-
             icon: AppIcons.date,
             text: startDateString,
             title: S.of(context).checkInDate,

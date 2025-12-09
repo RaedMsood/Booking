@@ -23,9 +23,9 @@ class BookingStatusWidget extends ConsumerWidget {
       height: 19.h,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: colors.background.withOpacity(0.5),
+        color: colors.background.withValues(alpha:0.5),
         borderRadius: BorderRadius.circular(12.sp),
-        border: Border.all(color: colors.text.withOpacity(0.3)),
+        border: Border.all(color: colors.text.withValues(alpha:0.3)),
       ),
       child: AutoSizeTextWidget(
         text: status == "منتهيه" ? S.of(context).completedFilter : status,

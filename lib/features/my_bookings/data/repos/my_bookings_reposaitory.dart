@@ -45,7 +45,6 @@ class MyBookingsReposaitory {
       final remote = await myBookingsDataSource.myBookingDetails(id: id);
       return Right(remote);
     } on DioException catch (e) {
-      print(e);
       return Left(e);
     }
   }

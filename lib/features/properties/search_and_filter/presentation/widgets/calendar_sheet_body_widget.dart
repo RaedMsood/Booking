@@ -83,7 +83,7 @@ class CalendarSheetBodyWidget extends StatelessWidget {
             ),
           ),
           6.h.verticalSpace,
-           Divider(height: 12,color:AppColors.fontColor.withOpacity(.25) ,),
+           Divider(height: 12,color:AppColors.fontColor.withValues(alpha:.25) ,),
 
           Expanded(
             child: ListView.builder(

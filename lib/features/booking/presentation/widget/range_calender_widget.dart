@@ -199,15 +199,15 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                         shape: BoxShape.circle,
                       ),
                       todayDecoration: BoxDecoration(
-                        color: AppColors.primaryColor.withOpacity(0.5),
+                        color: AppColors.primaryColor.withValues(alpha:0.5),
                         shape: BoxShape.circle,
                       ),
                       withinRangeDecoration: BoxDecoration(
-                        color: AppColors.primaryColor.withOpacity(0.5),
+                        color: AppColors.primaryColor.withValues(alpha:0.5),
                         shape: BoxShape.circle,
                       ),
                       rangeHighlightColor:
-                          AppColors.primaryColor.withOpacity(0.1),
+                          AppColors.primaryColor.withValues(alpha:0.1),
                     ),
                   ),
                 ],

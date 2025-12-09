@@ -34,7 +34,7 @@ class DayCellWidget extends StatelessWidget {
     BoxDecoration? decoration;
     TextDecoration? strike = disabled ? TextDecoration.lineThrough : null;
     Color textColor =
-        disabled ? AppColors.fontColor.withOpacity(.5) : Colors.black87;
+        disabled ? AppColors.fontColor.withValues(alpha:.5) : Colors.black87;
 
     if (start || end) {
       decoration = const BoxDecoration(
@@ -43,12 +43,12 @@ class DayCellWidget extends StatelessWidget {
       strike = null;
     } else if (between) {
       decoration = BoxDecoration(
-        color: Colors.blue.withOpacity(0.1),
+        color: Colors.blue.withValues(alpha:0.1),
         shape: BoxShape.circle,
       );
     } else if (isToday) {
       decoration = BoxDecoration(
-        border: Border.all(color: Colors.blue.withOpacity(0.2)),
+        border: Border.all(color: Colors.blue.withValues(alpha:0.2)),
         shape: BoxShape.circle,
       );
     }

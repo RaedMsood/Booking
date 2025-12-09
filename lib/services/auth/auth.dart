@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:booking/features/properties/cities/data/model/city_model.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../core/local/secure_storage.dart';
 import '../../features/user/data/model/auth_model.dart';
@@ -31,7 +32,7 @@ class Auth {
         AuthModel authModel = AuthModel.fromJson(map);
         user = authModel;
       }
-      print("token: ${user.token}");
+      debugPrint("token: ${user.token}");
     } catch (ex) {
       throw '$ex';
     }

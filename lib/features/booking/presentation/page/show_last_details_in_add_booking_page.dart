@@ -64,6 +64,7 @@ class ShowLastDetailsInAddBookingPage extends StatelessWidget {
                       builder: (context, ref, child) {
                         return DefaultButtonWidget(
                           text: S.of(context).payDeposit,
+                          textSize: 12.sp,
                           borderRadius: 12.r,
                           onPressed: () {
                             ref.read(selectedPayMethodProvider.notifier).state =

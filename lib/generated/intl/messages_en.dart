@@ -45,6 +45,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Application language",
     ),
     "applyFilter": MessageLookupByLibrary.simpleMessage("Apply filter"),
+    "area": MessageLookupByLibrary.simpleMessage("Area"),
+    "availableBedTypes": MessageLookupByLibrary.simpleMessage(
+      "Available bed types",
+    ),
     "backToMyBookings": MessageLookupByLibrary.simpleMessage(
       "Back to my bookings",
     ),
@@ -55,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "birthdateOptional": MessageLookupByLibrary.simpleMessage(
       "Birthdate (optional)",
     ),
+    "bookNow": MessageLookupByLibrary.simpleMessage("Book now"),
     "bookingCodeCopied": MessageLookupByLibrary.simpleMessage(
       "Booking number copied",
     ),
@@ -152,6 +157,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Do you really want to sign out?",
     ),
     "done": MessageLookupByLibrary.simpleMessage("Done"),
+    "doubleBed": MessageLookupByLibrary.simpleMessage("Double bed"),
     "editPersonalInfoSubtitle": MessageLookupByLibrary.simpleMessage(
       "Update your personal information",
     ),
@@ -238,7 +244,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "Invalid email address",
     ),
+    "invoice": MessageLookupByLibrary.simpleMessage("Invoice"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
+    "length": MessageLookupByLibrary.simpleMessage("Length"),
     "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
     "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
       "Do you really want to log out? You will need to log in again to access your data.",
@@ -280,6 +288,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Make sure the app is updated or contact support",
     ),
     "notificationsTitle": MessageLookupByLibrary.simpleMessage("Notifications"),
+    "openOffersWorldSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Log in now to discover all the great opportunities we\'ve prepared for you",
+    ),
+    "openOffersWorldTitle": MessageLookupByLibrary.simpleMessage(
+      "Open the door to your world of offers and bookings",
+    ),
     "or": MessageLookupByLibrary.simpleMessage("Or"),
     "payAction": MessageLookupByLibrary.simpleMessage("Pay"),
     "payDeposit": MessageLookupByLibrary.simpleMessage("Pay deposit"),
@@ -306,6 +320,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "payKuraimiInstruction": MessageLookupByLibrary.simpleMessage(
       "The identification number is generated from Al Kuraimi app settings on first setup",
     ),
+    "paymentMethod": MessageLookupByLibrary.simpleMessage("Payment method"),
     "paymentMethods": MessageLookupByLibrary.simpleMessage("Payment methods"),
     "personOne": MessageLookupByLibrary.simpleMessage("Person"),
     "personOther": MessageLookupByLibrary.simpleMessage("People"),
@@ -421,6 +436,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "showLess": MessageLookupByLibrary.simpleMessage("Show less"),
     "signOut": MessageLookupByLibrary.simpleMessage("SIGN OUT"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+    "singleBed": MessageLookupByLibrary.simpleMessage("Single bed"),
     "somethingWentWrong": MessageLookupByLibrary.simpleMessage(
       "Something went wrong",
     ),
@@ -464,6 +480,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "viewVenueDetails": MessageLookupByLibrary.simpleMessage(
       "View venue details",
     ),
+    "width": MessageLookupByLibrary.simpleMessage("Width"),
     "yes": MessageLookupByLibrary.simpleMessage("Yes"),
     "yourBookingDate": MessageLookupByLibrary.simpleMessage(
       "Your booking date",

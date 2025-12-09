@@ -78,7 +78,7 @@ class PropertyCardWidget extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 8.w, vertical: 2.4.h),
                             decoration: BoxDecoration(
-                              color: const Color(0xfffef4d4).withOpacity(.8),
+                              color: const Color(0xfffef4d4).withValues(alpha:.8),
                               borderRadius: BorderRadius.circular(28.r),
                             ),
                             child: Row(

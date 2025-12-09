@@ -5,8 +5,8 @@ import 'app_colors.dart';
 ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: AppColors.scaffoldColor,
   primarySwatch: AppColors.primarySwatch,
-  splashColor: AppColors.primaryColor.withOpacity(.1),
-  highlightColor: AppColors.primaryColor.withOpacity(.1),
+  splashColor: AppColors.primaryColor.withValues(alpha: .1),
+  highlightColor: AppColors.primaryColor.withValues(alpha:.1),
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.transparent,
     surfaceTintColor: Colors.transparent,

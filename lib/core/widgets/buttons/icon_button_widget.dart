@@ -23,8 +23,8 @@ class IconButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      splashColor: AppColors.primarySwatch.shade800.withOpacity(.1),
-      highlightColor: AppColors.primarySwatch.shade800.withOpacity(.1),
+      splashColor: AppColors.primarySwatch.shade800.withValues(alpha:.1),
+      highlightColor: AppColors.primarySwatch.shade800.withValues(alpha:.1),
       splashRadius: 2,
       style: ButtonStyle(
         shape: MaterialStateProperty.all(const CircleBorder()),

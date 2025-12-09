@@ -84,7 +84,7 @@ class _PropertyLocationWidgetState extends State<PropertyLocationWidget> {
             children: [
               SvgPicture.asset(
                 AppIcons.mapActive,
-                color: AppColors.greyColor.withOpacity(.8),
+                color: AppColors.greyColor.withValues(alpha:.8),
                 height: 15.h,
               ),
               3.w.horizontalSpace,

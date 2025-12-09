@@ -62,7 +62,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 14.w),
                       child: AutoSizeTextWidget(
@@ -91,7 +90,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               title: S.of(context).personalInfo,
                               context: context,
                               onTap: () {
-                                navigateTo(context, const EditProfilePage());
+                                navigateTo(context,
+                                    EditProfilePage(onSuccess: _refresh));
                               },
                             ),
                             TileWidget(

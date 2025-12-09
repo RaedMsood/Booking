@@ -54,7 +54,6 @@ class _ListOfTypeAllMyBookingsWidgetState
         itemBuilder: (context, index) => MyBookingCardWidget(
           bookData: bookingTypeState.data.data[index],
           onTap: () {
-            print(bookingTypeState.data.data[index].id);
             navigateTo(
               context,
               MyBookingDetailsPage(

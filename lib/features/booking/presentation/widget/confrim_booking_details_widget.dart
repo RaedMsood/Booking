@@ -38,7 +38,8 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
           PriceAndCurrencyWidget(
             price: totalPrice.toString() ,
             fontWeight: FontWeight.w400,
-            fontSize: 14.6.sp,
+            fontSize: 14.4.sp,
+            secondColor: AppColors.primaryColor,
           ),
           const Divider(
             thickness: 1,
@@ -49,14 +50,14 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 AppIcons.date,
-                height: 17.h,
+                height: 16.h,
                 color: const Color(0xff605A65),
               ),
               10.horizontalSpace,
               Flexible(
                 child: AutoSizeTextWidget(
                   text: '${S.of(context).bookingDateLabel} ${formatDate(bookAt)} ',
-                  fontSize: 10.5.sp,
+                  fontSize: 10.sp,
                   fontWeight: FontWeight.w400,
                   colorText: const Color(0xff757575),
                 ),
@@ -68,14 +69,14 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 AppIcons.buliding,
-                height: 17.h,
+                height: 16.h,
                 color: const Color(0xff605A65),
               ),
               10.horizontalSpace,
               Flexible(
                 child: AutoSizeTextWidget(
                   text: '$unitCount $unitName',
-                  fontSize: 10.5.sp,
+                  fontSize: 10.sp,
                   fontWeight: FontWeight.w400,
                   colorText: const Color(0xff757575),
                 ),
@@ -87,7 +88,7 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 AppIcons.clock,
-                height: 17.h,
+                height: 16.h,
                 color: const Color(0xff605A65),
               ),
               10.horizontalSpace,
@@ -95,7 +96,7 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
                 child: AutoSizeTextWidget(
                   text:
                       '${S.of(context).from} $checkIn ${S.of(context).to} $checkOut',
-                  fontSize: 10.5.sp,
+                  fontSize: 10.sp,
                   fontWeight: FontWeight.w400,
                   colorText: const Color(0xff757575),
                 ),

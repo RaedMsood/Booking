@@ -42,6 +42,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "applicationLanguage": MessageLookupByLibrary.simpleMessage("لغة التطبيق"),
     "applyFilter": MessageLookupByLibrary.simpleMessage("فلترة"),
+    "area": MessageLookupByLibrary.simpleMessage("المساحة"),
+    "availableBedTypes": MessageLookupByLibrary.simpleMessage(
+      "أنواع الأسرة المتوفرة",
+    ),
     "backToMyBookings": MessageLookupByLibrary.simpleMessage(
       "العودة إلى حجوزاتي",
     ),
@@ -52,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "birthdateOptional": MessageLookupByLibrary.simpleMessage(
       "تاريخ الميلاد (اختياري)",
     ),
+    "bookNow": MessageLookupByLibrary.simpleMessage("حجز الآن"),
     "bookingCodeCopied": MessageLookupByLibrary.simpleMessage(
       "تم نسخ رقم الحجز",
     ),
@@ -141,6 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "هل تريد حقا تسجيل الخروج؟",
     ),
     "done": MessageLookupByLibrary.simpleMessage("تم"),
+    "doubleBed": MessageLookupByLibrary.simpleMessage("سرير مزدوج"),
     "editPersonalInfoSubtitle": MessageLookupByLibrary.simpleMessage(
       "قم بتحديث معلوماتك الشخصية",
     ),
@@ -235,7 +241,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني غير صالح",
     ),
+    "invoice": MessageLookupByLibrary.simpleMessage("الفاتورة"),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
+    "length": MessageLookupByLibrary.simpleMessage("الطول"),
     "logIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
       "هل تريد حقا تسجيل الخروج؟ سيتوجب عليك تسجيل الدخول مرة أخرى للوصول إلى بياناتك",
@@ -277,6 +285,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "تأكد من تحديث التطبيق أو التواصل مع الدعم",
     ),
     "notificationsTitle": MessageLookupByLibrary.simpleMessage("الإشعارات"),
+    "openOffersWorldSubtitle": MessageLookupByLibrary.simpleMessage(
+      "سجّل دخولك الآن لتكتشف كل ما وفرّناه لك من فرص رائعة",
+    ),
+    "openOffersWorldTitle": MessageLookupByLibrary.simpleMessage(
+      "افتح الباب لعالم العروض والحجوزات الخاصة بك",
+    ),
     "or": MessageLookupByLibrary.simpleMessage("أو"),
     "payAction": MessageLookupByLibrary.simpleMessage("الدفع"),
     "payDeposit": MessageLookupByLibrary.simpleMessage("دفع العربون"),
@@ -299,6 +313,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "payKuraimiInstruction": MessageLookupByLibrary.simpleMessage(
       "رقم التعريف يُولَّد من إعدادات تطبيق الكريمي لأول مرة",
     ),
+    "paymentMethod": MessageLookupByLibrary.simpleMessage("طريقة الدفع"),
     "paymentMethods": MessageLookupByLibrary.simpleMessage("وسائل الدفع"),
     "personOne": MessageLookupByLibrary.simpleMessage("شخص"),
     "personOther": MessageLookupByLibrary.simpleMessage("أشخاص"),
@@ -408,6 +423,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "showLess": MessageLookupByLibrary.simpleMessage("عرض أقل"),
     "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+    "singleBed": MessageLookupByLibrary.simpleMessage("سرير مفرد"),
     "somethingWentWrong": MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
     "sslError": MessageLookupByLibrary.simpleMessage("مشكلة في شهادة الأمان"),
     "sslError2": MessageLookupByLibrary.simpleMessage(
@@ -443,6 +459,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "viewVenueDetails": MessageLookupByLibrary.simpleMessage(
       "استعراض تفاصيل المنشأة",
     ),
+    "width": MessageLookupByLibrary.simpleMessage("العرض"),
     "yes": MessageLookupByLibrary.simpleMessage("نعم"),
     "yourBookingDate": MessageLookupByLibrary.simpleMessage("تاريخ حجزك"),
     "yourHotelDestination": MessageLookupByLibrary.simpleMessage(

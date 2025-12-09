@@ -29,13 +29,13 @@ class AudienceInDetailsBookingWidget extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 AppIcons.profile,
-                height: 15.6.h,
+                height: 15.h,
                 color: const Color(0xff605A65),
               ),
               10.horizontalSpace,
               AutoSizeTextWidget(
                 text:type,
-                fontSize: 10.5.sp,
+                fontSize: 10.sp,
                 fontWeight: FontWeight.w400,
                 colorText: const Color(0xff757575),
               ),
@@ -46,14 +46,14 @@ class AudienceInDetailsBookingWidget extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 AppIcons.people,
-                height: 17.h,
+                height: 16.h,
                 color: const Color(0xff605A65),
               ),
               10.horizontalSpace,
               AutoSizeTextWidget(
                 text:
                     '$numGuests ${S.of(context).personOne} ($numChild ${S.of(context).children})',
-                fontSize: 10.5.sp,
+                fontSize: 10.sp,
                 fontWeight: FontWeight.w400,
                 colorText: const Color(0xff757575),
               ),

@@ -12,8 +12,10 @@ class HotelFeaturesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isRtl = Directionality.of(context) == TextDirection.rtl;
+
     return Stack(
-      alignment: Alignment.centerLeft,
+      alignment:isRtl?Alignment.centerLeft: Alignment.centerRight,
       children: [
         SizedBox(
           height: 75.h,
@@ -26,7 +28,7 @@ class HotelFeaturesWidget extends StatelessWidget {
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
                 decoration: BoxDecoration(
-                  color: AppColors.scaffoldColor.withOpacity(.8),
+                  color: AppColors.scaffoldColor.withValues(alpha:.8),
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Column(
@@ -59,17 +61,17 @@ class HotelFeaturesWidget extends StatelessWidget {
         Container(
           height: 75.h,
           width: 44.w,
-          decoration: const BoxDecoration(
+          decoration:  BoxDecoration(
             gradient: LinearGradient(
-              colors: [
+              colors: const[
                 Colors.white,
                 Colors.white,
                 Colors.white70,
                 Colors.white38,
                 Colors.white24,
               ],
-              begin: AlignmentGeometry.centerLeft,
-              end: AlignmentGeometry.centerRight,
+              begin:isRtl? AlignmentGeometry.centerLeft:AlignmentGeometry.centerRight,
+              end:isRtl?AlignmentGeometry.centerRight:  AlignmentGeometry.centerLeft,
             ),
           ),
         ),

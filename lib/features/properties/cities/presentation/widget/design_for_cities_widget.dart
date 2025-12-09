@@ -19,8 +19,8 @@ class DesignForCitiesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      splashColor: AppColors.primarySwatch.shade50.withOpacity(.6),
-      highlightColor: AppColors.primarySwatch.shade50.withOpacity(.4),
+      splashColor: AppColors.primarySwatch.shade50.withValues(alpha:.6),
+      highlightColor: AppColors.primarySwatch.shade50.withValues(alpha:.4),
       borderRadius: BorderRadius.circular(14.r),
       onTap: onTap,
       child: Container(

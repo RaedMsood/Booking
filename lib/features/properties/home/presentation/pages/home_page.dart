@@ -60,7 +60,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         displacement: 40,
         strokeWidth: 2.5,
         onRefresh: () async {
-          ref.refresh(getAllPropertyProvider);
+          ref.invalidate(getAllPropertyProvider);
         },
         child: CustomScrollView(
           controller: _scrollController,
@@ -75,7 +75,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               child: CheckStateInGetApiDataWidget(
                 state: state,
                 refresh: (){
-                  ref.refresh(getAllPropertyProvider);
+                  ref.invalidate(getAllPropertyProvider);
                 },
                 widgetOfLoading: const ShimmerHomeWidget(),
                 widgetOfData: Column(

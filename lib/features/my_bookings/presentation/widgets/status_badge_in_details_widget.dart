@@ -34,9 +34,9 @@ class StatusBadgeInDetailsWidget extends StatelessWidget {
             return Container(
               padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 4.sp),
               decoration: BoxDecoration(
-                color: colors.background.withOpacity(0.5),
+                color: colors.background.withValues(alpha:0.5),
                 borderRadius: BorderRadius.circular(12.sp),
-                border: Border.all(color: colors.text.withOpacity(0.3)),
+                border: Border.all(color: colors.text.withValues(alpha:0.3)),
               ),
               child: AutoSizeTextWidget(
                 text:status=="منتهيه"? 'مكتملة':status,

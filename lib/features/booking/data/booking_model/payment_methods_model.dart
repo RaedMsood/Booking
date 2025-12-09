@@ -15,10 +15,10 @@ class PaymentMethodsModel {
 
   factory PaymentMethodsModel.fromJson(Map<String, dynamic> json) {
     return PaymentMethodsModel(
-      id: (json['id'] as num).toInt(),
+      id: json['id'] ??0,
       name: json['name'] ?? '',
       title: json['title'] ?? '',
-      type: (json['type'] as num).toInt(),
+      type: json['type']??0 ,
       image: json['image'] ?? '',
     );
   }

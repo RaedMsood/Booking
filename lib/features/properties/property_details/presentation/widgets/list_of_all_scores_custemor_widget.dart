@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../booking/presentation/riverpod/booking_riverpod.dart';
 import '../../data/models/rate_with_customer_model.dart';
 import 'customer_of_score_widget.dart';
-import 'general_container_for_details_widget.dart';
 import 'list_of_score_in_rate_widget.dart';
 
 class ListOfAllScoresCustemorWidget extends ConsumerWidget {

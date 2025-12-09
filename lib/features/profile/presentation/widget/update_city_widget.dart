@@ -39,7 +39,7 @@ class UpdateCityWidget extends ConsumerWidget {
             showModalBottomSheetWidget(
               context: context,
               page: ListToViewAllCitiesWidgets(
-                cities: cityState.data!,
+                cities: cityState.data,
                 onCitySelected: (c) {
                   ref.read(selectedCityProvider.notifier).state = c;
                   onChanged();

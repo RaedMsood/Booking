@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/online_svg_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../property_details/data/models/features_model.dart';
 import '../../../property_details/presentation/widgets/general_container_for_details_widget.dart';
 
@@ -22,8 +23,8 @@ class UnitFeaturesWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AutoSizeTextWidget(
-              text: "المميزات",
-              fontSize: 13.sp,
+              text: S.of(context).features,
+              fontSize: 12.5.sp,
               fontWeight: FontWeight.w500,
             ),
             8.h.verticalSpace,

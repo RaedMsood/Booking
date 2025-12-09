@@ -1,6 +1,3 @@
-import '../../../../../core/state/pagination_data/paginated_model.dart';
-
-
 class UnitsModel {
   final int id;
   final String name;
@@ -8,6 +5,8 @@ class UnitsModel {
   final int maxGuests;
   final String? description;
   final String? image;
+  final num singleBed;
+  final num doubleBed;
 
   UnitsModel({
     required this.id,
@@ -16,6 +15,8 @@ class UnitsModel {
     required this.maxGuests,
     this.description,
     this.image,
+    required this.singleBed,
+    required this.doubleBed,
   });
 
   factory UnitsModel.fromJson(Map<String, dynamic> json) {
@@ -26,6 +27,8 @@ class UnitsModel {
       maxGuests: json['max_guests'] ?? 0,
       description: json['description'] ?? '',
       image: json['image'] ?? '',
+      singleBed: json['single_bed'] ?? 0,
+      doubleBed: json['double_bed'] ?? 0,
     );
   }
 
@@ -40,7 +43,7 @@ class UnitsModel {
         maxGuests: 0,
         description: null,
         image: null,
+        singleBed: 0,
+        doubleBed: 0,
       );
 }
-
-

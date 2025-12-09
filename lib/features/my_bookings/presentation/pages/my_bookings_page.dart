@@ -46,18 +46,18 @@ class _MyBookingsPageState extends State<MyBookingsPage>
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: Auth().loggedIn,
-      replacement: const GoToLoginWidget(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: AutoSizeTextWidget(
-            text: S.of(context).reservationsTitle,
-            fontWeight: FontWeight.w500,
-          ),
-          actions: const [NotificationsButtonWidget()],
+    return Scaffold(
+      appBar: AppBar(
+        title: AutoSizeTextWidget(
+          text: S.of(context).reservationsTitle,
+          fontWeight: FontWeight.w500,
         ),
-        body: Column(
+        actions: const [NotificationsButtonWidget()],
+      ),
+      body: Visibility(
+        visible: Auth().loggedIn,
+        replacement: const GoToLoginWidget(),
+        child: Column(
           children: [
             TabBar(
               controller: _tabController,

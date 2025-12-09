@@ -30,13 +30,16 @@ class DepositWidget extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
 
-          8.h.verticalSpace,
-          AutoSizeTextWidget(
-            text: deposit.policy,
-            fontSize: 11.5.sp,
-            colorText: AppColors.greySwatch.shade700,
-            fontWeight: FontWeight.w400,
-          ),
+          if(deposit.policy.isNotEmpty)...[
+            8.h.verticalSpace,
+            AutoSizeTextWidget(
+              text: deposit.policy,
+              fontSize: 11.5.sp,
+              colorText: AppColors.greySwatch.shade700,
+              fontWeight: FontWeight.w400,
+            ),
+          ],
+
         ],
       ),
     );

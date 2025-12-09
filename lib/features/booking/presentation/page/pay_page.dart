@@ -34,7 +34,7 @@ class PayPage extends ConsumerWidget {
       body: CheckStateInGetApiDataWidget(
         state: payState,
         refresh: () {
-          ref.refresh(getAllPaymentMethodsProvider);
+          ref.invalidate(getAllPaymentMethodsProvider);
         },
         widgetOfData: SafeArea(
           top: false,

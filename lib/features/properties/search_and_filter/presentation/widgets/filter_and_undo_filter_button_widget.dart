@@ -47,7 +47,7 @@ class FilterAndUndoFilterButtonWidget extends StatelessWidget {
                   borderRadius: 8.r,
                   fontWeight: FontWeight.w400,
                   border: Border.all(
-                      color: AppColors.primaryColor.withOpacity(.4),
+                      color: AppColors.primaryColor.withValues(alpha:.4),
                       width: 0.4.w),
                   onPressed: clickOnUndoFilter,
                 ),

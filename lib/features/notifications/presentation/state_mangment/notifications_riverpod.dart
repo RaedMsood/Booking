@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../../core/state/data_state.dart';
 import '../../../../core/state/state.dart';
 import '../../data/model/notifications_model.dart';
@@ -62,9 +63,29 @@ class NotificationNotifier
   }
 }
 
+// final unreadCountProvider =
+// StateNotifierProvider.autoDispose<UnreadNotifier, int>(
+//         (ref) => UnreadNotifier());
+//
+// class UnreadNotifier extends StateNotifier<int> {
+//   UnreadNotifier() : super(0);
+//
+//   final _repo = ReposaitoriesNotifications();
+//
+//   Future<void> refresh() async {
+//     final res = await _repo.getUnreadCount();
+//     res.fold((_) {}, (count) => state = count);
+//   }
+//
+//   void set(int value) => state = value;
+//
+//   void clear() => state = 0;
+// }
+
 final unreadCountProvider =
-StateNotifierProvider.autoDispose<UnreadNotifier, int>(
-        (ref) => UnreadNotifier());
+StateNotifierProvider<UnreadNotifier, int>(
+      (ref) => UnreadNotifier(),
+);
 
 class UnreadNotifier extends StateNotifier<int> {
   UnreadNotifier() : super(0);
@@ -73,10 +94,25 @@ class UnreadNotifier extends StateNotifier<int> {
 
   Future<void> refresh() async {
     final res = await _repo.getUnreadCount();
-    res.fold((_) {}, (count) => state = count);
+
+    if (!mounted) return; // حماية بعد الـ await
+
+    res.fold(
+          (_) {},
+          (count) {
+        if (!mounted) return;
+        state = count;
+      },
+    );
   }
 
-  void set(int value) => state = value;
+  void set(int value) {
+    if (!mounted) return;
+    state = value;
+  }
 
-  void clear() => state = 0;
+  void clear() {
+    if (!mounted) return;
+    state = 0;
+  }
 }

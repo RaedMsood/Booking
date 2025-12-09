@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/text_form_field.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../generated/l10n.dart';
-import '../../../../core/constants/app_icons.dart';
 
 class NameEmailPhoneSection extends StatelessWidget {
   final TextEditingController nameController;

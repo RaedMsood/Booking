@@ -41,7 +41,7 @@ class PaginationHelper {
           // استدعاء الدالة الممررة لتحميل البيانات من الخارج
           await onLoadMoreData();
         } catch (e) {
-          print("Error loading data: $e");
+          debugPrint("Error loading data: $e");
         } finally {
           _setLoadingState(false);
         }

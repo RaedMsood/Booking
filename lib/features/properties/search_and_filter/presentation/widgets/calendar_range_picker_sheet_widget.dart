@@ -141,7 +141,7 @@ class _CalendarRangePickerSheetWidgetState extends State<CalendarRangePickerShee
                     height: 40.h,
                     background: _canConfirm
                         ? AppColors.primaryColor
-                        : AppColors.primaryColor.withOpacity(.3),
+                        : AppColors.primaryColor.withValues(alpha:.3),
                     onPressed: _canConfirm
                         ? () => Navigator.pop(
                               context,

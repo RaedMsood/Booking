@@ -219,8 +219,8 @@ class _LaunchPageState extends State<LaunchPage> with TickerProviderStateMixin {
             gradient: LinearGradient(
               colors: [
                 AppColors.primaryColor,
-                AppColors.primarySwatch.shade600.withOpacity(.4),
-                AppColors.primarySwatch.shade400.withOpacity(.4),
+                AppColors.primarySwatch.shade600.withValues(alpha:.4),
+                AppColors.primarySwatch.shade400.withValues(alpha:.4),
                 AppColors.primarySwatch.shade400,
                 AppColors.primarySwatch.shade300,
               ],

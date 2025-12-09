@@ -38,7 +38,6 @@ class _AddYourRatingSectionState extends ConsumerState<AddYourRatingSection> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           padding: EdgeInsets.all(16.r),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -97,56 +96,3 @@ class _AddYourRatingSectionState extends ConsumerState<AddYourRatingSection> {
     );
   }
 }
-//
-// /// نجوم قابلة للسحب (1..5)
-// class _DraggableStars extends StatefulWidget {
-//   final int value;
-//   final ValueChanged<int> onChanged;
-//   final Color activeColor;
-//
-//   const _DraggableStars({
-//     required this.value,
-//     required this.onChanged,
-//     required this.activeColor,
-//   });
-//
-//   @override
-//   State<_DraggableStars> createState() => _DraggableStarsState();
-// }
-//
-// class _DraggableStarsState extends State<_DraggableStars> {
-//   final GlobalKey _key = GlobalKey();
-//
-//   void _updateFromDx(double dx) {
-//     final box = _key.currentContext!.findRenderObject() as RenderBox;
-//     final width = box.size.width;
-//     final segment = width / 5.0;
-//     int v = (dx / segment).ceil().clamp(1, 5); // 1..5
-//     widget.onChanged(v);
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onPanDown: (d) => _updateFromDx(d.localPosition.dx),
-//       onPanUpdate: (d) => _updateFromDx(d.localPosition.dx),
-//       onTapDown: (d) => _updateFromDx(d.localPosition.dx),
-//       behavior: HitTestBehavior.opaque,
-//       child: Row(
-//         key: _key,
-//         mainAxisSize: MainAxisSize.min,
-//         children: List.generate(5, (i) {
-//           final filled = i < widget.value;
-//           return Padding(
-//             padding: EdgeInsetsDirectional.only(end: 6.w),
-//             child: Icon(
-//               filled ? Icons.star : Icons.star_border_rounded,
-//               size: 22.r,
-//               color: filled ? widget.activeColor : AppColors.greySwatch[300],
-//             ),
-//           );
-//         }),
-//       ),
-//     );
-//   }
-// }

@@ -1,3 +1,4 @@
+import 'package:booking/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
@@ -22,6 +23,7 @@ class DepositInLastDetailsWidget extends StatelessWidget {
             price: deposit.toString(),
             fontWeight: FontWeight.w400,
             fontSize: 14.6.sp,
+            secondColor: AppColors.primaryColor,
           ),
           8.verticalSpace,
           AutoSizeTextWidget(

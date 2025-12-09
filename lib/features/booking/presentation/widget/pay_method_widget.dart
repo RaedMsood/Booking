@@ -145,7 +145,7 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
               hasMessageSuccess: false,
               functionSuccess: () {
                 CompleteBooking.successDialog(context, ref);
-                ref.refresh(getBookingProvider(0));
+                ref.invalidate(getBookingProvider(0));
               },
               bottonWidget: DefaultButtonWidget(
                 text: S.of(context).confirmPayment,

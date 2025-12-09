@@ -16,7 +16,6 @@ class SectionCardInDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.w),
       padding: EdgeInsets.all(12.sp),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -27,7 +26,7 @@ class SectionCardInDetailsWidget extends StatelessWidget {
         children: [
           AutoSizeTextWidget(
             text: title,
-            fontSize: 12.5,
+            fontSize: 11.sp,
             fontWeight: FontWeight.w500,
           ),
           8.verticalSpace,

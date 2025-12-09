@@ -92,7 +92,7 @@ class _RatingFilterWidgetState extends ConsumerState<RatingFilterWidget> {
                             );
                           }
                           return BorderSide(
-                            color: AppColors.fontColor.withOpacity(.8),
+                            color: AppColors.fontColor.withValues(alpha:.8),
                             width: 1,
                           );
                         }),

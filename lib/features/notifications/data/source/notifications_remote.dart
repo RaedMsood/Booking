@@ -7,8 +7,7 @@ class NotificationsRemoteDataSource {
 
   Future<List<NotificationsModel>> getNotifications() async {
     final response = await RemoteRequest.getData(url: AppURL.notification);
-
-    return NotificationsModel.fromJsonList(response.data);
+    return NotificationsModel.fromJsonList(response.data['data']);
   }
 
   Future<int> getUnreadCount() async {

@@ -41,8 +41,8 @@ class PropertyFavoriteAndMapWidget extends StatelessWidget {
       child: Card(
         elevation: propertiesByCity ? 1 : 0.6,
         shadowColor: propertiesByCity
-            ? AppColors.greySwatch.shade50.withOpacity(.6)
-            : AppColors.greySwatch.shade50.withOpacity(.04),
+            ? AppColors.greySwatch.shade50.withValues(alpha:.6)
+            : AppColors.greySwatch.shade50.withValues(alpha:.04),
         color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.r),
@@ -86,7 +86,7 @@ class PropertyFavoriteAndMapWidget extends StatelessWidget {
                           vertical: 2.4.h,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xfffef4d4).withOpacity(.8),
+                          color: const Color(0xfffef4d4).withValues(alpha:.8),
                           borderRadius: BorderRadius.circular(28.r),
                         ),
                         child: Row(

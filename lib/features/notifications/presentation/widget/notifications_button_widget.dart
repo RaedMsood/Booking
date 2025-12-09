@@ -35,7 +35,7 @@ class NotificationsButtonWidget extends ConsumerWidget {
             }
           },
         ),
-        // if (unread > 0)
+        if (unread > 0)
           Positioned(
             left: unread >= 10 ? 4.w : 8.w,
             top: 1.8,
@@ -48,7 +48,7 @@ class NotificationsButtonWidget extends ConsumerWidget {
                 ),
               ),
               child: AutoSizeTextWidget(
-                text: unread > 99 ? '99+' : ' 7 ',
+                text: unread > 99 ? '99+' : ' $unread ',
                 colorText: Colors.white,
                 fontSize: 7.2.sp,
                 minFontSize: 6,

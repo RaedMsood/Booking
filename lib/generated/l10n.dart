@@ -499,6 +499,26 @@ class S {
     return Intl.message('Send', name: 'send', desc: '', args: []);
   }
 
+  /// `Open the door to your world of offers and bookings`
+  String get openOffersWorldTitle {
+    return Intl.message(
+      'Open the door to your world of offers and bookings',
+      name: 'openOffersWorldTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in now to discover all the great opportunities we've prepared for you`
+  String get openOffersWorldSubtitle {
+    return Intl.message(
+      'Log in now to discover all the great opportunities we\'ve prepared for you',
+      name: 'openOffersWorldSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   // skipped getter for the '--------map-----------' key
 
   /// `Map`
@@ -636,6 +656,11 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Invoice`
+  String get invoice {
+    return Intl.message('Invoice', name: 'invoice', desc: '', args: []);
   }
 
   // skipped getter for the '--------hotelBooking-----------' key
@@ -843,6 +868,46 @@ class S {
   /// `People`
   String get personOther {
     return Intl.message('People', name: 'personOther', desc: '', args: []);
+  }
+
+  /// `Single bed`
+  String get singleBed {
+    return Intl.message('Single bed', name: 'singleBed', desc: '', args: []);
+  }
+
+  /// `Double bed`
+  String get doubleBed {
+    return Intl.message('Double bed', name: 'doubleBed', desc: '', args: []);
+  }
+
+  /// `Available bed types`
+  String get availableBedTypes {
+    return Intl.message(
+      'Available bed types',
+      name: 'availableBedTypes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Area`
+  String get area {
+    return Intl.message('Area', name: 'area', desc: '', args: []);
+  }
+
+  /// `Length`
+  String get length {
+    return Intl.message('Length', name: 'length', desc: '', args: []);
+  }
+
+  /// `Width`
+  String get width {
+    return Intl.message('Width', name: 'width', desc: '', args: []);
+  }
+
+  /// `Book now`
+  String get bookNow {
+    return Intl.message('Book now', name: 'bookNow', desc: '', args: []);
   }
 
   // skipped getter for the '--------booking-----------' key
@@ -1154,6 +1219,16 @@ class S {
     return Intl.message(
       'Please enter the purchase code',
       name: 'payJawaliCodeEmptyError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment method`
+  String get paymentMethod {
+    return Intl.message(
+      'Payment method',
+      name: 'paymentMethod',
       desc: '',
       args: [],
     );

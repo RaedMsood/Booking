@@ -1,8 +1,10 @@
+import '../../../booking/data/booking_model/payment_methods_model.dart';
+import '../../../properties/units/data/model/units_model.dart';
+import 'invoice_model.dart';
 import 'rate_model.dart';
 
 class MyBookingsData {
   final int? id;
-  final int? unitId;
   final int? propertyId;
   final String? property;
   final String? status;
@@ -22,10 +24,11 @@ class MyBookingsData {
   final List<RateModel>? rateData;
   final bool? isRated;
   final num? totalRate;
-
+  final UnitsModel? unit;
+  final PaymentMethodsModel? paymentMethods;
+  final InvoiceModel? invoice;
   MyBookingsData({
     this.id,
-    this.unitId,
     this.property,
     this.status,
     this.address,
@@ -45,14 +48,14 @@ class MyBookingsData {
     this.rateData,
     this.isRated,
     this.totalRate,
+    this.unit,
+    this.paymentMethods,
+    this.invoice,
   });
 
   factory MyBookingsData.fromJson(Map<String, dynamic> json) {
     return MyBookingsData(
       id: json['id'] != null ? int.tryParse(json['id'].toString()) : null,
-      unitId: json['unit_id'] != null
-          ? int.tryParse(json['unit_id'].toString())
-          : null,
       property: json['property']?.toString() ?? '',
       status: json['status']?.toString() ?? '',
       address: json['address'] != null
@@ -73,19 +76,27 @@ class MyBookingsData {
       type: json['type']?.toString() ?? '',
       bookingAt: json['booking_at']?.toString() ?? '',
       deposit: json['deposit']?.toString() ?? '',
-      code: json['code'] ?? '',
-      propertyId: json['property_id']??0,
+      code: json['trx_id'] ?? '',
+      propertyId: json['property_id'] ?? 0,
       rateData: RateModel.fromJsonList(json['criterias'] ?? []),
       isRated: json['rate'] ?? false,
-      totalRate: json['totalRate']??0 ,
-
+      totalRate: json['totalRate'] ?? 0,
+      unit: json['unit'] == null
+          ? UnitsModel.empty()
+          : UnitsModel.fromJson(json['unit'] as Map<String, dynamic>),
+      paymentMethods: json['payment_method'] == null
+          ? PaymentMethodsModel.empty()
+          : PaymentMethodsModel.fromJson(
+              json['payment_method'] as Map<String, dynamic>),
+      invoice: json['invoice'] != null
+          ? InvoiceModel.fromJson(json['invoice'] as Map<String, dynamic>)
+          : null,
     );
   }
 
   factory MyBookingsData.empty() {
     return MyBookingsData(
       propertyId: null,
-      unitId: null,
       checkIn: '',
       checkOut: '',
       guests: null,
@@ -94,9 +105,13 @@ class MyBookingsData {
       bookingAt: '',
       type: '',
       unitCount: null,
+      paymentMethods: PaymentMethodsModel.empty(),
+      unit: UnitsModel.empty(),
+      invoice: null
     );
   }
 }
+
 
 class Address {
   final String? city;

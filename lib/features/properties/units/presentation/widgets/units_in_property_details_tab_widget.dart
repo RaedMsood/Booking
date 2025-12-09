@@ -12,18 +12,9 @@ import '../riverpod/unit_riverpod.dart';
 import 'unit_card_widget.dart';
 
 class UnitsInPropertyDetailsTab extends ConsumerStatefulWidget {
-  const UnitsInPropertyDetailsTab({
-    super.key,
-    required this.propertyId,
-    required this.nameProp,
-    required this.location,
-    required this.image,
-  });
+  const UnitsInPropertyDetailsTab({super.key, required this.propertyId});
 
   final int propertyId;
-  final String nameProp;
-  final String location;
-  final String image;
 
   @override
   ConsumerState<UnitsInPropertyDetailsTab> createState() =>
@@ -141,7 +132,7 @@ class _UnitsInPropertyDetailsTabState
         ),
         widgetOfData: ListView.builder(
           padding:
-              EdgeInsets.symmetric(horizontal: 10.w).copyWith(bottom: 12.h),
+              EdgeInsets.symmetric(horizontal: 14.w).copyWith(bottom: 12.h),
           itemCount:
               units.length + ((state.stateData == States.loadingMore) ? 1 : 0),
           itemBuilder: (context, index) {
@@ -152,58 +143,10 @@ class _UnitsInPropertyDetailsTabState
               return const SizedBox.shrink();
             }
 
-            return UnitCardWidget(
-              units: units[index],
-              image: widget.image,
-              location: widget.location,
-              nameProp: widget.nameProp,
-            );
+            return UnitCardWidget(units: units[index]);
           },
         ),
       ),
-
-      // child: CheckStateInGetApiDataWidget(
-      //   state: state,
-      //   refresh: () async {
-      //     _isRequestingMore = false;
-      //     await ref
-      //         .read(
-      //           getAllUnitsProvider(
-      //             Tuple2(widget.propertyId, selectedSectionId),
-      //           ).notifier,
-      //         )
-      //         .getData(isRefresh: true);
-      //   },
-      //   widgetOfData: GridView.builder(
-      //     padding:
-      //         EdgeInsets.symmetric(horizontal: 12.w).copyWith(bottom: 12.h),
-      //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      //       crossAxisCount: 2,
-      //       mainAxisSpacing: 6.h,
-      //       crossAxisSpacing: 8.w,
-      //       childAspectRatio: 0.53.h,
-      //     ),
-      //     itemCount:
-      //         units.length + ((state.stateData == States.loadingMore) ? 1 : 0),
-      //     itemBuilder: (context, index) {
-      //       if (index == units.length) {
-      //         if (state.stateData == States.loadingMore) {
-      //           return const Center(
-      //             child: CircularProgressIndicatorWidget(),
-      //           );
-      //         }
-      //         return const SizedBox.shrink();
-      //       }
-      //
-      //       return UnitCardWidget(
-      //         units: units[index],
-      //         image: widget.image,
-      //         location: widget.location,
-      //         nameProp: widget.nameProp,
-      //       );
-      //     },
-      //   ),
-      // ),
     );
   }
 

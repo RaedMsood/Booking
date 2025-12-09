@@ -21,7 +21,9 @@ import '../../../properties/cities/presentation/widget/city_widget.dart';
 import '../state_mangement/riverpod.dart';
 
 class EditProfilePage extends ConsumerStatefulWidget {
-  const EditProfilePage({super.key});
+  final VoidCallback? onSuccess;
+
+  const EditProfilePage({super.key, this.onSuccess});
 
   @override
   ConsumerState<EditProfilePage> createState() => _EditProfilePageState();
@@ -148,14 +150,13 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                 ),
                 const CityWidget(),
                 18.h.verticalSpace,
-        
               ],
             ),
           ),
         ),
       ),
       bottomNavigationBar: ButtonBottomNavigationBarDesignWidget(
-        child:  CheckStateInPostApiDataWidget(
+        child: CheckStateInPostApiDataWidget(
           state: stateUpdateUser,
           messageSuccess: S.of(context).profileUpdatedSuccess,
           functionSuccess: () {
@@ -173,49 +174,44 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
               gender: ref.read(updateGenderProvider),
               city: ref.read(selectedCityProvider),
             );
-            ref
-                .read(editProfileControllerProvider.notifier)
-                .initialize(latest);
+            ref.read(editProfileControllerProvider.notifier).initialize(latest);
+            widget.onSuccess?.call();
           },
           bottonWidget: Opacity(
-            opacity: canSave? 1 : 0.4,
-
+            opacity: canSave ? 1 : 0.4,
             child: DefaultButtonWidget(
               text: S.of(context).saveChanges,
               isLoading: stateUpdateUser.stateData == States.loading,
               onPressed: !canSave
                   ? null
                   : () async {
-                if (!_formKey.currentState!.validate()) return;
-                FocusManager.instance.primaryFocus?.unfocus();
-            
-                final controller =
-                ref.read(editProfileControllerProvider.notifier);
-            
-                final current = ProfileModel(
-                  name: nameController.text,
-                  email: emailController.text,
-                  gender: ref.read(updateGenderProvider),
-                  birthDate: ref.read(birthDateProvider),
-                  city: ref.read(selectedCityProvider),
-                );
-            
-                controller.compute(current);
-                final effective = controller.effectiveForPut(current);
-                await ref
-                    .read(updateNotifierProvider.notifier)
-                    .update(
-                  dateOfBirth: effective.birthDate,
-                  email: effective.email,
-                  name: effective.name,
-                  gender: (effective.gender ?? '').toString(),
-                  cityId: effective.city?.id ?? 0,
-            
-                );
-              },
+                      if (!_formKey.currentState!.validate()) return;
+                      FocusManager.instance.primaryFocus?.unfocus();
+
+                      final controller =
+                          ref.read(editProfileControllerProvider.notifier);
+
+                      final current = ProfileModel(
+                        name: nameController.text,
+                        email: emailController.text,
+                        gender: ref.read(updateGenderProvider),
+                        birthDate: ref.read(birthDateProvider),
+                        city: ref.read(selectedCityProvider),
+                      );
+
+                      controller.compute(current);
+                      final effective = controller.effectiveForPut(current);
+                      await ref.read(updateNotifierProvider.notifier).update(
+                            dateOfBirth: effective.birthDate,
+                            email: effective.email,
+                            name: effective.name,
+                            gender: (effective.gender ?? '').toString(),
+                            cityId: effective.city?.id ?? 0,
+                          );
+                    },
             ),
           ),
-        ) ,
+        ),
       ),
     );
   }

@@ -32,7 +32,7 @@ class IdBookingWithCopyWidget extends StatelessWidget {
           color: AppColors.scaffoldColor,
           borderRadius: BorderRadius.circular(16.sp),
           border: Border.all(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha:0.1),
           ),
         ),
         child: Row(

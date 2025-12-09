@@ -39,7 +39,7 @@ class DiscoverDestinationsWidget extends StatelessWidget {
                     color: Colors.transparent,
                     borderRadius: BorderRadius.circular(40.r),
                     border: Border.all(
-                      color: AppColors.greySwatch.shade400.withOpacity(.29),
+                      color: AppColors.greySwatch.shade400.withValues(alpha:.29),
                       width: 1.w,
                     ),
                   ),

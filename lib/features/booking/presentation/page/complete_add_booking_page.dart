@@ -91,7 +91,7 @@ class _CompleteAddBookingPageState
                           children: [
                             14.h.verticalSpace,
                             AutoSizeTextWidget(
-                              text: "${S.of(context).personalInfoTitle} ${widget.booking.deposit}",
+                              text: S.of(context).personalInfoTitle,
                               fontSize: 11.6.sp,
                               fontWeight: FontWeight.w500,
                             ),

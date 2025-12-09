@@ -67,10 +67,10 @@ class _PriceFilterWidgetState extends ConsumerState<PriceFilterWidget> {
                     trackHeight: 2.4.h,
                     activeTrackColor: AppColors.primaryColor,
                     inactiveTrackColor:
-                        AppColors.primarySwatch.shade200.withOpacity(.8),
+                        AppColors.primarySwatch.shade200.withValues(alpha:.8),
                     thumbColor: AppColors.primaryColor,
                     overlayColor:
-                        AppColors.primarySwatch.shade200.withOpacity(.8),
+                        AppColors.primarySwatch.shade200.withValues(alpha:.8),
                     showValueIndicator: ShowValueIndicator.never,
 
                   ),

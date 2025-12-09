@@ -110,7 +110,7 @@ class _PropertiesByCityPagePageState
                           Container(
                             height: 1.h,
                             width: double.infinity,
-                            color: AppColors.fontColor2.withOpacity(.2),
+                            color: AppColors.fontColor2.withValues(alpha:.2),
                             margin: EdgeInsets.symmetric(vertical: 12.h),
                           ),
                         ],

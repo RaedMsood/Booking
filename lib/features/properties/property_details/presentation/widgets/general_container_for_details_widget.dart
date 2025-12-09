@@ -10,7 +10,7 @@ class GeneralContainerForDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.only(top: 12.h),
+      margin: EdgeInsets.only(top: 10.h),
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 14.w),
       color: Colors.white,
       child: child,

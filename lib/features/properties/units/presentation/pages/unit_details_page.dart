@@ -1,36 +1,29 @@
-import 'package:booking/core/state/check_state_in_get_api_data_widget.dart';
-import 'package:booking/core/widgets/price_and_currency_widget.dart';
-import 'package:booking/features/properties/units/presentation/riverpod/unit_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/helpers/navigateTo.dart';
+import '../../../../../core/state/check_state_in_get_api_data_widget.dart';
 import '../../../../../core/state/state.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/bottomNavbar/button_bottom_navigation_bar_design_widget.dart';
 import '../../../../../core/widgets/buttons/default_button.dart';
+import '../../../../../core/widgets/price_and_currency_widget.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../../services/auth/auth.dart';
 import '../../../../booking/presentation/page/details_of_book_in_add_page.dart';
 import '../../../../user/presentation/pages/log_in_page.dart';
-import '../../../property_details/presentation/widgets/deposit_widget.dart';
+import '../../../property_details/presentation/widgets/general_container_for_details_widget.dart';
 import '../../../property_details/presentation/widgets/sliver_app_bar_details_widget.dart';
+import '../riverpod/unit_riverpod.dart';
+import '../widgets/unit_area_and_beds_sliver_widget.dart';
 import '../widgets/unit_details_data_widget.dart';
 import '../widgets/unit_features_widget.dart';
 
 class UnitDetailsPage extends ConsumerWidget {
   final int unitId;
-  final String nameProp;
-  final String location;
-  final String image;
 
-  const UnitDetailsPage(
-      {super.key,
-      required this.unitId,
-      required this.image,
-      required this.nameProp,
-      required this.location});
+  const UnitDetailsPage({super.key, required this.unitId});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -60,23 +53,28 @@ class UnitDetailsPage extends ConsumerWidget {
               ),
             ),
             SliverToBoxAdapter(
-              child: Container(
-                margin: EdgeInsets.only(top: 12.h),
-                padding: EdgeInsets.symmetric(horizontal: 14.sp, vertical: 8.h),
-                color: Colors.white,
+              child: GeneralContainerForDetailsWidget(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AutoSizeTextWidget(
                       text: S.of(context).deposit,
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 12.5.sp,
                     ),
                     8.h.verticalSpace,
-                    PriceAndCurrencyWidget(price: state.data.deposit.toString())
+                    PriceAndCurrencyWidget(
+                      price: state.data.deposit.toString(),
+                      secondColor: AppColors.greyColor,
+                    )
                   ],
                 ),
               ),
+            ),
+            UnitAreaAndBedsSliverWidget(
+              singleBed: state.data.singleBed,
+              doubleBed: state.data.doubleBed,
+              length: state.data.length,
+              width: state.data.width,
             ),
             SliverToBoxAdapter(
               child: UnitFeaturesWidget(
@@ -99,35 +97,24 @@ class UnitDetailsPage extends ConsumerWidget {
                         children: [
                           AutoSizeTextWidget(
                             text: S.of(context).grandTotal,
-                            fontSize: 11.4.sp,
+                            fontSize: 11.sp,
                             colorText: AppColors.greyColor,
-                            fontWeight: FontWeight.w400,
+                            // fontWeight: FontWeight.w400,
                           ),
-                          6.h.verticalSpace,
-                          Row(
-                            children: [
-                              AutoSizeTextWidget(
-                                text: state.data.price.toString(),
-                                fontSize: 14.sp,
-                                colorText: AppColors.primaryColor,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              4.w.horizontalSpace,
-                              AutoSizeTextWidget(
-                                text: "ريال",
-                                fontSize: 11.4.sp,
-                                colorText: AppColors.greyColor,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ],
+                          4.h.verticalSpace,
+                          PriceAndCurrencyWidget(
+                            price: state.data.price.toString(),
+                            fontSize: 13.4.sp,
+                            secondColor: AppColors.primaryColor,
+                            fontWeightSecondText: FontWeight.w500,
                           ),
                         ],
                       ),
                       DefaultButtonWidget(
-                        text: 'حجز الان',
-                        height: 42.h,
-                        width: 126.w,
-                        textSize: 12.4.sp,
+                        text: S.of(context).bookNow,
+                        height: 38.h,
+                        width: 160.w,
+                        textSize: 12.6.sp,
                         borderRadius: 34.r,
                         onPressed: () {
                           if (!Auth().loggedIn) {
@@ -136,9 +123,9 @@ class UnitDetailsPage extends ConsumerWidget {
                             navigateTo(
                               context,
                               DetailsOfBookInAddPage(
-                                location: location,
-                                image: image,
-                                nameProp: nameProp,
+                                location: state.data.property.location,
+                                image: state.data.property.images[0].toString(),
+                                nameProp: state.data.property.name,
                                 unitId: state.data.id,
                                 totalPrice: state.data.price.toString(),
                               ),

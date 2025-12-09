@@ -90,7 +90,7 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
               child: CheckStateInGetApiDataWidget(
                 state: state,
                 refresh: () {
-                  ref.refresh(searchAndFilterPropertiesProvider);
+                  ref.invalidate(searchAndFilterPropertiesProvider);
                 },
                 widgetOfLoading: CustomScrollView(
                   controller: _scrollController,

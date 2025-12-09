@@ -1,7 +1,9 @@
+import 'package:booking/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../features/user/presentation/pages/log_in_page.dart';
+import '../../generated/l10n.dart';
 import '../constants/app_images.dart';
 import '../helpers/navigateTo.dart';
 import 'auto_size_text_widget.dart';
@@ -12,25 +14,32 @@ class GoToLoginWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return Center(
+      child: Padding(
+        padding:  EdgeInsets.all(14.sp),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(AppImages.errorNetwork),
             14.h.verticalSpace,
-            const AutoSizeTextWidget(
-              text: "افتح الباب لعالم العروض والحجوزات الخاصة بك",
+             AutoSizeTextWidget(
+              text: S.of(context).openOffersWorldTitle,
+              fontSize: 13.4.sp,
+              textAlign: TextAlign.center,
+              maxLines: 2,
             ),
-            4.h.verticalSpace,
+            8.h.verticalSpace,
             AutoSizeTextWidget(
-              text: "سجل دخولك الآن لتكتشف كل ما وفرناه لك من فرص رائعة",
+              text: S.of(context).openOffersWorldSubtitle,
               fontSize: 11.sp,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              colorText: AppColors.mainColorFont,
             ),
             20.h.verticalSpace,
             DefaultButtonWidget(
-              text: 'تسجيل الدخول',
+              text: S.of(context).logIn,
               width: 160.w,
               height: 36.h,
               onPressed: () {

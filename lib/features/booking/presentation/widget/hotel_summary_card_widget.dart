@@ -44,17 +44,17 @@ class HotelSummaryCard extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          6.horizontalSpace,
+          10.horizontalSpace,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AutoSizeTextWidget(
                   text: name,
-                  fontSize: 12.5,
+                  fontSize: 11.sp,
                   fontWeight: FontWeight.w500,
                 ),
-                4.verticalSpace,
+                6.verticalSpace,
                 Row(
                   children: [
                     SvgPicture.asset(
@@ -66,7 +66,7 @@ class HotelSummaryCard extends StatelessWidget {
                     Expanded(
                       child: AutoSizeTextWidget(
                         text: location,
-                        fontSize: 9,
+                        fontSize: 8.6.sp,
                         minFontSize: 7,
                         colorText: Colors.grey,
                         fontWeight: FontWeight.w400,

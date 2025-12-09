@@ -32,7 +32,7 @@ class PropertyViewTypeWidget extends ConsumerWidget {
                 width: 88.w,
                 margin: EdgeInsets.only(top: 10.h, right: 4.w),
                 decoration: BoxDecoration(
-                  color: AppColors.primarySwatch.shade300.withOpacity(.5),
+                  color: AppColors.primarySwatch.shade300.withValues(alpha:.5),
                   borderRadius: BorderRadius.circular(1.r),
                 ),
               ),
