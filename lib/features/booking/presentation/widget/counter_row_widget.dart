@@ -26,7 +26,7 @@ class CounterRowWidget extends StatelessWidget {
       children: [
         AutoSizeTextWidget(
           text: label,
-          fontSize: 10,
+          fontSize: 8.sp,
           fontWeight: FontWeight.w400,
         ),
         6.verticalSpace,

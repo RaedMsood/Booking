@@ -27,6 +27,9 @@ class MyBookingsData {
   final UnitsModel? unit;
   final PaymentMethodsModel? paymentMethods;
   final InvoiceModel? invoice;
+  final String? backgroundStatusColor;
+  final String? textStatusColor;
+
   MyBookingsData({
     this.id,
     this.property,
@@ -51,6 +54,8 @@ class MyBookingsData {
     this.unit,
     this.paymentMethods,
     this.invoice,
+    this.backgroundStatusColor,
+    this.textStatusColor,
   });
 
   factory MyBookingsData.fromJson(Map<String, dynamic> json) {
@@ -91,6 +96,8 @@ class MyBookingsData {
       invoice: json['invoice'] != null
           ? InvoiceModel.fromJson(json['invoice'] as Map<String, dynamic>)
           : null,
+      backgroundStatusColor: json['background_color']?.toString(),
+      textStatusColor: json['text_color']?.toString()
     );
   }
 

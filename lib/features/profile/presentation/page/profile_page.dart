@@ -1,6 +1,8 @@
 import 'package:booking/core/helpers/navigateTo.dart';
 import 'package:booking/core/theme/app_colors.dart';
+import 'package:booking/features/profile/presentation/page/policy_page.dart';
 import 'package:booking/features/profile/presentation/page/setting_page.dart';
+import 'package:booking/features/profile/presentation/page/terms_conditions_page.dart';
 import 'package:booking/services/auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +16,6 @@ import '../widget/tile_widget.dart';
 import 'about_page.dart';
 import 'contact_us_page.dart';
 import 'edit_profile_page.dart';
-import 'faq_page.dart';
 import 'favorite_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -132,17 +133,19 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       TileWidget(
                         icon: AppIcons.messageQuestion,
-                        title: S.of(context).faq,
+                        title: S.of(context).privacyPolicyTitle,
                         context: context,
                         onTap: () {
-                          navigateTo(context, const FAQPage());
+                          navigateTo(context, const PolicyPage());
                         },
                       ),
                       TileWidget(
-                        icon: AppIcons.sharing,
-                        title: S.of(context).shareApp,
+                        icon: AppIcons.messageQuestion,
+                        title: S.of(context).termsTitle,
                         context: context,
-                        onTap: () {},
+                        onTap: () {
+                            navigateTo(context, const TermsConditionsPage());
+                        },
                       ),
                     ],
                   ),

@@ -107,7 +107,7 @@ class OnlineImagesWidget extends StatelessWidget {
   final bool circularImage;
   final double? circularRadius;
   final bool hasShadow;
-  final Size? size; // مرّر ارتفاع أو الاثنين لو تستخدمه كأيقونة
+  final Size? size;
   final BoxFit? fit;
   final double? logoWidth;
   final double? borderRadius;
@@ -238,6 +238,8 @@ class OnlineImagesWidget extends StatelessWidget {
       alignment: Alignment.center,
       child: SvgPicture.asset(
         AppIcons.logo,
+        height: 60.h,
+        color: AppColors.whiteColor,
         width: logoWidth ?? (ScreenUtil().pixelRatio != 0 ? 50.w : 50.0),
       ),
     );

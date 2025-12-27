@@ -2,7 +2,6 @@ import 'package:booking/core/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/theme/app_colors.dart';
 
@@ -43,7 +42,8 @@ class ShimmerPropertyCardWidget extends StatelessWidget {
                 ),
                 SvgPicture.asset(
                   AppIcons.logo,
-                  height: 40.h,
+                  height: 70.h,
+                  color: AppColors.whiteColor.withValues(alpha: 0.7),
                 ),
               ],
             ),

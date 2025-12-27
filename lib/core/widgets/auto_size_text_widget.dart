@@ -33,12 +33,14 @@ class AutoSizeTextWidget extends StatelessWidget {
         fontSize: fontSize ?? 14.sp,
         color: colorText ?? Colors.black,
         fontFamily: 'ReadexPro',
+        decoration: TextDecoration.none,
       ),
       maxLines: maxLines ?? 1,
       maxFontSize: maxFontSize ?? 24,
       minFontSize: minFontSize ?? 10,
       overflow: TextOverflow.ellipsis,
       textAlign: textAlign ?? TextAlign.start,
+
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/state/check_state_in_get_api_data_widget.dart';
 import '../../../../../core/state/state.dart';
+import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/loading_widget.dart';
 import '../riverpod/unit_riverpod.dart';
 import 'unit_card_widget.dart';
@@ -123,7 +124,8 @@ class _UnitsInPropertyDetailsTabState
                   ),
                   SvgPicture.asset(
                     AppIcons.logo,
-                    height: 40.h,
+                    height: 100.h,
+                    color: AppColors.whiteColor.withValues(alpha: 0.7),
                   ),
                 ],
               ),

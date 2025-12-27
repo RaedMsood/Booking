@@ -24,11 +24,11 @@ class RatingBookingWidget extends StatelessWidget {
         children: [
           AutoSizeTextWidget(
             text: '$rating',
-            fontSize: 8,
+            fontSize: 8.sp,
             colorText: const Color(0xffFFA500),
             textAlign: TextAlign.center,
           ),
-          const Icon(Icons.star, size: 10, color: Color(0xffFFA500)),
+           Icon(Icons.star, size: 10.h, color: const Color(0xffFFA500)),
         ],
       ),
     );

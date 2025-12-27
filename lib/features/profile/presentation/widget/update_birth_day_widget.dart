@@ -10,8 +10,9 @@ import '../../../../generated/l10n.dart';
 final updateBirthDateProvider = StateProvider<DateTime?>((ref) => null);
 
 class UpdateBirthDatePickerWidget extends ConsumerWidget {
-  const UpdateBirthDatePickerWidget({super.key,required this.onChanged});
-  final ValueChanged<String>? onChanged;
+  const UpdateBirthDatePickerWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,7 +31,7 @@ class UpdateBirthDatePickerWidget extends ConsumerWidget {
           onTap: () async {
             final picked = await showDatePicker(
               context: context,
-              initialDate: DateTime(2000),
+              initialDate: birthDate ?? DateTime(2000),
               firstDate: DateTime(1900),
               lastDate: DateTime.now(),
               builder: (context, child) {
@@ -52,8 +53,8 @@ class UpdateBirthDatePickerWidget extends ConsumerWidget {
                 );
               },
             );
+
             if (picked != null) {
-              onChanged!(picked.toString());
               ref.read(updateBirthDateProvider.notifier).state = picked;
             }
           },
@@ -78,7 +79,7 @@ class UpdateBirthDatePickerWidget extends ConsumerWidget {
                       : "${birthDate.year}-${birthDate.month.toString().padLeft(2, '0')}-${birthDate.day.toString().padLeft(2, '0')}",
                   fontSize: 10.8.sp,
                   colorText:
-                  birthDate == null ? AppColors.fontColor2 : Colors.black87,
+                      birthDate == null ? AppColors.fontColor2 : Colors.black87,
                 ),
               ],
             ),

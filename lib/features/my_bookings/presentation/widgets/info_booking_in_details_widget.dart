@@ -39,7 +39,7 @@ class InfoBookingInDetailsWidget extends StatelessWidget {
         const Spacer(),
         AutoSizeTextWidget(
           text: text,
-          fontSize: 10,
+          fontSize: 10.sp,
           fontWeight: FontWeight.w500,
           colorText: const Color(0xff292D32),
         ),

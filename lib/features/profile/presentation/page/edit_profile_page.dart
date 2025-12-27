@@ -6,7 +6,6 @@ import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
 import '../../../properties/cities/data/model/city_model.dart';
 import '../../../properties/cities/presentation/riverpod/cities_riverpod.dart';
-import '../../../user/presentation/widgets/birth_date_picker_widget.dart';
 import '../../../user/presentation/widgets/user_page_titles_widget.dart';
 import '../../data/model/profile_model.dart';
 import '../widget/name_email_phone_widget.dart';
@@ -15,7 +14,6 @@ import '../widget/update_gender_widget.dart';
 import '../../../../core/state/state.dart';
 import '../../../../core/state/check_state_in_post_api_data_widget.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../properties/cities/presentation/widget/city_widget.dart';
 import '../state_mangement/riverpod.dart';
@@ -67,7 +65,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
           );
 
       _birthSub = ref.listenManual<DateTime?>(
-        birthDateProvider,
+        updateBirthDateProvider,
         (prev, next) => _onFormChanged(),
       );
       _genderSub = ref.listenManual<dynamic>(
@@ -104,7 +102,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
       name: nameController.text,
       email: emailController.text,
       gender: ref.read(updateGenderProvider),
-      birthDate: ref.read(birthDateProvider),
+      birthDate: ref.read(updateBirthDateProvider),
       city: ref.read(selectedCityProvider),
     );
 
@@ -142,7 +140,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                   emailController: emailController,
                 ),
                 12.h.verticalSpace,
-                UpdateBirthDatePickerWidget(onChanged: (_) => _onFormChanged()),
+                const UpdateBirthDatePickerWidget(),
                 12.h.verticalSpace,
                 UpdateGenderWidget(
                   selectedGenderFromProfile: ref.watch(updateGenderProvider),
@@ -164,11 +162,11 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
               name: nameController.text,
               email: emailController.text,
               gender: ref.read(updateGenderProvider),
-              birthDate: ref.read(birthDateProvider),
+              birthDate: ref.read(updateBirthDateProvider),
               city: ref.read(selectedCityProvider),
             );
             Auth().updateUserData(
-              birthDay: ref.read(birthDateProvider).toString(),
+              birthDay: ref.read(updateBirthDateProvider).toString(),
               email: emailController.text,
               name: nameController.text,
               gender: ref.read(updateGenderProvider),
@@ -195,7 +193,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                         name: nameController.text,
                         email: emailController.text,
                         gender: ref.read(updateGenderProvider),
-                        birthDate: ref.read(birthDateProvider),
+                        birthDate: ref.read(updateBirthDateProvider),
                         city: ref.read(selectedCityProvider),
                       );
 

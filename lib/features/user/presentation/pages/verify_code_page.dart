@@ -40,8 +40,12 @@ class _VerifyCodePageState extends ConsumerState<VerifyCodePage>
     listenForCode();
 
     _verifyController.addListener(_maybeAutoSubmit);
+    _getSignature();
   }
-
+  void _getSignature() async {
+    String signature = await SmsAutoFill().getAppSignature;
+    debugPrint("🔐 App Signature: $signature");
+  }
   @override
   void codeUpdated() {
     final c = code ?? '';

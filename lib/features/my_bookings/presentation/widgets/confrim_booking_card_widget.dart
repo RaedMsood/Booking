@@ -10,12 +10,15 @@ class ConfrimBookingCardWidget extends StatelessWidget {
   final String bookingId;
   final String bookingDateString;
   final String status;
-
+  final String backgroundStatusColor;
+  final String textStatusColor;
   const ConfrimBookingCardWidget({
     super.key,
     required this.bookingId,
     required this.bookingDateString,
     required this.status,
+    required this.backgroundStatusColor ,
+    required this.textStatusColor,
   });
 
   @override
@@ -45,6 +48,9 @@ class ConfrimBookingCardWidget extends StatelessWidget {
           10.verticalSpace,
           StatusBadgeInDetailsWidget(
             status: status,
+            backgroundColor: backgroundStatusColor,
+            textColor: textStatusColor,
+
           ),
         ],
       ),

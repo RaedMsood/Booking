@@ -32,7 +32,7 @@ class SelectFieldWidget extends StatelessWidget {
         AutoSizeTextWidget(
           colorText: fontColorLabel ?? Colors.black,
           text: label,
-          fontSize: fontSizeLabel ?? 10,
+          fontSize: fontSizeLabel ?? 8.sp,
           fontWeight: FontWeight.w400,
         ),
         6.verticalSpace,
@@ -51,7 +51,7 @@ class SelectFieldWidget extends StatelessWidget {
                 Expanded(
                   child: AutoSizeTextWidget(
                       text: value,
-                      fontSize: fontSizeValue ?? 10,
+                      fontSize: fontSizeValue ?? 8.sp,
                       fontWeight: FontWeight.w400),
                 ),
                 const Icon(Icons.keyboard_arrow_left, color: Colors.black54),

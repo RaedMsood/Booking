@@ -46,7 +46,7 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
               title: Center(
                 child: AutoSizeTextWidget(
                   text: opt,
-                  fontSize: 12,
+                  fontSize: 12.sp,
                 ),
               ),
               onTap: () {
@@ -94,7 +94,7 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
               },
             ),
           ),
-          const SizedBox(height: 16),
+           SizedBox(height: 16.h),
           CounterRowWidget(
             label: S.of(context).roomsCount,
             count: _rooms,
@@ -107,7 +107,7 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
               widget.countRoom(_rooms);
             },
           ),
-          const SizedBox(height: 12),
+           SizedBox(height: 12.h),
           CounterRowWidget(
             label: S.of(context).adults,
             count: _adults,
@@ -120,7 +120,7 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
               widget.countAdult(_adults);
             },
           ),
-          const SizedBox(height: 12),
+ SizedBox(height: 12.h),
           CounterRowWidget(
             label: S.of(context).children,
             count: _children,

@@ -27,6 +27,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "YER": MessageLookupByLibrary.simpleMessage("ريال"),
         "about": MessageLookupByLibrary.simpleMessage("عن الفندق"),
         "aboutApp": MessageLookupByLibrary.simpleMessage("عن التطبيق"),
+        "aboutMazaji": MessageLookupByLibrary.simpleMessage(
+            "مزاجي هو تجربة حجز راقية صُممت لتواكب ذوقك الرفيع. يقدّم لك مجموعة مختارة من أفضل الفنادق ، مع واجهة أنيقة وخطوات حجز سلسة تمنحك الراحة منذ اللحظة الأولى.\nفي مزاجي، كل تفصيلة صُممت لتمنحك الثقة، الخصوصية، وسهولة الاختيار، مع خيارات متنوعة تناسب جميع الميزانيات دون استثناء.\nاختر المكان، استمتع بالتجربة، ودع مزاجك يقودك.\nمزاجي… لأن الإقامة تعكس مزاجك."),
         "accountDeletedSuccess":
             MessageLookupByLibrary.simpleMessage("تم حذف الحساب بنجاح"),
         "addYourRating": MessageLookupByLibrary.simpleMessage("أضف تقييمك"),
@@ -108,6 +110,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "الاستمرار بالفيسبوك Facebook"),
         "continueWithGoogle":
             MessageLookupByLibrary.simpleMessage("الاستمرار بجوجل Google"),
+        "copiedToClipboard":
+            MessageLookupByLibrary.simpleMessage("تم النسخ إلى الحافظة"),
         "copy": MessageLookupByLibrary.simpleMessage("نسخ"),
         "cost": MessageLookupByLibrary.simpleMessage("التكلفة"),
         "countLabel": MessageLookupByLibrary.simpleMessage("عدد"),
@@ -182,7 +186,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "haveCouponQuestion":
             MessageLookupByLibrary.simpleMessage("لديك قسيمة تخفيض؟"),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
-        "hostel": MessageLookupByLibrary.simpleMessage("نُزل"),
+        "hotel": MessageLookupByLibrary.simpleMessage("مزاجي"),
         "hotelBookingTitle": MessageLookupByLibrary.simpleMessage("حجز الفندق"),
         "hotelPaymentNote": MessageLookupByLibrary.simpleMessage(
             "سيتوجب عليك دفع باقي المبلغ لصاحب الفندق عند الوصول"),
@@ -300,6 +304,130 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("يرجى المحاولة مرة أخرى"),
         "previous": MessageLookupByLibrary.simpleMessage("السابق"),
         "price": MessageLookupByLibrary.simpleMessage("السعر"),
+        "privacyPolicyConsentNote": MessageLookupByLibrary.simpleMessage(
+            "بالاستمرار في استخدام التطبيق، فإنك توافق على ما ورد في هذه السياسة."),
+        "privacyPolicyEmailLabel":
+            MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+        "privacyPolicyFooterNote": MessageLookupByLibrary.simpleMessage(
+            "آخر تحديث: 23 ديسمبر 2025.\nيمكن أن تختلف الممارسات باختلاف الدولة أو الأنظمة المحلية، وسيتم الالتزام بالمتطلبات النظامية المعمول بها."),
+        "privacyPolicyHeaderTitle":
+            MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
+        "privacyPolicyIntro": MessageLookupByLibrary.simpleMessage(
+            "تطبيق مزاجي هو تطبيق مملوك ومُدار من قبل شركة Algonest. نحن نحترم خصوصية مستخدمينا ونلتزم بحماية بياناتهم الشخصية وفقًا لأفضل الممارسات والمعايير المعمول بها. توضح هذه السياسة كيفية جمع المعلومات واستخدامها وحمايتها عند استخدامك للتطبيق."),
+        "privacyPolicySection1Title": MessageLookupByLibrary.simpleMessage(
+            "1. المعلومات التي نقوم بجمعها"),
+        "privacyPolicySection1aItem1":
+            MessageLookupByLibrary.simpleMessage("الاسم"),
+        "privacyPolicySection1aItem2":
+            MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "privacyPolicySection1aItem3":
+            MessageLookupByLibrary.simpleMessage("تاريخ الميلاد (اختياري)."),
+        "privacyPolicySection1aItem4":
+            MessageLookupByLibrary.simpleMessage("الجنس (اختياري)."),
+        "privacyPolicySection1aItem5":
+            MessageLookupByLibrary.simpleMessage("عنوان السكن."),
+        "privacyPolicySection1aItem6": MessageLookupByLibrary.simpleMessage(
+            "البريد الإلكتروني (عند إنشاء الحساب أو إجراء الحجز)."),
+        "privacyPolicySection1aTitle":
+            MessageLookupByLibrary.simpleMessage("أ. المعلومات الشخصية"),
+        "privacyPolicySection1bItem1":
+            MessageLookupByLibrary.simpleMessage("اسم الفندق."),
+        "privacyPolicySection1bItem2":
+            MessageLookupByLibrary.simpleMessage("تاريخ الحجز."),
+        "privacyPolicySection1bItem3":
+            MessageLookupByLibrary.simpleMessage("مدة الإقامة."),
+        "privacyPolicySection1bItem4":
+            MessageLookupByLibrary.simpleMessage("تفاصيل متعلقة بالحجز."),
+        "privacyPolicySection1bTitle":
+            MessageLookupByLibrary.simpleMessage("ب. معلومات الحجز"),
+        "privacyPolicySection1cItem1":
+            MessageLookupByLibrary.simpleMessage("نوع الجهاز."),
+        "privacyPolicySection1cItem2":
+            MessageLookupByLibrary.simpleMessage("عنوان IP."),
+        "privacyPolicySection1cItem3":
+            MessageLookupByLibrary.simpleMessage("نظام التشغيل."),
+        "privacyPolicySection1cItem4": MessageLookupByLibrary.simpleMessage(
+            "بيانات الاستخدام داخل التطبيق (لأغراض التحسين والأمان)."),
+        "privacyPolicySection1cTitle":
+            MessageLookupByLibrary.simpleMessage("ج. المعلومات التقنية"),
+        "privacyPolicySection2Item1":
+            MessageLookupByLibrary.simpleMessage("تنفيذ وإدارة الحجوزات."),
+        "privacyPolicySection2Item2": MessageLookupByLibrary.simpleMessage(
+            "تحسين تجربة المستخدم داخل التطبيق."),
+        "privacyPolicySection2Item3": MessageLookupByLibrary.simpleMessage(
+            "التواصل مع المستخدم بخصوص الحجوزات أو التحديثات المهمة."),
+        "privacyPolicySection2Item4": MessageLookupByLibrary.simpleMessage(
+            "تحسين أداء التطبيق وتحليل الاستخدام."),
+        "privacyPolicySection2Item5": MessageLookupByLibrary.simpleMessage(
+            "إعداد تقارير وإحصاءات غير شخصية."),
+        "privacyPolicySection2Title":
+            MessageLookupByLibrary.simpleMessage("2. كيفية استخدام المعلومات"),
+        "privacyPolicySection3Item1": MessageLookupByLibrary.simpleMessage(
+            "مشاركة بيانات الحجز مع الفندق المعني لإتمام الحجز."),
+        "privacyPolicySection3Item2": MessageLookupByLibrary.simpleMessage(
+            "مع مزودي الخدمات التقنية (مثل الاستضافة أو التحليلات) مع الالتزام بسرية البيانات."),
+        "privacyPolicySection3Item3": MessageLookupByLibrary.simpleMessage(
+            "عند الطلب القانوني من الجهات المختصة."),
+        "privacyPolicySection3Note1": MessageLookupByLibrary.simpleMessage(
+            "نلتزم بعدم بيع أو تأجير بياناتك الشخصية لأي طرف ثالث."),
+        "privacyPolicySection3Note2": MessageLookupByLibrary.simpleMessage(
+            "قد تتم مشاركة البيانات فقط في الحالات التالية:"),
+        "privacyPolicySection3Title":
+            MessageLookupByLibrary.simpleMessage("3. مشاركة المعلومات"),
+        "privacyPolicySection4Item1": MessageLookupByLibrary.simpleMessage(
+            "خدمات التحليلات (مثل Firebase Analytics)."),
+        "privacyPolicySection4Item2": MessageLookupByLibrary.simpleMessage(
+            "خدمات الخرائط وتحديد المواقع."),
+        "privacyPolicySection4Item3": MessageLookupByLibrary.simpleMessage(
+            "مزودي خدمات الدفع الإلكتروني."),
+        "privacyPolicySection4Note1": MessageLookupByLibrary.simpleMessage(
+            "قد يستخدم تطبيق مزاجي خدمات طرف ثالث مثل:"),
+        "privacyPolicySection4Note2": MessageLookupByLibrary.simpleMessage(
+            "وتخضع هذه الخدمات لسياسات الخصوصية الخاصة بها."),
+        "privacyPolicySection4Title":
+            MessageLookupByLibrary.simpleMessage("4. خدمات الطرف الثالث"),
+        "privacyPolicySection5Item1": MessageLookupByLibrary.simpleMessage(
+            "لا يقوم التطبيق بتخزين بيانات بطاقات الدفع."),
+        "privacyPolicySection5Item2": MessageLookupByLibrary.simpleMessage(
+            "تتم عمليات الدفع عبر مزودي خدمات دفع إلكتروني معتمدين وآمنين."),
+        "privacyPolicySection5Item3": MessageLookupByLibrary.simpleMessage(
+            "التطبيق غير مسؤول عن أي أخطاء ناتجة عن بوابة الدفع الخارجية."),
+        "privacyPolicySection5Title":
+            MessageLookupByLibrary.simpleMessage("5. الدفع الإلكتروني"),
+        "privacyPolicySection6Item1": MessageLookupByLibrary.simpleMessage(
+            "يتم تخزين البيانات على خوادم آمنة."),
+        "privacyPolicySection6Item2": MessageLookupByLibrary.simpleMessage(
+            "نستخدم إجراءات تقنية وتنظيمية مناسبة لحماية البيانات من الوصول غير المصرح به أو التعديل أو الفقدان."),
+        "privacyPolicySection6Item3": MessageLookupByLibrary.simpleMessage(
+            "قد يتم تخزين أو معالجة البيانات خارج دولة المستخدم مع الالتزام بمعايير الحماية المعتمدة."),
+        "privacyPolicySection6Title":
+            MessageLookupByLibrary.simpleMessage("6. تخزين وحماية البيانات"),
+        "privacyPolicySection7Footer": MessageLookupByLibrary.simpleMessage(
+            "يمكن تنفيذ ذلك من خلال إعدادات التطبيق أو التواصل معنا."),
+        "privacyPolicySection7Item1":
+            MessageLookupByLibrary.simpleMessage("الوصول إلى بياناته الشخصية."),
+        "privacyPolicySection7Item2": MessageLookupByLibrary.simpleMessage(
+            "تعديل أو تحديث بيانات الحساب."),
+        "privacyPolicySection7Item3": MessageLookupByLibrary.simpleMessage(
+            "حذف الحساب وطلب حذف البيانات نهائيًا."),
+        "privacyPolicySection7Item4": MessageLookupByLibrary.simpleMessage(
+            "سحب الموافقة على جمع البيانات غير الأساسية."),
+        "privacyPolicySection7Note":
+            MessageLookupByLibrary.simpleMessage("يحق للمستخدم:"),
+        "privacyPolicySection7Title":
+            MessageLookupByLibrary.simpleMessage("7. حقوق المستخدم"),
+        "privacyPolicySection8Note1": MessageLookupByLibrary.simpleMessage(
+            "نحتفظ بالحق في تحديث سياسة الخصوصية من وقت لآخر."),
+        "privacyPolicySection8Note2": MessageLookupByLibrary.simpleMessage(
+            "سيتم إشعار المستخدم بأي تغييرات جوهرية داخل التطبيق."),
+        "privacyPolicySection8Title": MessageLookupByLibrary.simpleMessage(
+            "8. التعديلات على سياسة الخصوصية"),
+        "privacyPolicySection9Note": MessageLookupByLibrary.simpleMessage(
+            "في حال وجود أي استفسار بخصوص سياسة الخصوصية أو شروط الاستخدام، يمكنكم التواصل مع شركة Algonest عبر:"),
+        "privacyPolicySection9Title":
+            MessageLookupByLibrary.simpleMessage("9. التواصل معنا"),
+        "privacyPolicyTitle":
+            MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
         "profile": MessageLookupByLibrary.simpleMessage("حسابي"),
         "profileUpdatedSuccess": MessageLookupByLibrary.simpleMessage(
             "تم تعديل البيانات الشخصية بنجاح"),
@@ -370,6 +498,79 @@ class MessageLookup extends MessageLookupByLibrary {
             "تأكد من ضبط الشهادة أو حاول لاحقاً"),
         "successfully":
             MessageLookupByLibrary.simpleMessage("تمت العملية بنجاح"),
+        "termsFooterNote": MessageLookupByLibrary.simpleMessage(
+            "آخر تحديث: 23 ديسمبر 2025.\nقد يتم تعديل الشروط والأحكام من وقت لآخر وسيتم إشعار المستخدم بالتغييرات الجوهرية داخل التطبيق."),
+        "termsIntro": MessageLookupByLibrary.simpleMessage(
+            "يرجى قراءة هذه الشروط والأحكام بعناية قبل استخدام تطبيق مزاجي. باستخدامك للتطبيق فإنك توافق على الالتزام بما يلي."),
+        "termsSection1Item1": MessageLookupByLibrary.simpleMessage(
+            "التطبيق مخصص لحجز أماكن الإقامة والخدمات المرتبطة بها."),
+        "termsSection1Item2": MessageLookupByLibrary.simpleMessage(
+            "يجب استخدام التطبيق لأغراض مشروعة فقط."),
+        "termsSection1Item3": MessageLookupByLibrary.simpleMessage(
+            "يمنع إساءة استخدام التطبيق أو محاولة التلاعب بالحجوزات أو الأنظمة."),
+        "termsSection1Title":
+            MessageLookupByLibrary.simpleMessage("1. استخدام التطبيق"),
+        "termsSection2Item1": MessageLookupByLibrary.simpleMessage(
+            "المستخدم مسؤول عن صحة البيانات المدخلة."),
+        "termsSection2Item2": MessageLookupByLibrary.simpleMessage(
+            "يتحمل المستخدم مسؤولية الحفاظ على سرية معلومات حسابه."),
+        "termsSection2Item3": MessageLookupByLibrary.simpleMessage(
+            "يحق للإدارة تعليق أو إيقاف أي حساب مخالف."),
+        "termsSection2Title":
+            MessageLookupByLibrary.simpleMessage("2. الحسابات"),
+        "termsSection3Item1": MessageLookupByLibrary.simpleMessage(
+            "جميع الحجوزات تخضع لتوفر الغرف لدى الفندق."),
+        "termsSection3Item2": MessageLookupByLibrary.simpleMessage(
+            "يعمل التطبيق كوسيط بين المستخدم والفندق."),
+        "termsSection3Item3": MessageLookupByLibrary.simpleMessage(
+            "الفندق هو المسؤول عن تنفيذ الخدمة المتفق عليها."),
+        "termsSection3Title":
+            MessageLookupByLibrary.simpleMessage("3. الحجوزات"),
+        "termsSection4Item1": MessageLookupByLibrary.simpleMessage(
+            "الأسعار يتم تحديدها من قبل الفندق."),
+        "termsSection4Item2": MessageLookupByLibrary.simpleMessage(
+            "قد تختلف الأسعار حسب الموسم أو التوفر."),
+        "termsSection4Item3": MessageLookupByLibrary.simpleMessage(
+            "التطبيق غير مسؤول عن أي تغيير يطرأ من قبل الفندق بعد تأكيد الحجز."),
+        "termsSection4Title":
+            MessageLookupByLibrary.simpleMessage("4. الأسعار والدفع"),
+        "termsSection5Item1": MessageLookupByLibrary.simpleMessage(
+            "التطبيق غير مسؤول عن أي نزاعات مباشرة بين المستخدم والفندق."),
+        "termsSection5Item2": MessageLookupByLibrary.simpleMessage(
+            "لا نتحمل مسؤولية أي خسائر ناتجة عن ظروف خارجة عن السيطرة."),
+        "termsSection5Title":
+            MessageLookupByLibrary.simpleMessage("5. إخلاء المسؤولية"),
+        "termsSection6Note": MessageLookupByLibrary.simpleMessage(
+            "تخضع هذه الشروط والسياسات لقوانين الدولة التي يعمل بها التطبيق، ويتم الفصل في أي نزاع عبر الجهات القضائية المختصة."),
+        "termsSection6Title":
+            MessageLookupByLibrary.simpleMessage("6. القانون الحاكم"),
+        "termsSection7Item1": MessageLookupByLibrary.simpleMessage(
+            "تختلف سياسة الإلغاء والاسترجاع من فندق لآخر."),
+        "termsSection7Item2": MessageLookupByLibrary.simpleMessage(
+            "يتم عرض سياسة الإلغاء بوضوح قبل تأكيد الحجز."),
+        "termsSection7Item3": MessageLookupByLibrary.simpleMessage(
+            "أي استرجاع مالي يتم وفق سياسة الفندق."),
+        "termsSection7Item4": MessageLookupByLibrary.simpleMessage(
+            "يلتزم التطبيق بنقل طلب الإلغاء أو الاسترجاع فقط."),
+        "termsSection7Title":
+            MessageLookupByLibrary.simpleMessage("7. سياسة الإلغاء والاسترجاع"),
+        "termsSection8Item1": MessageLookupByLibrary.simpleMessage(
+            "يحق للمستخدمين إضافة تقييماتهم بناءً على تجربة حقيقية."),
+        "termsSection8Item2": MessageLookupByLibrary.simpleMessage(
+            "يمنع نشر أي محتوى مسيء أو مضلل أو غير لائق."),
+        "termsSection8Item3": MessageLookupByLibrary.simpleMessage(
+            "يحق لإدارة التطبيق حذف أي محتوى مخالف دون إشعار مسبق."),
+        "termsSection8Title":
+            MessageLookupByLibrary.simpleMessage("8. سياسة المحتوى والتقييمات"),
+        "termsSection9Item1": MessageLookupByLibrary.simpleMessage(
+            "يوفر التطبيق قنوات دعم فني للمستخدمين."),
+        "termsSection9Item2": MessageLookupByLibrary.simpleMessage(
+            "يتم الرد على الاستفسارات خلال أوقات العمل الرسمية."),
+        "termsSection9Item3": MessageLookupByLibrary.simpleMessage(
+            "يحق للإدارة تعليق أو إيقاف الحسابات المخالفة للسياسات."),
+        "termsSection9Title":
+            MessageLookupByLibrary.simpleMessage("9. سياسة الدعم والتواصل"),
+        "termsTitle": MessageLookupByLibrary.simpleMessage("الشروط والأحكام"),
         "theModificationHasBeenCompletedSuccessfully":
             MessageLookupByLibrary.simpleMessage("لقد تم التعديل بنجاح"),
         "timeout":

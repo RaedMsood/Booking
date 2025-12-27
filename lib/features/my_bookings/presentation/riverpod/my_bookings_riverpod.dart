@@ -62,7 +62,12 @@ final statusColorsProvider =
         background: Color(0xffFFF3CD),
         text: Color(0xffFFA500),
       );
-    case 'منتهيه':
+    case 'قيد المراجعة':
+      return const StatusColors(
+        background: Color(0xffFFF3CD),
+        text: Color(0xffFFA500),
+      );
+    case 'مكتملة':
       return const StatusColors(
         background: Color(0xffD4EDDA),
         text: Color(0xff28A745),
@@ -74,8 +79,8 @@ final statusColorsProvider =
       );
     default:
       return const StatusColors(
-        background: Color(0xffFFE2E2),
-        text: Color(0xffFF4D4F),
+        background: Color(0xffFFF3CD),
+        text: Color(0xffFFA500),
       );
   }
 });

@@ -65,6 +65,9 @@ class MyBookingDetailsPage extends ConsumerWidget {
                       bookingDateString:
                           stateMyBooking.data.bookingAt.toString(),
                       status: stateMyBooking.data.status ?? '',
+                      backgroundStatusColor:
+                          stateMyBooking.data.backgroundStatusColor ?? '',
+                      textStatusColor: stateMyBooking.data.textStatusColor ?? '',
                     ),
                     8.h.verticalSpace,
                     BookingDataCardWidget(

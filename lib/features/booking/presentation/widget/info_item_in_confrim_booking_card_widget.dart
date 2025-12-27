@@ -29,7 +29,7 @@ class InfoItemInConfrimBookingCardWidget extends StatelessWidget {
       children: [
         AutoSizeTextWidget(
           text: title,
-          fontSize: 10,
+          fontSize: 9.sp,
           colorText: const Color(0xff605A65),
           fontWeight: FontWeight.w500,
 
@@ -39,7 +39,7 @@ class InfoItemInConfrimBookingCardWidget extends StatelessWidget {
         2.horizontalSpace,
         AutoSizeTextWidget(
           text: text,
-          fontSize: 10,
+          fontSize: 10.sp,
           fontWeight: FontWeight.w500,
           colorText: const Color(0xff292D32),
         ),

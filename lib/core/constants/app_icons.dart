@@ -10,7 +10,11 @@ class AppIcons {
   static const String arrowBottom = '${_iconsPath}arrow_bottom.svg';
   static const String arrowLeft = '${_iconsPath}arrow_left.svg';
   static const String arrowRight = '${_iconsPath}arrow_right.svg';
-  static const String logo = '${_iconsPath}logos/logo.svg';
+  static const String logo = '${_iconsPath}logos/mazaji11.svg';
+  static const String logo1 = '${_iconsPath}logos/mazaji11.svg';
+  static const String logo2 = '${_iconsPath}logos/mazaji12.svg';
+  static const String logo3 = '${_iconsPath}logos/mazaji13.svg';
+  static const String logo4 = '${_iconsPath}logos/mazaji14.svg';
 
 
   static const String about = '${_iconsPath}about.svg';

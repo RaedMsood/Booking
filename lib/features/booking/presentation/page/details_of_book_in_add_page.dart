@@ -123,7 +123,7 @@ class _DetailsOfBookInAddPageState
                           unitCount: rooms,
                           childCount: children,
                           adultCount: adults,
-                          guests: 4,
+                          guests: children+adults,
                           totalPrice: widget.totalPrice,
                           unitId: widget.unitId,
                         );

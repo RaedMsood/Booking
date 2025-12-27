@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/go_to_login_widget.dart';
@@ -22,6 +21,7 @@ class _MyBookingsPageState extends State<MyBookingsPage>
 
   final List<String> _tabs = [
     S.current.all,
+    'قيد المراجعة',
     S.current.currentFilter,
     S.current.completedFilter,
     S.current.canceledFilter,
@@ -30,7 +30,7 @@ class _MyBookingsPageState extends State<MyBookingsPage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this)
+    _tabController = TabController(length: 5, vsync: this)
       ..addListener(() {
         if (_tabController.index != _tabController.previousIndex) {
           setState(() {});
@@ -97,7 +97,7 @@ class _MyBookingsPageState extends State<MyBookingsPage>
                           borderRadius: BorderRadius.circular(25.r),
                           border: Border.all(
                             color: borderColor,
-                            width: 0.5,
+                            width: 0.5.w,
                           ),
                         ),
                         alignment: Alignment.center,

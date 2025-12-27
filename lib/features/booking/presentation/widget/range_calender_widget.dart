@@ -59,7 +59,7 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                   AutoSizeTextWidget(
                     text: S.of(context).yourBookingDate,
                     fontWeight: FontWeight.w500,
-                    fontSize: 10,
+                    fontSize: 9.5.sp,
                   ),
                   10.verticalSpace,
 
@@ -68,7 +68,7 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                     children: [
                       AutoSizeTextWidget(
                         text: DateFormat.yMMMM('$locale').format(_focusedDay),
-                        fontSize: 13,
+                        fontSize: 11.5.sp,
                         fontWeight: FontWeight.w300,
                         colorText: const Color(0xff757575),
                       ),
@@ -134,7 +134,7 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                     },
 
                     headerVisible: false,
-                    daysOfWeekHeight: 14,
+                    daysOfWeekHeight: 14.h,
 
                     // تخصيص شكل الأيام المعطّلة (الماضية) بخط فوق الرقم
                     calendarBuilders: CalendarBuilders(
@@ -142,9 +142,9 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                         return Center(
                           child: Text(
                             '${day.day}',
-                            style: const TextStyle(
-                              fontSize: 10,
-                              color: Color(0xFFBDBDBD),
+                            style:  TextStyle(
+                              fontSize: 8.sp,
+                              color: const Color(0xFFBDBDBD),
                               decoration: TextDecoration.lineThrough,
                               // خط فوق الرقم
                               decorationThickness: 0.8,
@@ -154,16 +154,16 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                       },
                     ),
 
-                    daysOfWeekStyle: const DaysOfWeekStyle(
+                    daysOfWeekStyle:  DaysOfWeekStyle(
                       weekdayStyle: TextStyle(
                         fontWeight: FontWeight.w300,
-                        fontSize: 10,
-                        color: Color(0xff333333),
+                        fontSize: 8.sp,
+                        color: const Color(0xff333333),
                       ),
                       weekendStyle: TextStyle(
                         fontWeight: FontWeight.w300,
-                        fontSize: 10,
-                        color: Color(0xff333333),
+                        fontSize: 8.sp,
+                        color: const Color(0xff333333),
                       ),
                     ),
 
@@ -173,23 +173,23 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                     calendarStyle: CalendarStyle(
                       outsideDaysVisible: true,
                       rangeStartTextStyle:
-                          const TextStyle(fontSize: 10, color: Colors.white),
+                           TextStyle(fontSize: 8.sp, color: Colors.white),
                       rangeEndTextStyle:
-                          const TextStyle(fontSize: 10, color: Colors.white),
-                      defaultTextStyle: const TextStyle(fontSize: 10),
-                      outsideTextStyle: const TextStyle(fontSize: 10),
-                      weekendTextStyle: const TextStyle(fontSize: 10),
-                      todayTextStyle: const TextStyle(fontSize: 10),
-                      selectedTextStyle: const TextStyle(
-                        fontSize: 10,
+                           TextStyle(fontSize: 8.sp, color: Colors.white),
+                      defaultTextStyle:  TextStyle(fontSize: 8.sp),
+                      outsideTextStyle:  TextStyle(fontSize: 8.sp),
+                      weekendTextStyle:  TextStyle(fontSize: 8.sp),
+                      todayTextStyle:  TextStyle(fontSize: 8.sp),
+                      selectedTextStyle:  TextStyle(
+                        fontSize: 8.sp,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
-                      withinRangeTextStyle: const TextStyle(
-                        fontSize: 10,
+                      withinRangeTextStyle:  TextStyle(
+                        fontSize: 8.sp,
                         color: Colors.white,
                       ),
-                      holidayTextStyle: const TextStyle(fontSize: 10),
+                      holidayTextStyle:  TextStyle(fontSize: 8.sp),
                       rangeStartDecoration: const BoxDecoration(
                         color: AppColors.primaryColor,
                         shape: BoxShape.circle,

@@ -28,7 +28,7 @@ class DepositInLastDetailsWidget extends StatelessWidget {
           8.verticalSpace,
           AutoSizeTextWidget(
             text: S.of(context).hotelPolicyNote,
-            fontSize: 12,
+            fontSize: 11.sp,
             colorText: const Color(0xff757575),
             fontWeight: FontWeight.w400,
           ),

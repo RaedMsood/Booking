@@ -4,10 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/theme/app_colors.dart';
-import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/buttons/ink_well_button_widget.dart';
 import '../../../../../core/widgets/custom_shape_widget.dart';
-import '../../../../../generated/l10n.dart';
 import '../../../../notifications/presentation/widget/notifications_button_widget.dart';
 import '../../../search_and_filter/presentation/pages/search_and_filter_page.dart';
 
@@ -32,14 +30,14 @@ class SliverAppBarHomeWidget extends SliverPersistentHeaderDelegate {
               children: [
                 14.w.horizontalSpace,
                 SvgPicture.asset(
-                  AppIcons.logo,
+                  AppIcons.logo1,
+                  color: AppColors.whiteColor,
+                  height: 26.h,
                 ),
-                8.w.horizontalSpace,
-                AutoSizeTextWidget(
-                  text: S.of(context).hostel,
-                  fontSize: 16.sp,
-                  colorText: AppColors.whiteColor,
-                  fontWeight: FontWeight.w600,
+                SvgPicture.asset(
+                  AppIcons.logo3,
+                  color: AppColors.whiteColor,
+                  height: 33.h,
                 ),
               ],
             ),

@@ -36,6 +36,8 @@ class MyBookingCardWidget extends StatelessWidget {
               children: [
                 BookingStatusWidget(
                   status: bookData.status ?? '',
+                  backgroundColor: bookData.backgroundStatusColor ?? '',
+                  textColor: bookData.textStatusColor ?? '',
                 ),
                 SizedBox(width: 8.w),
                 IdBookingWithCopyWidget(

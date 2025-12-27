@@ -112,12 +112,10 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
                   SingleChildScrollView(
                     physics: const NeverScrollableScrollPhysics(),
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         DepositWidget(deposit: state.data.deposit),
-                        if(state.data.policies.isNotEmpty)
-                        TermsPolicyWidget(policy: state.data.policies),
+                        if (state.data.policies.isNotEmpty)
+                          TermsPolicyWidget(policy: state.data.policies),
                         PropertyLocationWidget(address: state.data.address),
                         12.h.verticalSpace,
                       ],
