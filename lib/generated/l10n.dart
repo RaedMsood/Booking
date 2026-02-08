@@ -2648,606 +2648,6 @@ class S {
     );
   }
 
-  /// `Privacy Policy`
-  String get privacyPolicyHeaderTitle {
-    return Intl.message(
-      'Privacy Policy',
-      name: 'privacyPolicyHeaderTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Mazaji is an app owned and operated by Algonest. We respect our users’ privacy and are committed to protecting their personal data in accordance with best practices and applicable standards. This policy explains how we collect, use, and protect information when you use the app.`
-  String get privacyPolicyIntro {
-    return Intl.message(
-      'Mazaji is an app owned and operated by Algonest. We respect our users’ privacy and are committed to protecting their personal data in accordance with best practices and applicable standards. This policy explains how we collect, use, and protect information when you use the app.',
-      name: 'privacyPolicyIntro',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `By continuing to use the app, you agree to this policy.`
-  String get privacyPolicyConsentNote {
-    return Intl.message(
-      'By continuing to use the app, you agree to this policy.',
-      name: 'privacyPolicyConsentNote',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `1. Information We Collect`
-  String get privacyPolicySection1Title {
-    return Intl.message(
-      '1. Information We Collect',
-      name: 'privacyPolicySection1Title',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `A. Personal Information`
-  String get privacyPolicySection1aTitle {
-    return Intl.message(
-      'A. Personal Information',
-      name: 'privacyPolicySection1aTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Name`
-  String get privacyPolicySection1aItem1 {
-    return Intl.message(
-      'Name',
-      name: 'privacyPolicySection1aItem1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Phone number`
-  String get privacyPolicySection1aItem2 {
-    return Intl.message(
-      'Phone number',
-      name: 'privacyPolicySection1aItem2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Date of birth (optional).`
-  String get privacyPolicySection1aItem3 {
-    return Intl.message(
-      'Date of birth (optional).',
-      name: 'privacyPolicySection1aItem3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Gender (optional).`
-  String get privacyPolicySection1aItem4 {
-    return Intl.message(
-      'Gender (optional).',
-      name: 'privacyPolicySection1aItem4',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Residential address.`
-  String get privacyPolicySection1aItem5 {
-    return Intl.message(
-      'Residential address.',
-      name: 'privacyPolicySection1aItem5',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Email address (when creating an account or making a booking).`
-  String get privacyPolicySection1aItem6 {
-    return Intl.message(
-      'Email address (when creating an account or making a booking).',
-      name: 'privacyPolicySection1aItem6',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `B. Booking Information`
-  String get privacyPolicySection1bTitle {
-    return Intl.message(
-      'B. Booking Information',
-      name: 'privacyPolicySection1bTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Hotel name.`
-  String get privacyPolicySection1bItem1 {
-    return Intl.message(
-      'Hotel name.',
-      name: 'privacyPolicySection1bItem1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Booking date.`
-  String get privacyPolicySection1bItem2 {
-    return Intl.message(
-      'Booking date.',
-      name: 'privacyPolicySection1bItem2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Length of stay.`
-  String get privacyPolicySection1bItem3 {
-    return Intl.message(
-      'Length of stay.',
-      name: 'privacyPolicySection1bItem3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Booking-related details.`
-  String get privacyPolicySection1bItem4 {
-    return Intl.message(
-      'Booking-related details.',
-      name: 'privacyPolicySection1bItem4',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `C. Technical Information`
-  String get privacyPolicySection1cTitle {
-    return Intl.message(
-      'C. Technical Information',
-      name: 'privacyPolicySection1cTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Device type.`
-  String get privacyPolicySection1cItem1 {
-    return Intl.message(
-      'Device type.',
-      name: 'privacyPolicySection1cItem1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `IP address.`
-  String get privacyPolicySection1cItem2 {
-    return Intl.message(
-      'IP address.',
-      name: 'privacyPolicySection1cItem2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Operating system.`
-  String get privacyPolicySection1cItem3 {
-    return Intl.message(
-      'Operating system.',
-      name: 'privacyPolicySection1cItem3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `In-app usage data (for improvement and security).`
-  String get privacyPolicySection1cItem4 {
-    return Intl.message(
-      'In-app usage data (for improvement and security).',
-      name: 'privacyPolicySection1cItem4',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `2. How We Use Information`
-  String get privacyPolicySection2Title {
-    return Intl.message(
-      '2. How We Use Information',
-      name: 'privacyPolicySection2Title',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Process and manage bookings.`
-  String get privacyPolicySection2Item1 {
-    return Intl.message(
-      'Process and manage bookings.',
-      name: 'privacyPolicySection2Item1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Improve the user experience within the app.`
-  String get privacyPolicySection2Item2 {
-    return Intl.message(
-      'Improve the user experience within the app.',
-      name: 'privacyPolicySection2Item2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Contact the user regarding bookings or important updates.`
-  String get privacyPolicySection2Item3 {
-    return Intl.message(
-      'Contact the user regarding bookings or important updates.',
-      name: 'privacyPolicySection2Item3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Improve app performance and analyze usage.`
-  String get privacyPolicySection2Item4 {
-    return Intl.message(
-      'Improve app performance and analyze usage.',
-      name: 'privacyPolicySection2Item4',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Prepare non-personal reports and statistics.`
-  String get privacyPolicySection2Item5 {
-    return Intl.message(
-      'Prepare non-personal reports and statistics.',
-      name: 'privacyPolicySection2Item5',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `3. Data Sharing`
-  String get privacyPolicySection3Title {
-    return Intl.message(
-      '3. Data Sharing',
-      name: 'privacyPolicySection3Title',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `We do not sell or rent your personal data to any third party.`
-  String get privacyPolicySection3Note1 {
-    return Intl.message(
-      'We do not sell or rent your personal data to any third party.',
-      name: 'privacyPolicySection3Note1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Data may be shared only in the following cases:`
-  String get privacyPolicySection3Note2 {
-    return Intl.message(
-      'Data may be shared only in the following cases:',
-      name: 'privacyPolicySection3Note2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Share booking details with the relevant hotel to complete the booking.`
-  String get privacyPolicySection3Item1 {
-    return Intl.message(
-      'Share booking details with the relevant hotel to complete the booking.',
-      name: 'privacyPolicySection3Item1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `With technical service providers (e.g., hosting or analytics) under confidentiality obligations.`
-  String get privacyPolicySection3Item2 {
-    return Intl.message(
-      'With technical service providers (e.g., hosting or analytics) under confidentiality obligations.',
-      name: 'privacyPolicySection3Item2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `When required by law or competent authorities.`
-  String get privacyPolicySection3Item3 {
-    return Intl.message(
-      'When required by law or competent authorities.',
-      name: 'privacyPolicySection3Item3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `4. Third-Party Services`
-  String get privacyPolicySection4Title {
-    return Intl.message(
-      '4. Third-Party Services',
-      name: 'privacyPolicySection4Title',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Mazaji may use third-party services such as:`
-  String get privacyPolicySection4Note1 {
-    return Intl.message(
-      'Mazaji may use third-party services such as:',
-      name: 'privacyPolicySection4Note1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Analytics services (e.g., Firebase Analytics).`
-  String get privacyPolicySection4Item1 {
-    return Intl.message(
-      'Analytics services (e.g., Firebase Analytics).',
-      name: 'privacyPolicySection4Item1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Maps and location services.`
-  String get privacyPolicySection4Item2 {
-    return Intl.message(
-      'Maps and location services.',
-      name: 'privacyPolicySection4Item2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Electronic payment providers.`
-  String get privacyPolicySection4Item3 {
-    return Intl.message(
-      'Electronic payment providers.',
-      name: 'privacyPolicySection4Item3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `These services are subject to their own privacy policies.`
-  String get privacyPolicySection4Note2 {
-    return Intl.message(
-      'These services are subject to their own privacy policies.',
-      name: 'privacyPolicySection4Note2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `5. Electronic Payments`
-  String get privacyPolicySection5Title {
-    return Intl.message(
-      '5. Electronic Payments',
-      name: 'privacyPolicySection5Title',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `The app does not store card payment details.`
-  String get privacyPolicySection5Item1 {
-    return Intl.message(
-      'The app does not store card payment details.',
-      name: 'privacyPolicySection5Item1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Payments are processed through approved and secure payment providers.`
-  String get privacyPolicySection5Item2 {
-    return Intl.message(
-      'Payments are processed through approved and secure payment providers.',
-      name: 'privacyPolicySection5Item2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `The app is not responsible for errors caused by external payment gateways.`
-  String get privacyPolicySection5Item3 {
-    return Intl.message(
-      'The app is not responsible for errors caused by external payment gateways.',
-      name: 'privacyPolicySection5Item3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `6. Data Storage and Protection`
-  String get privacyPolicySection6Title {
-    return Intl.message(
-      '6. Data Storage and Protection',
-      name: 'privacyPolicySection6Title',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Data is stored on secure servers.`
-  String get privacyPolicySection6Item1 {
-    return Intl.message(
-      'Data is stored on secure servers.',
-      name: 'privacyPolicySection6Item1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `We use appropriate technical and organizational measures to protect data from unauthorized access, alteration, or loss.`
-  String get privacyPolicySection6Item2 {
-    return Intl.message(
-      'We use appropriate technical and organizational measures to protect data from unauthorized access, alteration, or loss.',
-      name: 'privacyPolicySection6Item2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Data may be stored or processed outside the user’s country in compliance with recognized protection standards.`
-  String get privacyPolicySection6Item3 {
-    return Intl.message(
-      'Data may be stored or processed outside the user’s country in compliance with recognized protection standards.',
-      name: 'privacyPolicySection6Item3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `7. User Rights`
-  String get privacyPolicySection7Title {
-    return Intl.message(
-      '7. User Rights',
-      name: 'privacyPolicySection7Title',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Users have the right to:`
-  String get privacyPolicySection7Note {
-    return Intl.message(
-      'Users have the right to:',
-      name: 'privacyPolicySection7Note',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Access their personal data.`
-  String get privacyPolicySection7Item1 {
-    return Intl.message(
-      'Access their personal data.',
-      name: 'privacyPolicySection7Item1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Edit or update account information.`
-  String get privacyPolicySection7Item2 {
-    return Intl.message(
-      'Edit or update account information.',
-      name: 'privacyPolicySection7Item2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Delete the account and request permanent deletion of data.`
-  String get privacyPolicySection7Item3 {
-    return Intl.message(
-      'Delete the account and request permanent deletion of data.',
-      name: 'privacyPolicySection7Item3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Withdraw consent for non-essential data collection.`
-  String get privacyPolicySection7Item4 {
-    return Intl.message(
-      'Withdraw consent for non-essential data collection.',
-      name: 'privacyPolicySection7Item4',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `This can be done through the app settings or by contacting us.`
-  String get privacyPolicySection7Footer {
-    return Intl.message(
-      'This can be done through the app settings or by contacting us.',
-      name: 'privacyPolicySection7Footer',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `8. Updates to This Privacy Policy`
-  String get privacyPolicySection8Title {
-    return Intl.message(
-      '8. Updates to This Privacy Policy',
-      name: 'privacyPolicySection8Title',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `We reserve the right to update this privacy policy from time to time.`
-  String get privacyPolicySection8Note1 {
-    return Intl.message(
-      'We reserve the right to update this privacy policy from time to time.',
-      name: 'privacyPolicySection8Note1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Users will be notified of any material changes within the app.`
-  String get privacyPolicySection8Note2 {
-    return Intl.message(
-      'Users will be notified of any material changes within the app.',
-      name: 'privacyPolicySection8Note2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `9. Contact Us`
-  String get privacyPolicySection9Title {
-    return Intl.message(
-      '9. Contact Us',
-      name: 'privacyPolicySection9Title',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `If you have any questions about the privacy policy or terms of use, you can contact Algonest via:`
-  String get privacyPolicySection9Note {
-    return Intl.message(
-      'If you have any questions about the privacy policy or terms of use, you can contact Algonest via:',
-      name: 'privacyPolicySection9Note',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Email`
-  String get privacyPolicyEmailLabel {
-    return Intl.message(
-      'Email',
-      name: 'privacyPolicyEmailLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Copied to clipboard`
   String get copiedToClipboard {
     return Intl.message(
@@ -3258,11 +2658,721 @@ class S {
     );
   }
 
-  /// `Last update: Dec 23, 2025.\nPractices may vary by country or local regulations, and applicable legal requirements will be followed.`
-  String get privacyPolicyFooterNote {
+  /// `Unable to open the link`
+  String get unableToOpenLink {
     return Intl.message(
-      'Last update: Dec 23, 2025.\nPractices may vary by country or local regulations, and applicable legal requirements will be followed.',
-      name: 'privacyPolicyFooterNote',
+      'Unable to open the link',
+      name: 'unableToOpenLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy Policy`
+  String get ppHeaderTitle {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'ppHeaderTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This policy explains how information is collected, used, and protected when you use the Mazaji app. Mazaji (hotel bookings) is owned and operated by Algonest.`
+  String get ppIntro {
+    return Intl.message(
+      'This policy explains how information is collected, used, and protected when you use the Mazaji app. Mazaji (hotel bookings) is owned and operated by Algonest.',
+      name: 'ppIntro',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By using the app, you agree to this policy.`
+  String get ppConsentNote {
+    return Intl.message(
+      'By using the app, you agree to this policy.',
+      name: 'ppConsentNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Important Pledge`
+  String get ppPledgeTitle {
+    return Intl.message(
+      'Important Pledge',
+      name: 'ppPledgeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We do not collect your precise location, we do not use GPS, and we do not request location permissions.`
+  String get ppPledgeLine1 {
+    return Intl.message(
+      'We do not collect your precise location, we do not use GPS, and we do not request location permissions.',
+      name: 'ppPledgeLine1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We may ask you to manually select your governorate (approximate location) to improve content and service display, and it will be stored in your account data.`
+  String get ppPledgeLine2 {
+    return Intl.message(
+      'We may ask you to manually select your governorate (approximate location) to improve content and service display, and it will be stored in your account data.',
+      name: 'ppPledgeLine2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maps in the app are used only to display partner hotels/properties locations and do not rely on the user's location.`
+  String get ppPledgeLine3 {
+    return Intl.message(
+      'Maps in the app are used only to display partner hotels/properties locations and do not rely on the user\'s location.',
+      name: 'ppPledgeLine3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1) Information We Collect`
+  String get ppSection1Title {
+    return Intl.message(
+      '1) Information We Collect',
+      name: 'ppSection1Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We collect only what is necessary to create your account, process bookings, and provide support.`
+  String get ppSection1Intro {
+    return Intl.message(
+      'We collect only what is necessary to create your account, process bookings, and provide support.',
+      name: 'ppSection1Intro',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account & Additional Information`
+  String get ppSection1SubA {
+    return Intl.message(
+      'Account & Additional Information',
+      name: 'ppSection1SubA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name (required).`
+  String get ppS1A1 {
+    return Intl.message(
+      'Name (required).',
+      name: 'ppS1A1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number (required) for OTP login, account security, and essential communication.`
+  String get ppS1A2 {
+    return Intl.message(
+      'Phone number (required) for OTP login, account security, and essential communication.',
+      name: 'ppS1A2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email (optional) if you provide it.`
+  String get ppS1A3 {
+    return Intl.message(
+      'Email (optional) if you provide it.',
+      name: 'ppS1A3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date of birth (optional) for improving experience and some personalization.`
+  String get ppS1A4 {
+    return Intl.message(
+      'Date of birth (optional) for improving experience and some personalization.',
+      name: 'ppS1A4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Governorate/region (manually entered approximate location) (required) to improve content and services display.`
+  String get ppS1A5 {
+    return Intl.message(
+      'Governorate/region (manually entered approximate location) (required) to improve content and services display.',
+      name: 'ppS1A5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gender (required) for improving experience and some personalization settings.`
+  String get ppS1A6 {
+    return Intl.message(
+      'Gender (required) for improving experience and some personalization settings.',
+      name: 'ppS1A6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking Information`
+  String get ppSection1SubB {
+    return Intl.message(
+      'Booking Information',
+      name: 'ppSection1SubB',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking details (hotel/property, dates, number of guests, booking notes) (required when booking) to complete the booking and support.`
+  String get ppS1B1 {
+    return Intl.message(
+      'Booking details (hotel/property, dates, number of guests, booking notes) (required when booking) to complete the booking and support.',
+      name: 'ppS1B1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Technical Information (Logged Automatically)`
+  String get ppSection1SubC {
+    return Intl.message(
+      'Technical Information (Logged Automatically)',
+      name: 'ppSection1SubC',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Some technical data may be logged (e.g., IP address, request time, and diagnostic data when errors occur). We do not use this data to track your location or for targeted advertising.`
+  String get ppS1C1 {
+    return Intl.message(
+      'Some technical data may be logged (e.g., IP address, request time, and diagnostic data when errors occur). We do not use this data to track your location or for targeted advertising.',
+      name: 'ppS1C1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We do not collect location data, do not use GPS, and do not request location permissions. The governorate/region is entered manually as approximate location only.`
+  String get ppLocationNote {
+    return Intl.message(
+      'We do not collect location data, do not use GPS, and do not request location permissions. The governorate/region is entered manually as approximate location only.',
+      name: 'ppLocationNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP: A login verification code may be sent via SMS and the app may auto-fill the code for convenience. We do not read or store your messages and we do not request SMS read permission.`
+  String get ppOtpNote {
+    return Intl.message(
+      'OTP: A login verification code may be sent via SMS and the app may auto-fill the code for convenience. We do not read or store your messages and we do not request SMS read permission.',
+      name: 'ppOtpNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2) App Permissions`
+  String get ppSection2Title {
+    return Intl.message(
+      '2) App Permissions',
+      name: 'ppSection2Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `INTERNET: to connect to our servers, display content, and complete bookings.`
+  String get ppS2_1 {
+    return Intl.message(
+      'INTERNET: to connect to our servers, display content, and complete bookings.',
+      name: 'ppS2_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `POST_NOTIFICATIONS (if enabled): to send booking-related notifications (confirmation/updates/important alerts). You can disable notifications in device settings.`
+  String get ppS2_2 {
+    return Intl.message(
+      'POST_NOTIFICATIONS (if enabled): to send booking-related notifications (confirmation/updates/important alerts). You can disable notifications in device settings.',
+      name: 'ppS2_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We do not request location, external storage, contacts, or SMS read permissions.`
+  String get ppS2Note {
+    return Intl.message(
+      'We do not request location, external storage, contacts, or SMS read permissions.',
+      name: 'ppS2Note',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3) How We Use Information`
+  String get ppSection3Title {
+    return Intl.message(
+      '3) How We Use Information',
+      name: 'ppSection3Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create and manage accounts and authenticate users via OTP.`
+  String get ppS3_1 {
+    return Intl.message(
+      'Create and manage accounts and authenticate users via OTP.',
+      name: 'ppS3_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Process and manage bookings and send related updates.`
+  String get ppS3_2 {
+    return Intl.message(
+      'Process and manage bookings and send related updates.',
+      name: 'ppS3_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customer support and technical support.`
+  String get ppS3_3 {
+    return Intl.message(
+      'Customer support and technical support.',
+      name: 'ppS3_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Security, fraud prevention, and abuse prevention.`
+  String get ppS3_4 {
+    return Intl.message(
+      'Security, fraud prevention, and abuse prevention.',
+      name: 'ppS3_4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Improve performance, stability, and overall user experience.`
+  String get ppS3_5 {
+    return Intl.message(
+      'Improve performance, stability, and overall user experience.',
+      name: 'ppS3_5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `4) Sharing Information`
+  String get ppSection4Title {
+    return Intl.message(
+      '4) Sharing Information',
+      name: 'ppSection4Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We do not sell or rent your data. We may share limited information only when needed:`
+  String get ppS4Intro {
+    return Intl.message(
+      'We do not sell or rent your data. We may share limited information only when needed:',
+      name: 'ppS4Intro',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `With the hotel/property: share necessary booking details (e.g., name, phone number, booking details) to complete your booking.`
+  String get ppS4_1 {
+    return Intl.message(
+      'With the hotel/property: share necessary booking details (e.g., name, phone number, booking details) to complete your booking.',
+      name: 'ppS4_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `External payment gateway: payments are processed via an external gateway and we do not store your card/bank details inside Mazaji. Payment processing is subject to the payment provider’s terms and privacy policy.`
+  String get ppS4_2 {
+    return Intl.message(
+      'External payment gateway: payments are processed via an external gateway and we do not store your card/bank details inside Mazaji. Payment processing is subject to the payment provider’s terms and privacy policy.',
+      name: 'ppS4_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service providers: hosting/infrastructure providers, with minimum access needed to operate the app.`
+  String get ppS4_3 {
+    return Intl.message(
+      'Service providers: hosting/infrastructure providers, with minimum access needed to operate the app.',
+      name: 'ppS4_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Legal obligations: when required by law or competent authorities.`
+  String get ppS4_4 {
+    return Intl.message(
+      'Legal obligations: when required by law or competent authorities.',
+      name: 'ppS4_4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `5) Third-Party Services`
+  String get ppSection5Title {
+    return Intl.message(
+      '5) Third-Party Services',
+      name: 'ppSection5Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google Maps: to display partner hotels/properties locations inside the app.`
+  String get ppS5_1 {
+    return Intl.message(
+      'Google Maps: to display partner hotels/properties locations inside the app.',
+      name: 'ppS5_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Firebase Cloud Messaging: to send booking-related notifications (e.g., booking confirmation/updates). Technical identifiers such as notification tokens may be used for operational and security purposes.`
+  String get ppS5_2 {
+    return Intl.message(
+      'Firebase Cloud Messaging: to send booking-related notifications (e.g., booking confirmation/updates). Technical identifiers such as notification tokens may be used for operational and security purposes.',
+      name: 'ppS5_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google may collect some data according to its policies when using Maps.`
+  String get ppS5Note {
+    return Intl.message(
+      'Google may collect some data according to its policies when using Maps.',
+      name: 'ppS5Note',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google Privacy Policy`
+  String get ppGooglePrivacyLabel {
+    return Intl.message(
+      'Google Privacy Policy',
+      name: 'ppGooglePrivacyLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google Developers Terms`
+  String get ppGoogleDevTermsLabel {
+    return Intl.message(
+      'Google Developers Terms',
+      name: 'ppGoogleDevTermsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `6) Data Retention`
+  String get ppSection6Title {
+    return Intl.message(
+      '6) Data Retention',
+      name: 'ppSection6Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We keep account and booking data as long as the account is active or as needed to provide the service.`
+  String get ppS6_1 {
+    return Intl.message(
+      'We keep account and booking data as long as the account is active or as needed to provide the service.',
+      name: 'ppS6_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We may retain some data longer to meet legal requirements or resolve disputes.`
+  String get ppS6_2 {
+    return Intl.message(
+      'We may retain some data longer to meet legal requirements or resolve disputes.',
+      name: 'ppS6_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `After an account deletion request, we delete or anonymize data within a reasonable time unless legal retention is required.`
+  String get ppS6_3 {
+    return Intl.message(
+      'After an account deletion request, we delete or anonymize data within a reasonable time unless legal retention is required.',
+      name: 'ppS6_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `7) Data Security`
+  String get ppSection7Title {
+    return Intl.message(
+      '7) Data Security',
+      name: 'ppSection7Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We apply appropriate technical and organizational measures to protect data from unauthorized access, alteration, or loss.`
+  String get ppS7_1 {
+    return Intl.message(
+      'We apply appropriate technical and organizational measures to protect data from unauthorized access, alteration, or loss.',
+      name: 'ppS7_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data is transmitted over encrypted connections when available (e.g., HTTPS).`
+  String get ppS7_2 {
+    return Intl.message(
+      'Data is transmitted over encrypted connections when available (e.g., HTTPS).',
+      name: 'ppS7_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No method is 100% secure, but we continuously improve our security controls.`
+  String get ppS7_3 {
+    return Intl.message(
+      'No method is 100% secure, but we continuously improve our security controls.',
+      name: 'ppS7_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `8) Your Rights (Access/Update/Delete)`
+  String get ppSection8Title {
+    return Intl.message(
+      '8) Your Rights (Access/Update/Delete)',
+      name: 'ppSection8Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have the right to:`
+  String get ppS8Intro {
+    return Intl.message(
+      'You have the right to:',
+      name: 'ppS8Intro',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update your data within the app.`
+  String get ppS8_1 {
+    return Intl.message(
+      'Update your data within the app.',
+      name: 'ppS8_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request correction of inaccurate data.`
+  String get ppS8_2 {
+    return Intl.message(
+      'Request correction of inaccurate data.',
+      name: 'ppS8_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request account deletion and deletion of related data.`
+  String get ppS8_3 {
+    return Intl.message(
+      'Request account deletion and deletion of related data.',
+      name: 'ppS8_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Disable notifications in device settings.`
+  String get ppS8_4 {
+    return Intl.message(
+      'Disable notifications in device settings.',
+      name: 'ppS8_4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Deletion`
+  String get ppDeleteAccountTitle {
+    return Intl.message(
+      'Account Deletion',
+      name: 'ppDeleteAccountTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can delete your account inside the app via: Delete Account → General Settings.`
+  String get ppDeleteAccountInAppPath {
+    return Intl.message(
+      'You can delete your account inside the app via: Delete Account → General Settings.',
+      name: 'ppDeleteAccountInAppPath',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account & Data Deletion Page`
+  String get ppDeleteAccountLinkLabel {
+    return Intl.message(
+      'Account & Data Deletion Page',
+      name: 'ppDeleteAccountLinkLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `9) Children’s Privacy`
+  String get ppSection9Title {
+    return Intl.message(
+      '9) Children’s Privacy',
+      name: 'ppSection9Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The app is not intended for children under 13.`
+  String get ppS9_1 {
+    return Intl.message(
+      'The app is not intended for children under 13.',
+      name: 'ppS9_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We do not knowingly collect personal data from children.`
+  String get ppS9_2 {
+    return Intl.message(
+      'We do not knowingly collect personal data from children.',
+      name: 'ppS9_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If we learn that a child’s data was collected, we will delete it promptly.`
+  String get ppS9_3 {
+    return Intl.message(
+      'If we learn that a child’s data was collected, we will delete it promptly.',
+      name: 'ppS9_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `10) Policy Updates`
+  String get ppSection10Title {
+    return Intl.message(
+      '10) Policy Updates',
+      name: 'ppSection10Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We may update this policy from time to time. The updated version will be published with an updated "Last update" date. Material changes may be notified inside the app.`
+  String get ppS10_1 {
+    return Intl.message(
+      'We may update this policy from time to time. The updated version will be published with an updated "Last update" date. Material changes may be notified inside the app.',
+      name: 'ppS10_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `11) Contact Us`
+  String get ppSection11Title {
+    return Intl.message(
+      '11) Contact Us',
+      name: 'ppSection11Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For privacy policy inquiries:`
+  String get ppS11_1 {
+    return Intl.message(
+      'For privacy policy inquiries:',
+      name: 'ppS11_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get ppEmailLabel {
+    return Intl.message(
+      'Email',
+      name: 'ppEmailLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last update: Jan 29, 2026.\nPractices may vary by country or local regulations, and applicable legal requirements will be followed.`
+  String get ppFooterNote {
+    return Intl.message(
+      'Last update: Jan 29, 2026.\nPractices may vary by country or local regulations, and applicable legal requirements will be followed.',
+      name: 'ppFooterNote',
       desc: '',
       args: [],
     );

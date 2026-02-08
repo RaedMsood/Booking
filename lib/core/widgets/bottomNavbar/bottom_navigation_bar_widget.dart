@@ -33,118 +33,118 @@ class _BottomNavigationBarWidgetState
   ];
 
   /// إظهار رسالة احترافية لتذكير المستخدم بتقييم الفندق باستخدام showGeneralDialog
-  void _showRateHotelDialog() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-
-      showGeneralDialog(
-        context: context,
-        barrierDismissible: true,
-        barrierColor: Colors.black54,
-        barrierLabel: 'rate_hotel',
-        transitionDuration: const Duration(milliseconds: 220),
-        pageBuilder: (ctx, animation, secondaryAnimation) {
-          return const SizedBox.shrink();
-        },
-        transitionBuilder: (ctx, animation, secondaryAnimation, child) {
-          final curved = CurvedAnimation(
-            parent: animation,
-            curve: Curves.easeOutBack,
-            reverseCurve: Curves.easeIn,
-          );
-
-          return Center(
-            child: AnimatedScale(
-              scale: curved.value,
-              duration: Duration.zero,
-              child: AnimatedOpacity(
-                opacity: animation.value,
-                duration: Duration.zero,
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 24.w),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 18.h),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: .08),
-                        blurRadius: 18,
-                        offset: const Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      AutoSizeTextWidget(
-                        text:
-                            'نتمنى أن إقامتك قد كانت مميزة! 🌟\nشارك تقييمك للفندق الآن وساعدنا على تقديم الأفضل.',
-                        fontSize: 12.5.sp,
-                        maxLines: 3,
-                        textAlign: TextAlign.center,
-                      ),
-                      8.h.verticalSpace,
-                      const AutoSizeTextWidget(
-                        text:
-                            'تقييمك يساعدنا على تحسين الخدمات وتقديم تجربة أفضل لك ولجميع ضيوفنا.',
-                        fontSize: 11.5,
-                        fontWeight: FontWeight.w400,
-                        maxLines: 4,
-                        textAlign: TextAlign.center,
-                      ),
-                      14.h.verticalSpace,
-                      Row(
-                        children: [
-                          Expanded(
-                            child: DefaultButtonWidget(
-                              text: 'قيم الآن',
-                              textSize: 12.sp,
-                              height: 35.h,
-                              onPressed: () {
-                                Navigator.of(ctx).pop();
-                              },
-                            ),
-                          ),
-                          10.w.horizontalSpace,
-
-                          Expanded(
-                            child: DefaultButtonWidget(
-                              text: 'لاحقاً',
-                               textSize: 12.sp,
-                              background: Colors.transparent,
-                              textColor: Colors.black,
-                              height: 35.h,
-                              border: Border.all(
-                                color: AppColors.greySwatch.shade400,
-                                width: 0.5.w,
-                              ),
-                              onPressed: () {
-                                Navigator.of(ctx).pop();
-                              },
-                            ),
-                          ),
-
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
-      );
-    });
-  }
+  // void _showRateHotelDialog() {
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     if (!mounted) return;
+  //
+  //     showGeneralDialog(
+  //       context: context,
+  //       barrierDismissible: true,
+  //       barrierColor: Colors.black54,
+  //       barrierLabel: 'rate_hotel',
+  //       transitionDuration: const Duration(milliseconds: 220),
+  //       pageBuilder: (ctx, animation, secondaryAnimation) {
+  //         return const SizedBox.shrink();
+  //       },
+  //       transitionBuilder: (ctx, animation, secondaryAnimation, child) {
+  //         final curved = CurvedAnimation(
+  //           parent: animation,
+  //           curve: Curves.easeOutBack,
+  //           reverseCurve: Curves.easeIn,
+  //         );
+  //
+  //         return Center(
+  //           child: AnimatedScale(
+  //             scale: curved.value,
+  //             duration: Duration.zero,
+  //             child: AnimatedOpacity(
+  //               opacity: animation.value,
+  //               duration: Duration.zero,
+  //               child: Container(
+  //                 margin: EdgeInsets.symmetric(horizontal: 24.w),
+  //                 padding:
+  //                     EdgeInsets.symmetric(horizontal: 16.w, vertical: 18.h),
+  //                 decoration: BoxDecoration(
+  //                   color: Colors.white,
+  //                   borderRadius: BorderRadius.circular(16.r),
+  //                   boxShadow: [
+  //                     BoxShadow(
+  //                       color: Colors.black.withValues(alpha: .08),
+  //                       blurRadius: 18,
+  //                       offset: const Offset(0, 8),
+  //                     ),
+  //                   ],
+  //                 ),
+  //                 child: Column(
+  //                   mainAxisSize: MainAxisSize.min,
+  //                   crossAxisAlignment: CrossAxisAlignment.center,
+  //                   children: [
+  //                     AutoSizeTextWidget(
+  //                       text:
+  //                           'نتمنى أن إقامتك قد كانت مميزة! 🌟\nشارك تقييمك للفندق الآن وساعدنا على تقديم الأفضل.',
+  //                       fontSize: 12.5.sp,
+  //                       maxLines: 3,
+  //                       textAlign: TextAlign.center,
+  //                     ),
+  //                     8.h.verticalSpace,
+  //                     const AutoSizeTextWidget(
+  //                       text:
+  //                           'تقييمك يساعدنا على تحسين الخدمات وتقديم تجربة أفضل لك ولجميع ضيوفنا.',
+  //                       fontSize: 11.5,
+  //                       fontWeight: FontWeight.w400,
+  //                       maxLines: 4,
+  //                       textAlign: TextAlign.center,
+  //                     ),
+  //                     14.h.verticalSpace,
+  //                     Row(
+  //                       children: [
+  //                         Expanded(
+  //                           child: DefaultButtonWidget(
+  //                             text: 'قيم الآن',
+  //                             textSize: 12.sp,
+  //                             height: 35.h,
+  //                             onPressed: () {
+  //                               Navigator.of(ctx).pop();
+  //                             },
+  //                           ),
+  //                         ),
+  //                         10.w.horizontalSpace,
+  //
+  //                         Expanded(
+  //                           child: DefaultButtonWidget(
+  //                             text: 'لاحقاً',
+  //                              textSize: 12.sp,
+  //                             background: Colors.transparent,
+  //                             textColor: Colors.black,
+  //                             height: 35.h,
+  //                             border: Border.all(
+  //                               color: AppColors.greySwatch.shade400,
+  //                               width: 0.5.w,
+  //                             ),
+  //                             onPressed: () {
+  //                               Navigator.of(ctx).pop();
+  //                             },
+  //                           ),
+  //                         ),
+  //
+  //                       ],
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         );
+  //       },
+  //     );
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
     // عرض رسالة التقييم بعد الدخول إلى الشاشة الرئيسية (بعد صفحة البداية)
-    _showRateHotelDialog();
+   // _showRateHotelDialog();
   }
 
   @override

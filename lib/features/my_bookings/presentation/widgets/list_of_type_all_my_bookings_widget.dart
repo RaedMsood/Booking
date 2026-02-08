@@ -127,7 +127,7 @@ class _ListOfTypeAllMyBookingsWidgetState
                         MyBookingDetailsPage(
                           bookingId: booking.id!,
                           isCompletedBook:
-                              widget.statusId == 3 || booking.status == "مؤكدة",
+                              widget.statusId == 3 || booking.status == "مكتملة",
                         ),
                       );
                     },

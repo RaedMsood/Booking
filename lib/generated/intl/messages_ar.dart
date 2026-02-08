@@ -302,130 +302,145 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("يرجى اختيار وسيلة الدفع"),
         "pleaseTryAgain":
             MessageLookupByLibrary.simpleMessage("يرجى المحاولة مرة أخرى"),
+        "ppConsentNote": MessageLookupByLibrary.simpleMessage(
+            "باستخدامك للتطبيق فإنك توافق على هذه السياسة."),
+        "ppDeleteAccountInAppPath": MessageLookupByLibrary.simpleMessage(
+            "يمكنك حذف الحساب من داخل التطبيق عبر: حذف الحساب → الإعدادات العامة."),
+        "ppDeleteAccountLinkLabel":
+            MessageLookupByLibrary.simpleMessage("صفحة حذف الحساب والبيانات"),
+        "ppDeleteAccountTitle":
+            MessageLookupByLibrary.simpleMessage("حذف الحساب"),
+        "ppEmailLabel":
+            MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+        "ppFooterNote": MessageLookupByLibrary.simpleMessage(
+            "آخر تحديث: 29 يناير 2026.\nقد تختلف الممارسات حسب البلد أو اللوائح المحلية، وسيتم الالتزام بالمتطلبات القانونية المطبقة."),
+        "ppGoogleDevTermsLabel":
+            MessageLookupByLibrary.simpleMessage("شروط Google Developers"),
+        "ppGooglePrivacyLabel":
+            MessageLookupByLibrary.simpleMessage("سياسة خصوصية Google"),
+        "ppHeaderTitle": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
+        "ppIntro": MessageLookupByLibrary.simpleMessage(
+            "توضح هذه السياسة كيفية جمع واستخدام وحماية المعلومات عند استخدامك لتطبيق مزاجي. تطبيق مزاجي (حجوزات الفنادق) مملوك ومُدار من قبل Algonest."),
+        "ppLocationNote": MessageLookupByLibrary.simpleMessage(
+            "لا نجمع بيانات الموقع (Location) ولا نستخدم GPS ولا نطلب أي إذن موقع. المحافظة/المنطقة يتم إدخالها يدويًا كموقع تقريبي فقط."),
+        "ppOtpNote": MessageLookupByLibrary.simpleMessage(
+            "رمز التحقق (OTP): يتم إرسال رمز تسجيل الدخول عبر SMS وقد يقوم التطبيق بملء الرمز تلقائيًا لتسهيل الدخول. لا نقوم بقراءة محتوى رسائلك أو تخزينها، ولا نطلب إذن قراءة الرسائل القصيرة."),
+        "ppPledgeLine1": MessageLookupByLibrary.simpleMessage(
+            "لا نجمع موقعك الجغرافي الدقيق ولا نستخدم GPS ولا نطلب أذونات الموقع."),
+        "ppPledgeLine2": MessageLookupByLibrary.simpleMessage(
+            "قد نطلب منك اختيار المحافظة يدويًا (موقع تقريبي) لتحسين عرض المحتوى والخدمات، ويتم حفظها ضمن بيانات حسابك."),
+        "ppPledgeLine3": MessageLookupByLibrary.simpleMessage(
+            "الخرائط داخل التطبيق لعرض مواقع الفنادق/المنشآت المتعاقدة فقط ولا تعتمد على موقع المستخدم."),
+        "ppPledgeTitle": MessageLookupByLibrary.simpleMessage("تعهد مهم"),
+        "ppS10_1": MessageLookupByLibrary.simpleMessage(
+            "قد نقوم بتحديث هذه السياسة من وقت لآخر. سيتم نشر النسخة المحدثة مع تحديث تاريخ \"آخر تحديث\"، وعند إجراء تغييرات جوهرية قد نقوم بإشعار المستخدم داخل التطبيق."),
+        "ppS11_1": MessageLookupByLibrary.simpleMessage(
+            "للاستفسارات المتعلقة بسياسة الخصوصية:"),
+        "ppS1A1": MessageLookupByLibrary.simpleMessage("الاسم (إلزامي)."),
+        "ppS1A2": MessageLookupByLibrary.simpleMessage(
+            "رقم الهاتف (إلزامي) لتسجيل الدخول عبر رمز تحقق (OTP) وتأمين الحساب والتواصل الضروري."),
+        "ppS1A3": MessageLookupByLibrary.simpleMessage(
+            "البريد الإلكتروني (اختياري) إذا قمت بإدخاله."),
+        "ppS1A4": MessageLookupByLibrary.simpleMessage(
+            "تاريخ الميلاد (اختياري) لتحسين تجربة المستخدم وبعض التخصيص داخل التطبيق."),
+        "ppS1A5": MessageLookupByLibrary.simpleMessage(
+            "المحافظة/المنطقة السكنية (موقع تقريبي يُدخل يدويًا) (إلزامي) لتحسين عرض المحتوى والخدمات المتاحة."),
+        "ppS1A6": MessageLookupByLibrary.simpleMessage(
+            "النوع (الجنس) (إلزامي) لتحسين تجربة المستخدم وبعض إعدادات التخصيص."),
+        "ppS1B1": MessageLookupByLibrary.simpleMessage(
+            "تفاصيل الحجز (الفندق/المنشأة، التواريخ، عدد النزلاء، ملاحظات الحجز) (إلزامية عند الحجز) لإتمام الحجز وخدمة العملاء."),
+        "ppS1C1": MessageLookupByLibrary.simpleMessage(
+            "قد يتم تسجيل بعض البيانات التقنية تلقائيًا مثل عنوان IP وتاريخ ووقت الطلب وبعض بيانات التشخيص عند حدوث أخطاء. لا نستخدم هذه البيانات لتتبع موقعك ولا لعرض إعلانات موجهة."),
+        "ppS2Note": MessageLookupByLibrary.simpleMessage(
+            "لا نطلب إذن الموقع ولا إذن الوصول للملفات العامة ولا جهات الاتصال، ولا نطلب إذن قراءة الرسائل القصيرة."),
+        "ppS2_1": MessageLookupByLibrary.simpleMessage(
+            "INTERNET: للاتصال بخوادمنا وعرض المحتوى وإتمام الحجوزات."),
+        "ppS2_2": MessageLookupByLibrary.simpleMessage(
+            "POST_NOTIFICATIONS (إن فُعِّلت الإشعارات): لإرسال إشعارات مرتبطة بالحجوزات (تأكيد/تحديث/تنبيه مهم). يمكنك إيقافها من إعدادات الجهاز."),
+        "ppS3_1": MessageLookupByLibrary.simpleMessage(
+            "إنشاء الحساب وإدارته وتسجيل الدخول عبر OTP."),
+        "ppS3_2": MessageLookupByLibrary.simpleMessage(
+            "إتمام الحجوزات وإدارتها وإرسال التحديثات المرتبطة بها."),
+        "ppS3_3":
+            MessageLookupByLibrary.simpleMessage("خدمة العملاء والدعم الفني."),
+        "ppS3_4": MessageLookupByLibrary.simpleMessage(
+            "الأمان ومنع الاحتيال وسوء الاستخدام."),
+        "ppS3_5": MessageLookupByLibrary.simpleMessage(
+            "تحسين الأداء والاستقرار وتجربة الاستخدام بشكل إجمالي."),
+        "ppS4Intro": MessageLookupByLibrary.simpleMessage(
+            "لا نبيع بياناتك ولا نؤجرها. قد نشارك معلومات محدودة عند الحاجة وفي الحدود التالية:"),
+        "ppS4_1": MessageLookupByLibrary.simpleMessage(
+            "مع الفندق/المنشأة: مشاركة بيانات الحجز اللازمة لإتمام الحجز وخدمتك (مثل الاسم ورقم الهاتف وتفاصيل الحجز)."),
+        "ppS4_2": MessageLookupByLibrary.simpleMessage(
+            "بوابة الدفع الخارجية: يتم تنفيذ الدفع عبر بوابة دفع خارجية، ولا نقوم بتخزين بيانات بطاقتك/حسابك المالي داخل تطبيق مزاجي. تخضع عملية الدفع لسياسة وشروط مزود بوابة الدفع."),
+        "ppS4_3": MessageLookupByLibrary.simpleMessage(
+            "مزودو خدمات التشغيل: مثل الاستضافة والبنية التحتية، وبالحد الأدنى اللازم لتشغيل التطبيق."),
+        "ppS4_4": MessageLookupByLibrary.simpleMessage(
+            "التزامات قانونية: إذا طُلِب منا ذلك بموجب القانون أو أوامر الجهات المختصة."),
+        "ppS5Note": MessageLookupByLibrary.simpleMessage(
+            "قد تجمع Google بعض البيانات وفقًا لسياساتها عند استخدام الخرائط."),
+        "ppS5_1": MessageLookupByLibrary.simpleMessage(
+            "Google Maps: لعرض مواقع الفنادق/المنشآت المتعاقدة داخل التطبيق."),
+        "ppS5_2": MessageLookupByLibrary.simpleMessage(
+            "Firebase Cloud Messaging: لإرسال إشعارات مرتبطة بالحجوزات (مثل تأكيد/تحديث الحجز). قد يتم استخدام مُعرّفات تقنية مثل توكن الإشعارات لأغراض تشغيلية وأمنية."),
+        "ppS6_1": MessageLookupByLibrary.simpleMessage(
+            "نحتفظ ببيانات الحساب والحجوزات طالما كان الحساب نشطًا أو حسب الحاجة لتقديم الخدمة."),
+        "ppS6_2": MessageLookupByLibrary.simpleMessage(
+            "قد نحتفظ ببعض البيانات لفترة إضافية إذا تطلبت ذلك المتطلبات القانونية أو لتسوية النزاعات."),
+        "ppS6_3": MessageLookupByLibrary.simpleMessage(
+            "بعد طلب حذف الحساب، نقوم بحذف البيانات أو إخفاء هويتها خلال مدة معقولة ما لم يوجد التزام قانوني بالاحتفاظ."),
+        "ppS7_1": MessageLookupByLibrary.simpleMessage(
+            "نطبق إجراءات تقنية وتنظيمية مناسبة لحماية البيانات من الوصول غير المصرح به أو التعديل أو الفقدان."),
+        "ppS7_2": MessageLookupByLibrary.simpleMessage(
+            "يتم نقل البيانات عبر اتصال مشفر عند توفره (مثل HTTPS)."),
+        "ppS7_3": MessageLookupByLibrary.simpleMessage(
+            "لا توجد طريقة نقل/تخزين آمنة 100%، لكننا نعمل باستمرار على تحسين الضوابط الأمنية."),
+        "ppS8Intro": MessageLookupByLibrary.simpleMessage("يحق لك:"),
+        "ppS8_1":
+            MessageLookupByLibrary.simpleMessage("تحديث بياناتك داخل التطبيق."),
+        "ppS8_2": MessageLookupByLibrary.simpleMessage(
+            "طلب تصحيح البيانات غير الدقيقة."),
+        "ppS8_3": MessageLookupByLibrary.simpleMessage(
+            "طلب حذف الحساب والبيانات المرتبطة به."),
+        "ppS8_4": MessageLookupByLibrary.simpleMessage(
+            "إيقاف الإشعارات من إعدادات الجهاز."),
+        "ppS9_1": MessageLookupByLibrary.simpleMessage(
+            "التطبيق غير موجه للأطفال دون سن 13 عامًا."),
+        "ppS9_2": MessageLookupByLibrary.simpleMessage(
+            "لا نجمع بيانات شخصية للأطفال عن قصد."),
+        "ppS9_3": MessageLookupByLibrary.simpleMessage(
+            "إذا تبيّن لنا جمع بيانات لطفل، سنقوم بحذفها فورًا."),
+        "ppSection10Title":
+            MessageLookupByLibrary.simpleMessage("10) التعديلات على السياسة"),
+        "ppSection11Title":
+            MessageLookupByLibrary.simpleMessage("11) التواصل معنا"),
+        "ppSection1Intro": MessageLookupByLibrary.simpleMessage(
+            "نجمع فقط المعلومات اللازمة لإنشاء الحساب وإتمام الحجوزات وتقديم الدعم."),
+        "ppSection1SubA": MessageLookupByLibrary.simpleMessage(
+            "معلومات الحساب والمعلومات الإضافية"),
+        "ppSection1SubB": MessageLookupByLibrary.simpleMessage("معلومات الحجز"),
+        "ppSection1SubC": MessageLookupByLibrary.simpleMessage(
+            "معلومات تقنية (تُسجَّل تلقائيًا)"),
+        "ppSection1Title":
+            MessageLookupByLibrary.simpleMessage("1) المعلومات التي نجمعها"),
+        "ppSection2Title": MessageLookupByLibrary.simpleMessage(
+            "2) الأذونات التي يطلبها التطبيق"),
+        "ppSection3Title":
+            MessageLookupByLibrary.simpleMessage("3) كيف نستخدم المعلومات"),
+        "ppSection4Title":
+            MessageLookupByLibrary.simpleMessage("4) مشاركة المعلومات"),
+        "ppSection5Title":
+            MessageLookupByLibrary.simpleMessage("5) خدمات الطرف الثالث"),
+        "ppSection6Title":
+            MessageLookupByLibrary.simpleMessage("6) الاحتفاظ بالبيانات"),
+        "ppSection7Title":
+            MessageLookupByLibrary.simpleMessage("7) حماية البيانات"),
+        "ppSection8Title": MessageLookupByLibrary.simpleMessage(
+            "8) حقوقك (الوصول/التعديل/الحذف)"),
+        "ppSection9Title":
+            MessageLookupByLibrary.simpleMessage("9) سياسة الأطفال"),
         "previous": MessageLookupByLibrary.simpleMessage("السابق"),
         "price": MessageLookupByLibrary.simpleMessage("السعر"),
-        "privacyPolicyConsentNote": MessageLookupByLibrary.simpleMessage(
-            "بالاستمرار في استخدام التطبيق، فإنك توافق على ما ورد في هذه السياسة."),
-        "privacyPolicyEmailLabel":
-            MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
-        "privacyPolicyFooterNote": MessageLookupByLibrary.simpleMessage(
-            "آخر تحديث: 23 ديسمبر 2025.\nيمكن أن تختلف الممارسات باختلاف الدولة أو الأنظمة المحلية، وسيتم الالتزام بالمتطلبات النظامية المعمول بها."),
-        "privacyPolicyHeaderTitle":
-            MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
-        "privacyPolicyIntro": MessageLookupByLibrary.simpleMessage(
-            "تطبيق مزاجي هو تطبيق مملوك ومُدار من قبل شركة Algonest. نحن نحترم خصوصية مستخدمينا ونلتزم بحماية بياناتهم الشخصية وفقًا لأفضل الممارسات والمعايير المعمول بها. توضح هذه السياسة كيفية جمع المعلومات واستخدامها وحمايتها عند استخدامك للتطبيق."),
-        "privacyPolicySection1Title": MessageLookupByLibrary.simpleMessage(
-            "1. المعلومات التي نقوم بجمعها"),
-        "privacyPolicySection1aItem1":
-            MessageLookupByLibrary.simpleMessage("الاسم"),
-        "privacyPolicySection1aItem2":
-            MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
-        "privacyPolicySection1aItem3":
-            MessageLookupByLibrary.simpleMessage("تاريخ الميلاد (اختياري)."),
-        "privacyPolicySection1aItem4":
-            MessageLookupByLibrary.simpleMessage("الجنس (اختياري)."),
-        "privacyPolicySection1aItem5":
-            MessageLookupByLibrary.simpleMessage("عنوان السكن."),
-        "privacyPolicySection1aItem6": MessageLookupByLibrary.simpleMessage(
-            "البريد الإلكتروني (عند إنشاء الحساب أو إجراء الحجز)."),
-        "privacyPolicySection1aTitle":
-            MessageLookupByLibrary.simpleMessage("أ. المعلومات الشخصية"),
-        "privacyPolicySection1bItem1":
-            MessageLookupByLibrary.simpleMessage("اسم الفندق."),
-        "privacyPolicySection1bItem2":
-            MessageLookupByLibrary.simpleMessage("تاريخ الحجز."),
-        "privacyPolicySection1bItem3":
-            MessageLookupByLibrary.simpleMessage("مدة الإقامة."),
-        "privacyPolicySection1bItem4":
-            MessageLookupByLibrary.simpleMessage("تفاصيل متعلقة بالحجز."),
-        "privacyPolicySection1bTitle":
-            MessageLookupByLibrary.simpleMessage("ب. معلومات الحجز"),
-        "privacyPolicySection1cItem1":
-            MessageLookupByLibrary.simpleMessage("نوع الجهاز."),
-        "privacyPolicySection1cItem2":
-            MessageLookupByLibrary.simpleMessage("عنوان IP."),
-        "privacyPolicySection1cItem3":
-            MessageLookupByLibrary.simpleMessage("نظام التشغيل."),
-        "privacyPolicySection1cItem4": MessageLookupByLibrary.simpleMessage(
-            "بيانات الاستخدام داخل التطبيق (لأغراض التحسين والأمان)."),
-        "privacyPolicySection1cTitle":
-            MessageLookupByLibrary.simpleMessage("ج. المعلومات التقنية"),
-        "privacyPolicySection2Item1":
-            MessageLookupByLibrary.simpleMessage("تنفيذ وإدارة الحجوزات."),
-        "privacyPolicySection2Item2": MessageLookupByLibrary.simpleMessage(
-            "تحسين تجربة المستخدم داخل التطبيق."),
-        "privacyPolicySection2Item3": MessageLookupByLibrary.simpleMessage(
-            "التواصل مع المستخدم بخصوص الحجوزات أو التحديثات المهمة."),
-        "privacyPolicySection2Item4": MessageLookupByLibrary.simpleMessage(
-            "تحسين أداء التطبيق وتحليل الاستخدام."),
-        "privacyPolicySection2Item5": MessageLookupByLibrary.simpleMessage(
-            "إعداد تقارير وإحصاءات غير شخصية."),
-        "privacyPolicySection2Title":
-            MessageLookupByLibrary.simpleMessage("2. كيفية استخدام المعلومات"),
-        "privacyPolicySection3Item1": MessageLookupByLibrary.simpleMessage(
-            "مشاركة بيانات الحجز مع الفندق المعني لإتمام الحجز."),
-        "privacyPolicySection3Item2": MessageLookupByLibrary.simpleMessage(
-            "مع مزودي الخدمات التقنية (مثل الاستضافة أو التحليلات) مع الالتزام بسرية البيانات."),
-        "privacyPolicySection3Item3": MessageLookupByLibrary.simpleMessage(
-            "عند الطلب القانوني من الجهات المختصة."),
-        "privacyPolicySection3Note1": MessageLookupByLibrary.simpleMessage(
-            "نلتزم بعدم بيع أو تأجير بياناتك الشخصية لأي طرف ثالث."),
-        "privacyPolicySection3Note2": MessageLookupByLibrary.simpleMessage(
-            "قد تتم مشاركة البيانات فقط في الحالات التالية:"),
-        "privacyPolicySection3Title":
-            MessageLookupByLibrary.simpleMessage("3. مشاركة المعلومات"),
-        "privacyPolicySection4Item1": MessageLookupByLibrary.simpleMessage(
-            "خدمات التحليلات (مثل Firebase Analytics)."),
-        "privacyPolicySection4Item2": MessageLookupByLibrary.simpleMessage(
-            "خدمات الخرائط وتحديد المواقع."),
-        "privacyPolicySection4Item3": MessageLookupByLibrary.simpleMessage(
-            "مزودي خدمات الدفع الإلكتروني."),
-        "privacyPolicySection4Note1": MessageLookupByLibrary.simpleMessage(
-            "قد يستخدم تطبيق مزاجي خدمات طرف ثالث مثل:"),
-        "privacyPolicySection4Note2": MessageLookupByLibrary.simpleMessage(
-            "وتخضع هذه الخدمات لسياسات الخصوصية الخاصة بها."),
-        "privacyPolicySection4Title":
-            MessageLookupByLibrary.simpleMessage("4. خدمات الطرف الثالث"),
-        "privacyPolicySection5Item1": MessageLookupByLibrary.simpleMessage(
-            "لا يقوم التطبيق بتخزين بيانات بطاقات الدفع."),
-        "privacyPolicySection5Item2": MessageLookupByLibrary.simpleMessage(
-            "تتم عمليات الدفع عبر مزودي خدمات دفع إلكتروني معتمدين وآمنين."),
-        "privacyPolicySection5Item3": MessageLookupByLibrary.simpleMessage(
-            "التطبيق غير مسؤول عن أي أخطاء ناتجة عن بوابة الدفع الخارجية."),
-        "privacyPolicySection5Title":
-            MessageLookupByLibrary.simpleMessage("5. الدفع الإلكتروني"),
-        "privacyPolicySection6Item1": MessageLookupByLibrary.simpleMessage(
-            "يتم تخزين البيانات على خوادم آمنة."),
-        "privacyPolicySection6Item2": MessageLookupByLibrary.simpleMessage(
-            "نستخدم إجراءات تقنية وتنظيمية مناسبة لحماية البيانات من الوصول غير المصرح به أو التعديل أو الفقدان."),
-        "privacyPolicySection6Item3": MessageLookupByLibrary.simpleMessage(
-            "قد يتم تخزين أو معالجة البيانات خارج دولة المستخدم مع الالتزام بمعايير الحماية المعتمدة."),
-        "privacyPolicySection6Title":
-            MessageLookupByLibrary.simpleMessage("6. تخزين وحماية البيانات"),
-        "privacyPolicySection7Footer": MessageLookupByLibrary.simpleMessage(
-            "يمكن تنفيذ ذلك من خلال إعدادات التطبيق أو التواصل معنا."),
-        "privacyPolicySection7Item1":
-            MessageLookupByLibrary.simpleMessage("الوصول إلى بياناته الشخصية."),
-        "privacyPolicySection7Item2": MessageLookupByLibrary.simpleMessage(
-            "تعديل أو تحديث بيانات الحساب."),
-        "privacyPolicySection7Item3": MessageLookupByLibrary.simpleMessage(
-            "حذف الحساب وطلب حذف البيانات نهائيًا."),
-        "privacyPolicySection7Item4": MessageLookupByLibrary.simpleMessage(
-            "سحب الموافقة على جمع البيانات غير الأساسية."),
-        "privacyPolicySection7Note":
-            MessageLookupByLibrary.simpleMessage("يحق للمستخدم:"),
-        "privacyPolicySection7Title":
-            MessageLookupByLibrary.simpleMessage("7. حقوق المستخدم"),
-        "privacyPolicySection8Note1": MessageLookupByLibrary.simpleMessage(
-            "نحتفظ بالحق في تحديث سياسة الخصوصية من وقت لآخر."),
-        "privacyPolicySection8Note2": MessageLookupByLibrary.simpleMessage(
-            "سيتم إشعار المستخدم بأي تغييرات جوهرية داخل التطبيق."),
-        "privacyPolicySection8Title": MessageLookupByLibrary.simpleMessage(
-            "8. التعديلات على سياسة الخصوصية"),
-        "privacyPolicySection9Note": MessageLookupByLibrary.simpleMessage(
-            "في حال وجود أي استفسار بخصوص سياسة الخصوصية أو شروط الاستخدام، يمكنكم التواصل مع شركة Algonest عبر:"),
-        "privacyPolicySection9Title":
-            MessageLookupByLibrary.simpleMessage("9. التواصل معنا"),
         "privacyPolicyTitle":
             MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
         "profile": MessageLookupByLibrary.simpleMessage("حسابي"),
@@ -576,6 +591,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "timeout":
             MessageLookupByLibrary.simpleMessage("عذراً هناك مشكلة بالانترنت"),
         "to": MessageLookupByLibrary.simpleMessage("إلى"),
+        "unableToOpenLink":
+            MessageLookupByLibrary.simpleMessage("تعذر فتح الرابط"),
         "unableToOpenMapsApp":
             MessageLookupByLibrary.simpleMessage("تعذّر فتح تطبيق الخرائط"),
         "validationGuestsRequired":

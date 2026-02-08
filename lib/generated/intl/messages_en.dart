@@ -313,130 +313,147 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please select a payment method"),
         "pleaseTryAgain":
             MessageLookupByLibrary.simpleMessage("Please try again"),
+        "ppConsentNote": MessageLookupByLibrary.simpleMessage(
+            "By using the app, you agree to this policy."),
+        "ppDeleteAccountInAppPath": MessageLookupByLibrary.simpleMessage(
+            "You can delete your account inside the app via: Delete Account → General Settings."),
+        "ppDeleteAccountLinkLabel": MessageLookupByLibrary.simpleMessage(
+            "Account & Data Deletion Page"),
+        "ppDeleteAccountTitle":
+            MessageLookupByLibrary.simpleMessage("Account Deletion"),
+        "ppEmailLabel": MessageLookupByLibrary.simpleMessage("Email"),
+        "ppFooterNote": MessageLookupByLibrary.simpleMessage(
+            "Last update: Jan 29, 2026.\nPractices may vary by country or local regulations, and applicable legal requirements will be followed."),
+        "ppGoogleDevTermsLabel":
+            MessageLookupByLibrary.simpleMessage("Google Developers Terms"),
+        "ppGooglePrivacyLabel":
+            MessageLookupByLibrary.simpleMessage("Google Privacy Policy"),
+        "ppHeaderTitle": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "ppIntro": MessageLookupByLibrary.simpleMessage(
+            "This policy explains how information is collected, used, and protected when you use the Mazaji app. Mazaji (hotel bookings) is owned and operated by Algonest."),
+        "ppLocationNote": MessageLookupByLibrary.simpleMessage(
+            "We do not collect location data, do not use GPS, and do not request location permissions. The governorate/region is entered manually as approximate location only."),
+        "ppOtpNote": MessageLookupByLibrary.simpleMessage(
+            "OTP: A login verification code may be sent via SMS and the app may auto-fill the code for convenience. We do not read or store your messages and we do not request SMS read permission."),
+        "ppPledgeLine1": MessageLookupByLibrary.simpleMessage(
+            "We do not collect your precise location, we do not use GPS, and we do not request location permissions."),
+        "ppPledgeLine2": MessageLookupByLibrary.simpleMessage(
+            "We may ask you to manually select your governorate (approximate location) to improve content and service display, and it will be stored in your account data."),
+        "ppPledgeLine3": MessageLookupByLibrary.simpleMessage(
+            "Maps in the app are used only to display partner hotels/properties locations and do not rely on the user\'s location."),
+        "ppPledgeTitle":
+            MessageLookupByLibrary.simpleMessage("Important Pledge"),
+        "ppS10_1": MessageLookupByLibrary.simpleMessage(
+            "We may update this policy from time to time. The updated version will be published with an updated \"Last update\" date. Material changes may be notified inside the app."),
+        "ppS11_1": MessageLookupByLibrary.simpleMessage(
+            "For privacy policy inquiries:"),
+        "ppS1A1": MessageLookupByLibrary.simpleMessage("Name (required)."),
+        "ppS1A2": MessageLookupByLibrary.simpleMessage(
+            "Phone number (required) for OTP login, account security, and essential communication."),
+        "ppS1A3": MessageLookupByLibrary.simpleMessage(
+            "Email (optional) if you provide it."),
+        "ppS1A4": MessageLookupByLibrary.simpleMessage(
+            "Date of birth (optional) for improving experience and some personalization."),
+        "ppS1A5": MessageLookupByLibrary.simpleMessage(
+            "Governorate/region (manually entered approximate location) (required) to improve content and services display."),
+        "ppS1A6": MessageLookupByLibrary.simpleMessage(
+            "Gender (required) for improving experience and some personalization settings."),
+        "ppS1B1": MessageLookupByLibrary.simpleMessage(
+            "Booking details (hotel/property, dates, number of guests, booking notes) (required when booking) to complete the booking and support."),
+        "ppS1C1": MessageLookupByLibrary.simpleMessage(
+            "Some technical data may be logged (e.g., IP address, request time, and diagnostic data when errors occur). We do not use this data to track your location or for targeted advertising."),
+        "ppS2Note": MessageLookupByLibrary.simpleMessage(
+            "We do not request location, external storage, contacts, or SMS read permissions."),
+        "ppS2_1": MessageLookupByLibrary.simpleMessage(
+            "INTERNET: to connect to our servers, display content, and complete bookings."),
+        "ppS2_2": MessageLookupByLibrary.simpleMessage(
+            "POST_NOTIFICATIONS (if enabled): to send booking-related notifications (confirmation/updates/important alerts). You can disable notifications in device settings."),
+        "ppS3_1": MessageLookupByLibrary.simpleMessage(
+            "Create and manage accounts and authenticate users via OTP."),
+        "ppS3_2": MessageLookupByLibrary.simpleMessage(
+            "Process and manage bookings and send related updates."),
+        "ppS3_3": MessageLookupByLibrary.simpleMessage(
+            "Customer support and technical support."),
+        "ppS3_4": MessageLookupByLibrary.simpleMessage(
+            "Security, fraud prevention, and abuse prevention."),
+        "ppS3_5": MessageLookupByLibrary.simpleMessage(
+            "Improve performance, stability, and overall user experience."),
+        "ppS4Intro": MessageLookupByLibrary.simpleMessage(
+            "We do not sell or rent your data. We may share limited information only when needed:"),
+        "ppS4_1": MessageLookupByLibrary.simpleMessage(
+            "With the hotel/property: share necessary booking details (e.g., name, phone number, booking details) to complete your booking."),
+        "ppS4_2": MessageLookupByLibrary.simpleMessage(
+            "External payment gateway: payments are processed via an external gateway and we do not store your card/bank details inside Mazaji. Payment processing is subject to the payment provider’s terms and privacy policy."),
+        "ppS4_3": MessageLookupByLibrary.simpleMessage(
+            "Service providers: hosting/infrastructure providers, with minimum access needed to operate the app."),
+        "ppS4_4": MessageLookupByLibrary.simpleMessage(
+            "Legal obligations: when required by law or competent authorities."),
+        "ppS5Note": MessageLookupByLibrary.simpleMessage(
+            "Google may collect some data according to its policies when using Maps."),
+        "ppS5_1": MessageLookupByLibrary.simpleMessage(
+            "Google Maps: to display partner hotels/properties locations inside the app."),
+        "ppS5_2": MessageLookupByLibrary.simpleMessage(
+            "Firebase Cloud Messaging: to send booking-related notifications (e.g., booking confirmation/updates). Technical identifiers such as notification tokens may be used for operational and security purposes."),
+        "ppS6_1": MessageLookupByLibrary.simpleMessage(
+            "We keep account and booking data as long as the account is active or as needed to provide the service."),
+        "ppS6_2": MessageLookupByLibrary.simpleMessage(
+            "We may retain some data longer to meet legal requirements or resolve disputes."),
+        "ppS6_3": MessageLookupByLibrary.simpleMessage(
+            "After an account deletion request, we delete or anonymize data within a reasonable time unless legal retention is required."),
+        "ppS7_1": MessageLookupByLibrary.simpleMessage(
+            "We apply appropriate technical and organizational measures to protect data from unauthorized access, alteration, or loss."),
+        "ppS7_2": MessageLookupByLibrary.simpleMessage(
+            "Data is transmitted over encrypted connections when available (e.g., HTTPS)."),
+        "ppS7_3": MessageLookupByLibrary.simpleMessage(
+            "No method is 100% secure, but we continuously improve our security controls."),
+        "ppS8Intro":
+            MessageLookupByLibrary.simpleMessage("You have the right to:"),
+        "ppS8_1": MessageLookupByLibrary.simpleMessage(
+            "Update your data within the app."),
+        "ppS8_2": MessageLookupByLibrary.simpleMessage(
+            "Request correction of inaccurate data."),
+        "ppS8_3": MessageLookupByLibrary.simpleMessage(
+            "Request account deletion and deletion of related data."),
+        "ppS8_4": MessageLookupByLibrary.simpleMessage(
+            "Disable notifications in device settings."),
+        "ppS9_1": MessageLookupByLibrary.simpleMessage(
+            "The app is not intended for children under 13."),
+        "ppS9_2": MessageLookupByLibrary.simpleMessage(
+            "We do not knowingly collect personal data from children."),
+        "ppS9_3": MessageLookupByLibrary.simpleMessage(
+            "If we learn that a child’s data was collected, we will delete it promptly."),
+        "ppSection10Title":
+            MessageLookupByLibrary.simpleMessage("10) Policy Updates"),
+        "ppSection11Title":
+            MessageLookupByLibrary.simpleMessage("11) Contact Us"),
+        "ppSection1Intro": MessageLookupByLibrary.simpleMessage(
+            "We collect only what is necessary to create your account, process bookings, and provide support."),
+        "ppSection1SubA": MessageLookupByLibrary.simpleMessage(
+            "Account & Additional Information"),
+        "ppSection1SubB":
+            MessageLookupByLibrary.simpleMessage("Booking Information"),
+        "ppSection1SubC": MessageLookupByLibrary.simpleMessage(
+            "Technical Information (Logged Automatically)"),
+        "ppSection1Title":
+            MessageLookupByLibrary.simpleMessage("1) Information We Collect"),
+        "ppSection2Title":
+            MessageLookupByLibrary.simpleMessage("2) App Permissions"),
+        "ppSection3Title":
+            MessageLookupByLibrary.simpleMessage("3) How We Use Information"),
+        "ppSection4Title":
+            MessageLookupByLibrary.simpleMessage("4) Sharing Information"),
+        "ppSection5Title":
+            MessageLookupByLibrary.simpleMessage("5) Third-Party Services"),
+        "ppSection6Title":
+            MessageLookupByLibrary.simpleMessage("6) Data Retention"),
+        "ppSection7Title":
+            MessageLookupByLibrary.simpleMessage("7) Data Security"),
+        "ppSection8Title": MessageLookupByLibrary.simpleMessage(
+            "8) Your Rights (Access/Update/Delete)"),
+        "ppSection9Title":
+            MessageLookupByLibrary.simpleMessage("9) Children’s Privacy"),
         "previous": MessageLookupByLibrary.simpleMessage("Previous"),
         "price": MessageLookupByLibrary.simpleMessage("Price"),
-        "privacyPolicyConsentNote": MessageLookupByLibrary.simpleMessage(
-            "By continuing to use the app, you agree to this policy."),
-        "privacyPolicyEmailLabel":
-            MessageLookupByLibrary.simpleMessage("Email"),
-        "privacyPolicyFooterNote": MessageLookupByLibrary.simpleMessage(
-            "Last update: Dec 23, 2025.\nPractices may vary by country or local regulations, and applicable legal requirements will be followed."),
-        "privacyPolicyHeaderTitle":
-            MessageLookupByLibrary.simpleMessage("Privacy Policy"),
-        "privacyPolicyIntro": MessageLookupByLibrary.simpleMessage(
-            "Mazaji is an app owned and operated by Algonest. We respect our users’ privacy and are committed to protecting their personal data in accordance with best practices and applicable standards. This policy explains how we collect, use, and protect information when you use the app."),
-        "privacyPolicySection1Title":
-            MessageLookupByLibrary.simpleMessage("1. Information We Collect"),
-        "privacyPolicySection1aItem1":
-            MessageLookupByLibrary.simpleMessage("Name"),
-        "privacyPolicySection1aItem2":
-            MessageLookupByLibrary.simpleMessage("Phone number"),
-        "privacyPolicySection1aItem3":
-            MessageLookupByLibrary.simpleMessage("Date of birth (optional)."),
-        "privacyPolicySection1aItem4":
-            MessageLookupByLibrary.simpleMessage("Gender (optional)."),
-        "privacyPolicySection1aItem5":
-            MessageLookupByLibrary.simpleMessage("Residential address."),
-        "privacyPolicySection1aItem6": MessageLookupByLibrary.simpleMessage(
-            "Email address (when creating an account or making a booking)."),
-        "privacyPolicySection1aTitle":
-            MessageLookupByLibrary.simpleMessage("A. Personal Information"),
-        "privacyPolicySection1bItem1":
-            MessageLookupByLibrary.simpleMessage("Hotel name."),
-        "privacyPolicySection1bItem2":
-            MessageLookupByLibrary.simpleMessage("Booking date."),
-        "privacyPolicySection1bItem3":
-            MessageLookupByLibrary.simpleMessage("Length of stay."),
-        "privacyPolicySection1bItem4":
-            MessageLookupByLibrary.simpleMessage("Booking-related details."),
-        "privacyPolicySection1bTitle":
-            MessageLookupByLibrary.simpleMessage("B. Booking Information"),
-        "privacyPolicySection1cItem1":
-            MessageLookupByLibrary.simpleMessage("Device type."),
-        "privacyPolicySection1cItem2":
-            MessageLookupByLibrary.simpleMessage("IP address."),
-        "privacyPolicySection1cItem3":
-            MessageLookupByLibrary.simpleMessage("Operating system."),
-        "privacyPolicySection1cItem4": MessageLookupByLibrary.simpleMessage(
-            "In-app usage data (for improvement and security)."),
-        "privacyPolicySection1cTitle":
-            MessageLookupByLibrary.simpleMessage("C. Technical Information"),
-        "privacyPolicySection2Item1": MessageLookupByLibrary.simpleMessage(
-            "Process and manage bookings."),
-        "privacyPolicySection2Item2": MessageLookupByLibrary.simpleMessage(
-            "Improve the user experience within the app."),
-        "privacyPolicySection2Item3": MessageLookupByLibrary.simpleMessage(
-            "Contact the user regarding bookings or important updates."),
-        "privacyPolicySection2Item4": MessageLookupByLibrary.simpleMessage(
-            "Improve app performance and analyze usage."),
-        "privacyPolicySection2Item5": MessageLookupByLibrary.simpleMessage(
-            "Prepare non-personal reports and statistics."),
-        "privacyPolicySection2Title":
-            MessageLookupByLibrary.simpleMessage("2. How We Use Information"),
-        "privacyPolicySection3Item1": MessageLookupByLibrary.simpleMessage(
-            "Share booking details with the relevant hotel to complete the booking."),
-        "privacyPolicySection3Item2": MessageLookupByLibrary.simpleMessage(
-            "With technical service providers (e.g., hosting or analytics) under confidentiality obligations."),
-        "privacyPolicySection3Item3": MessageLookupByLibrary.simpleMessage(
-            "When required by law or competent authorities."),
-        "privacyPolicySection3Note1": MessageLookupByLibrary.simpleMessage(
-            "We do not sell or rent your personal data to any third party."),
-        "privacyPolicySection3Note2": MessageLookupByLibrary.simpleMessage(
-            "Data may be shared only in the following cases:"),
-        "privacyPolicySection3Title":
-            MessageLookupByLibrary.simpleMessage("3. Data Sharing"),
-        "privacyPolicySection4Item1": MessageLookupByLibrary.simpleMessage(
-            "Analytics services (e.g., Firebase Analytics)."),
-        "privacyPolicySection4Item2":
-            MessageLookupByLibrary.simpleMessage("Maps and location services."),
-        "privacyPolicySection4Item3": MessageLookupByLibrary.simpleMessage(
-            "Electronic payment providers."),
-        "privacyPolicySection4Note1": MessageLookupByLibrary.simpleMessage(
-            "Mazaji may use third-party services such as:"),
-        "privacyPolicySection4Note2": MessageLookupByLibrary.simpleMessage(
-            "These services are subject to their own privacy policies."),
-        "privacyPolicySection4Title":
-            MessageLookupByLibrary.simpleMessage("4. Third-Party Services"),
-        "privacyPolicySection5Item1": MessageLookupByLibrary.simpleMessage(
-            "The app does not store card payment details."),
-        "privacyPolicySection5Item2": MessageLookupByLibrary.simpleMessage(
-            "Payments are processed through approved and secure payment providers."),
-        "privacyPolicySection5Item3": MessageLookupByLibrary.simpleMessage(
-            "The app is not responsible for errors caused by external payment gateways."),
-        "privacyPolicySection5Title":
-            MessageLookupByLibrary.simpleMessage("5. Electronic Payments"),
-        "privacyPolicySection6Item1": MessageLookupByLibrary.simpleMessage(
-            "Data is stored on secure servers."),
-        "privacyPolicySection6Item2": MessageLookupByLibrary.simpleMessage(
-            "We use appropriate technical and organizational measures to protect data from unauthorized access, alteration, or loss."),
-        "privacyPolicySection6Item3": MessageLookupByLibrary.simpleMessage(
-            "Data may be stored or processed outside the user’s country in compliance with recognized protection standards."),
-        "privacyPolicySection6Title": MessageLookupByLibrary.simpleMessage(
-            "6. Data Storage and Protection"),
-        "privacyPolicySection7Footer": MessageLookupByLibrary.simpleMessage(
-            "This can be done through the app settings or by contacting us."),
-        "privacyPolicySection7Item1":
-            MessageLookupByLibrary.simpleMessage("Access their personal data."),
-        "privacyPolicySection7Item2": MessageLookupByLibrary.simpleMessage(
-            "Edit or update account information."),
-        "privacyPolicySection7Item3": MessageLookupByLibrary.simpleMessage(
-            "Delete the account and request permanent deletion of data."),
-        "privacyPolicySection7Item4": MessageLookupByLibrary.simpleMessage(
-            "Withdraw consent for non-essential data collection."),
-        "privacyPolicySection7Note":
-            MessageLookupByLibrary.simpleMessage("Users have the right to:"),
-        "privacyPolicySection7Title":
-            MessageLookupByLibrary.simpleMessage("7. User Rights"),
-        "privacyPolicySection8Note1": MessageLookupByLibrary.simpleMessage(
-            "We reserve the right to update this privacy policy from time to time."),
-        "privacyPolicySection8Note2": MessageLookupByLibrary.simpleMessage(
-            "Users will be notified of any material changes within the app."),
-        "privacyPolicySection8Title": MessageLookupByLibrary.simpleMessage(
-            "8. Updates to This Privacy Policy"),
-        "privacyPolicySection9Note": MessageLookupByLibrary.simpleMessage(
-            "If you have any questions about the privacy policy or terms of use, you can contact Algonest via:"),
-        "privacyPolicySection9Title":
-            MessageLookupByLibrary.simpleMessage("9. Contact Us"),
         "privacyPolicyTitle":
             MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
@@ -589,6 +606,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "timeout": MessageLookupByLibrary.simpleMessage(
             "Sorry, there is an internet issue"),
         "to": MessageLookupByLibrary.simpleMessage("To"),
+        "unableToOpenLink":
+            MessageLookupByLibrary.simpleMessage("Unable to open the link"),
         "unableToOpenMapsApp":
             MessageLookupByLibrary.simpleMessage("Unable to open Maps app"),
         "validationGuestsRequired": MessageLookupByLibrary.simpleMessage(

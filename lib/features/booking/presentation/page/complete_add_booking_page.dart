@@ -11,6 +11,7 @@ import '../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../core/widgets/text_form_field.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
+import '../../../properties/cities/data/model/city_model.dart';
 import '../../../properties/cities/presentation/riverpod/cities_riverpod.dart';
 import '../../../properties/cities/presentation/widget/city_widget.dart';
 import '../../data/booking_model/booking_data.dart';
@@ -57,7 +58,7 @@ class _CompleteAddBookingPageState
 
   String? city;
   final _formKey = GlobalKey<FormState>();
-  dynamic initialCity = Auth().city;
+  CityModel? initialCity = Auth().city;
 
   @override
   Widget build(BuildContext context) {
@@ -216,14 +217,25 @@ class _CompleteAddBookingPageState
                         onPressed: () {
                           final isValid = _formKey.currentState!.validate();
 
-                          initialCity =
-                              ref.read(selectedCityProvider.notifier).state!;
+                          final selectedCity = ref.read(selectedCityProvider);
+                          if (selectedCity == null) {
+                            // Require a city selection instead of crashing.
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content:
+                                    Text(S.of(context).selectGovernorate),
+                              ),
+                            );
+                            return;
+                          }
+                          initialCity = selectedCity;
+
                           if (isValid) {
                             final custemor = CustomerModel(
                               email: email.text,
                               name: name.text,
                               phone: phone.text,
-                              address: initialCity.name,
+                              address: initialCity?.name,
                               booking: widget.booking,
                             );
                             ref

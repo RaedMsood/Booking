@@ -23,7 +23,7 @@ import '../widgets/section_card_in_details_widget.dart';
 import '../widgets/unit_card_for_my_booking_details_widget.dart';
 import 'rate_page.dart';
 
-class MyBookingDetailsPage extends ConsumerWidget {
+class MyBookingDetailsPage extends ConsumerStatefulWidget {
   final bool isCompletedBook;
   final int bookingId;
 
@@ -34,8 +34,52 @@ class MyBookingDetailsPage extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var stateMyBooking = ref.watch(myBookingDetailsProvider(bookingId));
+  ConsumerState<MyBookingDetailsPage> createState() =>
+      _MyBookingDetailsPageState();
+}
+
+class _MyBookingDetailsPageState extends ConsumerState<MyBookingDetailsPage> {
+  final ScrollController _scrollController = ScrollController();
+
+  /// لمنع تكرار السكروول مع كل rebuild
+  bool _didAutoScroll = false;
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _maybeAutoScrollToBottom({
+    required bool isCompletedBook,
+    required bool? isRated,
+    required bool ratedFromProvider,
+  }) {
+    if (_didAutoScroll) return;
+
+    final shouldScroll =
+        isCompletedBook && (isRated == false) && ratedFromProvider == false;
+
+    if (!shouldScroll) return;
+
+    _didAutoScroll = true;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      if (!_scrollController.hasClients) return;
+
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 550),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final stateMyBooking =
+        ref.watch(myBookingDetailsProvider(widget.bookingId));
 
     return Scaffold(
       appBar: SecondaryAppBarWidget(
@@ -47,14 +91,29 @@ class MyBookingDetailsPage extends ConsumerWidget {
         child: CheckStateInGetApiDataWidget(
           state: stateMyBooking,
           refresh: () {
-            ref.invalidate(myBookingDetailsProvider(bookingId));
+            _didAutoScroll = false;
+            ref.invalidate(myBookingDetailsProvider(widget.bookingId));
           },
           widgetOfData: SingleChildScrollView(
+            controller: _scrollController,
             padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
             child: Consumer(
               builder: (context, ref, child) {
-                final state = ref.watch(getIfPropertyRatedProvider(Tuple2(
-                    stateMyBooking.data.propertyId, stateMyBooking.data.id)));
+                final ratedFromProvider = ref.watch(
+                  getIfPropertyRatedProvider(
+                    Tuple2(
+                      stateMyBooking.data.propertyId,
+                      stateMyBooking.data.id,
+                    ),
+                  ),
+                );
+
+                _maybeAutoScrollToBottom(
+                  isCompletedBook: widget.isCompletedBook,
+                  isRated: stateMyBooking.data.isRated,
+                  ratedFromProvider: ratedFromProvider == true,
+                );
+
                 return Column(
                   children: [
                     UnitCardForMyBookingDetailsWidget(
@@ -67,7 +126,8 @@ class MyBookingDetailsPage extends ConsumerWidget {
                       status: stateMyBooking.data.status ?? '',
                       backgroundStatusColor:
                           stateMyBooking.data.backgroundStatusColor ?? '',
-                      textStatusColor: stateMyBooking.data.textStatusColor ?? '',
+                      textStatusColor:
+                          stateMyBooking.data.textStatusColor ?? '',
                     ),
                     8.h.verticalSpace,
                     BookingDataCardWidget(
@@ -77,10 +137,6 @@ class MyBookingDetailsPage extends ConsumerWidget {
                       endDateString: stateMyBooking.data.checkOut ?? '',
                     ),
                     8.h.verticalSpace,
-                    // PolicyTileWidget(
-                    //   title: 'سياسة الشراء والالغاء',
-                    //   onTap: () {},
-                    // ),
                     SectionCardInDetailsWidget(
                       title: S.of(context).paymentMethod,
                       child: Row(
@@ -110,22 +166,21 @@ class MyBookingDetailsPage extends ConsumerWidget {
                     ),
                     8.h.verticalSpace,
                     Visibility(
-                      visible: isCompletedBook,
+                      visible: widget.isCompletedBook,
                       replacement: PolicyTileWidget(
                         title: S.of(context).purchaseAndCancellationPolicy,
                         onTap: () {},
                       ),
-                      child:
-                          stateMyBooking.data.isRated == true || state == true
-                              ? const SizedBox.shrink()
-                              : AddYourRatingSection(
-                                  bookingId: stateMyBooking.data.id ?? 0,
-                                  propertyId: stateMyBooking.data.propertyId!,
-                                  rateData: stateMyBooking.data.rateData ?? [],
-                                ),
+                      child: stateMyBooking.data.isRated == true ||
+                              ratedFromProvider == true
+                          ? const SizedBox.shrink()
+                          : AddYourRatingSection(
+                              bookingId: stateMyBooking.data.id ?? 0,
+                              propertyId: stateMyBooking.data.propertyId!,
+                              rateData: stateMyBooking.data.rateData ?? [],
+                            ),
                     ),
                     12.h.verticalSpace,
-
                     DefaultButtonWidget(
                       text: S.of(context).viewVenueDetails,
                       textSize: 11.6.sp,

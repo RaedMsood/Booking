@@ -56,7 +56,10 @@ class Auth {
 
   String? get date => user.user.birthDay;
 
-  CityModel get city => user.user.city!;
+  /// Nullable-safe city getter.
+  ///
+  /// City can be null for new users or when cache hasn't been populated yet.
+  CityModel? get city => user.user.city;
 
   Future<void> login(AuthModel data) async {
     user = data;

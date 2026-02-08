@@ -8,7 +8,7 @@ class AppImages {
   static const String logo = '${_imagesPath}mazaji_light.png';
 
   ///////////// On Boarding ////////////////////////
-  static const String onBoarding1 = '${_imagesPath}on_boarding1.jpg';
-  static const String onBoarding2 = '${_imagesPath}on_boarding2.jpg';
-  static const String onBoarding3 = '${_imagesPath}on_boarding3.jpg';
+  static const String onBoarding1 = '${_imagesPath}on_boarding1.png';
+  static const String onBoarding2 = '${_imagesPath}on_boarding2.png';
+  static const String onBoarding3 = '${_imagesPath}on_boarding3.png';
 }

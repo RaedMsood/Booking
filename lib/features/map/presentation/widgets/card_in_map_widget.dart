@@ -15,7 +15,7 @@ class ShimmerCardInMapWidget extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 8.h),
       child: Card(
         elevation: 0.8,
-        shadowColor: AppColors.greySwatch.shade50.withValues(alpha:.2),
+        shadowColor: AppColors.greySwatch.shade50.withValues(alpha: .2),
         color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.r),
@@ -54,25 +54,28 @@ class ShimmerCardInMapWidget extends StatelessWidget {
                             height: 18.h,
                             width: 180.w,
                             decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10.r)
-                            ),                          ),
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                          ),
                         ),
                       ),
                       6.w.horizontalSpace,
                       ShimmerWidget(
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 8.w, vertical: 2.4.h),
+                            horizontal: 8.w,
+                            vertical: 2.4.h,
+                          ),
                           decoration: BoxDecoration(
-                            color: const Color(0xfffef4d4).withValues(alpha:.8),
+                            color: const Color(0xfffef4d4)
+                                .withValues(alpha: .8),
                             borderRadius: BorderRadius.circular(28.r),
                           ),
-                          child: Row(
+                          child: const Row(
                             children: [
-
-                              1.8.w.horizontalSpace,
-                              const RatingBarWidget(
+                              SizedBox(width: 1.8),
+                              RatingBarWidget(
                                 evaluation: 4,
                                 length: 1,
                               ),
@@ -89,17 +92,19 @@ class ShimmerCardInMapWidget extends StatelessWidget {
                       width: 100.w,
                       decoration: BoxDecoration(
                         color: Colors.black,
-                        borderRadius: BorderRadius.circular(10.r)
+                        borderRadius: BorderRadius.circular(10.r),
                       ),
-                      child: Flexible(
-                        child: ShimmerWidget(
-                          child: AutoSizeTextWidget(
-                            text: "          ",
-                            fontSize: 10.5.sp,
-                            colorText: const Color(0xff292D32),
-                            fontWeight: FontWeight.w400,
-                            minFontSize: 10,
-                          ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8.w,
+                          vertical: 4.h,
+                        ),
+                        child: AutoSizeTextWidget(
+                          text: '          ',
+                          fontSize: 10.5.sp,
+                          colorText: const Color(0xff292D32),
+                          fontWeight: FontWeight.w400,
+                          minFontSize: 10,
                         ),
                       ),
                     ),

@@ -7,6 +7,11 @@ plugins {
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
 
 android {
     namespace = "com.algonest.booking"
@@ -33,14 +38,28 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
-
-    buildTypes {
+    signingConfigs {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.debug
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
         }
     }
+    buildTypes {
+        release {
+            // Enable code shrinking/obfuscation and resource shrinking for smaller releases.
+            minifyEnabled true
+            shrinkResources true
+
+            // Use default Flutter/Android Proguard rules + your custom rules.
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // Use release keystore when available.
+            signingConfig = signingConfigs.release
+        }
+    }
+
 }
 
 flutter {

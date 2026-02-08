@@ -45,108 +45,110 @@ class _LogInPageState extends ConsumerState<LogInPage> {
         extendBody: true,
         resizeToAvoidBottomInset: false,
         body: DesignToLogInAndSignUpWidget(
-          widget: SingleChildScrollView(
-            padding: EdgeInsets.only(left: 14.w, right: 14.w, top: 120.h),
-            child: Form(
-              key: formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  UserPageTitlesWidget(
-                    title: S.of(context).logIn,
-                    subTitle: "مرحبًا! مرحبًا بك من جديد، لقد افتقدناك",
-                  ),
-                  12.h.verticalSpace,
-                  AutoSizeTextWidget(
-                    text: S.of(context).phoneNumber,
-                    fontSize: 11.sp,
-                    colorText: Colors.black87,
-                  ),
-                  6.h.verticalSpace,
-                  TextFormFieldWidget(
-                    controller: phoneNumberController,
-                    type: TextInputType.phone,
-                    maxLength: 9,
-                    hintText: S.of(context).phonePlaceholder,
-                    fieldValidator: (value) {
-                      if (value == null || value.toString().isEmpty) {
-                        return S.of(context).phoneRequired;
-                      }
-                      final phone = value.trim();
-                      if (!phone.startsWith('7')) {
-                        return S.of(context).phoneMustStartWith7;
-                      }
-                      if (phone.length < 9) {
-                        return S.of(context).phoneMustBe9Digits;
-                      }
-                      return null;
-                    },
-                    prefix: Padding(
-                      padding: EdgeInsets.all(11.sp),
-                      child: SvgPicture.asset(
-                        AppIcons.phone,
-                        height: 14.h,
-                      ),
+          widget: Center(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(left: 14.w, right: 14.w, ),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    UserPageTitlesWidget(
+                      title: S.of(context).logIn,
+                      subTitle: "مرحبًا! مرحبًا بك من جديد، لقد افتقدناك",
                     ),
-                    suffixIcon: Padding(
-                      padding: EdgeInsets.only(
-                          left: 12.w, right: 12.w, top: 12.h, bottom: 8.h),
-                      child: AutoSizeTextWidget(
-                        text: "967+",
-                        colorText: AppColors.primaryColor,
-                        fontSize: 12.sp,
-                      ),
+                    12.h.verticalSpace,
+                    AutoSizeTextWidget(
+                      text: S.of(context).phoneNumber,
+                      fontSize: 11.sp,
+                      colorText: Colors.black87,
                     ),
-                  ),
-                  16.h.verticalSpace,
-                  CheckStateInPostApiDataWidget(
-                    state: state,
-                    hasMessageSuccess: false,
-                    functionSuccess: () {
-                      showTitledBottomSheet(
-                          title: S.of(context).verificationCode,
-                          fontSize: 14.sp,
-                          context: context,
-                          page: VerifyCodePage(
-                            phoneNumber: phoneNumberController.text,
-                          ));
-                    },
-                    bottonWidget: DefaultButtonWidget(
-                      text: S.of(context).logIn,
-                      isLoading: state.stateData == States.loading,
-                      onPressed: () {
-                        final isValid = formKey.currentState!.validate();
-
-                        if (isValid) {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          ref.read(userProvider.notifier).logIn(
-                                phoneNumber: phoneNumberController.text,
-                              );
+                    6.h.verticalSpace,
+                    TextFormFieldWidget(
+                      controller: phoneNumberController,
+                      type: TextInputType.phone,
+                      maxLength: 9,
+                      hintText: S.of(context).phonePlaceholder,
+                      fieldValidator: (value) {
+                        if (value == null || value.toString().isEmpty) {
+                          return S.of(context).phoneRequired;
                         }
+                        final phone = value.trim();
+                        if (!phone.startsWith('7')) {
+                          return S.of(context).phoneMustStartWith7;
+                        }
+                        if (phone.length < 9) {
+                          return S.of(context).phoneMustBe9Digits;
+                        }
+                        return null;
                       },
-                    ),
-                  ),
-                  16.h.verticalSpace,
-
-                  Align(
-                    alignment: Alignment.center,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: AutoSizeTextWidget(
-                        text: S.of(context).continueAsGuest,
-                        fontSize: 11.sp,
-                        fontWeight: FontWeight.w400,
-                        colorText: AppColors.primaryColor,
+                      prefix: Padding(
+                        padding: EdgeInsets.all(11.sp),
+                        child: SvgPicture.asset(
+                          AppIcons.phone,
+                          height: 14.h,
+                        ),
+                      ),
+                      suffixIcon: Padding(
+                        padding: EdgeInsets.only(
+                            left: 12.w, right: 12.w, top: 12.h, bottom: 8.h),
+                        child: AutoSizeTextWidget(
+                          text: "967+",
+                          colorText: AppColors.primaryColor,
+                          fontSize: 12.sp,
+                        ),
                       ),
                     ),
-                  ),
-                  16.h.verticalSpace,
+                    16.h.verticalSpace,
+                    CheckStateInPostApiDataWidget(
+                      state: state,
+                      hasMessageSuccess: false,
+                      functionSuccess: () {
+                        showTitledBottomSheet(
+                            title: S.of(context).verificationCode,
+                            fontSize: 14.sp,
+                            context: context,
+                            page: VerifyCodePage(
+                              phoneNumber: phoneNumberController.text,
+                            ));
+                      },
+                      bottonWidget: DefaultButtonWidget(
+                        text: S.of(context).logIn,
+                        isLoading: state.stateData == States.loading,
+                        onPressed: () {
+                          final isValid = formKey.currentState!.validate();
 
-                  /// Class Continue To Google Or Facebook Widget
-                  const ContinueWithGoogleOrFacebookWidget(),
-                ],
+                          if (isValid) {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            ref.read(userProvider.notifier).logIn(
+                                  phoneNumber: phoneNumberController.text,
+                                );
+                          }
+                        },
+                      ),
+                    ),
+                    16.h.verticalSpace,
+
+                    Align(
+                      alignment: Alignment.center,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: AutoSizeTextWidget(
+                          text: S.of(context).continueAsGuest,
+                          fontSize: 11.sp,
+                          fontWeight: FontWeight.w400,
+                          colorText: AppColors.primaryColor,
+                        ),
+                      ),
+                    ),
+                    16.h.verticalSpace,
+
+                    /// Class Continue To Google Or Facebook Widget
+                   // const ContinueWithGoogleOrFacebookWidget(),
+                  ],
+                ),
               ),
             ),
           ),

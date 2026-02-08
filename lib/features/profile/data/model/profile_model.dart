@@ -1,20 +1,21 @@
 import '../../../properties/cities/data/model/city_model.dart';
 
 class ProfileModel {
-  final String name;
-  final String email;
+  final String? name;
+  final String? email;
   final dynamic gender;
   final DateTime? birthDate;
   final CityModel? city;
 
   const ProfileModel({
-    required this.name,
-    required this.email,
-    required this.gender,
-    required this.birthDate,
-    required this.city,
+    this.name,
+    this.email,
+    this.gender,
+    this.birthDate,
+    this.city,
   });
 }
+
 class ChangeResult {
   final bool nameChanged;
   final bool emailChanged;
@@ -32,8 +33,8 @@ class ChangeResult {
 
   bool get hasAny =>
       nameChanged ||
-          emailChanged ||
-          genderChanged ||
-          birthDateChanged ||
-          cityChanged;
+      emailChanged ||
+      genderChanged ||
+      birthDateChanged ||
+      cityChanged;
 }

@@ -56,8 +56,20 @@ class UpdateNotifier extends StateNotifier<DataState<AuthModel>> {
     DateTime? dateOfBirth,
   }) async {
     state = state.copyWith(state: States.loading);
+
+    final safeName = (name ?? '').trim();
+    final safeEmail = (email ?? '').trim();
+    final safeGender = (gender ?? '').trim();
+    final safeCityId = cityId ?? 0;
+
     final user = await _controller.update(
-        name!, email.toString(), gender!, cityId!, dateOfBirth);
+      safeName,
+      safeEmail,
+      safeGender,
+      safeCityId,
+      dateOfBirth,
+    );
+
     user.fold((f) {
       state = state.copyWith(state: States.error, exception: f);
     }, (data) {
@@ -122,7 +134,8 @@ class EditProfileController extends StateNotifier<ChangeResult> {
     final init = _initial;
     if (init == null) return;
 
-    bool eqStr(String a, String b) => a.trim() == b.trim();
+    bool eqStr(String? a, String? b) => (a ?? '').trim() == (b ?? '').trim();
+
     bool eqDate(DateTime? a, DateTime? b) {
       if (a == null && b == null) return true;
       if (a == null || b == null) return false;
