@@ -17,7 +17,6 @@ class PropertyRemoteDataSource {
       },
     );
 
-
     return PropertyModel.fromJson(response.data['data']);
   }
 }
