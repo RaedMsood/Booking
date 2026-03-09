@@ -1,6 +1,7 @@
 import 'package:booking/core/helpers/navigateTo.dart';
 import 'package:booking/features/user/presentation/pages/log_in_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -11,27 +12,31 @@ import '../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
+import '../state_mangement/currency_riverpod.dart';
+import '../widget/change_currency_bottom_sheet.dart';
 import '../widget/change_phone_number_widget.dart';
 import '../widget/languge_dialog_widget.dart';
 import '../widget/logout_or_delete_account_bottom_sheet_widget.dart';
 import '../widget/tile_widget.dart';
 
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends ConsumerStatefulWidget {
   final VoidCallback? onSuccess;
 
   const SettingsPage({super.key, this.onSuccess});
 
   @override
-  State<SettingsPage> createState() => _SettingsPageState();
+  ConsumerState<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _SettingsPageState extends ConsumerState<SettingsPage> {
   void _refresh() {
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    var currencyState = ref.watch(currencyProvider);
+
     return Scaffold(
       appBar: SecondaryAppBarWidget(title: S.of(context).generalSettings),
       body: Padding(
@@ -67,7 +72,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     colorText: const Color(0xff605A65),
                   ),
                   onTap: () {
-                    showModalBottomSheetWidget(
+                    showTitledBottomSheet(
+                      title: S.of(context).applicationLanguage,
                       context: context,
                       page: const LanguageDialog(),
                     );
@@ -75,6 +81,41 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.r),
+              child: Material(
+                color: Colors.white,
+                child: ListTile(
+                  titleAlignment: ListTileTitleAlignment.center,
+                  dense: true,
+                  horizontalTitleGap: 10.w,
+                  contentPadding:
+                  EdgeInsets.symmetric(vertical: 1.h, horizontal: 12.w),
+                  leading: SvgPicture.asset(
+                    AppIcons.translate,
+                  ),
+                  title: AutoSizeTextWidget(
+                    text: S.of(context).currency,
+                    colorText: const Color(0xff001A33),
+                    fontSize: 11.sp,
+                  ),
+                  trailing: AutoSizeTextWidget(
+                    text: currencyState.toString(),
+                    fontSize: 11.sp,
+                    fontWeight: FontWeight.w300,
+                    colorText: const Color(0xff605A65),
+                  ),
+                  onTap: () {
+                    showTitledBottomSheet(
+                      title: S.of(context).changeCurrency,
+                      context: context,
+                      page: const ChangeCurrencyBottomSheet(),
+                    );
+                  },
+                ),
+              ),
+            ),
+
             if(Auth().loggedIn)
             TileWidget(
               icon: AppIcons.phone,

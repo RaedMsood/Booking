@@ -210,6 +210,11 @@ class _CompleteAddBookingPageState
                             location: widget.location,
                             image: widget.imageUrl ?? '',
                           ));
+                              ref.read(selectedPayMethodProvider.notifier).state =
+                                  null;
+                              ref
+                                  .read(selectedPayMethodErrorProvider.notifier)
+                                  .state = null;
                     },
                     bottonWidget: DefaultButtonWidget(
                         isLoading: state.stateData == States.loading,

@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 
 import '../../../properties/home/data/model/property_data_model.dart';
 import '../../../user/data/model/auth_model.dart';
+import '../model/currency_model.dart';
 import '../source_data/remote_data_source.dart';
 
 class ProfileReposaitory {
@@ -68,6 +69,15 @@ class ProfileReposaitory {
         phoneNumber: phoneNumber,
         otp: otp,
       );
+      return Right(remote);
+    } on DioException catch (e) {
+      return Left(e);
+    }
+  }
+
+  Future<Either<DioException, List<CurrencyModel>>> getAllCurrencies() async {
+    try {
+      final remote = await profileRemoteDataSource.getAllCurrencies();
       return Right(remote);
     } on DioException catch (e) {
       return Left(e);

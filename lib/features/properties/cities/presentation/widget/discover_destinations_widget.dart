@@ -27,6 +27,7 @@ class DiscoverDestinationsWidget extends StatelessWidget {
                 colorText: AppColors.mainColorFont,
                 fontSize: 13.6.sp,
               ),
+
             ],
           ),
         ),

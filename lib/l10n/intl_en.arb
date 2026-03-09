@@ -90,6 +90,8 @@
   "checkOutDate": "Check-out date",
   "purchaseAndCancellationPolicy": "Purchase & cancellation policy",
   "viewVenueDetails": "View venue details",
+  "book": "Book",
+  "facilities": "Facilities",
   "invoice": "Invoice",
   "--------hotelBooking-----------": "---------hotelBooking----------",
   "hotelBookingTitle": "Hotel booking",

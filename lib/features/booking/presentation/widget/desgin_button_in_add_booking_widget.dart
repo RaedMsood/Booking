@@ -12,7 +12,7 @@ class DesginButtonInAddBookingWidget extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         Container(
-          height: 66.h,
+          height: 60.h,
           width: double.infinity,
           color: Colors.white,
         ),

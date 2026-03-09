@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/rating_bar_widget.dart';
 import '../../../../../core/widgets/read_more_text_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../data/models/features_model.dart';
 import 'hotel_features_widget.dart';
 
@@ -53,7 +54,7 @@ class NameAndDescriptionAndRatingWidget extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
                       decoration: BoxDecoration(
-                        color: const Color(0xfffef4d4).withValues(alpha:.8),
+                        color: const Color(0xfffef4d4).withValues(alpha: .8),
                         borderRadius: BorderRadius.circular(28.r),
                       ),
                       child: Row(
@@ -82,10 +83,19 @@ class NameAndDescriptionAndRatingWidget extends StatelessWidget {
             ),
           ),
           6.h.verticalSpace,
-          if (features.isNotEmpty)
+          if (features.isNotEmpty) ...[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
+              child: AutoSizeTextWidget(
+                text: S.of(context).facilities,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             HotelFeaturesWidget(
               features: features,
             ),
+          ],
         ],
       ),
     );

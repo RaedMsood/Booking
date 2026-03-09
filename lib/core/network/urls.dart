@@ -15,6 +15,8 @@ class AppURL {
 
   static String get confirmChangePhoneNumber => '/profile/confirm_change_phone';
 
+  static String get getAllCurrencies => '/currencies';
+
   static String get logout => '/auth/logout';
 
   static String get deleteAccount => '/profile/delete';

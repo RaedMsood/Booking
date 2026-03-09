@@ -43,9 +43,17 @@ class PropertyDetailsTabBarWidget extends SliverPersistentHeaderDelegate {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(S.of(context).sections),
+            Text(
+              S.of(context).book,
+              style: const TextStyle(
+                  color: AppColors.primaryColor, fontWeight: FontWeight.w500),
+            ),
             4.w.horizontalSpace,
-            SvgPicture.asset(AppIcons.about),
+            SvgPicture.asset(
+              AppIcons.myReservations,
+              height: 13.h,
+              color: AppColors.primaryColor,
+            ),
           ],
         ),
       ),

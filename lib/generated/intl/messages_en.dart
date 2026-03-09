@@ -62,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "birthdateOptional": MessageLookupByLibrary.simpleMessage(
       "Birthdate (optional)",
     ),
+    "book": MessageLookupByLibrary.simpleMessage("Book"),
     "bookNow": MessageLookupByLibrary.simpleMessage("Book now"),
     "bookingCodeCopied": MessageLookupByLibrary.simpleMessage(
       "Booking number copied",
@@ -178,6 +179,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailRequired": MessageLookupByLibrary.simpleMessage("Email is required"),
     "enterBirthdate": MessageLookupByLibrary.simpleMessage("Enter birthdate"),
     "enterCoupon": MessageLookupByLibrary.simpleMessage("Enter coupon"),
+    "facilities": MessageLookupByLibrary.simpleMessage("Facilities"),
     "faq": MessageLookupByLibrary.simpleMessage("FAQ"),
     "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
     "features": MessageLookupByLibrary.simpleMessage("Features"),

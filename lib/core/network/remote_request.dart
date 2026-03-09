@@ -20,8 +20,11 @@ class RemoteRequest {
     required String url,
     dynamic query,
   }) async {
+    String currency = await Auth().getCurrency();
+
     dio.options.headers = {
       'Content-Type': 'application/json',
+      'Currency-Code': currency,
       'Accept-Language': await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
     };
@@ -42,8 +45,10 @@ class RemoteRequest {
     Map<String, dynamic>? query,
     dynamic data,
   }) async {
+    String currency = await Auth().getCurrency();
     dio.options.headers = {
       'Content-Type': 'application/json',
+      'Currency-Code': currency,
       'Accept-Language': await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
     };
@@ -71,8 +76,10 @@ class RemoteRequest {
     Map<String, dynamic>? query,
     dynamic data,
   }) async {
+    String currency = await Auth().getCurrency();
     dio.options.headers = {
       'Content-Type': 'application/json',
+      'Currency-Code': currency,
       'Accept-Language': await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
     };
@@ -98,8 +105,11 @@ class RemoteRequest {
     Map<String, dynamic>? query,
     dynamic data,
   }) async {
+    String currency = await Auth().getCurrency();
+
     dio.options.headers = {
       'Content-Type': 'application/json',
+      'Currency-Code': currency,
       'Accept-Language': await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
     };

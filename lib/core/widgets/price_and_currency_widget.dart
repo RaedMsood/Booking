@@ -1,11 +1,12 @@
 import 'package:booking/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-import '../../generated/l10n.dart';
+import '../../features/profile/presentation/state_mangement/currency_riverpod.dart';
 
-class PriceAndCurrencyWidget extends StatelessWidget {
+class PriceAndCurrencyWidget extends ConsumerWidget {
   final String price;
   final Color? firstColor;
   final Color? secondColor;
@@ -28,7 +29,8 @@ class PriceAndCurrencyWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    var currencyState = ref.watch(currencyProvider);
     final NumberFormat formatter = NumberFormat('#,##0', 'en_US');
 
     return Text.rich(
@@ -44,7 +46,7 @@ class PriceAndCurrencyWidget extends StatelessWidget {
             ),
           ),
           TextSpan(
-            text: " ${S.of(context).YER}",
+            text: " ${currencyState.toString()}",
             style: TextStyle(
               color: secondColor ?? const Color(0xff757575),
               fontSize: fontSizeSecondText ?? 11.sp,

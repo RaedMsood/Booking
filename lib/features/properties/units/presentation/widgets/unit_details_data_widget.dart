@@ -5,6 +5,7 @@ import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/read_more_text_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../data/model/attachments_model.dart';
 import 'attachments_widget.dart';
 
@@ -45,7 +46,7 @@ class UnitDetailsDataWidget extends StatelessWidget {
                     4.w.horizontalSpace,
                     Flexible(
                       child: AutoSizeTextWidget(
-                        text: "شخصين",
+                        text: '$maxGuests ${S.of(context).personOne}',
                         fontSize: 9.6.sp,
                         colorText: AppColors.greyColor,
                         fontWeight: FontWeight.w500,
@@ -71,10 +72,19 @@ class UnitDetailsDataWidget extends StatelessWidget {
             ),
           ),
           6.h.verticalSpace,
-          if (attachments.isNotEmpty)
+          if (attachments.isNotEmpty) ...[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: AutoSizeTextWidget(
+                text: S.of(context).facilities,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             AttachmentsWidget(
               attachments: attachments,
             ),
+          ],
         ],
       ),
     );

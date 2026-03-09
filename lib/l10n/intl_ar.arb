@@ -90,6 +90,8 @@
   "checkOutDate": "تاريخ نهاية الحجز",
   "purchaseAndCancellationPolicy": "سياسة الشراء والإلغاء",
   "viewVenueDetails": "استعراض تفاصيل المنشأة",
+  "book": "احجز",
+  "facilities": "المرافق",
   "--------hotelBooking-----------": "---------hotelBooking----------",
   "hotelBookingTitle": "حجز الفندق",
   "yourBookingDate": "تاريخ حجزك",

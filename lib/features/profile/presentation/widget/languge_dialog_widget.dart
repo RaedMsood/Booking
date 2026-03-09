@@ -18,34 +18,18 @@ class LanguageDialog extends ConsumerWidget {
     ref.watch(languageProvider);
 
     return Padding(
-      padding: EdgeInsets.all(14.sp),
+      padding: EdgeInsets.all(12.sp),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          4.h.verticalSpace,
-          AutoSizeTextWidget(
-            text: S.of(context).applicationLanguage,
-            fontSize: 15.5.sp,
-            colorText: AppColors.primaryColor,
-            textAlign: TextAlign.center,
-          ),
-          10.h.verticalSpace,
           LanguageWidget(
             language: "العربية",
             value: "ar",
             languageGroupValue: Localizations.localeOf(context).languageCode,
             onPressed: () async {
-              AppRestartController.restartApp(context);
-
               const newLanguage = 'ar';
               await languageController.changeLanguage(newLanguage);
-            },
-            onChanged: (_) async {
               AppRestartController.restartApp(context);
-
-              const newLanguage = 'ar';
-              await languageController.changeLanguage(newLanguage);
-
             },
           ),
           6.h.verticalSpace,
@@ -54,16 +38,9 @@ class LanguageDialog extends ConsumerWidget {
             value: "en",
             languageGroupValue: Localizations.localeOf(context).languageCode,
             onPressed: () async {
-              AppRestartController.restartApp(context);
-
               const newLanguage = 'en';
               await languageController.changeLanguage(newLanguage);
-            },
-            onChanged: (_) async {
               AppRestartController.restartApp(context);
-
-              const newLanguage = 'en';
-              await languageController.changeLanguage(newLanguage);
             },
           ),
         ],

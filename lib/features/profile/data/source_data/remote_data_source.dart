@@ -4,6 +4,7 @@ import '../../../../core/network/remote_request.dart';
 import '../../../../core/network/urls.dart';
 import '../../../properties/home/data/model/property_data_model.dart';
 import '../../../user/data/model/auth_model.dart';
+import '../model/currency_model.dart';
 
 class ProfileRemoteDataSource {
   Future<AuthModel> upDateUser(
@@ -65,6 +66,13 @@ class ProfileRemoteDataSource {
     return AuthModel.fromJson(response.data['data']);
   }
 
+  Future<List<CurrencyModel>> getAllCurrencies() async {
+    final response = await RemoteRequest.getData(
+      url: AppURL.getAllCurrencies,
+    );
+    return CurrencyModel.fromJsonList(response.data['data']);
+  }
+
   Future<Unit> logout() async {
     await RemoteRequest.postData(
       path: AppURL.logout,
@@ -79,4 +87,3 @@ class ProfileRemoteDataSource {
     return Future.value(unit);
   }
 }
-// eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIwMTk3Y2M5NS04Njk5LTcwMzgtYjBlNy1kZjYyNDI3ZTUwNmMiLCJqdGkiOiI3NWJiYWNhZTJkODExOGVjYTIxOTdjY2I1MmQ1ZWI3ZGE3Y2M0NWVkYjE0ZmQwOWZjMmEzMTUzZTg4OWZhOGE2NGVkYzk3ZmI0YjFkMmVlZiIsImlhdCI6MTc2NDU1MDI3OC45NzQ4MTEsIm5iZiI6MTc2NDU1MDI3OC45NzQ4MTMsImV4cCI6MTc5NjA4NjI3OC45NzMyMzgsInN1YiI6IjYiLCJzY29wZXMiOltdfQ.GzyT-jFExLK_Ij2hRbQGxpXgM4l7OB1Bm15b1lqdFuITnRZO5nuodqAPJSC_FKZcmuG94OShkk5sXDLJaihIKf-vCg2--XQH5wDc4-4W8yX0cOE_Mga-I01NVj8EvFgbhYzwgOY-BVrbX4MagSiko_wyDNKNj-fhd1NrWvilQM_UoICxbTOMo1dUSJ3YfzJeopbovHab4nYOCAQuEHcvb-BsKFI6tnNGXnHqqwYKN8SfMW19HvD1-5PpJucXNGvQ9Sy_gjisY4TtTZ0I9Wt4nDdgZKxWtCfV0uN7hAoFSCELVdGUffqrB0R8fuNaNCicaHxEQc8RQnRJ4ifWg5PmtCnlC42KlIb3Zifz14XareRHNoFaruDMdQSFlUQzeWa3zfiekDFugu6kz9psqOx4vmp8DRxp2mdi95GnP3sMOX5XgwEdxQMH3Kw4jHaxy3T5E6pUnjRDpIPM-9iOX3tAIMqngHAEM6O06Ul9MqzFotY5pdo7DcO8EEBUQcecUoByrUEf_FhSH2ph8qavMEHMSzUT-Ucv6VaYQpnRixpr4m60DNfAIf8e9wzIB_CdxUWyaXOACE-NG6gi1hTQPDkpHDx1lhmiYJB6XKl5CRtDcdNXtWiWGZyEjBwjVHt8nRwKv9PuxD54Lw9D3hkYT9-HIwsfeSb1RfVC

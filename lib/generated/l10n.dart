@@ -658,6 +658,16 @@ class S {
     );
   }
 
+  /// `Book`
+  String get book {
+    return Intl.message('Book', name: 'book', desc: '', args: []);
+  }
+
+  /// `Facilities`
+  String get facilities {
+    return Intl.message('Facilities', name: 'facilities', desc: '', args: []);
+  }
+
   /// `Invoice`
   String get invoice {
     return Intl.message('Invoice', name: 'invoice', desc: '', args: []);

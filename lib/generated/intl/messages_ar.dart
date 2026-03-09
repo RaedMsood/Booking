@@ -59,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "birthdateOptional": MessageLookupByLibrary.simpleMessage(
       "تاريخ الميلاد (اختياري)",
     ),
+    "book": MessageLookupByLibrary.simpleMessage("احجز"),
     "bookNow": MessageLookupByLibrary.simpleMessage("حجز الآن"),
     "bookingCodeCopied": MessageLookupByLibrary.simpleMessage(
       "تم نسخ رقم الحجز",
@@ -173,6 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "إدخل تاريخ الميلاد",
     ),
     "enterCoupon": MessageLookupByLibrary.simpleMessage("أدخل القسيمة"),
+    "facilities": MessageLookupByLibrary.simpleMessage("المرافق"),
     "faq": MessageLookupByLibrary.simpleMessage("الأسئلة الشائعة"),
     "favorites": MessageLookupByLibrary.simpleMessage("المفضلة"),
     "features": MessageLookupByLibrary.simpleMessage("المميزات"),
