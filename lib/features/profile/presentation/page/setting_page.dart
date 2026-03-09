@@ -35,7 +35,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    var currencyState = ref.watch(currencyProvider);
+    final currencyName = ref.watch(currentCurrencyNameProvider);
 
     return Scaffold(
       appBar: SecondaryAppBarWidget(title: S.of(context).generalSettings),
@@ -92,7 +92,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                   contentPadding:
                   EdgeInsets.symmetric(vertical: 1.h, horizontal: 12.w),
                   leading: SvgPicture.asset(
-                    AppIcons.translate,
+                    AppIcons.currency,
                   ),
                   title: AutoSizeTextWidget(
                     text: S.of(context).currency,
@@ -100,7 +100,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                     fontSize: 11.sp,
                   ),
                   trailing: AutoSizeTextWidget(
-                    text: currencyState.toString(),
+                    text: currencyName.toString(),
                     fontSize: 11.sp,
                     fontWeight: FontWeight.w300,
                     colorText: const Color(0xff605A65),

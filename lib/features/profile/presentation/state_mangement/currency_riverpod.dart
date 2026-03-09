@@ -65,3 +65,18 @@ class CurrencyController extends StateNotifier<String> {
     }
   }
 }
+final currentCurrencyNameProvider = Provider<String>((ref) {
+  final selectedCode = ref.watch(currencyProvider);
+  final currenciesState = ref.watch(getAllCurrencies);
+
+  final currencies = currenciesState.data;
+
+  try {
+    final currentCurrency = currencies.firstWhere(
+          (element) => element.code == selectedCode,
+    );
+    return currentCurrency.name;
+  } catch (e) {
+    return selectedCode;
+  }
+});

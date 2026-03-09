@@ -30,7 +30,7 @@ class PriceAndCurrencyWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    var currencyState = ref.watch(currencyProvider);
+    final currencyName = ref.watch(currentCurrencyNameProvider);
     final NumberFormat formatter = NumberFormat('#,##0', 'en_US');
 
     return Text.rich(
@@ -46,7 +46,7 @@ class PriceAndCurrencyWidget extends ConsumerWidget {
             ),
           ),
           TextSpan(
-            text: " ${currencyState.toString()}",
+            text: " ${currencyName.toString()}",
             style: TextStyle(
               color: secondColor ?? const Color(0xff757575),
               fontSize: fontSizeSecondText ?? 11.sp,

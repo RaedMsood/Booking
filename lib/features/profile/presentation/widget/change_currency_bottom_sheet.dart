@@ -50,16 +50,16 @@ class ChangeCurrencyBottomSheet extends ConsumerWidget {
                       child: Row(
                         children: [
                           AutoSizeTextWidget(
-                            text: items.code,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.bold,
+                            text: items.name,
+                            fontSize: 11.4.sp,
+                            fontWeight: FontWeight.w500,
                             colorText: const Color(0xFF4F4A59),
                           ),
                           10.w.horizontalSpace,
                           Flexible(
                             child: AutoSizeTextWidget(
                               text: items.symbol,
-                              fontSize: 12.sp,
+                              fontSize: 11.sp,
                               colorText: const Color(0xFF4F4A59),
                             ),
                           ),

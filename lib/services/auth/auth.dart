@@ -138,4 +138,15 @@ class Auth {
     final language = await secureStorage.read(key: "CURRENCY");
     return language ?? "YER";
   }
+
 }
+
+
+// Future<void> setCurrencyName(String currencyCode) async {
+//   await secureStorage.write(key: "CURRENCY-NAME", value: currencyCode);
+// }
+//
+// Future<String> getCurrencyName() async {
+//   final language = await secureStorage.read(key: "CURRENCY-NAME");
+//   return language ?? "YER";
+// }
