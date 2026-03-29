@@ -41,7 +41,7 @@ class PropertySliverListWidget extends ConsumerWidget {
           crossAxisCount: provider.viewType,
           mainAxisSpacing: 10.h,
           crossAxisSpacing: 10.w,
-          childAspectRatio: provider.viewType == 2 ? 0.57.h : 1.28.h,
+          childAspectRatio: provider.viewType == 2 ? 0.45.h : 1.h,
         ),
       ),
     );

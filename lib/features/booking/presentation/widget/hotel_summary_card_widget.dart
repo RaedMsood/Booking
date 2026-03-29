@@ -69,6 +69,8 @@ class HotelSummaryCard extends StatelessWidget {
                         fontSize: 8.6.sp,
                         minFontSize: 7,
                         colorText: Colors.grey,
+
+                        maxLines:3,
                         fontWeight: FontWeight.w400,
                       ),
                     ),

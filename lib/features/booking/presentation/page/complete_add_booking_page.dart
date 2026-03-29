@@ -137,19 +137,16 @@ class _CompleteAddBookingPageState
                                   size: 20.sp,
                                   color: AppColors.primaryColor,
                                 ),
-                                fieldValidator: (value) {
-                                  if ((value == null ||
-                                      value.toString().isEmpty)) {
-                                    return S.of(context).emailRequired;
-                                  }
-                                  final emails = email.text.trim();
-                                  final emailRegex =
-                                      RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-                                  if (!emailRegex.hasMatch(emails)) {
-                                    return S.of(context).invalidEmail;
-                                  }
-                                  return null;
-                                }),
+                                // fieldValidator: (value) {
+                                //
+                                //   final emails = email.text.trim();
+                                //   final emailRegex =
+                                //       RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                                //   if (!emailRegex.hasMatch(emails)) {
+                                //     return S.of(context).invalidEmail;
+                                //   }
+                                //   return null;
+                                 ),
                             12.verticalSpace,
                             AutoSizeTextWidget(
                               text: S.of(context).phoneNumber,
