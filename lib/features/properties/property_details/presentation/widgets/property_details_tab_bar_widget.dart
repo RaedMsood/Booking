@@ -14,8 +14,10 @@ class PropertyDetailsTabBarWidget extends SliverPersistentHeaderDelegate {
   late final TabBar _tabBar = TabBar(
     controller: tabController,
     isScrollable: true,
+
     labelPadding: EdgeInsets.symmetric(horizontal: 30.w),
     physics: const ClampingScrollPhysics(),
+
     labelStyle: TextStyle(
       fontSize: 11.5.sp,
       fontWeight: FontWeight.w400,

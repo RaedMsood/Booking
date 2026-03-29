@@ -88,6 +88,7 @@ class _DetailsOfBookInAddPageState
               ),
             ),
             CheckStateInPostApiDataWidget(
+              hasMessageSuccess: false,
               state: checkBookingState,
               functionSuccess: () {
                 navigateTo(

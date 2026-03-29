@@ -47,7 +47,7 @@ class _TermsPolicyWidgetState extends State<TermsPolicyWidget>
             child: Column(
               children: [
                 for (var policy in policiesToShow) ...[
-                  _buildItem(policy.all),
+                  _buildItem(policy.description),
                   4.h.verticalSpace,
                 ],
               ],

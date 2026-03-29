@@ -19,7 +19,7 @@ class PhotoViewDialogWidget {
     await showDialog(
       context: context,
       barrierDismissible: true,
-      barrierColor:  AppColors.primarySwatch.shade900,
+      barrierColor:  AppColors.scaffoldColor,
       builder: (_) {
         return _FullScreenGalleryDialog(
           images: images,
@@ -67,7 +67,7 @@ class _FullScreenGalleryDialogState extends State<_FullScreenGalleryDialog> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.primarySwatch.shade900,
+      color: AppColors.scaffoldColor,
       child: SafeArea(
         child: Column(
           children: [
@@ -79,10 +79,10 @@ class _FullScreenGalleryDialogState extends State<_FullScreenGalleryDialog> {
                 width: 30.w,
                 margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
                 decoration: const BoxDecoration(
-                    color: Colors.white30, shape: BoxShape.circle),
+                    color: AppColors.whiteColor, shape: BoxShape.circle),
                 child: const IconButtonWidget(
                   icon: AppIcons.close,
-                  iconColor: Colors.white,
+                  iconColor: Colors.black,
                 ),
               ),
             ),
@@ -136,7 +136,7 @@ class _FullScreenGalleryDialogState extends State<_FullScreenGalleryDialog> {
                                 borderRadius: BorderRadius.circular(12.r),
                                 border: Border.all(
                                   color: isSelected
-                                      ? Colors.white
+                                      ? AppColors.primaryColor
                                       : Colors.transparent,
                                   width: 2,
                                 ),
@@ -161,13 +161,13 @@ class _FullScreenGalleryDialogState extends State<_FullScreenGalleryDialog> {
                             onPressed: () => _goTo(_currentIndex - 1),
                             icon: const Icon(
                               Icons.chevron_left,
-                              color: Colors.white,
+                              color: AppColors.primaryColor,
                             ),
                           ),
                           Text(
                             '${_currentIndex + 1} / ${widget.images.length}',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.primaryColor,
                               fontSize: 13.sp,
                               fontWeight: FontWeight.w600,
                             ),
@@ -176,7 +176,7 @@ class _FullScreenGalleryDialogState extends State<_FullScreenGalleryDialog> {
                             onPressed: () => _goTo(_currentIndex + 1),
                             icon: const Icon(
                               Icons.chevron_right,
-                              color: Colors.white,
+                              color: AppColors.primaryColor,
                             ),
                           ),
                         ],
