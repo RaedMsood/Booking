@@ -29,15 +29,24 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
   final formKey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    voucherController.dispose();
+    amountController.dispose();
+    phoneNumberController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final selectedPayMethod =
         ref.watch(selectedPayMethodProvider.notifier).state;
     if (selectedPayMethod!.name.isEmpty) return const SizedBox.shrink();
     final spec = paySpecs[selectedPayMethod.name];
     var state = ref.watch(confirmPaymentProvider);
-    if (spec!.requiresPhoneNumber) {
+    if (spec!.requiresPhoneNumber && phoneNumberController.text.isEmpty) {
       phoneNumberController.text = Auth().phoneNumber;
     }
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w)
           .copyWith(bottom: 12.h, top: 2.h),
@@ -162,6 +171,7 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                   ref.read(confirmPaymentProvider.notifier).confirmPayment(
                         bookingData: bookingData.data,
                         payMethodName: selectedPayMethod.name,
+
                         voucher: voucherController.text,
                         amount: int.tryParse(amountController.text) ?? 0,
                         phoneNumber: phoneNumberController.text,

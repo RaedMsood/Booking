@@ -174,3 +174,139 @@ class _LaunchPageState extends State<LaunchPage> with TickerProviderStateMixin {
     );
   }
 }
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:lottie/lottie.dart';
+//
+// import '../core/helpers/navigateTo.dart';
+// import '../core/theme/app_colors.dart';
+// import '../core/widgets/auto_size_text_widget.dart';
+// import '../core/widgets/bottomNavbar/bottom_navigation_bar_widget.dart';
+// import '../services/auth/auth.dart';
+// import 'user/presentation/pages/splach_screen_page.dart';
+// class LaunchPage extends StatefulWidget {
+//   const LaunchPage({super.key});
+//
+//   @override
+//   State<LaunchPage> createState() => _LaunchPageState();
+// }
+//
+// class _LaunchPageState extends State<LaunchPage>
+//     with SingleTickerProviderStateMixin {
+//   late final AnimationController _logoController;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//
+//     _logoController = AnimationController(
+//       vsync: this,
+//       duration: const Duration(seconds: 2), // مدة مبدئية
+//     );
+//
+//     _logoController.addStatusListener((status) {
+//       if (status == AnimationStatus.completed && mounted) {
+//         nav();
+//       }
+//     });
+//   }
+//
+//   Future<void> nav() async {
+//     if (!mounted) return;
+//
+//     final onBoarding = await Auth().getOnBoarding() ?? false;
+//
+//     if (!mounted) return;
+//
+//     if (onBoarding) {
+//       navigateAndFinish(context, const BottomNavigationBarWidget());
+//     } else {
+//       navigateAndFinish(context, const SplachScreenPage());
+//     }
+//   }
+//
+//   @override
+//   void dispose() {
+//     _logoController.dispose();
+//     super.dispose();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: AppColors.primaryColor,
+//       body: AnnotatedRegion<SystemUiOverlayStyle>(
+//         value: const SystemUiOverlayStyle(
+//           statusBarColor: Colors.transparent,
+//           systemNavigationBarColor: Colors.transparent,
+//           systemNavigationBarDividerColor: Colors.transparent,
+//           statusBarIconBrightness: Brightness.light,
+//           systemNavigationBarIconBrightness: Brightness.light,
+//           systemNavigationBarContrastEnforced: false,
+//         ),
+//         child: Container(
+//           width: double.infinity,
+//           height: MediaQuery.of(context).size.height,
+//           padding: EdgeInsets.fromLTRB(
+//             14.sp,
+//             MediaQuery.of(context).viewPadding.top + 14.sp,
+//             14.sp,
+//             MediaQuery.of(context).viewPadding.bottom + 14.sp,
+//           ),
+//           decoration: BoxDecoration(
+//             gradient: LinearGradient(
+//               colors: [
+//                 AppColors.primaryColor,
+//                 AppColors.primarySwatch.shade600.withOpacity(.4),
+//                 AppColors.primarySwatch.shade400.withOpacity(.4),
+//                 AppColors.primarySwatch.shade400,
+//                 AppColors.primarySwatch.shade300,
+//               ],
+//               begin: Alignment.topCenter,
+//               end: Alignment.bottomCenter,
+//             ),
+//           ),
+//           child: Column(
+//             children: [
+//               Expanded(
+//                 child:Center(
+//                   child: Lottie.asset(
+//                     'assets/data.json',
+//                     height: 160,
+//                     fit: BoxFit.contain,
+//                     repeat: false,
+//                     errorBuilder: (context, error, stackTrace) {
+//                       return Text('Lottie error: $error');
+//                     },
+//                   ),
+//                 )
+//               ),
+//               Padding(
+//                 padding: EdgeInsets.only(bottom: 4.h),
+//                 child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: [
+//                     AutoSizeTextWidget(
+//                       text: "تم التطوير بواسطة",
+//                       fontSize: 11.sp,
+//                       colorText: AppColors.whiteColor,
+//                       fontWeight: FontWeight.w500,
+//                     ),
+//                     8.w.horizontalSpace,
+//                     AutoSizeTextWidget(
+//                       text: "ALGONEST",
+//                       fontSize: 10.6.sp,
+//                       colorText: AppColors.whiteColor,
+//                       fontWeight: FontWeight.w500,
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

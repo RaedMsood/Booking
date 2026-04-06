@@ -1,3 +1,4 @@
+import 'package:booking/core/helpers/navigateTo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/constants/app_images.dart';
@@ -5,6 +6,7 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../generated/l10n.dart';
 import '../../data/model/city_model.dart';
+import '../pages/cities_page.dart';
 import 'city_card_for_home_page_widget.dart';
 
 class DiscoverDestinationsWidget extends StatelessWidget {
@@ -27,7 +29,35 @@ class DiscoverDestinationsWidget extends StatelessWidget {
                 colorText: AppColors.mainColorFont,
                 fontSize: 13.6.sp,
               ),
-
+              const Spacer(),
+              GestureDetector(
+                onTap: () {
+                  navigateTo(context, const DestinationsPage());
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.mainColorFont.withOpacity(0.2), width: 0.9),
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+                  child: Row(
+                    children: [
+                      AutoSizeTextWidget(
+                        text: 'المزيد',
+                        colorText: AppColors.mainColorFont.withOpacity(0.9),
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      SizedBox(width: 4.w),
+                      Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        size: 11.sp,
+                        color: AppColors.mainColorFont.withOpacity(0.9),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),

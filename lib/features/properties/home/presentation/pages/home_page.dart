@@ -82,7 +82,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     4.5.h.verticalSpace,
-                    const OffersWidget(),
+                     OffersWidget(banners: state.data.banners,),
                     4.5.h.verticalSpace,
                     DiscoverDestinationsWidget(
                       cities: state.data.cities,

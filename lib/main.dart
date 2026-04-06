@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'core/network/remote_request.dart';
 import 'core/notifications/firebase_messaging_service.dart';
 import 'core/notifications/notification_bootstrap.dart';
@@ -55,7 +57,9 @@ class MyApp extends ConsumerStatefulWidget {
 class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
-    FirebaseMessagingService.I.getDeviceToken().then((t) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      checkForMandatoryUpdate();
+    });    FirebaseMessagingService.I.getDeviceToken().then((t) {
       if (t != null) {
         debugPrint('Device Token: $t');
         Auth().setFcmToken(t);
@@ -75,7 +79,20 @@ class _MyAppState extends ConsumerState<MyApp> {
     }
     super.initState();
   }
+  Future<void> checkForMandatoryUpdate() async {
+    if (!Platform.isAndroid) return;
 
+    try {
+      final info = await InAppUpdate.checkForUpdate();
+
+      if (info.updateAvailability == UpdateAvailability.updateAvailable &&
+          info.immediateUpdateAllowed) {
+        await InAppUpdate.performImmediateUpdate();
+      }
+    } catch (e) {
+      debugPrint('Update check failed: $e');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final locale = ref.watch(languageProvider);

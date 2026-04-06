@@ -234,6 +234,7 @@ class _CompleteAddBookingPageState
 
                           if (isValid) {
                             final custemor = CustomerModel(
+
                               email: email.text,
                               name: name.text,
                               phone: phone.text,

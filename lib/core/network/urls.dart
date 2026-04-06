@@ -35,7 +35,7 @@ class AppURL {
 
   static String get unitDetails => '/unit/show/';
 
-  static String get getCities => '/cities';
+  static String get getCities => '/home-page/cities';
 
   static String get addReview => '/review';
 
