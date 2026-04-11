@@ -38,11 +38,11 @@ class IdBookingWithCopyWidget extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.copy, size: 8, color: Colors.black),
+             Icon(Icons.copy, size: 8.h, color: Colors.black),
             4.horizontalSpace,
             AutoSizeTextWidget(
               text: bookingId,
-              fontSize: 8,
+              fontSize: 8.sp,
               minFontSize: 4,
               fontWeight: FontWeight.w500,
             ),

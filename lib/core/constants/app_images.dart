@@ -6,6 +6,7 @@ class AppImages {
   static const String noData = '${_imagesPath}noData.png';
   static const String yemen = '${_imagesPath}yemen.png';
   static const String logo = '${_imagesPath}mazaji_light.png';
+  static const String logoInAppDate = '${_imagesPath}mazaj.png';
 
   ///////////// On Boarding ////////////////////////
   static const String onBoarding1 = '${_imagesPath}on_boarding1.png';

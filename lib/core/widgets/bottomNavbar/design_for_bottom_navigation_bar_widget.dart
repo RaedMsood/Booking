@@ -22,6 +22,10 @@ class DesignForBottomNavigationBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final shortestSide = MediaQuery.sizeOf(context).shortestSide;
+    final isTablet = shortestSide >= 600;
+    final iconSize = isTablet ? 28.0 : 22.0;
+
     return Expanded(
       child: InkWell(
         onTap: onTap,
@@ -41,6 +45,9 @@ class DesignForBottomNavigationBarWidget extends StatelessWidget {
               child: SvgPicture.asset(
                 active ? activeIcon ?? icon : icon,
                 key: ValueKey<String>(active ? activeIcon ?? icon : icon),
+                width: iconSize,
+                height: iconSize,
+                fit: BoxFit.contain,
               ),
             ),
             2.5.h.verticalSpace,

@@ -35,7 +35,7 @@ class InfoItemInConfrimBookingCardWidget extends StatelessWidget {
 
         ),
         const Spacer(),
-        Icon(icon, size: 12, color: const Color(0xff605A65)),
+        Icon(icon, size: 12.h, color: const Color(0xff605A65)),
         2.horizontalSpace,
         AutoSizeTextWidget(
           text: text,

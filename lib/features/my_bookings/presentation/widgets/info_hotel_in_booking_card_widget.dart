@@ -64,9 +64,9 @@ class InfoHotelInCardBookingWidget extends StatelessWidget {
               const Spacer(),
               PriceAndCurrencyWidget(
                 price: price.toStringAsFixed(0),
-                fontSize: 11.sp,
+                fontSize: 10.5.sp,
                 fontWeight: FontWeight.w400,
-                fontSizeSecondText: 10.sp,
+                fontSizeSecondText: 9.5.sp,
               ),
             ],
           ),

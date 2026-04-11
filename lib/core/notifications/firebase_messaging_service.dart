@@ -24,13 +24,15 @@ class FirebaseMessagingService {
   Future<String?> getDeviceToken() async {
     try {
       if (Platform.isIOS) {
-        // في نظام iOS، يجب الحصول على APNS token أولاً
+        // ننتظر ثانية واحدة للتأكد من استقرار تهيئة Firebase
+        await Future.delayed(const Duration(seconds: 1));
+
         String? apnsToken = await _messaging.getAPNSToken();
-        
-        // إذا كنت على المحاكي، توكن APNS سيكون دائماً null
-        // سنحاول الانتظار قليلاً فقط في حالة الجهاز الحقيقي
+
+        // محاولات متكررة في حال كان الجهاز حقيقي ولكنه يحتاج وقتاً للاتصال بخوادم آبل
         int retryCount = 0;
-        while (apnsToken == null && retryCount < 2) {
+        while (apnsToken == null && retryCount < 10) {
+          if (kDebugMode) print('[FCM] APNS Token is null, retrying ($retryCount/10)...');
           await Future.delayed(const Duration(seconds: 2));
           apnsToken = await _messaging.getAPNSToken();
           retryCount++;
@@ -38,14 +40,13 @@ class FirebaseMessagingService {
 
         if (apnsToken == null) {
           if (kDebugMode) {
-            print('[FCM] APNS Token is null. Skipping getToken to avoid error.');
-            print('[FCM] Note: FCM doesn\'t support notifications on iOS Simulators.');
+            print('[FCM] Error: APNS Token is still null. Please check Xcode Capabilities (Push Notifications & Background Modes).');
           }
-          return null; // نرجع null بهدوء دون استدعاء getToken الذي يسبب الخطأ
+          // في بعض الحالات، قد يعمل getToken حتى لو كان APNS null (اعتماداً على إصدار Firebase)
+          return await _messaging.getToken();
         }
       }
-      
-      // إذا وصلنا هنا (أندرويد أو iOS مع توكن APNS جاهز)
+
       return await _messaging.getToken();
     } catch (e) {
       if (kDebugMode) print('[FCM] getToken exception: $e');
@@ -57,11 +58,15 @@ class FirebaseMessagingService {
     if (_configured) return;
 
     // طلب الأذونات
-    await _messaging.requestPermission(
+    NotificationSettings settings = await _messaging.requestPermission(
       alert: true,
       badge: true,
       sound: true,
     );
+
+    if (kDebugMode) {
+      print('[FCM] User granted permission: ${settings.authorizationStatus}');
+    }
 
     if (Platform.isIOS) {
       await FirebaseMessaging.instance

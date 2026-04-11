@@ -139,6 +139,19 @@ class Auth {
     return language ?? "YER";
   }
 
+  Future<void> cacheSkippedOptionalUpdateVersion(String version) async {
+    await secureStorage.write(key: "SKIPPED_OPTIONAL_UPDATE", value: version);
+  }
+
+  Future<String> getSkippedOptionalUpdateVersion() async {
+    final value = await secureStorage.read(key: "SKIPPED_OPTIONAL_UPDATE");
+    return value ?? "";
+  }
+
+  Future<void> clearSkippedOptionalUpdateVersion() async {
+    await secureStorage.delete(key: "SKIPPED_OPTIONAL_UPDATE");
+  }
+
 }
 
 

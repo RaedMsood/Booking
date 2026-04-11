@@ -38,7 +38,7 @@ class NotificationsButtonWidget extends ConsumerWidget {
         if (unread > 0)
           Positioned(
             left: unread >= 10 ? 4.w : 8.w,
-            top: 1.8,
+            top: 1.8.h,
             child: Container(
               padding: EdgeInsets.all(unread >= 10 ? 1.sp : 1.sp),
               decoration: BoxDecoration(

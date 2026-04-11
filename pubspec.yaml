@@ -64,30 +64,41 @@ dependencies:
   url_launcher:
   flutter_staggered_grid_view:
   firebase_core:
+  firebase_remote_config:
   flutter_local_notifications:
   awesome_notifications:
   firebase_messaging:
+  package_info_plus:
   sms_autofill: ^2.4.1
   in_app_update:
   lottie: ^3.3.2
+  video_player: ^2.9.2
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons:
+  flutter_lints: ^4.0.0
 
+flutter_launcher_icons:
+  android: false
+  ios: true
+  image_path: "assets/images/mazaji_for_app.png"
+  remove_alpha_ios: true
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
+  config:
+    enable-lldb-debugging: false
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -100,6 +111,7 @@ flutter:
     - assets/data.json
     - assets/images/
     - assets/icons/
+    - assets/video/
     - assets/icons/contact/
     - assets/icons/bottombar/
     - assets/icons/profile/

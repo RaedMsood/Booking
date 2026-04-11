@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:in_app_update/in_app_update.dart';
 import 'core/network/remote_request.dart';
 import 'core/notifications/firebase_messaging_service.dart';
 import 'core/notifications/notification_bootstrap.dart';
@@ -33,6 +32,7 @@ void main() async {
       debugPrint("Flutter Error in Release Mode: ${details.exception}");
     }
   };
+
   runZonedGuarded(
         () async {
       RemoteRequest.initDio();
@@ -58,7 +58,6 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      checkForMandatoryUpdate();
     });    FirebaseMessagingService.I.getDeviceToken().then((t) {
       if (t != null) {
         debugPrint('Device Token: $t');
@@ -78,20 +77,6 @@ class _MyAppState extends ConsumerState<MyApp> {
       FirebaseMessagingService.I.onSetUnread = null;
     }
     super.initState();
-  }
-  Future<void> checkForMandatoryUpdate() async {
-    if (!Platform.isAndroid) return;
-
-    try {
-      final info = await InAppUpdate.checkForUpdate();
-
-      if (info.updateAvailability == UpdateAvailability.updateAvailable &&
-          info.immediateUpdateAllowed) {
-        await InAppUpdate.performImmediateUpdate();
-      }
-    } catch (e) {
-      debugPrint('Update check failed: $e');
-    }
   }
   @override
   Widget build(BuildContext context) {
@@ -120,7 +105,3 @@ class _MyAppState extends ConsumerState<MyApp> {
     );
   }
 }
-// package com.algonest.booking
-//
-// import io.flutter.embedding.android.FlutterActivity
-// class MainActivity: FlutterActivity()
