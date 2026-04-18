@@ -44,63 +44,39 @@ class ShimmerPropertyVerticalCardBody extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final topPadding = (constraints.maxHeight * 0.12).clamp(4.0, 8.h);
-              final bottomPadding =
-                  (constraints.maxHeight * 0.12).clamp(6.0, 10.h);
-              final titleHeight =
-                  (constraints.maxHeight * 0.24).clamp(12.0, 18.h);
-              final chipHeight =
-                  (constraints.maxHeight * 0.26).clamp(14.0, 20.h);
-              final spacerHeight =
-                  (constraints.maxHeight * 0.08).clamp(4.0, 6.h);
-              final locationIconHeight =
-                  (constraints.maxHeight * 0.18).clamp(10.0, 14.h);
-              final locationHeight =
-                  (constraints.maxHeight * 0.16).clamp(9.0, 11.h);
-
-              return Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(
-                  8.w,
-                  topPadding,
-                  8.w,
-                  bottomPadding,
-                ),
-                child: Align(
-                  alignment: AlignmentDirectional.topStart,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(8.w, 4.h, 8.w, 4.h),
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: ShimmerPlaceholderWidget(
-                              width: 180.w,
-                              height: titleHeight,
-                              borderRadius: 3.r,
-                            ),
-                          ),
-                          8.w.horizontalSpace,
-                          ShimmerPlaceholderWidget(
-                            height: chipHeight,
-                            width: 40.w,
-                            borderRadius: 40.r,
-                          ),
-                        ],
+                      Expanded(
+                        child: ShimmerPlaceholderWidget(
+                          width: 180.w,
+                          height: 14.h,
+                          borderRadius: 3.r,
+                        ),
                       ),
-                      SizedBox(height: spacerHeight),
-                      _ShimmerLocationRow(
-                        iconHeight: locationIconHeight,
-                        placeholderHeight: locationHeight,
+                      8.w.horizontalSpace,
+                      ShimmerPlaceholderWidget(
+                        height: 18.h,
+                        width: 40.w,
+                        borderRadius: 40.r,
                       ),
                     ],
                   ),
-                ),
-              );
-            },
+                  4.h.verticalSpace,
+                  _ShimmerLocationRow(
+                    iconHeight: 12.h,
+                    placeholderHeight: 10.h,
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ],
