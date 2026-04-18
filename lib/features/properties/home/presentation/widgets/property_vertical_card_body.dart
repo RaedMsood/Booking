@@ -30,69 +30,46 @@ class PropertyVerticalCardBody extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final topPadding = (constraints.maxHeight * 0.12).clamp(4.0, 8.h);
-              final bottomPadding =
-                  (constraints.maxHeight * 0.12).clamp(6.0, 10.h);
-              final titleFontSize = 12.sp;
-              const titleMinFontSize = 9.0;
-              final chipFontSize = 10.sp;
-              final chipVerticalPadding = 2.h;
-              final chipHorizontalPadding = 6.w;
-              final ratingItemSize = 14.sp;
-              final spacerHeight = 6.h;
-              final locationIconHeight = 12.h;
-              final locationFontSize = 10.sp;
-
-              return Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(
-                  8.w,
-                  topPadding,
-                  8.w,
-                  bottomPadding,
-                ),
-                child: Align(
-                  alignment: AlignmentDirectional.topStart,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(8.w, 4.h, 8.w, 4.h),
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: AutoSizeTextWidget(
-                              text: property.name,
-                              fontSize: titleFontSize,
-                              fontWeight: FontWeight.w500,
-                              maxLines: 2,
-                              minFontSize: titleMinFontSize,
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
-                          8.w.horizontalSpace,
-                          PropertyCardRatingChipWidget(
-                            rating: property.rating.toDouble(),
-                            fontSize: chipFontSize,
-                            horizontalPadding: chipHorizontalPadding,
-                            verticalPadding: chipVerticalPadding,
-                            itemSize: ratingItemSize,
-                          ),
-                        ],
+                      Expanded(
+                        child: AutoSizeTextWidget(
+                          text: property.name,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w500,
+                          maxLines: 1,
+                          minFontSize: 9,
+                          textAlign: TextAlign.start,
+                        ),
                       ),
-                      SizedBox(height: spacerHeight),
-                      PropertyCardLocationRowWidget(
-                        city: property.city,
-                        district: property.district,
-                        iconHeight: locationIconHeight,
-                        fontSize: locationFontSize,
+                      8.w.horizontalSpace,
+                      PropertyCardRatingChipWidget(
+                        rating: property.rating.toDouble(),
+                        fontSize: 10.sp,
+                        horizontalPadding: 6.w,
+                        verticalPadding: 2.h,
+                        itemSize: 14.sp,
                       ),
                     ],
                   ),
-                ),
-              );
-            },
+                  4.h.verticalSpace,
+                  PropertyCardLocationRowWidget(
+                    city: property.city,
+                    district: property.district,
+                    iconHeight: 12.h,
+                    fontSize: 10.sp,
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ],
