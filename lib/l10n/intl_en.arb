@@ -92,6 +92,8 @@
   "viewVenueDetails": "View venue details",
   "book": "Book",
   "facilities": "Facilities",
+      "facilitiesWithFeatures": "facilities And Features",
+
   "invoice": "Invoice",
   "--------hotelBooking-----------": "---------hotelBooking----------",
   "hotelBookingTitle": "Hotel booking",

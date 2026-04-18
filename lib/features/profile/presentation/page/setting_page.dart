@@ -45,42 +45,42 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           mainAxisSize: MainAxisSize.min,
           spacing: 14.h,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.r),
-              child: Material(
-                color: Colors.white,
-                child: ListTile(
-                  titleAlignment: ListTileTitleAlignment.center,
-                  dense: true,
-                  horizontalTitleGap: 10.w,
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 1.h, horizontal: 12.w),
-                  leading: SvgPicture.asset(
-                    AppIcons.translate,
-                  ),
-                  title: AutoSizeTextWidget(
-                    text: S.of(context).language,
-                    colorText: const Color(0xff001A33),
-                    fontSize: 11.sp,
-                  ),
-                  trailing: AutoSizeTextWidget(
-                    text: Directionality.of(context) == TextDirection.rtl
-                        ? 'العربية'
-                        : 'English',
-                    fontSize: 11.sp,
-                    fontWeight: FontWeight.w300,
-                    colorText: const Color(0xff605A65),
-                  ),
-                  onTap: () {
-                    showTitledBottomSheet(
-                      title: S.of(context).applicationLanguage,
-                      context: context,
-                      page: const LanguageDialog(),
-                    );
-                  },
-                ),
-              ),
-            ),
+            // ClipRRect(
+            //   borderRadius: BorderRadius.circular(8.r),
+            //   child: Material(
+            //     color: Colors.white,
+            //     child: ListTile(
+            //       titleAlignment: ListTileTitleAlignment.center,
+            //       dense: true,
+            //       horizontalTitleGap: 10.w,
+            //       contentPadding:
+            //           EdgeInsets.symmetric(vertical: 1.h, horizontal: 12.w),
+            //       leading: SvgPicture.asset(
+            //         AppIcons.translate,
+            //       ),
+            //       title: AutoSizeTextWidget(
+            //         text: S.of(context).language,
+            //         colorText: const Color(0xff001A33),
+            //         fontSize: 11.sp,
+            //       ),
+            //       trailing: AutoSizeTextWidget(
+            //         text: Directionality.of(context) == TextDirection.rtl
+            //             ? 'العربية'
+            //             : 'English',
+            //         fontSize: 11.sp,
+            //         fontWeight: FontWeight.w300,
+            //         colorText: const Color(0xff605A65),
+            //       ),
+            //       onTap: () {
+            //         showTitledBottomSheet(
+            //           title: S.of(context).applicationLanguage,
+            //           context: context,
+            //           page: const LanguageDialog(),
+            //         );
+            //       },
+            //     ),
+            //   ),
+            // ),
             ClipRRect(
               borderRadius: BorderRadius.circular(8.r),
               child: Material(

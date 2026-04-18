@@ -1,13 +1,9 @@
-import 'dart:async';
-import 'dart:ui' as ui;
 import 'package:booking/core/state/state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:flutter/services.dart' show rootBundle;
-
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../../../notifications/presentation/widget/notifications_button_widget.dart';
@@ -24,6 +20,9 @@ class MapPage extends ConsumerStatefulWidget {
 
 class _MapPageState extends ConsumerState<MapPage>
     with AutomaticKeepAliveClientMixin {
+  bool get _avoidPlatformViewClipping =>
+      !kIsWeb && defaultTargetPlatform == TargetPlatform.iOS;
+
   @override
   bool get wantKeepAlive => true;
 
@@ -105,29 +104,55 @@ class _MapPageState extends ConsumerState<MapPage>
           Expanded(
             child: Stack(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(18.r),
-                  child: GoogleMap(
-                    initialCameraPosition: CameraPosition(
-                      target: initialTarget,
-                      zoom: 11,
-                    ),
-                    onMapCreated: (ctrl) => _mapController = ctrl,
-                    onCameraMoveStarted: () {
-                      if (_userGestureInProgress && _showCard) {
-                        setState(() => _showCard = false);
-                      }
-                    },
-                    onTap: (_) {
-                      if (_showCard) {
-                        setState(() => _showCard = false);
-                      }
-                    },
-
-                    markers: markers,
-                    myLocationButtonEnabled: false,
-                    zoomControlsEnabled: false,
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18.r),
+                    color: Colors.white,
                   ),
+                  child: _avoidPlatformViewClipping
+                      ? GoogleMap(
+                          initialCameraPosition: CameraPosition(
+                            target: initialTarget,
+                            zoom: 11,
+                          ),
+                          onMapCreated: (ctrl) => _mapController = ctrl,
+                          onCameraMoveStarted: () {
+                            if (_userGestureInProgress && _showCard) {
+                              setState(() => _showCard = false);
+                            }
+                          },
+                          onTap: (_) {
+                            if (_showCard) {
+                              setState(() => _showCard = false);
+                            }
+                          },
+                          markers: markers,
+                          myLocationButtonEnabled: false,
+                          zoomControlsEnabled: false,
+                        )
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(18.r),
+                          child: GoogleMap(
+                            initialCameraPosition: CameraPosition(
+                              target: initialTarget,
+                              zoom: 11,
+                            ),
+                            onMapCreated: (ctrl) => _mapController = ctrl,
+                            onCameraMoveStarted: () {
+                              if (_userGestureInProgress && _showCard) {
+                                setState(() => _showCard = false);
+                              }
+                            },
+                            onTap: (_) {
+                              if (_showCard) {
+                                setState(() => _showCard = false);
+                              }
+                            },
+                            markers: markers,
+                            myLocationButtonEnabled: false,
+                            zoomControlsEnabled: false,
+                          ),
+                        ),
                 ),
                 Listener(
                   behavior: HitTestBehavior.translucent,

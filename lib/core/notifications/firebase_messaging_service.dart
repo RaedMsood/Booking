@@ -80,7 +80,12 @@ class FirebaseMessagingService {
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      await AwesomeNotificationService.I.showFromRemote(message);
+      final shouldShowLocalNotification =
+          !Platform.isIOS || message.notification == null;
+
+      if (shouldShowLocalNotification) {
+        await AwesomeNotificationService.I.showFromRemote(message);
+      }
       _touchUnread(message);
     });
 

@@ -21,29 +21,54 @@ class PropertySliverListWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     var provider = ref.read(getAllPropertyProvider.notifier);
+    final isGridView = provider.viewType == HomePropertyViewType.grid;
 
     return SliverPadding(
       padding: EdgeInsets.symmetric(horizontal: 14.w)
           .copyWith(bottom: 14.h, top: 6.h),
-      sliver: SliverGrid(
-        delegate: SliverChildBuilderDelegate(
-          (context, index) {
-            return isLoading
-                ? const ShimmerPropertyCardWidget()
-                : PropertyCardWidget(
-                    property: properties[index],
-                    propertiesByCity: propertiesByCity,
+      sliver: isGridView
+          ? SliverGrid(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return isLoading
+                      ? ShimmerPropertyCardWidget(viewType: provider.viewType)
+                      : PropertyCardWidget(
+                          property: properties[index],
+                          viewType: provider.viewType,
+                          propertiesByCity: propertiesByCity,
+                        );
+                },
+                childCount: isLoading ? 4 : properties.length,
+              ),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10.h,
+                crossAxisSpacing: 10.w,
+                mainAxisExtent: 224.h,
+              ),
+            )
+          : SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 10.h),
+                    child: SizedBox(
+                      height: 224.h,
+                      child: isLoading
+                          ? ShimmerPropertyCardWidget(
+                              viewType: provider.viewType,
+                            )
+                          : PropertyCardWidget(
+                              property: properties[index],
+                              viewType: provider.viewType,
+                              propertiesByCity: propertiesByCity,
+                            ),
+                    ),
                   );
-          },
-          childCount: isLoading ? 4 : properties.length,
-        ),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: provider.viewType,
-          mainAxisSpacing: 10.h,
-          crossAxisSpacing: 10.w,
-          childAspectRatio: provider.viewType == 2 ? 0.45.h : 1.h,
-        ),
-      ),
+                },
+                childCount: isLoading ? 4 : properties.length,
+              ),
+            ),
     );
   }
 }
