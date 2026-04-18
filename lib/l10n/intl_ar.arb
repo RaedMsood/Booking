@@ -92,6 +92,8 @@
   "viewVenueDetails": "استعراض تفاصيل المنشأة",
   "book": "احجز",
   "facilities": "المرافق",
+    "facilitiesWithFeatures": "المرافق و المميزات",
+
   "--------hotelBooking-----------": "---------hotelBooking----------",
   "hotelBookingTitle": "حجز الفندق",
   "yourBookingDate": "تاريخ حجزك",

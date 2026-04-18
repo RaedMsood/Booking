@@ -87,7 +87,7 @@ class NameAndDescriptionAndRatingWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
               child: AutoSizeTextWidget(
-                text: S.of(context).facilities,
+                text: 'المرافق و المميزات',
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w500,
               ),

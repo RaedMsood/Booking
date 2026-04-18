@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,6 +23,9 @@ class PropertyLocationWidget extends StatefulWidget {
 class _PropertyLocationWidgetState extends State<PropertyLocationWidget> {
   late final LatLng _propertyPosition;
   final Set<Marker> _markers = {};
+
+  bool get _avoidPlatformViewClipping =>
+      !kIsWeb && defaultTargetPlatform == TargetPlatform.iOS;
 
   @override
   void initState() {
@@ -105,18 +109,35 @@ class _PropertyLocationWidgetState extends State<PropertyLocationWidget> {
               height: 160.h,
               child: Stack(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(12.r),
-                    child: GoogleMap(
-                      mapType: MapType.normal,
-                      initialCameraPosition: CameraPosition(
-                        target: _propertyPosition,
-                        zoom: 14,
-                      ),
-                      markers: _markers,
-                      zoomControlsEnabled: false,
-                      myLocationButtonEnabled: false,
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.r),
+                      color: Colors.white,
                     ),
+                    child: _avoidPlatformViewClipping
+                        ? GoogleMap(
+                            mapType: MapType.normal,
+                            initialCameraPosition: CameraPosition(
+                              target: _propertyPosition,
+                              zoom: 14,
+                            ),
+                            markers: _markers,
+                            zoomControlsEnabled: false,
+                            myLocationButtonEnabled: false,
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(12.r),
+                            child: GoogleMap(
+                              mapType: MapType.normal,
+                              initialCameraPosition: CameraPosition(
+                                target: _propertyPosition,
+                                zoom: 14,
+                              ),
+                              markers: _markers,
+                              zoomControlsEnabled: false,
+                              myLocationButtonEnabled: false,
+                            ),
+                          ),
                   ),
                   Positioned.fill(
                     child: Align(

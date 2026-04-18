@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AutoSizeTextWidget extends StatelessWidget {
+  static const double _stepGranularity = 0.25;
+
   final String text;
   final double? fontSize;
   final FontWeight? fontWeight;
@@ -26,6 +28,13 @@ class AutoSizeTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final normalizedMinFontSize = _normalizeFontSize(minFontSize ?? 10);
+    final normalizedMaxFontSize = _normalizeFontSize(
+      (maxFontSize ?? 24) < normalizedMinFontSize
+          ? normalizedMinFontSize
+          : (maxFontSize ?? 24),
+    );
+
     return AutoSizeText(
       text,
       style: TextStyle(
@@ -36,11 +45,17 @@ class AutoSizeTextWidget extends StatelessWidget {
         decoration: TextDecoration.none,
       ),
       maxLines: maxLines ?? 1,
-      maxFontSize: maxFontSize ?? 24,
-      minFontSize: minFontSize ?? 10,
+      maxFontSize: normalizedMaxFontSize,
+      minFontSize: normalizedMinFontSize,
+      stepGranularity: _stepGranularity,
       overflow: TextOverflow.ellipsis,
       textAlign: textAlign ?? TextAlign.start,
 
     );
+  }
+
+  double _normalizeFontSize(double value) {
+    final steps = (value / _stepGranularity).round();
+    return steps * _stepGranularity;
   }
 }

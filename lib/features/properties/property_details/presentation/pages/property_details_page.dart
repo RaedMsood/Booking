@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/state/check_state_in_get_api_data_widget.dart';
+import '../../../../../core/state/state.dart';
+import '../../../../../core/theme/app_colors.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../units/presentation/widgets/units_in_property_details_tab_widget.dart';
 import '../../../units/presentation/widgets/sections_tabs_widget.dart';
 import '../riverpod/property_details_riverpod.dart';
@@ -33,8 +36,54 @@ class PropertyDetailsPage extends ConsumerStatefulWidget {
 class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
     with TickerProviderStateMixin {
   final ScrollController _scrollController = ScrollController();
+  final GlobalKey _propertyDetailsTabBarKey = GlobalKey();
   late TabController _tabController;
   double _tabAnimationValue = 0;
+  bool _isScrollingToUnitsTab = false;
+
+  bool get _isUnitsTab => _tabController.index == 1;
+
+  Future<void> _goToUnitsTab() async {
+    if (_isUnitsTab || _isScrollingToUnitsTab) return;
+
+    _isScrollingToUnitsTab = true;
+
+    try {
+      if (_scrollController.hasClients) {
+        final tabBarContext = _propertyDetailsTabBarKey.currentContext;
+        final renderObject = tabBarContext?.findRenderObject();
+
+        if (renderObject is RenderBox) {
+          final safeTop = MediaQuery.viewPaddingOf(context).top;
+          final tabBarTop = renderObject.localToGlobal(Offset.zero).dy;
+          final distanceToTop = tabBarTop - safeTop;
+
+          if (distanceToTop > 1) {
+            final targetOffset = (_scrollController.offset + distanceToTop)
+                .clamp(0.0, _scrollController.position.maxScrollExtent);
+
+            if ((targetOffset - _scrollController.offset).abs() > 1) {
+              await _scrollController.animateTo(
+                targetOffset,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOutCubic,
+              );
+            }
+          }
+        }
+      }
+
+      if (!mounted || _isUnitsTab) return;
+
+      _tabController.animateTo(
+        1,
+        duration: const Duration(milliseconds: 450),
+        curve: Curves.easeInOutCubic,
+      );
+    } finally {
+      _isScrollingToUnitsTab = false;
+    }
+  }
 
   @override
   void initState() {
@@ -64,6 +113,17 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        floatingActionButton:
+            state.stateData == States.loaded && !_isUnitsTab
+                ? FloatingActionButton.extended(
+                    onPressed: _goToUnitsTab,
+                    backgroundColor: AppColors.primaryColor,
+                    foregroundColor: AppColors.whiteColor,
+                    extendedPadding: EdgeInsets.symmetric(horizontal: 20.w),
+                    icon: const Icon(Icons.calendar_month_rounded),
+                    label: Text(S.of(context).book),
+                  )
+                : null,
         body: SafeArea(
           top: false,
           child: CheckStateInGetApiDataWidget(
@@ -74,6 +134,7 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
             widgetOfLoading:
                 ShimmerPropertyDetailsWidget(images: widget.images),
             widgetOfData: NestedScrollView(
+              controller: _scrollController,
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
                   SliverAppBarDetailsWidget(
@@ -95,6 +156,7 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
                     delegate: PropertyDetailsTabBarWidget(
                       _tabController,
                       context,
+                      _propertyDetailsTabBarKey,
                     ),
                   ),
                   SliverPersistentHeader(
@@ -132,5 +194,4 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
         ),
       ),
     );
-  }
-}
+  }}

@@ -6,6 +6,10 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>ar</string>
+	</array>
 	<key>CFBundleDisplayName</key>
 	<string>مزاجي</string>
 	<key>CFBundleExecutable</key>
@@ -24,14 +28,12 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>GMSApiKey</key>
+	<string>AIzaSyDsy4ccw3qCJTXBM_c5IaCLYfcUHeXmrJ8</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>يُستخدم الموقع فقط أثناء عرض مناطق الفنادق على الخريطة داخل التطبيق.</string>
-	<key>UIRequiresFullScreen</key>
-	<true/>
-	<key>GMSApiKey</key>
-	<string>AIzaSyAdR4i_FaGlxZM0_rju7BNQEziPG1GZ0ME</string>
+	<string>يستخدم التطبيق الخرائط لعرض مواقع الفنادق والعقارات المرتبطة بنا فقط، ولا يتم استخدام أو تتبع موقع العميل.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -63,6 +65,8 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

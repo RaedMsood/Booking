@@ -14,10 +14,11 @@ class AwesomeNotificationService {
   Future<void> initialize({bool debug = kDebugMode}) async {
     if (_initialized) return;
     await AwesomeNotifications().initialize(
-      null, // أو ضع أيقونة: 'resource://drawable/ic_stat_notification'
+      null,
       NotificationChannels.channels,
       channelGroups: NotificationChannels.groups,
       debug: debug,
+
     );
     _initialized = true;
   }

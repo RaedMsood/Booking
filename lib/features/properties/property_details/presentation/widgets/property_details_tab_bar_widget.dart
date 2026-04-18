@@ -8,8 +8,13 @@ import '../../../../../generated/l10n.dart';
 class PropertyDetailsTabBarWidget extends SliverPersistentHeaderDelegate {
   final TabController tabController;
   final BuildContext context;
+  final Key? tabBarKey;
 
-  PropertyDetailsTabBarWidget(this.tabController, this.context);
+  PropertyDetailsTabBarWidget(
+    this.tabController,
+    this.context, [
+    this.tabBarKey,
+  ]);
 
   late final TabBar _tabBar = TabBar(
     controller: tabController,
@@ -54,7 +59,10 @@ class PropertyDetailsTabBarWidget extends SliverPersistentHeaderDelegate {
             SvgPicture.asset(
               AppIcons.myReservations,
               height: 13.h,
-              color: AppColors.primaryColor,
+              colorFilter: const ColorFilter.mode(
+                AppColors.primaryColor,
+                BlendMode.srcIn,
+              ),
             ),
           ],
         ),
@@ -85,6 +93,7 @@ class PropertyDetailsTabBarWidget extends SliverPersistentHeaderDelegate {
     final bool isPinned = shrinkOffset > 0 || overlapsContent;
 
     return Container(
+      key: tabBarKey,
       color: isPinned ? AppColors.scaffoldColor : Colors.white,
       child: _tabBar,
     );

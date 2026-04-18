@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,13 +33,13 @@ void main() async {
   };
 
   runZonedGuarded(
-        () async {
+    () async {
       RemoteRequest.initDio();
       await di.init();
       await Auth().onInit();
       runApp(const AppRestartController(child: MyApp()));
     },
-        (error, stackTrace) {
+    (error, stackTrace) {
       debugPrint("Caught error in release mode: $error");
       debugPrint("Stack trace: $stackTrace");
     },
@@ -57,8 +56,9 @@ class MyApp extends ConsumerStatefulWidget {
 class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-    });    FirebaseMessagingService.I.getDeviceToken().then((t) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
+
+    FirebaseMessagingService.I.getDeviceToken().then((t) {
       if (t != null) {
         debugPrint('Device Token: $t');
         Auth().setFcmToken(t);
@@ -78,6 +78,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     }
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final locale = ref.watch(languageProvider);
@@ -97,7 +98,7 @@ class _MyAppState extends ConsumerState<MyApp> {
         ],
         supportedLocales: const [
           Locale('ar'),
-          Locale('en'),
+          //Locale('en'),
         ],
         theme: lightTheme,
         home: const LaunchPage(),
