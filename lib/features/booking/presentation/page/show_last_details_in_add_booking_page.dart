@@ -1,11 +1,8 @@
-import 'package:booking/core/helpers/navigateTo.dart';
 import 'package:booking/core/state/check_state_in_get_api_data_widget.dart';
 import 'package:booking/core/widgets/buttons/default_button.dart';
-import 'package:booking/features/booking/presentation/page/pay_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/constants/app_icons.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/secondary_app_bar_widget.dart';
@@ -19,9 +16,7 @@ import '../widget/bill_summary_widget.dart';
 import '../widget/confrim_booking_details_widget.dart';
 import '../widget/deposit_in_last_details_widget.dart';
 import '../widget/desgin_button_in_add_booking_widget.dart';
-import '../widget/discount_code_widget.dart';
 import '../widget/general_design_for_booking_widget.dart';
-import '../widget/hotel_summary_card_widget.dart';
 import '../widget/list_of_pay_method_widget.dart';
 import '../widget/pay_method_widget.dart';
 
@@ -161,6 +156,8 @@ class ShowLastDetailsInAddBookingPage extends ConsumerWidget {
                   onPressed: () {
                     final selectedPayMethod =
                     ref.read(selectedPayMethodProvider);
+                    final paySpec =
+                        paySpecForMethod(selectedPayMethod?.name);
 
                     bool hasError = false;
                     if (selectedPayMethod == null) {
@@ -176,7 +173,11 @@ class ShowLastDetailsInAddBookingPage extends ConsumerWidget {
 
                     showTitledBottomSheet(
                       context: context,
-                      title: paySpecs[selectedPayMethod!.name]!.codeLabel,
+                      title: paySpec?.requiresCodeField == false
+                          ? selectedPayMethod!.title
+                          : (paySpec?.codeLabel.isNotEmpty == true
+                              ? paySpec!.codeLabel
+                              : selectedPayMethod!.title),
                       page: const PayMethodWidget(),
                     );
                   },

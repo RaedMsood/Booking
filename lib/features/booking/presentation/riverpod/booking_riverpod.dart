@@ -4,6 +4,7 @@ import '../../../../core/state/data_state.dart';
 import '../../../../core/state/state.dart';
 import '../../data/booking_model/booking_data.dart';
 import '../../data/booking_model/booking_data_model.dart';
+import '../../data/booking_model/floosak_payment_session_model.dart';
 import '../../data/booking_model/payment_methods_model.dart';
 import '../../data/reposaitory/booking_reposaitory.dart';
 
@@ -117,6 +118,72 @@ class ConfirmPaymentNotifier extends StateNotifier<DataState<bool>> {
       state = state.copyWith(
         state: States.loaded,
       );
+    });
+  }
+}
+
+final startFloosakPaymentProvider = StateNotifierProvider.autoDispose<
+    StartFloosakPaymentNotifier, DataState<FloosakPaymentSessionModel>>(
+  (ref) => StartFloosakPaymentNotifier(),
+);
+
+class StartFloosakPaymentNotifier
+    extends StateNotifier<DataState<FloosakPaymentSessionModel>> {
+  StartFloosakPaymentNotifier()
+      : super(
+          DataState<FloosakPaymentSessionModel>.initial(
+            FloosakPaymentSessionModel.empty(),
+          ),
+        );
+
+  final _controller = BookingReposaitory();
+
+  Future<void> startPayment({
+    required BookingDataModel bookingData,
+    required String payMethodName,
+    required String phoneNumber,
+    required int amount,
+  }) async {
+    state = state.copyWith(state: States.loading);
+    final result = await _controller.startFloosakPayment(
+      bookingData: bookingData,
+      payMethodName: payMethodName,
+      phoneNumber: phoneNumber,
+      amount: amount,
+    );
+    result.fold((f) {
+      state = state.copyWith(state: States.error, exception: f);
+    }, (data) {
+      state = state.copyWith(state: States.loaded, data: data);
+    });
+  }
+}
+
+final confirmFloosakPaymentProvider = StateNotifierProvider.autoDispose<
+    ConfirmFloosakPaymentNotifier, DataState<bool>>(
+  (ref) => ConfirmFloosakPaymentNotifier(),
+);
+
+class ConfirmFloosakPaymentNotifier extends StateNotifier<DataState<bool>> {
+  ConfirmFloosakPaymentNotifier() : super(DataState<bool>.initial(false));
+
+  final _controller = BookingReposaitory();
+
+  Future<void> confirmPayment({
+    required BookingDataModel bookingData,
+    required FloosakPaymentSessionModel session,
+    required String otp,
+  }) async {
+    state = state.copyWith(state: States.loading);
+    final result = await _controller.confirmFloosakPayment(
+      bookingData: bookingData,
+      session: session,
+      otp: otp,
+    );
+    result.fold((f) {
+      state = state.copyWith(state: States.error, exception: f);
+    }, (_) {
+      state = state.copyWith(state: States.loaded);
     });
   }
 }

@@ -43,36 +43,41 @@ class ShimmerPropertyVerticalCardBody extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(8.w, 6.h, 8.w, 6.h),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+        Expanded(
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(8.w, 4.h, 8.w, 4.h),
+            child: Align(
+              alignment: AlignmentDirectional.topStart,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: ShimmerPlaceholderWidget(
-                      width: 180.w,
-                      height: 14.h,
-                      borderRadius: 3.r,
-                    ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: ShimmerPlaceholderWidget(
+                          width: 180.w,
+                          height: 14.h,
+                          borderRadius: 3.r,
+                        ),
+                      ),
+                      8.w.horizontalSpace,
+                      ShimmerPlaceholderWidget(
+                        height: 18.h,
+                        width: 40.w,
+                        borderRadius: 40.r,
+                      ),
+                    ],
                   ),
-                  8.w.horizontalSpace,
-                  ShimmerPlaceholderWidget(
-                    height: 18.h,
-                    width: 40.w,
-                    borderRadius: 40.r,
+                  4.h.verticalSpace,
+                  _ShimmerLocationRow(
+                    iconHeight: 12.h,
+                    placeholderHeight: 10.h,
                   ),
                 ],
               ),
-              4.h.verticalSpace,
-              _ShimmerLocationRow(
-                iconHeight: 12.h,
-                placeholderHeight: 10.h,
-              ),
-            ],
+            ),
           ),
         ),
       ],

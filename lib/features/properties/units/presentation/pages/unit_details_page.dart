@@ -19,6 +19,7 @@ import '../riverpod/unit_riverpod.dart';
 import '../widgets/unit_area_and_beds_sliver_widget.dart';
 import '../widgets/unit_details_data_widget.dart';
 import '../widgets/unit_features_widget.dart';
+import '../widgets/unit_price_widget.dart';
 
 class UnitDetailsPage extends ConsumerWidget {
   final int unitId;
@@ -102,11 +103,15 @@ class UnitDetailsPage extends ConsumerWidget {
                             // fontWeight: FontWeight.w400,
                           ),
                           4.h.verticalSpace,
-                          PriceAndCurrencyWidget(
-                            price: state.data.price.toString(),
-                            fontSize: 13.4.sp,
-                            secondColor: AppColors.primaryColor,
-                            fontWeightSecondText: FontWeight.w500,
+                          UnitPriceWidget(
+                            currentPrice: state.data.effectivePrice,
+                            originalPrice: state.data.originalPriceBeforeDiscount,
+                            currentFontSize: 13.4.sp,
+                            currentCurrencyFontSize: 11.sp,
+                            currentCurrencyColor: AppColors.primaryColor,
+                            currentCurrencyWeight: FontWeight.w500,
+                            originalFontSize: 10.sp,
+                            originalCurrencyFontSize: 9.sp,
                           ),
                         ],
                       ),
@@ -127,7 +132,7 @@ class UnitDetailsPage extends ConsumerWidget {
                                 image: state.data.property.images[0].toString(),
                                 nameProp: state.data.property.name,
                                 unitId: state.data.id,
-                                totalPrice: state.data.price.toString(),
+                                totalPrice: state.data.effectivePrice,
                               ),
                             );
                           }
