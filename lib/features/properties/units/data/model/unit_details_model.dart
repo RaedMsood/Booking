@@ -1,12 +1,13 @@
 import '../../../property_details/data/models/features_model.dart';
 import 'attachments_model.dart';
+import 'discount_pricing_model.dart';
 
 class UnitDetailsModel {
   final int id;
   final String name;
   final String description;
   final int maxGuests;
-  final int price;
+  final String price;
   final num deposit;
   final List<String> images;
   final List<FeaturesModel> features;
@@ -17,6 +18,7 @@ class UnitDetailsModel {
   final num doubleBed;
   final String? length;
   final String? width;
+  final DiscountPricingModel? discountPricing;
   final PropertyAtUnitDetailsModel property;
 
   UnitDetailsModel({
@@ -35,8 +37,26 @@ class UnitDetailsModel {
     required this.doubleBed,
      this.length,
      this.width,
+    this.discountPricing,
     required this.property,
   });
+
+  bool get hasDiscount => discountPricing?.hasDiscount ?? false;
+
+  String get effectivePrice {
+    final discountedPrice = discountPricing?.pricePerNight;
+    if ((discountedPrice ?? '').isNotEmpty) {
+      return discountedPrice!;
+    }
+    return price;
+  }
+
+  String? get originalPriceBeforeDiscount {
+    if (!hasDiscount) return null;
+    final basePrice = discountPricing?.basePricePerNight;
+    if ((basePrice ?? '').isEmpty) return null;
+    return basePrice;
+  }
 
   factory UnitDetailsModel.fromJson(Map<String, dynamic> json) {
     return UnitDetailsModel(
@@ -44,17 +64,20 @@ class UnitDetailsModel {
       name: json['name'] ?? '',
       description: json['description'] ?? '',
       maxGuests: json['max_guests'] as int,
-      price: json['price_per_night'] as int,
+      price: json['price_per_night']?.toString() ?? '',
       deposit: json['deposit'] ?? 0,
       images: List<String>.from(json['images'] ?? []),
       features: FeaturesModel.fromJsonList(json['amenities'] ?? []),
       attachments: AttachmentsModel.fromJsonList(json['details'] ?? []),
       checkInTime: json['check_in_time'] ?? '',
       checkOutTime: json['check_out_time'] ?? '',
-      singleBed: json['single_bed'] ?? 0,
-      doubleBed: json['double_bed'] ?? 0,
+      singleBed: json['single_beds'] ?? json['single_bed'] ?? 0,
+      doubleBed: json['double_beds'] ?? json['double_bed'] ?? 0,
       length: json['length']?.toString(),
       width: json['width']?.toString(),
+      discountPricing: json['discount_pricing'] is Map<String, dynamic>
+          ? DiscountPricingModel.fromJson(json['discount_pricing'])
+          : null,
       property: PropertyAtUnitDetailsModel.fromJson(
           json['property'] as Map<String, dynamic>),
     );
@@ -65,7 +88,7 @@ class UnitDetailsModel {
         name: '',
         description: '',
         maxGuests: 0,
-        price: 0,
+        price: '',
         // deposit: DepositModel.empty(),
         images: <String>[],
         deposit: 0,
@@ -77,6 +100,7 @@ class UnitDetailsModel {
         doubleBed: 0,
         length: '',
         width: '',
+        discountPricing: null,
         property: PropertyAtUnitDetailsModel.empty(),
       );
 }

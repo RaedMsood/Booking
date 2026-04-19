@@ -15,6 +15,7 @@ class PriceAndCurrencyWidget extends ConsumerWidget {
   final TextAlign? textAlign;
   final double? fontSizeSecondText;
   final FontWeight? fontWeightSecondText;
+  final TextDecoration? decoration;
 
   const PriceAndCurrencyWidget({
     super.key,
@@ -26,6 +27,7 @@ class PriceAndCurrencyWidget extends ConsumerWidget {
     this.textAlign,
     this.fontSizeSecondText,
     this.fontWeightSecondText,
+    this.decoration,
   });
 
   @override
@@ -43,6 +45,8 @@ class PriceAndCurrencyWidget extends ConsumerWidget {
               fontSize: fontSize ?? 12.sp,
               fontWeight: fontWeight ?? FontWeight.w500,
               fontFamily: 'ReadexPro',
+              decoration: decoration,
+              decorationColor: firstColor ?? AppColors.primaryColor,
             ),
           ),
           TextSpan(
@@ -52,6 +56,8 @@ class PriceAndCurrencyWidget extends ConsumerWidget {
               fontSize: fontSizeSecondText ?? 11.sp,
               fontWeight: fontWeightSecondText ?? FontWeight.w300,
               fontFamily: 'ReadexPro',
+              decoration: decoration,
+              decorationColor: secondColor ?? const Color(0xff757575),
             ),
           ),
         ],

@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:booking/core/widgets/price_and_currency_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,9 +9,10 @@ import '../../../../../core/helpers/navigateTo.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/online_images_widget.dart';
-import '../../../../../generated/l10n.dart';
 import '../../data/model/units_model.dart';
 import '../pages/unit_details_page.dart';
+import '../../../../../generated/l10n.dart';
+import 'unit_price_widget.dart';
 
 class UnitCardWidget extends StatelessWidget {
   final UnitsModel units;
@@ -97,12 +97,15 @@ class UnitCardWidget extends StatelessWidget {
                       color: AppColors.whiteColor,
                       borderRadius: BorderRadius.circular(10.r),
                     ),
-                    child: PriceAndCurrencyWidget(
-                      price: units.price,
-                      fontSize: 9.4.sp,
-                      fontSizeSecondText: 8.sp,
-                      secondColor: AppColors.primaryColor,
-                      fontWeightSecondText: FontWeight.w500,
+                    child: UnitPriceWidget(
+                      currentPrice: units.effectivePrice,
+                      originalPrice: units.originalPriceBeforeDiscount,
+                      currentFontSize: 9.4.sp,
+                      currentCurrencyFontSize: 8.sp,
+                      currentCurrencyColor: AppColors.primaryColor,
+                      currentCurrencyWeight: FontWeight.w500,
+                      originalFontSize: 8.sp,
+                      originalCurrencyFontSize: 7.sp,
                     ),
                   ),
                 ),
@@ -148,8 +151,10 @@ class UnitCardWidget extends StatelessWidget {
                                     SvgPicture.asset(
                                       AppIcons.gender,
                                       height: 10.h,
-                                      color:
-                                          Colors.white.withValues(alpha: 0.9),
+                                      colorFilter: ColorFilter.mode(
+                                        Colors.white.withValues(alpha: 0.9),
+                                        BlendMode.srcIn,
+                                      ),
                                     ),
                                     2.w.horizontalSpace,
                                     AutoSizeTextWidget(
@@ -170,7 +175,10 @@ class UnitCardWidget extends StatelessWidget {
                               SvgPicture.asset(
                                 AppIcons.bed,
                                 height: 10.8.h,
-                                color: Colors.white.withValues(alpha: 0.9),
+                                colorFilter: ColorFilter.mode(
+                                  Colors.white.withValues(alpha: 0.9),
+                                  BlendMode.srcIn,
+                                ),
                               ),
                               4.w.horizontalSpace,
                               Flexible(

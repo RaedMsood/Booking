@@ -7,10 +7,10 @@ import '../../../../core/helpers/navigateTo.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/online_images_widget.dart';
-import '../../../../core/widgets/price_and_currency_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../../../properties/units/data/model/units_model.dart';
 import '../../../properties/units/presentation/pages/unit_details_page.dart';
+import '../../../properties/units/presentation/widgets/unit_price_widget.dart';
 
 class UnitCardForMyBookingDetailsWidget extends StatelessWidget {
   final UnitsModel units;
@@ -77,7 +77,10 @@ class UnitCardForMyBookingDetailsWidget extends StatelessWidget {
                         SvgPicture.asset(
                           AppIcons.gender,
                           height: 12.h,
-                          color: const Color(0xff605A65),
+                          colorFilter: const ColorFilter.mode(
+                            Color(0xff605A65),
+                            BlendMode.srcIn,
+                          ),
                         ),
                         4.w.horizontalSpace,
                         Flexible(
@@ -91,12 +94,15 @@ class UnitCardForMyBookingDetailsWidget extends StatelessWidget {
                       ],
                     ),
                     6.h.verticalSpace,
-                    PriceAndCurrencyWidget(
-                      price: units.price,
-                      fontSize: 11.sp,
-                      fontSizeSecondText: 9.sp,
-                      secondColor: AppColors.primaryColor,
-                      fontWeightSecondText: FontWeight.w500,
+                    UnitPriceWidget(
+                      currentPrice: units.effectivePrice,
+                      originalPrice: units.originalPriceBeforeDiscount,
+                      currentFontSize: 11.sp,
+                      currentCurrencyFontSize: 9.sp,
+                      currentCurrencyColor: AppColors.primaryColor,
+                      currentCurrencyWeight: FontWeight.w500,
+                      originalFontSize: 9.sp,
+                      originalCurrencyFontSize: 8.sp,
                     ),
                     6.h.verticalSpace,
                   ],

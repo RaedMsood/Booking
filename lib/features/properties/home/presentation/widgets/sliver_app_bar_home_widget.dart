@@ -64,7 +64,7 @@ class SliverAppBarHomeWidget extends SliverPersistentHeaderDelegate {
   double get maxExtent => 86.h;
 
   @override
-  double get minExtent => kToolbarHeight + 38.h;
+  double get minExtent => 86.h;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {

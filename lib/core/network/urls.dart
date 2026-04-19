@@ -55,6 +55,10 @@ class AppURL {
 
   static String get confirmPayment => '/booking/payment';
 
+  static String get startFloosakPayment => '/booking/payment/Flousk/send-money';
+
+  static String get confirmFloosakPayment => '/booking/payment/Flousk/confirm';
+
   static String get updateUser => '/profile/update';
 
   static String get getFavorite => '/profile/favorites';

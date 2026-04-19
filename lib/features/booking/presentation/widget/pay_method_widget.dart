@@ -7,12 +7,14 @@ import '../../../../core/state/state.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
+import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
 import '../../../../core/widgets/text_form_field.dart';
 import '../../../../generated/l10n.dart';
 import '../../../my_bookings/presentation/riverpod/my_bookings_riverpod.dart';
 import '../../data/booking_model/pay_spec.dart';
 import '../riverpod/booking_riverpod.dart';
 import 'booking_success_dialog_widget.dart';
+import 'floosak_payment_otp_widget.dart';
 
 class PayMethodWidget extends ConsumerStatefulWidget {
   const PayMethodWidget({super.key});
@@ -28,6 +30,12 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
 
   final formKey = GlobalKey<FormState>();
 
+  int _amountValue(String value) => int.tryParse(value.trim()) ?? 0;
+
+  String _formatDepositValue(double value) {
+    return value % 1 == 0 ? value.toInt().toString() : value.toString();
+  }
+
   @override
   void dispose() {
     voucherController.dispose();
@@ -38,13 +46,28 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final selectedPayMethod =
-        ref.watch(selectedPayMethodProvider.notifier).state;
-    if (selectedPayMethod!.name.isEmpty) return const SizedBox.shrink();
-    final spec = paySpecs[selectedPayMethod.name];
-    var state = ref.watch(confirmPaymentProvider);
-    if (spec!.requiresPhoneNumber && phoneNumberController.text.isEmpty) {
+    final selectedPayMethod = ref.watch(selectedPayMethodProvider);
+    if (selectedPayMethod == null || selectedPayMethod.name.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    final spec = paySpecForMethod(selectedPayMethod.name);
+    if (spec == null) return const SizedBox.shrink();
+
+    final bookingDataState = ref.watch(customerBookingProvider);
+    final confirmState = ref.watch(confirmPaymentProvider);
+    final floosakState = ref.watch(startFloosakPaymentProvider);
+    final isFloosak = isFloosakPayMethod(selectedPayMethod.name);
+    final activeState = isFloosak ? floosakState : confirmState;
+    final depositAmount =
+        double.tryParse(bookingDataState.data.bookingData.deposit.toString()) ??
+            0;
+
+    if (spec.requiresPhoneNumber && phoneNumberController.text.isEmpty) {
       phoneNumberController.text = Auth().phoneNumber;
+    }
+    if (isFloosak && amountController.text.isEmpty && depositAmount > 0) {
+      amountController.text = _formatDepositValue(depositAmount);
     }
 
     return Padding(
@@ -100,26 +123,6 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                 ],
               ),
             ),
-            8.h.verticalSpace,
-            AutoSizeTextWidget(
-              text: spec.codeLabel,
-              fontSize: 10.4.sp,
-              colorText: AppColors.mainColorFont,
-              fontWeight: FontWeight.w400,
-            ),
-            6.h.verticalSpace,
-            TextFormFieldWidget(
-              controller: voucherController,
-              type: TextInputType.text,
-              fillColor: AppColors.scaffoldColor,
-              hintText: spec.codeHint,
-              fieldValidator: (value) {
-                if (value == null || value.toString().isEmpty) {
-                  return spec.codeEmptyError;
-                }
-                return null;
-              },
-            ),
             Visibility(
               visible: spec.requiresAmount,
               child: Column(
@@ -137,10 +140,56 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                     controller: amountController,
                     type: TextInputType.number,
                     fillColor: AppColors.scaffoldColor,
-                    hintText: "0.0",
+                    hintText: '0.0',
                     fieldValidator: (value) {
                       if (value == null || value.toString().isEmpty) {
                         return S.of(context).amountValidation;
+                      }
+                      final amount = double.tryParse(value.trim());
+                      if (amount == null) {
+                        return S.of(context).amountValidation;
+                      }
+                      if (isFloosak && amount < depositAmount) {
+                        return 'يجب أن يكون المبلغ المدخل مساويًا أو أكبر من مبلغ العربون';
+                      }
+                      return null;
+                    },
+                  ),
+                  if (isFloosak) ...[
+                    6.h.verticalSpace,
+                    AutoSizeTextWidget(
+                      text:
+                          'يجب أن يكون المبلغ المدخل مساويًا أو أكبر من مبلغ العربون',
+                      fontSize: 9.2.sp,
+                      colorText: AppColors.greyColor,
+                      fontWeight: FontWeight.w400,
+                      maxLines: 2,
+                    ),
+                  ],
+                ],
+              ),
+            ),
+            Visibility(
+              visible: spec.requiresCodeField,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  8.h.verticalSpace,
+                  AutoSizeTextWidget(
+                    text: spec.codeLabel,
+                    fontSize: 10.4.sp,
+                    colorText: AppColors.mainColorFont,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  6.h.verticalSpace,
+                  TextFormFieldWidget(
+                    controller: voucherController,
+                    type: TextInputType.text,
+                    fillColor: AppColors.scaffoldColor,
+                    hintText: spec.codeHint,
+                    fieldValidator: (value) {
+                      if (value == null || value.toString().isEmpty) {
+                        return spec.codeEmptyError;
                       }
                       return null;
                     },
@@ -150,9 +199,20 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
             ),
             16.h.verticalSpace,
             CheckStateInPostApiDataWidget(
-              state: state,
+              state: activeState,
               hasMessageSuccess: false,
               functionSuccess: () {
+                if (isFloosak) {
+                  showTitledBottomSheet(
+                    context: context,
+                    title: selectedPayMethod.title,
+                    page: FloosakPaymentOtpWidget(
+                      bookingData: bookingDataState.data,
+                      session: floosakState.data,
+                    ),
+                  );
+                  return;
+                }
                 CompleteBooking.successDialog(context, ref);
                 ref.invalidate(getBookingProvider(0));
               },
@@ -160,20 +220,30 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                 text: S.of(context).confirmPayment,
                 height: 40.h,
                 textSize: 12.sp,
-                isLoading: state.stateData == States.loading,
+                isLoading: activeState.stateData == States.loading,
                 onPressed: () async {
                   final isValid = formKey.currentState!.validate();
-
                   if (!isValid) return;
+
                   final bookingData = ref.read(customerBookingProvider);
+                  final amount = _amountValue(amountController.text);
 
                   FocusManager.instance.primaryFocus?.unfocus();
+                  if (isFloosak) {
+                    ref.read(startFloosakPaymentProvider.notifier).startPayment(
+                          bookingData: bookingData.data,
+                          payMethodName: selectedPayMethod.name,
+                          phoneNumber: phoneNumberController.text.trim(),
+                          amount: amount,
+                        );
+                    return;
+                  }
+
                   ref.read(confirmPaymentProvider.notifier).confirmPayment(
                         bookingData: bookingData.data,
                         payMethodName: selectedPayMethod.name,
-
                         voucher: voucherController.text,
-                        amount: int.tryParse(amountController.text) ?? 0,
+                        amount: amount,
                         phoneNumber: phoneNumberController.text,
                       );
                 },
