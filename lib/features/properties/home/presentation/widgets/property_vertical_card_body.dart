@@ -38,77 +38,149 @@ class PropertyVerticalCardBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(scrollOffsetProvider);
-    final drift = _calculateCardDrift(context);
 
-    return TweenAnimationBuilder<double>(
-      tween: Tween<double>(begin: 0, end: drift),
-      duration: const Duration(milliseconds: 140),
-      curve: Curves.easeOutCubic,
-      builder: (context, animatedDrift, child) {
-        return Transform.translate(
-          offset: Offset(0, animatedDrift),
-          child: child,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final drift = _calculateCardDrift(context);
+        final imageHeight = 160.h;
+
+        return TweenAnimationBuilder<double>(
+          tween: Tween<double>(begin: 0, end: drift),
+          duration: const Duration(milliseconds: 140),
+          curve: Curves.easeOutCubic,
+          builder: (context, animatedDrift, child) {
+            return Transform.translate(
+              offset: Offset(0, animatedDrift),
+              child: child,
+            );
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _PropertyCardMediaSection(
+                property: property,
+                imageHeight: imageHeight,
+              ),
+              8.verticalSpace,
+              Expanded(
+                child: _PropertyCardInfoSection(
+                  property: property,
+                ),
+              ),
+            ],
+          ),
         );
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 160.h,
-            child: PropertyPhotosWidget(
-              image: property.mainImageUrls,
-              height: 160.h,
-              idProperties: property.id,
-              isFavorite: property.isFavorite,
-              enableScrollReveal: true,
-            ),
+    );
+  }
+}
+
+class _PropertyCardMediaSection extends StatelessWidget {
+  final PropertyDataModel property;
+  final double imageHeight;
+
+  const _PropertyCardMediaSection({
+    required this.property,
+    required this.imageHeight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: imageHeight,
+      child: PropertyPhotosWidget(
+        image: property.mainImageUrls,
+        height: imageHeight,
+        idProperties: property.id,
+        isFavorite: property.isFavorite,
+        enableScrollReveal: true,
+      ),
+    );
+  }
+}
+
+class _PropertyCardInfoSection extends StatelessWidget {
+  final PropertyDataModel property;
+
+  const _PropertyCardInfoSection({
+    required this.property,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final availableHeight = constraints.maxHeight.isFinite
+            ? constraints.maxHeight
+            : 48.h;
+        final isTight = availableHeight <= 56.h;
+        final isVeryTight = availableHeight <= 46.h;
+        final contentVerticalPadding = isVeryTight ? 1.5.h : (isTight ? 2.h : 4.h);
+        final contentSpacing = isVeryTight ? 1.h : (isTight ? 2.h : 4.h);
+        final titleMaxLines = isTight ? 1 : 2;
+        final titleFontSize = isVeryTight ? 9.6.sp : (isTight ? 10.6.sp : 12.sp);
+        final titleMinFontSize = isVeryTight ? 7.5 : (isTight ? 8.0 : 9.0);
+        final titleRatingSpacing = isVeryTight ? 4.w : (isTight ? 6.w : 8.w);
+        final ratingFontSize = isVeryTight ? 8.sp : (isTight ? 9.sp : 10.sp);
+        final ratingHorizontalPadding = isVeryTight ? 4.w : (isTight ? 5.w : 6.w);
+        final ratingVerticalPadding = isVeryTight ? 1.h : (isTight ? 1.5.h : 2.h);
+        final ratingItemSize = isVeryTight ? 10.sp : (isTight ? 12.sp : 14.sp);
+        final locationIconHeight = isVeryTight ? 10.h : (isTight ? 11.h : 12.h);
+        final locationFontSize = isVeryTight ? 8.4.sp : (isTight ? 9.sp : 10.sp);
+
+        return Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(
+            8.w,
+            contentVerticalPadding,
+            8.w,
+            contentVerticalPadding,
           ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(8.w, 4.h, 8.w, 4.h),
-              child: Align(
-                alignment: AlignmentDirectional.topStart,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: AutoSizeTextWidget(
-                            text: property.name,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w500,
-                            maxLines: 1,
-                            minFontSize: 9,
-                            textAlign: TextAlign.start,
-                          ),
-                        ),
-                        8.w.horizontalSpace,
-                        PropertyCardRatingChipWidget(
-                          rating: property.rating.toDouble(),
-                          fontSize: 10.sp,
-                          horizontalPadding: 6.w,
-                          verticalPadding: 2.h,
-                          itemSize: 14.sp,
-                        ),
-                      ],
+                    Expanded(
+                      child: AutoSizeTextWidget(
+                        text: property.name,
+                        fontSize: titleFontSize,
+                        fontWeight: FontWeight.w500,
+                        maxLines: titleMaxLines,
+                        minFontSize: titleMinFontSize,
+                        textAlign: TextAlign.start,
+                      ),
                     ),
-                    4.h.verticalSpace,
-                    PropertyCardLocationRowWidget(
-                      city: property.city,
-                      district: property.district,
-                      iconHeight: 12.h,
-                      fontSize: 10.sp,
+                    titleRatingSpacing.horizontalSpace,
+                    PropertyCardRatingChipWidget(
+                      rating: property.rating.toDouble(),
+                      fontSize: ratingFontSize,
+                      horizontalPadding: ratingHorizontalPadding,
+                      verticalPadding: ratingVerticalPadding,
+                      itemSize: ratingItemSize,
                     ),
                   ],
                 ),
               ),
-            ),
+              SizedBox(height: contentSpacing),
+              Flexible(
+                child: Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: PropertyCardLocationRowWidget(
+                    city: property.city,
+                    district: property.district,
+                    iconHeight: locationIconHeight,
+                    fontSize: locationFontSize,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
