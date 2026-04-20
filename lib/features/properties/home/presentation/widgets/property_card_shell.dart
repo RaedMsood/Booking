@@ -21,6 +21,7 @@ class PropertyCardShell extends StatelessWidget {
           ? AppColors.greySwatch.shade50.withValues(alpha: .6)
           : AppColors.greySwatch.shade50.withValues(alpha: .04),
       color: Colors.white,
+      margin: EdgeInsets.zero,
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.r),

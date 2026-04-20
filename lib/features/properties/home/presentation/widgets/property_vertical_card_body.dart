@@ -38,76 +38,166 @@ class PropertyVerticalCardBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(scrollOffsetProvider);
-    final drift = _calculateCardDrift(context);
 
-    return TweenAnimationBuilder<double>(
-      tween: Tween<double>(begin: 0, end: drift),
-      duration: const Duration(milliseconds: 140),
-      curve: Curves.easeOutCubic,
-      builder: (context, animatedDrift, child) {
-        return Transform.translate(
-          offset: Offset(0, animatedDrift),
-          child: child,
-        );
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 160.h,
-            child: PropertyPhotosWidget(
-              image: property.mainImageUrls,
-              height: 160.h,
-              idProperties: property.id,
-              isFavorite: property.isFavorite,
-              enableScrollReveal: true,
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(8.w, 4.h, 8.w, 4.h),
-              child: Align(
-                alignment: AlignmentDirectional.topStart,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: AutoSizeTextWidget(
-                            text: property.name,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w500,
-                            maxLines: 1,
-                            minFontSize: 9,
-                            textAlign: TextAlign.start,
-                          ),
-                        ),
-                        8.w.horizontalSpace,
-                        PropertyCardRatingChipWidget(
-                          rating: property.rating.toDouble(),
-                          fontSize: 10.sp,
-                          horizontalPadding: 6.w,
-                          verticalPadding: 2.h,
-                          itemSize: 14.sp,
-                        ),
-                      ],
-                    ),
-                    4.h.verticalSpace,
-                    PropertyCardLocationRowWidget(
-                      city: property.city,
-                      district: property.district,
-                      iconHeight: 12.h,
-                      fontSize: 10.sp,
-                    ),
-                  ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final drift = _calculateCardDrift(context);
+        final cardHeight = constraints.maxHeight.isFinite
+            ? constraints.maxHeight
+            : 208.h;
+        final cardWidth = constraints.maxWidth.isFinite
+            ? constraints.maxWidth
+            : MediaQuery.sizeOf(context).width;
+
+        final isCompact = cardHeight <= 190.h || cardWidth <= 220.w;
+        final reservedContentHeight = isCompact ? 58.h : 56.h;
+        final imageHeight = (cardHeight - reservedContentHeight)
+            .clamp(136.h, 160.h)
+            .toDouble();
+        final titleMaxLines = isCompact ? 1 : 2;
+        final titleFontSize = isCompact ? 11.sp : 12.sp;
+        final titleMinFontSize = isCompact ? 8.0 : 9.0;
+        final titleRatingSpacing = isCompact ? 6.w : 8.w;
+        final contentVerticalPadding = isCompact ? 3.h : 4.h;
+        final contentSpacing = isCompact ? 2.h : 4.h;
+        final locationIconHeight = isCompact ? 11.h : 12.h;
+        final locationFontSize = isCompact ? 9.sp : 10.sp;
+
+        return TweenAnimationBuilder<double>(
+          tween: Tween<double>(begin: 0, end: drift),
+          duration: const Duration(milliseconds: 140),
+          curve: Curves.easeOutCubic,
+          builder: (context, animatedDrift, child) {
+            return Transform.translate(
+              offset: Offset(0, animatedDrift),
+              child: child,
+            );
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _PropertyCardMediaSection(
+                property: property,
+                imageHeight: imageHeight,
+              ),
+              Expanded(
+                child: _PropertyCardInfoSection(
+                  property: property,
+                  titleMaxLines: titleMaxLines,
+                  titleFontSize: titleFontSize,
+                  titleMinFontSize: titleMinFontSize,
+                  titleRatingSpacing: titleRatingSpacing,
+                  contentVerticalPadding: contentVerticalPadding,
+                  contentSpacing: contentSpacing,
+                  locationIconHeight: locationIconHeight,
+                  locationFontSize: locationFontSize,
+                  isCompact: isCompact,
                 ),
               ),
-            ),
+            ],
           ),
-        ],
+        );
+      },
+    );
+  }
+}
+
+class _PropertyCardMediaSection extends StatelessWidget {
+  final PropertyDataModel property;
+  final double imageHeight;
+
+  const _PropertyCardMediaSection({
+    required this.property,
+    required this.imageHeight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: imageHeight,
+      child: PropertyPhotosWidget(
+        image: property.mainImageUrls,
+        height: imageHeight,
+        idProperties: property.id,
+        isFavorite: property.isFavorite,
+        enableScrollReveal: true,
+      ),
+    );
+  }
+}
+
+class _PropertyCardInfoSection extends StatelessWidget {
+  final PropertyDataModel property;
+  final int titleMaxLines;
+  final double titleFontSize;
+  final double titleMinFontSize;
+  final double titleRatingSpacing;
+  final double contentVerticalPadding;
+  final double contentSpacing;
+  final double locationIconHeight;
+  final double locationFontSize;
+  final bool isCompact;
+
+  const _PropertyCardInfoSection({
+    required this.property,
+    required this.titleMaxLines,
+    required this.titleFontSize,
+    required this.titleMinFontSize,
+    required this.titleRatingSpacing,
+    required this.contentVerticalPadding,
+    required this.contentSpacing,
+    required this.locationIconHeight,
+    required this.locationFontSize,
+    required this.isCompact,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(
+        8.w,
+        contentVerticalPadding,
+        8.w,
+        contentVerticalPadding,
+      ),
+      child: Align(
+        alignment: AlignmentDirectional.centerStart,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: AutoSizeTextWidget(
+                    text: property.name,
+                    fontSize: titleFontSize,
+                    fontWeight: FontWeight.w500,
+                    maxLines: titleMaxLines,
+                    minFontSize: titleMinFontSize,
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                titleRatingSpacing.horizontalSpace,
+                PropertyCardRatingChipWidget(
+                  rating: property.rating.toDouble(),
+                  fontSize: isCompact ? 9.sp : 10.sp,
+                  horizontalPadding: isCompact ? 5.w : 6.w,
+                  verticalPadding: isCompact ? 1.5.h : 2.h,
+                  itemSize: isCompact ? 12.sp : 14.sp,
+                ),
+              ],
+            ),
+            contentSpacing.verticalSpace,
+            PropertyCardLocationRowWidget(
+              city: property.city,
+              district: property.district,
+              iconHeight: locationIconHeight,
+              fontSize: locationFontSize,
+            ),
+          ],
+        ),
       ),
     );
   }
