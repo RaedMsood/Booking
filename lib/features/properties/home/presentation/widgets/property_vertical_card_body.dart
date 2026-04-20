@@ -42,26 +42,7 @@ class PropertyVerticalCardBody extends ConsumerWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final drift = _calculateCardDrift(context);
-        final cardHeight = constraints.maxHeight.isFinite
-            ? constraints.maxHeight
-            : 208.h;
-        final cardWidth = constraints.maxWidth.isFinite
-            ? constraints.maxWidth
-            : MediaQuery.sizeOf(context).width;
-
-        final isCompact = cardHeight <= 190.h || cardWidth <= 220.w;
-        final reservedContentHeight = isCompact ? 58.h : 56.h;
-        final imageHeight = (cardHeight - reservedContentHeight)
-            .clamp(136.h, 160.h)
-            .toDouble();
-        final titleMaxLines = isCompact ? 1 : 2;
-        final titleFontSize = isCompact ? 11.sp : 12.sp;
-        final titleMinFontSize = isCompact ? 8.0 : 9.0;
-        final titleRatingSpacing = isCompact ? 6.w : 8.w;
-        final contentVerticalPadding = isCompact ? 3.h : 4.h;
-        final contentSpacing = isCompact ? 2.h : 4.h;
-        final locationIconHeight = isCompact ? 11.h : 12.h;
-        final locationFontSize = isCompact ? 9.sp : 10.sp;
+        final imageHeight = 160.h;
 
         return TweenAnimationBuilder<double>(
           tween: Tween<double>(begin: 0, end: drift),
@@ -80,18 +61,10 @@ class PropertyVerticalCardBody extends ConsumerWidget {
                 property: property,
                 imageHeight: imageHeight,
               ),
+              8.verticalSpace,
               Expanded(
                 child: _PropertyCardInfoSection(
                   property: property,
-                  titleMaxLines: titleMaxLines,
-                  titleFontSize: titleFontSize,
-                  titleMinFontSize: titleMinFontSize,
-                  titleRatingSpacing: titleRatingSpacing,
-                  contentVerticalPadding: contentVerticalPadding,
-                  contentSpacing: contentSpacing,
-                  locationIconHeight: locationIconHeight,
-                  locationFontSize: locationFontSize,
-                  isCompact: isCompact,
                 ),
               ),
             ],
@@ -128,77 +101,86 @@ class _PropertyCardMediaSection extends StatelessWidget {
 
 class _PropertyCardInfoSection extends StatelessWidget {
   final PropertyDataModel property;
-  final int titleMaxLines;
-  final double titleFontSize;
-  final double titleMinFontSize;
-  final double titleRatingSpacing;
-  final double contentVerticalPadding;
-  final double contentSpacing;
-  final double locationIconHeight;
-  final double locationFontSize;
-  final bool isCompact;
 
   const _PropertyCardInfoSection({
     required this.property,
-    required this.titleMaxLines,
-    required this.titleFontSize,
-    required this.titleMinFontSize,
-    required this.titleRatingSpacing,
-    required this.contentVerticalPadding,
-    required this.contentSpacing,
-    required this.locationIconHeight,
-    required this.locationFontSize,
-    required this.isCompact,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(
-        8.w,
-        contentVerticalPadding,
-        8.w,
-        contentVerticalPadding,
-      ),
-      child: Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: AutoSizeTextWidget(
-                    text: property.name,
-                    fontSize: titleFontSize,
-                    fontWeight: FontWeight.w500,
-                    maxLines: titleMaxLines,
-                    minFontSize: titleMinFontSize,
-                    textAlign: TextAlign.start,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final availableHeight = constraints.maxHeight.isFinite
+            ? constraints.maxHeight
+            : 48.h;
+        final isTight = availableHeight <= 56.h;
+        final isVeryTight = availableHeight <= 46.h;
+        final contentVerticalPadding = isVeryTight ? 1.5.h : (isTight ? 2.h : 4.h);
+        final contentSpacing = isVeryTight ? 1.h : (isTight ? 2.h : 4.h);
+        final titleMaxLines = isTight ? 1 : 2;
+        final titleFontSize = isVeryTight ? 9.6.sp : (isTight ? 10.6.sp : 12.sp);
+        final titleMinFontSize = isVeryTight ? 7.5 : (isTight ? 8.0 : 9.0);
+        final titleRatingSpacing = isVeryTight ? 4.w : (isTight ? 6.w : 8.w);
+        final ratingFontSize = isVeryTight ? 8.sp : (isTight ? 9.sp : 10.sp);
+        final ratingHorizontalPadding = isVeryTight ? 4.w : (isTight ? 5.w : 6.w);
+        final ratingVerticalPadding = isVeryTight ? 1.h : (isTight ? 1.5.h : 2.h);
+        final ratingItemSize = isVeryTight ? 10.sp : (isTight ? 12.sp : 14.sp);
+        final locationIconHeight = isVeryTight ? 10.h : (isTight ? 11.h : 12.h);
+        final locationFontSize = isVeryTight ? 8.4.sp : (isTight ? 9.sp : 10.sp);
+
+        return Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(
+            8.w,
+            contentVerticalPadding,
+            8.w,
+            contentVerticalPadding,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: AutoSizeTextWidget(
+                        text: property.name,
+                        fontSize: titleFontSize,
+                        fontWeight: FontWeight.w500,
+                        maxLines: titleMaxLines,
+                        minFontSize: titleMinFontSize,
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                    titleRatingSpacing.horizontalSpace,
+                    PropertyCardRatingChipWidget(
+                      rating: property.rating.toDouble(),
+                      fontSize: ratingFontSize,
+                      horizontalPadding: ratingHorizontalPadding,
+                      verticalPadding: ratingVerticalPadding,
+                      itemSize: ratingItemSize,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: contentSpacing),
+              Flexible(
+                child: Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: PropertyCardLocationRowWidget(
+                    city: property.city,
+                    district: property.district,
+                    iconHeight: locationIconHeight,
+                    fontSize: locationFontSize,
                   ),
                 ),
-                titleRatingSpacing.horizontalSpace,
-                PropertyCardRatingChipWidget(
-                  rating: property.rating.toDouble(),
-                  fontSize: isCompact ? 9.sp : 10.sp,
-                  horizontalPadding: isCompact ? 5.w : 6.w,
-                  verticalPadding: isCompact ? 1.5.h : 2.h,
-                  itemSize: isCompact ? 12.sp : 14.sp,
-                ),
-              ],
-            ),
-            contentSpacing.verticalSpace,
-            PropertyCardLocationRowWidget(
-              city: property.city,
-              district: property.district,
-              iconHeight: locationIconHeight,
-              fontSize: locationFontSize,
-            ),
-          ],
-        ),
-      ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

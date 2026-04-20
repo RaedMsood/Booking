@@ -13,10 +13,7 @@ class ShimmerPropertyVerticalCardBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final cardHeight = constraints.maxHeight.isFinite
-            ? constraints.maxHeight
-            : 208.h;
-        final imageHeight = (cardHeight - 56.h).clamp(136.h, 160.h).toDouble();
+        final imageHeight = 160.h;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,42 +84,56 @@ class _ShimmerPropertyCardInfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(
-        8.w,
-        contentVerticalPadding,
-        8.w,
-        contentVerticalPadding,
-      ),
-      child: Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ShimmerPlaceholderWidget(
-                    width: 180.w,
-                    height: 14.h,
-                    borderRadius: 3.r,
-                  ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final availableHeight = constraints.maxHeight.isFinite
+            ? constraints.maxHeight
+            : 48.h;
+        final isTight = availableHeight <= 56.h;
+        final isVeryTight = availableHeight <= 46.h;
+        final verticalPadding = isVeryTight ? 1.5.h : (isTight ? 2.h : contentVerticalPadding);
+        final spacing = isVeryTight ? 1.h : (isTight ? 2.h : contentSpacing);
+
+        return Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(
+            8.w,
+            verticalPadding,
+            8.w,
+            verticalPadding,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: ShimmerPlaceholderWidget(
+                        width: 180.w,
+                        height: isVeryTight ? 12.h : 14.h,
+                        borderRadius: 3.r,
+                      ),
+                    ),
+                    (isVeryTight ? 4.w : 8.w).horizontalSpace,
+                    ShimmerPlaceholderWidget(
+                      height: isVeryTight ? 16.h : 18.h,
+                      width: isVeryTight ? 34.w : 40.w,
+                      borderRadius: 40.r,
+                    ),
+                  ],
                 ),
-                8.w.horizontalSpace,
-                ShimmerPlaceholderWidget(
-                  height: 18.h,
-                  width: 40.w,
-                  borderRadius: 40.r,
-                ),
-              ],
-            ),
-            contentSpacing.verticalSpace,
-            const _ShimmerLocationRow(),
-          ],
-        ),
-      ),
+              ),
+              SizedBox(height: spacing),
+              Flexible(
+                child: const _ShimmerLocationRow(),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

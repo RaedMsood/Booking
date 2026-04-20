@@ -17,8 +17,6 @@ class ShimmerPropertyGridCardBody extends StatelessWidget {
             ? constraints.maxHeight
             : 178.h;
         final imageHeight = (cardHeight * 0.64).clamp(104.h, 122.h).toDouble();
-        final contentVerticalPadding = 6.h;
-        final contentSpacing = 4.h;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,45 +51,69 @@ class ShimmerPropertyGridCardBody extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(
-                  8.w,
-                  contentVerticalPadding,
-                  8.w,
-                  contentVerticalPadding,
-                ),
-                child: Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: ShimmerPlaceholderWidget(
-                              width: 120.w,
-                              height: 12.h,
-                              borderRadius: 3.r,
-                            ),
-                          ),
-                          6.w.horizontalSpace,
-                          ShimmerPlaceholderWidget(
-                            height: 16.h,
-                            width: 34.w,
-                            borderRadius: 40.r,
-                          ),
-                        ],
-                      ),
-                      contentSpacing.verticalSpace,
-                      const _ShimmerGridLocationRow(),
-                    ],
-                  ),
-                ),
-              ),
+              child: const _ShimmerPropertyGridCardInfoSection(),
             ),
           ],
+        );
+      },
+    );
+  }
+}
+
+class _ShimmerPropertyGridCardInfoSection extends StatelessWidget {
+  const _ShimmerPropertyGridCardInfoSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final availableHeight = constraints.maxHeight.isFinite
+            ? constraints.maxHeight
+            : 48.h;
+        final isTight = availableHeight <= 56.h;
+        final isVeryTight = availableHeight <= 46.h;
+        final contentVerticalPadding =
+            isVeryTight ? 1.5.h : (isTight ? 2.h : 6.h);
+        final contentSpacing = isVeryTight ? 1.h : (isTight ? 2.h : 6.h);
+
+        return Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(
+            8.w,
+            contentVerticalPadding,
+            8.w,
+            contentVerticalPadding,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: ShimmerPlaceholderWidget(
+                        width: 120.w,
+                        height: isVeryTight ? 10.h : 12.h,
+                        borderRadius: 3.r,
+                      ),
+                    ),
+                    (isVeryTight ? 4.w : 6.w).horizontalSpace,
+                    ShimmerPlaceholderWidget(
+                      height: isVeryTight ? 14.h : 16.h,
+                      width: isVeryTight ? 30.w : 34.w,
+                      borderRadius: 40.r,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: contentSpacing),
+              Flexible(
+                child: const _ShimmerGridLocationRow(),
+              ),
+            ],
+          ),
         );
       },
     );
