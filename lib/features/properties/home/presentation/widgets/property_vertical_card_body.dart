@@ -120,8 +120,8 @@ class _PropertyCardInfoSection extends StatelessWidget {
         final contentVerticalPadding = isVeryTight ? 1.5.h : (isTight ? 2.h : 4.h);
         final contentSpacing = isVeryTight ? 1.h : (isTight ? 2.h : 4.h);
         final titleMaxLines = isTight ? 1 : 2;
-        final titleFontSize = isVeryTight ? 12.5 : (isTight ? 13.0 : 13.5);
-        final titleMinFontSize = isVeryTight ? 12.5 : (isTight ? 13.0 : 13.5);
+        final titleFontSize = isVeryTight ? 12.sp : (isTight ? 12.5.sp : 13.0.sp);
+        final titleMinFontSize = isVeryTight ? 12.0 : (isTight ? 12.5 : 13.0);
         final titleRatingSpacing = isVeryTight ? 4.w : (isTight ? 6.w : 8.w);
         final ratingFontSize = isVeryTight ? 8.sp : (isTight ? 9.sp : 10.sp);
         final ratingHorizontalPadding = isVeryTight ? 4.w : (isTight ? 5.w : 6.w);
