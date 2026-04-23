@@ -1,26 +1,30 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:video_player/video_player.dart';
-
 import '../core/helpers/navigateTo.dart';
 import '../core/theme/app_colors.dart';
 import '../core/widgets/auto_size_text_widget.dart';
 import '../core/widgets/bottomNavbar/bottom_navigation_bar_widget.dart';
+import '../features/properties/home/presentation/riverpod/home_riverpod.dart';
 import '../services/app_update/app_update_service.dart';
 import '../services/auth/auth.dart';
-import 'app_update/presentation/page/force_update_page.dart';
-import 'app_update/presentation/widget/optional_update_bottom_sheet.dart';
 import 'user/presentation/pages/splach_screen_page.dart';
 
-class LaunchPage extends StatefulWidget {
+class LaunchPage extends ConsumerStatefulWidget {
   const LaunchPage({super.key});
 
   @override
-  State<LaunchPage> createState() => _LaunchPageState();
+  ConsumerState<LaunchPage> createState() => _LaunchPageState();
 }
 
-class _LaunchPageState extends State<LaunchPage> {
+class _LaunchPageState extends ConsumerState<LaunchPage> {
+  static const Duration _videoInitTimeout = Duration(seconds: 4);
+  static const Duration _onBoardingTimeout = Duration(seconds: 3);
+  static const Duration _launchWatchdogTimeout = Duration(seconds: 6);
+  static const Duration _homePrefetchDelay = Duration(milliseconds: 250);
   static const List<double> _blackToAlphaWhiteMatrix = <double>[
     0, 0, 0, 0, 255,
     0, 0, 0, 0, 255,
@@ -29,57 +33,69 @@ class _LaunchPageState extends State<LaunchPage> {
   ];
 
   late final VideoPlayerController _videoController;
-  late final Future<AppUpdateInfo> _updateInfoFuture;
+  late final Future<bool> _onBoardingFuture;
+  Timer? _launchWatchdogTimer;
   bool _isVideoReady = false;
+  bool _isNavigationInProgress = false;
   bool _didNavigate = false;
+  bool _didScheduleHomePrefetch = false;
+
+  Future<bool> _loadOnBoardingStatus() {
+    return Auth()
+        .getOnBoarding()
+        .timeout(_onBoardingTimeout, onTimeout: () => false);
+  }
+
+  void _scheduleHomePrefetch() {
+    if (_didScheduleHomePrefetch) return;
+    _didScheduleHomePrefetch = true;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      unawaited(_prefetchHomeData());
+    });
+  }
+
+  Future<void> _prefetchHomeData() async {
+    try {
+      await Future<void>.delayed(_homePrefetchDelay);
+
+      if (!mounted || _didNavigate) return;
+
+      final onBoarding = await _onBoardingFuture;
+
+      if (!mounted || _didNavigate || !onBoarding) return;
+
+      ref.read(getAllPropertyProvider.notifier);
+    } catch (error) {
+      debugPrint('Launch home prefetch skipped: $error');
+    }
+  }
 
   Future<void> nav() async {
-    if (!mounted || _didNavigate) return;
+    if (!mounted || _didNavigate || _isNavigationInProgress) return;
 
-    _didNavigate = true;
-    final updateInfo = await _updateInfoFuture;
+    _isNavigationInProgress = true;
 
-    if (!mounted) return;
+    try {
+      final onBoarding = await _onBoardingFuture;
 
-    if (updateInfo.requiresUpdate) {
-      navigateAndFinish(
-        context,
-        ForceUpdatePage(updateInfo: updateInfo),
-      );
-      return;
-    }
+      if (!mounted || _didNavigate) return;
 
-    if (updateInfo.hasOptionalUpdate) {
-      final shouldUpdateNow = await showModalBottomSheet<bool>(
-        context: context,
-        isDismissible: true,
-        enableDrag: true,
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        builder: (_) => OptionalUpdateBottomSheet(updateInfo: updateInfo),
-      );
-
-      if (!mounted) return;
-
-      if (shouldUpdateNow != true && updateInfo.latestVersion.isNotEmpty) {
-        await Auth().cacheSkippedOptionalUpdateVersion(updateInfo.latestVersion);
+      if (onBoarding) {
+        _finishNavigation(const BottomNavigationBarWidget());
+      } else {
+        _finishNavigation(const SplachScreenPage());
       }
-    }
-
-    final onBoarding = await Auth().getOnBoarding();
-
-    if (!mounted) return;
-
-    if (onBoarding) {
-      navigateAndFinish(context, const BottomNavigationBarWidget());
-    } else {
-      navigateAndFinish(context, const SplachScreenPage());
+    } finally {
+      if (mounted && !_didNavigate) {
+        _isNavigationInProgress = false;
+      }
     }
   }
 
   Future<void> _initializeVideo() async {
     try {
-      await _videoController.initialize();
+      await _videoController.initialize().timeout(_videoInitTimeout);
       await _videoController.setLooping(false);
       await _videoController.setVolume(0);
 
@@ -91,14 +107,39 @@ class _LaunchPageState extends State<LaunchPage> {
       });
 
       await _videoController.play();
-    } catch (_) {
-      await Future.delayed(const Duration(seconds: 3));
-      await nav();
+    } catch (error) {
+      _handleVideoFailure(error);
     }
   }
 
+  void _handleVideoFailure(Object error) {
+    debugPrint('Launch video init failed: $error');
+    unawaited(nav());
+  }
+
+  void _finishNavigation(Widget page) {
+    if (!mounted || _didNavigate) return;
+    _didNavigate = true;
+    _launchWatchdogTimer?.cancel();
+    AppUpdateService.I.markLaunchFlowCompleted();
+    navigateAndFinish(context, page);
+  }
+
+  void _startLaunchWatchdog() {
+    _launchWatchdogTimer?.cancel();
+    _launchWatchdogTimer = Timer(_launchWatchdogTimeout, () {
+      if (!_isVideoReady) {
+        unawaited(nav());
+      }
+    });
+  }
+
   void _handleVideoState() {
-    if (!_videoController.value.isInitialized || _didNavigate) return;
+    if (!_videoController.value.isInitialized ||
+        _didNavigate ||
+        _isNavigationInProgress) {
+      return;
+    }
 
     final position = _videoController.value.position;
     final duration = _videoController.value.duration;
@@ -112,13 +153,17 @@ class _LaunchPageState extends State<LaunchPage> {
   void initState() {
     super.initState();
 
-    _updateInfoFuture = AppUpdateService.I.checkForUpdates();
+    AppUpdateService.I.resetLaunchFlow();
+    _onBoardingFuture = _loadOnBoardingStatus();
     _videoController = VideoPlayerController.asset('assets/video/mazaji.mp4');
+    _scheduleHomePrefetch();
+    _startLaunchWatchdog();
     _initializeVideo();
   }
 
   @override
   void dispose() {
+    _launchWatchdogTimer?.cancel();
     _videoController.removeListener(_handleVideoState);
     _videoController.dispose();
     super.dispose();

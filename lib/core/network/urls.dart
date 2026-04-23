@@ -25,6 +25,8 @@ class AppURL {
 
   static String get searchAndFilterProperties => '/property/filter';
 
+  static String get searchAndFilterUnits => '/unit/filter';
+
   static String get getFilterData => '/filter_data';
 
   static String get propertiesByCity => '/property/show_city';

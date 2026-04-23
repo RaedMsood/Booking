@@ -35,6 +35,7 @@ class PropertySliverListWidget extends ConsumerWidget {
                   return isLoading
                       ? ShimmerPropertyCardWidget(viewType: provider.viewType)
                       : PropertyCardWidget(
+                             key: ValueKey('property-${properties[index].id}'),
                           property: properties[index],
                           viewType: provider.viewType,
                           propertiesByCity: propertiesByCity,
@@ -61,6 +62,7 @@ class PropertySliverListWidget extends ConsumerWidget {
                               viewType: provider.viewType,
                             )
                           : PropertyCardWidget(
+                              key: ValueKey('property-${properties[index].id}'),
                               property: properties[index],
                               viewType: provider.viewType,
                               propertiesByCity: propertiesByCity,

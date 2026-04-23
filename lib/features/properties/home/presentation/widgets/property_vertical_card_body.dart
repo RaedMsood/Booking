@@ -89,11 +89,13 @@ class _PropertyCardMediaSection extends StatelessWidget {
     return SizedBox(
       height: imageHeight,
       child: PropertyPhotosWidget(
+        key: ValueKey('property-photos-${property.id}'),
         image: property.mainImageUrls,
         height: imageHeight,
         idProperties: property.id,
         isFavorite: property.isFavorite,
         enableScrollReveal: true,
+        property: property,
       ),
     );
   }

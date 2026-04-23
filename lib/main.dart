@@ -11,10 +11,12 @@ import 'core/notifications/notification_bootstrap.dart';
 import 'core/state/app_restart_controller.dart';
 import 'package:booking/injection.dart' as di;
 import 'core/theme/theme.dart';
+import 'features/app_update/presentation/widget/app_update_coordinator.dart';
 import 'features/launch_page.dart';
 import 'features/notifications/presentation/state_mangment/notifications_riverpod.dart';
 import 'features/profile/presentation/state_mangement/riverpod.dart';
 import 'generated/l10n.dart';
+import 'services/app_update/app_update_service.dart';
 import 'services/auth/auth.dart';
 
 void main() async {
@@ -54,6 +56,8 @@ class MyApp extends ConsumerStatefulWidget {
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {});
@@ -76,6 +80,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       FirebaseMessagingService.I.onRefreshUnread = null;
       FirebaseMessagingService.I.onSetUnread = null;
     }
+    AppUpdateService.I.start();
     super.initState();
   }
 
@@ -88,6 +93,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       minTextAdapt: false,
       splitScreenMode: false,
       child: MaterialApp(
+        navigatorKey: _navigatorKey,
         debugShowCheckedModeBanner: false,
         locale: locale,
         localizationsDelegates: const [
@@ -101,6 +107,12 @@ class _MyAppState extends ConsumerState<MyApp> {
           //Locale('en'),
         ],
         theme: lightTheme,
+        builder: (context, child) {
+          return AppUpdateCoordinator(
+            navigatorKey: _navigatorKey,
+            child: child ?? const SizedBox.shrink(),
+          );
+        },
         home: const LaunchPage(),
       ),
     );

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -27,36 +28,88 @@ class AppUpdateInfo {
   final String currentVersion;
   final String packageName;
   final Uri? storeUri;
+
+  static const empty = AppUpdateInfo(
+    requiresUpdate: false,
+    hasOptionalUpdate: false,
+    minVersion: '0.0.0',
+    latestVersion: '0.0.0',
+    currentVersion: '0.0.0+0',
+    packageName: '',
+  );
 }
 
-class AppUpdateService {
+class AppUpdateService extends ChangeNotifier {
   AppUpdateService._();
 
   static final AppUpdateService I = AppUpdateService._();
 
+  AppUpdateInfo _currentInfo = AppUpdateInfo.empty;
+  bool _launchFlowCompleted = false;
+  bool _started = false;
+  bool _isRefreshing = false;
+
+  AppUpdateInfo get currentInfo => _currentInfo;
+  bool get launchFlowCompleted => _launchFlowCompleted;
+
+  Future<void> start() async {
+    if (_started) return;
+    _started = true;
+
+    final cachedInfo = await _buildUpdateInfo(fetchRemote: false);
+    _setCurrentInfo(cachedInfo);
+
+    unawaited(refreshInBackground());
+  }
+
+  void resetLaunchFlow() {
+    if (!_launchFlowCompleted) return;
+    _launchFlowCompleted = false;
+    notifyListeners();
+  }
+
+  void markLaunchFlowCompleted() {
+    if (_launchFlowCompleted) return;
+    _launchFlowCompleted = true;
+    notifyListeners();
+  }
+
+  Future<void> refreshUsingActivatedConfig() async {
+    final info = await _buildUpdateInfo(fetchRemote: false);
+    _setCurrentInfo(info);
+  }
+
+  Future<void> refreshInBackground() async {
+    if (_isRefreshing) return;
+    _isRefreshing = true;
+
+    try {
+      final info = await _buildUpdateInfo(fetchRemote: true);
+      _setCurrentInfo(info);
+    } finally {
+      _isRefreshing = false;
+    }
+  }
+
   Future<AppUpdateInfo> checkForUpdates() async {
+    return _buildUpdateInfo(fetchRemote: true);
+  }
+
+  Future<AppUpdateInfo> _buildUpdateInfo({required bool fetchRemote}) async {
     try {
       final packageInfo = await PackageInfo.fromPlatform();
       final remoteConfig = FirebaseRemoteConfig.instance;
       final skippedOptionalUpdateVersion =
           await Auth().getSkippedOptionalUpdateVersion();
 
-      await remoteConfig.setConfigSettings(
-        RemoteConfigSettings(
-          fetchTimeout: const Duration(seconds: 8),
-          minimumFetchInterval:
-              kDebugMode ? Duration.zero : const Duration(hours: 1),
-        ),
-      );
-      await remoteConfig.setDefaults(const {
-        'min_version': '0.0.0',
-        'latest_version': '0.0.0',
-      });
+      await _prepareRemoteConfig(remoteConfig);
 
-      try {
-        await remoteConfig.fetchAndActivate();
-      } catch (_) {
-        // Fall back to the last activated/cached value or the default above.
+      if (fetchRemote) {
+        try {
+          await remoteConfig.fetchAndActivate();
+        } catch (_) {
+          // Fall back to the last activated/cached value or the default above.
+        }
       }
 
       final minVersion = remoteConfig.getString('min_version').trim();
@@ -90,14 +143,37 @@ class AppUpdateService {
         packageName: packageInfo.packageName,
       );
     } catch (_) {
-      return const AppUpdateInfo(
-        requiresUpdate: false,
-        hasOptionalUpdate: false,
-        minVersion: '0.0.0',
-        latestVersion: '0.0.0',
-        currentVersion: '0.0.0+0',
-        packageName: '',
-      );
+      return AppUpdateInfo.empty;
+    }
+  }
+
+  Future<void> _prepareRemoteConfig(FirebaseRemoteConfig remoteConfig) async {
+    await remoteConfig.setConfigSettings(
+      RemoteConfigSettings(
+        fetchTimeout: const Duration(seconds: 8),
+        minimumFetchInterval:
+            kDebugMode ? Duration.zero : const Duration(hours: 1),
+      ),
+    );
+    await remoteConfig.setDefaults(const {
+      'min_version': '0.0.0',
+      'latest_version': '0.0.0',
+    });
+  }
+
+  void _setCurrentInfo(AppUpdateInfo info) {
+    final didChange =
+        _currentInfo.requiresUpdate != info.requiresUpdate ||
+        _currentInfo.hasOptionalUpdate != info.hasOptionalUpdate ||
+        _currentInfo.minVersion != info.minVersion ||
+        _currentInfo.latestVersion != info.latestVersion ||
+        _currentInfo.currentVersion != info.currentVersion ||
+        _currentInfo.packageName != info.packageName;
+
+    _currentInfo = info;
+
+    if (didChange) {
+      notifyListeners();
     }
   }
 

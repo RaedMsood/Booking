@@ -15,7 +15,12 @@ class BookingDataSource {
       path: AppURL.checkBookingHotel,
       data: bookingData.toJson(),
     );
-    return BookingData.fromJson(response.data['data']['id']);
+    final parsed = BookingData.fromJson(response.data['data']['id']);
+    return parsed.copyWith(
+      totalPrice: parsed.totalPrice ?? bookingData.totalPrice,
+      price: parsed.price ?? bookingData.price,
+      hasDiscount: parsed.hasDiscount || bookingData.hasDiscount,
+    );
   }
 
   Future<BookingDataModel> custemorDataForBooking({
@@ -25,7 +30,18 @@ class BookingDataSource {
       path: AppURL.custemorForBooking,
       data: custemor.toJson(),
     );
-    return BookingDataModel.fromJson(response.data['data']);
+    final parsed = BookingDataModel.fromJson(response.data['data']);
+    final requestBooking = custemor.booking;
+    if (requestBooking == null) return parsed;
+
+    return BookingDataModel(
+      bookingData: parsed.bookingData.copyWith(
+        totalPrice: parsed.bookingData.totalPrice ?? requestBooking.totalPrice,
+        price: parsed.bookingData.price ?? requestBooking.price,
+        hasDiscount: parsed.bookingData.hasDiscount || requestBooking.hasDiscount,
+      ),
+      customer: parsed.customer,
+    );
   }
 
   Future<List<PaymentMethodsModel>> getAllPaymentMethods() async {
@@ -46,17 +62,22 @@ class BookingDataSource {
     required int amount,
     required String phoneNumber,
   }) async {
-    final methodName = normalizePayMethodName(payMethodName);
+    final normalizedMethodName = normalizePayMethodName(payMethodName);
+    final requestMethodName = payMethodName.trim().toLowerCase();
+    final isJawaliLikeMethod =
+        isJawaliPayMethod(payMethodName) || isJaibPayMethod(payMethodName);
     await RemoteRequest.postData(
       path: AppURL.confirmPayment,
       data: {
         "booking": bookingData.bookingData.toJson(),
         "customer": bookingData.customer?.toJson(),
-        "payment_method_name": methodName,
-        if (methodName == "jawali") "voucher": voucher,
-        if (methodName == "jawali") "receiver_mobile": phoneNumber,
-        if (methodName == "kuraimi") "pin_pass": voucher,
-        if (methodName == "kuraimi") "amount": amount,
+        "payment_method_name": requestMethodName.isNotEmpty
+            ? requestMethodName
+            : normalizedMethodName,
+        if (isJawaliLikeMethod) "voucher": voucher,
+        if (isJawaliLikeMethod) "receiver_mobile": phoneNumber,
+        if (normalizedMethodName == "kuraimi") "pin_pass": voucher,
+        if (normalizedMethodName == "kuraimi") "amount": amount,
       },
     );
     return Future.value(unit);

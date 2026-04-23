@@ -6,6 +6,7 @@ import '../../../../../core/state/state.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../../generated/l10n.dart';
+import '../../data/model/filter_data_model.dart';
 import '../riverpod/search_and_filter_riverpod.dart';
 import '../widgets/features_filter_widget.dart';
 import '../widgets/filter_and_undo_filter_button_widget.dart';
@@ -13,13 +14,71 @@ import '../widgets/filter_by_date_widget.dart';
 import '../widgets/filter_by_unit_or_city_widget.dart';
 import '../widgets/price_filter_widget.dart';
 import '../widgets/rating_filter_widget.dart';
+import '../widgets/search_result_mode_toggle_widget.dart';
 
 class FilterPage extends ConsumerWidget {
   const FilterPage({super.key});
 
+  void _applyForMode(
+    WidgetRef ref,
+    SearchFilterResultMode mode,
+    FilterDataModel data,
+  ) {
+    final propertySearchText =
+        ref.read(searchAndFilterPropertiesProvider.notifier).searchController.text;
+
+    ref.read(appliedSearchResultModeProvider.notifier).state = mode;
+
+    if (mode == SearchFilterResultMode.property) {
+      ref.read(searchAndFilterPropertiesProvider.notifier).filter(
+            ref,
+            features: data.features,
+          );
+      return;
+    }
+
+    ref.read(searchAndFilterUnitsProvider.notifier).searchController.text =
+        propertySearchText;
+    ref.read(searchAndFilterUnitsProvider.notifier).filter(
+          ref,
+          features: data.features,
+        );
+  }
+
+  void _undoForMode(
+    WidgetRef ref,
+    SearchFilterResultMode mode,
+    FilterDataModel data,
+  ) {
+    final propertySearchText =
+        ref.read(searchAndFilterPropertiesProvider.notifier).searchController.text;
+
+    ref.read(appliedSearchResultModeProvider.notifier).state = mode;
+
+    if (mode == SearchFilterResultMode.property) {
+      ref.read(searchAndFilterPropertiesProvider.notifier).undoFiltering(
+            ref,
+            features: data.features,
+            maxPrice: double.tryParse(data.maxPrice) ?? 0.0,
+            minPrice: double.tryParse(data.minPrice) ?? 0.0,
+          );
+      return;
+    }
+
+    ref.read(searchAndFilterUnitsProvider.notifier).searchController.text =
+        propertySearchText;
+    ref.read(searchAndFilterUnitsProvider.notifier).undoFiltering(
+          ref,
+          features: data.features,
+          maxPrice: double.tryParse(data.maxPrice) ?? 0.0,
+          minPrice: double.tryParse(data.minPrice) ?? 0.0,
+        );
+  }
+
   @override
   Widget build(BuildContext context, ref) {
     var state = ref.watch(getFilterDataProvider);
+    final pendingMode = ref.watch(pendingSearchResultModeProvider);
 
     return Scaffold(
       extendBody: true,
@@ -31,6 +90,8 @@ class FilterPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SearchResultModeToggleWidget(),
+              12.h.verticalSpace,
               FilterByUnitOrCityWidget(unitTypes: state.data.unitTypes),
               12.h.verticalSpace,
               const FilterByDateWidget(),
@@ -69,22 +130,12 @@ class FilterPage extends ConsumerWidget {
               ? null
               : FilterAndUndoFilterButtonWidget(
                   clickOnFilter: () {
-                    ref.read(searchAndFilterPropertiesProvider.notifier).filter(
-                          ref,
-                          features: state.data.features,
-                        );
+                    _applyForMode(ref, pendingMode, state.data);
 
                     Navigator.of(context).pop();
                   },
                   clickOnUndoFilter: () {
-                    ref
-                        .read(searchAndFilterPropertiesProvider.notifier)
-                        .undoFiltering(
-                          ref,
-                          features: state.data.features,
-                          maxPrice: double.tryParse(state.data.maxPrice) ?? 0.0,
-                          minPrice: double.tryParse(state.data.minPrice) ?? 0.0,
-                        );
+                    _undoForMode(ref, pendingMode, state.data);
                   },
                 ),
     );

@@ -18,16 +18,64 @@ class PropertyDataModel {
     required this.isFavorite
   });
 
+  static int _parseInt(dynamic value) {
+    if (value is int) return value;
+    if (value is num) return value.toInt();
+    return int.tryParse(value?.toString() ?? '') ?? 0;
+  }
+
+  static num _parseNum(dynamic value) {
+    if (value is num) return value;
+    return num.tryParse(value?.toString() ?? '') ?? 0;
+  }
+
+  static bool _parseBool(dynamic value) {
+    if (value is bool) return value;
+    if (value is num) return value != 0;
+    final normalized = value?.toString().trim().toLowerCase() ?? '';
+    return normalized == 'true' || normalized == '1';
+  }
+
+  static List<String> _parseImages(Map<String, dynamic> json) {
+    final raw = json['main_image_url2'] ?? json['main_image_url'] ?? const [];
+    if (raw is List) {
+      return raw.map((e) => e.toString()).toList();
+    }
+    return const <String>[];
+  }
+
   factory PropertyDataModel.fromJson(Map<String, dynamic> json) {
     return PropertyDataModel(
-        id: json['id'],
+        id: _parseInt(json['id']),
         name: json['name'] ?? '',
-        rating: json['totalRate'] ?? 0.0,
+        rating: _parseNum(json['totalRate'] ?? json['rating']),
         type: json['type'] ?? '',
         city: json['city'] ?? '',
         district: json['district'] ?? '',
-        mainImageUrls: List<String>.from(json['main_image_url2'] ?? []),
-        isFavorite: json['isFavorite']
+        mainImageUrls: _parseImages(json),
+        isFavorite: _parseBool(json['isFavorite'])
+    );
+  }
+
+  PropertyDataModel copyWith({
+    int? id,
+    String? name,
+    dynamic rating,
+    String? type,
+    String? city,
+    String? district,
+    List<String>? mainImageUrls,
+    bool? isFavorite,
+  }) {
+    return PropertyDataModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      rating: rating ?? this.rating,
+      type: type ?? this.type,
+      city: city ?? this.city,
+      district: district ?? this.district,
+      mainImageUrls: mainImageUrls ?? this.mainImageUrls,
+      isFavorite: isFavorite ?? this.isFavorite,
     );
   }
 

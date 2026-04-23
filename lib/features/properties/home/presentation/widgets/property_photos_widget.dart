@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/widgets/online_images_widget.dart';
 import '../../../../profile/presentation/state_mangement/riverpod.dart';
+import '../../data/model/property_data_model.dart';
 import '../riverpod/home_riverpod.dart';
 
 class PropertyPhotosWidget extends StatefulWidget {
@@ -16,6 +17,7 @@ class PropertyPhotosWidget extends StatefulWidget {
   final int idProperties;
   final bool isFavorite;
   final bool enableScrollReveal;
+  final PropertyDataModel? property;
 
   const PropertyPhotosWidget(
       {super.key,
@@ -23,7 +25,8 @@ class PropertyPhotosWidget extends StatefulWidget {
       required this.height,
       required this.idProperties,
       required this.isFavorite,
-      this.enableScrollReveal = false});
+      this.enableScrollReveal = false,
+      this.property});
 
   @override
   State<PropertyPhotosWidget> createState() => _PropertyPhotosWidgetState();
@@ -31,7 +34,6 @@ class PropertyPhotosWidget extends StatefulWidget {
 
 class _PropertyPhotosWidgetState extends State<PropertyPhotosWidget> {
   int pageController = 0;
-  late bool favorite = widget.isFavorite;
 
   double get _maxParallaxShift => widget.height * 0.14;
 
@@ -132,12 +134,17 @@ class _PropertyPhotosWidgetState extends State<PropertyPhotosWidget> {
         Consumer(
           builder: (context, ref, _) {
             final isFav = ref.watch(
-              favoriteIdsProvider
-                  .select((ids) => ids.contains(widget.idProperties)),
+              favoritesProvider.select(
+                (state) => state.isFavorite(widget.idProperties),
+              ),
+            );
+            final isBusy = ref.watch(
+              favoritesProvider.select(
+                (state) => state.isBusy(widget.idProperties),
+              ),
             );
 
-            final fav = ref.read(favoriteIdsProvider.notifier);
-            fav.isBusy(widget.idProperties);
+            final favorites = ref.read(favoritesProvider.notifier);
 
             return PositionedDirectional(
               top: 8,
@@ -150,12 +157,12 @@ class _PropertyPhotosWidgetState extends State<PropertyPhotosWidget> {
                   child: IconButton(
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
-                    onPressed: () {
-                      fav.toggle(widget.idProperties);
-                      setState(() {
-                        favorite = !favorite;
-                      });
-                    },
+                     onPressed: isBusy
+                         ? null
+                         : () => favorites.toggle(
+                               id: widget.idProperties,
+                               property: widget.property,
+                             ),
                     icon: SvgPicture.asset(
                       isFav ? AppIcons.favoriteActive : AppIcons.favorite,
                       colorFilter: ColorFilter.mode(

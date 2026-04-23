@@ -30,6 +30,15 @@ Map<String, PaySpec> paySpecs = {
     requiresPhoneNumber: false,
     requiresCodeField: true,
   ),
+  'jaib': PaySpec(
+    instruction: 'أدخل كود الشراء المنشأ في تطبيق جيب',
+    codeLabel: 'كود الشراء',
+    codeHint: 'كود الشراء',
+    codeEmptyError: 'يرجى إدخال كود الشراء',
+    requiresAmount: false,
+    requiresPhoneNumber: true,
+    requiresCodeField: true,
+  ),
   'jawali': PaySpec(
     instruction: S.current.payJawaliInstruction,
     codeLabel: S.current.payJawaliCodeLabel,
@@ -51,9 +60,20 @@ Map<String, PaySpec> paySpecs = {
   ),
 };
 
+const Set<String> _jawaliMethodAliases = {
+  'jawali',
+  'جوالي',
+};
+
+const Set<String> _jaibMethodAliases = {
+  'جيب',
+  'jaib',
+};
+
 String normalizePayMethodName(String? value) {
   final normalized = (value ?? '').trim().toLowerCase();
   if (normalized == 'jawali') return 'jawali';
+  if (_jaibMethodAliases.contains(normalized)) return 'jaib';
   if (normalized == 'kuraimi') return 'kuraimi';
   if ({'flousk', 'fulosak', 'flosak', 'flousak', 'فلوسك'}
       .contains(normalized)) {
@@ -63,7 +83,21 @@ String normalizePayMethodName(String? value) {
 }
 
 PaySpec? paySpecForMethod(String? value) {
+  if (isJaibPayMethod(value)) {
+    return paySpecs['jaib'];
+  }
+  if (isJawaliPayMethod(value)) {
+    return paySpecs['jawali'];
+  }
   return paySpecs[normalizePayMethodName(value)];
+}
+
+bool isJaibPayMethod(String? value) {
+  return _jaibMethodAliases.contains((value ?? '').trim().toLowerCase());
+}
+
+bool isJawaliPayMethod(String? value) {
+  return _jawaliMethodAliases.contains((value ?? '').trim().toLowerCase());
 }
 
 bool isFloosakPayMethod(String? value) {

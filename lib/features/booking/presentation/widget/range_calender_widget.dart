@@ -6,7 +6,6 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../generated/l10n.dart';
-import '../../../profile/presentation/state_mangement/riverpod.dart';
 
 class RangeCalendarWidget extends ConsumerStatefulWidget {
   const RangeCalendarWidget({
@@ -25,6 +24,47 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _rangeStart, _rangeEnd;
 
+  DateTime _dateOnly(DateTime value) {
+    return DateTime(value.year, value.month, value.day);
+  }
+
+  DateTime? get _inclusiveSelectionEnd => _rangeEnd ?? _rangeStart;
+
+  DateTime? get _effectiveCheckout {
+    if (_rangeStart == null) return null;
+    final inclusiveEnd = _inclusiveSelectionEnd ?? _rangeStart!;
+    return _dateOnly(inclusiveEnd).add(const Duration(days: 1));
+  }
+
+  int? get _nightCount {
+    if (_rangeStart == null || _effectiveCheckout == null) return null;
+    return _effectiveCheckout!.difference(_rangeStart!).inDays;
+  }
+
+
+  String? _selectionPreview() {
+    if (_rangeStart == null || _effectiveCheckout == null) return null;
+
+    final formatter = DateFormat('d MMMM', 'ar');
+    final startText = formatter.format(_rangeStart!);
+    final checkoutText = formatter.format(_effectiveCheckout!);
+    final nightCountText = _nightCountLabel();
+
+    return nightCountText == null
+        ? 'الدخول: $startText  •  المغادرة: $checkoutText'
+        : 'الدخول: $startText  •  المغادرة: $checkoutText  •  $nightCountText';
+  }
+
+  String? _nightCountLabel() {
+    final nights = _nightCount;
+    if (nights == null || nights <= 0) return null;
+
+    if (nights == 1) return 'ليلة واحدة';
+    if (nights == 2) return 'ليلتان';
+    if (nights >= 3 && nights <= 10) return '$nights ليالٍ';
+    return '$nights ليلة';
+  }
+
   DateTime get _today {
     final now = DateTime.now();
     return DateTime(now.year, now.month, now.day);
@@ -40,8 +80,6 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final locale = ref.watch(languageProvider);
-
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -61,13 +99,41 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                     fontWeight: FontWeight.w500,
                     fontSize: 9.5.sp,
                   ),
+                 // 6.verticalSpace,
+                  // AutoSizeTextWidget(
+                  //   text: _selectionHint(),
+                  //   fontSize: 8.7.sp,
+                  //   colorText: AppColors.fontColor2,
+                  //   maxLines: 2,
+                  // ),
+                  if (_selectionPreview() != null) ...[
+                    8.verticalSpace,
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.w,
+                        vertical: 8.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryColor.withValues(alpha: 0.06),
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      child: AutoSizeTextWidget(
+                        text: _selectionPreview()!,
+                        fontSize: 8.8.sp,
+                        colorText: AppColors.primaryColor,
+                        fontWeight: FontWeight.w500,
+                        maxLines: 2,
+                      ),
+                    ),
+                  ],
                   10.verticalSpace,
 
                   // عنوان الشهر مع الأسهم
                   Row(
                     children: [
                       AutoSizeTextWidget(
-                        text: DateFormat.yMMMM('$locale').format(_focusedDay),
+                        text: DateFormat.yMMMM('ar').format(_focusedDay),
                         fontSize: 11.5.sp,
                         fontWeight: FontWeight.w300,
                         colorText: const Color(0xff757575),
@@ -100,7 +166,7 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                   24.verticalSpace,
 
                   TableCalendar(
-                    locale: '$locale',
+                    locale: 'ar',
                     firstDay: _minMonthStart,
                     lastDay: _lastDay,
                     focusedDay: _focusedDay,
@@ -112,6 +178,11 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                     rangeSelectionMode: RangeSelectionMode.enforced,
                     rangeStartDay: _rangeStart,
                     rangeEndDay: _rangeEnd,
+                    selectedDayPredicate: (day) {
+                      return _rangeStart != null &&
+                          _rangeEnd == null &&
+                          isSameDay(day, _rangeStart);
+                    },
 
                     // منع اختيار الأيام الماضية
                     enabledDayPredicate: (day) {
@@ -125,12 +196,25 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                           (end != null && end.isBefore(_today))) {
                         return;
                       }
+
+                      final normalizedStart = start == null ? null : _dateOnly(start);
+                      final normalizedEnd = end == null ? null : _dateOnly(end);
+
                       setState(() {
-                        _rangeStart = start;
-                        _rangeEnd = end;
+                        _rangeStart = normalizedStart;
+                        _rangeEnd = normalizedEnd;
                         _focusedDay = focused;
                       });
-                      widget.onRangeSelected(_rangeStart, _rangeEnd);
+
+                      if (normalizedStart == null) {
+                        widget.onRangeSelected(null, null);
+                        return;
+                      }
+
+                      final effectiveCheckout =
+                          _dateOnly(normalizedEnd ?? normalizedStart)
+                              .add(const Duration(days: 1));
+                      widget.onRangeSelected(normalizedStart, effectiveCheckout);
                     },
 
                     headerVisible: false,
@@ -184,6 +268,10 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                         fontSize: 8.sp,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
+                      ),
+                      selectedDecoration: const BoxDecoration(
+                        color: AppColors.primaryColor,
+                        shape: BoxShape.circle,
                       ),
                       withinRangeTextStyle:  TextStyle(
                         fontSize: 8.sp,

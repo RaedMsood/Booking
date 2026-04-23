@@ -52,10 +52,12 @@ class PropertyFavoriteAndMapWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PropertyPhotosWidget(
+              key: ValueKey('favorite-photos-${property.id}'),
               image: property.mainImageUrls,
-              height: imageHeight?.h ?? 120.h,
+              height: imageHeight?.h ?? 160.h,
               idProperties: property.id,
               isFavorite:property.isFavorite ,
+              property: property,
             ),
 
             Padding(
@@ -64,20 +66,17 @@ class PropertyFavoriteAndMapWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // الاسم والتقييم
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Flexible(
-                        child: AutoSizeTextWidget(
-                          text: property.name,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
-                          maxLines: 2,
-                          minFontSize: 12,
-                          textAlign: TextAlign.start,
-                        ),
+                      AutoSizeTextWidget(
+                        text: property.name,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w500,
+                        maxLines: 2,
+                        minFontSize: 12,
+                        textAlign: TextAlign.start,
                       ),
                       6.w.horizontalSpace,
                       Container(
@@ -106,10 +105,7 @@ class PropertyFavoriteAndMapWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-
-                  spaceHeight?.h.verticalSpace ?? 20.h.verticalSpace,
-
-                  // الموقع
+                  6.h.verticalSpace,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -118,7 +114,10 @@ class PropertyFavoriteAndMapWidget extends StatelessWidget {
                           children: [
                             SvgPicture.asset(
                               AppIcons.location,
-                              color: AppColors.fontColor,
+                              colorFilter: const ColorFilter.mode(
+                                AppColors.fontColor,
+                                BlendMode.srcIn,
+                              ),
                               height: 14.h,
                             ),
                             4.w.horizontalSpace,

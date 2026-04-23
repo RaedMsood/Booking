@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -78,25 +79,184 @@ class UpdateNotifier extends StateNotifier<DataState<AuthModel>> {
   }
 }
 
-final favoriteProvider = StateNotifierProvider.autoDispose<FavoriteNotifier,
-    DataState<List<PropertyDataModel>>>((ref) => FavoriteNotifier());
+class FavoritesState {
+  final DataState<List<PropertyDataModel>> listState;
+  final Set<int> ids;
+  final Set<int> busyIds;
 
-class FavoriteNotifier
-    extends StateNotifier<DataState<List<PropertyDataModel>>> {
-  FavoriteNotifier() : super(DataState<List<PropertyDataModel>>.initial([])) {
-    getFavoriteProperties();
+  const FavoritesState({
+    required this.listState,
+    this.ids = const <int>{},
+    this.busyIds = const <int>{},
+  });
+
+  factory FavoritesState.initial() {
+    return FavoritesState(
+      listState: DataState<List<PropertyDataModel>>.initial(const []),
+    );
+  }
+
+  bool isFavorite(int id) => ids.contains(id);
+  bool isBusy(int id) => busyIds.contains(id);
+
+  FavoritesState copyWith({
+    DataState<List<PropertyDataModel>>? listState,
+    Set<int>? ids,
+    Set<int>? busyIds,
+  }) {
+    return FavoritesState(
+      listState: listState ?? this.listState,
+      ids: ids ?? this.ids,
+      busyIds: busyIds ?? this.busyIds,
+    );
+  }
+}
+
+final favoritesProvider =
+    StateNotifierProvider<FavoritesNotifier, FavoritesState>(
+  (ref) => FavoritesNotifier(),
+);
+
+class FavoritesNotifier extends StateNotifier<FavoritesState> {
+  FavoritesNotifier() : super(FavoritesState.initial()) {
+    if (Auth().loggedIn) {
+      refresh();
+    }
   }
 
   final _controller = ProfileReposaitory();
 
-  Future<void> getFavoriteProperties() async {
-    state = state.copyWith(state: States.loading);
-    final user = await _controller.getFavoriteProperties();
-    user.fold((f) {
-      state = state.copyWith(state: States.error, exception: f);
-    }, (data) {
-      state = state.copyWith(state: States.loaded, data: data);
-    });
+  DataState<List<PropertyDataModel>> _nextListState(
+    States stateData, {
+    DioException? exception,
+    List<PropertyDataModel>? data,
+  }) {
+    return state.listState.copyWith(
+      state: stateData,
+      exception: exception,
+      data: data ?? state.listState.data,
+    );
+  }
+
+  Set<int> _idsFromList(List<PropertyDataModel> list) {
+    return list.map((property) => property.id).toSet();
+  }
+
+  List<PropertyDataModel> _normalizeFavorites(List<PropertyDataModel> list) {
+    final map = <int, PropertyDataModel>{};
+    for (final property in list) {
+      map[property.id] = property.copyWith(isFavorite: true);
+    }
+    return map.values.toList();
+  }
+
+  Future<void> refresh({bool showLoading = true}) async {
+    if (!Auth().loggedIn) {
+      if (!mounted) return;
+      state = FavoritesState.initial();
+      return;
+    }
+
+    final previousData = state.listState.data;
+    final previousIds = state.ids;
+
+    if (showLoading) {
+      state = state.copyWith(
+        listState: _nextListState(States.loading, data: previousData),
+      );
+    }
+
+    final response = await _controller.getFavoriteProperties();
+    if (!mounted) return;
+
+    response.fold(
+      (failure) {
+        if (previousData.isEmpty) {
+          state = state.copyWith(
+            listState: _nextListState(
+              States.error,
+              exception: failure,
+              data: previousData,
+            ),
+            ids: previousIds,
+          );
+        } else {
+          state = state.copyWith(
+            listState: _nextListState(States.loaded, data: previousData),
+            ids: previousIds,
+          );
+        }
+      },
+      (data) {
+        final normalized = _normalizeFavorites(data);
+        state = state.copyWith(
+          listState: _nextListState(States.loaded, data: normalized),
+          ids: _idsFromList(normalized),
+        );
+      },
+    );
+  }
+
+  Future<void> toggle({
+    required int id,
+    PropertyDataModel? property,
+  }) async {
+    if (!Auth().loggedIn || state.isBusy(id)) return;
+
+    final previousState = state;
+    final wasFavorite = state.ids.contains(id);
+    final nextIds = {...state.ids};
+    final nextBusyIds = {...state.busyIds, id};
+    final nextList = [...state.listState.data];
+
+    if (wasFavorite) {
+      nextIds.remove(id);
+      nextList.removeWhere((item) => item.id == id);
+    } else {
+      nextIds.add(id);
+
+      if (property != null) {
+        final favoriteProperty = property.copyWith(isFavorite: true);
+        final existingIndex = nextList.indexWhere((item) => item.id == id);
+        if (existingIndex >= 0) {
+          nextList[existingIndex] = favoriteProperty;
+        } else {
+          nextList.insert(0, favoriteProperty);
+        }
+      }
+    }
+
+    state = state.copyWith(
+      ids: nextIds,
+      busyIds: nextBusyIds,
+      listState: _nextListState(States.loaded, data: nextList),
+    );
+
+    final response = await _controller.addFavoriteProperties(idProperties: id);
+    if (!mounted) return;
+
+    var succeeded = false;
+    response.fold(
+      (_) {
+        state = previousState;
+      },
+      (_) {
+        succeeded = true;
+      },
+    );
+
+    if (!succeeded || !mounted) return;
+
+    await refresh(showLoading: false);
+    if (!mounted) return;
+
+    final clearedBusyIds = {...state.busyIds}..remove(id);
+    state = state.copyWith(busyIds: clearedBusyIds);
+  }
+
+  void clear() {
+    if (!mounted) return;
+    state = FavoritesState.initial();
   }
 }
 
@@ -168,46 +328,6 @@ final editProfileControllerProvider =
   (ref) => EditProfileController(),
 );
 
-class FavoriteIdsNotifier extends StateNotifier<Set<int>> {
-  FavoriteIdsNotifier() : super(<int>{});
-
-  final _repo = ProfileReposaitory();
-  final Map<int, bool> _inFlight = {};
-
-  bool isBusy(int id) => _inFlight[id] == true;
-
-  Future<void> load() async {
-    final res = await _repo.getFavoriteProperties();
-    res.fold((_) {}, (list) {
-      state = list.map((p) => p.id).toSet();
-    });
-  }
-
-  Future<void> toggle(int id) async {
-    if (_inFlight[id] == true) return;
-    _inFlight[id] = true;
-
-    final wasFav = state.contains(id);
-    state = wasFav ? ({...state}..remove(id)) : ({...state, id});
-
-    try {
-      final res = await _repo.addFavoriteProperties(idProperties: id); // toggle
-      res.fold(
-        (_) {
-          state = wasFav ? ({...state, id}) : ({...state}..remove(id));
-        },
-        (_) {},
-      );
-    } finally {
-      _inFlight[id] = false;
-    }
-  }
-}
-
-final favoriteIdsProvider =
-    StateNotifierProvider<FavoriteIdsNotifier, Set<int>>(
-  (ref) => FavoriteIdsNotifier()..load(),
-);
 final logoutProvider =
     StateNotifierProvider.autoDispose<LogoutController, DataState<Unit>>(
   (ref) {

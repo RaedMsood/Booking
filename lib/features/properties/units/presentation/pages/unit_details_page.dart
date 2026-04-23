@@ -133,6 +133,9 @@ class UnitDetailsPage extends ConsumerWidget {
                                 nameProp: state.data.property.name,
                                 unitId: state.data.id,
                                 totalPrice: state.data.effectivePrice,
+                                price: state.data.originalPriceBeforeDiscount ??
+                                    state.data.effectivePrice,
+                                hasDiscount: state.data.hasDiscount,
                               ),
                             );
                           }

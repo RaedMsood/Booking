@@ -5,8 +5,8 @@ import '../../../../core/constants/app_icons.dart';
 import '../../../../core/extension/string.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../core/widgets/price_and_currency_widget.dart';
 import '../../../../generated/l10n.dart';
+import '../../../properties/units/presentation/widgets/unit_price_widget.dart';
 import 'general_design_for_booking_widget.dart';
 
 class ConfrimBookingDetailsWidget extends StatelessWidget {
@@ -15,12 +15,14 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
     required this.checkOut,
     required this.unitCount,
     required this.unitName,
-    required this.totalPrice,
+    required this.displayPrice,
+    this.originalPrice,
     required this.bookAt,
     required this.checkIn,
   });
 
-  final double? totalPrice;
+  final double? displayPrice;
+  final double? originalPrice;
   final String bookAt;
   final String unitCount;
   final String unitName;
@@ -35,12 +37,20 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          PriceAndCurrencyWidget(
-            price: totalPrice.toString() ,
-            fontWeight: FontWeight.w400,
-            fontSize: 14.4.sp,
-            secondColor: AppColors.primaryColor,
-          ),
+            UnitPriceWidget(
+              currentPrice: (displayPrice ?? 0).toString(),
+              originalPrice: originalPrice?.toString(),
+              currentFontSize: 14.4.sp,
+              currentCurrencyFontSize: 11.sp,
+              currentCurrencyColor: AppColors.primaryColor,
+              currentPriceWeight: FontWeight.w400,
+              currentCurrencyWeight: FontWeight.w400,
+              originalFontSize: 10.sp,
+              originalCurrencyFontSize: 9.sp,
+              originalPriceColor: AppColors.greyColor,
+              originalCurrencyColor: AppColors.greyColor,
+              spacing: 2,
+            ),
           const Divider(
             thickness: 1,
             color: Color(0xffF0F0F0),
@@ -51,7 +61,10 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
               SvgPicture.asset(
                 AppIcons.date,
                 height: 16.h,
-                color: const Color(0xff605A65),
+                colorFilter: const ColorFilter.mode(
+                  Color(0xff605A65),
+                  BlendMode.srcIn,
+                ),
               ),
               10.horizontalSpace,
               Flexible(
@@ -70,7 +83,10 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
               SvgPicture.asset(
                 AppIcons.buliding,
                 height: 16.h,
-                color: const Color(0xff605A65),
+                colorFilter: const ColorFilter.mode(
+                  Color(0xff605A65),
+                  BlendMode.srcIn,
+                ),
               ),
               10.horizontalSpace,
               Flexible(
@@ -89,7 +105,10 @@ class ConfrimBookingDetailsWidget extends StatelessWidget {
               SvgPicture.asset(
                 AppIcons.clock,
                 height: 16.h,
-                color: const Color(0xff605A65),
+                colorFilter: const ColorFilter.mode(
+                  Color(0xff605A65),
+                  BlendMode.srcIn,
+                ),
               ),
               10.horizontalSpace,
               Flexible(

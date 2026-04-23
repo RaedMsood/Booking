@@ -71,11 +71,16 @@ class SliverAppBarDetailsWidget extends StatelessWidget
               Consumer(
                 builder: (context, ref, _) {
                   final isFav = ref.watch(
-                    favoriteIdsProvider
-                        .select((ids) => ids.contains(idProperties)),
+                    favoritesProvider.select(
+                      (state) => state.isFavorite(idProperties),
+                    ),
                   );
-                  final fav = ref.read(favoriteIdsProvider.notifier);
-                  fav.isBusy(idProperties);
+                  final isBusy = ref.watch(
+                    favoritesProvider.select(
+                      (state) => state.isBusy(idProperties),
+                    ),
+                  );
+                  final favorites = ref.read(favoritesProvider.notifier);
 
                   return CircleAvatar(
                     backgroundColor: Colors.white,
@@ -86,12 +91,16 @@ class SliverAppBarDetailsWidget extends StatelessWidget
                       child: IconButton(
                         padding: EdgeInsets.all(0.sp),
                         constraints: const BoxConstraints(),
-                        onPressed: () => fav.toggle(idProperties),
+                        onPressed:
+                            isBusy ? null : () => favorites.toggle(id: idProperties),
                         icon: SvgPicture.asset(
                           isFav ? AppIcons.favoriteActive : AppIcons.favorite,
-                          color: isFav
-                              ? AppColors.primarySwatch.shade400
-                              : AppColors.fontColor,
+                          colorFilter: ColorFilter.mode(
+                            isFav
+                                ? AppColors.primarySwatch.shade400
+                                : AppColors.fontColor,
+                            BlendMode.srcIn,
+                          ),
                           height: isFav ? 20.h : 16.h,
                         ),
                       ),

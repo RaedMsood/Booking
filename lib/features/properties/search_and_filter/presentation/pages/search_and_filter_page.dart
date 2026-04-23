@@ -13,6 +13,7 @@ import '../../../../../generated/l10n.dart';
 import '../../../home/presentation/widgets/property_list_widget.dart';
 import '../riverpod/search_and_filter_riverpod.dart';
 import '../widgets/search_and_filter_widget.dart';
+import '../widgets/unit_search_list_widget.dart';
 
 class SearchAndFilterPage extends ConsumerStatefulWidget {
   const SearchAndFilterPage({super.key});
@@ -36,13 +37,89 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
     // ============ Pagination ============
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 100) {
-      final state = ref.read(searchAndFilterPropertiesProvider);
+      final mode = ref.read(appliedSearchResultModeProvider);
+
+      if (mode == SearchFilterResultMode.property) {
+        final state = ref.read(searchAndFilterPropertiesProvider);
+        if (state.stateData != States.loadingMore) {
+          ref
+              .read(searchAndFilterPropertiesProvider.notifier)
+              .getData(moreData: true);
+        }
+        return;
+      }
+
+      final state = ref.read(searchAndFilterUnitsProvider);
       if (state.stateData != States.loadingMore) {
-        ref
-            .read(searchAndFilterPropertiesProvider.notifier)
-            .getData(moreData: true);
+        ref.read(searchAndFilterUnitsProvider.notifier).getData(moreData: true);
       }
     }
+  }
+
+  Widget _buildPropertyResults() {
+    final state = ref.watch(searchAndFilterPropertiesProvider);
+
+    return CheckStateInGetApiDataWidget(
+      state: state,
+      refresh: () {
+        ref.invalidate(searchAndFilterPropertiesProvider);
+      },
+      widgetOfLoading: CustomScrollView(
+        controller: _scrollController,
+        slivers: const [
+          PropertySliverListWidget(
+            properties: [],
+            isLoading: true,
+          ),
+        ],
+      ),
+      widgetOfData: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          if (state.data.data.isEmpty)
+            SliverToBoxAdapter(
+              child: EmptyWidget(title: S.of(context).noSearchResults),
+            ),
+          PropertySliverListWidget(
+            properties: state.data.data,
+          ),
+          if (state.stateData == States.loadingMore)
+            const SliverToBoxAdapter(
+              child: CircularProgressIndicatorWidget(),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildUnitResults() {
+    final state = ref.watch(searchAndFilterUnitsProvider);
+
+    return CheckStateInGetApiDataWidget(
+      state: state,
+      refresh: () {
+        ref.invalidate(searchAndFilterUnitsProvider);
+      },
+      widgetOfLoading: const Center(
+        child: CircularProgressIndicatorWidget(),
+      ),
+      widgetOfData: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          if (state.data.data.isEmpty)
+            SliverToBoxAdapter(
+              child: EmptyWidget(title: S.of(context).noSearchResults),
+            ),
+          UnitSearchSliverListWidget(
+            units: state.data.data,
+          ),
+          if (state.stateData == States.loadingMore)
+            const SliverToBoxAdapter(
+              child: CircularProgressIndicatorWidget(),
+            ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -53,8 +130,15 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
 
   @override
   Widget build(BuildContext context) {
-    var state = ref.watch(searchAndFilterPropertiesProvider);
-    var provider = ref.read(searchAndFilterPropertiesProvider.notifier);
+    final mode = ref.watch(appliedSearchResultModeProvider);
+    final isPropertyMode = mode == SearchFilterResultMode.property;
+    final propertyNotifier = ref.read(searchAndFilterPropertiesProvider.notifier);
+    final unitNotifier = ref.read(searchAndFilterUnitsProvider.notifier);
+    final searchController = propertyNotifier.searchController;
+
+    if (unitNotifier.searchController.text != searchController.text) {
+      unitNotifier.searchController.value = searchController.value;
+    }
 
     return Scaffold(
       appBar: const SecondaryAppBarWidget(title: ''),
@@ -82,43 +166,26 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
                     textAlign: TextAlign.start,
                   ),
                   14.h.verticalSpace,
-                  SearchAndFilterWidget(controller: provider),
+                  SearchAndFilterWidget(
+                    controller: searchController,
+                    hintText: S.of(context).searchHotelPlaceholder,
+                    onChanged: (_) {
+                      if (isPropertyMode) {
+                        propertyNotifier.search();
+                      } else {
+                        unitNotifier.searchController.value =
+                            searchController.value;
+                        unitNotifier.search();
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
             Expanded(
-              child: CheckStateInGetApiDataWidget(
-                state: state,
-                refresh: () {
-                  ref.invalidate(searchAndFilterPropertiesProvider);
-                },
-                widgetOfLoading: CustomScrollView(
-                  controller: _scrollController,
-                  slivers: const [
-                    PropertySliverListWidget(
-                      properties: [],
-                      isLoading: true,
-                    ),
-                  ],
-                ),
-                widgetOfData: CustomScrollView(
-                  controller: _scrollController,
-                  slivers: [
-                    if (state.data.data.isEmpty)
-                      SliverToBoxAdapter(
-                        child:
-                            EmptyWidget(title: S.of(context).noSearchResults),
-                      ),
-                    PropertySliverListWidget(
-                      properties: state.data.data,
-                    ),
-                    if (state.stateData == States.loadingMore)
-                      const SliverToBoxAdapter(
-                        child: CircularProgressIndicatorWidget(),
-                      ),
-                  ],
-                ),
-              ),
+              child: isPropertyMode
+                  ? _buildPropertyResults()
+                  : _buildUnitResults(),
             ),
           ],
         ),

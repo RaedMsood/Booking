@@ -50,7 +50,10 @@ class LogoutOrDeleteAccountBottomSheetWidget extends ConsumerWidget {
           SvgPicture.asset(
             deleteAccount ? AppIcons.trash : AppIcons.logOut,
             width: 40.w,
-            color: Colors.redAccent.withValues(alpha: .9),
+            colorFilter: ColorFilter.mode(
+              Colors.redAccent.withValues(alpha: .9),
+              BlendMode.srcIn,
+            ),
           ),
           10.h.verticalSpace,
           AutoSizeTextWidget(
@@ -92,6 +95,7 @@ class LogoutOrDeleteAccountBottomSheetWidget extends ConsumerWidget {
               Auth().logout();
               Navigator.of(context).pop();
               ref.read(unreadCountProvider.notifier).clear();
+              ref.read(favoritesProvider.notifier).clear();
               onSuccess?.call();
             },
             bottonWidget: DefaultButtonWidget(

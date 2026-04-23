@@ -23,6 +23,8 @@ class DetailsOfBookInAddPage extends ConsumerStatefulWidget {
   final String image;
   final int unitId;
   final String totalPrice;
+  final String price;
+  final bool hasDiscount;
 
   const DetailsOfBookInAddPage({
     required this.image,
@@ -30,6 +32,8 @@ class DetailsOfBookInAddPage extends ConsumerStatefulWidget {
     required this.location,
     required this.unitId,
     required this.totalPrice,
+    required this.price,
+    required this.hasDiscount,
     super.key,
   });
 
@@ -126,6 +130,8 @@ class _DetailsOfBookInAddPageState
                           adultCount: adults,
                           guests: children+adults,
                           totalPrice: widget.totalPrice,
+                          price: widget.price,
+                          hasDiscount: widget.hasDiscount,
                           unitId: widget.unitId,
                         );
                         ref

@@ -12,6 +12,7 @@ import '../../../../core/widgets/buttons/default_button.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
 import '../../../notifications/presentation/state_mangment/notifications_riverpod.dart';
+import '../../../profile/presentation/state_mangement/riverpod.dart';
 import '../riverpod/user_riverpod.dart';
 import '../widgets/resend_code_widget.dart';
 import '../widgets/verify_pinput_widget.dart';
@@ -109,6 +110,7 @@ class _VerifyCodePageState extends ConsumerState<VerifyCodePage>
             functionSuccess: () async {
               if (checkOTPState.data.status == true) {
                 Auth().login(checkOTPState.data);
+                ref.read(favoritesProvider.notifier).refresh();
                 navigateAndFinish(context, const BottomNavigationBarWidget());
                 ref.read(unreadCountProvider.notifier).refresh();
               } else {

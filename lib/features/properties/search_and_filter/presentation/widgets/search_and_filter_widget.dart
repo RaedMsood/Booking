@@ -4,14 +4,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/widgets/text_form_field.dart';
-import '../../../../../generated/l10n.dart';
 import '../pages/filter_page.dart';
-import '../riverpod/search_and_filter_riverpod.dart';
 
 class SearchAndFilterWidget extends StatelessWidget {
-  final SearchAndFilterPropertiesNotifier controller;
+  final TextEditingController controller;
+  final String hintText;
+  final ValueChanged<String> onChanged;
 
-  const SearchAndFilterWidget({super.key, required this.controller});
+  const SearchAndFilterWidget({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +24,10 @@ class SearchAndFilterWidget extends StatelessWidget {
       children: [
         Expanded(
           child: TextFormFieldWidget(
-            controller: controller.searchController,
+            controller: controller,
             type: TextInputType.text,
-            hintText: S.of(context).searchHotelPlaceholder,
-            onChanged: (value) {
-              controller.search();
-            },
+            hintText: hintText,
+            onChanged: onChanged,
           ),
         ),
         10.w.horizontalSpace,

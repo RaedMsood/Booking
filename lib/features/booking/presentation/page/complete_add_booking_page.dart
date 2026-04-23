@@ -120,33 +120,33 @@ class _CompleteAddBookingPageState
         
                                   return null;
                                 }),
-                            12.verticalSpace,
-                            AutoSizeTextWidget(
-                              text: S.of(context).email,
-                              fontSize: 11.sp,
-                              fontWeight: FontWeight.w400,
-                              colorText: const Color(0xff2E3333),
-                            ),
-                            6.verticalSpace,
-                            TextFormFieldWidget(
-                                controller: email,
-                                type: TextInputType.emailAddress,
-                                hintText: S.of(context).emailPlaceholder,
-                                prefix: Icon(
-                                  Icons.email_outlined,
-                                  size: 20.sp,
-                                  color: AppColors.primaryColor,
-                                ),
-                                // fieldValidator: (value) {
-                                //
-                                //   final emails = email.text.trim();
-                                //   final emailRegex =
-                                //       RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-                                //   if (!emailRegex.hasMatch(emails)) {
-                                //     return S.of(context).invalidEmail;
-                                //   }
-                                //   return null;
-                                 ),
+                            //12.verticalSpace,
+                            // AutoSizeTextWidget(
+                            //   text: S.of(context).email,
+                            //   fontSize: 11.sp,
+                            //   fontWeight: FontWeight.w400,
+                            //   colorText: const Color(0xff2E3333),
+                            // ),
+                            // 6.verticalSpace,
+                            // TextFormFieldWidget(
+                            //     controller: email,
+                            //     type: TextInputType.emailAddress,
+                            //     hintText: S.of(context).emailPlaceholder,
+                            //     prefix: Icon(
+                            //       Icons.email_outlined,
+                            //       size: 20.sp,
+                            //       color: AppColors.primaryColor,
+                            //     ),
+                            //     // fieldValidator: (value) {
+                            //     //
+                            //     //   final emails = email.text.trim();
+                            //     //   final emailRegex =
+                            //     //       RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                            //     //   if (!emailRegex.hasMatch(emails)) {
+                            //     //     return S.of(context).invalidEmail;
+                            //     //   }
+                            //     //   return null;
+                            //      ),
                             12.verticalSpace,
                             AutoSizeTextWidget(
                               text: S.of(context).phoneNumber,
@@ -179,10 +179,10 @@ class _CompleteAddBookingPageState
                                 return null;
                               },
                             ),
-                            CityWidget(
-                              fontSize: 11.sp,
-                              colorText: const Color(0xff2E3333),
-                            ),
+                            // CityWidget(
+                            //   fontSize: 11.sp,
+                            //   colorText: const Color(0xff2E3333),
+                            // ),
                           ],
                         ),
                       ),
