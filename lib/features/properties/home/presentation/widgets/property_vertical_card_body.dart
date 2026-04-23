@@ -61,7 +61,7 @@ class PropertyVerticalCardBody extends ConsumerWidget {
                 property: property,
                 imageHeight: imageHeight,
               ),
-              8.verticalSpace,
+              4.verticalSpace,
               Expanded(
                 child: _PropertyCardInfoSection(
                   property: property,

@@ -33,7 +33,7 @@ class PropertyCardLocationRowWidget extends StatelessWidget {
             BlendMode.srcIn,
           ),
         ),
-        4.w.horizontalSpace,
+        2.w.horizontalSpace,
         Expanded(
           child: AutoSizeTextWidget(
             text: '$city, $district',

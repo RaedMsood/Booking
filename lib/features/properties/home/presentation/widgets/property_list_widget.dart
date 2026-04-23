@@ -22,7 +22,7 @@ class PropertySliverListWidget extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     var provider = ref.read(getAllPropertyProvider.notifier);
     final isGridView = provider.viewType == HomePropertyViewType.grid;
-    final listCardExtent = 208.h;
+    final listCardExtent = 212.h;
     final gridCardExtent = 178.h;
 
     return SliverPadding(
