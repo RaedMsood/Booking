@@ -6,6 +6,7 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../generated/l10n.dart';
+import 'counter_row_widget.dart';
 
 class RangeCalendarWidget extends ConsumerStatefulWidget {
   const RangeCalendarWidget({
@@ -23,6 +24,7 @@ class RangeCalendarWidget extends ConsumerStatefulWidget {
 class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _rangeStart, _rangeEnd;
+  int _selectedNights = 1;
 
   DateTime _dateOnly(DateTime value) {
     return DateTime(value.year, value.month, value.day);
@@ -41,6 +43,92 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
     return _effectiveCheckout!.difference(_rangeStart!).inDays;
   }
 
+  int _clampNights(int nights, {DateTime? start}) {
+    final normalizedLastDay = _dateOnly(_lastDay);
+    final maxNights = start == null
+        ? normalizedLastDay.difference(_today).inDays + 1
+        : normalizedLastDay.difference(_dateOnly(start)).inDays + 1;
+
+    if (maxNights <= 0) return 1;
+    if (nights < 1) return 1;
+    if (nights > maxNights) return maxNights;
+    return nights;
+  }
+
+  DateTime _rangeEndFor(DateTime start, int nights) {
+    return _dateOnly(start).add(Duration(days: nights - 1));
+  }
+
+  void _applyManualRange(
+    DateTime start,
+    DateTime end, {
+    DateTime? focusedDay,
+  }) {
+    final normalizedStart = _dateOnly(start);
+    final normalizedEnd = _dateOnly(end);
+    final calculatedNights =
+        normalizedEnd.difference(normalizedStart).inDays + 1;
+    final effectiveNights = _clampNights(
+      calculatedNights,
+      start: normalizedStart,
+    );
+
+    setState(() {
+      _rangeStart = normalizedStart;
+      _rangeEnd = _rangeEndFor(normalizedStart, effectiveNights);
+      _selectedNights = effectiveNights;
+      _focusedDay = _dateOnly(focusedDay ?? end);
+    });
+
+    _emitSelection();
+  }
+
+  void _emitSelection() {
+    if (_rangeStart == null || _rangeEnd == null) {
+      widget.onRangeSelected(null, null);
+      return;
+    }
+
+    widget.onRangeSelected(
+      _rangeStart,
+      _dateOnly(_rangeEnd!).add(const Duration(days: 1)),
+    );
+  }
+
+  void _selectStartDate(DateTime day, {DateTime? focusedDay}) {
+    final normalizedStart = _dateOnly(day);
+    final effectiveNights = _clampNights(_selectedNights, start: normalizedStart);
+    final normalizedEnd = _rangeEndFor(normalizedStart, effectiveNights);
+
+    setState(() {
+      _rangeStart = normalizedStart;
+      _rangeEnd = normalizedEnd;
+      _selectedNights = effectiveNights;
+      _focusedDay = _dateOnly(focusedDay ?? day);
+    });
+
+    _emitSelection();
+  }
+
+  void _changeNights(int delta) {
+    final nextNights = _clampNights(
+      _selectedNights + delta,
+      start: _rangeStart,
+    );
+
+    if (nextNights == _selectedNights) return;
+
+    setState(() {
+      _selectedNights = nextNights;
+      if (_rangeStart != null) {
+        _rangeEnd = _rangeEndFor(_rangeStart!, _selectedNights);
+      }
+    });
+
+    if (_rangeStart != null) {
+      _emitSelection();
+    }
+  }
 
   String? _selectionPreview() {
     if (_rangeStart == null || _effectiveCheckout == null) return null;
@@ -127,6 +215,21 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                       ),
                     ),
                   ],
+                  12.verticalSpace,
+                  CounterRowWidget(
+                    label: S.of(context).nights,
+                    count: _selectedNights,
+                    onIncrement: () => _changeNights(1),
+                    onDecrement: () => _changeNights(-1),
+                  ),
+                  6.verticalSpace,
+                  AutoSizeTextWidget(
+                    text:
+                        'اختر عدد الليالي ثم حدد تاريخ الدخول، أو اضغط تاريخاً لاحقاً من التقويم ليتحدث العداد تلقائياً',
+                    fontSize: 8.3.sp,
+                    colorText: AppColors.fontColor2,
+                    maxLines: 2,
+                  ),
                   10.verticalSpace,
 
                   // عنوان الشهر مع الأسهم
@@ -175,12 +278,13 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                       _calendarPageController = controller;
                     },
                     // اختيار مدى (Range)
-                    rangeSelectionMode: RangeSelectionMode.enforced,
+                    rangeSelectionMode: RangeSelectionMode.toggledOn,
                     rangeStartDay: _rangeStart,
                     rangeEndDay: _rangeEnd,
                     selectedDayPredicate: (day) {
                       return _rangeStart != null &&
-                          _rangeEnd == null &&
+                          _rangeEnd != null &&
+                          isSameDay(_rangeStart, _rangeEnd) &&
                           isSameDay(day, _rangeStart);
                     },
 
@@ -190,31 +294,26 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                       return !d.isBefore(_today);
                     },
 
-                    onRangeSelected: (start, end, focused) {
-                      // حارس إضافي لو حصلت حالة غريبة من الـ callback
-                      if ((start != null && start.isBefore(_today)) ||
-                          (end != null && end.isBefore(_today))) {
+                    onDaySelected: (selectedDay, focusedDay) {
+                      final normalizedSelectedDay = _dateOnly(selectedDay);
+                      if (normalizedSelectedDay.isBefore(_today)) {
                         return;
                       }
 
-                      final normalizedStart = start == null ? null : _dateOnly(start);
-                      final normalizedEnd = end == null ? null : _dateOnly(end);
+                       if (_rangeStart != null &&
+                           normalizedSelectedDay.isAfter(_rangeStart!)) {
+                         _applyManualRange(
+                           _rangeStart!,
+                           normalizedSelectedDay,
+                           focusedDay: focusedDay,
+                         );
+                         return;
+                       }
 
-                      setState(() {
-                        _rangeStart = normalizedStart;
-                        _rangeEnd = normalizedEnd;
-                        _focusedDay = focused;
-                      });
-
-                      if (normalizedStart == null) {
-                        widget.onRangeSelected(null, null);
-                        return;
-                      }
-
-                      final effectiveCheckout =
-                          _dateOnly(normalizedEnd ?? normalizedStart)
-                              .add(const Duration(days: 1));
-                      widget.onRangeSelected(normalizedStart, effectiveCheckout);
+                      _selectStartDate(
+                        normalizedSelectedDay,
+                        focusedDay: focusedDay,
+                      );
                     },
 
                     headerVisible: false,
