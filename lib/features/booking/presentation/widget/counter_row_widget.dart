@@ -8,6 +8,7 @@ import 'counter_button_widget.dart';
 class CounterRowWidget extends StatelessWidget {
   final String label;
   final int count;
+  final String? countSuffix;
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
 
@@ -15,6 +16,7 @@ class CounterRowWidget extends StatelessWidget {
     super.key,
     required this.label,
     required this.count,
+    this.countSuffix,
     required this.onIncrement,
     required this.onDecrement,
   });
@@ -32,7 +34,12 @@ class CounterRowWidget extends StatelessWidget {
         6.verticalSpace,
         Row(
           children: [
-            Expanded(child: CountDisplayWidget(count: count)),
+            Expanded(
+              child: CountDisplayWidget(
+                count: count,
+                suffix: countSuffix,
+              ),
+            ),
             8.horizontalSpace,
             CounterButtonWidget(icon: Icons.add, onTap: onIncrement),
             8.horizontalSpace,

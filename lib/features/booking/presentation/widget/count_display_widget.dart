@@ -5,8 +5,13 @@ import '../../../../core/widgets/auto_size_text_widget.dart';
 
 class CountDisplayWidget extends StatelessWidget {
   final int count;
+  final String? suffix;
 
-  const CountDisplayWidget({super.key, required this.count});
+  const CountDisplayWidget({
+    super.key,
+    required this.count,
+    this.suffix,
+  });
 
   @override
   Widget build(BuildContext context) => Container(
@@ -16,10 +21,23 @@ class CountDisplayWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
     ),
     alignment: Alignment.center,
-    child: AutoSizeTextWidget(
-      text: '$count',
-      fontSize: 12,
-      fontWeight: FontWeight.w400,
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AutoSizeTextWidget(
+          text: '$count',
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+        ),
+        if (suffix != null && suffix!.trim().isNotEmpty) ...[
+          6.horizontalSpace,
+          AutoSizeTextWidget(
+            text: suffix!,
+            fontSize: 9.sp,
+            fontWeight: FontWeight.w400,
+          ),
+        ],
+      ],
     ),
   );
 }

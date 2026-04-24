@@ -130,6 +130,16 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
     }
   }
 
+  void _resetSelection() {
+    setState(() {
+      _rangeStart = null;
+      _rangeEnd = null;
+      _selectedNights = 1;
+    });
+
+    widget.onRangeSelected(null, null);
+  }
+
   String? _selectionPreview() {
     if (_rangeStart == null || _effectiveCheckout == null) return null;
 
@@ -140,7 +150,7 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
 
     return nightCountText == null
         ? 'الدخول: $startText  •  المغادرة: $checkoutText'
-        : 'الدخول: $startText  •  المغادرة: $checkoutText  •  $nightCountText';
+        : 'الدخول: $startText  •  المغادرة: $checkoutText  ';
   }
 
   String? _nightCountLabel() {
@@ -182,10 +192,75 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AutoSizeTextWidget(
-                    text: S.of(context).yourBookingDate,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 9.5.sp,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AutoSizeTextWidget(
+                          text: S.of(context).yourBookingDate,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 9.5.sp,
+                        ),
+                      ),
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 220),
+                        switchInCurve: Curves.easeOut,
+                        switchOutCurve: Curves.easeIn,
+                        child: _selectionPreview() == null
+                            ? const SizedBox.shrink()
+                            : Tooltip(
+                                key: const ValueKey('calendar-reset-button'),
+                                message: S.of(context).calendarClear,
+                                child: Semantics(
+                                  button: true,
+                                  label: S.of(context).calendarClear,
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      borderRadius: BorderRadius.circular(12.r),
+                                      onTap: _resetSelection,
+                                      child: Ink(
+                                        width: 34.w,
+                                        height: 34.h,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12.r),
+                                          border: Border.all(
+                                            color: AppColors.primaryColor
+                                                .withValues(alpha: 0.14),
+                                          ),
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                            colors: [
+                                              AppColors.primaryColor
+                                                  .withValues(alpha: 0.09),
+                                              AppColors.primaryColor
+                                                  .withValues(alpha: 0.03),
+                                            ],
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: AppColors.primaryColor
+                                                  .withValues(alpha: 0.08),
+                                              blurRadius: 10,
+                                              offset: const Offset(0, 4),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.restart_alt_rounded,
+                                            size: 16.sp,
+                                            color: AppColors.primaryColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                      ),
+                    ],
                   ),
                  // 6.verticalSpace,
                   // AutoSizeTextWidget(
@@ -219,6 +294,7 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                   CounterRowWidget(
                     label: S.of(context).nights,
                     count: _selectedNights,
+                    countSuffix: S.of(context).nights,
                     onIncrement: () => _changeNights(1),
                     onDecrement: () => _changeNights(-1),
                   ),
@@ -300,15 +376,15 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                         return;
                       }
 
-                       if (_rangeStart != null &&
-                           normalizedSelectedDay.isAfter(_rangeStart!)) {
-                         _applyManualRange(
-                           _rangeStart!,
-                           normalizedSelectedDay,
-                           focusedDay: focusedDay,
-                         );
-                         return;
-                       }
+                      if (_rangeStart != null &&
+                          normalizedSelectedDay.isAfter(_rangeStart!)) {
+                        _applyManualRange(
+                          _rangeStart!,
+                          normalizedSelectedDay,
+                          focusedDay: focusedDay,
+                        );
+                        return;
+                      }
 
                       _selectStartDate(
                         normalizedSelectedDay,
