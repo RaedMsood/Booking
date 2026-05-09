@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,6 +14,8 @@ import '../../../../core/widgets/text_form_field.dart';
 import '../../../../generated/l10n.dart';
 import '../riverpod/user_riverpod.dart';
 import '../widgets/design_to_log_in_and_sign_up_widget.dart';
+import '../widgets/phone_country_selector_button_widget.dart';
+import '../widgets/user_country_picker_helper.dart';
 import '../widgets/user_page_titles_widget.dart';
 import 'verify_code_page.dart';
 
@@ -31,6 +32,8 @@ class _LogInPageState extends ConsumerState<LogInPage> {
   String _selectedCountryDialCode = '967';
   String _selectedCountryFlag = '🇾🇪';
 
+  bool get _isNonYemeniNumber => _selectedCountryDialCode != '967';
+
   String get _normalizedPhoneNumber =>
       phoneNumberController.text.replaceAll(RegExp(r'\D'), '');
 
@@ -38,36 +41,12 @@ class _LogInPageState extends ConsumerState<LogInPage> {
       '+$_selectedCountryDialCode$_normalizedPhoneNumber';
 
   void _showCountryPicker() {
-    showCountryPicker(
+    UserCountryPickerHelper.show(
       context: context,
-      showPhoneCode: true,
-      favorite: const ['YE', 'SA', 'AE', 'EG'],
-      countryListTheme: CountryListThemeData(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(14.r)),
-        bottomSheetHeight: MediaQuery.of(context).size.height * 0.82,
-        inputDecoration: InputDecoration(
-          hintText: 'ابحث عن الدولة',
-          prefixIcon: const Icon(Icons.search),
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.r),
-            borderSide: BorderSide.none,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.r),
-            borderSide: BorderSide.none,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.r),
-            borderSide: BorderSide.none,
-          ),
-        ),
-      ),
-      onSelect: (Country country) {
+      onSelected: (selection) {
         setState(() {
-          _selectedCountryDialCode = country.phoneCode;
-          _selectedCountryFlag = country.flagEmoji;
+          _selectedCountryDialCode = selection.dialCode;
+          _selectedCountryFlag = selection.flagEmoji;
         });
       },
     );
@@ -138,39 +117,23 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                           height: 14.h,
                         ),
                       ),
-                      suffixIcon: InkWell(
+                      suffixIcon: PhoneCountrySelectorButtonWidget(
+                        flagEmoji: _selectedCountryFlag,
+                        dialCode: _selectedCountryDialCode,
                         onTap: _showCountryPicker,
-                        borderRadius: BorderRadius.circular(8.r),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            left: 12.w,
-                            right: 10.w,
-                            top: 10.h,
-                            bottom: 8.h,
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                _selectedCountryFlag,
-                                style: TextStyle(fontSize: 15.sp),
-                              ),
-                              4.w.horizontalSpace,
-                              AutoSizeTextWidget(
-                                text: '+$_selectedCountryDialCode',
-                                colorText: AppColors.primaryColor,
-                                fontSize: 12.sp,
-                              ),
-                              Icon(
-                                Icons.keyboard_arrow_down_rounded,
-                                size: 18.sp,
-                                color: AppColors.primaryColor,
-                              ),
-                            ],
-                          ),
-                        ),
                       ),
                     ),
+                    if (_isNonYemeniNumber) ...[
+                      8.h.verticalSpace,
+                      AutoSizeTextWidget(
+                        text:
+                            'إذا كان الرقم ليس يمنيًا، يرجى إدخال رقم مرتبط بالواتساب الخاص بك لأن رمز التحقق OTP سيصل إليه.',
+                        fontSize: 9.8.sp,
+                        colorText: AppColors.fontColor2,
+                        fontWeight: FontWeight.w400,
+                        maxLines: 3,
+                      ),
+                    ],
                     16.h.verticalSpace,
                     CheckStateInPostApiDataWidget(
                       state: state,

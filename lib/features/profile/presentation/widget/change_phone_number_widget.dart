@@ -12,6 +12,8 @@ import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
 import '../../../../core/widgets/text_form_field.dart';
 import '../../../../services/auth/auth.dart';
+import '../../../user/presentation/widgets/phone_country_selector_button_widget.dart';
+import '../../../user/presentation/widgets/user_country_picker_helper.dart';
 import '../state_mangement/riverpod.dart';
 import 'verify_phone_change_widget.dart';
 
@@ -29,6 +31,34 @@ class _ChangePhoneNumberWidgetState
     extends ConsumerState<ChangePhoneNumberWidget> {
   TextEditingController phoneNumberController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  String _selectedCountryDialCode = '967';
+  String _selectedCountryFlag = '🇾🇪';
+
+  bool get _isNonYemeniNumber => _selectedCountryDialCode != '967';
+
+  String get _normalizedPhoneNumber =>
+      phoneNumberController.text.replaceAll(RegExp(r'\D'), '');
+
+  String get _completePhoneNumber =>
+      '+$_selectedCountryDialCode$_normalizedPhoneNumber';
+
+  void _showCountryPicker() {
+    UserCountryPickerHelper.show(
+      context: context,
+      onSelected: (selection) {
+        setState(() {
+          _selectedCountryDialCode = selection.dialCode;
+          _selectedCountryFlag = selection.flagEmoji;
+        });
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    phoneNumberController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +90,10 @@ class _ChangePhoneNumberWidgetState
                   SvgPicture.asset(
                     AppIcons.phone,
                     height: 17.h,
-                    color: AppColors.primaryColor,
+                    colorFilter: ColorFilter.mode(
+                      AppColors.primaryColor,
+                      BlendMode.srcIn,
+                    ),
                   ),
                   10.w.horizontalSpace,
                   AutoSizeTextWidget(
@@ -81,19 +114,18 @@ class _ChangePhoneNumberWidgetState
             TextFormFieldWidget(
               controller: phoneNumberController,
               type: TextInputType.phone,
+              textAlign: TextAlign.left,
               hintText: S.of(context).phonePlaceholder,
               fillColor: AppColors.scaffoldColor,
-              maxLength: 9,
+              maxLength: 15,
+              buildCounter: false,
               fieldValidator: (value) {
-                if (value == null || value.toString().isEmpty) {
+                final phone = (value ?? '').replaceAll(RegExp(r'\D'), '');
+                if (phone.isEmpty) {
                   return S.of(context).pleaseEnterPhoneNumber;
                 }
-                final phone = value.trim();
-                if (!phone.startsWith('7')) {
-                  return S.of(context).phoneMustStartWith7;
-                }
-                if (phone.length < 9) {
-                  return S.of(context).phoneMustBe9Digits;
+                if (phone.length < 6 || phone.length > 15) {
+                  return 'يرجى إدخال رقم هاتف صحيح';
                 }
                 return null;
               },
@@ -102,28 +134,34 @@ class _ChangePhoneNumberWidgetState
                 child: SvgPicture.asset(
                   AppIcons.phone,
                   height: 13.h,
-                  color: AppColors.primaryColor,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.primaryColor,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
-              suffixIcon: Padding(
-                padding: EdgeInsets.only(
-                  left: 12.w,
-                  right: 12.w,
-                  top: 14.h,
-                  bottom: 12.h,
-                ),
-                child: AutoSizeTextWidget(
-                  text: "967+",
-                  colorText: AppColors.primaryColor,
-                  fontSize: 12.sp,
-                ),
+              suffixIcon: PhoneCountrySelectorButtonWidget(
+                flagEmoji: _selectedCountryFlag,
+                dialCode: _selectedCountryDialCode,
+                onTap: _showCountryPicker,
               ),
             ),
+            if (_isNonYemeniNumber) ...[
+              8.h.verticalSpace,
+              AutoSizeTextWidget(
+                text:
+                    'إذا كان الرقم ليس يمنيًا، يرجى إدخال رقم مرتبط بالواتساب الخاص بك لأن رمز التحقق OTP سيصل إليه.',
+                fontSize: 9.8.sp,
+                colorText: AppColors.fontColor2,
+                fontWeight: FontWeight.w400,
+                maxLines: 3,
+              ),
+            ],
             14.h.verticalSpace,
             CheckStateInPostApiDataWidget(
               state: state,
               messageSuccess:
-                  "${S.of(context).codeHasBeenSendTo} ${phoneNumberController.text}",
+                  "${S.of(context).codeHasBeenSendTo} $_completePhoneNumber",
               functionSuccess: () {
                 Navigator.of(context).pop();
                 showTitledBottomSheet(
@@ -131,7 +169,7 @@ class _ChangePhoneNumberWidgetState
                   fontSize: 15.6.sp,
                   context: context,
                   page: VerifyPhoneChangeWidget(
-                    phoneNumber: phoneNumberController.text,
+                    phoneNumber: _completePhoneNumber,
                     phoneNumberOnSuccess: widget.phoneNumberOnSuccess,
                   ),
                 );
@@ -146,7 +184,7 @@ class _ChangePhoneNumberWidgetState
                     ref
                         .read(changePhoneNumberProvider.notifier)
                         .changePhoneNumber(
-                          phoneNumber: phoneNumberController.text,
+                          phoneNumber: _completePhoneNumber,
                         );
                   }
                 },
