@@ -38,7 +38,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
       phoneNumberController.text.replaceAll(RegExp(r'\D'), '');
 
   String get _completePhoneNumber =>
-      '+$_selectedCountryDialCode$_normalizedPhoneNumber';
+      '$_selectedCountryDialCode$_normalizedPhoneNumber';
 
   void _showCountryPicker() {
     UserCountryPickerHelper.show(
@@ -126,7 +126,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                       8.h.verticalSpace,
                       AutoSizeTextWidget(
                         text:
-                            'إذا كان الرقم ليس يمنيًا، يرجى إدخال رقم مرتبط بالواتساب الخاص بك لأن رمز التحقق OTP سيصل إليه.',
+                            ' يرجى إدخال رقم مرتبط بالواتساب الخاص بك لأن رمز التحقق OTP سيصل إليه.',
                         fontSize: 9.8.sp,
                         colorText: AppColors.fontColor2,
                         fontWeight: FontWeight.w400,
@@ -151,7 +151,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                         isLoading: state.stateData == States.loading,
                         onPressed: () {
                           final isValid = formKey.currentState!.validate();
-
+                          print(_completePhoneNumber);
                           if (isValid) {
                             FocusManager.instance.primaryFocus?.unfocus();
                             ref.read(userProvider.notifier).logIn(
