@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,7 +14,6 @@ import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
 import '../../../../core/widgets/text_form_field.dart';
 import '../../../../generated/l10n.dart';
 import '../riverpod/user_riverpod.dart';
-import '../widgets/continue_with_google_or_facebook_widget.dart';
 import '../widgets/design_to_log_in_and_sign_up_widget.dart';
 import '../widgets/user_page_titles_widget.dart';
 import 'verify_code_page.dart';
@@ -28,6 +28,56 @@ class LogInPage extends ConsumerStatefulWidget {
 class _LogInPageState extends ConsumerState<LogInPage> {
   TextEditingController phoneNumberController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  String _selectedCountryDialCode = '967';
+  String _selectedCountryFlag = '🇾🇪';
+
+  String get _normalizedPhoneNumber =>
+      phoneNumberController.text.replaceAll(RegExp(r'\D'), '');
+
+  String get _completePhoneNumber =>
+      '+$_selectedCountryDialCode$_normalizedPhoneNumber';
+
+  void _showCountryPicker() {
+    showCountryPicker(
+      context: context,
+      showPhoneCode: true,
+      favorite: const ['YE', 'SA', 'AE', 'EG'],
+      countryListTheme: CountryListThemeData(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(14.r)),
+        bottomSheetHeight: MediaQuery.of(context).size.height * 0.82,
+        inputDecoration: InputDecoration(
+          hintText: 'ابحث عن الدولة',
+          prefixIcon: const Icon(Icons.search),
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.r),
+            borderSide: BorderSide.none,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.r),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.r),
+            borderSide: BorderSide.none,
+          ),
+        ),
+      ),
+      onSelect: (Country country) {
+        setState(() {
+          _selectedCountryDialCode = country.phoneCode;
+          _selectedCountryFlag = country.flagEmoji;
+        });
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    phoneNumberController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,18 +117,17 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                     TextFormFieldWidget(
                       controller: phoneNumberController,
                       type: TextInputType.phone,
-                      maxLength: 9,
+                      textAlign: TextAlign.left,
+                      maxLength: 15,
+                      buildCounter: false,
                       hintText: S.of(context).phonePlaceholder,
                       fieldValidator: (value) {
-                        if (value == null || value.toString().isEmpty) {
+                        final phone = (value ?? '').replaceAll(RegExp(r'\D'), '');
+                        if (phone.isEmpty) {
                           return S.of(context).phoneRequired;
                         }
-                        final phone = value.trim();
-                        if (!phone.startsWith('7')) {
-                          return S.of(context).phoneMustStartWith7;
-                        }
-                        if (phone.length < 9) {
-                          return S.of(context).phoneMustBe9Digits;
+                        if (phone.length < 6 || phone.length > 15) {
+                          return 'يرجى إدخال رقم هاتف صحيح';
                         }
                         return null;
                       },
@@ -89,13 +138,36 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                           height: 14.h,
                         ),
                       ),
-                      suffixIcon: Padding(
-                        padding: EdgeInsets.only(
-                            left: 12.w, right: 12.w, top: 12.h, bottom: 8.h),
-                        child: AutoSizeTextWidget(
-                          text: "967+",
-                          colorText: AppColors.primaryColor,
-                          fontSize: 12.sp,
+                      suffixIcon: InkWell(
+                        onTap: _showCountryPicker,
+                        borderRadius: BorderRadius.circular(8.r),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left: 12.w,
+                            right: 10.w,
+                            top: 10.h,
+                            bottom: 8.h,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                _selectedCountryFlag,
+                                style: TextStyle(fontSize: 15.sp),
+                              ),
+                              4.w.horizontalSpace,
+                              AutoSizeTextWidget(
+                                text: '+$_selectedCountryDialCode',
+                                colorText: AppColors.primaryColor,
+                                fontSize: 12.sp,
+                              ),
+                              Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                size: 18.sp,
+                                color: AppColors.primaryColor,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -109,7 +181,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                             fontSize: 14.sp,
                             context: context,
                             page: VerifyCodePage(
-                              phoneNumber: phoneNumberController.text,
+                              phoneNumber: _completePhoneNumber,
                             ));
                       },
                       bottonWidget: DefaultButtonWidget(
@@ -121,7 +193,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                           if (isValid) {
                             FocusManager.instance.primaryFocus?.unfocus();
                             ref.read(userProvider.notifier).logIn(
-                                  phoneNumber: phoneNumberController.text,
+                                  phoneNumber: _completePhoneNumber,
                                 );
                           }
                         },

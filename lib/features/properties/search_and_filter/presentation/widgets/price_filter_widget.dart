@@ -24,25 +24,54 @@ class PriceFilterWidget extends ConsumerStatefulWidget {
 class _PriceFilterWidgetState extends ConsumerState<PriceFilterWidget> {
   final NumberFormat _formatter = NumberFormat('#,##0', 'en_US');
 
+  RangeValues _normalizedRange(RangeValues? range) {
+    final min = widget.minPrice;
+    final max = widget.maxPrice;
+
+    if (range == null) {
+      return RangeValues(min, max);
+    }
+
+    var start = range.start.clamp(min, max).toDouble();
+    var end = range.end.clamp(min, max).toDouble();
+
+    if (start > end) {
+      final temp = start;
+      start = end;
+      end = temp;
+    }
+
+    return RangeValues(start, end);
+  }
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final currentRange = ref.read(currentPriceRangeProvider);
-      if (currentRange == null) {
-        ref.read(currentPriceRangeProvider.notifier).state =
-            RangeValues(widget.minPrice, widget.maxPrice);
+      final normalized = _normalizedRange(currentRange);
+      if (currentRange == null ||
+          currentRange.start != normalized.start ||
+          currentRange.end != normalized.end) {
+        ref.read(currentPriceRangeProvider.notifier).state = normalized;
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final currentRange = ref.watch(currentPriceRangeProvider);
+    final storedRange = ref.watch(currentPriceRangeProvider);
+    final currentRange = _normalizedRange(storedRange);
 
-    if (currentRange == null) {
-      return const SizedBox.shrink();
+    if (storedRange == null ||
+        storedRange.start != currentRange.start ||
+        storedRange.end != currentRange.end) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        ref.read(currentPriceRangeProvider.notifier).state = currentRange;
+      });
     }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

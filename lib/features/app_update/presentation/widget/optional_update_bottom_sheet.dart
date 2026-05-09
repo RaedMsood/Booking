@@ -37,8 +37,8 @@ class _OptionalUpdateBottomSheetState extends State<OptionalUpdateBottomSheet> {
   String get _laterText => _isArabic ? 'لاحقاً' : 'Later';
 
   String get _storeErrorText => _isArabic
-      ? 'تعذر فتح صفحة التحديث. حاول مرة أخرى.'
-      : 'Unable to open the update page. Please try again.';
+      ? 'تعذر فتح المتجر تلقائياً. يرجى الانتقال إلى المتجر وتحديث التطبيق يدوياً.'
+      : 'Unable to open the store automatically. Please go to the store and update the app manually.';
 
   Future<void> _updateNow() async {
     if (_isOpeningStore) return;

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
 import '../../../../../core/state/data_state.dart';
 import '../../../../../core/state/pagination_data/paginated_model.dart';
 import '../../../../../core/state/state.dart';
@@ -15,6 +15,8 @@ final appliedSearchResultModeProvider =
     StateProvider<SearchFilterResultMode>((ref) {
   return SearchFilterResultMode.property;
 });
+
+final searchQueryProvider = StateProvider<String>((ref) => '');
 
 final pendingSearchResultModeProvider =
     StateProvider.autoDispose<SearchFilterResultMode>((ref) {
@@ -51,7 +53,7 @@ class SelectedFeaturesNotifier extends StateNotifier<List<bool>> {
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-final searchAndFilterPropertiesProvider = StateNotifierProvider.autoDispose<
+final searchAndFilterPropertiesProvider = StateNotifierProvider<
     SearchAndFilterPropertiesNotifier,
     DataState<PaginationModel<PropertyDataModel>>>(
   (ref) {
@@ -74,7 +76,8 @@ class SearchAndFilterPropertiesNotifier
   DateTime? dateTo;
   RangeValues? priceRange;
   List<int> rating = [];
-  TextEditingController searchController = TextEditingController();
+  String searchQuery = '';
+  int _requestId = 0;
 
   final _controller = SearchAndFilterReposaitory();
 
@@ -85,6 +88,8 @@ class SearchAndFilterPropertiesNotifier
 
   Future<void> getData({bool moreData = false}) async {
     if (!mounted) return;
+
+    final requestId = ++_requestId;
 
     if (moreData && state.data.currentPage >= state.data.lastPage) {
       return;
@@ -99,7 +104,7 @@ class SearchAndFilterPropertiesNotifier
 
     final result = await _controller.searchAndFilterProperties(
       page: nextPage,
-      search: searchController.text,
+      search: searchQuery,
       dateFrom: dateFrom,
       dateTo: dateTo,
       cityId: cityId,
@@ -110,7 +115,7 @@ class SearchAndFilterPropertiesNotifier
       rating: rating,
     );
 
-    if (!mounted) return;
+    if (!mounted || requestId != _requestId) return;
 
     result.fold(
       (failure) {
@@ -129,10 +134,14 @@ class SearchAndFilterPropertiesNotifier
 
     _setStateIfMounted(state.copyWith(
       data: PaginationModel.empty(),
-      state: States.initial,
+      state: States.loading,
     ));
 
     await getData();
+  }
+
+  void setSearchQuery(String value) {
+    searchQuery = value;
   }
 
   Future<void> filter(
@@ -149,20 +158,18 @@ class SearchAndFilterPropertiesNotifier
         if (selectedFeatures[i]) features[i].id,
     ];
     priceRange = ref.read(currentPriceRangeProvider);
-    if (ref.read(selectedRatingProvider.notifier).state.isNotEmpty) {
-      rating = ref
-          .read(selectedRatingProvider.notifier)
-          .state
-          .whereType<double>()
-          .map((e) => e.toInt())
-          .toList();
-    }
+    rating = ref
+        .read(selectedRatingProvider.notifier)
+        .state
+        .whereType<double>()
+        .map((e) => e.toInt())
+        .toList();
 
     if (!mounted) return;
 
     _setStateIfMounted(state.copyWith(
       data: PaginationModel.empty(),
-      state: States.initial,
+      state: States.loading,
     ));
 
     await getData();
@@ -194,21 +201,16 @@ class SearchAndFilterPropertiesNotifier
 
     _setStateIfMounted(state.copyWith(
       data: PaginationModel.empty(),
-      state: States.initial,
+      state: States.loading,
     ));
     await getData();
   }
 
-  @override
-  void dispose() {
-    searchController.dispose();
-    super.dispose();
-  }
 }
 
 /////////////////////////////////////////////////////////////////////////
 
-final searchAndFilterUnitsProvider = StateNotifierProvider.autoDispose<
+final searchAndFilterUnitsProvider = StateNotifierProvider<
     SearchAndFilterUnitsNotifier,
     DataState<PaginationModel<UnitsModel>>>(
   (ref) {
@@ -231,7 +233,8 @@ class SearchAndFilterUnitsNotifier
   DateTime? dateTo;
   RangeValues? priceRange;
   List<int> rating = [];
-  TextEditingController searchController = TextEditingController();
+  String searchQuery = '';
+  int _requestId = 0;
 
   final _controller = SearchAndFilterReposaitory();
 
@@ -242,6 +245,8 @@ class SearchAndFilterUnitsNotifier
 
   Future<void> getData({bool moreData = false}) async {
     if (!mounted) return;
+
+    final requestId = ++_requestId;
 
     if (moreData && state.data.currentPage >= state.data.lastPage) {
       return;
@@ -256,7 +261,7 @@ class SearchAndFilterUnitsNotifier
 
     final result = await _controller.searchAndFilterUnits(
       page: nextPage,
-      search: searchController.text,
+      search: searchQuery,
       dateFrom: dateFrom,
       dateTo: dateTo,
       cityId: cityId,
@@ -267,7 +272,7 @@ class SearchAndFilterUnitsNotifier
       rating: rating,
     );
 
-    if (!mounted) return;
+    if (!mounted || requestId != _requestId) return;
 
     result.fold(
       (failure) {
@@ -286,10 +291,14 @@ class SearchAndFilterUnitsNotifier
 
     _setStateIfMounted(state.copyWith(
       data: PaginationModel.empty(),
-      state: States.initial,
+      state: States.loading,
     ));
 
     await getData();
+  }
+
+  void setSearchQuery(String value) {
+    searchQuery = value;
   }
 
   Future<void> filter(
@@ -306,20 +315,18 @@ class SearchAndFilterUnitsNotifier
         if (selectedFeatures[i]) features[i].id,
     ];
     priceRange = ref.read(currentPriceRangeProvider);
-    if (ref.read(selectedRatingProvider.notifier).state.isNotEmpty) {
-      rating = ref
-          .read(selectedRatingProvider.notifier)
-          .state
-          .whereType<double>()
-          .map((e) => e.toInt())
-          .toList();
-    }
+    rating = ref
+        .read(selectedRatingProvider.notifier)
+        .state
+        .whereType<double>()
+        .map((e) => e.toInt())
+        .toList();
 
     if (!mounted) return;
 
     _setStateIfMounted(state.copyWith(
       data: PaginationModel.empty(),
-      state: States.initial,
+      state: States.loading,
     ));
 
     await getData();
@@ -351,16 +358,11 @@ class SearchAndFilterUnitsNotifier
 
     _setStateIfMounted(state.copyWith(
       data: PaginationModel.empty(),
-      state: States.initial,
+      state: States.loading,
     ));
     await getData();
   }
 
-  @override
-  void dispose() {
-    searchController.dispose();
-    super.dispose();
-  }
 }
 
 /////////////////////////////////////////////////////////////////////////

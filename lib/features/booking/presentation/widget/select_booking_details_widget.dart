@@ -26,7 +26,7 @@ class SelectBookingDetailsWidget extends StatefulWidget {
 
 class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
   String _purpose = S.current.purposeLeisure;
-  int _rooms = 1, _adults = 1, _children = 1;
+  int _rooms = 0, _adults = 0, _children = 0;
 
   void _showOptionsSheet({
     required String title,
@@ -103,7 +103,7 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
               widget.countRoom(_rooms);
             },
             onDecrement: () {
-              if (_rooms > 1) setState(() => _rooms--);
+              if (_rooms > 0) setState(() => _rooms--);
               widget.countRoom(_rooms);
             },
           ),
@@ -116,7 +116,7 @@ class _BookingDetailsSectionState extends State<SelectBookingDetailsWidget> {
               widget.countAdult(_adults);
             },
             onDecrement: () {
-              if (_adults > 1) setState(() => _adults--);
+              if (_adults > 0) setState(() => _adults--);
               widget.countAdult(_adults);
             },
           ),

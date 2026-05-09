@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:booking/core/state/check_state_in_get_api_data_widget.dart';
 import 'package:booking/core/widgets/empty_widget.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +27,22 @@ class SearchAndFilterPage extends ConsumerStatefulWidget {
 
 class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
   final ScrollController _scrollController = ScrollController();
+  late final TextEditingController _searchController;
+  Timer? _searchDebounce;
 
   @override
   void initState() {
     super.initState();
+
+    _searchController = TextEditingController(
+      text: ref.read(searchQueryProvider),
+    );
+
+    final initialQuery = _searchController.text;
+    ref
+        .read(searchAndFilterPropertiesProvider.notifier)
+        .setSearchQuery(initialQuery);
+    ref.read(searchAndFilterUnitsProvider.notifier).setSearchQuery(initialQuery);
 
     _scrollController.addListener(_onScroll);
   }
@@ -41,7 +55,8 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
 
       if (mode == SearchFilterResultMode.property) {
         final state = ref.read(searchAndFilterPropertiesProvider);
-        if (state.stateData != States.loadingMore) {
+        if (state.stateData != States.loadingMore &&
+            state.stateData != States.loading) {
           ref
               .read(searchAndFilterPropertiesProvider.notifier)
               .getData(moreData: true);
@@ -50,7 +65,8 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
       }
 
       final state = ref.read(searchAndFilterUnitsProvider);
-      if (state.stateData != States.loadingMore) {
+      if (state.stateData != States.loadingMore &&
+          state.stateData != States.loading) {
         ref.read(searchAndFilterUnitsProvider.notifier).getData(moreData: true);
       }
     }
@@ -124,7 +140,11 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
 
   @override
   void dispose() {
+    _searchDebounce?.cancel();
+    _searchController.dispose();
     _scrollController.dispose();
+    ref.invalidate(searchAndFilterPropertiesProvider);
+    ref.invalidate(searchAndFilterUnitsProvider);
     super.dispose();
   }
 
@@ -134,11 +154,6 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
     final isPropertyMode = mode == SearchFilterResultMode.property;
     final propertyNotifier = ref.read(searchAndFilterPropertiesProvider.notifier);
     final unitNotifier = ref.read(searchAndFilterUnitsProvider.notifier);
-    final searchController = propertyNotifier.searchController;
-
-    if (unitNotifier.searchController.text != searchController.text) {
-      unitNotifier.searchController.value = searchController.value;
-    }
 
     return Scaffold(
       appBar: const SecondaryAppBarWidget(title: ''),
@@ -167,16 +182,26 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
                   ),
                   14.h.verticalSpace,
                   SearchAndFilterWidget(
-                    controller: searchController,
+                    controller: _searchController,
                     hintText: S.of(context).searchHotelPlaceholder,
-                    onChanged: (_) {
-                      if (isPropertyMode) {
-                        propertyNotifier.search();
-                      } else {
-                        unitNotifier.searchController.value =
-                            searchController.value;
-                        unitNotifier.search();
-                      }
+                    onChanged: (value) {
+                      _searchDebounce?.cancel();
+                      ref.read(searchQueryProvider.notifier).state = value;
+                      propertyNotifier.setSearchQuery(value);
+                      unitNotifier.setSearchQuery(value);
+
+                      _searchDebounce = Timer(
+                        const Duration(milliseconds: 300),
+                        () {
+                          if (!mounted) return;
+
+                          if (isPropertyMode) {
+                            propertyNotifier.search();
+                          } else {
+                            unitNotifier.search();
+                          }
+                        },
+                      );
                     },
                   ),
                 ],

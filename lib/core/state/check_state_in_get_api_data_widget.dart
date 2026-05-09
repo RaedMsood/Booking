@@ -49,7 +49,8 @@ class CheckStateInGetApiDataWidget extends StatelessWidget {
           ),
         );
       }
-    } else if (state.stateData == States.loading) {
+    } else if (state.stateData == States.loading ||
+        state.stateData == States.initial) {
       return widgetOfLoading ??
           const Center(
               child: CircularProgressIndicator(

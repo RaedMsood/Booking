@@ -44,10 +44,52 @@ class DetailsOfBookInAddPage extends ConsumerStatefulWidget {
 
 class _DetailsOfBookInAddPageState
     extends ConsumerState<DetailsOfBookInAddPage> {
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey _bookingDetailsKey = GlobalKey();
+
   DateTime? startDate;
   DateTime? endDate;
   String typeBook = S.current.purposeLeisure;
-  int rooms = 1, adults = 1, children = 1;
+  int rooms = 0, adults = 0, children = 0;
+
+  Future<void> _scrollToBookingDetails() async {
+    final targetContext = _bookingDetailsKey.currentContext;
+    if (targetContext == null) return;
+
+    await Scrollable.ensureVisible(
+      targetContext,
+      duration: const Duration(milliseconds: 350),
+      curve: Curves.easeInOut,
+      alignment: 0.2,
+    );
+  }
+
+  Future<void> _validateBookingCounts() async {
+    await _scrollToBookingDetails();
+
+    if (!mounted) return;
+
+    if (rooms <= 0) {
+      showFlashBarWarring(
+        context: context,
+        message: S.of(context).validationRoomsRequired,
+      );
+      return;
+    }
+
+    if (adults <= 0) {
+      showFlashBarWarring(
+        context: context,
+        message: S.of(context).validationMinOneAdult,
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +104,7 @@ class _DetailsOfBookInAddPageState
           children: [
             Expanded(
               child: SingleChildScrollView(
+                controller: _scrollController,
                 child: Column(
                   children: [
                     6.h.verticalSpace,
@@ -78,15 +121,18 @@ class _DetailsOfBookInAddPageState
                         });
                       },
                     ),
-                    SelectBookingDetailsWidget(countAdult: (adult) {
-                      adults = adult!;
-                    }, countChild: (child) {
-                      children = child!;
-                    }, countRoom: (room) {
-                      rooms = room!;
-                    }, onTypeSelected: (type) {
-                      typeBook = type!;
-                    }),
+                    KeyedSubtree(
+                      key: _bookingDetailsKey,
+                      child: SelectBookingDetailsWidget(countAdult: (adult) {
+                        adults = adult!;
+                      }, countChild: (child) {
+                        children = child!;
+                      }, countRoom: (room) {
+                        rooms = room!;
+                      }, onTypeSelected: (type) {
+                        typeBook = type!;
+                      }),
+                    ),
                   ],
                 ),
               ),
@@ -116,6 +162,8 @@ class _DetailsOfBookInAddPageState
                         showFlashBarWarring(
                             context: context,
                             message: S.of(context).validationSelectDate);
+                      } else if (rooms <= 0 || adults <= 0) {
+                        _validateBookingCounts();
                       } else {
                         final bookingData = BookingData(
                           checkIn: DateFormat('yyyy-MM-dd', 'en_US')

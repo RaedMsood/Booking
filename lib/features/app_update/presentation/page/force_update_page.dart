@@ -44,8 +44,8 @@ class _ForceUpdatePageState extends State<ForceUpdatePage> {
   String get _updateNowText => _isArabic ? 'تحديث الآن' : 'Update now';
 
   String get _storeErrorText => _isArabic
-      ? 'تعذر فتح صفحة التحديث. تأكد من توفر المتجر أو حاول مرة أخرى.'
-      : 'Unable to open the update page. Please make sure the store is available and try again.';
+      ? 'تعذر فتح المتجر تلقائياً. يرجى الانتقال إلى المتجر وتحديث التطبيق للمتابعة.'
+      : 'Unable to open the store automatically. Please go to the store and update the app to continue.';
 
   Future<void> _openStore() async {
     if (_isOpeningStore) return;
@@ -56,7 +56,7 @@ class _ForceUpdatePageState extends State<ForceUpdatePage> {
 
     final opened = await AppUpdateService.I.openStore(
       packageName: widget.updateInfo.packageName,
-      allowImmediateAndroidUpdate: true,
+      allowImmediateAndroidUpdate: false,
     );
 
     if (!mounted) return;

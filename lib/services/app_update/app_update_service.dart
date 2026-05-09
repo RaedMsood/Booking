@@ -152,7 +152,7 @@ class AppUpdateService extends ChangeNotifier {
       RemoteConfigSettings(
         fetchTimeout: const Duration(seconds: 8),
         minimumFetchInterval:
-            kDebugMode ? Duration.zero : const Duration(hours: 1),
+            kDebugMode ? Duration.zero : const Duration(minutes: 1),
       ),
     );
     await remoteConfig.setDefaults(const {
@@ -191,11 +191,17 @@ class AppUpdateService extends ChangeNotifier {
       }
     }
 
-    final uri = await _resolveStoreUri(currentPackageName);
-    if (uri == null) return false;
-
-    if (await canLaunchUrl(uri)) {
-      return launchUrl(uri, mode: LaunchMode.externalApplication);
+    final uris = await _resolveStoreUris(currentPackageName);
+    for (final uri in uris) {
+      try {
+        final opened = await launchUrl(
+          uri,
+          mode: LaunchMode.externalApplication,
+        );
+        if (opened) return true;
+      } catch (_) {
+        // Try the next available store/browser fallback.
+      }
     }
 
     return false;
@@ -217,26 +223,25 @@ class AppUpdateService extends ChangeNotifier {
     return false;
   }
 
-  Future<Uri?> _resolveStoreUri(String packageName) async {
+  Future<List<Uri>> _resolveStoreUris(String packageName) async {
     if (Platform.isAndroid) {
-      final nativeUri = Uri.parse('market://details?id=$packageName');
-      if (await canLaunchUrl(nativeUri)) {
-        return nativeUri;
-      }
-
-      return Uri.parse(
-        'https://play.google.com/store/apps/details?id=$packageName',
-      );
+      return <Uri>[
+        Uri.parse('market://details?id=$packageName'),
+        Uri.parse('https://play.google.com/store/apps/details?id=$packageName'),
+      ];
     }
 
     if (Platform.isIOS) {
       final trackViewUrl = await _lookupIosTrackViewUrl(packageName);
       if (trackViewUrl != null) {
-        return Uri.tryParse(trackViewUrl);
+        final uri = Uri.tryParse(trackViewUrl);
+        if (uri != null) {
+          return <Uri>[uri];
+        }
       }
     }
 
-    return null;
+    return const <Uri>[];
   }
 
   Future<String?> _lookupIosTrackViewUrl(String packageName) async {

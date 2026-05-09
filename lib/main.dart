@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -98,6 +99,7 @@ class _MyAppState extends ConsumerState<MyApp> {
         locale: locale,
         localizationsDelegates: const [
           S.delegate,
+          CountryLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
