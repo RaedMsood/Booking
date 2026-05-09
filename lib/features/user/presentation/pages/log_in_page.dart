@@ -96,7 +96,6 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                     TextFormFieldWidget(
                       controller: phoneNumberController,
                       type: TextInputType.phone,
-                      textAlign: TextAlign.left,
                       maxLength: 15,
                       buildCounter: false,
                       hintText: S.of(context).phonePlaceholder,
