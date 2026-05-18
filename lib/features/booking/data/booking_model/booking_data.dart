@@ -1,3 +1,5 @@
+import '../../../offers/data/model/offer_pricing_model.dart';
+
 class BookingData {
   final int? propertyId;
   final int? userId;
@@ -14,6 +16,7 @@ class BookingData {
   final dynamic totalPrice;
   final dynamic price;
   final bool hasDiscount;
+  final OfferPricingModel? offerPricing;
   final dynamic pricePerNight;
   final String? unitName;
 
@@ -27,6 +30,7 @@ class BookingData {
     this.totalPrice,
     this.price,
     this.hasDiscount = false,
+    this.offerPricing,
     this.pricePerNight,
     this.type,
     this.unitCount,
@@ -36,6 +40,23 @@ class BookingData {
     this.deposit,
     this.unitName,
   });
+
+  bool get hasActiveOffer => offerPricing?.hasActiveOffer ?? false;
+
+  int get minimumNights => offerPricing?.minimumNights ?? 0;
+
+  String get startsAt => offerPricing?.startsAt ?? '';
+
+  String get endsAt => offerPricing?.endsAt ?? '';
+
+  String get offerDescription {
+    final offer = offerPricing?.offer;
+    final giftDescription = offer?.giftDescription?.trim() ?? '';
+    if (giftDescription.isNotEmpty) return giftDescription;
+    final title = offer?.title.trim() ?? '';
+    if (title.isNotEmpty) return title;
+    return '';
+  }
 
   factory BookingData.fromJson(Map<String, dynamic> json) {
     return BookingData(
@@ -55,6 +76,14 @@ class BookingData {
       totalPrice: _parseAmount(json['total_price']),
       price: _parseAmount(json['price']) ?? _parseAmount(json['total_price']),
       hasDiscount: _parseBool(json['has_discount'] ?? json['hasDiscount']),
+      offerPricing: json['offer_pricing'] is Map<String, dynamic>
+          ? OfferPricingModel.fromJson({
+              ...json['offer_pricing'] as Map<String, dynamic>,
+              'total_before_offer': json['total_before_offer'] ?? json['totalBeforeOffer'],
+              'total_after_offer': json['total_after_offer'] ?? json['totalAfterOffer'],
+              'total_discount_amount': json['total_discount_amount'] ?? json['totalDiscountAmount'],
+            })
+          : null,
       adultCount: json['adults'] ?? 0,
       childCount: json['children'] ?? 0,
       pricePerNight: _parseAmount(json['price_per_night']),
@@ -81,6 +110,7 @@ class BookingData {
     dynamic totalPrice,
     dynamic price,
     bool? hasDiscount,
+    OfferPricingModel? offerPricing,
     dynamic pricePerNight,
     String? unitName,
   }) {
@@ -100,6 +130,7 @@ class BookingData {
       totalPrice: totalPrice ?? this.totalPrice,
       price: price ?? this.price,
       hasDiscount: hasDiscount ?? this.hasDiscount,
+      offerPricing: offerPricing ?? this.offerPricing,
       pricePerNight: pricePerNight ?? this.pricePerNight,
       unitName: unitName ?? this.unitName,
     );
@@ -115,7 +146,13 @@ class BookingData {
       'guests': guests,
       'total_price': totalPrice,
       'price': price,
+      'total_before_offer': resolvedTotalBeforeOffer,
+      'total_after_offer': resolvedTotalAfterOffer,
+      'total_discount_amount': resolvedTotalDiscountAmount,
       'has_discount': hasDiscount,
+      'has_active_offer': hasActiveOffer,
+      'offer_description': offerDescription,
+      'offer_pricing': offerPricing?.toJson(),
       'price_per_night': pricePerNight,
       'children': childCount,
       'adults': adultCount,
@@ -138,6 +175,7 @@ class BookingData {
       totalPrice: null,
       price: null,
       hasDiscount: false,
+      offerPricing: null,
       childCount: 0,
       adultCount: 0,
       bookingAt: '',
@@ -160,6 +198,31 @@ class BookingData {
     final current = displayPrice;
     if (original == null || current == null || original == current) return null;
     return original;
+  }
+
+  double? get resolvedTotalBeforeOffer {
+    final direct = offerPricing?.totalBeforeOffer;
+    if ((direct ?? 0) > 0) return direct!.toDouble();
+    return originalPriceBeforeDiscount ?? _parseAmount(price);
+  }
+
+  double? get resolvedTotalAfterOffer {
+    final direct = offerPricing?.totalAfterOffer;
+    if ((direct ?? 0) > 0) return direct!.toDouble();
+    return displayPrice ?? _parseAmount(totalPrice);
+  }
+
+  double? get resolvedTotalDiscountAmount {
+    final direct = offerPricing?.totalDiscountAmount;
+    if ((direct ?? 0) > 0) return direct!.toDouble();
+
+    final before = resolvedTotalBeforeOffer;
+    final after = resolvedTotalAfterOffer;
+    if (before == null || after == null) return null;
+
+    final diff = before - after;
+    if (diff <= 0) return null;
+    return diff;
   }
 
   static double? _parseAmount(dynamic value) {

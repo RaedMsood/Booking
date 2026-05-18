@@ -67,8 +67,8 @@ class ShowLastDetailsInAddBookingPage extends ConsumerWidget {
                         bookAt: bookingData.bookingAt.toString(),
                         checkIn: bookingData.checkIn.toString(),
                         checkOut: bookingData.checkOut.toString(),
-                        displayPrice: bookingData.displayPrice ?? 0.0,
-                        originalPrice: bookingData.originalPriceBeforeDiscount,
+                        displayPrice: bookingData.resolvedTotalAfterOffer ?? 0.0,
+                        originalPrice:bookingData.resolvedTotalBeforeOffer,
                       ),
                       // 18.verticalSpace,
                       // Consumer(
@@ -140,6 +140,9 @@ class ShowLastDetailsInAddBookingPage extends ConsumerWidget {
                       BookingBillSummaryWidget(
                         totalPrice: bookingData.displayPrice,
                         originalPrice: bookingData.originalPriceBeforeDiscount,
+                        totalBeforeOffer: bookingData.resolvedTotalBeforeOffer,
+                        totalAfterOffer: bookingData.resolvedTotalAfterOffer,
+                        totalDiscountAmount: bookingData.resolvedTotalDiscountAmount,
                         deposit: bookingData.deposit,
                       ),
                       12.verticalSpace,

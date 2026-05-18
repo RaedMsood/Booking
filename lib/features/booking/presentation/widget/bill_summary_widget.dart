@@ -9,12 +9,18 @@ class BookingBillSummaryWidget extends StatelessWidget {
   final dynamic deposit;
   final dynamic totalPrice;
   final dynamic originalPrice;
+  final dynamic totalBeforeOffer;
+  final dynamic totalAfterOffer;
+  final dynamic totalDiscountAmount;
 
   const BookingBillSummaryWidget({
     super.key,
     required this.deposit,
     required this.totalPrice,
     this.originalPrice,
+    this.totalBeforeOffer,
+    this.totalAfterOffer,
+    this.totalDiscountAmount,
   });
 
   double _asDouble(dynamic value) {
@@ -26,6 +32,12 @@ class BookingBillSummaryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final displayedTotal = _asDouble(totalPrice);
     final depositAmount = _asDouble(deposit);
+    final beforeOfferAmount = _asDouble(totalBeforeOffer);
+    final afterOfferAmount = _asDouble(totalAfterOffer);
+    final discountAmount = _asDouble(totalDiscountAmount);
+    final showOfferSummary = beforeOfferAmount > 0 &&
+        afterOfferAmount > 0 &&
+        discountAmount > 0;
 
     return Container(
       width: double.infinity,
@@ -69,6 +81,39 @@ class BookingBillSummaryWidget extends StatelessWidget {
               ),
             ],
           ),
+          if (showOfferSummary) ...[
+            8.verticalSpace,
+            InvoiceRowWidget(
+              label: 'الإجمالي قبل العرض',
+              price: beforeOfferAmount.toString(),
+              fontSizeLabel: 10.8.sp,
+              fontSizePrice: 11.4.sp,
+              fontSizeSecondText: 9.sp,
+              firstColor: AppColors.greyColor,
+              textColor: AppColors.greyColor,
+             // isDiscounted: true,
+            ),
+            8.verticalSpace,
+            InvoiceRowWidget(
+              label: 'الإجمالي بعد العرض',
+              price: afterOfferAmount.toString(),
+              fontSizeLabel: 10.8.sp,
+              fontSizePrice: 11.6.sp,
+              fontSizeSecondText: 9.2.sp,
+              firstColor: AppColors.primaryColor,
+              textColor: const Color(0xff292D32),
+            ),
+            8.verticalSpace,
+            InvoiceRowWidget(
+              label: 'إجمالي الخصم',
+              price: discountAmount.toString(),
+              fontSizeLabel: 10.8.sp,
+              fontSizePrice: 11.6.sp,
+              fontSizeSecondText: 9.2.sp,
+              firstColor: AppColors.successSwatch.shade700,
+              textColor: AppColors.successSwatch.shade700,
+            ),
+          ],
           4.verticalSpace,
           const Divider(color: Color(0xffF0F0F0)),
           4.verticalSpace,

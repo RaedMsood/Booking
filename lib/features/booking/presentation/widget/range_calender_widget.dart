@@ -12,9 +12,13 @@ class RangeCalendarWidget extends ConsumerStatefulWidget {
   const RangeCalendarWidget({
     super.key,
     required this.onRangeSelected,
+    this.offerStartDate,
+    this.offerEndDate,
   });
 
   final void Function(DateTime? start, DateTime? end) onRangeSelected;
+  final DateTime? offerStartDate;
+  final DateTime? offerEndDate;
 
   @override
   ConsumerState<RangeCalendarWidget> createState() =>
@@ -29,6 +33,96 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
 
   DateTime _dateOnly(DateTime value) {
     return DateTime(value.year, value.month, value.day);
+  }
+
+  DateTime? _normalizeNullable(DateTime? value) {
+    if (value == null) return null;
+    return _dateOnly(value);
+  }
+
+  DateTime? get _offerStart => _normalizeNullable(widget.offerStartDate);
+
+  DateTime? get _offerEnd => _normalizeNullable(widget.offerEndDate);
+
+  bool get _hasOfferWindow => _offerStart != null && _offerEnd != null;
+
+  bool _isOfferDay(DateTime day) {
+    final start = _offerStart;
+    final end = _offerEnd;
+    if (start == null || end == null) return false;
+    final normalized = _dateOnly(day);
+    return !normalized.isBefore(start) && !normalized.isAfter(end);
+  }
+
+  bool _isPastDay(DateTime day) {
+    return _dateOnly(day).isBefore(_today);
+  }
+
+  bool _isSelectionStyledDay(DateTime day) {
+    if (_rangeStart == null) return false;
+
+    final normalizedDay = _dateOnly(day);
+    final normalizedStart = _dateOnly(_rangeStart!);
+    final normalizedEnd = _dateOnly(_rangeEnd ?? _rangeStart!);
+
+    return !normalizedDay.isBefore(normalizedStart) &&
+        !normalizedDay.isAfter(normalizedEnd);
+  }
+
+  Widget _buildOfferDayCell(
+    DateTime day, {
+    bool isOutside = false,
+  }) {
+    final backgroundColor = AppColors.primaryColor.withValues(
+      alpha: isOutside ? 0.07 : 0.1,
+    );
+    final borderColor = AppColors.primaryColor.withValues(
+      alpha: isOutside ? 0.18 : 0.28,
+    );
+    final dayTextColor = isOutside
+        ? AppColors.primaryColor.withValues(alpha: 0.65)
+        : AppColors.primaryColor;
+
+    return Center(
+      child: Container(
+        width: 34.w,
+        height: 34.h,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(
+            color: borderColor,
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primaryColor.withValues(alpha: 0.08),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Text(
+              '${day.day}',
+              style: TextStyle(
+                fontSize: 8.sp,
+                fontWeight: FontWeight.w700,
+                color: dayTextColor,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String? _offerPreview() {
+    if (!_hasOfferWindow) return null;
+    final formatter = DateFormat('d MMM', 'ar');
+    return 'أيام العرض مميزة داخل التقويم من ${formatter.format(_offerStart!)} إلى ${formatter.format(_offerEnd!)}';
   }
 
   DateTime? get _inclusiveSelectionEnd => _rangeEnd ?? _rangeStart;
@@ -192,6 +286,7 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
   @override
   Widget build(BuildContext context) {
     final selectionPreview = _selectionPreview();
+    final offerPreview = _offerPreview();
     final showCalendar = _isCalendarVisible || selectionPreview != null;
 
     return SafeArea(
@@ -306,6 +401,7 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                       ),
                     ),
                   ],
+
                   12.verticalSpace,
                   CounterRowWidget(
                     label: S.of(context).nights,
@@ -425,6 +521,18 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                                   headerVisible: false,
                                   daysOfWeekHeight: 14.h,
                                   calendarBuilders: CalendarBuilders(
+                                    prioritizedBuilder: (context, day, focusedDay) {
+                                      if (_isPastDay(day) ||
+                                          !_isOfferDay(day) ||
+                                          _isSelectionStyledDay(day)) {
+                                        return null;
+                                      }
+
+                                      return _buildOfferDayCell(
+                                        day,
+                                        isOutside: day.month != focusedDay.month,
+                                      );
+                                    },
                                     disabledBuilder:
                                         (context, day, focusedDay) {
                                       return Center(
@@ -611,6 +719,31 @@ class _RangeCalendarScreenState extends ConsumerState<RangeCalendarWidget> {
                             ),
                     ),
                   ),
+                  if (offerPreview != null) ...[
+                    8.verticalSpace,
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.w,
+                        vertical: 8.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryColor.withValues(alpha: 0.05),
+                        borderRadius: BorderRadius.circular(10.r),
+                        border: Border.all(
+                          color: AppColors.primaryColor.withValues(alpha: 0.16),
+                          width: 0.8,
+                        ),
+                      ),
+                      child: AutoSizeTextWidget(
+                        text: offerPreview,
+                        fontSize: 8.5.sp,
+                        colorText: AppColors.primaryColor,
+                        fontWeight: FontWeight.w500,
+                        maxLines: 2,
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),

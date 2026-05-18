@@ -12,6 +12,7 @@ import '../../../../../core/widgets/price_and_currency_widget.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../../services/auth/auth.dart';
 import '../../../../booking/presentation/page/details_of_book_in_add_page.dart';
+import '../../../home/presentation/widgets/property_offer_banner_widget.dart';
 import '../../../../user/presentation/pages/log_in_page.dart';
 import '../../../property_details/presentation/widgets/general_container_for_details_widget.dart';
 import '../../../property_details/presentation/widgets/sliver_app_bar_details_widget.dart';
@@ -45,6 +46,15 @@ class UnitDetailsPage extends ConsumerWidget {
               isUnit: true,
               title: state.data.name,
             ),
+            if (state.data.hasActiveOffer && state.data.offerBadgeText.isNotEmpty)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 0),
+                  child: PropertyOfferBannerWidget(
+                    text: state.data.offerBadgeText,
+                  ),
+                ),
+              ),
             SliverToBoxAdapter(
               child: UnitDetailsDataWidget(
                 name: state.data.name,
@@ -136,6 +146,7 @@ class UnitDetailsPage extends ConsumerWidget {
                                 price: state.data.originalPriceBeforeDiscount ??
                                     state.data.effectivePrice,
                                 hasDiscount: state.data.hasDiscount,
+                                offerPricing: state.data.offerPricing,
                               ),
                             );
                           }

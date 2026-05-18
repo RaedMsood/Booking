@@ -54,11 +54,13 @@ class BannersModel {
   });
 
   factory BannersModel.fromJson(Map<String, dynamic> json) {
+    final rawType = json['type'] ?? json['bannerable_type'] ?? '';
+
     return BannersModel(
       id: json['id'],
       image: json['image'] ?? '',
       idProp: json['bannerable_id'] ?? 0,
-      type: json['bannerable_type'] ?? '',
+      type: rawType.toString().trim().toLowerCase().replaceAll('app\\models\\', ''),
     );
   }
 

@@ -45,6 +45,7 @@ class PropertyDetailsTabBarWidget extends SliverPersistentHeaderDelegate {
           ],
         ),
       ),
+
       Tab(
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -61,6 +62,24 @@ class PropertyDetailsTabBarWidget extends SliverPersistentHeaderDelegate {
               height: 13.h,
               colorFilter: const ColorFilter.mode(
                 AppColors.primaryColor,
+                BlendMode.srcIn,
+              ),
+            ),
+          ],
+        ),
+      ),
+      Tab(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text('العروض'),
+            4.w.horizontalSpace,
+            SvgPicture.asset(
+              AppIcons.offerStar,
+              height: 13.h,
+              colorFilter: const ColorFilter.mode(
+                Colors.grey,
                 BlendMode.srcIn,
               ),
             ),

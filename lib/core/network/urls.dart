@@ -35,6 +35,8 @@ class AppURL {
 
   static String get getAllUnis => '/unit/all';
 
+  static String get getAllOfferUnits => '/unit/active-offers';
+
   static String get unitDetails => '/unit/show/';
 
   static String get getCities => '/home-page/cities';
@@ -74,6 +76,10 @@ class AppURL {
   static String get rateProperty => '/booking/rate';
 
   static String get notification => '/notifications';
+
+  static String get bestOffers => '/offer/best';
+
+  static String get offerDetails => '/offer';
 
   static const String unreadNotificationCount = '/notifications/count';
 

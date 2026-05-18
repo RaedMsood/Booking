@@ -19,10 +19,11 @@ class SectionsTabsPinnedHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   static final double _height = 50.h;
 
-  bool get _isSectionsTab {
-    // لما تكون القيمة بين 0.5 و 1.5 نعتبر أننا في منطقة تبويب الأقسام
-    return tabAnimationValue >= 0.5 && tabAnimationValue <= 1.5;
-  }
+  bool get _isUnitsTab => tabAnimationValue >= 0.5 && tabAnimationValue <= 1.5;
+
+  bool get _isOfferTab => tabAnimationValue >= 1.5 && tabAnimationValue <= 2.5;
+
+  bool get _isSectionsTab => _isUnitsTab || _isOfferTab;
 
   @override
   double get minExtent => _isSectionsTab ? _height : 0;
@@ -41,8 +42,9 @@ class SectionsTabsPinnedHeaderDelegate extends SliverPersistentHeaderDelegate {
       color: AppColors.scaffoldColor,
       child: Consumer(
         builder: (context, ref, _) {
-          final baseState =
-              ref.watch(getAllUnitsProvider(Tuple2(propertyId, 0)));
+          final baseState = _isOfferTab
+              ? ref.watch(getAllOfferUnitsProvider(Tuple2(propertyId, 0)))
+              : ref.watch(getAllUnitsProvider(Tuple2(propertyId, 0)));
           final sections = baseState.data.sections;
 
           if (sections.isEmpty && baseState.stateData == States.loading) {
@@ -53,7 +55,9 @@ class SectionsTabsPinnedHeaderDelegate extends SliverPersistentHeaderDelegate {
             return const SizedBox.shrink();
           }
           final selectedSectionId =
-              ref.watch(selectedUnitsSectionIdProvider(propertyId)) ??
+              (_isOfferTab
+                      ? ref.watch(selectedOfferUnitsSectionIdProvider(propertyId))
+                      : ref.watch(selectedUnitsSectionIdProvider(propertyId))) ??
                   sections.first.id;
 
           return SizedBox(
@@ -71,28 +75,54 @@ class SectionsTabsPinnedHeaderDelegate extends SliverPersistentHeaderDelegate {
                   borderRadius: BorderRadius.circular(20.r),
                   onTap: () {
                     final sectionId = section.id;
-                    ref
-                        .read(
-                            selectedUnitsSectionIdProvider(propertyId).notifier)
-                        .state = sectionId;
-                    final sectionState = ref.read(
-                      getAllUnitsProvider(
-                        Tuple2(propertyId, sectionId),
-                      ),
-                    );
+                    if (_isOfferTab) {
+                      ref
+                          .read(
+                            selectedOfferUnitsSectionIdProvider(propertyId)
+                                .notifier,
+                          )
+                          .state = sectionId;
+                    } else {
+                      ref
+                          .read(
+                            selectedUnitsSectionIdProvider(propertyId).notifier,
+                          )
+                          .state = sectionId;
+                    }
+                    final sectionState = _isOfferTab
+                        ? ref.read(
+                            getAllOfferUnitsProvider(
+                              Tuple2(propertyId, sectionId),
+                            ),
+                          )
+                        : ref.read(
+                            getAllUnitsProvider(
+                              Tuple2(propertyId, sectionId),
+                            ),
+                          );
                     final alreadyLoaded =
                         sectionState.data.units.data.isNotEmpty;
                     //  إذا ما فيه داتا وما هو في حالة تحميل، حمّل لأول مرة
                     if (!alreadyLoaded &&
                         sectionState.stateData != States.loading &&
                         sectionState.stateData != States.loadingMore) {
-                      ref
-                          .read(
-                            getAllUnitsProvider(
-                              Tuple2(propertyId, sectionId),
-                            ).notifier,
-                          )
-                          .getData();
+                      if (_isOfferTab) {
+                        ref
+                            .read(
+                              getAllOfferUnitsProvider(
+                                Tuple2(propertyId, sectionId),
+                              ).notifier,
+                            )
+                            .getData();
+                      } else {
+                        ref
+                            .read(
+                              getAllUnitsProvider(
+                                Tuple2(propertyId, sectionId),
+                              ).notifier,
+                            )
+                            .getData();
+                      }
                     }
                   },
                   child: Container(

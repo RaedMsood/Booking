@@ -44,9 +44,8 @@ class UnitPriceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: crossAxisAlignment,
+    return Row(
+
       children: [
         PriceAndCurrencyWidget(
           price: currentPrice,
@@ -58,7 +57,7 @@ class UnitPriceWidget extends StatelessWidget {
           fontWeightSecondText: currentCurrencyWeight,
         ),
         if (_hasOriginalPrice) ...[
-          spacing.h.verticalSpace,
+          spacing.w.horizontalSpace,
           PriceAndCurrencyWidget(
             price: originalPrice!,
             fontSize: originalFontSize ?? 9.sp,

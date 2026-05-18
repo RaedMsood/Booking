@@ -32,4 +32,22 @@ class UnitDataSource {
 
     return UnitsInPropertySectionsModel.fromJson(response.data['data']);
   }
+
+  Future<UnitsInPropertySectionsModel> getAllOfferUnits({
+    required int propertyId,
+    required int page,
+    required int sectionId,
+    int perPage = 10,
+  }) async {
+    final response = await RemoteRequest.getData(
+      url: '${AppURL.getAllOfferUnits}/$propertyId',
+      query: {
+        'page': page,
+        'perPage': perPage,
+        'sectionId': sectionId,
+      },
+    );
+
+    return UnitsInPropertySectionsModel.fromJson(response.data['data']);
+  }
 }

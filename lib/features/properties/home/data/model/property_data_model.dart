@@ -7,6 +7,9 @@ class PropertyDataModel {
   final String district;
   final List<String> mainImageUrls;
   final bool isFavorite;
+  final bool hasActiveOffer;
+  final String offerDescription;
+
   PropertyDataModel({
     required this.id,
     required this.name,
@@ -15,7 +18,9 @@ class PropertyDataModel {
     required this.city,
     required this.district,
     required this.mainImageUrls,
-    required this.isFavorite
+    required this.isFavorite,
+    required this.hasActiveOffer,
+    required this.offerDescription,
   });
 
   static int _parseInt(dynamic value) {
@@ -44,6 +49,17 @@ class PropertyDataModel {
     return const <String>[];
   }
 
+
+
+
+  bool get hasOffer =>
+      hasActiveOffer ||  offerDescription.trim().isNotEmpty;
+
+  String get offerBadgeText {
+    if (offerDescription.trim().isNotEmpty) return offerDescription.trim();
+    return '';
+  }
+
   factory PropertyDataModel.fromJson(Map<String, dynamic> json) {
     return PropertyDataModel(
         id: _parseInt(json['id']),
@@ -53,7 +69,10 @@ class PropertyDataModel {
         city: json['city'] ?? '',
         district: json['district'] ?? '',
         mainImageUrls: _parseImages(json),
-        isFavorite: _parseBool(json['isFavorite'])
+        isFavorite: _parseBool(json['isFavorite']),
+        // hasActiveOffer: _parseHasActiveOffer(json),
+        hasActiveOffer: json['has_offer_active'],
+        offerDescription: json['offer_description']??''
     );
   }
 
@@ -66,6 +85,9 @@ class PropertyDataModel {
     String? district,
     List<String>? mainImageUrls,
     bool? isFavorite,
+    bool? hasActiveOffer,
+    String? offerTitle,
+    String? offerDescription,
   }) {
     return PropertyDataModel(
       id: id ?? this.id,
@@ -76,6 +98,8 @@ class PropertyDataModel {
       district: district ?? this.district,
       mainImageUrls: mainImageUrls ?? this.mainImageUrls,
       isFavorite: isFavorite ?? this.isFavorite,
+      hasActiveOffer: hasActiveOffer ?? this.hasActiveOffer,
+      offerDescription: offerDescription ?? this.offerDescription,
     );
   }
 
@@ -92,6 +116,8 @@ class PropertyDataModel {
         type: '',
         mainImageUrls: [],
         isFavorite: false,
+        hasActiveOffer: false,
+        offerDescription: '',
         rating: 0);
   }
 }

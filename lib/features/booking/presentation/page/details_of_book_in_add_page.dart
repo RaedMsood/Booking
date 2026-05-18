@@ -9,6 +9,8 @@ import '../../../../core/state/state.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
 import '../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../generated/l10n.dart';
+import '../../../offers/data/model/offer_pricing_model.dart';
+import '../../../properties/home/presentation/widgets/property_offer_banner_widget.dart';
 import '../../data/booking_model/booking_data.dart';
 import '../riverpod/booking_riverpod.dart';
 import '../widget/desgin_button_in_add_booking_widget.dart';
@@ -25,6 +27,7 @@ class DetailsOfBookInAddPage extends ConsumerStatefulWidget {
   final String totalPrice;
   final String price;
   final bool hasDiscount;
+  final OfferPricingModel? offerPricing;
 
   const DetailsOfBookInAddPage({
     required this.image,
@@ -34,6 +37,7 @@ class DetailsOfBookInAddPage extends ConsumerStatefulWidget {
     required this.totalPrice,
     required this.price,
     required this.hasDiscount,
+    required this.offerPricing,
     super.key,
   });
 
@@ -85,6 +89,25 @@ class _DetailsOfBookInAddPageState
     }
   }
 
+  DateTime? _parseOfferDate(String value) {
+    final raw = value.trim();
+    if (raw.isEmpty) return null;
+
+    final direct = DateTime.tryParse(raw);
+    if (direct != null) {
+      return DateTime(direct.year, direct.month, direct.day);
+    }
+
+    for (final pattern in ['yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd']) {
+      try {
+        final parsed = DateFormat(pattern, 'en_US').parseStrict(raw);
+        return DateTime(parsed.year, parsed.month, parsed.day);
+      } catch (_) {}
+    }
+
+    return null;
+  }
+
   @override
   void dispose() {
     _scrollController.dispose();
@@ -94,6 +117,15 @@ class _DetailsOfBookInAddPageState
   @override
   Widget build(BuildContext context) {
     var checkBookingState = ref.watch(checkBookingProvider);
+    final currentOffer = widget.offerPricing?.offer;
+    final hasActiveOffer = widget.offerPricing?.hasActiveOffer ?? false;
+    final offerStartDate = _parseOfferDate(widget.offerPricing?.startsAt ?? '');
+    final offerEndDate = _parseOfferDate(widget.offerPricing?.endsAt ?? '');
+    final bookingOfferText = (currentOffer?.giftDescription?.trim().isNotEmpty ?? false)
+        ? currentOffer!.giftDescription!.trim()
+        : ((currentOffer?.title.trim().isNotEmpty ?? false)
+            ? currentOffer!.title.trim()
+            : '');
 
     return Scaffold(
       appBar: SecondaryAppBarWidget(title: S.of(context).hotelBookingTitle),
@@ -113,7 +145,16 @@ class _DetailsOfBookInAddPageState
                       location: widget.location,
                       imageUrl: widget.image,
                     ),
+                    if (hasActiveOffer && bookingOfferText.trim().isNotEmpty)
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 0),
+                        child: PropertyOfferBannerWidget(
+                          text: bookingOfferText,
+                        ),
+                      ),
                     RangeCalendarWidget(
+                      offerStartDate: offerStartDate,
+                      offerEndDate: offerEndDate,
                       onRangeSelected: (start, end) {
                         setState(() {
                           startDate = start;
@@ -180,6 +221,7 @@ class _DetailsOfBookInAddPageState
                           totalPrice: widget.totalPrice,
                           price: widget.price,
                           hasDiscount: widget.hasDiscount,
+                          offerPricing: widget.offerPricing,
                           unitId: widget.unitId,
                         );
                         ref

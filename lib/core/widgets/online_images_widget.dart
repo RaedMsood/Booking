@@ -105,6 +105,7 @@ import '../theme/app_colors.dart';
 class OnlineImagesWidget extends StatelessWidget {
   final String imageUrl;
   final bool circularImage;
+  final bool smoothCorners;
   final double? circularRadius;
   final bool hasShadow;
   final Size? size;
@@ -117,6 +118,7 @@ class OnlineImagesWidget extends StatelessWidget {
     super.key,
     required this.imageUrl,
     this.circularImage = false,
+    this.smoothCorners = false,
     this.circularRadius,
     this.hasShadow = false,
     this.size,
@@ -136,6 +138,9 @@ class OnlineImagesWidget extends StatelessWidget {
     final r = (circularRadius ?? (ScreenUtil().pixelRatio != 0 ? 35.sp : 35.0))
         .toDouble();
     final bRadius = BorderRadius.circular((borderRadius ?? 4.r));
+    final smoothShape = ContinuousRectangleBorder(borderRadius: bRadius);
+    final regularShape = RoundedRectangleBorder(borderRadius: bRadius);
+    final currentShape = smoothCorners ? smoothShape : regularShape;
 
     // نحاول نحسب cacheWidth بشكل آمن وبسيط
     int? safeCacheWidth(double? w) {
@@ -182,9 +187,15 @@ class OnlineImagesWidget extends StatelessWidget {
           height: targetHeight,
           fit: fit ?? BoxFit.cover,
           placeholderBuilder: (ctx) =>
-              _placeholderBox(targetWidth, targetHeight, bRadius, boxShadow),
+              _placeholderBox(
+                targetWidth,
+                targetHeight,
+                bRadius,
+                boxShadow,
+                currentShape,
+              ),
           errorBuilder: (ctx, _, __) => _errorBox(targetWidth, targetHeight,
-              boxShadow: boxShadow, bRadius: bRadius),
+              boxShadow: boxShadow, bRadius: bRadius, shape: currentShape),
         );
 
         if (circularImage) {
@@ -200,23 +211,33 @@ class OnlineImagesWidget extends StatelessWidget {
         return Container(
           width: targetWidth,
           height: targetHeight,
-          decoration:
-              BoxDecoration(borderRadius: bRadius, boxShadow: boxShadow),
-          clipBehavior: Clip.antiAlias,
-          child: imageWidget,
+          decoration: ShapeDecoration(
+            shape: currentShape,
+            shadows: boxShadow,
+          ),
+          child: ClipPath(
+            clipBehavior: Clip.antiAlias,
+            clipper: ShapeBorderClipper(shape: currentShape),
+            child: imageWidget,
+          ),
         );
       },
     );
   }
 
   Widget _placeholderBox(
-      double? w, double? h, BorderRadius bRadius, List<BoxShadow>? shadows) {
+      double? w,
+      double? h,
+      BorderRadius bRadius,
+      List<BoxShadow>? shadows,
+      ShapeBorder shape) {
     return Container(
       height: size?.height,
       width: size?.width,
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: Colors.grey[300],
-        borderRadius: BorderRadius.circular(borderRadius ?? 4.r),
+        shape: shape,
+        shadows: shadows,
       ),
       child: SpinKitPulse(
         color: AppColors.primaryColor,
@@ -226,20 +247,27 @@ class OnlineImagesWidget extends StatelessWidget {
   }
 
   Widget _errorBox(double? w, double? h,
-      {List<BoxShadow>? boxShadow, BorderRadius? bRadius}) {
+      {List<BoxShadow>? boxShadow, BorderRadius? bRadius, ShapeBorder? shape}) {
     return Container(
       width: w,
       height: h,
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: AppColors.greySwatch.shade200,
-        borderRadius: bRadius ?? BorderRadius.circular((borderRadius ?? 4.r)),
-        boxShadow: boxShadow,
+        shape: shape ??
+            ContinuousRectangleBorder(
+              borderRadius:
+                  bRadius ?? BorderRadius.circular((borderRadius ?? 4.r)),
+            ),
+        shadows: boxShadow,
       ),
       alignment: Alignment.center,
       child: SvgPicture.asset(
         AppIcons.logo,
         height: 60.h,
-        color: AppColors.whiteColor,
+        colorFilter: const ColorFilter.mode(
+          AppColors.whiteColor,
+          BlendMode.srcIn,
+        ),
         width: logoWidth ?? (ScreenUtil().pixelRatio != 0 ? 50.w : 50.0),
       ),
     );

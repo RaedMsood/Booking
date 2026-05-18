@@ -27,19 +27,17 @@ class LogInPage extends ConsumerStatefulWidget {
 }
 
 class _LogInPageState extends ConsumerState<LogInPage> {
+
   TextEditingController phoneNumberController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   String _selectedCountryDialCode = '967';
   String _selectedCountryFlag = '🇾🇪';
 
   bool get _isNonYemeniNumber => _selectedCountryDialCode != '967';
-
   String get _normalizedPhoneNumber =>
       phoneNumberController.text.replaceAll(RegExp(r'\D'), '');
-
   String get _completePhoneNumber =>
       '$_selectedCountryDialCode$_normalizedPhoneNumber';
-
   void _showCountryPicker() {
     UserCountryPickerHelper.show(
       context: context,

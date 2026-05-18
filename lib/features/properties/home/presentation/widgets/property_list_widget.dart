@@ -23,6 +23,7 @@ class PropertySliverListWidget extends ConsumerWidget {
     var provider = ref.read(getAllPropertyProvider.notifier);
     final isGridView = provider.viewType == HomePropertyViewType.grid;
     final listCardExtent = 212.h;
+    final listCardExtentWithOffer = 252.h;
     final gridCardExtent = 178.h;
 
     return SliverPadding(
@@ -53,17 +54,21 @@ class PropertySliverListWidget extends ConsumerWidget {
           : SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
+                  final property = isLoading ? null : properties[index];
+
                   return Padding(
                     padding: EdgeInsets.only(bottom: 10.h),
                     child: SizedBox(
-                        height: listCardExtent,
+                      height: property?.hasOffer == true
+                          ? listCardExtentWithOffer
+                          : listCardExtent,
                       child: isLoading
                           ? ShimmerPropertyCardWidget(
                               viewType: provider.viewType,
                             )
                           : PropertyCardWidget(
-                              key: ValueKey('property-${properties[index].id}'),
-                              property: properties[index],
+                              key: ValueKey('property-${property!.id}'),
+                              property: property,
                               viewType: provider.viewType,
                               propertiesByCity: propertiesByCity,
                             ),

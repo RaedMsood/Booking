@@ -1,6 +1,6 @@
 import '../../../property_details/data/models/features_model.dart';
+import '../../../../offers/data/model/offer_pricing_model.dart';
 import 'attachments_model.dart';
-import 'discount_pricing_model.dart';
 
 class UnitDetailsModel {
   final int id;
@@ -18,7 +18,7 @@ class UnitDetailsModel {
   final num doubleBed;
   final String? length;
   final String? width;
-  final DiscountPricingModel? discountPricing;
+  final OfferPricingModel? offerPricing;
   final PropertyAtUnitDetailsModel property;
 
   UnitDetailsModel({
@@ -37,28 +37,60 @@ class UnitDetailsModel {
     required this.doubleBed,
      this.length,
      this.width,
-    this.discountPricing,
+    this.offerPricing,
     required this.property,
   });
 
-  bool get hasDiscount => discountPricing?.hasDiscount ?? false;
+  bool get hasActiveOffer => offerPricing?.hasActiveOffer ?? false;
+
+  int get minimumNights => offerPricing?.minimumNights ?? 0;
+
+  String get startsAt => offerPricing?.startsAt ?? '';
+
+  String get endsAt => offerPricing?.endsAt ?? '';
+
+  String get offerDescription {
+    final offer = offerPricing?.offer;
+    final giftDescription = offer?.giftDescription?.trim() ?? '';
+    if (giftDescription.isNotEmpty) return giftDescription;
+    final title = offer?.title.trim() ?? '';
+    if (title.isNotEmpty) return title;
+    return '';
+  }
+
+  String get offerBadgeText => offerDescription;
+
+  bool get hasDiscount {
+    final pricing = offerPricing;
+    if (pricing == null) return false;
+    return pricing.hasActiveOffer &&
+        pricing.basePricePerNight > 0 &&
+        pricing.pricePerNight > 0 &&
+        pricing.basePricePerNight != pricing.pricePerNight;
+  }
 
   String get effectivePrice {
-    final discountedPrice = discountPricing?.pricePerNight;
-    if ((discountedPrice ?? '').isNotEmpty) {
-      return discountedPrice!;
+    final discountedPrice = offerPricing?.pricePerNight;
+    if ((discountedPrice ?? 0) > 0) {
+      return discountedPrice.toString();
     }
     return price;
   }
 
   String? get originalPriceBeforeDiscount {
     if (!hasDiscount) return null;
-    final basePrice = discountPricing?.basePricePerNight;
-    if ((basePrice ?? '').isEmpty) return null;
-    return basePrice;
+    final basePrice = offerPricing?.basePricePerNight;
+    if ((basePrice ?? 0) <= 0) return null;
+    return basePrice.toString();
   }
 
   factory UnitDetailsModel.fromJson(Map<String, dynamic> json) {
+    final pricingJson = json['offer_pricing'] is Map<String, dynamic>
+        ? json['offer_pricing']
+        : (json['discount_pricing'] is Map<String, dynamic>
+            ? json['discount_pricing']
+            : null);
+
     return UnitDetailsModel(
       id: json['id'] as int,
       name: json['name'] ?? '',
@@ -75,8 +107,8 @@ class UnitDetailsModel {
       doubleBed: json['double_beds'] ?? json['double_bed'] ?? 0,
       length: json['length']?.toString(),
       width: json['width']?.toString(),
-      discountPricing: json['discount_pricing'] is Map<String, dynamic>
-          ? DiscountPricingModel.fromJson(json['discount_pricing'])
+      offerPricing: pricingJson is Map<String, dynamic>
+          ? OfferPricingModel.fromJson(pricingJson)
           : null,
       property: PropertyAtUnitDetailsModel.fromJson(
           json['property'] as Map<String, dynamic>),
@@ -100,7 +132,7 @@ class UnitDetailsModel {
         doubleBed: 0,
         length: '',
         width: '',
-        discountPricing: null,
+        offerPricing: null,
         property: PropertyAtUnitDetailsModel.empty(),
       );
 }

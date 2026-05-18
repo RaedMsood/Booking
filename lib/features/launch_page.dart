@@ -11,6 +11,7 @@ import '../core/widgets/bottomNavbar/bottom_navigation_bar_widget.dart';
 import '../features/properties/home/presentation/riverpod/home_riverpod.dart';
 import '../services/app_update/app_update_service.dart';
 import '../services/auth/auth.dart';
+import 'offers/presentation/riverpod/offers_riverpod.dart';
 import 'user/presentation/pages/splach_screen_page.dart';
 
 class LaunchPage extends ConsumerStatefulWidget {
@@ -66,6 +67,7 @@ class _LaunchPageState extends ConsumerState<LaunchPage> {
       if (!mounted || _didNavigate || !onBoarding) return;
 
       ref.read(getAllPropertyProvider.notifier);
+      ref.read(getBestOffersProvider.notifier);
     } catch (error) {
       debugPrint('Launch home prefetch skipped: $error');
     }

@@ -201,7 +201,7 @@ class _CompleteAddBookingPageState
                     functionSuccess: () {
                       navigateTo(
                           context,
-                          ShowLastDetailsInAddBookingPage(
+                          ShowLastDetailsInAddBookingPage (
                             bookingData: state.data.bookingData,
                             nameProp: widget.nameProp,
                             location: widget.location,
@@ -256,3 +256,4 @@ class _CompleteAddBookingPageState
     );
   }
 }
+

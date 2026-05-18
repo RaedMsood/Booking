@@ -35,4 +35,21 @@ class UnitReposaitory {
       return Left(e);
     }
   }
+
+  Future<Either<DioException, UnitsInPropertySectionsModel>> getAllOfferUnits({
+    required int propertyId,
+    required int page,
+    required int sectionId,
+  }) async {
+    try {
+      final remote = await _unitDetailsDataSource.getAllOfferUnits(
+        page: page,
+        propertyId: propertyId,
+        sectionId: sectionId,
+      );
+      return Right(remote);
+    } on DioException catch (e) {
+      return Left(e);
+    }
+  }
 }

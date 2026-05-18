@@ -15,6 +15,7 @@ class AppIcons {
   static const String logo2 = '${_iconsPath}logos/mazaji12.svg';
   static const String logo3 = '${_iconsPath}logos/mazaji13.svg';
   static const String logo4 = '${_iconsPath}logos/mazaji14.svg';
+  static const String offerStar = '${_iconsPath}star_of_offer.svg';
 
 
   static const String about = '${_iconsPath}about.svg';

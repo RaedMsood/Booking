@@ -1,3 +1,4 @@
+import 'package:booking/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -96,16 +97,19 @@ class _PropertyGridCardInfoSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               Flexible(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
                     Expanded(
                       child: AutoSizeTextWidget(
                         text: property.name,
                         fontSize: titleFontSize,
                         fontWeight: FontWeight.w500,
                         maxLines: titleMaxLines,
+                        colorText: AppColors.primaryColor,
                         minFontSize: titleMinFontSize,
                         textAlign: TextAlign.start,
                       ),

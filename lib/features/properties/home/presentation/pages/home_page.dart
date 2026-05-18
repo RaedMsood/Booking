@@ -5,6 +5,7 @@ import '../../../../../core/state/check_state_in_get_api_data_widget.dart';
 import '../../../../../core/state/state.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/loading_widget.dart';
+import '../../../../offers/presentation/page/best_offers_in_home_page.dart';
 import '../riverpod/home_riverpod.dart';
 import '../widgets/shimmer_home_widget.dart';
 import '../widgets/sliver_app_bar_home_widget.dart';
@@ -87,6 +88,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     DiscoverDestinationsWidget(
                       cities: state.data.cities,
                     ),
+                    const BestOffers(),
                     6.h.verticalSpace,
                     const PropertyViewTypeWidget(),
                   ],

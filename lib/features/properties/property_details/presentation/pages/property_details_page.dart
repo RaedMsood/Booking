@@ -5,6 +5,7 @@ import '../../../../../core/state/check_state_in_get_api_data_widget.dart';
 import '../../../../../core/state/state.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../home/presentation/widgets/property_offer_banner_widget.dart';
 import '../../../units/presentation/widgets/units_in_property_details_tab_widget.dart';
 import '../../../units/presentation/widgets/sections_tabs_widget.dart';
 import '../riverpod/property_details_riverpod.dart';
@@ -14,6 +15,7 @@ import '../widgets/shimmer_property_details_widget.dart';
 import '../widgets/sliver_app_bar_details_widget.dart';
 import '../widgets/deposit_widget.dart';
 import '../widgets/name_and_description_and_rating_widget.dart';
+import '../widgets/property_offer_tab_widget.dart';
 import '../widgets/property_details_tab_bar_widget.dart';
 import '../widgets/terms_policy_widget.dart';
 
@@ -42,6 +44,10 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
   bool _isScrollingToUnitsTab = false;
 
   bool get _isUnitsTab => _tabController.index == 1;
+
+  bool get _isOffersTab => _tabController.index == 2;
+
+  bool get _hideBookingFab => _isUnitsTab || _isOffersTab;
 
   Future<void> _goToUnitsTab() async {
     if (_isUnitsTab || _isScrollingToUnitsTab) return;
@@ -88,7 +94,7 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
     _tabAnimationValue = _tabController.index.toDouble();
 
     //  هنا نسمع لتغيّر الأنيميشن (سحب جانبي أو ضغط
@@ -111,10 +117,10 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
     var state = ref.watch(getPropertyDetailsProvider(widget.propertyId));
 
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         floatingActionButton:
-            state.stateData == States.loaded && !_isUnitsTab
+            state.stateData == States.loaded && !_hideBookingFab
                 ? FloatingActionButton.extended(
                     onPressed: _goToUnitsTab,
                     backgroundColor: AppColors.primaryColor,
@@ -142,6 +148,20 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
                     idProperties: state.data.id,
                     title: state.data.name,
                   ),
+                  if (state.data.hasActivePaidOffer)
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(16.w, 14.h, 16.w, 0),
+                        child: PropertyOfferBannerWidget(
+                          text: state.data.offerDescription,
+                          iconPath: 'assets/icons/pay.svg',
+                          backgroundColor: const Color(0xffFEE2E2),
+                          borderColor: const Color(0xffE1202E),
+                          textColor: const Color(0xffE1202E),
+                        ),
+                      ),
+                    ),
+
                   SliverToBoxAdapter(
                     child: NameAndDescriptionAndRatingWidget(
                       name: state.data.name,
@@ -184,6 +204,9 @@ class _PropertyDetailsPageState extends ConsumerState<PropertyDetailsPage>
                     ),
                   ),
                   UnitsInPropertyDetailsTab(propertyId: state.data.id),
+                  PropertyOfferTabWidget(
+                    propertyId: state.data.id,
+                  ),
                   ListOfAllScoresCustemorWidget(
                     rateOfScore: state.data.allScoreRateWithUser,
                   ),

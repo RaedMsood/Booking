@@ -15,6 +15,8 @@ class PropertyDetailsModel {
   final AddressModel address;
   final DepositModel deposit;
   final List<PolicyModel> policies;
+  final bool hasActivePaidOffer;
+  final String offerDescription;
 
   final List<RateWithCustomerModel> allScoreRateWithUser;
 
@@ -29,8 +31,28 @@ class PropertyDetailsModel {
     required this.address,
     required this.deposit,
     required this.policies,
+    required this.hasActivePaidOffer,
+    required this.offerDescription,
     required this.allScoreRateWithUser,
   });
+
+  static int _parseInt(dynamic value) {
+    if (value is int) return value;
+    if (value is num) return value.toInt();
+    return int.tryParse(value?.toString() ?? '') ?? 0;
+  }
+
+  static bool _parseBool(dynamic value) {
+    if (value is bool) return value;
+    if (value is num) return value != 0;
+    final normalized = value?.toString().trim().toLowerCase() ?? '';
+    return normalized == 'true' || normalized == '1';
+  }
+
+  bool get hasOffer =>
+      hasActivePaidOffer ||  offerDescription.trim().isNotEmpty;
+
+
 
   factory PropertyDetailsModel.fromJson(Map<String, dynamic> json) {
     return PropertyDetailsModel(
@@ -44,6 +66,8 @@ class PropertyDetailsModel {
       address: AddressModel.fromJson(json['address'] as Map<String, dynamic>),
       deposit: DepositModel.fromJson(json['deposit'] as Map<String, dynamic>),
       policies: PolicyModel.fromJsonList(json['policies'] ?? []),
+      hasActivePaidOffer: json['has_active_pay_offer']??false,
+      offerDescription: json['offer_description']??'',
       allScoreRateWithUser:
           RateWithCustomerModel.fromJsonList(json['rate'] ?? []),
     );
@@ -59,6 +83,8 @@ class PropertyDetailsModel {
         address: AddressModel.empty(),
         features: <FeaturesModel>[],
         policies: <PolicyModel>[],
+    hasActivePaidOffer: false,
+        offerDescription: '',
         images: <String>[],
         allScoreRateWithUser: [],
       );

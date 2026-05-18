@@ -1,3 +1,4 @@
+import 'package:booking/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +7,7 @@ import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../data/model/property_data_model.dart';
 import '../riverpod/home_riverpod.dart';
 import 'property_card_location_row_widget.dart';
+import 'property_offer_banner_widget.dart';
 import 'property_card_rating_chip_widget.dart';
 import 'property_photos_widget.dart';
 
@@ -110,6 +112,8 @@ class _PropertyCardInfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final showOfferBanner = property.hasOffer;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final availableHeight = constraints.maxHeight.isFinite
@@ -142,6 +146,17 @@ class _PropertyCardInfoSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (showOfferBanner) ...[
+                PropertyOfferBannerWidget(
+                  text: property.offerBadgeText,
+                ),
+                SizedBox(height: contentSpacing),
+                Divider(
+                  height: 1.h,
+                  color: const Color(0xffF5F5F5),
+                ),
+                SizedBox(height: contentSpacing),
+              ],
               Flexible(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,

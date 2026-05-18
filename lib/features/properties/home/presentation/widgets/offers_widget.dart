@@ -1,8 +1,12 @@
-import 'package:booking/features/properties/home/data/model/property_data_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../core/helpers/navigateTo.dart';
 import '../../../../../core/widgets/online_images_widget.dart';
+import '../../../../offers/presentation/page/specific_offers_page.dart';
+import '../../../property_details/presentation/pages/property_details_page.dart';
+import '../../../units/presentation/pages/unit_details_page.dart';
 import '../../data/model/property_model.dart';
 
 class OffersWidget extends StatefulWidget {
@@ -14,6 +18,32 @@ class OffersWidget extends StatefulWidget {
 
 class _OffersWidgetState extends State<OffersWidget> {
   int pageController = 0;
+
+  void _handleBannerTap(BuildContext context, BannersModel banner) {
+    switch (banner.type) {
+      case 'offer':
+        navigateTo(
+          context,
+          SpecificOffersPage(offerId: banner.idProp),
+        );
+        break;
+      case 'property':
+        navigateTo(
+          context,
+          PropertyDetailsPage(
+            propertyId: banner.idProp,
+           images: [],
+          ),
+        );
+        break;
+      case 'unit':
+        navigateTo(
+          context,
+          UnitDetailsPage(unitId: banner.idProp),
+        );
+        break;
+    }
+  }
 
   // List offersImage = [
   //   "https://techvillageeg.com/wp-content/uploads/2023/08/%D8%A3%D9%81%D8%B6%D9%84-%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA-%D8%AD%D8%AC%D8%B2-%D8%A7%D9%84%D9%81%D9%86%D8%A7%D8%AF%D9%82.webp",
@@ -29,13 +59,20 @@ class _OffersWidgetState extends State<OffersWidget> {
       child: CarouselSlider.builder(
         itemCount: widget.banners.length,
         itemBuilder: (context, index, realIdx) {
+          final banner = widget.banners[index];
+
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.w),
-            child: OnlineImagesWidget(
-              imageUrl: widget.banners[index].image,
-              fit: BoxFit.cover,
-              size: Size(double.infinity, 104.h),
-              borderRadius: 8.r,
+            child: InkWell(
+              onTap: (){
+                _handleBannerTap(context, banner);
+              },
+              child: OnlineImagesWidget(
+                imageUrl: banner.image,
+                fit: BoxFit.cover,
+                size: Size(double.infinity, 104.h),
+                borderRadius: 8.r,
+              ),
             ),
           );
         },
