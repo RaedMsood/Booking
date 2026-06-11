@@ -19,6 +19,7 @@ class BookingData {
   final OfferPricingModel? offerPricing;
   final dynamic pricePerNight;
   final String? unitName;
+  final String? purchaseId;
 
   BookingData({
     this.propertyId,
@@ -39,6 +40,7 @@ class BookingData {
     this.bookingAt,
     this.deposit,
     this.unitName,
+    this.purchaseId,
   });
 
   bool get hasActiveOffer => offerPricing?.hasActiveOffer ?? false;
@@ -91,6 +93,7 @@ class BookingData {
       bookingAt: json['created_at'] ?? '',
       deposit: _parseAmount(json['deposit']),
       unitName: json['unit_name'] ?? '',
+      purchaseId: json['purchase_id']?.toString() ?? '',
     );
   }
 
@@ -113,6 +116,7 @@ class BookingData {
     OfferPricingModel? offerPricing,
     dynamic pricePerNight,
     String? unitName,
+    String? purchaseId,
   }) {
     return BookingData(
       propertyId: propertyId ?? this.propertyId,
@@ -133,6 +137,7 @@ class BookingData {
       offerPricing: offerPricing ?? this.offerPricing,
       pricePerNight: pricePerNight ?? this.pricePerNight,
       unitName: unitName ?? this.unitName,
+      purchaseId: purchaseId ?? this.purchaseId,
     );
   }
 
@@ -161,6 +166,7 @@ class BookingData {
       'created_at': bookingAt,
       'unit_name': unitName,
       'deposit': deposit,
+      'purchase_id': purchaseId,
     };
   }
 
@@ -182,6 +188,7 @@ class BookingData {
       type: '',
       unitCount: null,
       unitName: '',
+      purchaseId: '',
     );
   }
 

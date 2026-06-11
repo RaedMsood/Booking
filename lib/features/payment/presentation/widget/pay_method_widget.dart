@@ -1,7 +1,7 @@
-import 'package:booking/services/auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/state/check_state_in_post_api_data_widget.dart';
 import '../../../../core/state/state.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -10,23 +10,31 @@ import '../../../../core/widgets/buttons/default_button.dart';
 import '../../../../core/widgets/show_modal_bottom_sheet_widget.dart';
 import '../../../../core/widgets/text_form_field.dart';
 import '../../../../generated/l10n.dart';
-import '../../../my_bookings/presentation/riverpod/my_bookings_riverpod.dart';
-import '../../data/booking_model/pay_spec.dart';
-import '../riverpod/booking_riverpod.dart';
-import 'booking_success_dialog_widget.dart';
+import '../../data/model/pay_spec.dart';
+import '../../data/model/payment_request_context_model.dart';
+import '../riverpod/payment_riverpod.dart';
 import 'floosak_payment_otp_widget.dart';
+import 'manual_payment_widget.dart';
 
 class PayMethodWidget extends ConsumerStatefulWidget {
-  const PayMethodWidget({super.key});
+  final PaymentRequestContextModel paymentRequest;
+  final void Function(BuildContext context, WidgetRef ref, String? purchaseId)?
+      onPaymentSuccess;
+
+  const PayMethodWidget({
+    super.key,
+    required this.paymentRequest,
+    this.onPaymentSuccess,
+  });
 
   @override
   ConsumerState<PayMethodWidget> createState() => _PayMethodWidgetState();
 }
 
 class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
-  TextEditingController voucherController = TextEditingController();
-  TextEditingController amountController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController voucherController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
 
@@ -51,20 +59,25 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
       return const SizedBox.shrink();
     }
 
-    final spec = paySpecForMethod(selectedPayMethod.name);
+    final isManual = isManualPayMethod(selectedPayMethod);
+    if (isManual) {
+      return ManualPaymentWidget(
+        paymentMethod: selectedPayMethod,
+        onPaymentSuccess: widget.onPaymentSuccess,
+      );
+    }
+
+    final spec = paySpecForPaymentMethod(selectedPayMethod);
     if (spec == null) return const SizedBox.shrink();
 
-    final bookingDataState = ref.watch(customerBookingProvider);
     final confirmState = ref.watch(confirmPaymentProvider);
     final floosakState = ref.watch(startFloosakPaymentProvider);
-    final isFloosak = isFloosakPayMethod(selectedPayMethod.name);
+    final isFloosak = !isManual && isFloosakPayMethod(selectedPayMethod.name);
     final activeState = isFloosak ? floosakState : confirmState;
-    final depositAmount =
-        double.tryParse(bookingDataState.data.bookingData.deposit.toString()) ??
-            0;
+    final depositAmount = widget.paymentRequest.depositAmount;
 
     if (spec.requiresPhoneNumber && phoneNumberController.text.isEmpty) {
-      phoneNumberController.text = Auth().phoneNumber;
+      phoneNumberController.text = widget.paymentRequest.initialPhoneNumber;
     }
     if (isFloosak && amountController.text.isEmpty && depositAmount > 0) {
       amountController.text = _formatDepositValue(depositAmount);
@@ -102,22 +115,17 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                   TextFormFieldWidget(
                     controller: phoneNumberController,
                     type: TextInputType.phone,
-                    maxLength: 9,
-                    buildCounter: false,
+                    maxLength: widget.paymentRequest.phoneMaxLength,
+                    buildCounter: widget.paymentRequest.showPhoneCounter,
                     fillColor: AppColors.scaffoldColor,
                     hintText: S.of(context).phonePlaceholder,
                     fieldValidator: (value) {
-                      if (value == null || value.toString().isEmpty) {
+                      final phone = value?.trim() ?? '';
+                      if (phone.isEmpty) {
                         return S.of(context).phoneRequired;
                       }
-                      final phone = value.trim();
-                      if (!phone.startsWith('7')) {
-                        return S.of(context).phoneMustStartWith7;
-                      }
-                      if (phone.length < 9) {
-                        return S.of(context).phoneMustBe9Digits;
-                      }
-                      return null;
+                      return widget.paymentRequest.phoneValidator
+                          ?.call(context, value);
                     },
                   ),
                 ],
@@ -150,7 +158,8 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                         return S.of(context).amountValidation;
                       }
                       if (isFloosak && amount < depositAmount) {
-                        return 'يجب أن يكون المبلغ المدخل مساويًا أو أكبر من مبلغ العربون';
+                        return widget.paymentRequest
+                            .floosakMinimumAmountErrorText(context);
                       }
                       return null;
                     },
@@ -158,8 +167,8 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                   if (isFloosak) ...[
                     6.h.verticalSpace,
                     AutoSizeTextWidget(
-                      text:
-                          'يجب أن يكون المبلغ المدخل مساويًا أو أكبر من مبلغ العربون',
+                      text: widget.paymentRequest
+                          .floosakMinimumAmountErrorText(context),
                       fontSize: 9.2.sp,
                       colorText: AppColors.greyColor,
                       fontWeight: FontWeight.w400,
@@ -207,14 +216,14 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                     context: context,
                     title: selectedPayMethod.title,
                     page: FloosakPaymentOtpWidget(
-                      bookingData: bookingDataState.data,
+                      paymentRequest: widget.paymentRequest,
                       session: floosakState.data,
+                      onPaymentSuccess: widget.onPaymentSuccess,
                     ),
                   );
                   return;
                 }
-                CompleteBooking.successDialog(context, ref);
-                ref.invalidate(getBookingProvider(0));
+                widget.onPaymentSuccess?.call(context, ref, null);
               },
               bottonWidget: DefaultButtonWidget(
                 text: S.of(context).confirmPayment,
@@ -225,13 +234,12 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                   final isValid = formKey.currentState!.validate();
                   if (!isValid) return;
 
-                  final bookingData = ref.read(customerBookingProvider);
                   final amount = _amountValue(amountController.text);
 
                   FocusManager.instance.primaryFocus?.unfocus();
                   if (isFloosak) {
                     ref.read(startFloosakPaymentProvider.notifier).startPayment(
-                          bookingData: bookingData.data,
+                          paymentRequest: widget.paymentRequest,
                           payMethodName: selectedPayMethod.name,
                           phoneNumber: phoneNumberController.text.trim(),
                           amount: amount,
@@ -240,7 +248,7 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
                   }
 
                   ref.read(confirmPaymentProvider.notifier).confirmPayment(
-                        bookingData: bookingData.data,
+                        paymentRequest: widget.paymentRequest,
                         payMethodName: selectedPayMethod.name,
                         voucher: voucherController.text,
                         amount: amount,
@@ -255,3 +263,4 @@ class _PayMethodWidgetState extends ConsumerState<PayMethodWidget> {
     );
   }
 }
+

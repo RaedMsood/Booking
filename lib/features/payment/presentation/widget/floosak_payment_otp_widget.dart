@@ -9,21 +9,22 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../core/widgets/buttons/default_button.dart';
 import '../../../../generated/l10n.dart';
-import '../../../my_bookings/presentation/riverpod/my_bookings_riverpod.dart';
 import '../../../user/presentation/widgets/verify_pinput_widget.dart';
-import '../../data/booking_model/booking_data_model.dart';
-import '../../data/booking_model/floosak_payment_session_model.dart';
-import '../riverpod/booking_riverpod.dart';
-import 'booking_success_dialog_widget.dart';
+import '../../data/model/floosak_payment_session_model.dart';
+import '../../data/model/payment_request_context_model.dart';
+import '../riverpod/payment_riverpod.dart';
 
 class FloosakPaymentOtpWidget extends ConsumerStatefulWidget {
-  final BookingDataModel bookingData;
+  final PaymentRequestContextModel paymentRequest;
   final FloosakPaymentSessionModel session;
+  final void Function(BuildContext context, WidgetRef ref, String? purchaseId)?
+      onPaymentSuccess;
 
   const FloosakPaymentOtpWidget({
     super.key,
-    required this.bookingData,
+    required this.paymentRequest,
     required this.session,
+    this.onPaymentSuccess,
   });
 
   @override
@@ -63,7 +64,7 @@ class _FloosakPaymentOtpWidgetState
       _canAutoSubmit = false;
       FocusManager.instance.primaryFocus?.unfocus();
       ref.read(confirmFloosakPaymentProvider.notifier).confirmPayment(
-            bookingData: widget.bookingData,
+            paymentRequest: widget.paymentRequest,
             session: widget.session,
             otp: text,
           );
@@ -105,8 +106,7 @@ class _FloosakPaymentOtpWidgetState
             state: state,
             hasMessageSuccess: false,
             functionSuccess: () {
-              CompleteBooking.successDialog(context, ref);
-              ref.invalidate(getBookingProvider(0));
+              widget.onPaymentSuccess?.call(context, ref, null);
             },
             bottonWidget: DefaultButtonWidget(
               text: S.of(context).confirm,
@@ -116,7 +116,7 @@ class _FloosakPaymentOtpWidgetState
                 if (code.length != _otpLen) return;
                 FocusManager.instance.primaryFocus?.unfocus();
                 ref.read(confirmFloosakPaymentProvider.notifier).confirmPayment(
-                      bookingData: widget.bookingData,
+                      paymentRequest: widget.paymentRequest,
                       session: widget.session,
                       otp: code,
                     );

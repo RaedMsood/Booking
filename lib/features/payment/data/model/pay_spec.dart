@@ -1,4 +1,5 @@
 import '../../../../generated/l10n.dart';
+import 'payment_methods_model.dart';
 
 class PaySpec {
   final String instruction;
@@ -8,6 +9,7 @@ class PaySpec {
   final bool requiresAmount;
   final bool requiresPhoneNumber;
   final bool requiresCodeField;
+  final bool requiresManualPointNumber;
 
   const PaySpec({
     required this.instruction,
@@ -17,7 +19,31 @@ class PaySpec {
     required this.requiresAmount,
     required this.requiresPhoneNumber,
     this.requiresCodeField = true,
+    this.requiresManualPointNumber = false,
   });
+
+  PaySpec copyWith({
+    String? instruction,
+    String? codeLabel,
+    String? codeHint,
+    String? codeEmptyError,
+    bool? requiresAmount,
+    bool? requiresPhoneNumber,
+    bool? requiresCodeField,
+    bool? requiresManualPointNumber,
+  }) {
+    return PaySpec(
+      instruction: instruction ?? this.instruction,
+      codeLabel: codeLabel ?? this.codeLabel,
+      codeHint: codeHint ?? this.codeHint,
+      codeEmptyError: codeEmptyError ?? this.codeEmptyError,
+      requiresAmount: requiresAmount ?? this.requiresAmount,
+      requiresPhoneNumber: requiresPhoneNumber ?? this.requiresPhoneNumber,
+      requiresCodeField: requiresCodeField ?? this.requiresCodeField,
+      requiresManualPointNumber:
+          requiresManualPointNumber ?? this.requiresManualPointNumber,
+    );
+  }
 }
 
 Map<String, PaySpec> paySpecs = {
@@ -58,6 +84,17 @@ Map<String, PaySpec> paySpecs = {
     requiresPhoneNumber: true,
     requiresCodeField: false,
   ),
+  'manual': const PaySpec(
+    instruction:
+        'قم بالتحويل إلى رقم نقطة الدفع الموضح أدناه، ثم أدخل رقم الحوالة لإتمام عملية الدفع وتأكيد الحجز.',
+    codeLabel: 'رقم الحوالة',
+    codeHint: 'أدخل رقم الحوالة',
+    codeEmptyError: 'يرجى إدخال رقم الحوالة',
+    requiresAmount: false,
+    requiresPhoneNumber: false,
+    requiresCodeField: true,
+    requiresManualPointNumber: true,
+  ),
 };
 
 const Set<String> _jawaliMethodAliases = {
@@ -92,6 +129,21 @@ PaySpec? paySpecForMethod(String? value) {
   return paySpecs[normalizePayMethodName(value)];
 }
 
+PaySpec? paySpecForPaymentMethod(PaymentMethodsModel? method) {
+  if (method == null) return null;
+  final baseSpec = !method.isConnected
+      ? paySpecs['manual']
+      : paySpecForMethod(method.name);
+  if (baseSpec == null) return null;
+
+  final note = method.note.trim();
+  if (note.isEmpty) return baseSpec;
+
+  return baseSpec.copyWith(
+    instruction: note,
+  );
+}
+
 bool isJaibPayMethod(String? value) {
   return _jaibMethodAliases.contains((value ?? '').trim().toLowerCase());
 }
@@ -102,5 +154,9 @@ bool isJawaliPayMethod(String? value) {
 
 bool isFloosakPayMethod(String? value) {
   return normalizePayMethodName(value) == 'flousk';
+}
+
+bool isManualPayMethod(PaymentMethodsModel? method) {
+  return method != null && !method.isConnected;
 }
 

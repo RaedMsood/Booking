@@ -11,9 +11,10 @@ import '../../../../core/widgets/secondary_app_bar_widget.dart';
 import '../../../../core/widgets/text_form_field.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../services/auth/auth.dart';
+import '../../../payment/presentation/riverpod/payment_riverpod.dart'
+    as payment_riverpod;
 import '../../../properties/cities/data/model/city_model.dart';
 import '../../../properties/cities/presentation/riverpod/cities_riverpod.dart';
-import '../../../properties/cities/presentation/widget/city_widget.dart';
 import '../../data/booking_model/booking_data.dart';
 import '../../data/booking_model/booking_data_model.dart';
 import '../riverpod/booking_riverpod.dart';
@@ -203,15 +204,12 @@ class _CompleteAddBookingPageState
                           context,
                           ShowLastDetailsInAddBookingPage (
                             bookingData: state.data.bookingData,
+                            bookingDataModel: state.data,
                             nameProp: widget.nameProp,
                             location: widget.location,
                             image: widget.imageUrl ?? '',
                           ));
-                              ref.read(selectedPayMethodProvider.notifier).state =
-                                  null;
-                              ref
-                                  .read(selectedPayMethodErrorProvider.notifier)
-                                  .state = null;
+                      payment_riverpod.resetPaymentSelectionState(ref);
                     },
                     bottonWidget: DefaultButtonWidget(
                         isLoading: state.stateData == States.loading,

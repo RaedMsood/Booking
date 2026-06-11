@@ -1,4 +1,4 @@
-import '../../../booking/data/booking_model/payment_methods_model.dart';
+import '../../../payment/data/model/payment_methods_model.dart';
 import '../../../properties/units/data/model/units_model.dart';
 import 'invoice_model.dart';
 import 'rate_model.dart';
