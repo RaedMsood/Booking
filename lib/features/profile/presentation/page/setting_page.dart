@@ -15,7 +15,6 @@ import '../../../../services/auth/auth.dart';
 import '../state_mangement/currency_riverpod.dart';
 import '../widget/change_currency_bottom_sheet.dart';
 import '../widget/change_phone_number_widget.dart';
-import '../widget/languge_dialog_widget.dart';
 import '../widget/logout_or_delete_account_bottom_sheet_widget.dart';
 import '../widget/tile_widget.dart';
 

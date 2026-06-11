@@ -70,7 +70,7 @@ class _MyBookingsPageState extends State<MyBookingsPage>
                 borderRadius: BorderRadius.circular(10),
               ),
               labelPadding: EdgeInsets.symmetric(horizontal: 9.6.w),
-              overlayColor: MaterialStateProperty.all(Colors.transparent),
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
               tabs: [
                 for (int i = 0; i < _tabs.length; i++)
                   AnimatedBuilder(

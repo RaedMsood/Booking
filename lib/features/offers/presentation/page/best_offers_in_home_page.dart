@@ -6,7 +6,6 @@ import '../../../../core/helpers/navigateTo.dart';
 import '../../../../core/state/state.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../properties/property_details/presentation/pages/property_details_page.dart';
 import '../../../properties/units/presentation/pages/unit_details_page.dart';
 import '../riverpod/offers_riverpod.dart';
 import '../widget/card_of_best_offers_widget.dart';

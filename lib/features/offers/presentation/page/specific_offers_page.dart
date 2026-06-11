@@ -59,7 +59,7 @@ class SpecificOffersPage extends ConsumerWidget {
               offset: Offset(0, -26.h),
               child: Container(
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppColors.scaffoldColor,
                 ),
                 child: Column(

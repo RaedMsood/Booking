@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/widgets/auto_size_text_widget.dart';
 import '../../../../../core/widgets/rating_bar_widget.dart';
 import '../../../../../core/widgets/read_more_text_widget.dart';
-import '../../../../../generated/l10n.dart';
 import '../../data/models/features_model.dart';
 import 'hotel_features_widget.dart';
 

@@ -41,7 +41,7 @@ class CardOfBestOffersWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: height??100.h,
       width: width,
       child: InkWell(
@@ -90,7 +90,7 @@ class CardOfBestOffersWidget extends StatelessWidget {
                         fontSize: 10.sp,
                         maxLines: 1,
                         fontWeight: FontWeight.w400,
-                        colorText: Color(0xff757575),
+                        colorText: const Color(0xff757575),
                         textAlign: TextAlign.center,
                       ),
                       5.h.verticalSpace,
@@ -136,7 +136,7 @@ class _OfferBadgeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderColor = Color(0xffB6FFCE);
+    const borderColor = Color(0xffB6FFCE);
 
     return Container(
       height: 16.h,
@@ -156,7 +156,7 @@ class _OfferBadgeWidget extends StatelessWidget {
             fontSize: 8.sp,
             minFontSize: 8,
             maxLines: 1,
-            colorText: Color(0xff04B440),
+            colorText: const Color(0xff04B440),
             textAlign: TextAlign.center,
           ),
         ],

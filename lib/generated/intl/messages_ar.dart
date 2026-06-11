@@ -155,6 +155,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إدخل تاريخ الميلاد"),
         "enterCoupon": MessageLookupByLibrary.simpleMessage("أدخل القسيمة"),
         "facilities": MessageLookupByLibrary.simpleMessage("المرافق"),
+        "facilitiesWithFeatures":
+            MessageLookupByLibrary.simpleMessage("المرافق و المميزات"),
         "faq": MessageLookupByLibrary.simpleMessage("الأسئلة الشائعة"),
         "favorites": MessageLookupByLibrary.simpleMessage("المفضلة"),
         "features": MessageLookupByLibrary.simpleMessage("المميزات"),

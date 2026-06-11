@@ -90,7 +90,7 @@ class _ChangePhoneNumberWidgetState
                   SvgPicture.asset(
                     AppIcons.phone,
                     height: 17.h,
-                    colorFilter: ColorFilter.mode(
+                    colorFilter: const ColorFilter.mode(
                       AppColors.primaryColor,
                       BlendMode.srcIn,
                     ),
@@ -134,7 +134,7 @@ class _ChangePhoneNumberWidgetState
                 child: SvgPicture.asset(
                   AppIcons.phone,
                   height: 13.h,
-                  colorFilter: ColorFilter.mode(
+                  colorFilter: const ColorFilter.mode(
                     AppColors.primaryColor,
                     BlendMode.srcIn,
                   ),

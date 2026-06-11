@@ -50,8 +50,8 @@ class ShimmerPropertyGridCardBody extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
-              child: const _ShimmerPropertyGridCardInfoSection(),
+            const Expanded(
+              child: _ShimmerPropertyGridCardInfoSection(),
             ),
           ],
         );
@@ -109,8 +109,8 @@ class _ShimmerPropertyGridCardInfoSection extends StatelessWidget {
                 ),
               ),
               SizedBox(height: contentSpacing),
-              Flexible(
-                child: const _ShimmerGridLocationRow(),
+              const Flexible(
+                child: _ShimmerGridLocationRow(),
               ),
             ],
           ),

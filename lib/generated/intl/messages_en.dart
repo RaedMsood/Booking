@@ -159,6 +159,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter birthdate"),
         "enterCoupon": MessageLookupByLibrary.simpleMessage("Enter coupon"),
         "facilities": MessageLookupByLibrary.simpleMessage("Facilities"),
+        "facilitiesWithFeatures":
+            MessageLookupByLibrary.simpleMessage("facilities And Features"),
         "faq": MessageLookupByLibrary.simpleMessage("FAQ"),
         "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
         "features": MessageLookupByLibrary.simpleMessage("Features"),

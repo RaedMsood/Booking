@@ -127,8 +127,8 @@ class _ShimmerPropertyCardInfoSection extends StatelessWidget {
                 ),
               ),
               SizedBox(height: spacing),
-              Flexible(
-                child: const _ShimmerLocationRow(),
+              const Flexible(
+                child: _ShimmerLocationRow(),
               ),
             ],
           ),

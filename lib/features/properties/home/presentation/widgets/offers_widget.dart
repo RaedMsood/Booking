@@ -32,7 +32,7 @@ class _OffersWidgetState extends State<OffersWidget> {
           context,
           PropertyDetailsPage(
             propertyId: banner.idProp,
-           images: [],
+           images: const [],
           ),
         );
         break;

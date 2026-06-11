@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/theme/app_colors.dart';
-import '../../../../../core/widgets/auto_size_text_widget.dart';
-import '../../../../../generated/l10n.dart';
 import '../../../../core/state/app_restart_controller.dart';
 import '../state_mangement/riverpod.dart';
 import 'language_widget.dart';

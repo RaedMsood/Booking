@@ -100,7 +100,7 @@ class FilterPage extends ConsumerWidget {
                 isCity: true,
               ),
               12.h.verticalSpace,
-              PriceFilterWidget(
+              const PriceFilterWidget(
                 maxPrice: _defaultMaxPrice,
                 minPrice: _defaultMinPrice,
               ),

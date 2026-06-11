@@ -1,4 +1,3 @@
-import 'package:booking/core/widgets/buttons/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +10,6 @@ import '../../../generated/l10n.dart';
 import '../../constants/app_icons.dart';
 import '../../helpers/exit_from_the_app.dart';
 import '../../theme/app_colors.dart';
-import '../auto_size_text_widget.dart';
 import 'design_for_bottom_navigation_bar_widget.dart';
 
 var activeIndexProvider = StateProvider<int>((ref) => 0);

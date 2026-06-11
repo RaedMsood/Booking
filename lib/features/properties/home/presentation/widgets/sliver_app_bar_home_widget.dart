@@ -13,7 +13,7 @@ class SliverAppBarHomeWidget extends SliverPersistentHeaderDelegate {
   SliverAppBarHomeWidget();
 
   @override
-  Widget build(
+  Widget build( 
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return ClipPath(
       clipper: CustomShapeWidget(),

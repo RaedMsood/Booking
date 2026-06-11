@@ -908,6 +908,16 @@ class S {
     );
   }
 
+  /// `facilities And Features`
+  String get facilitiesWithFeatures {
+    return Intl.message(
+      'facilities And Features',
+      name: 'facilitiesWithFeatures',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Invoice`
   String get invoice {
     return Intl.message(

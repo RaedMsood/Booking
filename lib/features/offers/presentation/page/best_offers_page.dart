@@ -73,7 +73,7 @@ class _BestOffersPageState extends ConsumerState<BestOffersPage> {
     final offers = state.data.data;
 
     return Scaffold(
-      appBar: SecondaryAppBarWidget(title: 'افضل العروض'),
+      appBar: const SecondaryAppBarWidget(title: 'افضل العروض'),
       body: CheckStateInGetApiDataWidget(
         state: state,
         refresh: () => ref.read(getBestOffersProvider.notifier).getBestOffers(),

@@ -40,12 +40,11 @@ class BirthDatePickerWidget extends ConsumerWidget {
                       onPrimary: Colors.white,
                       onSurface: Color(0xff032545),
                     ),
-                    dialogBackgroundColor: Colors.white,
                     textButtonTheme: TextButtonThemeData(
                       style: TextButton.styleFrom(
                         foregroundColor: AppColors.primaryColor,
                       ),
-                    ),
+                    ), dialogTheme: DialogThemeData(backgroundColor: Colors.white),
                   ),
                   child: child!,
                 );

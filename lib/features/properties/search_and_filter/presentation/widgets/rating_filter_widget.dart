@@ -84,8 +84,8 @@ class _RatingFilterWidgetState extends ConsumerState<RatingFilterWidget> {
                         activeColor: AppColors.primaryColor,
                         checkColor: Colors.white,
                         shape: const CircleBorder(),
-                        side: MaterialStateBorderSide.resolveWith((states) {
-                          if (states.contains(MaterialState.selected)) {
+                        side: WidgetStateBorderSide.resolveWith((states) {
+                          if (states.contains(WidgetState.selected)) {
                             return const BorderSide(
                               color: AppColors.primaryColor,
                               width: 1,
@@ -101,8 +101,8 @@ class _RatingFilterWidgetState extends ConsumerState<RatingFilterWidget> {
                           horizontal: -0.5,
                           vertical: -3.5,
                         ),
-                        fillColor: MaterialStateProperty.resolveWith<Color>(
-                          (states) => states.contains(MaterialState.selected)
+                        fillColor: WidgetStateProperty.resolveWith<Color>(
+                          (states) => states.contains(WidgetState.selected)
                               ? AppColors.primaryColor
                               : Colors.white,
                         ),

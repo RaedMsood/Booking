@@ -63,7 +63,7 @@ class AboutPage extends StatelessWidget {
                     Container(
                       height: 160.h,
                       width: double.infinity,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: AppColors.primaryColor,
 
                         image: DecorationImage(

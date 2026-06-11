@@ -18,9 +18,9 @@ class UpdateCityWidget extends ConsumerWidget {
   final VoidCallback onChanged;
 
   const UpdateCityWidget({
-    Key? key,
+    super.key,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -88,10 +88,10 @@ class ListToViewAllCitiesWidgets extends StatefulWidget {
   final ValueChanged<CityModel> onCitySelected;
 
   const ListToViewAllCitiesWidgets({
-    Key? key,
+    super.key,
     required this.cities,
     required this.onCitySelected,
-  }) : super(key: key);
+  });
 
   @override
   State<ListToViewAllCitiesWidgets> createState() =>
