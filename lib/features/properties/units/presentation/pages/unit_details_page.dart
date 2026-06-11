@@ -125,32 +125,34 @@ class UnitDetailsPage extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      DefaultButtonWidget(
-                        text: S.of(context).bookNow,
-                        height: 38.h,
-                        width: 160.w,
-                        textSize: 12.6.sp,
-                        borderRadius: 34.r,
-                        onPressed: () {
-                          if (!Auth().loggedIn) {
-                            navigateTo(context, const LogInPage());
-                          } else {
-                            navigateTo(
-                              context,
-                              DetailsOfBookInAddPage(
-                                location: state.data.property.location,
-                                image: state.data.property.images[0].toString(),
-                                nameProp: state.data.property.name,
-                                unitId: state.data.id,
-                                totalPrice: state.data.effectivePrice,
-                                price: state.data.originalPriceBeforeDiscount ??
-                                    state.data.effectivePrice,
-                                hasDiscount: state.data.hasDiscount,
-                                offerPricing: state.data.offerPricing,
-                              ),
-                            );
-                          }
-                        },
+                      Flexible(
+                        child: DefaultButtonWidget(
+                          text: S.of(context).bookNow,
+                          height: 38.h,
+                          width: 160.w,
+                          textSize: 12.6.sp,
+                          borderRadius: 34.r,
+                          onPressed: () {
+                            if (!Auth().loggedIn) {
+                              navigateTo(context, const LogInPage());
+                            } else {
+                              navigateTo(
+                                context,
+                                DetailsOfBookInAddPage(
+                                  location: state.data.property.location,
+                                  image: state.data.property.images[0].toString(),
+                                  nameProp: state.data.property.name,
+                                  unitId: state.data.id,
+                                  totalPrice: state.data.effectivePrice,
+                                  price: state.data.originalPriceBeforeDiscount ??
+                                      state.data.effectivePrice,
+                                  hasDiscount: state.data.hasDiscount,
+                                  offerPricing: state.data.offerPricing,
+                                ),
+                              );
+                            }
+                          },
+                        ),
                       ),
                     ],
                   ),

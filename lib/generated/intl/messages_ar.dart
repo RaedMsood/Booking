@@ -119,7 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "coupon": MessageLookupByLibrary.simpleMessage("القسيمة"),
         "couponDiscount": MessageLookupByLibrary.simpleMessage("قيمة الخصم"),
         "currency": MessageLookupByLibrary.simpleMessage("عملة"),
-        "currentFilter": MessageLookupByLibrary.simpleMessage("الحالية"),
+        "currentFilter": MessageLookupByLibrary.simpleMessage("مؤكدة"),
         "date": MessageLookupByLibrary.simpleMessage("التاريخ"),
         "decrease": MessageLookupByLibrary.simpleMessage("نقصان"),
         "delete": MessageLookupByLibrary.simpleMessage("حذف"),
