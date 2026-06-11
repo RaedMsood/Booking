@@ -64,7 +64,7 @@
   "--------myBookings-----------": "---------myBookings----------",
   "reservationsTitle": "الحجوزات",
   "allFilter": "الكل",
-  "currentFilter": "الحالية",
+  "currentFilter": "مؤكدة",
   "completedFilter": "مكتملة",
   "canceledFilter": "ملغية",
   "bookingCodeCopied": "تم نسخ رقم الحجز",

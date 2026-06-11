@@ -1,3 +1,4 @@
+import 'package:booking/core/helpers/navigateTo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +12,7 @@ import '../riverpod/search_and_filter_riverpod.dart';
 import '../widgets/features_filter_widget.dart';
 import '../widgets/filter_and_undo_filter_button_widget.dart';
 import '../widgets/filter_by_unit_or_city_widget.dart';
+import '../widgets/filter_result_widget.dart';
 import '../widgets/price_filter_widget.dart';
 import '../widgets/rating_filter_widget.dart';
 import '../widgets/search_result_mode_toggle_widget.dart';
@@ -30,14 +32,14 @@ class FilterPage extends ConsumerWidget {
     ref.read(searchAndFilterPropertiesProvider.notifier).setSearchQuery(searchText);
     ref.read(searchAndFilterUnitsProvider.notifier).setSearchQuery(searchText);
 
-    if (mode == SearchFilterResultMode.property) {
-      ref.read(searchAndFilterPropertiesProvider.notifier).filter(
-            ref,
-            features: data.features,
-          );
-      ref.read(appliedSearchResultModeProvider.notifier).state = mode;
-      return;
-    }
+    // if (mode == SearchFilterResultMode.property) {
+    //   ref.read(searchAndFilterPropertiesProvider.notifier).filter(
+    //         ref,
+    //         features: data.features,
+    //       );
+    //   ref.read(appliedSearchResultModeProvider.notifier).state = mode;
+    //   return;
+    // }
 
     ref.read(searchAndFilterUnitsProvider.notifier).filter(
           ref,
@@ -55,16 +57,16 @@ class FilterPage extends ConsumerWidget {
     ref.read(searchAndFilterPropertiesProvider.notifier).setSearchQuery(searchText);
     ref.read(searchAndFilterUnitsProvider.notifier).setSearchQuery(searchText);
 
-    if (mode == SearchFilterResultMode.property) {
-      ref.read(searchAndFilterPropertiesProvider.notifier).undoFiltering(
-            ref,
-            features: data.features,
-            maxPrice: _defaultMaxPrice,
-            minPrice: _defaultMinPrice,
-          );
-      ref.read(appliedSearchResultModeProvider.notifier).state = mode;
-      return;
-    }
+    // if (mode == SearchFilterResultMode.property) {
+    //   ref.read(searchAndFilterPropertiesProvider.notifier).undoFiltering(
+    //         ref,
+    //         features: data.features,
+    //         maxPrice: _defaultMaxPrice,
+    //         minPrice: _defaultMinPrice,
+    //       );
+    //   ref.read(appliedSearchResultModeProvider.notifier).state = mode;
+    //   return;
+    // }
 
     ref.read(searchAndFilterUnitsProvider.notifier).undoFiltering(
           ref,
@@ -90,8 +92,8 @@ class FilterPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SearchResultModeToggleWidget(),
-              12.h.verticalSpace,
+             // const SearchResultModeToggleWidget(),
+             // 12.h.verticalSpace,
               FilterByUnitOrCityWidget(unitTypes: state.data.unitTypes),
               12.h.verticalSpace,
              // const FilterByDateWidget(),
@@ -132,7 +134,7 @@ class FilterPage extends ConsumerWidget {
                   clickOnFilter: () {
                     _applyForMode(ref, pendingMode, state.data);
 
-                    Navigator.of(context).pop();
+                    navigateTo(context, FilterResultWidget());
                   },
                   clickOnUndoFilter: () {
                     _undoForMode(ref, pendingMode, state.data);

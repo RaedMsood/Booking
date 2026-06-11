@@ -1,6 +1,6 @@
 class AppURL {
-  static String get base => 'https://booking.najaz.in';
-
+  static String get base => 'https://mazaji.algo-nest.com';
+  //mazaji.algo-nest.com
   static String get baseURL => '$base/api/app';
 
   static String get logIn => '/auth/check';

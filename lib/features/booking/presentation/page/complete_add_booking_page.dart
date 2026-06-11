@@ -170,14 +170,14 @@ class _CompleteAddBookingPageState
                                 if (value == null || value.toString().isEmpty) {
                                   return S.of(context).phoneRequired;
                                 }
-                                final phone = value.trim();
-                                if (!phone.startsWith('7')) {
-                                  return S.of(context).phoneMustStartWith7;
-                                }
-                                if (phone.length < 9) {
-                                  return S.of(context).phoneMustBe9Digits;
-                                }
-                                return null;
+                                // final phone = value.trim();
+                                // if (!phone.startsWith('7')) {
+                                //   return S.of(context).phoneMustStartWith7;
+                                // }
+                                // if (phone.length < 9) {
+                                //   return S.of(context).phoneMustBe9Digits;
+                                // }
+                                // return null;
                               },
                             ),
                             // CityWidget(

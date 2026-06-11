@@ -20,7 +20,19 @@ class Auth {
   Auth._() {
     onInit();
   }
+  String removeCountryCode(String phone) {
+    // إزالة +967
+    if (phone.startsWith('+967')) {
+      return phone.substring(4);
+    }
 
+    // إزالة 967 بدون +
+    if (phone.startsWith('967')) {
+      return phone.substring(3);
+    }
+
+    return phone;
+  }
   Future<void> onInit() async {
     try {
       var read = await secureStorage.read(
@@ -62,7 +74,10 @@ class Auth {
   CityModel? get city => user.user.city;
 
   Future<void> login(AuthModel data) async {
-    user = data;
+    final updatedUser = data.user.copyWith(
+      phoneNumber: removeCountryCode(data.user.phoneNumber),
+    );
+    user = data.copyWith(user: updatedUser);
     _writeToCache();
   }
 
