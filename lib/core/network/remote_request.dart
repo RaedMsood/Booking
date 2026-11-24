@@ -27,6 +27,7 @@ class RemoteRequest {
       'Currency-Code': currency,
       'Accept-Language': await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
+      'X-API-Key': AppURL.aiApiKey,
     };
     final response = await dio.get(url, queryParameters: query);
     debugPrint(response.statusCode.toString());
@@ -51,6 +52,7 @@ class RemoteRequest {
       'Currency-Code': currency,
       'Accept-Language': await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
+      'X-API-Key': AppURL.aiApiKey,
     };
     final response = await dio.post(
       path,
@@ -82,6 +84,7 @@ class RemoteRequest {
       'Currency-Code': currency,
       'Accept-Language': await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
+      'X-API-Key': AppURL.aiApiKey,
     };
     final response = await dio.put(
       path,
@@ -112,6 +115,7 @@ class RemoteRequest {
       'Currency-Code': currency,
       'Accept-Language': await Auth().getLanguage(),
       'Authorization': 'Bearer ${Auth().token}',
+      'X-API-Key': AppURL.aiApiKey,
     };
     final response =
         await dio.delete(path, queryParameters: query, data: jsonEncode(data));

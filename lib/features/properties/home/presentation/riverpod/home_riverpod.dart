@@ -1,3 +1,5 @@
+import 'package:booking/generated/l10n.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../core/state/data_state.dart';
 import '../../../../../core/state/state.dart';
@@ -13,21 +15,22 @@ class HomePropertyViewType {
   static int grid = 2;
 }
 
-final getAllPropertyProvider =
-    StateNotifierProvider<GetAllPropertyNotifier, DataState<PropertyModel>>(
-  (ref) {
-    return GetAllPropertyNotifier();
+final getAllPropertyProvider = StateNotifierProvider.family<
+    GetAllPropertyNotifier, DataState<PropertyModel>, Tuple2<String, String>>(
+  (ref,params) {
+    return GetAllPropertyNotifier(sortBy:params.value1, idsAmenities: params.value2);
   },
 );
 
 class GetAllPropertyNotifier extends StateNotifier<DataState<PropertyModel>> {
-  GetAllPropertyNotifier()
+  GetAllPropertyNotifier({required this.idsAmenities, required this.sortBy})
       : super(DataState<PropertyModel>.initial(PropertyModel.empty())) {
     getData();
   }
 
   int viewType = HomePropertyViewType.list;
-
+  String sortBy;
+  String idsAmenities;
   final _controller = sl<PropertyReposaitory>();
 
   Future<void> getData({bool moreData = false}) async {
@@ -43,8 +46,10 @@ class GetAllPropertyNotifier extends StateNotifier<DataState<PropertyModel>> {
 
     final nextPage = moreData ? state.data.property.currentPage + 1 : 1;
 
-    final result = await _controller.getAllProperty(page: nextPage);
+    final result = await _controller.getAllProperty(
+        page: nextPage, idsAmenities: idsAmenities, sortBy: sortBy);
 
+    print(sortBy);
     result.fold(
       (failure) {
         state = state.copyWith(state: States.error, exception: failure);
@@ -73,4 +78,51 @@ class GetAllPropertyNotifier extends StateNotifier<DataState<PropertyModel>> {
   }
 }
 
+final getFilterTypeProvider =
+    StateNotifierProvider<GetFilterTypeNotifier, String?>(
+        (ref) {
+  return GetFilterTypeNotifier();
+});
 
+class GetFilterTypeNotifier extends StateNotifier<String?> {
+  GetFilterTypeNotifier() : super(null);
+
+  void setSectionFilterNumber(int numberFilter) {
+    switch (numberFilter) {
+      case 0:
+        state = 'most_booked';
+      case 1:
+        state = 'price_desc';
+
+      case 2:
+        state = 'price_asc';
+      case 3:
+        state = 'highest_rated';
+      default:
+        state = '';
+    }
+  }
+}
+final getFeaturesProvider =
+StateNotifierProvider<GetFeaturesNotifier, String?>(
+      (ref) => GetFeaturesNotifier(),
+);
+
+class GetFeaturesNotifier extends StateNotifier<String?> {
+  GetFeaturesNotifier() : super(null);
+
+  void setFeaturesNumber(int featureId) {
+    List<String> ids = state?.split(',') ?? [];
+
+    if (ids.contains(featureId.toString())) {
+      ids.remove(featureId.toString());
+    } else {
+      ids.add(featureId.toString());
+    }
+
+    state = ids.isEmpty ? null : ids.join(',');
+  }
+
+
+
+}

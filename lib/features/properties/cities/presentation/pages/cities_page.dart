@@ -18,6 +18,7 @@ class DestinationsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+
     var state = ref.watch(getAllCitiesProvider);
 
     return Scaffold(

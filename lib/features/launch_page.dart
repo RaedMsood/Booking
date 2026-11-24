@@ -267,6 +267,7 @@
 // }
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -325,7 +326,7 @@ class _LaunchPageState extends ConsumerState<LaunchPage> {
 
       if (!mounted || _didNavigate || !onBoarding) return;
 
-      ref.read(getAllPropertyProvider.notifier);
+      ref.read(getAllPropertyProvider(Tuple2('','')).notifier);
       ref.read(getBestOffersProvider.notifier);
     } catch (e) {
       debugPrint('Launch prefetch skipped: $e');

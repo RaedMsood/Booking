@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +21,8 @@ class PropertySliverListWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    var provider = ref.read(getAllPropertyProvider.notifier);
+
+    var provider = ref.read(getAllPropertyProvider(Tuple2('','')).notifier);
     final isGridView = provider.viewType == HomePropertyViewType.grid;
     final listCardExtent = 212.h;
     final listCardExtentWithOffer = 252.h;

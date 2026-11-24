@@ -143,8 +143,8 @@ class _SearchAndFilterPageState extends ConsumerState<SearchAndFilterPage> {
     _searchDebounce?.cancel();
     _searchController.dispose();
     _scrollController.dispose();
-    ref.invalidate(searchAndFilterPropertiesProvider);
-    ref.invalidate(searchAndFilterUnitsProvider);
+   // ref.invalidate(searchAndFilterPropertiesProvider);
+   // ref.invalidate(searchAndFilterUnitsProvider);
     super.dispose();
   }
 

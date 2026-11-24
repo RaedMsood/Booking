@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../core/state/data_state.dart';
@@ -38,18 +39,19 @@ class GetAllCitiesNotifier extends StateNotifier<DataState<List<CityModel>>> {
   }
 }
 
-final getPropertiesByCityProvider = StateNotifierProvider.autoDispose
-    .family<GetPropertiesByCityNotifier, DataState<PropertyModel>, int>(
-      (ref, int cityId) {
-    return GetPropertiesByCityNotifier(cityId);
+final getPropertiesByCityProvider = StateNotifierProvider
+    .family<GetPropertiesByCityNotifier, DataState<PropertyModel>, Tuple3<int,String,String>>(
+      (ref, params) {
+    return GetPropertiesByCityNotifier(params.value1,params.value2,params.value3);
   },
 );
 
 class GetPropertiesByCityNotifier
     extends StateNotifier<DataState<PropertyModel>> {
   final int cityId;
-
-  GetPropertiesByCityNotifier(this.cityId)
+  String sortBy;
+  String idsAmenities;
+  GetPropertiesByCityNotifier(this.cityId,this.sortBy,this.idsAmenities)
       : super(DataState<PropertyModel>.initial(PropertyModel.empty())) {
     getData();
   }
@@ -72,6 +74,8 @@ class GetPropertiesByCityNotifier
     final result = await _controller.getPropertiesByCity(
       page: nextPage,
       cityId: cityId,
+      sortBy: sortBy,
+idsAmenities: idsAmenities
     );
 
     result.fold(
@@ -95,4 +99,54 @@ class GetPropertiesByCityNotifier
       },
     );
   }
+}
+
+
+final getFilterCitiesTypeProvider =
+StateNotifierProvider<GetFilterTypeCitiesNotifier, String?>(
+        (ref) {
+      return GetFilterTypeCitiesNotifier();
+    });
+
+class GetFilterTypeCitiesNotifier extends StateNotifier<String?> {
+  GetFilterTypeCitiesNotifier() : super(null);
+
+  void setSectionFilterNumber(int numberFilter) {
+    switch (numberFilter) {
+      case 0:
+        state = 'most_booked';
+      case 1:
+        state = 'price_desc';
+
+      case 2:
+        state = 'price_asc';
+      case 3:
+        state = 'highest_rated';
+      default:
+        state = '';
+    }
+  }
+}
+final getFeaturesCitiesProvider =
+StateNotifierProvider<GetFeaturesCitiesNotifier, String?>(
+      (ref) => GetFeaturesCitiesNotifier(),
+);
+
+class GetFeaturesCitiesNotifier extends StateNotifier<String?> {
+  GetFeaturesCitiesNotifier() : super(null);
+
+  void setFeaturesNumber(int featureId) {
+    List<String> ids = state?.split(',') ?? [];
+
+    if (ids.contains(featureId.toString())) {
+      ids.remove(featureId.toString());
+    } else {
+      ids.add(featureId.toString());
+    }
+
+    state = ids.isEmpty ? null : ids.join(',');
+  }
+
+
+
 }

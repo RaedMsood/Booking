@@ -49,19 +49,19 @@ class SearchAndFilterRemoteDataSource {
     List<int>? rating,
   }) async {
     final response = await RemoteRequest.getData(
-      url: AppURL.searchAndFilterProperties,
+      url: AppURL.aiSmartSearch,
       query: _buildQuery(
         page: page,
         perPage: perPage,
         search: search,
-        dateFrom: dateFrom,
-        dateTo: dateTo,
-        cityId: cityId,
-        priceFrom: priceFrom,
-        priceTo: priceTo,
-        unitTypeId: unitTypeId,
-        featureIds: featureIds,
-        rating: rating,
+        // dateFrom: dateFrom,
+        // dateTo: dateTo,
+        // cityId: cityId,
+        // priceFrom: priceFrom,
+        // priceTo: priceTo,
+        // unitTypeId: unitTypeId,
+        // featureIds: featureIds,
+        // rating: rating,
       ),
     );
     return PaginationModel<PropertyDataModel>.fromJson(

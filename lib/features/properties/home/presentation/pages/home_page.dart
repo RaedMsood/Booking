@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,7 +6,10 @@ import '../../../../../core/state/check_state_in_get_api_data_widget.dart';
 import '../../../../../core/state/state.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/loading_widget.dart';
+import '../../../../../core/widgets/shimmer_widget.dart';
 import '../../../../offers/presentation/page/best_offers_in_home_page.dart';
+import '../../../property_details/data/models/features_model.dart';
+import '../../../search_and_filter/presentation/riverpod/search_and_filter_riverpod.dart';
 import '../riverpod/home_riverpod.dart';
 import '../widgets/shimmer_home_widget.dart';
 import '../widgets/sliver_app_bar_home_widget.dart';
@@ -33,13 +37,20 @@ class _HomePageState extends ConsumerState<HomePage> {
   }
 
   void _onScroll() {
+    var numberFilter = ref.watch(getFilterTypeProvider);
+    var idsFeatures = ref.watch(getFeaturesProvider);
     ref.read(scrollOffsetProvider.notifier).state = _scrollController.offset;
     // ============ Pagination ============
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 100) {
-      final state = ref.read(getAllPropertyProvider);
+      final state = ref.read(getAllPropertyProvider(
+          Tuple2(numberFilter ?? 'most_booked', idsFeatures ?? '')));
       if (state.stateData != States.loadingMore) {
-        ref.read(getAllPropertyProvider.notifier).getData(moreData: true);
+        ref
+            .read(getAllPropertyProvider(
+                    Tuple2(numberFilter ?? 'most_booked', idsFeatures ?? ''))
+                .notifier)
+            .getData(moreData: true);
       }
     }
   }
@@ -52,7 +63,9 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var state = ref.watch(getAllPropertyProvider);
+    var numberFilter = ref.watch(getFilterTypeProvider);
+    var idsFeatures = ref.watch(getFeaturesProvider);
+    var state = ref.watch(getAllPropertyProvider(const Tuple2('most_booked', '')));
 
     return Scaffold(
       body: RefreshIndicator(
@@ -75,7 +88,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             SliverToBoxAdapter(
               child: CheckStateInGetApiDataWidget(
                 state: state,
-                refresh: (){
+                refresh: () {
                   ref.invalidate(getAllPropertyProvider);
                 },
                 widgetOfLoading: const ShimmerHomeWidget(),
@@ -83,14 +96,18 @@ class _HomePageState extends ConsumerState<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     4.5.h.verticalSpace,
-                     OffersWidget(banners: state.data.banners,),
+                    OffersWidget(
+                      banners: state.data.banners,
+                    ),
                     4.5.h.verticalSpace,
                     DiscoverDestinationsWidget(
                       cities: state.data.cities,
                     ),
                     const BestOffers(),
                     6.h.verticalSpace,
-                    const PropertyViewTypeWidget(),
+                    PropertyViewTypeWidget(
+                      features: state.data.features,
+                    ),
                   ],
                 ),
               ),
@@ -98,12 +115,22 @@ class _HomePageState extends ConsumerState<HomePage> {
             if (state.stateData == States.error)
               const SliverToBoxAdapter(child: SizedBox.shrink())
             else
-              PropertySliverListWidget(
-                properties: state.data.property.data,
-                isLoading: state.stateData == States.loading,
+              Consumer(
+                builder: (context, ref, child) {
+                  if (numberFilter != null || idsFeatures != null) {
+                    state = ref.watch(getAllPropertyProvider(Tuple2(
+                        numberFilter ?? 'most_booked', idsFeatures ?? '')));
+                  }
+
+                  return PropertySliverListWidget(
+                    properties: state.data.property.data,
+                    isLoading: state.stateData == States.loading,
+                  );
+                },
               ),
             if (state.stateData == States.loadingMore)
-              const SliverToBoxAdapter(child: CircularProgressIndicatorWidget()),
+              const SliverToBoxAdapter(
+                  child: CircularProgressIndicatorWidget()),
           ],
         ),
       ),

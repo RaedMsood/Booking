@@ -164,11 +164,13 @@ class OnlineImagesWidget extends StatelessWidget {
         final targetHeight = size?.height; // ثبّت الارتفاع لو مرّرته
         final cacheW = safeCacheWidth(boundedW ?? size?.width);
 
+        // ✅ استخدام cache key محسّن - يضمن عدم إعادة تحميل الصور
+        final effectiveCacheKey = cacheKey ?? url;
+
         final provider = CachedNetworkImageProvider(
           url,
-          cacheKey: cacheKey,
-          // ↓ يقلل فكّ الترميز للصور الكبيرة وللصور الصغيرة يظل منطقي
-          maxWidth: cacheW,
+          cacheKey: effectiveCacheKey,
+       //   maxWidth: cacheW,
         );
 
         final boxShadow = hasShadow

@@ -1,5 +1,6 @@
 class AppURL {
-  static String get base => 'https://mazaji.algo-nest.com';
+ // static String get base => 'https://mazaji.algo-nest.com';
+  static String get base => 'https://booking.najaz.in';
   //mazaji.algo-nest.com
   static String get baseURL => '$base/api/app';
 
@@ -84,4 +85,11 @@ class AppURL {
   static const String unreadNotificationCount = '/notifications/count';
 
   static const String markNotificationAsRead = '/notifications/mark_as_read';
+
+  // Mazaji AI Assistant
+  static String get aiBase => 'https://mazaji-ai.algo-nest.com/api/v1';
+  static String get aiSmartSearch => '$aiBase/search/smart';
+  static String get aiChatMessage => '$aiBase/chat/message';
+  static String get aiChatStream => '$aiBase/chat/stream';
+  static const String aiApiKey = 'mazaji_ai_secure_prod_key_9f82d1c4b7e';
 }

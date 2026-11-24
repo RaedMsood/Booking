@@ -8,12 +8,17 @@ class PropertyRemoteDataSource {
   Future<PropertyModel> getAllProperty({
     required int page,
     int perPage = 5,
+    String? sortBy,
+    String? idsAmenities,
   }) async {
+    print(sortBy);
     final response = await RemoteRequest.getData(
       url: AppURL.property,
       query: {
         'page': page,
         'perPage': 4,
+        'sort_by': sortBy,
+        'amenities': idsAmenities,
       },
     );
 

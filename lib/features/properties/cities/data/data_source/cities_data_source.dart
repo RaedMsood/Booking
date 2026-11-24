@@ -15,6 +15,8 @@ class CitiesRemoteDataSource {
   Future<PropertyModel> getPropertiesByCity({
     required int page,
     required int cityId,
+    String? sortBy,
+    String? idsAmenities,
     int perPage = 5,
   }) async {
     final response = await RemoteRequest.getData(
@@ -23,6 +25,8 @@ class CitiesRemoteDataSource {
         'page': page,
         'perPage': perPage,
         'city_id': cityId,
+        'sort_by': sortBy,
+        'amenities': idsAmenities,
       },
     );
 

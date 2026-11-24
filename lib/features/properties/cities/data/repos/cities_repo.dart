@@ -19,6 +19,8 @@ class CitiesReposaitory {
   Future<Either<DioException, PropertyModel>> getPropertiesByCity({
     required int page,
     required int cityId,
+    String? sortBy,
+    String? idsAmenities,
   }) async {
     try {
       final remote = await _citiesRemoteDataSource.getPropertiesByCity(

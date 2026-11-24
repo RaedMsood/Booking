@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +12,7 @@ import '../riverpod/cities_riverpod.dart';
 import '../widget/city_name_and_flag_widget.dart';
 import '../../../home/presentation/widgets/property_list_widget.dart';
 import '../../../home/presentation/widgets/property_view_type_widget.dart';
+import '../widget/property_view_type_cities_widget.dart';
 import '../widget/sliver_app_bar_pro_by_city_widget.dart';
 
 class PropertiesByCityPage extends ConsumerStatefulWidget {
@@ -34,12 +36,16 @@ class _PropertiesByCityPagePageState
   }
 
   void _onScroll() {
+    var numberFilter = ref.watch(getFilterCitiesTypeProvider);
+    var idsFeatures = ref.watch(getFeaturesCitiesProvider);
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 100) {
-      final state = ref.read(getPropertiesByCityProvider(widget.cityId));
+      final state =
+          ref.read(getPropertiesByCityProvider(Tuple3(widget.cityId, numberFilter??'', idsFeatures??'')));
       if (state.stateData != States.loadingMore) {
         ref
-            .read(getPropertiesByCityProvider(widget.cityId).notifier)
+            .read(getPropertiesByCityProvider(Tuple3(widget.cityId, numberFilter??'', idsFeatures??''))
+                .notifier)
             .getData(moreData: true);
       }
     }
@@ -53,8 +59,11 @@ class _PropertiesByCityPagePageState
 
   @override
   Widget build(BuildContext context) {
-    var state = ref.watch(getPropertiesByCityProvider(widget.cityId));
-    ref.watch(getAllPropertyProvider);
+    var numberFilter = ref.watch(getFilterCitiesTypeProvider);
+    var idsFeatures = ref.watch(getFeaturesCitiesProvider);
+    var state =
+        ref.watch(getPropertiesByCityProvider(Tuple3(widget.cityId, '', '')));
+    // ref.watch(getAllPropertyProvider(Tuple2('', '')));
 
     final hasDestination = state.data.cities.isNotEmpty;
 
@@ -72,7 +81,9 @@ class _PropertiesByCityPagePageState
             strokeWidth: 2.5,
             onRefresh: () async {
               await ref
-                  .read(getPropertiesByCityProvider(widget.cityId).notifier)
+                  .read(
+                      getPropertiesByCityProvider(Tuple3(widget.cityId, '', ''))
+                          .notifier)
                   .getData();
             },
             child: CustomScrollView(
@@ -110,20 +121,32 @@ class _PropertiesByCityPagePageState
                           Container(
                             height: 1.h,
                             width: double.infinity,
-                            color: AppColors.fontColor2.withValues(alpha:.2),
+                            color: AppColors.fontColor2.withValues(alpha: .2),
                             margin: EdgeInsets.symmetric(vertical: 12.h),
                           ),
                         ],
                       ),
                     ),
                   ),
-                const SliverToBoxAdapter(
-                  child: PropertyViewTypeWidget(),
+                SliverToBoxAdapter(
+                  child: PropertyViewTypeCitiesWidget(
+                    features: state.data.features,
+                  ),
                 ),
-                PropertySliverListWidget(
-                  properties: state.data.property.data,
-
-                  propertiesByCity: true,
+                Consumer(
+                  builder: (context, ref, child) {
+                    if (numberFilter != null || idsFeatures != null) {
+                      state = ref.watch(getPropertiesByCityProvider(Tuple3(
+                          widget.cityId,
+                          numberFilter ?? 'most_booked',
+                          idsFeatures ?? '')));
+                    }
+                    return PropertySliverListWidget(
+                      properties: state.data.property.data,
+                      isLoading: state.stateData == States.loading,
+                      propertiesByCity: true,
+                    );
+                  },
                 ),
                 if (state.stateData == States.loadingMore)
                   const SliverToBoxAdapter(

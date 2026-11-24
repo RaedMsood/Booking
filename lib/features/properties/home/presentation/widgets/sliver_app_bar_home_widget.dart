@@ -6,6 +6,7 @@ import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/buttons/ink_well_button_widget.dart';
 import '../../../../../core/widgets/custom_shape_widget.dart';
+import '../../../../chatbot/presentation/pages/chatbot_page.dart';
 import '../../../../notifications/presentation/widget/notifications_button_widget.dart';
 import '../../../search_and_filter/presentation/pages/search_and_filter_page.dart';
 
@@ -48,7 +49,9 @@ class SliverAppBarHomeWidget extends SliverPersistentHeaderDelegate {
                   iconColor: Colors.white,
                   height: 19.h,
                   onPressed: () {
-                    navigateTo(context, const SearchAndFilterPage());
+                    navigateTo(context, const ChatbotPage());
+               //     navigateTo(context, const SearchAndFilterPage());
+
                   },
                 ),
                 const NotificationsButtonWidget(colorIcon: Colors.white),

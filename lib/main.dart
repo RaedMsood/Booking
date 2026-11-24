@@ -61,6 +61,7 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   @override
   void initState() {
+
     WidgetsBinding.instance.addPostFrameCallback((_) {});
 
     FirebaseMessagingService.I.getDeviceToken().then((t) {

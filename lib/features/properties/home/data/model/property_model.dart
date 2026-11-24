@@ -1,3 +1,5 @@
+import 'package:booking/features/properties/property_details/data/models/features_model.dart';
+
 import '../../../cities/data/model/city_model.dart';
 import 'property_pagination_model.dart';
 
@@ -5,11 +7,12 @@ class PropertyModel {
   final List<CityModel> cities;
   final PropertyPaginationModel property;
   final List<BannersModel> banners;
-
+  final List<FeaturesModel> features ;
   PropertyModel({
     required this.cities,
     required this.property,
     required this.banners,
+    required this.features
   });
 
   factory PropertyModel.fromJson(Map<String, dynamic> json) {
@@ -17,6 +20,7 @@ class PropertyModel {
       cities: CityModel.fromJsonList(json['cities'] ?? []),
       property: PropertyPaginationModel.fromJson(json['properties']),
       banners: BannersModel.fromJsonList(json['banners'] ?? []),
+      features: FeaturesModel.fromJsonList(json['amenities'] ?? [],)
     );
   }
 
@@ -24,17 +28,20 @@ class PropertyModel {
     List<CityModel>? cities,
     PropertyPaginationModel? property,
     List<BannersModel>? banners,
+    List<FeaturesModel>? features
   }) {
     return PropertyModel(
       cities: cities ?? this.cities,
       property: property ?? this.property,
       banners: banners ?? this.banners,
+      features: features ?? this.features
     );
   }
 
   factory PropertyModel.empty() {
     return PropertyModel(
       cities: [],
+      features: [],
       property: PropertyPaginationModel.empty(),
       banners: [],
     );
